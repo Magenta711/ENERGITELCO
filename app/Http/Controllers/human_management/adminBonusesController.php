@@ -87,6 +87,8 @@ class adminBonusesController extends Controller
                 'admin_11' => $request->admin_11[$key],
                 'admin_12' => $request->admin_12[$key],
                 
+                'carro' => isset($request->carro[$key]) ? 1 : 0,
+                'moto' => isset($request->moto[$key]) ? 1 : 0,
                 'driver_1' => $request->driver_1[$key],
                 'driver_2' => $request->driver_2[$key],
                 
@@ -159,6 +161,8 @@ class adminBonusesController extends Controller
                 'admin_11' => $request->admin_11[$value->user_id],
                 'admin_12' => $request->admin_12[$value->user_id],
                 
+                'carro' => isset($request->carro[$key]) ? 1 : 0,
+                'moto' => isset($request->moto[$key]) ? 1 : 0,
                 'driver_1' => $request->driver_1[$value->user_id],
                 'driver_2' => $request->driver_2[$value->user_id],
                 

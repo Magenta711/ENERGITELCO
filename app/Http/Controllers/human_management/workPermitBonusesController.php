@@ -17,6 +17,7 @@ use App\Notifications\notificationMain;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class workPermitBonusesController extends Controller
 {
@@ -184,8 +185,7 @@ class workPermitBonusesController extends Controller
                 $i++;
             }
         }
-
-
+        
         return view('human_management.bonus.technical.show',compact('items','id','array'));
     }
 

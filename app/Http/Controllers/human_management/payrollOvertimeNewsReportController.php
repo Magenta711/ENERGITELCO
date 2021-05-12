@@ -14,7 +14,7 @@ use App\Models\Work8Users;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Mail;
 use App\Notifications\notificationMain;
-use App\User;
+use App\User;   
 
 class payrollOvertimeNewsReportController extends Controller
 {

@@ -69,7 +69,7 @@ class checklistComputerMaintenance extends Controller
 
         $com = invComputer::find($request->computer_id);
 
-        $request['responsable_equipo'] = $com->user->name;
+        $request['responsable_equipo'] = $com->user ? $com->user->name : 'Energitelco';
 
         
         $id = Work6::create($request->all());

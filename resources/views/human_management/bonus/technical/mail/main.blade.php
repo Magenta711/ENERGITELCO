@@ -68,14 +68,11 @@
 
                                         
                                         <div style="display: flex; width: 100%">
-                                            <div style="width: 33%; text-align: center">
+                                            <div style="width: 50%; text-align: center">
                                                 <p>Periodo <br>{{ $bonus->start_date }} - {{ $bonus->end_date }}</p>
                                             </div>
-                                            <div style="width: 33%; text-align: center">
+                                            <div style="width: 50%; text-align: center">
                                                 <p>Total de permisos <br> {{$bonus->formats}}</p>
-                                            </div>
-                                            <div style="width: 33%; text-align: center">
-                                                <p>Total <br>$ {{ number_format($bonus->value_bonu, 2,',','.') }}</p>
                                             </div>
                                        </div>
 
@@ -97,6 +94,7 @@
                                                         <td>{{ $item['cuenta'] }}</td>
                                                         <td class="text-right">${{ number_format($item['bonificacion'],2,',','.') }}</td>
                                                         <td class="text-right">${{ number_format($item['viaticos'],2,',','.') }}</td>
+                                                        <td class="text-right">-${{ number_format($item['ajustes'],2,',','.') }}</td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>

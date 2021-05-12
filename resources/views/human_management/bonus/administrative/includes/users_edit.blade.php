@@ -116,11 +116,11 @@
                                             <h4>Conductor</h4>
                                             <div class="row">
                                                 <div class="col-md-6 form-group">
-                                                    <label for="driver_{{$item->user->id}}_1">BONIFICACIÓN POR CONDUCIR CARRO</label>
+                                                    <label for="driver_{{$item->user->id}}_1"><input type="checkbox" {{$item->carro ? 'checked' : ''}} name="carro[{{$item->user->id}}]" value="1"> BONIFICACIÓN POR CONDUCIR CARRO</label>
                                                     <input type="number" name="driver_1[{{$item->user->id}}]" id="driver_{{$item->user->id}}_1" class="form-control question2_{{$item->user->id}} driver_input" value="{{$item->driver_1}}" max="10" min="0">
                                                 </div>
                                                 <div class="col-md-6 form-group">
-                                                    <label for="driver_{{$item->user->id}}_2">BONIFICACIÓN POR CONDUCIR MOTO</label>
+                                                    <label for="driver_{{$item->user->id}}_2"><input type="checkbox" {{$item->moto ? 'checked' : ''}} name="moto[{{$item->user->id}}]" value="1"> BONIFICACIÓN POR CONDUCIR MOTO</label>
                                                     <input type="number" name="driver_2[{{$item->user->id}}]" id="driver_{{$item->user->id}}_2" class="form-control question2_{{$item->user->id}} driver_input" value="{{$item->driver_2}}" max="10" min="0">
                                                 </div>
                                             </div>
