@@ -1,0 +1,73 @@
+@extends('lte.layouts')
+
+@section('content')
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+       Bonificaciones de amdinistrativos y conductores <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
+        <li class="active"><a href="#">Bonificaciones de amdinistrativos y conductores</a></li>
+    </ol>
+</section>
+<section class="content">
+    @include('includes.alerts')
+    <div class="box box-solid">
+        <div class="box-header with-border">
+            <h3 class="box-title">Lista de cortes de pago de bonificaciones</h3>
+            <div class="box-tools">
+                @can('Crear bonificaciones a administrativos y conductores')
+                    <a class="btn btn-sm btn-success" href="{{route('admin_bonuses_create')}}">
+                        Crear
+                    </a>
+                @endcan
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="table-responsive table-hover">
+                <table id="table_index" class="table table-striped table-bordered" data-page-length='15'>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Responsable</th>
+                            <th>Aprobador</th>
+                            <th>Periodo </th>
+                            <th>Estado</th>
+                            <th>Fecha</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($bonus as $item)
+                            <tr>
+                                <td>{{ $item->id }}</td>
+                                <td>{{ $item->responsable->name }}</td>
+                                <td>{{ $item->approve ? $item->approve->name : '' }}</td>
+                                <td>{{ $item->start_date.' / '.$item->end_date }}</td>
+                                <td>{{ ($item->status == 1) ? 'Aprobado' : (($item->status == 2) ? 'Sin aprobar' : 'No aprobado') }}</td>
+                                <td>{{ $item->created_at }}</td>
+                                <td>
+                                    @can('Ver bonificaciones a administrativos y conductores')
+                                        <a href="{{ route('admin_bonuses_show',$item->id) }}" class="btn btn-sm btn-success">Ver</a>
+                                    @endcan
+                                    @can('Editar bonificaciones a administrativos y conductores')
+                                        @if ($item->status == 2)
+                                            <a href="{{ route('admin_bonuses_edit',$item->id) }}" class="btn btn-sm btn-primary">Editar</a>
+                                        @endif
+                                    @endcan
+                                    @if ($item->status == 1)
+                                        @can('Descargar bonificaciones a administrativos y conductores')
+                                            <a href="{{ route('admin_bonuses_download',$item->id) }}" class="btn btn-sm btn-warning">Exportar</a>
+                                        @endcan
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+@endsection

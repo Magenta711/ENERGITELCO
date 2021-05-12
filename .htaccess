@@ -1,0 +1,8 @@
+
+RewriteCond %{HTTP_Host} ^energitelco.com.co$
+RewriteRule (.*) http://www.energitelco.com.co$1 [R=301,L]
+&lt;IfModule mod_rewrite.c&gt;
+RewriteEngine On
+RewriteRule ^(.*)$ public/$1 [L]
+&lt;/IfModule&gt;
+

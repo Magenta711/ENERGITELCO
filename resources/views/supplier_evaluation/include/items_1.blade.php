@@ -1,0 +1,10 @@
+<p>1. Calidad de los productos o servicios. <br>Respuesta del proveedor: <strong>{{$id->item_1}}</strong><br>{!!($id->item_1_new) ? 'Respuesta del usuario: <strong>'.$id->item_1_new.'</strong>' : ''!!}</p><hr>
+<p>2. Puntualidad en la entrega. <br>Respuesta del proveedor: <strong>{{$id->item_2}}</strong><br>{!!($id->item_2_new) ? 'Respuesta del usuario: <strong>'.$id->item_2_new.'</strong>' : ''!!}</p><hr>
+<p>3. Disponibilidad en la atención. <br>Respuesta del proveedor: <strong>{{$id->item_3}}</strong><br>{!!($id->item_3_new) ? 'Respuesta del usuario: <strong>'.$id->item_3_new.'</strong>' : ''!!}</p><hr>
+<p>4. Precio. <br>Respuesta del proveedor: <strong>{{$id->item_4}}</strong><br>{!!($id->item_4_new) ? 'Respuesta del usuario: <strong>'.$id->item_4_new.'</strong>' : ''!!}</p><hr>
+<p>5. Aplicación de descuentos. <br>Respuesta del proveedor: <strong>{{$id->item_5}}</strong><br>{!!($id->item_5_new) ? 'Respuesta del usuario: <strong>'.$id->item_5_new.'</strong>' : ''!!}</p><hr>
+<p>6. Variedad de productos o servicios. <br>Respuesta del proveedor: <strong>{{$id->item_6}}</strong><br>{!!($id->item_6_new) ? 'Respuesta del usuario: <strong>'.$id->item_6_new.'</strong>' : ''!!}</p><hr>
+<p>7. Agilidad en la cotización. <br>Respuesta del proveedor: <strong>{{$id->item_7}}</strong><br>{!!($id->item_7_new) ? 'Respuesta del usuario: <strong>'.$id->item_7_new.'</strong>' : ''!!}</p><hr>
+<p>8. Garantía. <br>Respuesta del proveedor: <strong>{{$id->item_8}}</strong><br>{!!($id->item_8_new) ? 'Respuesta del usuario: <strong>'.$id->item_8_new.'</strong>' : ''!!}</p><hr>
+<p>9. Transporte en la entrega de los insumos. <br>Respuesta del proveedor: <strong>{{$id->item_9}}</strong><br>{!!($id->item_9_new) ? 'Respuesta del usuario: <strong>'.$id->item_9_new.'</strong>' : ''!!}</p><hr>
+<p>10. Atención de quejas y reclamos. <br>Respuesta del proveedor: <strong>{{$id->item_10}}</strong><br>{!!($id->item_10_new) ? 'Respuesta del usuario: <strong>'.$id->item_10_new.'</strong>' : ''!!}</p><hr>

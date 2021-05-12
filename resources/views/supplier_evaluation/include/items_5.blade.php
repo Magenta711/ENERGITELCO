@@ -1,0 +1,7 @@
+<p>1. Se encuentran avalados para prestar los servicios ofertados. <br>Respuesta del proveedor: <strong>{{$id->item_1}}</strong><br>{!!($id->item_1_new) ? 'Respuesta del usuario: <strong>'.$id->item_1_new.'</strong>' : ''!!}</p><hr>
+<p>2. La capacitación ofrecida es eficaz. <br>Respuesta del proveedor: <strong>{{$id->item_2}}</strong><br>{!!($id->item_2_new) ? 'Respuesta del usuario: <strong>'.$id->item_2_new.'</strong>' : ''!!}</p><hr>
+<p>3. Las instalaciones de la formación son adecuadas. <br>Respuesta del proveedor: <strong>{{$id->item_3}}</strong><br>{!!($id->item_3_new) ? 'Respuesta del usuario: <strong>'.$id->item_3_new.'</strong>' : ''!!}</p><hr>
+<p>4. Los instructores se encuentran certificados. <br>Respuesta del proveedor: <strong>{{$id->item_4}}</strong><br>{!!($id->item_4_new) ? 'Respuesta del usuario: <strong>'.$id->item_4_new.'</strong>' : ''!!}</p><hr>
+<p>5. El equipo utilizado en la instrucción es idóneo. <br>Respuesta del proveedor: <strong>{{$id->item_5}}</strong><br>{!!($id->item_5_new) ? 'Respuesta del usuario: <strong>'.$id->item_5_new.'</strong>' : ''!!}</p><hr>
+<p>6. Costos eficientes. <br>Respuesta del proveedor: <strong>{{$id->item_6}}</strong><br>{!!($id->item_6_new) ? 'Respuesta del usuario: <strong>'.$id->item_6_new.'</strong>' : ''!!}</p><hr>
+<p>7. El tiempo de entrega de los certificados es oportuna. <br>Respuesta del proveedor: <strong>{{$id->item_7}}</strong><br>{!!($id->item_7_new) ? 'Respuesta del usuario: <strong>'.$id->item_7_new.'</strong>' : ''!!}</p><hr>
