@@ -10,6 +10,7 @@ use App\Models\Responsable;
 use App\Models\signature;
 use App\User;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\Mail;
 
 class proceedingController extends Controller
 {
@@ -105,6 +106,15 @@ class proceedingController extends Controller
                 ]);
             }
         }
+
+        Mail::send('human_management.proceedings.mail.main', ['id' => $pro], function ($menssage) use ($pro)
+        {
+            foreach ($pro->users as $value) {
+                $menssage->to($value->email,$value->name)->subject("Energitelco S.A.S. Acta de reuniones ".$pro->affair);
+            }
+            $menssage->subject("Energitelco S.A.S. Acta de reuniones ".$pro->affair);
+        });
+
         return redirect()->route('proceeding')->with('success','Se ha gardado el acta correctamente');
     }
 
@@ -253,6 +263,15 @@ class proceedingController extends Controller
                 $id->update(['status' => 1]);
             }
         }
+
+        Mail::send('human_management.proceedings.mail.main', ['id' => $id], function ($menssage) use ($id)
+        {
+            foreach ($id->users as $value) {
+                $menssage->to($value->email,$value->name)->subject("Energitelco S.A.S. Acta de reuniones actualizada ".$id->affair);
+            }
+            $menssage->subject("Energitelco S.A.S. Acta de reuniones ".$id->affair);
+        });
+
         return redirect()->route('proceeding')->with('success','Se ha actualizado el acta correctamente');
     }
 
@@ -281,6 +300,6 @@ class proceedingController extends Controller
 
     public function download (Proceeding $id){
         $pdf = PDF::loadView('human_management/proceedings/pdf/main',['id' => $id]);
-        return $pdf->download('example.pdf');
+        return $pdf->download($id->id+'_acta.pdf');
     }
 }

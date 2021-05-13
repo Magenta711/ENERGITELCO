@@ -82,8 +82,8 @@
             <td colspan="3">{{$format->fecha_inspeccion}}</td>
         </tr>
         <tr>
-            <th>Equipo</td>
-            <th>Parte</td>
+            <th>Equipo</th>
+            <th>Parte</th>
             <th>Aspecto a inspeccionar</th>
             <th>Si / No</th>
             <th>Observaciones</th>
@@ -174,8 +174,8 @@
             <td colspan="2">{{$format->estado_arnes}}</td>
         </tr>
         <tr>
-            <th>Equipo</td>
-            <th>Parte</td>
+            <th>Equipo</th>
+            <th>Parte</th>
             <th>Aspecto a inspeccionar</th>
             <th>Si / No</th>
             <th>Observaciones</th>
@@ -270,8 +270,8 @@
             <td colspan="2">{{$format->estado_eslinga}}</td>
         </tr>
         <tr>
-            <th>Equipo</td>
-            <th>Parte</td>
+            <th>Equipo</th>
+            <th>Parte</th>
             <th>Aspecto a inspeccionar</th>
             <th>Si / No</th>
             <th>Observaciones</th>
@@ -350,8 +350,8 @@
             <td colspan="2">{{$format->estado_eslinga2}}</td>
         </tr>
         <tr>
-            <th>Equipo</td>
-            <th>Parte</td>
+            <th>Equipo</thth>
+            <th>Parte</thth>
             <th>Aspecto a inspeccionar</th>
             <th>Si / No</th>
             <th>Observaciones</th>

@@ -205,11 +205,11 @@
                     @endforeach
                     <tr class="active">
                         <th colspan="2">Total</th>
-                        <th class="text-right" colspan="4">$ {{ number_format($total, 2) }}</th>
+                        <th class="text-right">$ {{ number_format($total, 2) }}</th>
                     </tr>
                     <tr class="active">
-                        <th colspan="2">Valor en letras</th>
-                        <th class="text-right" colspan="4">{{ numberToText($total) }}</th>
+                        <th>Valor en letras</th>
+                        <th colspan="2" class="text-right">{{ numberToText($total) }}</th>
                     </tr>
                 </tbody>
             </table>

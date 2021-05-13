@@ -206,12 +206,10 @@ class adminBonusesController extends Controller
                 $menssage->to('energitelco.011@gmail.com','ENERGITELCO SAS')->subject("Energitelco S.A.S, Notificación de pago de bonificaciones");
             });
             foreach ($id->users as $data) {
-                if ($data->user->id == 1) {
-                    Mail::send('human_management.bonus.administrative.email.user', ['data' => $data,'id' => $id], function ($menssage) use ($data)
-                    {
-                        $menssage->to($data->user->email,$data->user->name)->subject("Energitelco S.A.S, Notificación de pago de bonificaciones");
-                    });
-                }
+                Mail::send('human_management.bonus.administrative.email.user', ['data' => $data,'id' => $id], function ($menssage) use ($data)
+                {
+                    $menssage->to($data->user->email,$data->user->name)->subject("Energitelco S.A.S, Notificación de pago de bonificaciones");
+                });
             }
             $id->responsable->notify(new notificationMain($id->id,'Se ha aprobado las el pago de las bonificaciones a administradores y conductores'.$id->id,'human_management/bonus/administratives/show/'));
             return redirect()->route('admin_bonuses')->with('success','Se ha aprobado el pago de las bonificaciones administradores y conductores correctamente');

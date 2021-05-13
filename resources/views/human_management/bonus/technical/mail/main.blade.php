@@ -66,7 +66,6 @@
                                     <p
                                         style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; box-sizing: border-box; color: #3d4852; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: center;">Se ha aprobado el pago de comisiones a ténicos.</p>
 
-                                        
                                         <div style="display: flex; width: 100%">
                                             <div style="width: 50%; text-align: center">
                                                 <p>Periodo <br>{{ $bonus->start_date }} - {{ $bonus->end_date }}</p>
@@ -84,6 +83,7 @@
                                                     <th># Cuenta</th>
                                                     <th>Bonificación</th>
                                                     <th>Viáticos</th>
+                                                    <th>Ajustes</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

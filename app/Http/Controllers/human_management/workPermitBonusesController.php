@@ -580,7 +580,6 @@ class workPermitBonusesController extends Controller
                     $i++;
                 }
             }
-            $i = 0;
             foreach ($array as $item) {
                 if ($item['total'] < 50000)
                 {
@@ -639,12 +638,10 @@ class workPermitBonusesController extends Controller
                     $AccTotalPagaViatic += $item['total_bonus'];
                     $AccTotalPagarBox += $item['total_box'];
                 }
-                if ($i < 1) {
-                    Mail::send('human_management.bonus.technical.mail.user', ['bonus' => $id,'item' => $item], function ($menssage) use ($item)
-                    {
-                        $menssage->to($item['email'],$item['name'])->subject("Energitelco S.A.S PAGO DE COMISIONES A TÉCNICOS APROBADO");
-                    });
-                }
+                Mail::send('human_management.bonus.technical.mail.user', ['bonus' => $id,'item' => $item], function ($menssage) use ($item)
+                {
+                    $menssage->to($item['email'],$item['name'])->subject("Energitelco S.A.S PAGO DE COMISIONES A TÉCNICOS APROBADO");
+                });
                 $i++;
             }
 
@@ -654,8 +651,8 @@ class workPermitBonusesController extends Controller
                 'value_bonu' => $AccTotalPagaViatic,
                 'value_box' => $AccTotalPagarBox,
             ]);
-            
-            Mail::send('human_management.bonus.technical.mail.main', ['bonus' => $id, 'users' => $array], function ($menssage) use ($id)
+            $pdf = PDF::loadView('human_management.bonus.technical.pdf.main',compact('id','array'));
+            Mail::send('human_management.bonus.technical.mail.main', ['bonus' => $id, 'users' => $array], function ($menssage) use ($id,$pdf)
             {
                 $emails = system_setting::where('state',1)->pluck('emails_before_approval')->first();
                 $company = general_setting::where('state',1)->pluck('company')->first();
@@ -668,6 +665,7 @@ class workPermitBonusesController extends Controller
                 $menssage->to($id->responsable->email,$id->responsable->name);
                 $menssage->to('energitelco.011@gmail.com','ENERGITELCO SAS');
                 $menssage->subject("Energitelco S.A.S PAGO DE COMISIONES A TÉCNICOS APROBADO");
+                $menssage->attachData($pdf->output(), 'COMPROBANTE_EGRESOS.pdf');
             });
             return redirect()->route('approval')->with(['success'=>'Se ha aprobado la comisión correctamente','sudmenu' => 18]);
         }else {
