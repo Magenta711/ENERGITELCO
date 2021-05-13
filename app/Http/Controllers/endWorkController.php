@@ -54,6 +54,7 @@ class endWorkController extends Controller
         $dayNow = now()->format('d');
         
         // Convertir fecha
+        $monthDff = 0;
         if ($yearNow == $year) {
             if ($monthNow > $month) {
                 $monthDff = $monthNow - $month;
@@ -63,7 +64,8 @@ class endWorkController extends Controller
             $monthDff = $monthNow - $month;
         }
 
-        if ($dayNow < $day) {
+        if ($dayNow < $day)
+        {
             $monthDff--;
         }
 

@@ -71,7 +71,7 @@
     <main class="text-justify">
         <br><br><br>
         <p>{{$data->city}}, {{$date['day']}} de {{$date['month']}} de {{ $date['year']}}</p>
-        <br><br><br><br>
+        <br><br><br>
         <p class="text-center">A QUIEN INTERESE</p>
         <br>
         <p>{!! str_replace("\r\n", '<br>', addslashes($data->letter1)) !!}</p>

@@ -75,13 +75,13 @@ function upload(btn) {
                 if(data.type.toLowerCase() == 'jpg' || data.type.toLowerCase() == 'png' || data.type.toLowerCase() == 'jpeg'){
                     $('#icon_'+btn).addClass('has-img');
                     $('<img>',{
-                        'src' : '/storage/upload/mintic/'+data.name,
+                        'src' : '/storage/upload/clearing/'+data.name,
                         'alt' : data.name,
                     }).width('100%').appendTo('#type_'+btn);
                 }
                 if(data.type.toLowerCase() == 'mp4'){
                     $('<video>',{
-                        'src' : '/storage/upload/mintic/'+data.name,
+                        'src' : '/storage/upload/clearing/'+data.name,
                         'width' : '100%',
                         'controls' : 'true',
                     }).width('100%').appendTo('#type_'+btn);

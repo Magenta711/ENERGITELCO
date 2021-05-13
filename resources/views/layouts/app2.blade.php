@@ -47,7 +47,7 @@
                             <a class="nav-link js-scroll-trigger" href="{{ route('work_with_us') }}">Trabaja con nosotros</a>
                         </li>
                         <li class="{{ activeMenu('work_with_us') }} nav-item">
-                            <a class="nav-link js-scroll-trigger" href="{{ route('letter_recommendation') }}">Carta recomendaci贸n</a>
+                            <a class="nav-link js-scroll-trigger" href="{{ route('letter_recommendation') }}">Carta recomendación</a>
                         </li>
                     </ul>
                 </div>

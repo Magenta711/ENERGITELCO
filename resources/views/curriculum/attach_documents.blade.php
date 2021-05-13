@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">Adjunto de documentos</div>
                     <form method="POST" action="{{ route('curriculum_attach',$id->id) }}" enctype="multipart/form-data"
@@ -32,8 +32,6 @@
                                         <label for="emergency_contact_number">Número de contacto de emergencia</label>
                                         <input type="text" name="emergency_contact_number" value="{{ $id->register->emergency_contact_number ?? old('emergency_contact_number') }}" id="emergency_contact_number" class="form-control">
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-md-4">
                                         <label for="eps">EPS</label>
                                         <input type="text" name="eps" value="{{ $id->register->eps ?? old('eps') }}" id="eps" class="form-control">
@@ -46,8 +44,6 @@
                                         <label for="rh">RH</label>
                                         <input type="text" name="rh" value="{{ $id->register->rh ?? old('rh') }}" id="rh" class="form-control">
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-md-4">
                                         <label for="shirt_size">Talla camisa</label>
                                         <input type="text" name="shirt_size" value="{{ $id->register->shirt_size ?? old('shirt_size') }}" id="shirt_size" class="form-control">
@@ -59,6 +55,14 @@
                                     <div class="col-md-4">
                                         <label for="shoe_size">Talla calzado</label>
                                         <input type="text" name="shoe_size" value="{{ $id->register->shoe_size ?? old('shoe_size') }}" id="shoe_size" class="form-control">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="height">Estatura</label>
+                                        <input type="text" name="height" value="{{ $id->register->height ?? old('height') }}" id="height" class="form-control">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="weight">Peso</label>
+                                        <input type="text" name="weight" value="{{ $id->register->weight ?? old('weight') }}" id="weight" class="form-control">
                                     </div>
                                 </div>
                                 <div class="modal fade" id="modal_save" data-backdrop="static" data-keyboard="false"
@@ -88,7 +92,7 @@
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                                                <h5 class="modal-title" id="staticBackdropLabel">Enviar información</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -160,4 +164,37 @@
 
 @section('js')
     <script src="{{ asset('js/upload.js') }}" defer></script>
+@endsection
+
+@section('css')
+    <style>
+        .mailbox-attachment-info {
+            padding: 10px;
+            background: #f4f4f4;
+        }
+        .mailbox-attachment-icon {
+            text-align: center;
+            font-size: 65px;
+            color: #666;
+            padding: 20px 10px;
+            display: block;
+        }
+        .mailbox-attachment-icon.has-img {
+            padding: 0;
+        }
+        .mailbox-attachment-name {
+            font-weight: bold;
+            color: #666;
+        }
+        .mailbox-attachment-size {
+            color: #999;
+            font-size: 12px;
+        }
+        .fa-file-pdf:before {
+            content: "\f1c1";
+        }
+        .hide {
+            display: none;
+        }
+    </style>
 @endsection

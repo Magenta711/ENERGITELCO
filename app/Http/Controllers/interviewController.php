@@ -296,7 +296,7 @@ class interviewController extends Controller
         $pdf = PDF::loadView('documents/contract',['data'=>$request,'id' => $id->register, 'date' => $date]);
         $pdf->save(storage_path('app/public/contratos/') .$time.'contrato.pdf');
 
-        // $id->update(['state' => 3]);
+        $id->update(['state' => 3]);
 
         $end_date = null;
         if ($request->months) {
@@ -344,7 +344,7 @@ class interviewController extends Controller
             $mail->attachData($pdf->output(), 'contrato.pdf');
             // Traer datos de la base de datos
             foreach ($documents as $value) {
-                $mail->attach( storage_path('app/private/documents/').$value->file->name );
+                $mail->attach( storage_path('app/private/documents/').$value->file->name);
             }
         });
 

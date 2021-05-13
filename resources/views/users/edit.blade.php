@@ -165,6 +165,10 @@
                             <input type="text" name="eps" value="{{ $id->register && $id->register->eps ? $id->register->eps : old('eps') }}" id="eps" class="form-control">
                         </div>
                         <div class="form-group col-md-6">
+                            <label for="arl">ARL</label>
+                            <input type="text" name="arl" value="{{ $id->register && $id->register->arl ? $id->register->arl : old('arl') }}" id="arl" class="form-control">
+                        </div>
+                        <div class="form-group col-md-6">
                             <label for="pension">Pensión</label>
                             <input type="text" name="pension" value="{{ $id->register && $id->register->pension ? $id->register->pension : old('pension') }}" id="pension" class="form-control">
                         </div>
@@ -183,6 +187,14 @@
                         <div class="form-group col-md-6">
                             <label for="shoe_size">Talla calzado</label>
                             <input type="text" name="shoe_size" value="{{ $id->register && $id->register->shoe_size ? $id->register->shoe_size : old('shoe_size') }}" id="shoe_size" class="form-control">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="height">Estatura</label>
+                            <input type="text" name="height" value="{{ $id->register->height ?? old('height') }}" id="height" class="form-control">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="weight">Peso</label>
+                            <input type="text" name="weight" value="{{ $id->register->weight ?? old('weight') }}" id="weight" class="form-control">
                         </div>
                         <div class="col-md-12">
                             <small class="text-muted">No se cambian tallas despues de fecha de corte</small>

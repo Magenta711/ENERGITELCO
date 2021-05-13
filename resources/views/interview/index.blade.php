@@ -48,11 +48,11 @@
                                 @can('Editar entrevistas')                                    
                                     <a href="{{route('interview_edit',$item->id)}}" class="btn btn-sm btn-primary">Editar</a>
                                 @endcan
-                                @can('Enviar documentos de contratación')
-                                    @if ($item->state == 1)
+                                @if ($item->state == 1)
+                                    @can('Enviar documentos de contratación')
                                         <a href="{{route('interview_send_documentation',$item->id)}}" class="btn btn-sm btn-warning">Enviar docuementación</a>
-                                    @endif
-                                @endcan
+                                    @endcan
+                                @endif
                                 @can('Eliminar entrevistas')
                                     <button type="button" class="btn btn-sm btn-danger pl-4 pr-4" data-toggle="modal" data-target="#modal_delete_{{$item->id}}">Eliminar</button>
                                 

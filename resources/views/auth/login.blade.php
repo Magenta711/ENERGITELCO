@@ -11,7 +11,7 @@
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="form-group">
-                        <input class="form-control mr-0 mr-sm-2 mb-3 mb-sm-0 @error('email') is-invalid @enderror" name="email" id="email" type="email" placeholder="{{ __('E-Mail Address') }}" required autocomplete="email" autofocus />
+                        <input class="form-control mr-0 mr-sm-2 mb-3 mb-sm-0 @error('email') is-invalid @enderror" name="email" id="email" type="email" placeholder="{{ __('E-Mail Address') }}" required autocomplete="email" autofocus value="{{ old('email') }}" />
 
                         @error('email')
                             <span class="invalid-feedback text-white text-left" role="alert">

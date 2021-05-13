@@ -74,7 +74,7 @@
         <br><br>
         <p>Señor. <br>PENSIONES Y CESANTÍAS PROTECCION</p>
         <br><br>
-        <p>{!! str_replace("\r\n", '<br>', addslashes($data->letter4))!!}</p>
+        <p>{!! str_replace("\r\n", '<br>', addslashes($data->letter4)) !!}</p>
         <br><br>
         <p>El valor de las cesantías consignadas: $ {{number_format($data->layoffs,2,',','.')}}.</p>
         <br><br>

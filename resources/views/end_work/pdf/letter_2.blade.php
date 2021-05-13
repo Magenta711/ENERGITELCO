@@ -74,12 +74,12 @@
         <br>
         <p>Señor(a): {{$id->name}}</p>
         <p>Cargo: {{$id->position->name}}</p>
-        <br><br>
+        <br>
         <p>{!! str_replace("\r\n", '<br>', addslashes($data->letter2)) !!}</p>
         <p>Gracias por los servicios prestados a nuestra compañía.</p>
         <br><br>
         <p>Atentamente,</p>
-        <br><br>
+        <br>
         <p>
             Firmado electrónicamente por <b>JORGE ANDRES ORTEGA BEDOYA</b> en rol de Gerente General habilitado por Energitelco, con conocimiento de funciones y contenido del presente documento. Se cumple Ley 527 de 1999 y Decreto 19 de 2012.<br>
             ___________________________

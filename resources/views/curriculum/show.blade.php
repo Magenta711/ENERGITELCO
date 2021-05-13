@@ -147,32 +147,41 @@
                 <p>{{($id->has_limitation == '1') ? 'Si' : 'No'}}</p>
             </div>
             <hr>
-            <div class="box">
-                <div class="box-header">
-                    <div class="box-title">
-                        Firmado electrónicamente por el auditor o coordinador
-                    </div>
-                </div>
-                <div class="box-body">
-                    <div class="row">
-                        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="box">
+                        <div class="box-header">
+                            <div class="box-title">
+                                Firmado electrónicamente por el responsable
+                            </div>
+                        </div>
+                        <div class="box-body">
                             <div class="row">
                                 <div class="col-md-6"><strong>Nombre: </strong>{{$id->responsable->name}}</div>
                                 <div class="col-md-6"><strong>Cédula: </strong>{{$id->responsable->cedula}}</div>
                             </div>
                             <p>Solicitud aprobada y firmada electrónicamente por <strong>{{$id->responsable->name}}</strong> en rol de {{$id->responsable->getRoleNames()[0]}} Energitelco, con conocimiento de funciones y contenido del presente documento. Se cumple Ley 527 de 1999 y Decreto 19 de 2012</p>
                         </div>
-                        @if ($id->approver)
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-6"><strong>Nombre: </strong>{{$id->approver->name}}</div>
-                                <div class="col-md-6"><strong>Cédula: </strong>{{$id->approver->cedula}}</div>
-                            </div>
-                            <p>Solicitud aprobada y firmada electrónicamente por <strong>{{$id->approver->name}}</strong> en rol de {{$id->approver->getRoleNames()[0]}} Energitelco, con conocimiento de funciones y contenido del presente documento. Se cumple Ley 527 de 1999 y Decreto 19 de 2012</p>
-                        </div>
-                        @endif
                     </div>
                 </div>
+                @if ($id->approver)
+                    <div class="col-md-6">
+                        <div class="box">
+                            <div class="box-header">
+                                <div class="box-title">
+                                    Firmado electrónicamente por el auditor o coordinador
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6"><strong>Nombre: </strong>{{$id->approver->name}}</div>
+                                    <div class="col-md-6"><strong>Cédula: </strong>{{$id->approver->cedula}}</div>
+                                </div>
+                                <p>Solicitud aprobada y firmada electrónicamente por <strong>{{$id->approver->name}}</strong> en rol de {{$id->approver->getRoleNames()[0]}} Energitelco, con conocimiento de funciones y contenido del presente documento. Se cumple Ley 527 de 1999 y Decreto 19 de 2012</p>
+                            </div>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
         <div class="box-footer">
