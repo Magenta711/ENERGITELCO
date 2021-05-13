@@ -109,7 +109,7 @@ class endWorkController extends Controller
         }
         $pdf4 = '';
         if (isset($request->letters[3])) {
-            $pdf4 = PDF::loadView('end_work/pdf/letter_4',['data'=>$request,'id' => $id,'date' => $date,'document' => $time.'_CARTA_RETIRO_CESANTIAS.pdf']);
+            $pdf4 = PDF::loadView('end_work/pdf/letter_4',['data'=>$request,'id' => $id,'date' => $date,'document' => 'end_work'.$time.'_CARTA_RETIRO_CESANTIAS.pdf']);
             $pdf4->save(storage_path('app/public/end_work/') .$time.'_CARTA_RETIRO_CESANTIAS.pdf');
         }
         

@@ -65,11 +65,12 @@ class checklistComputerMaintenance extends Controller
     {
         $request->validate([
             'cedula_tecnico'=>['required'],
+            'computer_id'=>['required'],
         ]);
 
         $com = invComputer::find($request->computer_id);
 
-        $request['responsable_equipo'] = $com->user ? $com->user->name : 'Energitelco';
+        $request['responsable_equipo'] = $com->user_id ? $com->user->name : 'Energitelco';
 
         
         $id = Work6::create($request->all());

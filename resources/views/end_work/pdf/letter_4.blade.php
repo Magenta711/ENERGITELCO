@@ -75,15 +75,16 @@
         <p>Señor. <br>PENSIONES Y CESANTÍAS PROTECCION</p>
         <br><br>
         <p>{!! str_replace("\r\n", '<br>', addslashes($data->letter4)) !!}</p>
-        <br><br>
+        <br>
         <p>El valor de las cesantías consignadas: $ {{number_format($data->layoffs,2,',','.')}}.</p>
-        <br><br>
+        <br>
         <p>Agradezco su atención y colaboración prestada.</p>
         <br>
         <p>Atentamente,</p>
         <br>
-        <p>Firmado electrónicamente por <b>JORGE ANDRES ORTEGA BEDOYA</b> en rol de gerente general habilitado por Energitelco, con conocimiento de funciones y contenido del presente documento. Se cumple Ley 527 de 1999 y Decreto 19 de 2012.
-            <br>
+        <p>Firmado electrónicamente por <b>JORGE ANDRES ORTEGA BEDOYA</b> en rol de gerente general habilitado por Energitelco, con conocimiento de funciones y contenido del presente documento. Se cumple Ley 527 de 1999 y Decreto 19 de 2012.</p>
+        <img src="{{ asset('img/pruhagafs/25522adadaf.jpg') }}" height="50px" />
+        <p>
             ___________________________
         </p>
         <p>
@@ -96,7 +97,7 @@
         <br>
         <p>
             <p>Para confirmar la fiabilidad de está carta la puede ingresar a:</p>
-            <p><a target="_blank" href="{{config('app.url')}}/storage/files/layoffs/{{$document}}">{{config('app.url')}}/storage/files/layoffs/{{$document}}</a></p>
+            <p><a target="_blank" href="{{config('app.url')}}/storage/files/{{$document}}">{{config('app.url')}}/storage/files/{{$document}}</a></p>
         </p>
     </main>
     <footer>
