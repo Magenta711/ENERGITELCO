@@ -15,10 +15,12 @@ class Work1Export implements FromView, WithDrawings, WithStyles, ShouldAutoSize
 {
     use Exportable;
 
-    private $all;
+    private $array;
+    private $id;
 
-    public function bonus($all){
-        $this->all = $all;
+    public function bonus($array,$id){
+        $this->array = $array;
+        $this->id = $id;
 
         return $this;
     }
@@ -51,7 +53,8 @@ class Work1Export implements FromView, WithDrawings, WithStyles, ShouldAutoSize
     public function view(): View
     {
         return view('human_management.bonus.technical.export.main', [
-            'all' => $this->all,
+            'array' => $this->array,
+            'id' => $this->id,
         ]);
     }
 }

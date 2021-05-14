@@ -801,3 +801,21 @@ Route::get('human_management/auto_form/{id}/edit','human_management\auto_formCon
 Route::put('human_management/auto_form/{id}','human_management\auto_formController@update')->name('auto_form_update');
 Route::get('human_management/auto_form/download/{id}','human_management\auto_formController@download')->name('auto_form_download');
 Route::delete('human_management/auto_form/{id}','human_management\auto_formController@destroy')->name('auto_form_delete');
+
+//AutoForms
+Route::get('forms','forms\formController@index')->name("forms");
+Route::get('forms/create','forms\formController@create')->name("form_create");
+Route::get('forms/{id}','forms\formController@show')->name("forms_show");
+Route::get('forms/{id}/edit','forms\formController@edit')->name("forms_edit");
+Route::get('forms/{id}/answer','forms\formController@answer')->name("forms_answer");
+Route::post('forms','forms\formController@store')->name("forms_store");
+Route::put('forms/{id}','forms\formController@update')->name("forms_update");
+Route::delete('forms/{id}','forms\formController@delete')->name("forms_delete");
+Route::get('forms/export/{id}','forms\formController@export')->name("forms_export");
+
+// Route::get('answers','answers\orderController@index')->name("answers");
+// Route::get('answers/{id}','answers\orderController@show')->name("answers_show");
+// Route::get('answer/{form}/{user}','answers\orderController@create')->name("answers_create");
+// Route::post('answers','answers\orderController@store')->name("answers_store");
+// Route::get('answer/ready','answers\orderController@ready')->name("answers_ready");
+// Route::delete('answer/{id}','answers\orderController@delete')->name("answers_delete");

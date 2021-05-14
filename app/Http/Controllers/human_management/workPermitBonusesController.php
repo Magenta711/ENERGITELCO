@@ -318,10 +318,7 @@ class workPermitBonusesController extends Controller
 
     public function export($id)
     {
-        $cuts = work1_cut_bonus::get();   
-        // $cut->start_date, $cut->end_date
-        $all = array();
-        foreach ($cuts as $cut) {
+        $cut = work1_cut_bonus::find($id);
             $array = array();
             $items = Work1::whereBetween('created_at',[$cut->start_date,$cut->end_date])->where('estado','!=','No aprobado')->get();
             foreach ($items as $item) {
@@ -437,17 +434,7 @@ class workPermitBonusesController extends Controller
                     $i++;
                 }
             }
-            $all[$cut->id] = [
-                'array' => $array,
-                'start_date' => $cut->start_date,
-                'end_date' => $cut->end_date,
-                'value_box' => $cut->value_box,
-                'formats' => $cut->formats,
-                'value_bonu' => $cut->value_bonu,
-                'total' => $cut->value,
-            ];
-        }
-        return (new Work1Export)->bonus($all)->download('CVB.xlsx');
+        return (new Work1Export)->bonus($array,$cut)->download('CVB.xlsx');
     }
 
     public function approve(Request $request,work1_cut_bonus $id)

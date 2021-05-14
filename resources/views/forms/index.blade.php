@@ -1,0 +1,136 @@
+@extends('lte.layouts')
+
+@section('content')
+<section class="content-header">
+    <h1>
+        Auto Form
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
+        <li><a href="#"> Dirección</a></li>
+        <li><a href="#"> Indicadores</a></li>
+        <li class="active">Informe de indicadores</li>
+    </ol>
+</section>
+<section class="content">
+    @include('includes.alerts')
+    <div class="box">
+        <div class="box-header">
+            <div class="box-title">
+                
+            </div>
+            <div class="box-tools">
+                <a href="{{route('indicators')}}" class="btn btn-sm btn-primary">Volver</a>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="row">
+                @foreach ($forms as $item)
+                    <div class="col-md-3 col-6 mb-5">
+                        <span class="mailbox-attachment-icon has-img p-3" id="icon_{{$item->id}}">
+                            <img src="{{asset('img/logo_sm.png')}}" class="box-img-top m-3" alt="...">
+                        </span>
+                        <div class="mailbox-attachment-info">
+                            <p class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
+                                {{$item->name}}
+                            </p>
+                            <span class="mailbox-attachment-size">
+                                {{$item->updated_at}}
+                                    <button class="btn btn-default btn-xs pull-right dropdown-toggle" type="button" id="optionsForm_{{$item->id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
+                                    <div class="dropdown-menu option-form-menu" aria-labelledby="optionsForm_{{$item->id}}">
+                                        <ul class="menu">
+                                            <li>
+                                                <a href="{{route('forms_answer',$item->id)}}" class="dropdown-item"><i class="fas fa-list-alt"></i> {{__('Answers')}}</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{route('forms_show',$item->id)}}" class="dropdown-item"><i class="fas fa-eye"></i> {{__('Show')}}</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{route('forms_edit',$item->id)}}" class="dropdown-item"><i class="fas fa-edit"></i> {{__('Edit')}}</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{route('forms_export',$item->id)}}" class="dropdown-item"><i class="fas fa-file-export"></i> {{__('Export')}}</a>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item" data-toggle="modal" data-target="#modal_delete_{{$item->id}}"><i class="fas fa-trash-alt"></i> {{__('Delete')}}</button>
+                                            </li>
+                                    </ul>
+                                    <div class="dropdown-item" style="display: flex">
+                                        <input type="text" class="form-control" id="url_{{$item->id}}" value="{{config('app.url')}}/answer/{{$item->token}}/{{Auth::user()->token}}" name="myURL_{{$item->id}}">
+                                        <button class="btn btn-outline-secondary copy-url" id="copy_url_{{$item->id}}" onclick="copy_url({{$item->id}})" type="button"><i class="fas fa-copy"></i></button>
+                                    </div>
+                                    {{-- </div> --}}
+                                </div>
+                            </span>
+                            {{-- @endif --}}
+                        </div>
+                    </div>
+                    @include('forms.includes.modals.delete')
+                @endforeach
+            </div>
+            {{$forms->links()}}
+            <hr>
+            <div class="row">
+                <div class="col-md-12">
+                    {{-- @can('Crear formularios') --}}
+                    <a href="{{route('form_create')}}" class="btn btn-sm btn-primary btn-block">{{__('Create')}}</a>
+                    {{-- @endcan --}}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@endsection
+
+@section('js')
+    <script>
+        function copy_url(item){
+            document.getElementById('url_'+item).select();
+            document.execCommand("copy");
+        }
+    </script>
+@endsection
+
+@section('css')
+    <style>
+        .option-form-menu>.menu>li.header{
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+            background-color: #ffffff;
+            padding: 7px 10px;
+            border-bottom: 1px solid #f4f4f4;
+            color: #444444;
+            font-size: 14px;
+        }
+        .option-form-menu>.menu{
+            max-height: 200px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            overflow-x: hidden;
+        }
+        .option-form-menu>.menu>li>a{
+            color: #444444;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+            padding: 10px;
+            white-space: nowrap;
+            border-bottom: none;
+        }
+        .option-form-menu>.menu>li>button{
+            color: #444444;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 10px;
+            display: block;
+            white-space: nowrap;
+            border: none;
+            background: #fff;
+            width: 100%;
+            text-align: left;
+        }
+    </style>
+@endsection
