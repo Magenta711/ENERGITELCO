@@ -4,10 +4,10 @@
     <div class="modal-dialog  modal-dialog-scrollable modal-dialog-centered modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modal_deleteLabel">Create user</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
-          </button>
+        </button>
+          <h4 class="modal-title" id="exampleModalLongTitle">Create user</h4>
         </div>
         <form action="{{route('forms_delete',$item->id)}}" method="POST">
           @csrf

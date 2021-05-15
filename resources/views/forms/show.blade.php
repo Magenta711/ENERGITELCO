@@ -20,7 +20,7 @@
                 {{$id->name}} <span>{{$id->description}}</span>
             </div>
             <div class="box-tools">
-                <a href="{{route('indicators')}}" class="btn btn-sm btn-primary">Volver</a>
+                <a href="{{route('forms')}}" class="btn btn-sm btn-primary">Volver</a>
             </div>
         </div>
         <div class="box-body">

@@ -20,13 +20,13 @@
                 
             </div>
             <div class="box-tools">
-                <a href="{{route('indicators')}}" class="btn btn-sm btn-primary">Volver</a>
+                <a href="{{route('form_create')}}" class="btn btn-sm btn-primary">{{__('Create')}}</a>
             </div>
         </div>
         <div class="box-body">
             <div class="row">
                 @foreach ($forms as $item)
-                    <div class="col-md-3 col-6 mb-5">
+                    <div class="col-md-3 col-sm-4 col-xs-6 col-6 mb-5">
                         <span class="mailbox-attachment-icon has-img p-3" id="icon_{{$item->id}}">
                             <img src="{{asset('img/logo_sm.png')}}" class="box-img-top m-3" alt="...">
                         </span>
@@ -69,14 +69,6 @@
                 @endforeach
             </div>
             {{$forms->links()}}
-            <hr>
-            <div class="row">
-                <div class="col-md-12">
-                    {{-- @can('Crear formularios') --}}
-                    <a href="{{route('form_create')}}" class="btn btn-sm btn-primary btn-block">{{__('Create')}}</a>
-                    {{-- @endcan --}}
-                </div>
-            </div>
         </div>
     </div>
 </section>

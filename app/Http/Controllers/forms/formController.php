@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\forms;
 
+use App\Exports\AnswersExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\autoForm\form;
-// use App\Models\order;
-// use App\Models\Answer;
+use App\Models\autoForm\order;
+use App\Models\autoForm\Answer;
 use App\Models\autoForm\question;
 use App\Models\autoForm\detail_question;
 use Illuminate\Support\Str;
@@ -375,6 +376,6 @@ class formController extends Controller
 
     public function export(form $id)
     {
-        // return (new AnswersExport)->forId($id)->download('answers.xlsx');
+        return (new AnswersExport)->forId($id)->download('answers.xlsx');
     }
 }

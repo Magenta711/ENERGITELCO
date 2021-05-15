@@ -21,7 +21,7 @@
                 {{__('Form without title')}}
             </div>
             <div class="box-tools">
-                <a href="{{route('indicators')}}" class="btn btn-sm btn-primary">Volver</a>
+                <a href="{{route('forms')}}" class="btn btn-sm btn-primary">Volver</a>
             </div>
         </div>
         <form action="{{route('forms_store')}}" method="POST" autocomplete="off">
@@ -38,7 +38,7 @@
             <div id="destino_question">
 
             </div>
-            <button class="btn btn-sm btn-primary" id="new-option"><i class="fas fa-plus"></i> Agregar pregunta</button>
+            <button class="btn btn-sm btn-link" id="new-option"><i class="fas fa-plus"></i> Agregar pregunta</button>
         </div>
         <div class="box-footer">
             <button class="btn btn-sm btn-primary">{{__('Save')}}</button>

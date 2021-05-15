@@ -24,7 +24,7 @@
                 {{$id->name}}
             </div>
             <div class="box-tools">
-                <a href="{{route('indicators')}}" class="btn btn-sm btn-primary">Volver</a>
+                <a href="{{route('forms')}}" class="btn btn-sm btn-primary">Volver</a>
             </div>
         </div>
         <form action="{{route('forms_update',$id->id)}}" method="POST" autocomplete="off">
@@ -34,7 +34,7 @@
             <div class="box box-body mb-3">
                 <div class="form-group">
                     <input type="text" class="form-control" name="name" id="name" placeholder="{{__('Form title')}}" value="{{$id->name}}">
-                </div>
+                </div> 
                 <div class="form-group">
                     <textarea class="form-control" name="description" id="description" cols="30" rows="3" placeholder=">{{__('Description of the form')}}">{{$id->description}}</textarea>
                 </div>
@@ -71,22 +71,20 @@
                             </div>
                         </div>
                     </div>
-                    <div class="box-footer text-right">
-                        <button id="destroy_{{$n}}" class="btn btn-sm btn-destroy"><i class="fas fa-trash-alt"></i></button>
+                    <div class="box-footer text-right d-flex">
+                        <button id="destroy_{{$n}}" class="btn btn-sm btn-destroy"><i class="fas fa-trash"></i></button>
                         |
-                         <div class="form-check form-check-inline">
-                             <input class="form-check-input" name="required[]" type="checkbox" {{$question->required ? 'checked' : ''}} value="{{$n}}" id="required_{{$n}}">
-                             <label class="form-check-label" for="required_{{$n}}">
-                                {{__('Required')}}
-                             </label>
-                         </div>
-                         |
-                         <button type="button" class="btn btn-sm"><i class="fas fa-ellipsis-v"></i></button>
+                        <label class="form-check-label" for="required_{{$n}}">
+                            <input class="form-check-input" name="required[]" type="checkbox" {{$question->required ? 'checked' : ''}} value="{{$n}}" id="required_{{$n}}">
+                            {{__('Required')}}
+                        </label>
+                        |
+                        <button type="button" class="btn btn-sm"><i class="fas fa-ellipsis-v"></i></button>
                     </div>
                  </div>
                 @endforeach
             </div>
-            <button class="btn btn-sm btn-primary btn-block" id="new-option"><i class="fas fa-plus"></i></button>
+            <button class="btn btn-sm btn-link" id="new-option"><i class="fas fa-plus"></i> Agregar pregunta</button>
         </div>
         <div class="box-footer">
             <button class="btn btn-sm btn-primary">{{__('Update')}}</button>

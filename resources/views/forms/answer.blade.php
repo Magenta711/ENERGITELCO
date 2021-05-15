@@ -53,7 +53,7 @@
                 {{$id->name}}
             </div>
             <div class="box-tools">
-                <a href="{{route('indicators')}}" class="btn btn-sm btn-primary">Volver</a>
+                <a href="{{route('forms')}}" class="btn btn-sm btn-primary">Volver</a>
             </div>
         </div>
         <div class="box-body">
@@ -71,25 +71,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (Auth::user()->hasPermissionTo('Ver todas las respuestas'))
-                        @php
+                        {{-- @if (Auth::user()->hasPermissionTo('Ver todas las respuestas')) --}}
+                        {{-- @php
                             $already = true;
-                        @endphp
+                        @endphp --}}
                             @foreach ($id->orders as $order)
-                            <tr>
-                                <td>{{$order->id}}</td>
-                                <td>{{$order->user->name}}</td>
-                                @foreach ($id->questions as $question)
-                                    <td>{!!answerQuestion($order,$question)!!}</td>
-                                @endforeach
-                                <td>{{$order->created_at}}</td>
-                                <td>
-                                    <a href="{{route('answers_show',$order->id)}}" class="btn btn-sm btn-primary">{{__("Show")}}</a>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>{{$order->id}}</td>
+                                    <td>{{$order->user->name}}</td>
+                                    @foreach ($id->questions as $question)
+                                        <td>{!!answerQuestion($order,$question)!!}</td>
+                                    @endforeach
+                                    <td>{{$order->created_at}}</td>
+                                    <td>
+                                        <a href="{{route('answers_show',$order->id)}}" class="btn btn-sm btn-primary">{{__("Show")}}</a>
+                                    </td>
+                                </tr>
                             @endforeach
-                        @endif
-                        @if (!$already && Auth::user()->hasPermissionTo('Ver respuestas del cliente propias'))
+                        {{-- @endif --}}
+                        {{-- @if (!$already && Auth::user()->hasPermissionTo('Ver respuestas del cliente propias'))
                             @foreach ($id->orders as $order)
                                 @if (Auth::user()->id == $order->user_id)
                                     <tr>
@@ -105,7 +105,7 @@
                                     </tr>
                                 @endif
                             @endforeach
-                        @endif
+                        @endif --}}
                     </tbody>
                 </table>
             </div>

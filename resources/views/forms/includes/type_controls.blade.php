@@ -36,8 +36,8 @@
         </select>
         @break
     @case('6')
-        {{--  <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal_upload_{{$question->id}}">Open</button>  --}}
-        {{--  @include('forms.includes.modals.upload')  --}}
+        {{-- <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal_upload_{{$question->id}}">Open</button> --}}
+        {{-- @include('forms.includes.modals.upload') --}}
         <label for="input_{{$question->id}}" class="form-control text-center" id="label_file_input_{{$question->id}}"><i class="fas fa-upload"></i></label>
         <input type="file" value="" multiple name="file[]" id="input_{{$question->id}}" class="form-control file_input {{ $question->required ? 'required' : '' }}" accept=" @foreach ($question->options as $option) @switch($option->option) @case('document') .doc,.docx @break @case('worksheets') .xml @break @case('pdf') .pdf @break @case('image') image/* @break @case('video') video/* @break @default @endswitch , @endforeach " style="display: none">
         <input type="hidden" name="num_file[]" value="0" id="num_file_{{$question->id}}">

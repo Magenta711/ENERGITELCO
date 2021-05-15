@@ -56,7 +56,7 @@
             </div>
         </div>
         <input type="hidden" name="num_option[]">
-        <button class="btn btn-sm btn-primary btn-block"><i class="fas fa-plus"></i></button>
+        <button class="btn btn-sm btn-link"><i class="fas fa-plus"></i> Agregar opción</button>
     </div>
     <div id="checkbox-option">
         <div class="form-group">
@@ -70,7 +70,7 @@
             </div>
         </div>
         <input type="hidden" name="num_option[]">
-        <button class="btn btn-sm btn-primary btn-block"><i class="fas fa-plus"></i></button>
+        <button class="btn btn-sm btn-link"><i class="fas fa-plus"></i> Agregar opción</button>
     </div>
     <div id="select-option">
         <div class="form-group">
@@ -83,7 +83,7 @@
             </div>
         </div>
         <input type="hidden" name="num_option[]">
-        <button class="btn btn-sm btn-primary btn-block"><i class="fas fa-plus"></i></button>
+        <button class="btn btn-sm btn-link"><i class="fas fa-plus"></i> Agregar opción</button>
     </div>
     <div class="form-group" id="file-option">
         <label for="">Permitir solo archivos de tipo</label>
