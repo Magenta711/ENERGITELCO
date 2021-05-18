@@ -245,6 +245,12 @@
                         <td class="text-right">{{ $total }}</td>
                         <td>{{ $now }}</td>
                     </tr> --}}
+                    <tr>
+                        <td colspan="6"></td>
+                        <td>
+                            <input type="text" name="plus" id="plus" placeholder="" class="form-control" value="{{old('plus')}}">
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>

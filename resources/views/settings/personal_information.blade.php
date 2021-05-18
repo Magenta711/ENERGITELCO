@@ -41,25 +41,6 @@
                         </div>
                         <div class="col-md-8 col-sm-8">
                             <div class="row">
-
-                                <div class="col-md-12">
-                                    <div class="form-group @error('name') has-error @enderror">
-                                        <label for="name">Nombre:</label>
-                                        <input type="text" readonly name="name" value="{{ Auth::user()->name }}" class="form-control" placeholder="Nombre">
-                                        @error('name')
-                                            <span class="help-block">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group @error('email') has-error @enderror">
-                                        <label for="email">Correo</label>
-                                        <input type="email" name="email" value="{{ Auth::user()->email }}" class="form-control" placeholder="email">
-                                        @error('email')
-                                            <span class="help-block">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
                                 <div class="col-md-12">
                                     <div class="form-group @error('direccion') has-error @enderror">
                                         <label for="direccion">Dirección</label>
@@ -70,19 +51,88 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="form-group @error('cedula') has-error @enderror">
-                                        <label for="cedula">Documento de identificación</label>
-                                        <input type="cedula" readonly name="cedula" value="{{ Auth::user()->cedula }}" class="form-control" placeholder="Documento de identificación">
-                                        @error('cedula')
+                                    <div class="form-group @error('telefono') has-error @enderror">
+                                        <label for="telefono">Teléfono</label>
+                                        <input type="tel" name="telefono" value="{{ Auth::user()->telefono }}" class="form-control" placeholder="Teléfono">
+                                        @error('telefono')
                                             <span class="help-block">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="form-group @error('telefono') has-error @enderror">
-                                        <label for="telefono">Teléfono</label>
-                                        <input type="tel" name="telefono" value="{{ Auth::user()->telefono }}" class="form-control" placeholder="Teléfono">
-                                        @error('telefono')
+                                    <div class="form-group @error('marital_status') has-error @enderror">
+                                        <label for="marital_status">Estado civil</label>
+                                        <select name="marital_status" id="marital_status" class="form-control">
+                                            <option disabled selected></option>
+                                            <option {{ auth()->user()->register && auth()->user()->register->marital_status == 'Soltero' ? 'selected' : ''}} value="Soltero">Soltero</option>
+                                            <option {{ auth()->user()->register && auth()->user()->register->marital_status == 'Casado' ? 'selected' : ''}} value="Casado">Casado</option>
+                                            <option {{ auth()->user()->register && auth()->user()->register->marital_status == 'Viudo' ? 'selected' : ''}} value="Viudo">Viudo</option>
+                                            <option {{ auth()->user()->register && auth()->user()->register->marital_status == 'Unión libre' ? 'selected' : ''}} value="Unión libre">Union libre</option>
+                                        </select>
+                                        @error('marital_status')
+                                            <span class="help-block">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group @error('emergency_contact') has-error @enderror">
+                                        <label for="emergency_contact">Contacto de emergencia</label>
+                                        <input type="text" name="emergency_contact" value="{{ auth()->user()->register && auth()->user()->register->emergency_contact ? auth()->user()->register->emergency_contact : old('emergency_contact') }}" id="emergency_contact" class="form-control">
+                                        @error('emergency_contact')
+                                            <span class="help-block">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group @error('emergency_contact_number') has-error @enderror">
+                                        <label for="emergency_contact_number">Número de contacto de emergencia</label>
+                                        <input type="text" name="emergency_contact_number" value="{{ auth()->user()->register && auth()->user()->register->emergency_contact_number ? auth()->user()->register->emergency_contact_number : old('emergency_contact_number') }}" id="emergency_contact_number" class="form-control">
+                                        @error('emergency_contact_number')
+                                            <span class="help-block">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group @error('shirt_size') has-error @enderror">
+                                        <label for="shirt_size">Talla camisa</label>
+                                        <input type="text" name="shirt_size" value="{{ auth()->user()->register && auth()->user()->register->shirt_size ? auth()->user()->register->shirt_size : old('shirt_size') }}" id="shirt_size" class="form-control">
+                                        @error('shirt_size')
+                                            <span class="help-block">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group @error('pant_size') has-error @enderror">
+                                        <label for="pant_size">Talla pantalón</label>
+                                        <input type="text" name="pant_size" value="{{ auth()->user()->register && auth()->user()->register->pant_size ? auth()->user()->register->pant_size : old('pant_size') }}" id="pant_size" class="form-control">
+                                        @error('pant_size')
+                                            <span class="help-block">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group @error('shoe_size') has-error @enderror">
+                                        <label for="shoe_size">Talla calzado</label>
+                                        <input type="text" name="shoe_size" value="{{ auth()->user()->register && auth()->user()->register->shoe_size ? auth()->user()->register->shoe_size : old('shoe_size') }}" id="shoe_size" class="form-control">
+                                        @error('shoe_size')
+                                            <span class="help-block">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group @error('height') has-error @enderror">
+                                        <label for="height">Estatura</label>
+                                        <input type="text" name="height" value="{{ auth()->user()->register->height ?? old('height') }}" id="height" class="form-control">
+                                        @error('height')
+                                            <span class="help-block">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group @error('weight') has-error @enderror">
+                                        <label for="weight">Peso</label>
+                                        <input type="text" name="weight" value="{{ auth()->user()->register->weight ?? old('weight') }}" id="weight" class="form-control">
+                                        @error('weight')
                                             <span class="help-block">{{ $message }}</span>
                                         @enderror
                                     </div>

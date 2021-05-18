@@ -39,11 +39,16 @@ class profileController extends Controller
         //pinture profile
         $this->authorize(auth()->user());
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.auth()->id()],
-            'cedula' => ['required','unique:users,cedula,'.auth()->id()],
             'direccion' => ['required'],
             'telefono' => ['required'],
+            'marital_status' => ['required'],
+            'emergency_contact' => ['required'],
+            'emergency_contact_number' => ['required'],
+            'shirt_size' => ['required'],
+            'pant_size' => ['required'],
+            'shoe_size' => ['required'],
+            'height' => ['required'],
+            'weight' => ['required'],
         ]);
         $name = auth()->user()->foto;
         if ($request->hasFile('foto')){
@@ -52,27 +57,24 @@ class profileController extends Controller
             $file->move(public_path().'/img/',$name);
             User::find(auth()->id())->update(['foto'=>$name,]);
         }
-        
-        if($request->email !== auth()->user()->email){
-            auth()->user()->update([ 'email_verified_at' => null ]);
-        }
 
         auth()->user()->update([
-            'name' => $request->name,
-            'email' => $request->email,
             'direccion' => $request->direccion,
             'telefono' => $request->telefono,
-            'cedula' => $request->cedula,
-            'area' => $request->area,
         ]);
 
         if (auth()->user()->register) {
             auth()->user()->register->update([
-                'name' => $request->name,
-                'email' => $request->email,
                 'address' => $request->direccion,
                 'tel' => $request->telefono,
-                'document' => $request->cedula,
+                'marital_status' => $request->marital_status,
+                'emergency_contact' => $request->emergency_contact,
+                'emergency_contact_number' => $request->emergency_contact_number,
+                'shirt_size' => $request->shirt_size,
+                'pant_size' => $request->pant_size,
+                'shoe_size' => $request->shoe_size,
+                'height' => $request->height,
+                'weight' => $request->weight,
             ]);
         }
         
