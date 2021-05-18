@@ -813,9 +813,9 @@ Route::put('forms/{id}','forms\formController@update')->name("forms_update");
 Route::delete('forms/{id}','forms\formController@delete')->name("forms_delete");
 Route::get('forms/export/{id}','forms\formController@export')->name("forms_export");
 
-// Route::get('answers','answers\orderController@index')->name("answers");
-// Route::get('answers/{id}','answers\orderController@show')->name("answers_show");
-// Route::get('answer/{form}/{user}','answers\orderController@create')->name("answers_create");
-// Route::post('answers','answers\orderController@store')->name("answers_store");
-// Route::get('answer/ready','answers\orderController@ready')->name("answers_ready");
-// Route::delete('answer/{id}','answers\orderController@delete')->name("answers_delete");
+Route::get('answers','forms\answerController@index')->name("answers");
+Route::get('answers/{id}','forms\answerController@show')->name("answers_show");
+Route::get('answer/{form}','forms\answerController@create')->name("answers_create");
+Route::post('answers','forms\answerController@store')->name("answers_store");
+Route::get('answers/ready','forms\answerController@ready')->name("answers_ready");
+Route::delete('answer/{id}','forms\answerController@delete')->name("answers_delete");

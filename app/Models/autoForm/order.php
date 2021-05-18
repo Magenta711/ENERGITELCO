@@ -2,6 +2,7 @@
 
 namespace App\Models\autoForm;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class order extends Model
