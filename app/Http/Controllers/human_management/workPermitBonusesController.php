@@ -290,6 +290,7 @@ class workPermitBonusesController extends Controller
         $id->update([
             // 'value' => $total + $total_value_box,
             // 'value_bonu' => $total,
+            'plus' => $request->plus,
             'has_bonus' => 1,
             'status' => $id->has_box ? 2 : 3,
         ]);
@@ -638,8 +639,9 @@ class workPermitBonusesController extends Controller
                 'value_bonu' => $AccTotalPagaViatic,
                 'value_box' => $AccTotalPagarBox,
             ]);
-            $pdf = PDF::loadView('human_management.bonus.technical.pdf.main',compact('id','array'));
-            Mail::send('human_management.bonus.technical.mail.main', ['bonus' => $id, 'users' => $array], function ($menssage) use ($id,$pdf)
+            $plus = 0;
+            $pdf = PDF::loadView('human_management.bonus.technical.pdf.main',compact('id','array','plus'));
+            Mail::send('human_management.bonus.technical.mail.main', ['bonus' => $id, 'users' => $array,'plus' => 0], function ($menssage) use ($id,$pdf)
             {
                 $emails = system_setting::where('state',1)->pluck('emails_before_approval')->first();
                 $company = general_setting::where('state',1)->pluck('company')->first();
@@ -650,6 +652,14 @@ class workPermitBonusesController extends Controller
                     }
                 }
                 $menssage->to($id->responsable->email,$id->responsable->name);
+                $menssage->to('energitelco.011@gmail.com','ENERGITELCO SAS');
+                $menssage->subject("Energitelco S.A.S PAGO DE COMISIONES A TÉCNICOS APROBADO");
+                $menssage->attachData($pdf->output(), 'COMPROBANTE_EGRESOS.pdf');
+            });
+            $plus = $id->plus;
+            $pdf = PDF::loadView('human_management.bonus.technical.pdf.main',compact('id','array','plus'));
+            Mail::send('human_management.bonus.technical.mail.main', ['bonus' => $id, 'users' => $array,'plus' => $id->plus], function ($menssage) use ($id,$pdf)
+            {
                 $menssage->to('energitelco.011@gmail.com','ENERGITELCO SAS');
                 $menssage->subject("Energitelco S.A.S PAGO DE COMISIONES A TÉCNICOS APROBADO");
                 $menssage->attachData($pdf->output(), 'COMPROBANTE_EGRESOS.pdf');

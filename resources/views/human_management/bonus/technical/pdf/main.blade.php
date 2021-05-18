@@ -193,14 +193,17 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                        $plusUser = $plus / count($array);
+                    @endphp
                     @foreach ($array as $item)
                         <tr>
                             <td class="text-right">{{ $i++ }}</td>
                             <td>{{ $item['cedula'] }} {{ $item['name'] }}</td>
-                            <td class="text-right">${{ number_format(($item['bonificacion']+$item['viaticos']-$item['ajustes']),2) }}</td>
+                            <td class="text-right">${{ number_format(($item['bonificacion']+$plusUser+$item['viaticos']-$item['ajustes']),2) }}</td>
                         </tr>
                         @php
-                            $total += ($item['bonificacion']+$item['viaticos']-$item['ajustes']);
+                            $total += ($item['bonificacion']+$item['viaticos']-$item['ajustes']+$plusUser);
                         @endphp
                     @endforeach
                     <tr class="active">

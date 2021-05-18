@@ -248,7 +248,7 @@
                     <tr>
                         <td colspan="6"></td>
                         <td>
-                            <input type="text" name="plus" id="plus" placeholder="" class="form-control" value="{{old('plus')}}">
+                            <input type="text" name="plus" id="plus" placeholder="" class="form-control" value="{{old('plus') ?? 0}}">
                         </td>
                     </tr>
                     </tbody>

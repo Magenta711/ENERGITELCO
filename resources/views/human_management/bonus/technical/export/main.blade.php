@@ -43,7 +43,7 @@
                     <tr>
                         <td>{{ $item['cedula'] }}</td>
                         <td>{{ $item['name'] }}</td>
-                        <td>{{ format($item['cuenta']) }}</td>
+                        <td>{{ $item['cuenta'] }}</td>
 
                         <td>{{ $item['count'] }}</td>
 

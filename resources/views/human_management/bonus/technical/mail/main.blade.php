@@ -87,12 +87,15 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @php
+                                                    $plusUser = $plus / count($users);
+                                                @endphp
                                                 @foreach ($users as $key => $item)
                                                     <tr>
                                                         <td>{{ $item['cedula'] }}</td>
                                                         <td>{{ $item['name'] }}</td>
                                                         <td>{{ $item['cuenta'] }}</td>
-                                                        <td class="text-right">${{ number_format($item['bonificacion'],2,',','.') }}</td>
+                                                        <td class="text-right">${{ number_format(($item['bonificacion'] + $plusUser),2,',','.') }}</td>
                                                         <td class="text-right">${{ number_format($item['viaticos'],2,',','.') }}</td>
                                                         <td class="text-right">-${{ number_format($item['ajustes'],2,',','.') }}</td>
                                                     </tr>

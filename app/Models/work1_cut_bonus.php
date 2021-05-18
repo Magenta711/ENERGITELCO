@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class work1_cut_bonus extends Model
 {
     protected $table = "work1_cut_bonuses";
-    protected $fillable = ['user_id','approver_id','total','status','start_date','end_date','formats','has_bonus', 'has_box', 'value_box', 'value_bonu'];
+    protected $fillable = ['user_id','approver_id','total','status','start_date','end_date','formats','has_bonus', 'has_box', 'value_box', 'value_bonu','plus'];
     
     protected $guarder = ['id'];
 
