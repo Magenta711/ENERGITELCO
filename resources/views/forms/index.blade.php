@@ -34,30 +34,29 @@
                             </p>
                             <span class="mailbox-attachment-size">
                                 {{$item->updated_at}}
-                                    <button class="btn btn-default btn-xs pull-right dropdown-toggle" type="button" id="optionsForm_{{$item->id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
-                                    <div class="dropdown-menu option-form-menu" aria-labelledby="optionsForm_{{$item->id}}">
-                                        <ul class="menu">
-                                            <li>
-                                                <a href="{{route('forms_answer',$item->id)}}" class="dropdown-item"><i class="fas fa-list-alt"></i> Respuestas</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{route('forms_show',$item->id)}}" class="dropdown-item"><i class="fas fa-eye"></i> Ver</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{route('forms_edit',$item->id)}}" class="dropdown-item"><i class="fas fa-edit"></i> Editar</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{route('forms_export',$item->id)}}" class="dropdown-item"><i class="fas fa-file-export"></i> Exportar</a>
-                                            </li>
-                                            <li>
-                                                <button class="dropdown-item" data-toggle="modal" data-target="#modal_delete_{{$item->id}}"><i class="fas fa-trash-alt"></i> Eliminar</button>
-                                            </li>
+                                <button class="btn btn-default btn-xs pull-right dropdown-toggle" type="button" id="optionsForm_{{$item->id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
+                                <div class="dropdown-menu option-form-menu" aria-labelledby="optionsForm_{{$item->id}}">
+                                    <ul class="menu">
+                                        <li>
+                                            <a href="{{route('forms_answer',$item->id)}}" class="dropdown-item"><i class="fas fa-list-alt"></i> Respuestas</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{route('forms_show',$item->id)}}" class="dropdown-item"><i class="fas fa-eye"></i> Ver</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{route('forms_edit',$item->id)}}" class="dropdown-item"><i class="fas fa-edit"></i> Editar</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{route('forms_export',$item->id)}}" class="dropdown-item"><i class="fas fa-file-export"></i> Exportar</a>
+                                        </li>
+                                        <li>
+                                            <button class="dropdown-item" data-toggle="modal" data-target="#modal_delete_{{$item->id}}"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                                        </li>
                                     </ul>
                                     <div class="dropdown-item" style="display: flex">
                                         <input type="text" class="form-control" id="url_{{$item->id}}" value="{{config('app.url')}}/answer/{{$item->token}}/{{Auth::user()->token}}" name="myURL_{{$item->id}}">
                                         <button class="btn btn-outline-secondary copy-url" id="copy_url_{{$item->id}}" onclick="copy_url({{$item->id}})" type="button"><i class="fas fa-copy"></i></button>
                                     </div>
-                                    {{-- </div> --}}
                                 </div>
                             </span>
                             {{-- @endif --}}
@@ -83,6 +82,15 @@
 
 @section('css')
     <style>
+        .option-form-menu {
+            position: absolute;
+            right: 0;
+            left: auto;
+            width: 200px;
+            padding: 0 0 0 0;
+            margin: 0;
+            top: 100%;
+        }
         .option-form-menu>.menu>li.header{
             border-top-left-radius: 4px;
             border-top-right-radius: 4px;

@@ -83,9 +83,10 @@
         <p>Atentamente,</p>
         <br>
         <p>Firmado electrónicamente por <b>JORGE ANDRES ORTEGA BEDOYA</b> en rol de gerente general habilitado por Energitelco, con conocimiento de funciones y contenido del presente documento. Se cumple Ley 527 de 1999 y Decreto 19 de 2012.</p>
-        <img src="{{ asset('img/pruhagafs/25522adadaf.jpg') }}" height="50px" />
-        <p>
-            ___________________________
+        <p style="line-height: 0;">
+        <img src="{{ asset('img/pruhagafs/25522adadaf.jpg') }}" height="40px" style="margin-bottom: -20px" />
+        <br>
+            ______________________________________________
         </p>
         <p>
             Jorge Andrés Ortega Bedoya
@@ -94,10 +95,9 @@
             <br>
             Energitelco S.A.S
         </p>
-        <br>
         <p>
-            <p>Para confirmar la fiabilidad de está carta la puede ingresar a:</p>
-            <p><a target="_blank" href="{{config('app.url')}}/storage/files/{{$document}}">{{config('app.url')}}/storage/files/{{$document}}</a></p>
+            Para confirmar la fiabilidad de esta carta la puede ingresar a: <br>
+            <a target="_blank" href="{{config('app.url')}}/storage/files/work_10/{{$document}}">{{config('app.url')}}/storage/files/work_10/{{$document}}</a>
         </p>
     </main>
     <footer>

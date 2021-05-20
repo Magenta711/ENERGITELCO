@@ -20,6 +20,7 @@
                 Formulario sin título
             </div>
             <div class="box-tools">
+                @include('forms.includes.modals.setting')
                 <a href="{{route('forms')}}" class="btn btn-sm btn-primary">Volver</a>
             </div>
         </div>
@@ -35,7 +36,7 @@
                 </div>
             </div>
             <div id="destino_question">
-
+                
             </div>
             <button class="btn btn-sm btn-link" id="new-option"><i class="fas fa-plus"></i> Agregar pregunta</button>
         </div>
@@ -49,4 +50,58 @@
 
 @section('js')
     <script src="{{ asset('js/forms/create.js') }}" defer></script>
+    <script src="{{ asset('js/forms/setting.js') }}" defer></script>
+@endsection
+
+@section('css')
+    <style>
+        .option-form-menu {
+            position: absolute;
+            right: 0;
+            left: auto;
+            width: 200px;
+            padding: 0 0 0 0;
+            margin: 0;
+            top: 100%;
+        }
+        .option-form-menu>.menu>li.header{
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+            background-color: #ffffff;
+            padding: 7px 10px;
+            border-bottom: 1px solid #f4f4f4;
+            color: #444444;
+            font-size: 14px;
+        }
+        .option-form-menu>.menu{
+            max-height: 200px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            overflow-x: hidden;
+        }
+        .option-form-menu>.menu>li>a{
+            color: #444444;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+            padding: 10px;
+            white-space: nowrap;
+            border-bottom: none;
+        }
+        .option-form-menu>.menu>li>button{
+            color: #444444;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 10px;
+            display: block;
+            white-space: nowrap;
+            border: none;
+            background: #fff;
+            width: 100%;
+            text-align: left;
+        }
+    </style>
 @endsection

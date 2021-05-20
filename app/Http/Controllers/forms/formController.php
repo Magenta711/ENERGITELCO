@@ -10,6 +10,7 @@ use App\Models\autoForm\order;
 use App\Models\autoForm\Answer;
 use App\Models\autoForm\question;
 use App\Models\autoForm\detail_question;
+use App\Models\Positions;
 use Illuminate\Support\Str;
 use App\Notifications\notificationMain;
 use App\User;
@@ -38,7 +39,8 @@ class formController extends Controller
 
     public function create ()
     {
-        return view('forms.create');
+        $positions = Positions::get();
+        return view('forms.create',compact('positions'));
     }
 
     public function store(Request $request)
@@ -47,7 +49,19 @@ class formController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'responsible_id' => auth()->user()->id,
-            'token' => Str::random(15)
+            'token' => Str::random(15),
+            // setting
+            'form_type' => $request->form_type,
+            'rating_type' => $request->rating_type,
+            'value_type' => $request->value_type,
+            'from_to_guest' => $request->from_to_guest ? 1 : 0,
+            'from_to_auth' => $request->from_to_auth ? 1 : 0,
+            'from_to_mail' => $request->from_to_mail ? 1 : 0,
+            'limit_to_one' => $request->limit_to_one ? 1 : 0,
+            'sort_randomly' => $request->sort_randomly ? 1 : 0,
+            'mails' => $request->mails,
+            'note' => $request->note,
+            'position' => $request->position,
         ]);
         $nO = 0;
         $nOtR = 0;
@@ -66,6 +80,9 @@ class formController extends Controller
                     'question' => $request->question[$i],
                     'number' => $i,
                     'required' => $required,
+                    'value_question' => $request->value_question,
+                    'max_file' => $request->max_file,
+                    'description_question' => $request->description_question,
                     'type' => $request->type[$i],
                     'status' => 1
                 ]);

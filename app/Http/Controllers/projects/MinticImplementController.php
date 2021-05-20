@@ -152,8 +152,7 @@ class MinticImplementController extends Controller
                 ]);
             }
             if ($value->productable_type == 'App\Models\project\Mintic\inventory\invMinticEquipment') {
-                $consumable = invMinticConsumable::find($value->productable_id);
-                invMinticEquipment::find($request->description[$i])->update([
+                invMinticEquipment::find($value->productable_id)->update([
                     'status' => 1,
                 ]);
             }

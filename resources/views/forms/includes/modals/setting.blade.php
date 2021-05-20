@@ -1,0 +1,114 @@
+<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#exampleModalCenter">
+    <i class="fas fa-cog"></i>
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h5 class="modal-title" id="exampleModalLongTitle">Configuraciones</h5>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="form_type">Tipo de formulario</label>
+                        <select name="form_type" id="form_type" class="form-control">
+                            <option value="Evaluación">Evaluación</option>
+                            <option value="Encuesta">Encuesta</option>
+                            <option selected value="Formulario">Formulario</option>
+                        </select>
+                    </div>
+                    <hr>
+                </div>
+                <div class="col-md-6" id="rating_type_div" style="display: none;">
+                    <div class="form-group">
+                        <label for="rating_type">Tipo de calificación</label>
+                        <select name="rating_type" id="rating_type" class="form-control">
+                            <option selected value="Automática">Automática</option>
+                            <option value="Manual">Manual</option>
+                        </select>
+                    </div>
+                    <hr>
+                </div>
+                <div class="col-md-6" id="value_type_div" style="display: none;">
+                    <div class="form-group">
+                        <label for="value_type">Valor de la valificación automática</label>
+                        <select name="value_type" id="value_type" class="form-control">
+                            <option selected value="Promedio">Promedio</option>
+                            <option value="Dar el valor">Dar el valor a las preguntas</option>
+                        </select>
+                    </div>
+                    <hr>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="from">Destinarios</label>
+                        <div class="form-check">
+                            <input type="checkbox" name="from_to_guest" id="from_to_guest">
+                            <label for="from_to_guest">Invitados</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" name="from_to_auth" id="from_to_auth">
+                            <label for="from_to_auth">Funcionarios</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" name="from_to_mail" id="from_to_mail">
+                            <label for="from_to_mail">Correos</label>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+                <div class="col-md-6" id="note_div" style="display: none">
+                    <div class="form-group">
+                        <label for="note">Nota maxima</label>
+                        <input type="number" name="note" id="note" class="form-control" value="10">
+                    </div>
+                    <hr>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="checkbox" name="limit_to_one" id="limit_to_one">
+                        <label for="limit_to_one">Limitar a una sola respuesta</label>
+                    </div>
+                    <hr>
+                </div>
+                <div class="col-md-6" id="sort_randomly_div" style="display: none;">
+                    <div class="form-group">
+                        <input type="checkbox" name="sort_randomly" id="sort_randomly">
+                        <label for="sort_randomly">Ordenar aleatoriamente las preguntas</label>
+                    </div>
+                    <hr>
+                </div>
+                <div class="col-md-12" id="from_to_mail_div" style="display: none">
+                    <div class="form-group">
+                        <label for="mails">Correos</label> <small>Separar por <span class="text-danger"><b>;</b></span></small>
+                        <textarea name="mails" id="mails" cols="30" rows="3" class="form-control"></textarea>
+                    </div>
+                    <hr>
+                </div>
+                <div class="col-md-12" id="from_to_auth_div" style="display: none">
+                    <label for="">Por cargos</label>
+                    <div class="row">
+                        @foreach ($positions as $item)
+                            <div class="col-sm-3">
+                                <label>
+                                    <input type="checkbox" name="position[]" id="" value="{{$item->id}}" checked>
+                                    {{$item->name}}
+                                </label>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+        </div>
+    </div>
+    </div>
+</div>

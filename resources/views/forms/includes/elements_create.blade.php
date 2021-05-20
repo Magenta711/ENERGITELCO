@@ -22,6 +22,9 @@
                         <option value="8">Hora</option>
                     </select>
                 </div>
+                <div class="col-md-12 description_div">
+                    <textarea name="description_question[]" id="" cols="30" rows="1" class="form-control" placeholder="Descripción de la pregunta" style="display: none"></textarea>
+                </div>
                 <div class="col-md-12 detino" id="detino">
                 </div>
             </div>
@@ -34,7 +37,18 @@
                 Requerido
             </label>
              |
-             <button type="button" class="btn btn-sm"><i class="fas fa-ellipsis-v"></i></button>
+             <button class="btn btn-default btn-xs pull-right dropdown-toggle" type="button" id="optionsForm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
+            <div class="dropdown-menu option-form-menu" aria-labelledby="optionsForm">
+                <ul class="menu">
+                    <li>
+                        <a href="#"><label for=""><input type="checkbox" name="check_description_question[]" id=""> Descripción</label></a>
+                    </li>
+                </ul>
+                <div class="dropdown-item">
+                    <input type="text" class="form-control value_question" id="" value="" name="value_question[]" placeholder="Valor de la pregunta" style="display: none">
+                    <input type="number" class="form-control max_file" id="" value="1" name="max_file[]" placeholder="Número de archivos permitidos" style="display: none;">
+                </div>
+            </div>
         </div>
      </div>
     {{-- Opciones --}}

@@ -56,13 +56,19 @@ $(document).ready(function() {
         newQuestion.children().children().children('.type-options').children().attr('id','type_'+num).change(function () {
             changeControl(this);
         });
+        newQuestion.children().children().children('.description_div').children().attr('id','description_question_'+num);
         newQuestion.children().children().children('.detino').attr('id','detino_'+num);
         newQuestion.children('.box-footer').children('.destroy').attr('id','destroy_'+num).click(function (e) {
             e.preventDefault();
             deleteQuestion(this);
         });
-        newQuestion.children('.box-footer').children('.form-check').children('input').attr('id','required_'+num).val(num);
-        newQuestion.children('.box-footer').children('.form-check').children('label').attr('for','required_'+num);
+        newQuestion.children('.box-footer').children('.form-check-label').children('input').attr('id','required_'+num).val(num);
+        newQuestion.children('.box-footer').children('.form-check-label').children('label').attr('for','required_'+num);
+        newQuestion.children('.box-footer').children('.dropdown-menu').children('.menu').children().children().children().children('input').attr('id','check_description_question_'+num).click(function () {
+            show_description(this);
+        });
+        newQuestion.children('.box-footer').children('.dropdown-menu').children('.dropdown-item').children('.max_file').attr('id','max_file_'+num);
+        newQuestion.children('.box-footer').children('.dropdown-menu').children('.dropdown-item').children('.value_question').attr('id','value_question_'+num);
     });
 
 });
@@ -75,6 +81,7 @@ function changeControl(ele) {
     select = $('#type_'+item);
     v = select.val();
     $('#detino_'+item).children().remove();
+    $('#max_file_'+item).hide();
     switch (v) {
         case '1':
             $("#text-option").clone().appendTo("#detino_"+item);
@@ -142,6 +149,7 @@ function changeControl(ele) {
                     newElemento.children()[i].children[1].setAttribute('for', 'file_option_'+i+'_'+item);
                 }
             }
+            $('#max_file_'+item).show();
             newElemento.children('input').attr('id','num_option_'+item).val(0);
             break;
         case '7':
@@ -256,4 +264,16 @@ function checkOptionFile(ele){
         }
     }
     $('#num_option_'+item).val(n);
+}
+
+function show_description(ele) {
+    item = ele.id.split("_")[ele.id.split("_").length - 1];
+    console.log(ele);
+    console.log(item);
+    if (ele.checked) {
+        $('#description_question_'+item).show();
+    }else {
+        $('#description_question_'+item).hide();
+    }
+        
 }
