@@ -308,7 +308,7 @@ class MinticController extends Controller
                         $constraint->aspectRatio();
                     });
                     
-                    $image->text('CLARO MINTIC 7K', $image->width() - 10, $image->height() - 84, function($font) use($request) {
+                    $image->text('CLARO MINTIC 7K', $image->width() - 10, $image->height() - 86, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size(20);
                         $font->color($request->color);
@@ -317,7 +317,7 @@ class MinticController extends Controller
                         $font->angle(0);
                     });
 
-                    $image->text('COD '.$mintic->code.' '.$mintic->name, $image->width() - 10, $image->height() - 66, function($font) use($request) {
+                    $image->text('COD '.$mintic->code.' '.$mintic->name, $image->width() - 10, $image->height() - 68, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size(20);
                         $font->color($request->color);
@@ -326,7 +326,7 @@ class MinticController extends Controller
                         $font->angle(0);
                     });
 
-                    $image->text($text, $image->width() - 10, $image->height() - 48, function($font) use($request) {
+                    $image->text($text, $image->width() - 10, $image->height() - 50, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size(20);
                         $font->color($request->color);
@@ -334,7 +334,7 @@ class MinticController extends Controller
                         $font->valign('top');
                         $font->angle(0);
                     });
-                    $image->text($text2, $image->width() - 10, $image->height() - 30, function($font) use($request) {
+                    $image->text($text2, $image->width() - 10, $image->height() - 32, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size(20);
                         $font->color($request->color);
@@ -342,7 +342,7 @@ class MinticController extends Controller
                         $font->valign('top');
                         $font->angle(0);
                     });
-                    $image->text($text3, $image->width() - 10, $image->height() - 12, function($font) use($request) {
+                    $image->text($text3, $image->width() - 10, $image->height() - 14, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size(20);
                         $font->color($request->color);
@@ -362,7 +362,7 @@ class MinticController extends Controller
                         $constraint->aspectRatio();
                     });
 
-                    $image->text('COD '.$mintic->code, $image->width() - 10, $image->height() - 66, function($font) use($request) {
+                    $image->text('COD '.$mintic->code, $image->width() - 10, $image->height() - 68, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size(20);
                         $font->color($request->color);
@@ -371,7 +371,7 @@ class MinticController extends Controller
                         $font->angle(0);
                     });
 
-                    $image->text($text, $image->width() - 10, $image->height() - 48, function($font) use($request) {
+                    $image->text($text, $image->width() - 10, $image->height() - 50, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size(20);
                         $font->color($request->color);
@@ -379,7 +379,7 @@ class MinticController extends Controller
                         $font->valign('top');
                         $font->angle(0);
                     });
-                    $image->text($text2, $image->width() - 10, $image->height() - 30, function($font) use($request) {
+                    $image->text($text2, $image->width() - 10, $image->height() - 32, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size(20);
                         $font->color($request->color);
@@ -387,7 +387,7 @@ class MinticController extends Controller
                         $font->valign('top');
                         $font->angle(0);
                     });
-                    $image->text($text3, $image->width() - 10, $image->height() - 12, function($font) use($request) {
+                    $image->text($text3, $image->width() - 10, $image->height() - 14, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size(20);
                         $font->color($request->color);

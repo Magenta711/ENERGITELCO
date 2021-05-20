@@ -86,7 +86,7 @@ function changeControl(ele) {
             var newELemento = $("#radio-option").clone().appendTo("#detino_"+item);
             newELemento.children().children('.custom-radio').addClass('option-radio_'+item);
             newELemento.children().children('.custom-radio').attr('id','option-radio_'+item+'_1');
-            newELemento.children().children().children('.form-control').val('Option 1');
+            newELemento.children().children().children('.form-control').val('Opción 1');
             newELemento.children().children().children('.btn').attr('id','delete_option_radio_'+item+'_1').click(function (e) {
                 e.preventDefault();
                 deleteOptionRadio(this);
@@ -102,7 +102,7 @@ function changeControl(ele) {
             var newElemento = $("#checkbox-option").clone().appendTo("#detino_"+item);
             newElemento.children().children('.custom-checkbox').addClass('option-checkbox_'+item);
             newElemento.children().children('.custom-checkbox').attr('id','option-checkbox_'+item+'_1');
-            newElemento.children().children().children('.form-control').val('Option 1');
+            newElemento.children().children().children('.form-control').val('Opción 1');
             newElemento.children().children().children('.btn').attr('id','delete_option_checkbox_'+item+'_1').click(function (e){
                 e.preventDefault();
                 deleteOptionCheckbox(this);
@@ -118,7 +118,7 @@ function changeControl(ele) {
             var newELemento = $("#select-option").clone().appendTo("#detino_"+item);
             newELemento.children().children('.custom-select').addClass('option-select_'+item);
             newELemento.children().children('.custom-select').attr('id','option-select_'+item+'_1');
-            newELemento.children().children().children('.form-control').val('Option 1');
+            newELemento.children().children().children('.form-control').val('Opción 1');
             newELemento.children().children().children('.btn').attr('id','delete_option_select_'+item+'_1').click(function (e) {
                 e.preventDefault();
                 deleteOptionSelect(this);
@@ -177,7 +177,7 @@ function newOptionRadio(ele) {
         deleteOptionRadio(this);
     });
     newELemento.attr('id','option-radio_'+item+'_'+num);
-    newELemento.children('.form-control').val('Option '+num);
+    newELemento.children('.form-control').val('Opción '+num);
     $('#num_option_'+item).val((opt.length + 1));
 }
 // Delete option radio
@@ -206,7 +206,7 @@ function newOptionCheckbox(ele){
         deleteOptionCheckbox(this);
     });
     newELemento.attr('id','option-checkbox_'+item+'_'+num);
-    newELemento.children('.form-control').val('Option '+num);
+    newELemento.children('.form-control').val('Opción '+num);
     $('#num_option_'+item).val((opt.length + 1));
 }
 // Delete option checkbox
@@ -234,7 +234,7 @@ function newOptionSelect(ele){
         deleteOptionSelect(this);
     });
     newELemento.attr('id','option-select_'+item+'_'+num);
-    newELemento.children('.form-control').val('Option '+num);
+    newELemento.children('.form-control').val('Opción '+num);
     $('#num_option_'+item).val((opt.length + 1));
 }
 // Delete option Select

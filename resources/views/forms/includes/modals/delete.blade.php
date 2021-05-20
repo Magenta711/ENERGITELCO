@@ -7,17 +7,17 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
-          <h4 class="modal-title" id="exampleModalLongTitle">Create user</h4>
+          <h4 class="modal-title" id="exampleModalLongTitle">Eliminar formulario</h4>
         </div>
         <form action="{{route('forms_delete',$item->id)}}" method="POST">
           @csrf
           @method('DELETE')
         <div class="modal-body text-left">
-          <p>Are you sure you want to delete the form {{$item->name}}?</p>
+          <p>¿Está seguro de eliminar el formulario {{$item->name}}?</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-sm btn-primary">Delete</button>
+          <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-sm btn-primary">Eliminar</button>
         </div>
         </form>
       </div>

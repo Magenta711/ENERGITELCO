@@ -6,7 +6,7 @@
                 <div class="col-md-6">
                     <div class="form-group box-title">
                         <input type="hidden" value="0" name="question_id[]">
-                         <input type="question" value="{{__('Title of the question')}}" placeholder="{{__('Title of the question')}}" name="question[]" id="question" class="form-control">
+                         <input type="question" value="Pregunta" placeholder="Pregunta" name="question[]" id="question" class="form-control">
                     </div>
                 </div>
                 <div class="col-md-6 type-options">
@@ -31,7 +31,7 @@
             |
             <label class="form-check-label" for="required">
                  <input class="form-check-input" name="required[]" type="checkbox" value="" id="required">
-                {{__('Required')}}
+                Requerido
             </label>
              |
              <button type="button" class="btn btn-sm"><i class="fas fa-ellipsis-v"></i></button>
@@ -48,7 +48,7 @@
         <div class="form-group">
             <div class="custom-radio form-check" style="display: flex; margin-bottom: 5px;">
                 <input type="radio" id="radio" name="radio[]" aria-label="Radio button for following text input">
-                <input type="text" name="text_radio[]" id="text-radio" class="form-control" value="Option" placeholder="Option" aria-describedby="button-addon2">
+                <input type="text" name="text_radio[]" id="text-radio" class="form-control" value="Opción" placeholder="Opción" aria-describedby="button-addon2">
                 <button class="btn btn-sm" type="button" id="button-addon2"><i class="fas fa-times"></i></button>
             </div>
             <div class="option-new">
@@ -62,7 +62,7 @@
         <div class="form-group">
             <div class="custom-checkbox form-check" style="display: flex; margin-bottom: 5px">
                 <input type="checkbox" name="checkbox" class="custom-control-input" id="customCheck1">
-                <input type="text" name="text_checkbox[]" id="text-checkbox" class="form-control" value="Option" placeholder="Option" aria-describedby="button-addon2">
+                <input type="text" name="text_checkbox[]" id="text-checkbox" class="form-control" value="Opción" placeholder="Opción" aria-describedby="button-addon2">
                 <button class="btn btn-sm" type="button" id="button-addon2"><i class="fas fa-times"></i></button>
             </div>
             <div class="option-new">
@@ -75,7 +75,7 @@
     <div id="select-option">
         <div class="form-group">
             <div class="custom-select" style="display: flex; margin-bottom: 5px">
-                <input type="text" name="text_select[]" id="text-select" class="form-control" value="Option" placeholder="Option" aria-describedby="button-addon2">
+                <input type="text" name="text_select[]" id="text-select" class="form-control" value="Opción" placeholder="Opción" aria-describedby="button-addon2">
                 <button class="btn btn-sm" type="button" id="button-addon2"><i class="fas fa-times"></i></button>
             </div>
             <div class="option-new">
@@ -129,18 +129,18 @@
     {{-- Option radio --}}
     <div class="custom-radio" id="option-radio" style="display: flex; margin-bottom: 5px;">
         <input type="radio" id="radio" name="radio[]" class="custom-control-input">
-        <input type="text" name="text_radio[]" id="text-radio" class="form-control" value="Option" placeholder="Option" aria-describedby="button-addon2">
+        <input type="text" name="text_radio[]" id="text-radio" class="form-control" value="Opción" placeholder="Opción" aria-describedby="button-addon2">
         <button class="btn btn-sm" type="button" id="button-addon2"><i class="fas fa-times"></i></button>
     </div>
     {{-- option checkbox --}}
     <div id="option-checkbox" style="display: flex; margin-bottom: 5px">
         <input type="checkbox" name="checkbox" class="custom-control-input" id="customCheck1">
-        <input type="text" name="text_checkbox[]" id="text-checkbox" class="form-control" value="Option" placeholder="Option" aria-describedby="button-addon2">
+        <input type="text" name="text_checkbox[]" id="text-checkbox" class="form-control" value="Opción" placeholder="Opción" aria-describedby="button-addon2">
         <button class="btn btn-sm" type="button" id="button-addon2"><i class="fas fa-times"></i></button>
     </div>
     {{-- option select --}}
     <div id="option-select" style="display: flex; margin-bottom: 5px">
-        <input type="text" name="text_select[]" id="text-select" class="form-control" value="Option" placeholder="Option" aria-describedby="button-addon2">
+        <input type="text" name="text_select[]" id="text-select" class="form-control" value="Opción" placeholder="Opción" aria-describedby="button-addon2">
         <button class="btn btn-sm" type="button" id="button-addon2"><i class="fas fa-times"></i></button>
     </div>
 </div>

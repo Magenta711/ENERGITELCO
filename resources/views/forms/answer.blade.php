@@ -36,13 +36,12 @@
 @section('content')
 <section class="content-header">
     <h1>
-        Auto Form
+        Formularios
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
-        <li><a href="#"> Dirección</a></li>
-        <li><a href="#"> Indicadores</a></li>
-        <li class="active">Informe de indicadores</li>
+        <li><a href="#"> Formularios</a></li>
+        <li class="active">Respuestas</li>
     </ol>
 </section>
 <section class="content">
@@ -62,50 +61,28 @@
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>{{__('Adviser')}}</th>
+                            <th>Funcionario</th>
                             @foreach ($id->questions as $question)
-                            <th>{{$question->question}}</th>
+                                <th>{{$question->question}}</th>
                             @endforeach
-                            <th>{{__('Date')}}</th>
+                            <th>Fecha</th>
                             <th>/</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @if (Auth::user()->hasPermissionTo('Ver todas las respuestas')) --}}
-                        {{-- @php
-                            $already = true;
-                        @endphp --}}
-                            @foreach ($id->orders as $order)
-                                <tr>
-                                    <td>{{$order->id}}</td>
-                                    <td>{{$order->user->name}}</td>
-                                    @foreach ($id->questions as $question)
-                                        <td>{!!answerQuestion($order,$question)!!}</td>
-                                    @endforeach
-                                    <td>{{$order->created_at}}</td>
-                                    <td>
-                                        <a href="{{route('answers_show',$order->id)}}" class="btn btn-sm btn-primary">{{__("Show")}}</a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        {{-- @endif --}}
-                        {{-- @if (!$already && Auth::user()->hasPermissionTo('Ver respuestas del cliente propias'))
-                            @foreach ($id->orders as $order)
-                                @if (Auth::user()->id == $order->user_id)
-                                    <tr>
-                                        <td>{{$order->id}}</td>
-                                        <td>{{$order->user->name}}</td>
-                                        @foreach ($id->questions as $question)
-                                            <td>{!!answerQuestion($order,$question)!!}</td>
-                                        @endforeach
-                                        <td>{{$order->created_at}}</td>
-                                        <td>
-                                            <a href="{{route('answers_show',$order->id)}}" class="btn btn-sm btn-primary">{{ __('Show') }}</a>
-                                        </td>
-                                    </tr>
-                                @endif
-                            @endforeach
-                        @endif --}}
+                        @foreach ($id->orders as $order)
+                            <tr>
+                                <td>{{$order->id}}</td>
+                                <td>{{$order->user->name}}</td>
+                                @foreach ($id->questions as $question)
+                                    <td>{!!answerQuestion($order,$question)!!}</td>
+                                @endforeach
+                                <td>{{$order->created_at}}</td>
+                                <td>
+                                    <a href="{{route('answers_show',$order->id)}}" class="btn btn-sm btn-primary">Ver</a>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

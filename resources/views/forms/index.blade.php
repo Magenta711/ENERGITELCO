@@ -3,13 +3,11 @@
 @section('content')
 <section class="content-header">
     <h1>
-        Auto Form
+        Formularios
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
-        <li><a href="#"> Dirección</a></li>
-        <li><a href="#"> Indicadores</a></li>
-        <li class="active">Informe de indicadores</li>
+        <li class="active">Formularios</li>
     </ol>
 </section>
 <section class="content">
@@ -20,7 +18,7 @@
                 
             </div>
             <div class="box-tools">
-                <a href="{{route('form_create')}}" class="btn btn-sm btn-primary">{{__('Create')}}</a>
+                <a href="{{route('form_create')}}" class="btn btn-sm btn-primary">Crear</a>
             </div>
         </div>
         <div class="box-body">
@@ -40,19 +38,19 @@
                                     <div class="dropdown-menu option-form-menu" aria-labelledby="optionsForm_{{$item->id}}">
                                         <ul class="menu">
                                             <li>
-                                                <a href="{{route('forms_answer',$item->id)}}" class="dropdown-item"><i class="fas fa-list-alt"></i> {{__('Answers')}}</a>
+                                                <a href="{{route('forms_answer',$item->id)}}" class="dropdown-item"><i class="fas fa-list-alt"></i> Respuestas</a>
                                             </li>
                                             <li>
-                                                <a href="{{route('forms_show',$item->id)}}" class="dropdown-item"><i class="fas fa-eye"></i> {{__('Show')}}</a>
+                                                <a href="{{route('forms_show',$item->id)}}" class="dropdown-item"><i class="fas fa-eye"></i> Ver</a>
                                             </li>
                                             <li>
-                                                <a href="{{route('forms_edit',$item->id)}}" class="dropdown-item"><i class="fas fa-edit"></i> {{__('Edit')}}</a>
+                                                <a href="{{route('forms_edit',$item->id)}}" class="dropdown-item"><i class="fas fa-edit"></i> Editar</a>
                                             </li>
                                             <li>
-                                                <a href="{{route('forms_export',$item->id)}}" class="dropdown-item"><i class="fas fa-file-export"></i> {{__('Export')}}</a>
+                                                <a href="{{route('forms_export',$item->id)}}" class="dropdown-item"><i class="fas fa-file-export"></i> Exportar</a>
                                             </li>
                                             <li>
-                                                <button class="dropdown-item" data-toggle="modal" data-target="#modal_delete_{{$item->id}}"><i class="fas fa-trash-alt"></i> {{__('Delete')}}</button>
+                                                <button class="dropdown-item" data-toggle="modal" data-target="#modal_delete_{{$item->id}}"><i class="fas fa-trash-alt"></i> Eliminar</button>
                                             </li>
                                     </ul>
                                     <div class="dropdown-item" style="display: flex">

@@ -7,13 +7,12 @@
 @include('forms.includes.elements_create')
 <section class="content-header">
     <h1>
-        Auto Form
+        Formularios
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
-        <li><a href="#"> Dirección</a></li>
-        <li><a href="#"> Indicadores</a></li>
-        <li class="active">Informe de indicadores</li>
+        <li><a href="#"> Formularios</a></li>
+        <li class="active">Editar</li>
     </ol>
 </section>
 <section class="content">
@@ -33,10 +32,10 @@
         <div class="box-body">
             <div class="box box-body mb-3">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="name" id="name" placeholder="{{__('Form title')}}" value="{{$id->name}}">
+                    <input type="text" class="form-control" name="name" id="name" placeholder="Título del formulario" value="{{$id->name}}">
                 </div> 
                 <div class="form-group">
-                    <textarea class="form-control" name="description" id="description" cols="30" rows="3" placeholder=">{{__('Description of the form')}}">{{$id->description}}</textarea>
+                    <textarea class="form-control" name="description" id="description" cols="30" rows="3" placeholder="Descripción de el formulario">{{$id->description}}</textarea>
                 </div>
             </div>
             <div id="destino_question">
@@ -76,7 +75,7 @@
                         |
                         <label class="form-check-label" for="required_{{$n}}">
                             <input class="form-check-input" name="required[]" type="checkbox" {{$question->required ? 'checked' : ''}} value="{{$n}}" id="required_{{$n}}">
-                            {{__('Required')}}
+                            Requerido
                         </label>
                         |
                         <button type="button" class="btn btn-sm"><i class="fas fa-ellipsis-v"></i></button>
@@ -87,7 +86,7 @@
             <button class="btn btn-sm btn-link" id="new-option"><i class="fas fa-plus"></i> Agregar pregunta</button>
         </div>
         <div class="box-footer">
-            <button class="btn btn-sm btn-primary">{{__('Update')}}</button>
+            <button class="btn btn-sm btn-primary">Actualizar</button>
         </div>
         </form>
     </div>

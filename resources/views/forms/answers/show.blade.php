@@ -57,7 +57,7 @@ function answerQuestion($order, $question){
             </div>
         </div>
         <div class="box-body">
-            <span class="text-danger">*{{__('Required')}}</span>
+            <p>Todo campo con <span class="text-danger">*</span> son requeridos</p>
             @foreach ($id->form->questions as $question)
                 <div class="card card-body mb-3">
                     <label class="label-text"> {{$question->question}} <span class="text-danger">{{ $question->required ? '*' : '' }}</span></label>
@@ -68,4 +68,3 @@ function answerQuestion($order, $question){
     </div>
 </section>
 @endsection
-

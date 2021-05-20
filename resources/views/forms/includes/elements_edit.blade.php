@@ -22,7 +22,7 @@
                     @endphp
                         <div id="option-radio_{{$n}}_{{$m}}" class="custom-radio form-check option-radio_{{$n}}" style="display: flex; margin-bottom: 5px;">
                             <input type="radio" id="radio" name="radio[]" class="custom-control-input">
-                            <input type="text" name="text_radio[]" id="text-radio" class="form-control" value="{{$option->option}}" placeholder="Option" aria-describedby="button-addon2">
+                            <input type="text" name="text_radio[]" id="text-radio" class="form-control" value="{{$option->option}}" placeholder="Opción" aria-describedby="button-addon2">
                             <button class="btn btn-sm btn-delete-option-radio" id="delete_option_radio_{{$n}}_{{$m}}" type="button" id="button-addon2"><i class="fas fa-times"></i></button>
                         </div>
                     @endforeach
@@ -42,7 +42,7 @@
                     @endphp
                         <div id="option-checkbox_{{$n}}_{{$m}}" class="custom-checkbox form-check option-checkbox_{{$n}}"  style="display: flex; margin-bottom: 5px">
                             <input type="checkbox" name="checkbox" class="custom-control-input" id="customCheck1">
-                            <input type="text" name="text_checkbox[]" id="text-checkbox" class="form-control" value="{{$option->option}}" placeholder="Option" aria-describedby="button-addon2">
+                            <input type="text" name="text_checkbox[]" id="text-checkbox" class="form-control" value="{{$option->option}}" placeholder="Opción" aria-describedby="button-addon2">
                             <button class="btn btn-sm btn-delete-option-checkbox" id="delete_option_checkbox_{{$n}}_{{$m}}" type="button" id="button-addon2"><i class="fas fa-times"></i></button>
                         </div>
                     @endforeach
@@ -61,7 +61,7 @@
                         $m++;
                     @endphp
                         <div class="input-group mb-3" id="option-select_{{$n}}_{{$m}}"  style="display: flex; margin-bottom: 5px">
-                            <input type="text" name="text_select[]" id="text-select" class="form-control" value="{{$option->option}}" placeholder="Option" aria-describedby="button-addon2">
+                            <input type="text" name="text_select[]" id="text-select" class="form-control" value="{{$option->option}}" placeholder="Opción" aria-describedby="button-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-sm btn-delete-option-select" id="delete_option_select_{{$n}}_{{$m}}" type="button" id="button-addon2"><i class="fas fa-times"></i></button>
                             </div>

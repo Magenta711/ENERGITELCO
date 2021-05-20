@@ -4,7 +4,7 @@
     <div class="modal-dialog  modal-dialog-scrollable modal-dialog-centered modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modal_uploadLabel">Upload files</h5>
+          <h5 class="modal-title" id="modal_uploadLabel">Subir archivos</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -20,11 +20,11 @@
                 <div id="uploader">
                   <div class="row uploadDoc">
                     <div class="col-md-3">
-                      <div class="docErr" style="display: none">Please upload valid file</div>
+                      <div class="docErr" style="display: none">Por favor sube un archivo valido</div>
                       <!--error-->
                       <div class="fileUpload btn btn-orange">
                         <img src="https://image.flaticon.com/icons/svg/136/136549.svg" width="40" class="icon">
-                        <span class="upl" id="upload">Upload document</span>
+                        <span class="upl" id="upload">Actualizar archivo</span>
                         <input type="file" class="upload up" id="up" onchange="readURL(this);">
                       </div><!-- btn-orange -->
                     </div><!-- col-3 -->
@@ -38,8 +38,8 @@
                 </div>
                 <!--uploader-->
                 <div class="text-center">
-                  <a class="btn btn-new"><i class="fa fa-plus"></i> Add new</a>
-                  <a class="btn btn-next"><i class="fa fa-paper-plane"></i> Submit</a>
+                  <a class="btn btn-new"><i class="fa fa-plus"></i> Agregar nueva</a>
+                  <a class="btn btn-next"><i class="fa fa-paper-plane"></i> Enviar</a>
                 </div>
               </div>
               <!--one-->
@@ -47,8 +47,8 @@
           </div><!-- container -->
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-sm btn-primary">Save</button>
+          <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-sm btn-primary">Guardar</button>
         </div>
         </form>
       </div>

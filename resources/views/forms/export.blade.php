@@ -35,13 +35,13 @@
         </tr>
         <tr>
             <th style="background: #e9bfb9">Id</th>
-            <th style="background: #e9bfb9">{{__('Adviser')}}</th>
+            <th style="background: #e9bfb9">Funcionario</th>
             @foreach ($forms->questions as $question)
                 @if ($question->status)
                     <th style="background: #e9bfb9">{{$question->question}}</th>
                 @endif
             @endforeach
-            <th style="background: #e9bfb9">{{__('Date')}}</th>
+            <th style="background: #e9bfb9">Fecha</th>
         </tr>
     </thead>
     <tbody>
