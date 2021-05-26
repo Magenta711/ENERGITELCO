@@ -571,12 +571,12 @@ class workPermitBonusesController extends Controller
             foreach ($array as $item) {
                 if ($item['total'] < 50000)
                 {
-                    $mensaje = 'Automático pendiente: '.$item['total'].' Comentario: En el corte '.$id->id.' no cumple con valor mínimo 50.000';
+                    $mensaje = 'Automático pendiente: '.$item['total'].' Comentario: En el corte '.$id->id.' no cumple con valor mínimo $50.000';
                     $minorUser = MinorBoxUser::where('user_id' ,$item['id'])->first();
                     if ($minorUser) {
                         $minorUser->update([
                             'responsable_id' => auth()->id(),
-                            'charges' => $item['total_box'] + $item['deliverable'],
+                            'charges' => $item['caja'] + $item['deliverable'],
                             'pending' => $item['total'],
                             'discharges' => 0,
                             'last_date' => $now,
@@ -584,11 +584,11 @@ class workPermitBonusesController extends Controller
                             'commentary' => null,
                             'history' => $minorUser->history.' '.now()->format('d/m/Y H:i:s').': '.$mensaje."\n",
                         ]);
-                    }else {
+                    }else{
                         MinorBoxUser::create([
                             'user_id' => $item['id'],
                             'responsable_id' => auth()->id(),
-                            'charges' => $item['total_box'] + $item['deliverable'],
+                            'charges' => $item['caja'] + $item['deliverable'],
                             'pending' => $item['total'],
                             'discharges' => 0,
                             'last_date' => $now,
@@ -597,29 +597,30 @@ class workPermitBonusesController extends Controller
                             'history' => now()->format('d/m/Y H:i:s').': '.$mensaje."\n",
                         ]);
                     }
-                }
-                else{
+                }else{
+                    $mensaje = now()->format('d/m/Y H:i:s').': Pago el corte '.$id->id.': $'.number_format($item['total'],0,',','.').' (Caja menor: $'.number_format($item['caja'],0,',','.').' Bonificaciones: $'.number_format($item['bonificacion'],0,',','.').', viáticos: $'.number_format($item['viaticos'],0,',','.').', Otros: $'.number_format(($item['discharges'] + $item['pending'] - $item['ajustes']),0,',','.').') Por: '.auth()->user()->name."\n";
+
                     $minorUser = MinorBoxUser::where('user_id' ,$item['id'])->first();
                     if ($minorUser) {
                         $minorUser->update([
                             'responsable_id' => auth()->id(),
-                            'charges' => $item['total_box'] + $item['deliverable'],
+                            'charges' => $item['caja'] + $item['deliverable'],
                             'pending' => 0,
                             'last_date' => $now,
                             'status' => 1,
                             'commentary' => null,
-                            'history' => $minorUser->history.' '.now()->format('d/m/Y H:i:s').': Pago: '.$item['total'].' Por: '.auth()->user()->name.' Comentario: se le pago el corte '.$id->id."\n",
+                            'history' => $minorUser->history.' '.$mensaje,
                         ]);
                     }else{
                         MinorBoxUser::create([
                             'user_id' => $item['id'],
                             'responsable_id' => auth()->id(),
-                            'charges' => $item['total_box'] + $item['deliverable'],
+                            'charges' => $item['caja'] + $item['deliverable'],
                             'pending' => 0,
                             'last_date' => $now,
                             'status' => 1,
                             'commentary' => null,
-                            'history' => now()->format('d/m/Y H:i:s').': Pago: '.$item['total'].' Por: '.auth()->user()->name.' Comentario: se le pago el corte '.$id->id."\n",
+                            'history' => $mensaje,
                         ]);
                     }
                     $AccTotalPagar += $item['total'];

@@ -44,7 +44,7 @@
                             <th>Funcionario</th>
                             <th># Cuenta</th>
                             <th>Bonificaciones</th>
-                            <th>Viaticos</th>
+                            <th>Viáticos</th>
                             <th>Ajustes</th>
                             <th>Pendientes</th>
                             <th>Total a pagar</th>

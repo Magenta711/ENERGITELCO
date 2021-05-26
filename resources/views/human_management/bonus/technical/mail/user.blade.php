@@ -60,7 +60,7 @@
                                                 <p>Bonificaciones <br>${{ number_format($item['bonificacion'],2,',','.') }}</p>
                                             </div>
                                             <div style="width: 25%; text-align: center">
-                                                <p>Viaticos <br>${{number_format($item['viaticos'],2,',','.')}}</p>
+                                                <p>Viáticos <br>${{number_format($item['viaticos'],2,',','.')}}</p>
                                             </div>
                                             <div style="width: 25%; text-align: center">
                                                 <p>Ajustes <br>- ${{number_format($item['ajustes'],2,',','.')}}</p>

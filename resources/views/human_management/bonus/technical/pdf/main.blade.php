@@ -45,6 +45,9 @@
             if ($number[0]) {
                 $text = $text.$unidades[$number[0]].' mil ';
             }
+            if ($number[0] == 0) {
+                $text = $text.' mil ';
+            }
             $text = $text;
             array_splice($number, 0, 1);
             $by--;
@@ -76,6 +79,9 @@
         if ($by == 1) {
             if ($number[0]) {
                 $text = $text.$unidades[$number[0]].' ';
+            }
+            if ($text == '' && $number[0] == 0) {
+                $text = 'cero';
             }
             $text = $text;
             array_splice($number, 0, 1);
@@ -197,14 +203,16 @@
                         $plusUser = $plus / count($array);
                     @endphp
                     @foreach ($array as $item)
-                        <tr>
-                            <td class="text-right">{{ $i++ }}</td>
-                            <td>{{ $item['cedula'] }} {{ $item['name'] }}</td>
-                            <td class="text-right">${{ number_format(($item['bonificacion']+$plusUser+$item['viaticos']-$item['ajustes']),2) }}</td>
-                        </tr>
+                        @if (($item['bonificacion']+$plusUser+$item['viaticos']-$item['ajustes']) > 0)
+                            <tr>
+                                <td class="text-right">{{ $i++ }}</td>
+                                <td>{{ $item['cedula'] }} {{ $item['name'] }}</td>
+                                <td class="text-right">${{ number_format(($item['bonificacion']+$plusUser+$item['viaticos']-$item['ajustes']),2) }}</td>
+                            </tr>
                         @php
                             $total += ($item['bonificacion']+$item['viaticos']-$item['ajustes']+$plusUser);
                         @endphp
+                        @endif
                     @endforeach
                     <tr class="active">
                         <th colspan="2">Total</th>

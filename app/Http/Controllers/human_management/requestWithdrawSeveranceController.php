@@ -308,6 +308,9 @@ class requestWithdrawSeveranceController extends Controller
             if ($number[0]) {
                 $text = $text.$unidades[$number[0]].' mil ';
             }
+            if ($number[0] == 0) {
+                $text = $text.' mil ';
+            }
             $text = $text;
             array_splice($number, 0, 1);
             $by--;
@@ -339,6 +342,9 @@ class requestWithdrawSeveranceController extends Controller
         if ($by == 1) {
             if ($number[0]) {
                 $text = $text.$unidades[$number[0]].' ';
+            }
+            if ($text == '' && $number[0] == 0) {
+                $text = 'cero';
             }
             $text = $text;
             array_splice($number, 0, 1);
