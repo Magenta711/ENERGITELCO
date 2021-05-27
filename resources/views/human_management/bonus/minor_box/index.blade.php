@@ -55,7 +55,7 @@
                                 <td>{{ $item->start_date }}</td>
                                 <td>{{ $item->end_date }}</td>
                                 <td>{{ $item->status == 3 && !$item->has_box ? 'Pendiente' : (($item->status == 1) ? 'Aprobado' : (($item->status == 2 || ($item->has_box && $item->status == 3)) ? 'Sin aprobar' : 'No aprobado')) }}</td>
-                                <td>{{ $item->created_at }}</td>
+                                <td>{{ $item->updated_at }}</td>
                                 <td>
                                     @can('Ver bonificaciones de permisos de trabajo')
                                         <a href="{{ route('bonus_minor_box_show',$item->id) }}" class="btn btn-sm btn-success">Ver</a>

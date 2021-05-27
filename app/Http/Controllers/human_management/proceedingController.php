@@ -194,7 +194,7 @@ class proceedingController extends Controller
         $acount = count($id->users);
         $total_assis = count($request->assistants_id) + $total_guest;
         foreach ($id->users as $user) {
-            if (count($request->assistants_id) < $i) {
+            if (count($request->assistants_id) > $i) {
                 $user->update([
                     'user_id' => $request->assistants_id[$i],
                 ]);
@@ -215,10 +215,10 @@ class proceedingController extends Controller
                         'responsibles_id' => $id->id,
                     ]);
                 }
-                $i = $j + $i;
+                $i += $j;
             }
             if ($request->guest_id) {
-                for ($j= ($total_assis - $i); $j < $total_guest; $j++) { 
+                for ($j= $i; $j < $total_guest; $j++) { 
                     Responsable::create([
                         'user_id' => $request->guest_id[$j],
                         'responsibles_type' => 'App\Models\Proceeding',
@@ -300,6 +300,6 @@ class proceedingController extends Controller
 
     public function download (Proceeding $id){
         $pdf = PDF::loadView('human_management/proceedings/pdf/main',['id' => $id]);
-        return $pdf->download($id->id+'_acta.pdf');
+        return $pdf->download($id->id.'_acta.pdf');
     }
 }

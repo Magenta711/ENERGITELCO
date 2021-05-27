@@ -276,9 +276,11 @@ class MinorBoxController extends Controller
                 $smAcc = "se le debe un total de ".$total_discharges;
             }
 
+            $msValue = '';
             if ($request->value > 0) {
                 $msValue = 'cargo: '.$request->value.' ';
             }
+            $msDischarges = '';
             if ($request->discharges > 0) {
                 $msDischarges = 'descargo: '.$request->discharges.' ';
             }
@@ -317,9 +319,11 @@ class MinorBoxController extends Controller
                     $smAcc = "se le debe un total de ".$request->discharges;
                 }
             }
+            $msValue = '';
             if ($request->value > 0) {
                 $msValue = 'cargo: '.$request->value.' ';
             }
+            $msDischarges = '';
             if ($request->discharges > 0) {
                 $msDischarges = 'descargo: '.$request->discharges.' ';
             }

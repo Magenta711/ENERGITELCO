@@ -51,7 +51,7 @@
                                 <td>{{ $item->end_date }}</td>
                                 {{-- if hasBox and hasBonus pass this estatate else whiouth --}}
                                 <td>{{ $item->status == 3 ? 'Pendiente' : (($item->status == 1) ? 'Aprobado' : (($item->status == 2) ? 'Sin aprobar' : 'No aprobado')) }}</td>
-                                <td>{{ $item->created_at }}</td>
+                                <td>{{ $item->updated_at }}</td>
                                 <td>
                                     @can('Ver bonificaciones de permisos de trabajo')
                                         <a href="{{ route('work_permit_bonuses_show',$item->id) }}" class="btn btn-sm btn-success">Ver</a>
