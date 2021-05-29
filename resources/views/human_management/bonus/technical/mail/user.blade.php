@@ -74,7 +74,7 @@
                                                 <p>Caja menor <br>${{ number_format($item['caja'], 2,',','.') }}</p>
                                             </div>
                                             <div style="width: 33.3%; text-align: center">
-                                                <p>El valor a liquidar es <br>$ {{number_format(($item['total_box'] + $item['deliverable']),2,',','.')}}</p>
+                                                <p>El valor a liquidar es <br>$ {{number_format(($item['caja'] + $item['deliverable']),2,',','.')}}</p>
                                             </div>
                                             <div style="width: 33.3%; text-align: center">
                                                 <p>Valor pendiente <br>$ {{number_format($item['discharges'],2,',','.')}}</p>
