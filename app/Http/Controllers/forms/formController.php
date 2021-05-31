@@ -45,11 +45,30 @@ class formController extends Controller
 
     public function store(Request $request)
     {
+        $acc_question = 0;
+        $note = 0;
+        if ($request->form_type == "Evaluación") {
+            if ($request->rating_type == "Automática" && $request->type){
+                if ($request->value_type == "Promedio") {
+                    for ($i=0; $i < count($request->type); $i++) {
+                        if ($request->type[$i] == 3) {
+                            $acc_question++;
+                        }
+                    }
+                }else {
+                    for ($i=0; $i < count($request->type); $i++) {
+                        if ($request->type[$i] == 3) {
+                            $note+=$request->value_question;
+                        }
+                    }
+                }
+            }
+        }
         $form = form::create([
             'name' => $request->name,
             'description' => $request->description,
             'responsible_id' => auth()->user()->id,
-            'token' => Str::random(15),
+            'token' => Str::random(7),
             // setting
             'form_type' => $request->form_type,
             'rating_type' => $request->rating_type,
@@ -60,8 +79,7 @@ class formController extends Controller
             'limit_to_one' => $request->limit_to_one ? 1 : 0,
             'sort_randomly' => $request->sort_randomly ? 1 : 0,
             'mails' => $request->mails,
-            'note' => $request->note,
-            'position' => $request->position,
+            'note' => $request->form_type == "Evaluación" && $request->rating_type == "Automática" && $request->value_type == "Promedio" ? $request->note : $note,
         ]);
         $nO = 0;
         $nOtR = 0;
@@ -69,6 +87,7 @@ class formController extends Controller
         $nOtS = 0;
         $nF = 0;
         $nFt = 0;
+        $note = $request->note / $acc_question;
         if($request->type){
             for ($i=0; $i < count($request->type); $i++) { 
                 $required = 0;
@@ -80,9 +99,9 @@ class formController extends Controller
                     'question' => $request->question[$i],
                     'number' => $i,
                     'required' => $required,
-                    'value_question' => $request->value_question,
-                    'max_file' => $request->max_file,
-                    'description_question' => $request->description_question,
+                    'value_question' => $request->form_type == "Evaluación" && $request->rating_type == "Automática" && $request->value_type == "Promedio" ? $note : $request->value_question[$i],
+                    'max_file' => $request->type[$i] == 6 ? $request->max_file[$i] : 0,
+                    'description_question' => $request->description_question[$i],
                     'type' => $request->type[$i],
                     'status' => 1
                 ]);
@@ -103,7 +122,7 @@ class formController extends Controller
                         break;
                     case "4":
                         if ($request->num_option[$nO]) {
-                            for ($j=0; $j < $request->num_option[$nO]; $j++) { 
+                            for ($j=0; $j < $request->num_option[$nO]; $j++) {
                                 detail_question::create([
                                     'question_id' => $question->id,
                                     'num' => $j,
@@ -151,11 +170,21 @@ class formController extends Controller
             }
         }
 
+        //position
+        // if ($request->from_to_auth) {
+        //     for ($i=0; $i < count($request->position); $i++) { 
+                // $users = User::where('state',1)->where('position_id',$request->position[$i])->get();
+                // foreach ($users as $item) {
+
+                // }
+        //     }
+        // }
+
         $users = User::where('state',1)->get();
         foreach ($users as $use) {
-            if ($use->hasPermissionTo('Ver lista de formularios')) {
-                $use->notify(new notificationMain($form->id,'Nuevo formulario '.$form->id,'forms/'.$form->id));
-            }
+            // if ($use->hasPermissionTo('Ver lista de formularios')) {
+            //     $use->notify(new notificationMain($form->id,'Nuevo formulario '.$form->id,'forms/'.$form->id));
+            // }
         }
 
         return redirect()->route('forms')->with('success','Se ha creado el formulario correctamente');
@@ -163,11 +192,13 @@ class formController extends Controller
 
     public function edit(form $id)
     {
-        return view('forms.edit',compact('id'));
+        $positions = Positions::get();  
+        return view('forms.edit',compact('id','positions'));
     }
 
     public function update(Request $request,form $id)
     {
+        return $request;
         // Actualizar todos los por la lista de question_id -> ideantificar cuales id no estan en el array, luego chequear la pregunta si cambia las condiciones y actualizar a el estado, los que no esten en el array eliminar y los nuevos items crearlos y realacionarlos
         //Cambiar request para los existentes para tener mas control
         // Desactivar las preguntas que se hayan eliminado
@@ -176,9 +207,39 @@ class formController extends Controller
         // if($id->orders){
         //     return redirect()->route('forms')->with('success','No es posible editar el formulario, cuenta con resgistros');
         // }
+        $acc_question = 0;
+        $note = 0;
+        if ($request->form_type == "Evaluación") {
+            if ($request->rating_type == "Automática" && $request->type){
+                if ($request->value_type == "Promedio") {
+                    for ($i=0; $i < count($request->type); $i++) {
+                        if ($request->type[$i] == 3) {
+                            $acc_question++;
+                        }
+                    }
+                }else {
+                    for ($i=0; $i < count($request->type); $i++) {
+                        if ($request->type[$i] == 3) {
+                            $note+=$request->value_question;
+                        }
+                    }
+                }
+            }
+        }
         $id->update([
             'name' => $request->name,
             'description' => $request->description,
+            //setting
+            'form_type' => $request->form_type,
+            'rating_type' => $request->rating_type,
+            'value_type' => $request->value_type,
+            'from_to_guest' => $request->from_to_guest ? 1 : 0,
+            'from_to_auth' => $request->from_to_auth ? 1 : 0,
+            'from_to_mail' => $request->from_to_mail ? 1 : 0,
+            'limit_to_one' => $request->limit_to_one ? 1 : 0,
+            'sort_randomly' => $request->sort_randomly ? 1 : 0,
+            'mails' => $request->mails,
+            'note' => $request->form_type == "Evaluación" && $request->rating_type == "Automática" && $request->value_type == "Promedio" ? $request->note : $note,
         ]);
         question::where('form_id',$id->id)->update([ 'status' => 0 ]);
         $nO = 0;
@@ -187,6 +248,7 @@ class formController extends Controller
         $nOtS = 0;
         $nF = 0;
         $nFt = 0;
+        $note = $request->note / $acc_question;
         if($request->type){
             for ($i=0; $i < count($request->type); $i++) {
                 $required = false;
@@ -200,6 +262,9 @@ class formController extends Controller
                         'number' => ($i + 1),
                         'required' => $required,
                         'type' => $request->type[$i],
+                        'value_question' => $request->form_type == "Evaluación" && $request->rating_type == "Automática" && $request->value_type == "Promedio" ? $note : $request->value_question[$i],
+                        'max_file' => $request->type[$i] == 6 ? $request->max_file[$i] : 0,
+                        'description_question' => $request->description_question[$i],
                         'status' => 1
                     ]);
                 }else {

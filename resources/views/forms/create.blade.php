@@ -15,6 +15,8 @@
 <section class="content">
     @include('includes.alerts')
     <div class="box">
+        <form action="{{route('forms_store')}}" method="POST" autocomplete="off">
+            @csrf
         <div class="box-header">
             <div class="box-title" id="form-tiple">
                 Formulario sin título
@@ -24,8 +26,6 @@
                 <a href="{{route('forms')}}" class="btn btn-sm btn-primary">Volver</a>
             </div>
         </div>
-        <form action="{{route('forms_store')}}" method="POST" autocomplete="off">
-            @csrf
         <div class="box-body">
             <div class="card card-body mb-3">
                 <div class="form-group">

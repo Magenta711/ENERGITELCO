@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class question extends Model
 {
     protected $fillable = [
-        'form_id','number','question','required','type','status'
+        'form_id','number','question','required','type','status','value_question','max_file','description_question'
     ];
     
     public function options()

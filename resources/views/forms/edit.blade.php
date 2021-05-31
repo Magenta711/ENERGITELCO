@@ -23,6 +23,7 @@
                 {{$id->name}}
             </div>
             <div class="box-tools">
+                @include('forms.includes.modals.setting')
                 <a href="{{route('forms')}}" class="btn btn-sm btn-primary">Volver</a>
             </div>
         </div>
@@ -95,4 +96,5 @@
 
 @section('js')
     <script src="{{ asset('js/forms/create.js') }}" defer></script>
+    <script src="{{ asset('js/forms/setting.js') }}" defer></script>
 @endsection
