@@ -50,7 +50,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group box-title">
-                                     <input type="question" value="{{$question->question}}" placeholder="Title of the question" name="question[]" id="question" class="form-control">
+                                     <input type="question" value="{{$question->question}}" placeholder="Title of the question" name="question[]" id="question_{{$n}}" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-6 type-options">
@@ -82,8 +82,8 @@
                             Requerido
                         </label>
                         |
-                        <button class="btn btn-default btn-xs pull-right dropdown-toggle" type="button" id="optionsForm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
-                        <div class="dropdown-menu option-form-menu" aria-labelledby="optionsForm">
+                        <button class="btn btn-default btn-xs pull-right dropdown-toggle" type="button" id="optionsForm_{{$n}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
+                        <div class="dropdown-menu option-form-menu" aria-labelledby="optionsForm_{{$n}}">
                             <ul class="menu">
                                 <li>
                                     <a href="#"><label for=""><input type="checkbox" name="check_description_question[]" id="check_description_question_{{$n}}" {!! $question->description_question != '' ? 'checked' : ''!!} value="{{$n}}"> Descripción</label></a>

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\autoForm\Answer;
 use App\Models\autoForm\form;
 use App\Models\autoForm\order;
+use App\Models\autoForm\UserForm;
 use App\Notifications\notificationMain;
 use App\User;
 use Illuminate\Support\Facades\Storage;
@@ -34,21 +35,25 @@ class answerController extends Controller
         return view('forms.answers.show',compact('id'));
     }
 
-    public function create($form)
+    public function create($form,string $email = null)
     {
         $id = form::where('token',$form)->first();
-        // with(['questions' => function ($query)
-        // {
-        //     // $query->inRandomOrder();
-        // }])->
-        // $token_user = User::where('token',$user)->first();
         if ($id) {
             if ($id->from_to_auth) {
                 if (!auth()->check()) {
                     return abort(404);
                 }
+            }else {
+                if (!auth()->check()) {
+                    if (!$email) {
+                        return redirect()->route('answers_email',[ 'form' => $form]);
+                    }
+                    $user = UserForm::where('secret',$email)->first();
+                    if (!$user) {
+                        return abort(404);
+                    }
+                }
             }
-
             
             return view('forms.answers.create',compact('id','form'));
         }
@@ -189,5 +194,31 @@ class answerController extends Controller
         }
         $id->delete();
         return redirect()->route('answers')->with('success','Se ha eliminado la respuesta');
+    }
+
+    public function register_email($form)
+    {
+        $id = form::where('token',$form)->first();
+        if ($id) {
+            return view('forms.answers.email',compact('form'));
+        }
+        return abort(404);
+    }
+    public function register_email_store(Request $request,$form)
+    {
+        $id = form::where('token',$form)->first();
+        if ($id) {
+            $user_form = UserForm::where('email',$request->email)->first();
+            if (!$user_form) {
+                $user_form = UserForm::create([
+                    'email'=>$request->email,
+                    'form_id'=>$id->id,
+                    'secret'=>encrypt($request->email),
+                    'status'=>0
+                ]);
+            }
+            return redirect()->route('answers_create',[$form,$user_form->secret]);
+        }
+        return abort(404);
     }
 }

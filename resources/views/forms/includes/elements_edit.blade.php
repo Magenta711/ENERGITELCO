@@ -4,12 +4,12 @@
 @switch($question->type)
     @case(1)
     <div class="form-group" id="text-option">
-        <input type="text" readonly name="text[]" id="text" class="form-control">
+        <input type="text" readonly name="text[]" id="text_{{$n}}" class="form-control">
     </div>
         @break
     @case(2)
         <div class="form-group" id="textarea-option">
-            <textarea name="textarea[]" readonly id="textarea" cols="30" rows="1" class="form-control"></textarea> 
+            <textarea name="textarea[]" readonly id="textarea_{{$n}}" cols="30" rows="1" class="form-control"></textarea> 
         </div>
         @break
     @case(3)
@@ -21,8 +21,8 @@
                         $m++;
                     @endphp
                         <div id="option-radio_{{$n}}_{{$m}}" class="custom-radio form-check option-radio_{{$n}}" style="display: flex; margin-bottom: 5px;">
-                            <input type="radio" id="radio" name="radio[]" class="custom-control-input">
-                            <input type="text" name="text_radio[]" id="text-radio" class="form-control" value="{{$option->option}}" placeholder="Opción" aria-describedby="button-addon2">
+                            <input type="radio" id="radio_{{$n}}_{{$m}}" name="answer[{{$n}}]" class="custom-control-input input_radio" value="{{$option->option}}" {!! $option->option == $question->answer ? 'checked' : ''!!}>
+                            <input type="text" name="text_radio[]" id="text-radio_{{$n}}_{{$m}}" class="form-control text_radio" value="{{$option->option}}" placeholder="Opción" aria-describedby="button-addon2">
                             <button class="btn btn-sm btn-delete-option-radio" id="delete_option_radio_{{$n}}_{{$m}}" type="button" id="button-addon2"><i class="fas fa-times"></i></button>
                         </div>
                     @endforeach
@@ -41,8 +41,8 @@
                         $m++;
                     @endphp
                         <div id="option-checkbox_{{$n}}_{{$m}}" class="custom-checkbox form-check option-checkbox_{{$n}}"  style="display: flex; margin-bottom: 5px">
-                            <input type="checkbox" name="checkbox" class="custom-control-input" id="customCheck1">
-                            <input type="text" name="text_checkbox[]" id="text-checkbox" class="form-control" value="{{$option->option}}" placeholder="Opción" aria-describedby="button-addon2">
+                            <input type="checkbox" name="checkbox" class="custom-control-input" id="customCheck_{{$n}}_{{$m}}">
+                            <input type="text" name="text_checkbox[]" id="text-checkbox_{{$n}}_{{$m}}" class="form-control" value="{{$option->option}}" placeholder="Opción" aria-describedby="button-addon2">
                             <button class="btn btn-sm btn-delete-option-checkbox" id="delete_option_checkbox_{{$n}}_{{$m}}" type="button" id="button-addon2"><i class="fas fa-times"></i></button>
                         </div>
                     @endforeach
@@ -61,7 +61,7 @@
                         $m++;
                     @endphp
                         <div class="input-group mb-3" id="option-select_{{$n}}_{{$m}}"  style="display: flex; margin-bottom: 5px">
-                            <input type="text" name="text_select[]" id="text-select" class="form-control" value="{{$option->option}}" placeholder="Opción" aria-describedby="button-addon2">
+                            <input type="text" name="text_select[]" id="text-select_{{$n}}_{{$m}}" class="form-control" value="{{$option->option}}" placeholder="Opción" aria-describedby="button-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-sm btn-delete-option-select" id="delete_option_select_{{$n}}_{{$m}}" type="button" id="button-addon2"><i class="fas fa-times"></i></button>
                             </div>
@@ -114,12 +114,12 @@
         @break
     @case(7)
         <div class="form-group" id="date-option">
-            <input type="date" readonly name="date[]" id="" class="form-control">
+            <input type="date" readonly name="date[]" class="form-control">
         </div>
         @break
     @case(8)    
         <div class="form-group" id="time-option">
-            <input type="time" readonly name="time[]" id="" class="form-control">
+            <input type="time" readonly name="time[]" class="form-control">
         </div>
         @break
     @default

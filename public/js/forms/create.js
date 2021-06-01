@@ -3,8 +3,6 @@ $(document).ready(function() {
     $('#name').keyup(function(){
         $('#form-tiple').text(this.value);
     });
-    $('.questions').click(function(e){
-    });
     $('.types').change(function () {
         changeControl(this);
     });
@@ -39,6 +37,9 @@ $(document).ready(function() {
     $('.btn-delete-option-select').click(function (e) {
         e.preventDefault();
         deleteOptionSelect(this);
+    });
+    $('.text_radio').blur(function name() {
+        $(this).parent().children('.input_radio').val(this.value);
     });
     $('.file_option_checked').click(function(){
         checkOptionFile(this);
@@ -78,8 +79,8 @@ $(document).ready(function() {
 function changeControl(ele) {
     // console.log(e.currentTarget.id);
     var item = ele.id.split("_")[ele.id.split("_").length - 1];
-    select = $('#type_'+item);
-    v = select.val();
+    let select = $('#type_'+item);
+    let v = select.val();
     $('#detino_'+item).children().remove();
     $('#max_file_'+item).hide();
     switch (v) {
@@ -93,7 +94,10 @@ function changeControl(ele) {
             var newELemento = $("#radio-option").clone().appendTo("#detino_"+item);
             newELemento.children().children('.custom-radio').addClass('option-radio_'+item);
             newELemento.children().children('.custom-radio').attr('id','option-radio_'+item+'_1');
-            newELemento.children().children().children('.form-control').val('Opción 1');
+            newELemento.children().children().children('.form-control').val('Opción 1').blur(function () {
+                $(this).parent().children('.input_radio').val(this.value);
+            });
+            newELemento.children().children().children('.input_radio').attr('name','radio['+item+']').val('Opción 1');
             newELemento.children().children().children('.btn').attr('id','delete_option_radio_'+item+'_1').click(function (e) {
                 e.preventDefault();
                 deleteOptionRadio(this);
@@ -185,7 +189,10 @@ function newOptionRadio(ele) {
         deleteOptionRadio(this);
     });
     newELemento.attr('id','option-radio_'+item+'_'+num);
-    newELemento.children('.form-control').val('Opción '+num);
+    newELemento.children('.form-control').val('Opción '+num).blur(function () {
+        $(this).parent().children('.input_radio').val(this.value);
+    });
+    newELemento.children('.input_radio').attr('name','radio['+item+']').val('Opción '+num);
     $('#num_option_'+item).val((opt.length + 1));
 }
 // Delete option radio

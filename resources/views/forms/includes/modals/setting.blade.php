@@ -97,7 +97,7 @@
                         @foreach ($positions as $item)
                             <div class="col-sm-3">
                                 <label>
-                                    <input type="checkbox" name="position[]" id="" value="{{$item->id}}" checked>
+                                    <input type="checkbox" name="position[]" id="position_{{$item->id}}" value="{{$item->id}}" checked>
                                     {{$item->name}}
                                 </label>
                             </div>

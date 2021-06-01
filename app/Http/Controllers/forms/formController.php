@@ -252,6 +252,7 @@ class formController extends Controller
                         'question' => $request->question[$i],
                         'number' => ($i + 1),
                         'required' => $required,
+                        'answer' => isset($request->answer[($i + 1)]) ? $request->answer[($i + 1)] : null,
                         'type' => $request->type[$i],
                         'value_question' => $request->form_type == "Evaluación" && $request->rating_type == "Automática" && $request->value_type == "Promedio" ? $note : $request->value_question[$i],
                         'max_file' => $request->type[$i] == 6 ? $request->max_file[$i] : 0,
@@ -267,6 +268,7 @@ class formController extends Controller
                     $question->update([
                         'question' => $request->question[$i],
                         'number' => ($i + 1),
+                        'answer' => isset($request->answer[($i + 1)]) ? $request->answer[($i + 1)] : null,
                         'required' => $required,
                         'type' => $request->type[$i],
                         'value_question' => $request->form_type == "Evaluación" && $request->rating_type == "Automática" && $request->value_type == "Promedio" ? $note : $request->value_question[$i],

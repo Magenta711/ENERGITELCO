@@ -815,7 +815,9 @@ Route::get('forms/export/{id}','forms\formController@export')->name("forms_expor
 
 Route::get('answers','forms\answerController@index')->name("answers");
 Route::get('answers/{id}','forms\answerController@show')->name("answers_show");
-Route::get('answer/{form}','forms\answerController@create')->name("answers_create");
+Route::get('answer/{form}/{email?}','forms\answerController@create')->name("answers_create");
 Route::post('answers','forms\answerController@store')->name("answers_store");
 Route::get('answers/ready','forms\answerController@ready')->name("answers_ready");
-Route::delete('answer/{id}','forms\answerController@delete')->name("answers_delete");
+Route::delete('answers/{id}','forms\answerController@delete')->name("answers_delete");
+Route::get('answers/login/{form}','forms\answerController@register_email')->name("answers_email");
+Route::post('answers/login/{form}','forms\answerController@register_email_store')->name("answers_email_store");
