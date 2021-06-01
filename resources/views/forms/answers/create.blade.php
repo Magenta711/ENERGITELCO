@@ -1,3 +1,20 @@
+@php
+    function twodshuffle($array)
+    {
+        $count = count($array);
+        $indi = range(0,$count-1);
+        shuffle($indi);
+        $newarray = array($count);
+        $i = 0;
+        foreach ($indi as $index)
+        {
+            $newarray[$i] = $array[$index];
+            $i++;
+        }
+        return $newarray;
+    }
+@endphp
+
 @extends(isset(Auth::user()->id) ? 'lte.layouts' : 'layouts.app2')
 @auth
     @section('content')
@@ -28,14 +45,9 @@
 @guest
 
 @section('content')
-{{-- <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{$id->name}}</div> --}}
 
-<section class="signup-section" id="signup">
-    <div class="container">
+<section class="signup-section" id="signup" style="padding: 10rem 0 0 0">
+    <div class="container" style="background-color: rgb(0,0,0,0.4); padding: 1rem; border-radius: 10px">
         <div class="row">
             <div class="col-md-10 col-lg-8 mx-auto text-white">
                 {{-- <i class="far fa-paper-plane fa-2x mb-2 text-white"></i> --}}
@@ -45,23 +57,36 @@
                 </div>
                 <form action="{{route('answers_store')}}" id="target" autocomplete="off" method="post" enctype="multipart/form-data">
                     @csrf
-                    {{-- <div class="card-body"> --}}
 @endguest
-
-            {{-- <div class="mb-3">
-                <h3 class="card-title">{{$id->name}}</h3> --}}
                 <p class="card-text">{{$id->description}}</p>
                 <p>Todo campo con <span class="text-danger">*</span> son requeridos</p>
-            {{-- </div> --}}
             <input type="hidden" name="form" value="{{$id->token}}">
-            {{-- <input type="hidden" name="user" value="{{$user}}"> --}}
             <hr>
-            @foreach ($id->questions as $question)
-                <div class="form-group ">
-                    <label class="label-text" for="input_{{$question->id}}">{{$question->question}} <span class="text-danger">{{ $question->required ? '*' : '' }}</span></label>
-                    @include('forms.includes.type_controls')
-                </div>
-            @endforeach
+            @if ($id->sort_randomly)
+                @foreach ($id->questions as $question)
+                    @if ($question->type != 3)
+                        <div class="form-group">
+                            <label class="label-text" for="input_{{$question->id}}">{{$question->question}} <span class="text-danger">{{ $question->required ? '*' : '' }}</span></label>
+                            @include('forms.includes.type_controls')
+                        </div>
+                    @endif
+                @endforeach
+                    @foreach (twodshuffle($id->questions) as $question)
+                        @if ($question->type == 3)
+                            <div class="form-group">
+                                <label class="label-text" for="input_{{$question->id}}">{{$question->question}} <span class="text-danger">{{ $question->required ? '*' : '' }}</span></label>
+                                @include('forms.includes.type_controls')
+                            </div>
+                        @endif
+                    @endforeach
+            @else
+             @foreach ($id->questions as $question)
+                 <div class="form-group">
+                     <label class="label-text" for="input_{{$question->id}}">{{$question->question}} <span class="text-danger">{{ $question->required ? '*' : '' }}</span></label>
+                     @include('forms.includes.type_controls')
+                 </div>
+             @endforeach
+            @endif
 @auth
         </div>
             <div class="box-footer">
@@ -74,19 +99,6 @@
     @endsection
 @endauth
 @guest
-                {{-- </div>
-                <div class="card-footer">
-                    <div class="row justify-content-end">
-                        <div class="col-auto">
-                            <button class="btn btn-sm btn-primary btn-save">Enviar</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-        </div>
-    </div>
-</div> --}}
                     <button class="btn btn-sm btn-block btn-primary btn-save">Enviar</button>
                 </form>
             </div>

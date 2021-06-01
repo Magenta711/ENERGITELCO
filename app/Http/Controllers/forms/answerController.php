@@ -37,8 +37,19 @@ class answerController extends Controller
     public function create($form)
     {
         $id = form::where('token',$form)->first();
+        // with(['questions' => function ($query)
+        // {
+        //     // $query->inRandomOrder();
+        // }])->
         // $token_user = User::where('token',$user)->first();
         if ($id) {
+            if ($id->from_to_auth) {
+                if (!auth()->check()) {
+                    return abort(404);
+                }
+            }
+
+            
             return view('forms.answers.create',compact('id','form'));
         }
         return abort(404);

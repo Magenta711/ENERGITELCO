@@ -49,15 +49,15 @@
                     <div class="form-group">
                         <label for="from">Destinarios</label>
                         <div class="form-check">
-                            <input {{isset($id) && $id->from_to_guest ? 'checked' : ''}} type="checkbox" name="from_to_guest" id="from_to_guest">
+                            <input {!!isset($id) && $id->from_to_guest ? 'checked' : ''!!} type="checkbox" name="from_to_guest" id="from_to_guest" value="1">
                             <label for="from_to_guest">Invitados</label>
                         </div>
                         <div class="form-check">
-                            <input {{isset($id) && $id->from_to_auth ? 'checked' : ''}} type="checkbox" name="from_to_auth" id="from_to_auth">
+                            <input {!!isset($id) && $id->from_to_auth ? 'checked' : ''!!} type="checkbox" name="from_to_auth" id="from_to_auth" value="1">
                             <label for="from_to_auth">Funcionarios</label>
                         </div>
                         <div class="form-check">
-                            <input {{isset($id) && $id->from_to_mail ? 'checked' : ''}} type="checkbox" name="from_to_mail" id="from_to_mail">
+                            <input {!!isset($id) && $id->from_to_mail ? 'checked' : ''!!} type="checkbox" name="from_to_mail" id="from_to_mail" value="1">
                             <label for="from_to_mail">Correos</label>
                         </div>
                     </div>
@@ -72,14 +72,14 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input type="checkbox" {{isset($id) && $id->limit_to_one ? 'checked' : ''}}  name="limit_to_one"  id="limit_to_one">
+                        <input type="checkbox" {!!isset($id) && $id->limit_to_one ? 'checked' : ''!!}  name="limit_to_one"  id="limit_to_one" value="1">
                         <label for="limit_to_one">Limitar a una sola respuesta</label>
                     </div>
                     <hr>
                 </div>
                 <div class="col-md-6" id="sort_randomly_div" style="display: none;">
                     <div class="form-group">
-                        <input type="checkbox" {{isset($id) && $id->sort_randomly ? 'checked' : ''}}  name="sort_randomly" id="sort_randomly">
+                        <input type="checkbox" {!!isset($id) && $id->sort_randomly ? 'checked' : ''!!}  name="sort_randomly" id="sort_randomly" value="1">
                         <label for="sort_randomly">Ordenar aleatoriamente las preguntas</label>
                     </div>
                     <hr>

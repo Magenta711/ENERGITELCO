@@ -7,7 +7,7 @@
         <textarea name="text_area[]" id="input_{{$question->id}}"  placeholder="Respuesta" class="form-control {{ $question->required ? 'required' : '' }}" cols="30" rows="3"></textarea>
         @break
     @case('3')
-        @foreach ($question->options as $option)
+        @foreach (twodshuffle($question->options) as $option)
             <div class="custom-control custom-radio form-check">
                 <input type="radio" id="radio_{{$option->id}}" name="radio[{{$question->id}}]" value="{{$option->id}}" class="custom-control-input radios_{{$question->id}} {{ $question->required ? 'required' : '' }}">
                 <label class="custom-control-label" for="radio_{{$option->id}}">
@@ -41,6 +41,7 @@
         <label for="input_{{$question->id}}" class="form-control text-center" id="label_file_input_{{$question->id}}"><i class="fas fa-upload"></i></label>
         <input type="file" value="" multiple name="file[]" id="input_{{$question->id}}" class="form-control file-input {{ $question->required ? 'required' : '' }}" accept=" @foreach ($question->options as $option) @switch($option->option) @case('document') .doc,.docx @break @case('worksheets') .xml @break @case('pdf') .pdf @break @case('image') image/* @break @case('video') video/* @break @default @endswitch , @endforeach " style="display: none">
         <input type="hidden" name="num_file[]" value="0" id="num_file_{{$question->id}}">
+        <input type="hidden" name="max_file[]" value="{{$question->max_file}}" id="max_file_{{$question->id}}">
         <small class="text-muted" id="text_num_file_{{$question->id}}"></small>
         @break
     @case('7')

@@ -18,6 +18,9 @@
 <section class="content">
     @include('includes.alerts')
     <div class="box">
+        <form action="{{route('forms_update',$id->id)}}" method="POST" autocomplete="off">
+            @csrf
+            @method('PUT')
         <div class="box-header">
             <div class="box-title">
                 {{$id->name}}
@@ -27,9 +30,6 @@
                 <a href="{{route('forms')}}" class="btn btn-sm btn-primary">Volver</a>
             </div>
         </div>
-        <form action="{{route('forms_update',$id->id)}}" method="POST" autocomplete="off">
-            @csrf
-            @method('PUT')
         <div class="box-body">
             <div class="box box-body mb-3">
                 <div class="form-group">
@@ -66,6 +66,9 @@
                                     <option {{$question->type == 8 ? 'selected' : ''}} value="8">Hora</option>
                                 </select>
                             </div>
+                            <div class="col-md-12 description_div" style="margin-bottom: 6px">
+                                <textarea name="description_question[]" id="description_question_{{$n}}" cols="30" rows="1" class="form-control" placeholder="Descripción de la pregunta" {!! $question->description_question != '' ? '' : 'style="display: none"'!!}>{{ $question->description_question }}</textarea>
+                            </div>
                             <div class="col-md-12 detino" id="detino_{{$n}}">
                                 @include('forms.includes.elements_edit')
                             </div>
@@ -79,7 +82,18 @@
                             Requerido
                         </label>
                         |
-                        <button type="button" class="btn btn-sm"><i class="fas fa-ellipsis-v"></i></button>
+                        <button class="btn btn-default btn-xs pull-right dropdown-toggle" type="button" id="optionsForm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
+                        <div class="dropdown-menu option-form-menu" aria-labelledby="optionsForm">
+                            <ul class="menu">
+                                <li>
+                                    <a href="#"><label for=""><input type="checkbox" name="check_description_question[]" id="check_description_question_{{$n}}" {!! $question->description_question != '' ? 'checked' : ''!!} value="{{$n}}"> Descripción</label></a>
+                                </li>
+                            </ul>
+                            <div class="dropdown-item">
+                                <input type="text" class="form-control value_question" id="value_question_{{$n}}" value="{{$question->value_question}}" name="value_question[]" placeholder="Valor de la pregunta" {!! $id->form_type == 'Evaluación' && $id->rating_type == 'Automática' && $id->value_type == 'Dar el valor' ? '' : 'style="display: none"'!!}>
+                                <input type="number" class="form-control max_file" id="max_file_{{$n}}" value="{{ $question->type == 6 ? $question->max_file : 1}}" name="max_file[]" placeholder="Número de archivos permitidos" {!! $question->type == 6 ? '' : 'style="display: none"'!!}>
+                            </div>
+                        </div>
                     </div>
                  </div>
                 @endforeach
@@ -97,4 +111,58 @@
 @section('js')
     <script src="{{ asset('js/forms/create.js') }}" defer></script>
     <script src="{{ asset('js/forms/setting.js') }}" defer></script>
+@endsection
+
+
+@section('css')
+    <style>
+        .option-form-menu {
+            position: absolute;
+            right: 0;
+            left: auto;
+            width: 200px;
+            padding: 0 0 0 0;
+            margin: 0;
+            top: 100%;
+        }
+        .option-form-menu>.menu>li.header{
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+            background-color: #ffffff;
+            padding: 7px 10px;
+            border-bottom: 1px solid #f4f4f4;
+            color: #444444;
+            font-size: 14px;
+        }
+        .option-form-menu>.menu{
+            max-height: 200px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            overflow-x: hidden;
+        }
+        .option-form-menu>.menu>li>a{
+            color: #444444;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+            padding: 10px;
+            white-space: nowrap;
+            border-bottom: none;
+        }
+        .option-form-menu>.menu>li>button{
+            color: #444444;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 10px;
+            display: block;
+            white-space: nowrap;
+            border: none;
+            background: #fff;
+            width: 100%;
+            text-align: left;
+        }
+    </style>
 @endsection

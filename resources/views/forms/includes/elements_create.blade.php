@@ -61,7 +61,7 @@
     <div id="radio-option">
         <div class="form-group">
             <div class="custom-radio form-check" style="display: flex; margin-bottom: 5px;">
-                <input type="radio" id="radio" name="radio[]" aria-label="Radio button for following text input">
+                <input type="radio" id="radio" name="radio[]">
                 <input type="text" name="text_radio[]" id="text-radio" class="form-control" value="Opción" placeholder="Opción" aria-describedby="button-addon2">
                 <button class="btn btn-sm" type="button" id="button-addon2"><i class="fas fa-times"></i></button>
             </div>

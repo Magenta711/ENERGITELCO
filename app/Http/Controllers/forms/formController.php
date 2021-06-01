@@ -198,15 +198,6 @@ class formController extends Controller
 
     public function update(Request $request,form $id)
     {
-        return $request;
-        // Actualizar todos los por la lista de question_id -> ideantificar cuales id no estan en el array, luego chequear la pregunta si cambia las condiciones y actualizar a el estado, los que no esten en el array eliminar y los nuevos items crearlos y realacionarlos
-        //Cambiar request para los existentes para tener mas control
-        // Desactivar las preguntas que se hayan eliminado
-        //Crear un control de cambios y responsables e historial
-
-        // if($id->orders){
-        //     return redirect()->route('forms')->with('success','No es posible editar el formulario, cuenta con resgistros');
-        // }
         $acc_question = 0;
         $note = 0;
         if ($request->form_type == "Evaluación") {
@@ -278,6 +269,9 @@ class formController extends Controller
                         'number' => ($i + 1),
                         'required' => $required,
                         'type' => $request->type[$i],
+                        'value_question' => $request->form_type == "Evaluación" && $request->rating_type == "Automática" && $request->value_type == "Promedio" ? $note : $request->value_question[$i],
+                        'max_file' => $request->type[$i] == 6 ? $request->max_file[$i] : 0,
+                        'description_question' => $request->description_question[$i],
                         'status' => 1
                     ]);
                 }
