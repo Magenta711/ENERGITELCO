@@ -1,6 +1,5 @@
 @switch($question->type)
 @case('1')
-        {{" "}}
         <input type="text" value="" name="text[]" placeholder="Respuesta" id="input_{{$question->id}}" class="form-control {{ $question->required ? 'required' : '' }}">
         @break
     @case('2')

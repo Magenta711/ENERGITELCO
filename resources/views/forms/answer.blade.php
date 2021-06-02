@@ -66,6 +66,9 @@
                                 <th>{{$question->question}}</th>
                             @endforeach
                             <th>Fecha</th>
+                            @if ($id->form_type == 'Evaluación')
+                                <th>Calificación</th>
+                            @endif
                             <th>/</th>
                         </tr>
                     </thead>
@@ -73,11 +76,18 @@
                         @foreach ($id->orders as $order)
                             <tr>
                                 <td>{{$order->id}}</td>
-                                <td>{{$order->user->name}}</td>
+                                <td>{{$order->user ? $order->user->name : ''}}</td>
                                 @foreach ($id->questions as $question)
                                     <td>{!!answerQuestion($order,$question)!!}</td>
                                 @endforeach
                                 <td>{{$order->created_at}}</td>
+                                @if ($id->form_type == 'Evaluación')
+                                    @if ($id->rating_type == 'Automática')
+                                        <td>{{($order->qualification * 100) / $id->note}}% / 100%</td>
+                                    @else
+                                        <td>{{$order->qualification ? (($order->qualification * 100) / $id->note).'% / 100%'  : 'Sin calificar'}}</td>
+                                    @endif
+                                @endif
                                 <td>
                                     <a href="{{route('answers_show',$order->id)}}" class="btn btn-sm btn-primary">Ver</a>
                                 </td>

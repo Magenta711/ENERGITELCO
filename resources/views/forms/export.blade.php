@@ -31,17 +31,17 @@
 <table>
     <thead>
         <tr>
-            <th colspan="{{ (count($forms->questions) + 3) }}" style="text-align: center;background: #e9bfb9">{{ $forms->name }}</th>
+            <th colspan="{{ (count($forms->questions) + 3) }}" style="text-align: center;background: #7390ca">{{ $forms->name }}</th>
         </tr>
         <tr>
-            <th style="background: #e9bfb9">Id</th>
-            <th style="background: #e9bfb9">Funcionario</th>
+            <th style="background: #7390ca">Id</th>
+            <th style="background: #7390ca">Funcionario</th>
             @foreach ($forms->questions as $question)
                 @if ($question->status)
-                    <th style="background: #e9bfb9">{{$question->question}}</th>
+                    <th style="background: #7390ca">{{$question->question}}</th>
                 @endif
             @endforeach
-            <th style="background: #e9bfb9">Fecha</th>
+            <th style="background: #7390ca">Fecha</th>
         </tr>
     </thead>
     <tbody>

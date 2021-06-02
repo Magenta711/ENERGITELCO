@@ -43,31 +43,72 @@ class answerController extends Controller
                 if (!auth()->check()) {
                     return abort(404);
                 }
+                $user = UserForm::where('secret',$email)->where('form_id',$id->id)->first();
+                if ($user && $user->email == auth()->user()->email) {
+                    if ($user->status == 1) {
+                        return redirect()->with('success','Ya respondiste');
+                    }
+                }else {
+                    return redirect()->route('home')->with('success','Acción no permitida');
+                }
             }else {
                 if (!auth()->check()) {
                     if (!$email) {
                         return redirect()->route('answers_email',[ 'form' => $form]);
                     }
-                    $user = UserForm::where('secret',$email)->first();
+                    $user = UserForm::where('secret',$email)->where('form_id',$id->id)->where('status',0)->first();
                     if (!$user) {
                         return abort(404);
                     }
+                }else {
+                    $user = UserForm::where('email',auth()->user()->email)->where('form_id',$id->id)->first();
+                    if ($user && $user->status == 1) {
+                        return abort(404);
+                    }else {
+                        if (!$user) {
+                            $email = encrypt(auth()->user()->email);
+                            $user = UserForm::create([
+                                'email' => auth()->user()->email,
+                                'secret' => $email,
+                                'form_id' => $id->id,
+                                'status' => 0
+                            ]);
+                        }else {
+                            $email = $id->secret;
+                        }
+                    }
                 }
             }
-            
-            return view('forms.answers.create',compact('id','form'));
+            return view('forms.answers.create',compact('id','form','email'));
         }
         return abort(404);
     }
 
     public function store(Request $request)
     {
-        // $user = User::where('token',$request->user)->first();
         $form = form::where('token',$request->form)->first();
+        
+        $user = UserForm::where('form_id',$form->id)->where('secret',$request->email)->first();
+        if ($user) {
+            if ($form->limit_to_one) {
+                if ($user->status == 1) {
+                    return abort(404);
+                }
+                $user->update([
+                    'status' => 1
+                ]);
+            }
+        }else{
+            if (auth()->check()) {
+                return redirect()->route('home')->with('success','Acción no permitida');
+            }else {
+                return abort(404);
+            }
+        }
         $answer = order::create([
             'form_id' => $form->id,
-            'user_id' => auth()->id(),
-            'responder_id' => auth()->id(),
+            'user_id' => auth()->check() ? auth()->id() : null,
+            'user_form_id' => $form->limit_to_one ? $user->id : null,
         ]);
         $nt = 0;
         $nta = 0;
@@ -80,6 +121,7 @@ class answerController extends Controller
         $nd = 0;
         $ntm = 0;
         $r = '';
+        $quali = 0;
         foreach ($form->questions as $question) {
             switch ($question->type) {
                 case "1":
@@ -105,6 +147,11 @@ class answerController extends Controller
                             'answer'=>$request->radio[$question->id],
                             'order_id' => $answer->id
                         ]);
+                        if ($form->form_type == 'Evaluación' && $form->rating_type == 'Automática') {
+                            if ($question->answer == $request->radio[$question->id]) {
+                                $quali += $question->value_question;
+                            }
+                        }
                     }
                     $nr++;
                     break;
@@ -130,7 +177,7 @@ class answerController extends Controller
                     break;
                 case "6":
                     if (isset($request->num_file[$nfp])) {
-                        for ($i=0; $i < $request->num_file[$nfp]; $i++) { 
+                        for ($i=0; $i < $request->num_file[$nfp]; $i++) {
                             if ($request->hasFile('file')){
                                 if ($file = $request->file('file')[$nf]) {
                                     $name = time().$file->getClientOriginalName();
@@ -170,20 +217,26 @@ class answerController extends Controller
                     break;
             }
         }
+        
+        $answer->update([
+            'qualification' => $quali,
+        ]);
 
-        $users = User::where('state',1)->get();
+        // $users = User::where('state',1)->get();
         // $user->notify(new notificationMain($answer->id,'Nueva respuesta '.$answer->id,'answers/'.$answer->id));
         // foreach ($users as $use) {
         //     if ($use->hasPermissionTo('Ver lista de respuestas')) {
         //         $use->notify(new notificationMain($answer->id,'Nueva respuesta '.$answer->id,'answers/'.$answer->id));
         //     }
         // }
-
         return redirect()->route('answers_ready');
     }
 
     public function ready()
     {
+        if (auth()->check()) {
+            return redirect()->route('home')->with('success','Tus respuestas se han registrado correctamente');
+        }
         return view('forms.answers.ready');
     }
 
@@ -204,18 +257,29 @@ class answerController extends Controller
         }
         return abort(404);
     }
+    
     public function register_email_store(Request $request,$form)
     {
+        $request->validate([
+            'email' => ['required'],
+        ]);
         $id = form::where('token',$form)->first();
         if ($id) {
-            $user_form = UserForm::where('email',$request->email)->first();
-            if (!$user_form) {
-                $user_form = UserForm::create([
-                    'email'=>$request->email,
-                    'form_id'=>$id->id,
-                    'secret'=>encrypt($request->email),
-                    'status'=>0
-                ]);
+            $user_form = UserForm::where('email',$request->email)->where('form_id',$id->id)->first();
+            if ($id->from_to_mail) {
+                if (!$user_form && !$id->from_to_guest) {
+                    return back()->withErrors(['email'=>'Estas credenciales no coinciden con nuestros registros.'])->withInput();
+                }
+            }
+            if ($id->from_to_guest) {
+                if (!$user_form) {
+                    $user_form = UserForm::create([
+                        'email'=>$request->email,
+                        'form_id'=>$id->id,
+                        'secret'=>encrypt($request->email),
+                        'status'=>0
+                    ]);
+                }
             }
             return redirect()->route('answers_create',[$form,$user_form->secret]);
         }

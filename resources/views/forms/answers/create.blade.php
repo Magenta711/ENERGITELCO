@@ -61,6 +61,7 @@
                 <p class="card-text">{{$id->description}}</p>
                 <p>Todo campo con <span class="text-danger">*</span> son requeridos</p>
             <input type="hidden" name="form" value="{{$id->token}}">
+            <input type="hidden" name="email" value="{{$email}}">
             <hr>
             @if ($id->sort_randomly)
                 @foreach ($id->questions as $question)

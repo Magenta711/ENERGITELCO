@@ -5,8 +5,8 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card card-body mb-3">
-                <h3 class="card-title">Thanks for your reply</h3>
-                <p class="card-text">Your answers have been recorded correctly</p>
+                <h3 class="card-title">Gracias por tu participación</h3>
+                <p class="card-text">Tus respuestas se han registrado correctamente</p>
             </div>
         </div>
     </div>

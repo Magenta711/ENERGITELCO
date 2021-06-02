@@ -1,3 +1,19 @@
+@php
+    function twodshuffle($array)
+    {
+        $count = count($array);
+        $indi = range(0,$count-1);
+        shuffle($indi);
+        $newarray = array($count);
+        $i = 0;
+        foreach ($indi as $index)
+        {
+            $newarray[$i] = $array[$index];
+            $i++;
+        }
+        return $newarray;
+    }
+@endphp
 @extends('lte.layouts')
 
 @section('content')
@@ -23,7 +39,7 @@
             </div>
         </div>
         <div class="box-body">
-            <span class="text-danger">*Required</span>
+            <p>Todo campo con <span class="text-danger">*</span> son requeridos</p>
             @foreach ($id->questions as $question)
                 @if ($question->status)
                     <div class="box box-body mb-3">

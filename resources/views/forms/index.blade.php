@@ -53,10 +53,12 @@
                                             <button class="dropdown-item" data-toggle="modal" data-target="#modal_delete_{{$item->id}}"><i class="fas fa-trash-alt"></i> Eliminar</button>
                                         </li>
                                     </ul>
-                                    <div class="dropdown-item" style="display: flex">
-                                        <input type="text" class="form-control" id="url_{{$item->id}}" value="{{config('app.url')}}/answer/{{$item->token}}/{{Auth::user()->token}}" name="myURL_{{$item->id}}">
-                                        <button class="btn btn-outline-secondary copy-url" id="copy_url_{{$item->id}}" onclick="copy_url({{$item->id}})" type="button"><i class="fas fa-copy"></i></button>
-                                    </div>
+                                    @if ($item->from_to_guest || $item->from_to_mail)
+                                        <div class="dropdown-item" style="display: flex">
+                                            <input type="text" class="form-control" id="url_{{$item->id}}" value="{{config('app.url')}}/answer/{{$item->token}}/{{Auth::user()->token}}" name="myURL_{{$item->id}}">
+                                            <button class="btn btn-outline-secondary copy-url" id="copy_url_{{$item->id}}" onclick="copy_url({{$item->id}})" type="button"><i class="fas fa-copy"></i></button>
+                                        </div>
+                                    @endif
                                 </div>
                             </span>
                             {{-- @endif --}}
@@ -117,6 +119,9 @@
             padding: 10px;
             white-space: nowrap;
             border-bottom: none;
+        }
+        .option-form-menu>.menu>li>a:hover, .option-form-menu>.menu>li>button:hover{
+            background: rgb(0,0,0,0.05);
         }
         .option-form-menu>.menu>li>button{
             color: #444444;

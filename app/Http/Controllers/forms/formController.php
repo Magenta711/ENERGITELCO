@@ -10,6 +10,7 @@ use App\Models\autoForm\order;
 use App\Models\autoForm\Answer;
 use App\Models\autoForm\question;
 use App\Models\autoForm\detail_question;
+use App\Models\autoForm\UserForm;
 use App\Models\Positions;
 use Illuminate\Support\Str;
 use App\Notifications\notificationMain;
@@ -63,6 +64,7 @@ class formController extends Controller
                     }
                 }
             }
+            $note = $request->note / $acc_question;
         }
         $form = form::create([
             'name' => $request->name,
@@ -87,7 +89,6 @@ class formController extends Controller
         $nOtS = 0;
         $nF = 0;
         $nFt = 0;
-        $note = $request->note / $acc_question;
         if($request->type){
             for ($i=0; $i < count($request->type); $i++) { 
                 $required = 0;
@@ -109,12 +110,17 @@ class formController extends Controller
                     case "3":
                         if ($request->num_option[$nO]){
                             for ($j=0; $j < $request->num_option[$nO]; $j++) {
-                                detail_question::create([
+                                $detail = detail_question::create([
                                     'question_id' => $question->id,
                                     'num' => $j,
                                     'option' => $request->text_radio[$nOtR],
                                     'type' => $request->type[$i]
                                 ]);
+                                if (isset($request->answer[($i + 1)]) && $request->answer[($i + 1)] == $request->text_radio[$nOtR]) {
+                                    $form->update([
+                                        'answer' => $detail->id
+                                    ]);
+                                }
                                 $nOtR++;
                             }
                         }
@@ -136,7 +142,7 @@ class formController extends Controller
                         break;
                     case "5":
                         if ($request->num_option[$nO]) {
-                            for ($j=0; $j < $request->num_option[$nO]; $j++) { 
+                            for ($j=0; $j < $request->num_option[$nO]; $j++) {
                                 detail_question::create([
                                     'question_id' => $question->id,
                                     'num' => $j,
@@ -171,21 +177,40 @@ class formController extends Controller
         }
 
         //position
-        // if ($request->from_to_auth) {
-        //     for ($i=0; $i < count($request->position); $i++) { 
-                // $users = User::where('state',1)->where('position_id',$request->position[$i])->get();
-                // foreach ($users as $item) {
+        if ($request->from_to_auth) {
+            for ($i=0; $i < count($request->position); $i++) { 
+                $users = User::where('state',1)->where('position_id',$request->position[$i])->get();
+                foreach ($users as $item) {
+                    UserForm::create([
+                        'form_id' => $form->id,
+                        'email' => $item->email,
+                        'secret' => encrypt($item->email),
+                        'status' => 0,
+                    ]);
+                }
+            }
+        }
 
-                // }
-        //     }
-        // }
+        if ($request->from_to_mail) {
+            $mails = explode(';',$request->mails);
+            for ($i=0; $i < count($mails); $i++) { 
+                if ($mails[$i] != '') {
+                    UserForm::create([
+                        'form_id' => $form->id,
+                        'email' => trim($mails[$i]),
+                        'secret' => encrypt(trim($mails[$i])),
+                        'status' => 0,
+                    ]);
+                }
+            }
+        }
 
-        $users = User::where('state',1)->get();
-        foreach ($users as $use) {
+        // $users = User::where('state',1)->get();
+        // foreach ($users as $use) {
             // if ($use->hasPermissionTo('Ver lista de formularios')) {
             //     $use->notify(new notificationMain($form->id,'Nuevo formulario '.$form->id,'forms/'.$form->id));
             // }
-        }
+        // }
 
         return redirect()->route('forms')->with('success','Se ha creado el formulario correctamente');
     }
@@ -216,6 +241,7 @@ class formController extends Controller
                     }
                 }
             }
+            $note = $request->note / $acc_question;
         }
         $id->update([
             'name' => $request->name,
@@ -239,7 +265,6 @@ class formController extends Controller
         $nOtS = 0;
         $nF = 0;
         $nFt = 0;
-        $note = $request->note / $acc_question;
         if($request->type){
             for ($i=0; $i < count($request->type); $i++) {
                 $required = false;
