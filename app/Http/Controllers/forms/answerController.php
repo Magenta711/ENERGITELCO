@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Storage;
 class answerController extends Controller
 {
 
+    public function __construct() {
+        
+    }
+
     public function index()
     {
         #

@@ -15,10 +15,12 @@
     <div class="box">
         <div class="box-header">
             <div class="box-title">
-                
+                Listas de formularios
             </div>
             <div class="box-tools">
-                <a href="{{route('form_create')}}" class="btn btn-sm btn-primary">Crear</a>
+                @can('Crear formularios')
+                    <a href="{{route('form_create')}}" class="btn btn-sm btn-primary">Crear</a>
+                @endcan
             </div>
         </div>
         <div class="box-body">

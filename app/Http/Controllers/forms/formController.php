@@ -15,8 +15,6 @@ use App\Models\Positions;
 use Illuminate\Support\Str;
 use App\Notifications\notificationMain;
 use App\User;
-// use App\Exports\AnswersExport;
-// use Maatwebsite\Excel\Facades\Excel;
 
 class formController extends Controller
 {
@@ -24,12 +22,12 @@ class formController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('verified');
-        // $this->middleware('permission:Ver lista de formularios', ['only' => ['index']]);
-        // $this->middleware('permission:Ver formularios', ['only' => ['show']]);
-        // $this->middleware('permission:Crear formularios', ['only' => ['create','store']]);
-        // $this->middleware('permission:Editar formularios', ['only' => ['edit','update']]);
-        // $this->middleware('permission:Eliminar formularios', ['only' => ['delete']]);
-        // $this->middleware('permission:Ver todas las respuestas|Ver respuestas del cliente propias', ['only' => ['answer']]);
+        $this->middleware('permission:Lista de formularios', ['only' => ['index']]);
+        $this->middleware('permission:Ver formularios', ['only' => ['show']]);
+        $this->middleware('permission:Crear formularios', ['only' => ['create','store']]);
+        $this->middleware('permission:Editar formularios', ['only' => ['edit','update']]);
+        $this->middleware('permission:Eliminar formularios', ['only' => ['delete']]);
+        $this->middleware('permission:Ver respuestas de formularios', ['only' => ['answer']]);
     }
 
     public function index()
@@ -92,8 +90,10 @@ class formController extends Controller
         if($request->type){
             for ($i=0; $i < count($request->type); $i++) { 
                 $required = 0;
-                if (in_array(($i+1), $request->required)) {
-                    $required = 1;
+                if ($request->required){
+                    if (in_array(($i+1), $request->required)) {
+                        $required = 1;
+                    }
                 }
                 $question = question::create([
                     'form_id' => $form->id,
@@ -117,7 +117,7 @@ class formController extends Controller
                                     'type' => $request->type[$i]
                                 ]);
                                 if (isset($request->answer[($i + 1)]) && $request->answer[($i + 1)] == $request->text_radio[$nOtR]) {
-                                    $form->update([
+                                    $question->update([
                                         'answer' => $detail->id
                                     ]);
                                 }
@@ -267,17 +267,19 @@ class formController extends Controller
         $nFt = 0;
         if($request->type){
             for ($i=0; $i < count($request->type); $i++) {
-                $required = false;
-                if (in_array(($i+1), $request->required)) {
-                    $required = true;
+                $required = 0;
+                if ($request->required){
+                    if (in_array(($i+1), $request->required)) {
+                        $required = 1;
+                    }
                 }
+                $change = 0;
                 if ($request->question_id[$i] == 0) {
                     $question = question::create([
                         'form_id' => $id->id,
                         'question' => $request->question[$i],
                         'number' => ($i + 1),
                         'required' => $required,
-                        'answer' => isset($request->answer[($i + 1)]) ? $request->answer[($i + 1)] : null,
                         'type' => $request->type[$i],
                         'value_question' => $request->form_type == "Evaluación" && $request->rating_type == "Automática" && $request->value_type == "Promedio" ? $note : $request->value_question[$i],
                         'max_file' => $request->type[$i] == 6 ? $request->max_file[$i] : 0,
@@ -286,14 +288,12 @@ class formController extends Controller
                     ]);
                 }else {
                     $question = question::where('form_id',$id->id)->where('id',$request->question_id[$i])->first();
-                    $change = 0;
                     if ($question->type == $request->type[$i]) {
                         $change = 1;
                     }
                     $question->update([
                         'question' => $request->question[$i],
                         'number' => ($i + 1),
-                        'answer' => isset($request->answer[($i + 1)]) ? $request->answer[($i + 1)] : null,
                         'required' => $required,
                         'type' => $request->type[$i],
                         'value_question' => $request->form_type == "Evaluación" && $request->rating_type == "Automática" && $request->value_type == "Promedio" ? $note : $request->value_question[$i],
@@ -307,12 +307,17 @@ class formController extends Controller
                         if ($request->num_option[$nO]){
                             if ($change == 0) {
                                 for ($j=0; $j < $request->num_option[$nO]; $j++) {
-                                    detail_question::create([
+                                    $detail = detail_question::create([
                                         'question_id' => $question->id,
                                         'num' => $j,
                                         'option' => $request->text_radio[$nOtR],
                                         'type' => $request->type[$i]
                                     ]);
+                                    if (isset($request->answer[($i + 1)]) && $request->answer[($i + 1)] == $request->text_radio[$nOtR]) {
+                                        $question->update([
+                                            'answer' => $detail->id
+                                        ]);
+                                    }
                                     $nOtR++;
                                 }
                             }else {
@@ -323,13 +328,23 @@ class formController extends Controller
                                             'option' => $request->text_radio[$nOtR],
                                             'type' => $request->type[$i],
                                         ]);
+                                        if (isset($request->answer[($i + 1)]) && $request->answer[($i + 1)] == $request->text_radio[$nOtR]) {
+                                            $question->update([
+                                                'answer' => $detail->id
+                                            ]);
+                                        }
                                     }else {
-                                        detail_question::create([
+                                        $detail = detail_question::create([
                                             'question_id' => $question->id,
                                             'num' => $j,
                                             'option' => $request->text_radio[$nOtR],
                                             'type' => $request->type[$i]
                                         ]);
+                                        if (isset($request->answer[($i + 1)]) && $request->answer[($i + 1)] == $request->text_radio[$nOtR]) {
+                                            $question->update([
+                                                'answer' => $detail->id
+                                            ]);
+                                        }
                                     }
                                     $nOtR++;
                                 }

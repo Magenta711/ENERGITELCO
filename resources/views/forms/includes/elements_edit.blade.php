@@ -21,7 +21,7 @@
                         $m++;
                     @endphp
                         <div id="option-radio_{{$n}}_{{$m}}" class="custom-radio form-check option-radio_{{$n}}" style="display: flex; margin-bottom: 5px;">
-                            <input type="radio" id="radio_{{$n}}_{{$m}}" name="answer[{{$n}}]" class="custom-control-input input_radio" value="{{$option->option}}" {!! $option->option == $question->answer ? 'checked' : ''!!}>
+                            <input type="radio" id="radio_{{$n}}_{{$m}}" name="answer[{{$n}}]" class="custom-control-input input_radio" value="{{$option->option}}" {!! $option->id == $question->answer ? 'checked' : ''!!}>
                             <input type="text" name="text_radio[]" id="text-radio_{{$n}}_{{$m}}" class="form-control text_radio" value="{{$option->option}}" placeholder="Opción" aria-describedby="button-addon2">
                             <button class="btn btn-sm btn-delete-option-radio" id="delete_option_radio_{{$n}}_{{$m}}" type="button" id="button-addon2"><i class="fas fa-times"></i></button>
                         </div>

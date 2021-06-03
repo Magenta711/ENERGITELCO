@@ -4,6 +4,7 @@ namespace App\Http\Controllers\human_management;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\User;
 
 class improvementActionController extends Controller
 {
@@ -14,7 +15,7 @@ class improvementActionController extends Controller
      */
     public function index()
     {
-        //
+        return view('human_management.improvement_action.index');
     }
 
     /**
@@ -24,7 +25,8 @@ class improvementActionController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::where('state',1)->get();
+        return view('human_management.improvement_action.create',compact('users'));
     }
 
     /**

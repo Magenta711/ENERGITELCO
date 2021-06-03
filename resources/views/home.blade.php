@@ -165,7 +165,6 @@
                         </div>
                     </a>
                 </div>
-                <!-- /.description-block -->
             </div>
         @endif
         @if (
@@ -183,7 +182,6 @@
                         </div>
                     </a>
                 </div>
-                <!-- /.description-block -->
             </div>
         @endif
         @if (auth()->user()->hasPermissionTo('Aprobar solicitud de Permisos de trabajo') ||
@@ -201,7 +199,6 @@
                         </div>
                     </a>
                 </div>
-                <!-- /.description-block -->
             </div>
         @endif
         @if (auth()->user()->hasPermissionTo('Aprobar solicitud de permiso laboral o notificación de incapacidad') ||
@@ -219,7 +216,6 @@
                         </div>
                     </a>
                 </div>
-                <!-- /.description-block -->
             </div>
         @endif
         <div class="col-sm-2 col-xs-3">
@@ -232,7 +228,6 @@
                     </div>
                 </a>
             </div>
-            <!-- /.description-block -->
         </div>
         @can('Lista de formularios')
             <div class="col-sm-2 col-xs-3">
@@ -245,15 +240,11 @@
                         </div>
                     </a>
                 </div>
-                <!-- /.description-block -->
             </div>
         @endcan
     </div>
-    <!-- Default box -->
     <div class="row">
         <div class="col-md-8">
-        {{-- Billboard --}}
-        
         @can('Consultar cartelera')
             <div class="box box-primary">
                 <div class="box-header with-border">

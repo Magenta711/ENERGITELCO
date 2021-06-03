@@ -15,7 +15,7 @@
   <!-- Font Awesome -->
   <link href="{{asset("assets/$theme/bower_components/font-awesome/css/all.min.css")}}" rel="stylesheet">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="{{asset("assets/$theme/bower_components/Ionicons/css/ionicons.min.css")}}">
+  <link rel="stylesheet" href="{{asset("assets/$theme/bower_components/Ionicons/css/ionicons.min.css")}}">  
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset("assets/$theme/dist/css/AdminLTE.min.css")}}">
   <!-- AdminLTE Skins. Choose a skin from the css/skins

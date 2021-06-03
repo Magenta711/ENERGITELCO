@@ -791,17 +791,6 @@ Route::put('human_management/improvement_action/{id}','human_management\improvem
 Route::get('human_management/improvement_action/download/{id}','human_management\improvementActionController@download')->name('improvement_action_download');
 Route::delete('human_management/improvement_action/{id}','human_management\improvementActionController@destroy')->name('improvement_action_delete');
 
-// Sistema de formularios automatizados
-Route::get('human_management/auto_form','human_management\auto_formController@index')->name('auto_form');
-Route::get('human_management/auto_form/create','human_management\auto_formController@create')->name('auto_form_create');
-Route::post('human_management/auto_form','human_management\auto_formController@store')->name('auto_form_store');
-Route::get('human_management/auto_form/show/{id}','human_management\auto_formController@show')->name('auto_form_show');
-Route::patch('human_management/auto_form/{id}','human_management\auto_formController@approve')->name('auto_form_approve');
-Route::get('human_management/auto_form/{id}/edit','human_management\auto_formController@edit')->name('auto_form_edit');
-Route::put('human_management/auto_form/{id}','human_management\auto_formController@update')->name('auto_form_update');
-Route::get('human_management/auto_form/download/{id}','human_management\auto_formController@download')->name('auto_form_download');
-Route::delete('human_management/auto_form/{id}','human_management\auto_formController@destroy')->name('auto_form_delete');
-
 //AutoForms
 Route::get('forms','forms\formController@index')->name("forms");
 Route::get('forms/create','forms\formController@create')->name("form_create");
