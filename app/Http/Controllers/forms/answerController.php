@@ -14,20 +14,10 @@ use Illuminate\Support\Facades\Storage;
 
 class answerController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('permission:Ver lista de respuestas', ['only' => ['index']]);
-    }
+
     public function index()
     {
-        if (auth()->user()->hasPermissionTo('Ver todas las respuestas')) {
-            $answers = order::get();
-        }else{
-            if (auth()->user()->hasPermissionTo('Ver respuestas del cliente propias')) {
-                $answers = order::where('user_id',auth()->user()->id)->get();
-            }
-        }
-        return view('forms.answers.index',compact('answers'));
+        #
     }
 
     public function show(order $id)
@@ -242,9 +232,6 @@ class answerController extends Controller
 
     public function delete(order $id)
     {
-        foreach ($id->answers as $answers) {
-            Answer::where('id',$answers->id)->delete();
-        }
         $id->delete();
         return redirect()->route('answers')->with('success','Se ha eliminado la respuesta');
     }

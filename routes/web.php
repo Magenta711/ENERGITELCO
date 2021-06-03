@@ -814,7 +814,7 @@ Route::delete('forms/{id}','forms\formController@delete')->name("forms_delete");
 Route::get('forms/export/{id}','forms\formController@export')->name("forms_export");
 
 Route::get('answers','forms\answerController@index')->name("answers");
-Route::get('answers/{id}','forms\answerController@show')->name("answers_show");
+Route::get('answers/{id}','forms\answerController@show')->name("answers_show")->middleware('auth')->middleware('verified');
 Route::get('answer/{form}/{email?}','forms\answerController@create')->name("answers_create");
 Route::post('answers','forms\answerController@store')->name("answers_store");
 Route::get('answers/guest/ready','forms\answerController@ready')->name("answers_ready");

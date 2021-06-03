@@ -52,6 +52,8 @@
                 {{$id->name}}
             </div>
             <div class="box-tools">
+                <button class="btn btn-sm btn-info" data-toggle="modal" data-target="#modal_users">Usuarios</button>
+                @include('forms.includes.modals.checklist')
                 <a href="{{route('forms')}}" class="btn btn-sm btn-primary">Volver</a>
             </div>
         </div>

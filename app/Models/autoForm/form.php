@@ -19,4 +19,9 @@ class form extends Model
     {
         return $this->hasMany(order::class, 'form_id', 'id');
     }
+
+    public function user_forms()
+    {
+        return $this->hasMany(UserForm::class, 'form_id','id');
+    }
 }
