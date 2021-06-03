@@ -31,6 +31,10 @@
                                         <h4 class="modal-title" id="exampleModalLongTitle">{{$user->name}} - {{$user->position->name}}</h4>
                                     </div>
                                     <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="working_days">Días trabajados</label>
+                                            <input type="number" name="working_days[{{$user->id}}]" id="working_days_{{$user->id}}" class="form-control" value="30"> 
+                                        </div>
                                         <ul class="list-group">
                                             <li class="list-group-item">
                                                 <label for="admin_bonus_{{ $user->id }}">
@@ -42,7 +46,7 @@
                                                     <input type="checkbox" id="drive_bonus_checked_{{ $user->id }}" class="check_concept drive_bonus_checked" name="drive_bonus_check[{{ $user->id }}]" value="1"> Bonificación a conductores
                                                 </label>
                                             </li>
-                                            <li class="list-group-item">
+                                            <li class="list-group-item hide">
                                                 <label for="na_{{ $user->id }}">
                                                     <input type="checkbox" id="na_checked_{{ $user->id }}" class="check_concept na_checked" name="na_check[{{ $user->id }}]" value="1"> Está en incapacidad o en vacaciones
                                                 </label>

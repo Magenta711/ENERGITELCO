@@ -101,7 +101,9 @@ function preguntarAntesDeSalir()
 
 function update_admin(user) {
     let questions = $('.question_'+user);
-    let value_bonus = $('#value_bonus_'+user).val();
+    let value = $('#value_bonus_'+user).val();
+    let working_days = $('#working_days_'+user).val();
+    let value_bonus = (value * working_days) / 30;
     let total = 0;
     for (let i = 0; i < questions.length; i++) {
         total += calification_admin((i+1),questions[i].value);
@@ -117,12 +119,15 @@ function update_admin(user) {
 function update_driver(user) {
     let pay = 0;
     let questions = $('.question2_'+user);
+    let working_days = $('#working_days_'+user).val();
     for (let i = 0; i < questions.length; i++) {
         pay += calification_drive((i+1),questions[i].value);
     }
     if (pay > 100000) {
         pay = 100000;
     }
+
+    pay = (pay * working_days) / 30;
 
     $('#total_pay_driver_'+user).text('$' + parseFloat(pay, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
     $('#total_driver_'+user).val(pay.toFixed(2));

@@ -67,7 +67,8 @@ class adminBonusesController extends Controller
             bonusUser::create([
                 'bonus_id' => $id->id,
                 'user_id' => $key,
-
+                
+                'working_days' => $request->working_days[$key],
                 'value_bonus' => $request->value_bonus[$key],
 
                 'admin_bonus_check' => isset($request->admin_bonus_check[$key]) ? 1 : 0 ,
@@ -143,6 +144,7 @@ class adminBonusesController extends Controller
         foreach ($id->users as $key => $value) {
             $value->update([
                 'value_bonus' => $request->value_bonus[$value->user_id],
+                'working_days' => $request->working_days[$key],
 
                 'admin_bonus_check' => isset($request->admin_bonus_check[$value->user_id]) ? 1 : 0,
                 'drive_bonus_check' => isset($request->drive_bonus_check[$value->user_id]) ? 1 : 0,
