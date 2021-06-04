@@ -42,6 +42,12 @@
                         <div class="col-md-8 col-sm-8">
                             <div class="row">
                                 <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="checkbox" name="b24_7" id="b24_7" value="1" {{Auth::user()->b24_7 ? 'checked' : ''}}>
+                                        <label for="b24_7">24/7</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
                                     <div class="form-group @error('direccion') has-error @enderror">
                                         <label for="direccion">Dirección</label>
                                         <input type="direccion" name="direccion" value="{{ Auth::user()->direccion }}" class="form-control" placeholder="Dirección">

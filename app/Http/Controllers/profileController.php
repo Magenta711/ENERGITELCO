@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\document;
 use App\Models\Register;
 use App\Notifications\notificationMain;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
 class profileController extends Controller
@@ -57,10 +58,31 @@ class profileController extends Controller
             $file->move(public_path().'/img/',$name);
             User::find(auth()->id())->update(['foto'=>$name,]);
         }
+        $last_24_7 = null;
+        $menssage = '';
+        if (!auth()->user()->b24_7 && isset($request->b24_7)) {
+            $last_24_7 = now();
+        }
+        if (auth()->user()->b24_7) {
+            if (!$request->b24_7) {
+                $menssage = '<br>No puedes desabilitar el 24/7 hasta que cumpla con el tiempo de 7 días';
+                if (now()->subDays(7) < auth()->user()->last_24_7) {
+                    $request['b24_7'] = 1;
+                    $last_24_7 = auth()->user()->last_24_7;
+                }else {
+                    $request['b24_7'] = 0;
+                    $last_24_7 = null;
+                }
+            }else {
+                $last_24_7 = auth()->user()->last_24_7;
+            }
+        }
 
         auth()->user()->update([
             'direccion' => $request->direccion,
             'telefono' => $request->telefono,
+            'b24_7' => $request->b24_7,
+            'last_24_7' => $last_24_7,
         ]);
 
         if (auth()->user()->register) {
@@ -78,7 +100,7 @@ class profileController extends Controller
             ]);
         }
         
-        return redirect()->route('profile')->with('success','Su usuarios ha sido actualizado correctamente');
+        return redirect()->route('profile')->with('success','Su usuarios ha sido actualizado correctamente'.$menssage);
     }
     
     public function password_update(Request $request)

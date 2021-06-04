@@ -12,6 +12,7 @@ use App\Models\Work6;
 use App\Models\Work7;
 use App\Models\interview;
 use App\Models\billboard\billboard_type;
+use App\Models\bonus24;
 use App\Models\project\planing\Project;
 use App\Models\Customer;
 use App\Models\Provider;
@@ -146,5 +147,17 @@ class HomeController extends Controller
         return $pdf->download('carta_laboral.pdf');
     }
 
-    
+    public function bonus_24_7(Request $request)
+    {
+        $request->validate([
+            'date_start' => ['required'],
+            'date_end' => ['required'],
+            'description' => ['required'],
+        ]);
+        $request['status'] = 0;
+        $request['user_id'] = auth()->id();
+        bonus24::create($request->all());
+
+        return redirect()->route('home')->with('success','Se ha enviado el reporte correctamente');
+    }
 }

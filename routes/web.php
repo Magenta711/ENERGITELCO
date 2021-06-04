@@ -68,6 +68,8 @@ Route::get('about','HomeController@about')->name('about');
 Route::post('suggestions_mailbox','HomeController@suggestions_mailbox')->name('suggestions_mailbox_save');
 Route::get('letters/working','HomeController@working_letter')->name('working_letter');
 
+Route::post('suggestions_mailbox','HomeController@bonus_24_7')->name('bonus_24-7');
+
 //profile
 Route::get('profile','profileController@index')->name('profile');
 Route::get('profile/setting/edit','profileController@edit')->name('profile_edit');

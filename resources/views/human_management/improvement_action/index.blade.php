@@ -27,45 +27,34 @@
                         <thead>
                             <tr>
                                 <th scope="col"></th>
-                                <th scope="col">Motivo</th>
+                                <th scope="col">Código</th>
                                 <th scope="col">Responsable</th>
-                                <th scope="col">Fecha</th>
                                 <th scope="col">Estado</th>
+                                <th scope="col">Fecha</th>
                                 <th scope="col">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @foreach ($proceedings as $proceeding)
+                            @foreach ($improvements as $item)
                             <tr>
-                                <th scope="row">{{ $proceeding->id }}</th>
-                                <td scope="row">{{ $proceeding->affair }}</td>
-                                <td>{{ $proceeding->responsable->name }}</td>
+                                <th>{{ $item->id }}</th>
+                                <th>D-FR-12-{{ $item->id }}</th>
+                                <td>{{ $item->responsable->name }}</td>
+                                <td>{{ $item->status == 1 ? 'Acción cerrada' : ($item->status == 2 ? 'Pedientes' : 'Acción no posible de cerrar' ) }}</td>
+                                <td>{{ $item->created_at }}</td>
                                 <td>
-                                    @foreach ($proceeding->users as $item)
-                                        - {{$item->name}}<br>
-                                    @endforeach
-                                </td>
-                                <td>{{ $proceeding->date }}</td>
-                                <td>
-                                    @if (count($proceeding->users) != count($proceeding->signaturebles))
-                                        <small class="label bg-red">Firmas pendientes</small>
-                                    @else
-                                        <small class="label {{($proceeding->status == 2) ? 'bg-yellow' : (($proceeding->status == 1) ? 'bg-blue' : 'bg-red') }}">{{$proceeding->status == 3 ? 'Sin firmar' : ( $proceeding->status == 2 ? 'Compromisos pendientes' : 'Aprobada')}}</small>
-                                    @endif
-                                </td>
-                                <td>
-                                    @can('Ver actas')
-                                        <a href="{{route('proceeding_show',$proceeding->id)}}" class="btn btn-sm btn-success">Ver</a>
-                                    @endcan
-                                    @can('Editar actas')
-                                        <a href="{{route('proceeding_edit',$proceeding->id)}}" class="btn btn-sm btn-primary">Editar</a>
-                                    @endcan
-                                    @can('Descargar actas')
-                                        <a href="{{route("proceeding_download",$proceeding->id)}}" class="btn btn-warning btn-sm">Descargar</a>
-                                    @endcan
-                                    @can('Eliminar actas')
-                                        <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete_{{$proceeding->id}}">Eliminar</button>
-                                        <div class="modal fade" id="delete_{{$proceeding->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                    {{-- @can('Ver actas') --}}
+                                        <a href="{{route('improvement_action_show',$item->id)}}" class="btn btn-sm btn-success">Ver</a>
+                                    {{-- @endcan
+                                    @can('Editar actas') --}}
+                                        <a href="{{route('improvement_action_edit',$item->id)}}" class="btn btn-sm btn-primary">Editar</a>
+                                    {{-- @endcan
+                                    @can('Descargar actas') --}}
+                                        <a href="{{route("improvement_action_download",$item->id)}}" class="btn btn-warning btn-sm">Descargar</a>
+                                    {{-- @endcan
+                                    @can('Eliminar actas') --}}
+                                        <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete_{{$item->id}}">Eliminar</button>
+                                        <div class="modal fade" id="delete_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-md">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -74,7 +63,7 @@
                                                         </button>
                                                         <h4 class="modal-title">Eliminar formato</h4>
                                                     </div>
-                                                    <form action="{{route('proceeding_delete',$proceeding->id)}}" method="post">
+                                                    <form action="{{route('improvement_action_delete',$item->id)}}" method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                         <div class="modal-body">
@@ -88,19 +77,18 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @endcan
+                                    {{-- @endcan --}}
                                 </td>
                             </tr>
-                            @endforeach --}}
+                            @endforeach
                         </tbody>
                         <tfoot>
                             <tr>
                                 <th scope="col"></th>
+                                <th scope="col">Código</th>
                                 <th scope="col">Responsable</th>
-                                <th scope="col">Motivo</th>
-                                <th scope="col">Asistentes e invitados</th>
-                                <th scope="col">Fecha</th>
                                 <th scope="col">Estado</th>
+                                <th scope="col">Fecha</th>
                                 <th scope="col">Acciones</th>
                             </tr>
                         </tfoot>
