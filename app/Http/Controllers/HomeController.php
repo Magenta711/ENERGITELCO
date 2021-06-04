@@ -150,8 +150,6 @@ class HomeController extends Controller
     public function bonus_24_7(Request $request)
     {
         $request->validate([
-            'date_start' => ['required'],
-            'date_end' => ['required'],
             'description' => ['required'],
         ]);
         $request['status'] = 0;

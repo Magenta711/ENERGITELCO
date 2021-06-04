@@ -164,4 +164,14 @@ class profileController extends Controller
     public function carnet(){
         return view('profile.carnet');
     }
+
+    public function all_week()
+    {
+        auth()->user()->update([
+            'b24_7' => 1,
+            'last_24_7' => now(),
+        ]);
+
+        return response()->json(['success'=>'Good']);
+    }
 }

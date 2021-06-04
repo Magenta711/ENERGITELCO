@@ -74,6 +74,7 @@ Route::post('suggestions_mailbox','HomeController@bonus_24_7')->name('bonus_24-7
 Route::get('profile','profileController@index')->name('profile');
 Route::get('profile/setting/edit','profileController@edit')->name('profile_edit');
 Route::put('profile/settings','profileController@update')->name('profile_update');
+Route::post('profile/all_week','profileController@all_week')->name('all_week');
 
 //password
 Route::get('password/edit','profileController@password_edit')->name('password_edit');

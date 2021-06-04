@@ -234,7 +234,7 @@
                 <div class="box box-info">
                     <a href="{{route('forms')}}" class="btn-send">
                         <div class="description-block border-right">
-                            <span class="description-percentage text-green"><i class="fa fa-wpforms"></i></span>
+                            <span class="description-percentage text-green"><i class="fab fa-wpforms"></i></span>
                             <h5 class="description-header">Gestión</h5>
                             <span class="description-text">Formularios</span>
                         </div>
@@ -448,25 +448,24 @@
                     <div class="box-body">
                         <form action="{{route('bonus_24-7')}}" method="POST" autocomplete="off">
                             @csrf
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="date_time_start">Fecha de inicio</label>
-                                        <input type="datetime-local" name="date_start" id="date_start" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label for="date_time_end">Fecha final</label>
-                                        <input type="datetime-local" name="date_end" id="date_end" class="form-control">
-                                    </div>
-                                </div>
+                            <div class="form-group">
+                                <label for="date_time_start">Fecha</label>
+                                <input type="date" name="date_start" id="date_start" class="form-control" value="{{now()->format('Y-m-d')}}" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="description">Descripción</label>
-                                <textarea name="description" id="description" cols="30" rows="3" class="form-control" placeholder="Mensaje...">{{old('description')}}</textarea>
+                                <label for="description">Nombre de EB o CD</label>
+                                <input type="text" name="description" id="description" class="form-control">
                             </div>
-                            <button class="btn btn-sm btn-primary">Guardar</button>
+                            <div class="form-group">
+                                <label for="plus">
+                                    <input type="checkbox" name="plus" id="plus" value="1">
+                                    Me retiro con actividad exitosa, visto bueno de coordinador y con 0 impacto ambiental o sitio limpio
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <small class="text-muted"><b>Nota:</b> Recuerde enviar reportes en linea a <i class="fab fa-whatsapp"></i>3113066482</small>
+                            </div>
+                            <button class="btn btn-sm btn-primary">Enviar</button>
                         </form>
                     </div>
                     <!-- /.box-body -->
@@ -509,45 +508,22 @@
     </div>
 </section>
 
-
-
 @endsection
 
 @section('css')
     <style>
         .swal2-content{
-            font-size: 15px;
+            font-size: 15px !important;
         }
     </style>
 @endsection
 @section('js')
-    {{-- <script src="{{asset("assets/$theme/dist/js/pages/dashboard.js")}}"></script> --}}
-    
-    {{-- <script>
-        let text_message = $('#menssage_user').text();
-        Swal.fire({
-            html: '<h1 style="color: #ffffff;">¡FELIZ NAVIDAD Y UN PRÓSPERO AÑO NUEVO 2021!</h1><p style="font-size: 14pt; color: #ffffff;">AMOR, PAZ Y FELIZIDAD <br> Son nuestros mejores deseos <br> <small style="font-size: 9pt">ENERGITELCO</small></p>',
-            width: 600,
-            padding: '3em',
-            background: '#fff url(https://elements-video-cover-images-0.imgix.net/files/215790456/Image+Preview_Simple+Christmas+Background.jpg?auto=compress%2Cformat&fit=min&h=394&w=700&s=9fe54538a4613c12de6d8101004be8c5)',
-            backdrop: `
-                rgba(123,0,0,0.4)
-                url("{{ asset("img/arbolito.png") }}")
-                left top
-                no-repeat
-            `
-        }).then((result) => {
-            Swal.fire({
-                title: 'Bienvenido, {{ auth()->user()->name }}',
-                text: text_message,
-                width: 600,
-
-                icon: 'info',
-            })
-        })
-        // background: '#fff url(https://png.pngtree.com/thumb_back/fw800/background/20191105/pngtree-merry-christmas-background-image_321534.jpg)',
-    </script> --}}
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         let text_message = $('#menssage_user').text();
         Swal.fire({
             title: 'Bienvenido, {{ auth()->user()->name }}',
@@ -565,10 +541,45 @@
                     toast.addEventListener('mousedown', Swal.stopTimer)
                     toast.addEventListener('mouseup', Swal.resumeTimer)
                 }
+            }).then((val) => {
+                if (!{{auth()->user()->b24_7}}) {
+                    const swalWithBootstrapButtons = Swal.mixin({
+                        customClass: {
+                            confirmButton: 'btn btn-primary',
+                            cancelButton: 'btn btn-default text-black'
+                        }
+                    })
+                    
+                    swalWithBootstrapButtons.fire({
+                        title: 'Actualmente no estas habilitado como 27/7',
+                        text: "De clic en activar si deseas habilitarlo",
+                        footer: '<a href="">Políticas y condiciones</a>',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#f4f4f4',
+                        confirmButtonText: 'Activar',
+                        cancelButtonText: 'Cancelar'
+                        }).then((result) => {
+                        if (result.isConfirmed) {
+                            var jqxhr = $.post('/profile/all_week', function name(data) {
+                                swalWithBootstrapButtons.fire(
+                                    'Bien!',
+                                    'Tu estado como 24/7 se ha activado.',
+                                    'success'
+                                )
+                            })
+                            .fail(function() {
+                                alert( "error" );
+                            });
+                        }
+                    })
+                }
             })
         });
     // allowOutsideClick: false,
         $('#swal2-content').css('font-size', 14);
+        $('.swal2-content').css('font-size', 14);
 </script>
 @endsection
 
