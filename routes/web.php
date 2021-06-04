@@ -86,6 +86,7 @@ Route::get('carnet','profileController@carnet')->name('carnet');
 // terms condition and provacy policy
 Route::get('terms_conditions','infoController@termsConditions')->name('terms_conditions');
 Route::get('privacy_policy','infoController@privacyPolicy')->name('privacy_policy');
+Route::get('policy_condition_24_7','infoController@b24_7')->name('policy_condition_24_7');
 
 //Approvals
 Route::get('approval','approvalController@index')->name('approval');

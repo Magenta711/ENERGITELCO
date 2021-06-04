@@ -15,4 +15,9 @@ class infoController extends Controller
     {
         return view('info.privacyPolicy');
     }
+    
+    public function b24_7()
+    {
+        return view('info.policy_condition_24_7');
+    }
 }
