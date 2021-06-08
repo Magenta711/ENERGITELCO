@@ -13,10 +13,10 @@ $(function () {
           type = this.id.split('_')[0];
           newELement = $('#origer_action').clone().appendTo('#destino_action');
           newELement.attr('id','div_'+type+'_'+incre);
-          newELement.children('.col-sm-3').children('.form-group').children('.action_user_id').attr('id','user_id_'+incre).val('');
-          newELement.children('.col-sm-4').children('.form-group').children('.homework').attr('id','homework_'+incre).val('');
-          newELement.children('.col-sm-4').children('.form-group').children('.row').children('.col-md-6').children('.start_date').attr('id','start_date_'+incre).val('');
-          newELement.children('.col-sm-4').children('.form-group').children('.row').children('.col-md-6').children('.end_date').attr('id','end_date_'+incre).val('');
+          newELement.children('.col-sm-4').children('.form-group').children('.action_user_id').attr('id','user_id_'+incre).val('');
+          newELement.children('.col-sm-12').children('.form-group').children('.homework').attr('id','homework_'+incre).val('');
+          newELement.children('.col-sm-6').children('.form-group').children('.row').children('.col-md-6').children('.start_date').attr('id','start_date_'+incre).val('');
+          newELement.children('.col-sm-6').children('.form-group').children('.row').children('.col-md-6').children('.end_date').attr('id','end_date_'+incre).val('');
           newELement.children('.col-sm-1').children('.remove').attr('id',type+'_remove_'+incre).click(function () {
               remove(this.id);
           });
@@ -26,10 +26,10 @@ $(function () {
           type = this.id.split('_')[0];
           newELement = $('#origer_tracing').clone().appendTo('#destino_tracing');
           newELement.attr('id','div_'+type+'_'+incre);
-          newELement.children('.col-sm-3').children('.form-group').children('.user_id').attr('id','user_id_'+incre).val('');
-          newELement.children('.col-sm-4').children('.form-group').children('.action').attr('id','action_'+incre).val('');
-          newELement.children('.col-sm-4').children('.form-group').children('.row').children('.col-md-6').children('.start_date').attr('id','start_date_'+incre).val('');
-          newELement.children('.col-sm-4').children('.form-group').children('.row').children('.col-md-6').children('.end_date').attr('id','end_date_'+incre).val('');
+          newELement.children('.col-sm-4').children('.form-group').children('.user_id').attr('id','user_id_'+incre).val('');
+          newELement.children('.col-sm-12').children('.form-group').children('.action').attr('id','action_'+incre).val('');
+          newELement.children('.col-sm-6').children('.form-group').children('.row').children('.col-md-6').children('.start_date').attr('id','start_date_'+incre).val('');
+          newELement.children('.col-sm-6').children('.form-group').children('.row').children('.col-md-6').children('.end_date').attr('id','end_date_'+incre).val('');
           newELement.children('.col-sm-1').children('.remove').attr('id',type+'_remove_'+incre).click(function () {
               remove(this.id);
           });

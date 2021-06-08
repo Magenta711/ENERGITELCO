@@ -6,7 +6,7 @@
         <textarea name="text_area[]" id="input_{{$question->id}}"  placeholder="Respuesta" class="form-control {{ $question->required ? 'required' : '' }}" cols="30" rows="3"></textarea>
         @break
     @case('3')
-        @foreach (twodshuffle($question->options) as $option)
+        @foreach ($question->options as $option)
             <div class="custom-control custom-radio form-check">
                 <input type="radio" id="radio_{{$option->id}}" name="radio[{{$question->id}}]" value="{{$option->id}}" class="custom-control-input radios_{{$question->id}} {{ $question->required ? 'required' : '' }}">
                 <label class="custom-control-label" for="radio_{{$option->id}}">

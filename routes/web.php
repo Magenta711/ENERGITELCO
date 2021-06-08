@@ -805,6 +805,7 @@ Route::post('forms','forms\formController@store')->name("forms_store");
 Route::put('forms/{id}','forms\formController@update')->name("forms_update");
 Route::delete('forms/{id}','forms\formController@delete')->name("forms_delete");
 Route::get('forms/export/{id}','forms\formController@export')->name("forms_export");
+Route::post('forms/{user}','forms\formController@resend')->name("forms_resend");
 
 Route::get('answers','forms\answerController@index')->name("answers");
 Route::get('answers/{id}','forms\answerController@show')->name("answers_show")->middleware('auth')->middleware('verified');

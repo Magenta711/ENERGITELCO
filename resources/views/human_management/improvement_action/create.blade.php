@@ -17,7 +17,7 @@
             <div class="box-header">
                 <h3 class="box-title">Crear acta</h3>
                 <div class="box-tools">
-                    <a href="{{route('proceeding')}}" class="btn btn-sm btn-primary">Volver</a>
+                    <a href="{{route('improvement_action')}}" class="btn btn-sm btn-primary">Volver</a>
                 </div>
             </div>
             <form action="{{route('improvement_action_store')}}" method="POST">
@@ -100,24 +100,13 @@
                 <div id="destino_action">
                     <h4>Plan de Acción</h4>
                     <div id="origer_action" class="row">
-                        <div class="col-sm-4">
+                        <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="homework">Tarea</label>
-                                <input type="text" name="homework[]" class="form-control homework" id="homework">
+                                <textarea name="homework[]" id="homework" cols="30" rows="3" class="form-control homework"></textarea>
                             </div>
                         </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <label for="user_id_0">Funcionario</label>
-                                <select name="user_action_id[]" id="user_id_0" class="form-control action_user_id">
-                                    <option selected disabled></option>
-                                    @foreach ($users as $user)
-                                        <option value="{{$user->id}}">{{$user->cedula}} - {{$user->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -131,9 +120,24 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="user_id_0">Funcionario</label>
+                                <select name="user_action_id[]" id="user_id_0" class="form-control action_user_id">
+                                    <option selected disabled></option>
+                                    @foreach ($users as $user)
+                                        <option value="{{$user->id}}">{{$user->cedula}} - {{$user->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-1" style="cursor: pointer;">
+                            <br>
+                            <i class="fa fa-plus add_user" id="action_add_user_0"></i> Agregar funcionario
+                        </div>
                         <div class="col-sm-1">
                             <br>
-                            <i class="fa fa-trash remove" id="action_remove_0"></i>
+                            <i class="fa fa-trash remove" style="cursor: pointer;" id="action_remove_0"></i>
                         </div>
                     </div>
                 </div>
@@ -142,24 +146,13 @@
                 <div id="destino_tracing">
                     <h4>Seguimiento y Verificación del Plan de Acción</h4>
                     <div id="origer_tracing" class="row">
-                        <div class="col-sm-4">
+                        <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="action">Acción</label>
-                                <input type="text" name="action[]" class="form-control action" id="action">
+                                <textarea name="action[]" id="action" cols="30" rows="3" class="form-control action"></textarea>
                             </div>
                         </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <label for="user_id_0">Funcionario</label>
-                                <select name="user_tracing_id[]" id="user_id_0" class="form-control tracing_user_id">
-                                    <option selected disabled></option>
-                                    @foreach ($users as $user)
-                                        <option value="{{$user->id}}">{{$user->cedula}} - {{$user->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -173,20 +166,36 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="user_id_0">Funcionario</label>
+                                <select name="user_tracing_id[]" id="user_id_0" class="form-control tracing_user_id">
+                                    <option selected disabled></option>
+                                    @foreach ($users as $user)
+                                        <option value="{{$user->id}}">{{$user->cedula}} - {{$user->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-1" style="cursor: pointer;">
+                            <br>
+                            <i class="fa fa-plus add_user" id="tracing_add_user_0"></i> Agregar funcionario
+                        </div>
                         <div class="col-sm-1">
                             <br>
-                            <i class="fa fa-trash remove" id="tracing_remove_0"></i>
+                            <i class="fa fa-trash remove" style="cursor: pointer;" id="tracing_remove_0"></i>
                         </div>
                     </div>
                 </div>
                 <button type="button" class="btn btn-sm btn-link bnt-clone-tracing" id="tracing_clone"><i class="fa fa-plus"></i> Agregar seguimiento o verificación</button>
                 <hr>
+                <h4>Evaluación de las acciones tomadas</h4>
+                <hr>
                 <div class="fomr-control">
-                    <label for="commentary">Comentarios</label>
-                    <textarea name="commentary" id="commentary" cols="30" rows="10" class="form-control"></textarea>
+                    <label for="commentary">Comentarios adicionales</label>
+                    <textarea name="commentary" id="commentary" cols="30" rows="3" class="form-control"></textarea>
                 </div>
                 <hr>
-                <h4>Evaluación de las acciones tomadas</h4>
             </div>
             <div class="box-footer">
                 <button class="btn btn-sm btn-primary btn-send">Enviar y firmar</button>
@@ -205,3 +214,9 @@
     <script src="{{asset("assets/$theme/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js")}}"></script>
     <script src="{{asset('js/forms/improvement_action.js')}}"></script>
 @endsection
+
+{{-- Varios funcionarios para una tarea e incluir solo texto para invitados o cargo --}}
+{{-- Evaluación de las acciones tomadas ??? --}}
+{{-- Cambiar estados --}}
+{{-- Fecha de cierre --}}
+{{-- Cada tarea y accion es un cuadro de texto html --}}

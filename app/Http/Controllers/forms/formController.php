@@ -15,6 +15,7 @@ use App\Models\Positions;
 use Illuminate\Support\Str;
 use App\Notifications\notificationMain;
 use App\User;
+use Illuminate\Support\Facades\Mail;
 
 class formController extends Controller
 {
@@ -181,12 +182,16 @@ class formController extends Controller
             for ($i=0; $i < count($request->position); $i++) { 
                 $users = User::where('state',1)->where('position_id',$request->position[$i])->get();
                 foreach ($users as $item) {
-                    UserForm::create([
+                    $user = UserForm::create([
                         'form_id' => $form->id,
                         'email' => $item->email,
                         'secret' => encrypt($item->email),
                         'status' => 0,
                     ]);
+                    Mail::send('forms.email.main', ['form'=>$form,'user'=>$user], function ($menssage) use($form,$user)
+                    {
+                        $menssage->to($user->email,'ENERGITELCO')->subject("Energitelco S.A.S. ".$form->name);
+                    });
                 }
             }
         }
@@ -195,22 +200,26 @@ class formController extends Controller
             $mails = explode(';',$request->mails);
             for ($i=0; $i < count($mails); $i++) { 
                 if ($mails[$i] != '') {
-                    UserForm::create([
+                    $user = UserForm::create([
                         'form_id' => $form->id,
                         'email' => trim($mails[$i]),
                         'secret' => encrypt(trim($mails[$i])),
                         'status' => 0,
                     ]);
+                    Mail::send('forms.email.main', ['form'=>$form,'user'=>$user], function ($menssage) use($form,$user)
+                    {
+                        $menssage->to($user->email,'ENERGITELCO')->subject("Energitelco S.A.S. ".$form->name);
+                    });
                 }
             }
         }
 
-        // $users = User::where('state',1)->get();
-        // foreach ($users as $use) {
-            // if ($use->hasPermissionTo('Ver lista de formularios')) {
-            //     $use->notify(new notificationMain($form->id,'Nuevo formulario '.$form->id,'forms/'.$form->id));
-            // }
-        // }
+        $users = User::where('state',1)->get();
+        foreach ($users as $use) {
+            if ($use->hasPermissionTo('Lista de formularios')) {
+                $use->notify(new notificationMain($form->id,'Nuevo formulario '.$form->id,'forms/'));
+            }
+        }
 
         return redirect()->route('forms')->with('success','Se ha creado el formulario correctamente');
     }
@@ -460,24 +469,60 @@ class formController extends Controller
                 }
             }
         }
+
+        if ($request->from_to_auth) {
+            for ($i=0; $i < count($request->position); $i++) { 
+                $users = User::where('state',1)->where('position_id',$request->position[$i])->get();
+                foreach ($users as $item) {
+                    $user = UserForm::where('email',$item->email)->where('form_id',$id->id)->first();
+                    if (!$user) {
+                        $user = UserForm::create([
+                            'form_id' => $id->id,
+                            'email' => $item->email,
+                            'secret' => encrypt($item->email),
+                            'status' => 0,
+                        ]);
+                        Mail::send('forms.email.main', ['form'=>$id,'user'=>$user], function ($menssage) use($id,$user)
+                        {
+                            $menssage->to($user->email,'ENERGITELCO')->subject("Energitelco S.A.S. ".$id->name);
+                        });
+                    }
+                }
+            }
+        }
+
+        if ($request->from_to_mail) {
+            $mails = explode(';',$request->mails);
+            for ($i=0; $i < count($mails); $i++) { 
+                if ($mails[$i] != '') {
+                    $user = UserForm::where('email',trim($mails[$i]))->where('form_id',$id->id)->first();
+                    if (!$user) {
+                        $user = UserForm::create([
+                            'form_id' => $id->id,
+                            'email' => trim($mails[$i]),
+                            'secret' => encrypt(trim($mails[$i])),
+                            'status' => 0,
+                        ]);
+                        Mail::send('forms.email.main', ['form'=>$id,'user'=>$user], function ($menssage) use($id,$user)
+                        {
+                            $menssage->to($user->email,'ENERGITELCO')->subject("Energitelco S.A.S. ".$id->name);
+                        });
+                    }
+                }
+            }
+        }
+
+        $users = User::where('state',1)->get();
+        foreach ($users as $use) {
+            if ($use->hasPermissionTo('Lista de formularios')) {
+                $use->notify(new notificationMain($id->id,'Nuevo formulario '.$id->id,'forms/'));
+            }
+        }
         return redirect()->route('forms')->with('success','Se ha actualizado el formulario correctamente');
     }
 
     public function delete(form $id)
     {
-        // foreach ($id->orders as $order) {
-        //     foreach ($order->answers as $option
-        //     ) {
-        //         Answer::where('id',$option->id)->delete();
-        //     }
-        //     order::where('id',$order->id)->delete();
-        // }
-        // foreach ($id->questions as $question) {
-        //     foreach ($question->options as $option) {
-        //         detail_question::where('id',$option->id)->delete();
-        //     }
-        //     question::where('id',$question->id)->delete();
-        // }
         $id->delete();
         return redirect()->route('forms')->with('success','Se ha eliminado el formulario correctamente');
     }
@@ -495,5 +540,15 @@ class formController extends Controller
     public function export(form $id)
     {
         return (new AnswersExport)->forId($id)->download('answers.xlsx');
+    }
+
+    public function resend(UserForm $user)
+    {
+        $form = form::find($user->form_id);
+        Mail::send('forms.email.main', ['form'=>$form,'user'=>$user], function ($menssage) use($form,$user)
+        {
+            $menssage->to($user->email,'ENERGITELCO')->subject("Energitelco S.A.S. ".$form->name);
+        });
+        return back()->with('success','Se Ha reenviado el formulario correctamente');
     }
 }

@@ -18,6 +18,9 @@
                       <th>Correo</th>
                       <th>Respuestas</th>
                       <th>Estado</th>
+                      @if ($id->from_to_auth || $id->from_to_mail)
+                        <th>/</th>
+                      @endif
                     </tr>
                   </thead>
                   <tbody>
@@ -27,6 +30,16 @@
                               <td>{{$item->email}}</td>
                               <td>{{count($item->orders)}}</td>
                               <td>{{$item->status ? 'Inhabilitado' : 'Habilitado' }}</td>
+                              @if ($id->from_to_auth || $id->from_to_mail)
+                                <td>
+                                  @if (!$item->status)
+                                    <form action="{{route('forms_resend',$item->id)}}" method="post">
+                                      @csrf
+                                      <button type="submit" class="btn btn-sm btn-primary">Reenviar</button>
+                                    </form>
+                                  @endif
+                                </td>
+                              @endif
                           </tr>
                       @endforeach
                   </tbody>

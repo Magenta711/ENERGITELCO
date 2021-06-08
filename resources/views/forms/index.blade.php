@@ -69,7 +69,7 @@
                                     @if ($item->from_to_guest || $item->from_to_mail)
                                         @can('Copiar elaces de los formularios')
                                             <div class="dropdown-item" style="display: flex">
-                                                <input type="text" class="form-control" id="url_{{$item->id}}" value="{{config('app.url')}}/answer/{{$item->token}}/{{Auth::user()->token}}" name="myURL_{{$item->id}}">
+                                                <input type="text" class="form-control" id="url_{{$item->id}}" value="{{config('app.url')}}/answer/{{$item->token}}" name="myURL_{{$item->id}}">
                                                 <button class="btn btn-outline-secondary copy-url" id="copy_url_{{$item->id}}" onclick="copy_url({{$item->id}})" type="button"><i class="fas fa-copy"></i></button>
                                             </div>
                                         @endcan
