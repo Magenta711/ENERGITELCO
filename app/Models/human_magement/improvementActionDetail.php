@@ -6,5 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class improvementActionDetail extends Model
 {
-    protected $fillable = ['text','start_date','end_date','type'];
+    protected $fillable = ['improvement_id','text','start_date','end_date','type'];
+
+    public function users()
+    {
+        return $this->hasMany(improvementActionDetailUser::class,'detail_id','id');
+    }
 }

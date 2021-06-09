@@ -112,12 +112,6 @@ class endWorkController extends Controller
             $pdf4 = PDF::loadView('end_work/pdf/letter_4',['data'=>$request,'id' => $id,'date' => $date,'document' => 'end_work'.$time.'_CARTA_RETIRO_CESANTIAS.pdf']);
             $pdf4->save(storage_path('app/public/end_work/') .$time.'_CARTA_RETIRO_CESANTIAS.pdf');
         }
-        
-        $id->register->update([
-            'date_start' => $request->date,
-            'date_end' => $request->date_end,
-            'state' => 2,
-        ]);
 
         if (isset($request->letters[0])) {
             $letter = Letter::create([
@@ -195,6 +189,12 @@ class endWorkController extends Controller
         Contract::where('id',$id->register->hasContract()->id)->update([
             'last_date' => $request->date_end,
         ]);
+        $id->register->update([
+            'date_start' => $request->date,
+            'date_end' => $request->date_end,
+            'state' => 2,
+        ]);
+        
         $id->notify(new notificationMain('','Terminación de contracto '.$id->name,'/user/end_work/signature'));
         $users = User::where('state',1)->get();
 

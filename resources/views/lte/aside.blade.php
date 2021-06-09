@@ -826,6 +826,16 @@
                           )
                           <li class="{{ activeMenu('human_management/settlement*') }}"><a class="btn-send" href="{{route('settlement')}}"><i class="fa fa-money-check-alt"></i> LIQUIDACIÓN PRESTACIONES SOCIALES</a></li>
                         @endif
+                        @if (
+                          auth()->user()->hasPermissionTo('Lista de liquidación de prestaciones sociales') ||
+                          auth()->user()->hasPermissionTo('Crear liquidación de prestaciones sociales') ||
+                          auth()->user()->hasPermissionTo('Ver liquidación de prestaciones sociales') ||
+                          auth()->user()->hasPermissionTo('Editar liquidación de prestaciones sociales') ||
+                          auth()->user()->hasPermissionTo('Descargar liquidación de prestaciones sociales') ||
+                          auth()->user()->hasPermissionTo('Eliminar liquidación de prestaciones sociales')
+                          )
+                          <li class="{{ activeMenu('human_management/settlement*') }}"><a class="btn-send" href="{{route('improvement_action')}}"><i class="fa fa-money-check-alt"></i> ACCIONES DE MEJORA</a></li>
+                        @endif
                       </ul>
                     </li>
                 @endif

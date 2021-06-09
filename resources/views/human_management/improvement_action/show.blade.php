@@ -2,7 +2,7 @@
 @section('content')
 <section class="content-header">
     <h1>
-        
+        D-FR-12	ACCIONES CORRECTIVAS Y DE MEJORA
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
@@ -17,26 +17,11 @@
             <div class="box-header">
                 <h3 class="box-title"></h3>
                 <div class="box-tools">
-                    <a href="#" class="btn btn-sm btn-success">Crear</a>
+                    <a href="#" class="btn btn-sm btn-success">Volver</a>
                 </div>
             </div>
             <div class="box-body">
-                <div class="table-responsive table-hover">
-                    <table id="table_index" class="table table-striped table-bordered" data-page-length='15'>
-                        <thead>
-                            <tr>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {{-- @foreach ($improvement_actions as $item)
-                                <tr>
-                                    <th scope="row">{{ $item->id }}</th>
-                                </tr>
-                            @endforeach --}}
-                        </tbody>
-                    </table>
-                </div>
+                
             </div>
         </div>
     </section>

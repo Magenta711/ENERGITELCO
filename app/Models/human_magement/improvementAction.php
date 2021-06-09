@@ -13,4 +13,9 @@ class improvementAction extends Model
     {
         return $this->hasOne(User::class,'id','responsable_id');
     }
+
+    public function details()
+    {
+        return $this->hasMany(improvementActionDetail::class,'improvement_id','id');
+    }
 }

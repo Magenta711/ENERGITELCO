@@ -11,6 +11,22 @@
         <li class="active">Crear acciones</li>
     </ol>
 </section>
+<div class="col-sm-4 hide" id="origen_user">
+    <div class="form-group">
+        <label for="user_id">Funcionario</label>
+        <div class="input-group">
+            <select class="form-control select2" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                <option selected disabled></option>
+                @foreach ($users as $user)
+                    <option data-select2-id="{{$user->id}}" value="{{$user->id}}">{{$user->cedula}} - {{$user->name}}</option>
+                @endforeach
+            </select>
+            <div class="input-group-addon">
+                <i class="fa fa-trash remove-user-tracing" style="cursor: pointer"></i>
+            </div>
+        </div>
+    </div>
+</div>
 <section class="content">
     @include('includes.alerts')
         <div class="box">
@@ -62,8 +78,6 @@
                     <label for="effect_description">Descripción del efecto, problema o riesgo identificado</label>
                     <div class="form-group">
                         <textarea class="textarea" id="effect_description" style="width: 100%;" name="effect_description"><b>Descripción:</b> </textarea>
-                        <input type="hidden" name="_wysihtml5_mode" value="1">
-                        <iframe class="wysihtml5-sandbox" security="restricted" allowtransparency="true" frameborder="0" width="0" height="0" marginwidth="0" marginheight="0" style="width: 100%;"></iframe>
                     </div>
                 </div>
                 <hr>
@@ -102,8 +116,8 @@
                     <div id="origer_action" class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label for="homework">Tarea</label>
-                                <textarea name="homework[]" id="homework" cols="30" rows="3" class="form-control homework"></textarea>
+                                <label for="action">Tarea</label>
+                                <textarea class="textarea" id="action_0" style="width: 100%;" name="action[0]"></textarea>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -111,37 +125,47 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="start_date">Fecha inicial</label>
-                                        <input type="date" name="start_date_action[]" class="form-control start_date" id="start_date">
+                                        <input type="date" name="start_date_action[0]" class="form-control start_date" id="start_date_action">
                                     </div>
                                     <div class="col-md-6">
                                         <label for="end_date">Fecha termina</label>
-                                        <input type="date" name="end_date_action[]" class="form-control end_date" id="end_date">
+                                        <input type="date" name="end_date_action[0]" class="form-control end_date" id="end_date_action">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label for="user_id_0">Funcionario</label>
-                                <select name="user_action_id[]" id="user_id_0" class="form-control action_user_id">
-                                    <option selected disabled></option>
-                                    @foreach ($users as $user)
-                                        <option value="{{$user->id}}">{{$user->cedula}} - {{$user->name}}</option>
-                                    @endforeach
-                                </select>
+                                <label for="user_action_id_0">Funcionario</label>
+                                <div class="input-group">
+                                    <select name="user_action_id[0][]" id="user_action_id_0" class="form-control select2 action_user_id" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <option selected disabled></option>
+                                        @foreach ($users as $user)
+                                            <option data-select2-id="{{$user->id}}" value="{{$user->id}}">{{$user->cedula}} - {{$user->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-trash remove-user-tracing"></i>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-sm-1" style="cursor: pointer;">
+                        <div class="destino_user" id="destino_user_action_0"></div>
+                        <div class="col-sm-1 text-center" style="cursor: pointer;">
                             <br>
-                            <i class="fa fa-plus add_user" id="action_add_user_0"></i> Agregar funcionario
+                            <span class="add_user text-info" id="add_user_action_0">
+                                <i class="fa fa-plus"></i>
+                                Agregar funcionario
+                            </span>
                         </div>
-                        <div class="col-sm-1">
+                        <div class="col-sm-1 text-center">
                             <br>
                             <i class="fa fa-trash remove" style="cursor: pointer;" id="action_remove_0"></i>
                         </div>
                     </div>
+                    <hr>
                 </div>
-                <button type="button" class="btn btn-sm btn-link bnt-clone-action" id="action_clone"><i class="fa fa-plus"></i> Agregar plan de acción</button>
+                <button type="button" class="btn btn-sm btn-link bnt-clone" id="action_clone"><i class="fa fa-plus"></i> Agregar plan de acción</button>
                 <hr>
                 <div id="destino_tracing">
                     <h4>Seguimiento y Verificación del Plan de Acción</h4>
@@ -149,7 +173,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="action">Acción</label>
-                                <textarea name="action[]" id="action" cols="30" rows="3" class="form-control action"></textarea>
+                                <textarea class="textarea" id="action_0" style="width: 100%;" name="action[0]"></textarea>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -157,37 +181,47 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="">Fecha inicial</label>
-                                        <input type="date" name="start_date_tracing[]" class="form-control start_date" id="start_date">
+                                        <input type="date" name="start_date_tracing[0]" class="form-control start_date" id="start_date_tracing">
                                     </div>
                                     <div class="col-md-6">
                                         <label for="">Fecha termina</label>
-                                        <input type="date" name="end_date_tracing[]" class="form-control end_date" id="end_date">
+                                        <input type="date" name="end_date_tracing[0]" class="form-control end_date" id="end_date_tracing">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label for="user_id_0">Funcionario</label>
-                                <select name="user_tracing_id[]" id="user_id_0" class="form-control tracing_user_id">
-                                    <option selected disabled></option>
-                                    @foreach ($users as $user)
-                                        <option value="{{$user->id}}">{{$user->cedula}} - {{$user->name}}</option>
-                                    @endforeach
-                                </select>
+                                <label for="user_tracing_id_0">Funcionario</label>
+                                <div class="input-group">
+                                    <select name="user_tracing_id[0][]" id="user_tracing_id_0" class="form-control select2 tracing_user_id" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                        <option selected disabled></option>
+                                        @foreach ($users as $user)
+                                            <option data-select2-id="{{$user->id}}" value="{{$user->id}}">{{$user->cedula}} - {{$user->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-trash remove-user-tracing"></i>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-sm-1" style="cursor: pointer;">
+                        <div class="destino_user" id="destino_user_tracing_0"></div>
+                        <div class="col-sm-1 text-center" style="cursor: pointer;">
                             <br>
-                            <i class="fa fa-plus add_user" id="tracing_add_user_0"></i> Agregar funcionario
+                            <span class="add_user text-info" id="add_user_tracing_0">
+                                <i class="fa fa-plus"></i>
+                                Agregar funcionario
+                            </span>
                         </div>
-                        <div class="col-sm-1">
+                        <div class="col-sm-1 text-center">
                             <br>
                             <i class="fa fa-trash remove" style="cursor: pointer;" id="tracing_remove_0"></i>
                         </div>
+                        <hr>
                     </div>
                 </div>
-                <button type="button" class="btn btn-sm btn-link bnt-clone-tracing" id="tracing_clone"><i class="fa fa-plus"></i> Agregar seguimiento o verificación</button>
+                <button type="button" class="btn btn-sm btn-link bnt-clone" id="tracing_clone"><i class="fa fa-plus"></i> Agregar seguimiento o verificación</button>
                 <hr>
                 <h4>Evaluación de las acciones tomadas</h4>
                 <hr>
@@ -208,10 +242,12 @@
 @section('css')
 {{-- wysihtml5-supported --}}
     <link rel="stylesheet" href="{{asset("assets/$theme/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css")}}">
+    <link rel="stylesheet" href="{{asset("assets/$theme/bower_components/select2/dist/css/select2.min.css")}}">
 @endsection
 
 @section('js')
     <script src="{{asset("assets/$theme/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js")}}"></script>
+    <script src="{{asset("assets/$theme//bower_components/select2/dist/js/select2.full.min.js")}}"></script>
     <script src="{{asset('js/forms/improvement_action.js')}}"></script>
 @endsection
 
