@@ -744,7 +744,7 @@
                   auth()->user()->hasPermissionTo('Eliminar formato de reporte de novedades de nómina y horas extras') ||
                   auth()->user()->hasPermissionTo('Consultar reporte de novedades de nómina y horas extras')
                 )
-                    <li class="treeview {{ activeMenu('human_management/proceeding*') }}{{ activeMenu('human_management/work_permit*') }}{{ activeMenu('human_management/fall_protection_equipment_inspection*') }}{{ activeMenu('human_management/delivery_staffing*') }}{{ activeMenu('human_management/work_permits_notifications_medical_incapacity*') }}{{ activeMenu('human_management/payroll_overtime_news_report*') }}{{ activeMenu('human_management/settlement*') }}">
+                    <li class="treeview {{ activeMenu('human_management/proceeding*') }}{{ activeMenu('human_management/work_permit*') }}{{ activeMenu('human_management/fall_protection_equipment_inspection*') }}{{ activeMenu('human_management/delivery_staffing*') }}{{ activeMenu('human_management/work_permits_notifications_medical_incapacity*') }}{{ activeMenu('human_management/payroll_overtime_news_report*') }}{{ activeMenu('human_management/settlement*') }}{{activeMenu('human_management/improvement_action*')}}">
                       <a href="#"><i class="fa fa-file-alt"></i> FORMATOS<span class="pull-right-container">
                           <i class="fa fa-angle-left pull-right"></i>
                         </span>
@@ -834,7 +834,7 @@
                           auth()->user()->hasPermissionTo('Descargar liquidación de prestaciones sociales') ||
                           auth()->user()->hasPermissionTo('Eliminar liquidación de prestaciones sociales')
                           )
-                          <li class="{{ activeMenu('human_management/settlement*') }}"><a class="btn-send" href="{{route('improvement_action')}}"><i class="fa fa-money-check-alt"></i> ACCIONES DE MEJORA</a></li>
+                          <li class="{{ activeMenu('human_management/improvement_action*') }}"><a class="btn-send" href="{{route('improvement_action')}}"><i class="fa fa-money-check-alt"></i> ACCIONES DE MEJORA</a></li>
                         @endif
                       </ul>
                     </li>

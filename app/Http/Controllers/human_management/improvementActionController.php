@@ -55,6 +55,7 @@ class improvementActionController extends Controller
                 'start_date' => $request->start_date_action[$key],
                 'end_date' => $request->end_date_action[$key],
                 'type' => 'action',
+                'status' => 1
             ]);
             for ($j=0; $j < count($request->user_action_id[$key]); $j++) { 
                 improvementActionDetailUser::create([
@@ -70,6 +71,7 @@ class improvementActionController extends Controller
                 'start_date' => $request->start_date_tracing[$key],
                 'end_date' => $request->end_date_tracing[$key],
                 'type' => 'tracing',
+                'status' => 1
             ]);
             for ($j=0; $j < count($request->user_tracing_id[$key]); $j++) { 
                 improvementActionDetailUser::create([
@@ -114,17 +116,18 @@ class improvementActionController extends Controller
      */
     public function update(Request $request, improvementAction $id)
     {
+        // return $request;
         $id->update($request->all());
         $amount_action = count($request->action);
         $amount_tracing = count($request->tracing);
-        $amuont_all = $amount_action + $amount_tracing;
+        $amuont_all = ($amount_action) + $amount_tracing;
         $i = 0;
         improvementActionDetail::where('improvement_id',$id->id)->update([ 'status' => 0 ]);
         $action_ready = 0;
         $tracing_ready = 0;
         foreach ($id->details as $key => $detail) {
             improvementActionDetailUser::where('detail_id',$detail->id)->delete();
-            if ($i < $amount_tracing) {
+            if ($i < $amount_action) {
                 $j = 0;
                 foreach ($request->action as $key => $item) {
                     if ($j == $i) {
@@ -135,18 +138,24 @@ class improvementActionController extends Controller
                             'type' => 'action',
                             'status' => 1
                         ]);
-                        for ($h=0; $h < count($request->user_action_id[$key]); $h++) { 
-                            improvementActionDetailUser::create([
-                                'user_id' => $request->user_action_id[$key][$h],
-                                'detail_id' => $detail->id
-                            ]);
+                        if (isset($request->user_action_id[$key]) && $request->user_action_id[$key] != '') {
+                            for ($h=0; $h < count($request->user_action_id[$key]); $h++) { 
+                                improvementActionDetailUser::create([
+                                    'user_id' => $request->user_action_id[$key][$h],
+                                    'detail_id' => $detail->id
+                                ]);
+                            }
                         }
                         $action_ready++;
                     }
                     $j++;
                 }
             }else {
-                $j = 0;
+                if (isset($j)) {
+                    $j = $action_ready;
+                }else {
+                    $j = 0;
+                }
                 foreach ($request->tracing as $key => $item) {
                     if ($j == $i) {
                         $detail->update([
@@ -156,11 +165,13 @@ class improvementActionController extends Controller
                             'type' => 'tracing',
                             'status' => 1
                         ]);
-                        for ($h=0; $h < count($request->user_action_id[$key]); $h++) { 
-                            improvementActionDetailUser::create([
-                                'user_id' => $request->user_action_id[$key][$h],
-                                'detail_id' => $detail->id
-                            ]);
+                        if (isset($request->user_tracing_id[$key]) && $request->user_tracing_id[$key] != '') {
+                            for ($h=0; $h < count($request->user_tracing_id[$key]); $h++) { 
+                                improvementActionDetailUser::create([
+                                    'user_id' => $request->user_tracing_id[$key][$h],
+                                    'detail_id' => $detail->id,
+                                ]);
+                            }
                         }
                         $tracing_ready++;
                     }
@@ -169,6 +180,7 @@ class improvementActionController extends Controller
             }
             $i++;
         }
+        improvementActionDetail::where('detail_id',$detail->id)->where('status',0)->delete();
         if ($i < $amuont_all) {
             if ($i < $amount_action) {
                 foreach ($request->action as $key => $value) {
@@ -179,14 +191,18 @@ class improvementActionController extends Controller
                             'start_date' => $request->start_date_action[$key],
                             'end_date' => $request->end_date_action[$key],
                             'type' => 'action',
+                            'status' => 1,
                         ]);
-                        for ($h=0; $h < count($request->user_action_id[$key]); $h++) { 
-                            improvementActionDetailUser::create([
-                                'user_id' => $request->user_action_id[$key][$h],
-                                'detail_id' => $detail->id
-                            ]);
+                        if (isset($request->user_action_id[$key]) && $request->user_action_id[$key] != '') {
+                            for ($h=0; $h < count($request->user_action_id[$key]); $h++) { 
+                                improvementActionDetailUser::create([
+                                    'user_id' => $request->user_action_id[$key][$h],
+                                    'detail_id' => $detail->id,
+                                ]);
+                            }
                         }
                     }
+                    $j++;
                 }
             }
             $j = 0;
@@ -198,14 +214,18 @@ class improvementActionController extends Controller
                         'start_date' => $request->start_date_tracing[$key],
                         'end_date' => $request->end_date_tracing[$key],
                         'type' => 'tracing',
+                        'status' => 1
                     ]);
-                    for ($h=0; $h < count($request->user_tracing_id[$key]); $h++) { 
-                        improvementActionDetailUser::create([
-                            'user_id' => $request->user_tracing_id[$key][$h],
-                            'detail_id' => $detail->id
-                        ]);
+                    if (isset($request->user_tracing_id[$key]) && $request->user_tracing_id[$key] != '') {
+                        for ($h=0; $h < count($request->user_tracing_id[$key]); $h++) {
+                            improvementActionDetailUser::create([
+                                'user_id' => $request->user_tracing_id[$key][$h],
+                                'detail_id' => $detail->id
+                            ]);
+                        }
                     }
                 }
+                $j++;
             }
         }
         return redirect()->route('improvement_action')->with('success','Se ha actualizado la acción correctamente');

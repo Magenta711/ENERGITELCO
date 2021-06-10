@@ -13,8 +13,7 @@ $(document).ready(function() {
     $(".bnt-clone").click(function() {
         incre++;
         type = this.id.split('_')[0];
-        newELement = $('#origer_'+type).clone().appendTo('#destino_'+type);
-        newELement.attr('id','div_'+type+'_'+incre);
+        newELement = $('#origen_'+type).clone().appendTo('#destino_'+type).attr('id','div_'+type+'_'+incre);
         newELement.children('.col-sm-12').children('.form-group').children('.wysihtml5-toolbar').remove();
         newELement.children('.col-sm-12').children('.form-group').children('.wysihtml5-sandbox').remove();
         newELement.children('.col-sm-12').children('.form-group').children('input').remove();

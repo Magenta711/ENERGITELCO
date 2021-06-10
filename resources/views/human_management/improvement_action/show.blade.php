@@ -8,16 +8,16 @@
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
         <li><a href="#"> Gestión humana</a></li>
         <li><a href="#"> Acciones correctivas y de mejora</a></li>
-        <li class="active">Crear acciones</li>
+        <li class="active">Ver acciones</li>
     </ol>
 </section>
 <section class="content">
     @include('includes.alerts')
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Crear acta</h3>
+                <h3 class="box-title">Ver acción de correctiva o de mejora</h3>
                 <div class="box-tools">
-                    <a href="{{route('proceeding')}}" class="btn btn-sm btn-primary">Volver</a>
+                    <a href="{{route('improvement_action')}}" class="btn btn-sm btn-primary">Volver</a>
                 </div>
             </div>
             <form action="{{route('improvement_action_update',$id->id)}}" method="POST">
@@ -103,30 +103,16 @@
                     <h4>Plan de Acción</h4>
                     @foreach ($id->details as $key => $item)
                         @if ($item->type == 'action')
-                        @if ($x == 0)
-                            <div id="origen_action" class="row">
-                        @else
                             <div id="div_action_{{$key}}" class="row">
-                        @endif
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label for="action">Tarea</label>
                                         {!!$item->text!!}
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label for="start_date">Fecha inicial</label>
-                                                <p>{{$item->start_date}}</p>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="end_date">Fecha termina</label>
-                                                <p>{{$item->end_date}}</p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="col-md-6">
+                                    <label for="start_date">Fecha</label>
+                                    <p>{{$item->start_date}}</p>
                                 </div>
                                 @foreach ($item->users as $uId => $ui)
                                     <div class="col-sm-4">

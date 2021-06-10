@@ -33,7 +33,7 @@
             <div class="box-header">
                 <h3 class="box-title">Editar acción correctivas o de mejora</h3>
                 <div class="box-tools">
-                    <a href="{{route('proceeding')}}" class="btn btn-sm btn-primary">Volver</a>
+                    <a href="{{route('improvement_action')}}" class="btn btn-sm btn-primary">Volver</a>
                 </div>
             </div>
             <form action="{{route('improvement_action_update',$id->id)}}" method="POST">
@@ -134,10 +134,10 @@
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label for="start_date">Fecha inicial</label>
+                                                <label for="start_date">Fecha</label>
                                                 <input type="date" name="start_date_action[{{$key}}]" class="form-control start_date" id="start_date_action_{{$key}}" value="{{$item->start_date}}">
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 hide">
                                                 <label for="end_date">Fecha termina</label>
                                                 <input type="date" name="end_date_action[{{$key}}]" class="form-control end_date" id="end_date_action_{{$key}}" value="{{$item->end_date}}">
                                             </div>

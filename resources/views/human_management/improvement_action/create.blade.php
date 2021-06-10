@@ -124,10 +124,10 @@
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label for="start_date">Fecha inicial</label>
+                                        <label for="start_date">Fecha</label>
                                         <input type="date" name="start_date_action[0]" class="form-control start_date" id="start_date_action_0">
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 hide">
                                         <label for="end_date">Fecha termina</label>
                                         <input type="date" name="end_date_action[0]" class="form-control end_date" id="end_date_action">
                                     </div>
