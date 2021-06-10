@@ -217,7 +217,7 @@ class fallProtectionEquipmentInspectionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**
@@ -271,7 +271,7 @@ class fallProtectionEquipmentInspectionController extends Controller
             //Correo por si aprueba
             $mensaje = 'Certificación exitosa de equipo de proteción contra caídas.';
             
-            Mail::send('human_management.fall_proteccion.mail.main', ['format' => $id, 'mensaje'=>$mensaje], function ($menssage) use ($id)
+            Mail::send('human_management.fall_proteccion.email.main', ['format' => $id, 'mensaje'=>$mensaje], function ($menssage) use ($id)
             {
                 $emails = system_setting::where('state',1)->pluck('approval_emails')->first();
                 $company = general_setting::where('state',1)->pluck('company')->first();

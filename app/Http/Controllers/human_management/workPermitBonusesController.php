@@ -637,7 +637,8 @@ class workPermitBonusesController extends Controller
             }
 
             $id->update([
-                'status' => 1,'approver_id' => auth()->id(),
+                'status' => 1,
+                'approver_id' => auth()->id(),
                 'total' => $AccTotalPagar,
                 'value_bonu' => $AccTotalPagaViatic,
                 'value_box' => $AccTotalPagarBox,

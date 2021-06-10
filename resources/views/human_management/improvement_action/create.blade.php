@@ -18,11 +18,11 @@
             <select class="form-control select2" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
                 <option selected disabled></option>
                 @foreach ($users as $user)
-                    <option data-select2-id="{{$user->id}}" value="{{$user->id}}">{{$user->cedula}} - {{$user->name}}</option>
+                    <option data-select2-id="{{$user->id}}" value="{{$user->id}}">{{$user->name}}</option>
                 @endforeach
             </select>
             <div class="input-group-addon">
-                <i class="fa fa-trash remove-user-tracing" style="cursor: pointer"></i>
+                <i class="fa fa-trash remove-user" style="cursor: pointer"></i>
             </div>
         </div>
     </div>
@@ -31,7 +31,7 @@
     @include('includes.alerts')
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Crear acta</h3>
+                <h3 class="box-title">Crear acción correctiva o de mejora</h3>
                 <div class="box-tools">
                     <a href="{{route('improvement_action')}}" class="btn btn-sm btn-primary">Volver</a>
                 </div>
@@ -113,7 +113,7 @@
                 <hr>
                 <div id="destino_action">
                     <h4>Plan de Acción</h4>
-                    <div id="origer_action" class="row">
+                    <div id="origen_action" class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="action">Tarea</label>
@@ -125,7 +125,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="start_date">Fecha inicial</label>
-                                        <input type="date" name="start_date_action[0]" class="form-control start_date" id="start_date_action">
+                                        <input type="date" name="start_date_action[0]" class="form-control start_date" id="start_date_action_0">
                                     </div>
                                     <div class="col-md-6">
                                         <label for="end_date">Fecha termina</label>
@@ -141,11 +141,11 @@
                                     <select name="user_action_id[0][]" id="user_action_id_0" class="form-control select2 action_user_id" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                         <option selected disabled></option>
                                         @foreach ($users as $user)
-                                            <option data-select2-id="{{$user->id}}" value="{{$user->id}}">{{$user->cedula}} - {{$user->name}}</option>
+                                            <option data-select2-id="{{$user->id}}" value="{{$user->id}}">{{$user->name}}</option>
                                         @endforeach
                                     </select>
                                     <div class="input-group-addon">
-                                        <i class="fa fa-trash remove-user-tracing"></i>
+                                        <i class="fa fa-trash remove-user" style="cursor: pointer;"></i>
                                     </div>
                                 </div>
                             </div>
@@ -169,11 +169,11 @@
                 <hr>
                 <div id="destino_tracing">
                     <h4>Seguimiento y Verificación del Plan de Acción</h4>
-                    <div id="origer_tracing" class="row">
+                    <div id="origen_tracing" class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label for="action">Acción</label>
-                                <textarea class="textarea" id="action_0" style="width: 100%;" name="action[0]"></textarea>
+                                <label for="tracing">Acción</label>
+                                <textarea class="textarea" id="tracing_0" style="width: 100%;" name="tracing[0]"></textarea>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -197,11 +197,11 @@
                                     <select name="user_tracing_id[0][]" id="user_tracing_id_0" class="form-control select2 tracing_user_id" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                         <option selected disabled></option>
                                         @foreach ($users as $user)
-                                            <option data-select2-id="{{$user->id}}" value="{{$user->id}}">{{$user->cedula}} - {{$user->name}}</option>
+                                            <option data-select2-id="{{$user->id}}" value="{{$user->id}}">{{$user->name}}</option>
                                         @endforeach
                                     </select>
                                     <div class="input-group-addon">
-                                        <i class="fa fa-trash remove-user-tracing"></i>
+                                        <i class="fa fa-trash remove-user" style="cursor: pointer;"></i>
                                     </div>
                                 </div>
                             </div>
@@ -240,7 +240,6 @@
 @endsection
 
 @section('css')
-{{-- wysihtml5-supported --}}
     <link rel="stylesheet" href="{{asset("assets/$theme/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css")}}">
     <link rel="stylesheet" href="{{asset("assets/$theme/bower_components/select2/dist/css/select2.min.css")}}">
 @endsection
