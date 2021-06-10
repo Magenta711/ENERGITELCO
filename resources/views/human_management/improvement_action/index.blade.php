@@ -16,9 +16,9 @@
             <div class="box-header">
                 <h3 class="box-title">Lista de acciones correctivas y de mejora</h3>
                 <div class="box-tools">
-                    {{-- @can('Crear actas') --}}
+                    @can('Crear acciones de mejora')
                             <a href="{{route('improvement_action_create')}}" class="btn btn-sm btn-success">Crear</a>
-                    {{-- @endcan --}}
+                    @endcan
                 </div>
             </div>
             <div class="box-body">
@@ -43,16 +43,16 @@
                                 <td>{{ $item->status == 1 ? 'Acción cerrada' : ($item->status == 2 ? 'Pedientes' : 'Acción no posible de cerrar' ) }}</td>
                                 <td>{{ $item->created_at }}</td>
                                 <td>
-                                    {{-- @can('Ver actas') --}}
+                                    @can('Ver acciones de mejora')
                                         <a href="{{route('improvement_action_show',$item->id)}}" class="btn btn-sm btn-success">Ver</a>
-                                    {{-- @endcan
-                                    @can('Editar actas') --}}
+                                    @endcan
+                                    @can('Editar acciones de mejora')
                                         <a href="{{route('improvement_action_edit',$item->id)}}" class="btn btn-sm btn-primary">Editar</a>
-                                    {{-- @endcan
-                                    @can('Descargar actas') --}}
+                                    @endcan
+                                    @can('Descargar acciones de mejora')
                                         <a href="{{route("improvement_action_download",$item->id)}}" class="btn btn-warning btn-sm">Descargar</a>
-                                    {{-- @endcan
-                                    @can('Eliminar actas') --}}
+                                    @endcan
+                                    @can('Eliminar acciones de mejora')
                                         <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete_{{$item->id}}">Eliminar</button>
                                         <div class="modal fade" id="delete_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-md">
@@ -61,13 +61,13 @@
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
-                                                        <h4 class="modal-title">Eliminar formato</h4>
+                                                        <h4 class="modal-title">Eliminar acción</h4>
                                                     </div>
                                                     <form action="{{route('improvement_action_delete',$item->id)}}" method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                         <div class="modal-body">
-                                                            <p>¿Está seguro que desa eliminar el acta?</p>
+                                                            <p>¿Está seguro que desa eliminar la acción?</p>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-sm btn-secondary pull-left" data-dismiss="modal">Cancelar</button>
@@ -77,7 +77,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    {{-- @endcan --}}
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

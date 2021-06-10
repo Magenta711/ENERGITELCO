@@ -823,17 +823,17 @@
                           auth()->user()->hasPermissionTo('Editar liquidación de prestaciones sociales') ||
                           auth()->user()->hasPermissionTo('Descargar liquidación de prestaciones sociales') ||
                           auth()->user()->hasPermissionTo('Eliminar liquidación de prestaciones sociales')
-                          )
+                        )
                           <li class="{{ activeMenu('human_management/settlement*') }}"><a class="btn-send" href="{{route('settlement')}}"><i class="fa fa-money-check-alt"></i> LIQUIDACIÓN PRESTACIONES SOCIALES</a></li>
                         @endif
                         @if (
-                          auth()->user()->hasPermissionTo('Lista de liquidación de prestaciones sociales') ||
-                          auth()->user()->hasPermissionTo('Crear liquidación de prestaciones sociales') ||
-                          auth()->user()->hasPermissionTo('Ver liquidación de prestaciones sociales') ||
-                          auth()->user()->hasPermissionTo('Editar liquidación de prestaciones sociales') ||
-                          auth()->user()->hasPermissionTo('Descargar liquidación de prestaciones sociales') ||
-                          auth()->user()->hasPermissionTo('Eliminar liquidación de prestaciones sociales')
-                          )
+                          auth()->user()->hasPermissionTo('Lista de acciones de mejora') ||
+                          auth()->user()->hasPermissionTo('Crear acciones de mejora') ||
+                          auth()->user()->hasPermissionTo('Ver acciones de mejora') ||
+                          auth()->user()->hasPermissionTo('Editar acciones de mejora') ||
+                          auth()->user()->hasPermissionTo('Descargar acciones de mejora') ||
+                          auth()->user()->hasPermissionTo('Eliminar acciones de mejora')
+                        )
                           <li class="{{ activeMenu('human_management/improvement_action*') }}"><a class="btn-send" href="{{route('improvement_action')}}"><i class="fa fa-money-check-alt"></i> ACCIONES DE MEJORA</a></li>
                         @endif
                       </ul>

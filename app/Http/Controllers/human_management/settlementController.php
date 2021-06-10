@@ -16,7 +16,7 @@ class settlementController extends Controller
     public function __construct() {
         $this->middleware(['auth']);
         $this->middleware('verified');
-        $this->middleware('permission:Lista de liquidación de prestaciones sociales',['only' => ['index']]);
+        $this->middleware('permission:Lista de liquidación de prestaciones sociales|Crear liquidación de prestaciones sociales|Ver liquidación de prestaciones sociales|Editar liquidación de prestaciones sociales|Descargar liquidación de prestaciones sociales|Eliminar liquidación de prestaciones sociales|Aprobar liquidación de prestaciones sociales',['only' => ['index']]);
         $this->middleware('permission:Crear liquidación de prestaciones sociales',['only' => ['create','store']]);
         $this->middleware('permission:Ver liquidación de prestaciones sociales',['only' => ['show']]);
         $this->middleware('permission:Editar liquidación de prestaciones sociales',['only' => ['edit','update']]);

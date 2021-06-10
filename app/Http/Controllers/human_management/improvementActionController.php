@@ -14,6 +14,13 @@ class improvementActionController extends Controller
     public function __construct() {
         $this->middleware('auth');
         $this->middleware('verified');
+        $this->middleware('permission:Lista de acciones de mejora|Crear acciones de mejora|Ver acciones de mejora|Editar acciones de mejora|Descargar acciones de mejora|Eliminar acciones de mejora|Aprobar acciones de mejora',['only' => ['index']]);
+        $this->middleware('permission:Crear acciones de mejora',['only' => ['create','store']]);
+        $this->middleware('permission:Ver acciones de mejora',['only' => ['show']]);
+        $this->middleware('permission:Editar acciones de mejora',['only' => ['edit','update']]);
+        $this->middleware('permission:Descargar acciones de mejora',['only' => ['download']]);
+        $this->middleware('permission:Eliminar acciones de mejora',['only' => ['destroy']]);
+        $this->middleware('permission:Aprobar acciones de mejora',['only' => ['approve']]);
     }
     /**
      * Display a listing of the resource.
@@ -237,8 +244,14 @@ class improvementActionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(improvementAction $id)
     {
-        //
+        $id->delete();
+        return redirect()->route('improvement_action')->with('success','Se ha eliminado la acción correctamente');
+    }
+
+    public function download(improvementAction $id)
+    {
+        return $id;
     }
 }
