@@ -325,34 +325,11 @@ function getpremium_payment_days() {
     $('#premium_payment_days').val(days + 1);
 }
 
-function getdiffDates(start, end) {
-    let date1 = start.split('-');
-    let date2 = end.split('-');
-    
-    total = 0;
-    if (date1[0] == date2[0]) {
-        if (date1[1] == date2[1]) {
-            total = date2[2] - date1[2];
-        }else {
-            diff = date2[1] - date1[1] - 1;
-            days1 = 30 - date1[2];
-            days2 = parseInt(date2[2]);
-            r = days1 + days2;
-            r += (diff * 30);
-            total = r;
-        }
-    }else {
-        diff = date2[0] - date1[0] - 1;
-        month1 = (12 - date1[1]);
-        month2 = parseInt(date2[1]);
-        r =  ((month1 + month2) - 1) * 30;
-        days1 = 30 - date1[2];
-        days2 = parseInt(date2[2]);
-        r += days1 + days2;
-        r += (diff * 360);
-        total = r;
-    }
-    return total;
+function getdiffDates(start, end)
+{
+    var date_start = moment(start);
+    var date_end = moment(end);
+    return date_end.diff(date_start, 'days');
 }
 
 function getsalaryThisMonth() {
