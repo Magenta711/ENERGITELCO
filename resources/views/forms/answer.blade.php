@@ -76,12 +76,14 @@
                     </thead>
                     <tbody>
                         @foreach ($id->orders as $order)
-                            <tr>
-                                <td>{{$order->id}}</td>
-                                <td>{{$order->user ? $order->user->name : ''}}</td>
-                                @foreach ($id->questions as $question)
+                        <tr>
+                            <td>{{$order->id}}</td>
+                            <td>{{$order->user ? $order->user->name : ''}}</td>
+                            @foreach ($id->questions as $question)
+                                @if ($question->status)
                                     <td>{!!answerQuestion($order,$question)!!}</td>
-                                @endforeach
+                                @endif
+                            @endforeach
                                 <td>{{$order->created_at}}</td>
                                 @if ($id->form_type == 'Evaluación')
                                     @if ($id->rating_type == 'Automática')

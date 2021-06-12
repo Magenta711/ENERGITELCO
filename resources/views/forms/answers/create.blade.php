@@ -65,27 +65,33 @@
             <hr>
             @if ($id->sort_randomly)
                 @foreach ($id->questions as $question)
-                    @if ($question->type != 3)
-                        <div class="form-group">
-                            <label class="label-text" for="input_{{$question->id}}">{{$question->question}} <span class="text-danger">{{ $question->required ? '*' : '' }}</span></label>
-                            @include('forms.includes.type_controls')
-                        </div>
-                    @endif
-                @endforeach
-                    @foreach (twodshuffle($id->questions) as $question)
-                        @if ($question->type == 3)
+                    @if ($question->status)
+                        @if ($question->type != 3)
                             <div class="form-group">
                                 <label class="label-text" for="input_{{$question->id}}">{{$question->question}} <span class="text-danger">{{ $question->required ? '*' : '' }}</span></label>
                                 @include('forms.includes.type_controls')
                             </div>
                         @endif
+                    @endif
+                @endforeach
+                    @foreach (twodshuffle($id->questions) as $question)
+                        @if ($question->status)
+                            @if ($question->type == 3)
+                                <div class="form-group">
+                                    <label class="label-text" for="input_{{$question->id}}">{{$question->question}} <span class="text-danger">{{ $question->required ? '*' : '' }}</span></label>
+                                    @include('forms.includes.type_controls')
+                                </div>
+                            @endif
+                        @endif
                     @endforeach
             @else
              @foreach ($id->questions as $question)
-                 <div class="form-group">
-                     <label class="label-text" for="input_{{$question->id}}">{{$question->question}} <span class="text-danger">{{ $question->required ? '*' : '' }}</span></label>
-                     @include('forms.includes.type_controls')
-                 </div>
+                @if ($question->status)
+                    <div class="form-group">
+                        <label class="label-text" for="input_{{$question->id}}">{{$question->question}} <span class="text-danger">{{ $question->required ? '*' : '' }}</span></label>
+                        @include('forms.includes.type_controls')
+                    </div>
+                 @endif
              @endforeach
             @endif
 @auth

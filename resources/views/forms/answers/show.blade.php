@@ -59,10 +59,12 @@ function answerQuestion($order, $question){
         <div class="box-body">
             <p>Todo campo con <span class="text-danger">*</span> son requeridos</p>
             @foreach ($id->form->questions as $question)
-                <div class="card card-body mb-3">
-                    <label class="label-text"> {{$question->question}} <span class="text-danger">{{ $question->required ? '*' : '' }}</span></label>
-                    @include('forms.answers.includes.answer')
-                </div>
+                @if ($question->status)
+                    <div class="card card-body mb-3">
+                        <label class="label-text"> {{$question->question}} <span class="text-danger">{{ $question->required ? '*' : '' }}</span></label>
+                        @include('forms.answers.includes.answer')
+                    </div>
+                @endif
             @endforeach
         </div>
     </div>
