@@ -35,12 +35,12 @@ class answerController extends Controller
         if ($id) {
             if ($id->from_to_auth) {
                 if (!auth()->check()) {
-                    return abort(404);
+                    return redirect()->route('answers_to_auth',['form' => $form, 'email' => $email]);
                 }
                 $user = UserForm::where('secret',$email)->where('form_id',$id->id)->first();
                 if ($user && $user->email == auth()->user()->email) {
                     if ($user->status == 1) {
-                        return redirect()->with('success','Ya respondiste');
+                        return redirect()->back()->with('success','Ya respondiste');
                     }
                 }else {
                     return redirect()->route('home')->with('success','Acción no permitida');
@@ -216,13 +216,12 @@ class answerController extends Controller
             'qualification' => $quali,
         ]);
 
-        // $users = User::where('state',1)->get();
-        // $user->notify(new notificationMain($answer->id,'Nueva respuesta '.$answer->id,'answers/'.$answer->id));
-        // foreach ($users as $use) {
-        //     if ($use->hasPermissionTo('Ver lista de respuestas')) {
-        //         $use->notify(new notificationMain($answer->id,'Nueva respuesta '.$answer->id,'answers/'.$answer->id));
-        //     }
-        // }
+        $users = User::where('state',1)->get();
+        foreach ($users as $use) {
+            if ($use->hasPermissionTo('Ver respuestas de formularios')) {
+                $use->notify(new notificationMain($answer->id,'Nueva respuesta '.$answer->id,'answers/'.$answer->id));
+            }
+        }
         return redirect()->route('answers_ready');
     }
 
@@ -275,5 +274,10 @@ class answerController extends Controller
             return redirect()->route('answers_create',[$form,$user_form->secret]);
         }
         return abort(404);
+    }
+
+    public function forAuth($form,$email)
+    {
+        return redirect()->route('answers_create',['form' => $form,'email' => $email]);
     }
 }

@@ -551,7 +551,7 @@
                     })
                     
                     swalWithBootstrapButtons.fire({
-                        title: 'Actualmente no estas habilitado como 27/7',
+                        title: 'Actualmente no estas habilitado como 24/7',
                         text: "De clic en activar si deseas habilitarlo",
                         footer: '<a href="{{route("policy_condition_24_7")}}" target="_blank">Políticas y condiciones</a>',
                         icon: 'warning',

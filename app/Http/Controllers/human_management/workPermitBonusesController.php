@@ -104,7 +104,6 @@ class workPermitBonusesController extends Controller
                 return redirect()->back()->withErrors(['No se encuentraron solicitudes de permisos de trabajo']);
             }
         }
-
     }
 
     /**

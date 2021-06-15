@@ -810,6 +810,7 @@ Route::post('forms/{user}','forms\formController@resend')->name("forms_resend");
 Route::get('answers','forms\answerController@index')->name("answers");
 Route::get('answers/{id}','forms\answerController@show')->name("answers_show")->middleware('auth')->middleware('verified');
 Route::get('answer/{form}/{email?}','forms\answerController@create')->name("answers_create");
+Route::get('answers/auth/{form}/{email?}','forms\answerController@forAuth')->name("answers_to_auth")->middleware('auth')->middleware('verified');
 Route::post('answers','forms\answerController@store')->name("answers_store");
 Route::get('answers/guest/ready','forms\answerController@ready')->name("answers_ready");
 Route::delete('answers/{id}','forms\answerController@delete')->name("answers_delete");
