@@ -20,9 +20,6 @@
                     <a href="{{route('improvement_action')}}" class="btn btn-sm btn-primary">Volver</a>
                 </div>
             </div>
-            <form action="{{route('improvement_action_update',$id->id)}}" method="POST">
-                @csrf
-                @method('PUT')
             <div class="box-body">
                 <div class="row">
                     <div class="col-md-3">
@@ -175,10 +172,6 @@
                 <hr>
                 <h4>Evaluación de las acciones tomadas</h4>
             </div>
-            <div class="box-footer">
-                <button class="btn btn-sm btn-primary btn-send">Enviar y firmar</button>
-            </div>
-        </form>
         </div>
     </section>
 @endsection

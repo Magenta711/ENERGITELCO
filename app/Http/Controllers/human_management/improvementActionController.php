@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\human_management;
 
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 use App\Http\Controllers\Controller;
 use App\Models\human_magement\improvementAction;
 use App\Models\human_magement\improvementActionDetail;
@@ -20,7 +21,6 @@ class improvementActionController extends Controller
         $this->middleware('permission:Editar acciones de mejora',['only' => ['edit','update']]);
         $this->middleware('permission:Descargar acciones de mejora',['only' => ['download']]);
         $this->middleware('permission:Eliminar acciones de mejora',['only' => ['destroy']]);
-        $this->middleware('permission:Aprobar acciones de mejora',['only' => ['approve']]);
     }
     /**
      * Display a listing of the resource.
@@ -55,6 +55,7 @@ class improvementActionController extends Controller
         $request['responsable_id'] = auth()->id();
         $request['status'] = 2;
         $improvement = improvementAction::create($request->all());
+        $status = 1;
         foreach ($request->action as $key => $value) {
             $detail = improvementActionDetail::create([
                 'improvement_id' => $improvement->id,
@@ -72,6 +73,9 @@ class improvementActionController extends Controller
             }
         }
         foreach ($request->tracing as $key => $value) { 
+            if (!$request->end_date_tracing[$key]) {
+                $status = 0;
+            }
             $detail = improvementActionDetail::create([
                 'improvement_id' => $improvement->id,
                 'text' => $request->tracing[$key],
@@ -86,6 +90,12 @@ class improvementActionController extends Controller
                     'detail_id' => $detail->id
                 ]);
             }
+        }
+
+        if ($status) {
+            $improvement->update([
+                'status' => 1
+            ]);
         }
 
         return redirect()->route('improvement_action')->with('success','Se ha creado la acción correctamente');
@@ -123,7 +133,6 @@ class improvementActionController extends Controller
      */
     public function update(Request $request, improvementAction $id)
     {
-        // return $request;
         $id->update($request->all());
         $amount_action = count($request->action);
         $amount_tracing = count($request->tracing);
@@ -132,6 +141,7 @@ class improvementActionController extends Controller
         improvementActionDetail::where('improvement_id',$id->id)->update([ 'status' => 0 ]);
         $action_ready = 0;
         $tracing_ready = 0;
+        $status = 1;
         foreach ($id->details as $key => $detail) {
             improvementActionDetailUser::where('detail_id',$detail->id)->delete();
             if ($i < $amount_action) {
@@ -165,6 +175,9 @@ class improvementActionController extends Controller
                 }
                 foreach ($request->tracing as $key => $item) {
                     if ($j == $i) {
+                        if (!$request->end_date_tracing[$key]) {
+                            $status = 0;
+                        }
                         $detail->update([
                             'text' => $request->tracing[$key],
                             'start_date' => $request->start_date_tracing[$key],
@@ -215,6 +228,9 @@ class improvementActionController extends Controller
             $j = 0;
             foreach ($request->tracing as $key => $value) { 
                 if ($j >= $tracing_ready) {
+                    if (!$request->end_date_tracing[$key]) {
+                        $status = 0;
+                    }
                     $detail = improvementActionDetail::create([
                         'improvement_id' => $id->id,
                         'text' => $request->tracing[$key],
@@ -235,6 +251,13 @@ class improvementActionController extends Controller
                 $j++;
             }
         }
+
+        if ($status) {
+            $id->update([
+                'status' => 1
+            ]);
+        }
+
         return redirect()->route('improvement_action')->with('success','Se ha actualizado la acción correctamente');
     }
 
@@ -252,6 +275,9 @@ class improvementActionController extends Controller
 
     public function download(improvementAction $id)
     {
-        return $id;
+        $pdf = PDF::loadView('human_management.improvement_action.pdf.main',compact('id'));
+        $pdf->getDomPDF()->set_option("enable_php", true);
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->download($id->id.'_ACCION_DE_MEJORA.pdf');
     }
 }
