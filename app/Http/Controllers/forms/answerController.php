@@ -117,98 +117,100 @@ class answerController extends Controller
         $r = '';
         $quali = 0;
         foreach ($form->questions as $question) {
-            switch ($question->type) {
-                case "1":
-                    Answer::create([
-                        'question_id'=>$question->id,
-                        'answer'=>$request->text[$nt],
-                        'order_id' => $answer->id
-                    ]);
-                    $nt++;
-                break;
-                case "2":
-                    Answer::create([
-                        'question_id'=>$question->id,
-                        'answer'=>$request->text_area[$nta],
-                        'order_id' => $answer->id
-                    ]);
-                    $nta++;
-                    break;
-                case "3":
-                    if(isset($request->radio[$question->id])){
+            if ($question->status) {
+                switch ($question->type) {
+                    case "1":
                         Answer::create([
                             'question_id'=>$question->id,
-                            'answer'=>$request->radio[$question->id],
+                            'answer'=>$request->text[$nt],
                             'order_id' => $answer->id
                         ]);
-                        if ($form->form_type == 'Evaluación' && $form->rating_type == 'Automática') {
-                            if ($question->answer == $request->radio[$question->id]) {
-                                $quali += $question->value_question;
-                            }
-                        }
-                    }
-                    $nr++;
+                        $nt++;
                     break;
-                case "4":
-                    for ($i=0; $i < $request->num_checked[$nc]; $i++) { 
+                    case "2":
                         Answer::create([
                             'question_id'=>$question->id,
-                            'answer'=>$request->checkbox[$nci],
-                            'order_id' => $answer->id,
-                            'num' => ($i+1)
+                            'answer'=>$request->text_area[$nta],
+                            'order_id' => $answer->id
                         ]);
-                        $nci++;
-                    }
-                    $nc++;
-                    break;
-                case "5":
-                    Answer::create([
-                        'question_id'=>$question->id,
-                        'answer'=>$request->select[$ns],
-                        'order_id' => $answer->id
-                    ]);
-                    $ns++;
-                    break;
-                case "6":
-                    if (isset($request->num_file[$nfp])) {
-                        for ($i=0; $i < $request->num_file[$nfp]; $i++) {
-                            if ($request->hasFile('file')){
-                                if ($file = $request->file('file')[$nf]) {
-                                    $name = time().$file->getClientOriginalName();
-                                    $path = Storage::putFileAs('public/upload/files', $file, $name);
-                                    Answer::create([
-                                        'question_id'=>$question->id,
-                                        'answer'=>$name,
-                                        'order_id' => $answer->id,
-                                        'num' => ($i+1)
-                                    ]);
+                        $nta++;
+                        break;
+                    case "3":
+                        if(isset($request->radio[$question->id])){
+                            Answer::create([
+                                'question_id'=>$question->id,
+                                'answer'=>$request->radio[$question->id],
+                                'order_id' => $answer->id
+                            ]);
+                            if ($form->form_type == 'Evaluación' && $form->rating_type == 'Automática') {
+                                if ($question->answer == $request->radio[$question->id]) {
+                                    $quali += $question->value_question;
                                 }
-                                $nf++;
                             }
                         }
-                    }
-                    $nfp++;
-                    break;
-                case "7":
-                    Answer::create([
-                        'question_id'=>$question->id,
-                        'answer'=>$request->date[$nd],
-                        'order_id' => $answer->id
-                    ]);
-                    $nd++;
-                    break;
-                case "8":
-                    Answer::create([
-                        'question_id'=>$question->id,
-                        'answer'=>$request->time[$ntm],
-                        'order_id' => $answer->id
-                    ]);
-                    $ntm++;
-                    break;
-                
-                default:
+                        $nr++;
+                        break;
+                    case "4":
+                        for ($i=0; $i < $request->num_checked[$nc]; $i++) { 
+                            Answer::create([
+                                'question_id'=>$question->id,
+                                'answer'=>$request->checkbox[$nci],
+                                'order_id' => $answer->id,
+                                'num' => ($i+1)
+                            ]);
+                            $nci++;
+                        }
+                        $nc++;
+                        break;
+                    case "5":
+                        Answer::create([
+                            'question_id'=>$question->id,
+                            'answer'=>$request->select[$ns],
+                            'order_id' => $answer->id
+                        ]);
+                        $ns++;
+                        break;
+                    case "6":
+                        if (isset($request->num_file[$nfp])) {
+                            for ($i=0; $i < $request->num_file[$nfp]; $i++) {
+                                if ($request->hasFile('file')){
+                                    if ($file = $request->file('file')[$nf]) {
+                                        $name = time().$file->getClientOriginalName();
+                                        $path = Storage::putFileAs('public/upload/files', $file, $name);
+                                        Answer::create([
+                                            'question_id'=>$question->id,
+                                            'answer'=>$name,
+                                            'order_id' => $answer->id,
+                                            'num' => ($i+1)
+                                        ]);
+                                    }
+                                    $nf++;
+                                }
+                            }
+                        }
+                        $nfp++;
+                        break;
+                    case "7":
+                        Answer::create([
+                            'question_id'=>$question->id,
+                            'answer'=>$request->date[$nd],
+                            'order_id' => $answer->id
+                        ]);
+                        $nd++;
+                        break;
+                    case "8":
+                        Answer::create([
+                            'question_id'=>$question->id,
+                            'answer'=>$request->time[$ntm],
+                            'order_id' => $answer->id
+                        ]);
+                        $ntm++;
+                        break;
                     
-                    break;
+                    default:
+                        
+                        break;
+                }
             }
         }
         

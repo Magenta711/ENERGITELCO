@@ -55,7 +55,11 @@
                 <table class="table-form">
                     <thead>
                         <tr>
-                            <th colspan="4">SOLICITUD DE RETIRO DE CESANTÍAS O LABORAL</th>
+                            @if ($id->reason == 'carta laboral')
+                                <th colspan="4">SOLICITUD DE CARTA LABORAL</th>
+                            @else
+                                <th colspan="4">SOLICITUD DE CARTA DE RETIRO CESANTÍAS</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
