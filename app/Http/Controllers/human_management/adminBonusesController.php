@@ -100,6 +100,18 @@ class adminBonusesController extends Controller
                 'commentary' => $request->commentary[$key],
             ]);
         }
+
+        $users = User::where('state',1)->get();
+        foreach ($users as $user) {
+            foreach ($user->report_24_7 as $item) {
+                if ($id->status == 0) {
+                    $item->update([
+                        'bonus_id' => $id->id,
+                        'status' => 1
+                    ]);
+                }
+            }
+        }
         
         return redirect()->route('admin_bonuses')->with('success','Se ha registrado las bonificaciones administradores y conductores correctamente');
     }

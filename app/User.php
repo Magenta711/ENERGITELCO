@@ -17,6 +17,7 @@ use App\Models\Work6;
 use App\Models\Work7;
 use App\Models\Document;
 use App\Models\attention_call\AttentionCall;
+use App\Models\bonus24;
 use App\Models\bonus\MinorBoxUser;
 use App\Models\project\route\Routes;
 use App\Models\Work8Users;
@@ -146,6 +147,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function minor_box()
     {
         return $this->hasOne(MinorBoxUser::class, 'user_id','id');
+    }
+    public function report_24_7()
+    {
+        return $this->hasMany(bonus24::class, 'user_id','id');
     }
 }
 // UPDATE `signatures` SET `signatures_type`='App\Models\document' WHERE `signatures_type` like 'App\User'

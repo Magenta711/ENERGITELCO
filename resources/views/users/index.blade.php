@@ -42,6 +42,7 @@
                                     <th scope="col">Nombre</th>
                                     <th scope="col">Correo</th>
                                     <th scope="col">Cargo</th>
+                                    <th scope="col">24/7</th>
                                     <th scope="col">Estado</th>
                                     <th scope="col">Acciones</th>
                                 </tr>
@@ -54,6 +55,7 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email}}</td>
                                     <td>{{ $user->position->name }}</td>
+                                    <td>{!! $user->b24_7 ? '<i class="fa fa-check">' : '<i class="fa fa-times">' !!}</td>
                                     <td>{{ ($user->state == 1)  ? 'Activo' : 'Inactivo' }}</td>
                                     <td>
                                         @can('Ver usuarios')

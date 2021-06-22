@@ -37,13 +37,18 @@
                                         </div>
                                         <ul class="list-group">
                                             <li class="list-group-item">
-                                                <label for="admin_bonus_{{ $user->id }}">
-                                                    <input type="checkbox" id="admin_bonus_checked_{{ $user->id }}" class="check_concept admin_bonus_checked" name="admin_bonus_check[{{ $user->id }}]" value="1"> Bonificación a administrativos
+                                                <label for="admin_bonus_checked_{{ $user->id }}">
+                                                    <input type="checkbox" id="admin_bonus_checked_{{ $user->id }}" class="check_concept admin_bonus_checked" name="admin_bonus_check[{{ $user->id }}]" value="1" {{old('admin_bonus_check')[$user->id] ? 'checked' : ''}}> Bonificación a administrativos
                                                 </label>
                                             </li>
                                             <li class="list-group-item">
-                                                <label for="drive_bonus_{{ $user->id }}">
-                                                    <input type="checkbox" id="drive_bonus_checked_{{ $user->id }}" class="check_concept drive_bonus_checked" name="drive_bonus_check[{{ $user->id }}]" value="1"> Bonificación a conductores
+                                                <label for="drive_bonus_checked_{{ $user->id }}">
+                                                    <input type="checkbox" id="drive_bonus_checked_{{ $user->id }}" class="check_concept drive_bonus_checked" name="drive_bonus_check[{{ $user->id }}]" value="1" {{old('drive_bonus_check')[$user->id] ? 'checked' : (($user->register && ($user->register->car || $user->register->moto)) ? 'checked' : '')}}> Bonificación a conductores
+                                                </label>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <label for="24_7_bonus_checked_{{ $user->id }}">
+                                                    <input type="checkbox" id="24_7_bonus_checked_{{ $user->id }}" class="check_concept 24_7_bonus_checked" name="24_7_bonus_check[{{ $user->id }}]" value="1" {{ (old('24_7_bonus_check')[$user->id]) ? 'checked' : (($user->b24_7) ? 'checked' : '') }}> Bonificación 24/7
                                                 </label>
                                             </li>
                                             <li class="list-group-item hide">
@@ -116,17 +121,23 @@
                                                 <input type="number" name="admin_12[{{$user->id}}]" id="admin_{{$user->id}}_12" class="form-control question_{{$user->id}} admin_input" value="0" max="10" min="0">
                                             </div>
                                         </div>
-                                        <div class="block_bonus_driver_{{$user->id}}" style="display: none">
+                                        <div class="block_bonus_driver_{{$user->id}}" {!! old('drive_bonus_check')[$user->id] ? 'style="display: none"' : (($user->register && ($user->register->car || $user->register->moto)) ? '' : 'style="display: none"') !!}>
                                             <h4>Conductor</h4>
                                             <div class="row">
                                                 <div class="col-md-6 form-group">
-                                                    <label for="driver_{{$user->id}}_1"><input type="checkbox" name="carro[{{$user->id}}]" value="1"> BONIFICACIÓN POR CONDUCIR CARRO</label>
+                                                    <label for="driver_{{$user->id}}_1"><input type="checkbox" name="carro[{{$user->id}}]" value="1" {{($user->register && $user->register->car) ? 'checked' : '' }}> BONIFICACIÓN POR CONDUCIR CARRO</label>
                                                     <input type="number" name="driver_1[{{$user->id}}]" id="driver_{{$user->id}}_1" class="form-control question2_{{$user->id}} driver_input" value="0" max="10" min="0">
                                                 </div>
                                                 <div class="col-md-6 form-group">
-                                                    <label for="driver_{{$user->id}}_2"><input type="checkbox" name="moto[{{$user->id}}]" value="1"> BONIFICACIÓN POR CONDUCIR MOTO</label>
+                                                    <label for="driver_{{$user->id}}_2"><input type="checkbox" name="moto[{{$user->id}}]" value="1" {{($user->register && $user->register->moto) ? 'checked' : '' }}> BONIFICACIÓN POR CONDUCIR MOTO</label>
                                                     <input type="number" name="driver_2[{{$user->id}}]" id="driver_{{$user->id}}_2" class="form-control question2_{{$user->id}} driver_input" value="0" max="10" min="0">
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div class="block_bonus_24_7_{{$user->id}}" {!!old('24_7_bonus_check')[$user->id] || $user->b24_7 ? '' : 'style="display:none"'!!}>
+                                            <div class="form-group">
+                                                <label for="bonus_24_7">Bonificación 24/7 (valor $)</label>
+                                                <input type="number" name="bonus_24_7[{{$user->id}}]" id="bonus_24_7_{{$user->id}}" class="form-control total_24_7" value="{{old('bonus_24_7')[$user->id] ?? 0 }}">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -165,6 +176,43 @@
                                 </div>
                             </div>
                         </div>
+
+                        <button type="button" class="btn btn-sm btn-success pl-4 pr-4" data-toggle="modal" data-target="#modal_report_{{$user->id}}">Reporte 24/7</button>
+                        <div class="modal fade" id="modal_report_{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <h4 class="modal-title" id="exampleModalLongTitle">{{$user->name}} - {{$user->position->name}}</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table table-striped table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Descripción</th>
+                                                    <th>Plus</th>
+                                                    <th>Fecha</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($user->report_24_7 as $item)
+                                                    <tr>
+                                                        <td>{{$item->description}}</td>
+                                                        <td>{{$item->plus ? 'Si' : 'No'}}</td>
+                                                        <td>{{$item->created_at}}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             @endforeach
@@ -179,6 +227,7 @@
                     <th>Total empleados</th>
                     <th>Total bonificaciones a administrativos</th>
                     <th>Total bonificaciones a condutores</th>
+                    <th>Total bonificaciones 24/7</th>
                     <th>Total neto a pagar</th>
                 </tr>
             </thead>
@@ -196,6 +245,10 @@
                         <td>
                             <span id="total_driver">$0,00</span>
                             <input type="hidden" name="total_pay_drive" value="0" id="total_pay_drive">
+                        </td>
+                        <td>
+                            <span id="total_24_7">$0,00</span>
+                            <input type="hidden" name="total_pay_24_7" value="0" id="total_pay_24_7">
                         </td>
                         <th>
                             <h4><span id="total_all">$0,00</span></h4>

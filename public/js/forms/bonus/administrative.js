@@ -52,6 +52,18 @@ $(document).ready(function() {
         }
         
     });
+
+    $('.24_7_bonus_checked').click(function () {
+        let user = this.id.split('_')[this.id.split('_').length - 1];
+        if ( $('#'+this.id).is(':checked') ){
+            $('.block_bonus_24_7_'+user).show();
+        }else {
+            $('.block_bonus_24_7_'+user).hide();
+            $('#bonus_24_7_'+user).val(0);
+            totalPay(user);
+        }
+        
+    });
     
     $('.na_checked').click(function () {
         let user = this.id.split('_')[this.id.split('_').length - 1];
@@ -90,6 +102,11 @@ $(document).ready(function() {
             $('#'+this.id).removeClass('is-invalid');
         }
         update_driver(user);
+    });
+
+    $('.total_24_7').blur(function () {
+        let user = this.id.split('_')[this.id.split('_').length - 1];
+        totalPay(user);
     });
     
 });
@@ -130,14 +147,15 @@ function update_driver(user) {
     pay = (pay * working_days) / 30;
 
     $('#total_pay_driver_'+user).text('$' + parseFloat(pay, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
-    $('#total_driver_'+user).val(pay.toFixed(2));
+    $('#total_24_7_'+user).val(pay.toFixed(2));
     totalPay(user);
 }
 
 function totalPay(user){
     let admin = parseFloat($('#total_admin_'+user).val());
     let driver = parseFloat($('#total_driver_'+user).val());
-    let total = admin + driver;
+    let b24_7 = parseFloat($('#bonus_24_7_'+user).val());
+    let total = admin + driver + b24_7;
     $('#total_pay_'+user).text('$' + parseFloat((total), 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
     $('#total_pay_td_'+user).text('$' + parseFloat((total), 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
     $('#total_'+user).val((total).toFixed(2));
@@ -148,14 +166,17 @@ function totalPay(user){
 function totalAll() {
     let total_admin = $('.total_admin');
     let total_driver = $('.total_driver');
+    let total_24_7 = $('.total_24_7');
     let total_user = $('.total_user');
     total = 0;
     admin = 0;
     driver = 0;
+    t24_7 = 0;
 
     for (let i = 0; i < total_user.length; i++) {
         admin += parseFloat(total_admin[i].value);
         driver += parseFloat(total_driver[i].value);
+        t24_7 += parseFloat(total_24_7[i].value);
         total += parseFloat(total_user[i].value);
     }
 
@@ -163,6 +184,8 @@ function totalAll() {
     $('#total_pay_admin').val(admin.toFixed(2));
     $('#total_driver').text('$' + parseFloat((driver), 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
     $('#total_pay_drive').val(driver.toFixed(2));
+    $('#total_24_7').text('$' + parseFloat((t24_7), 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+    $('#total_pay_24_7').val(t24_7.toFixed(2));
     $('#total_all').text('$' + parseFloat((total), 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
     $('#total_pay').val(total.toFixed(2));
 }
