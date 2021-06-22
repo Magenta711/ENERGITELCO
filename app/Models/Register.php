@@ -12,7 +12,7 @@ class Register extends Model
     protected $table = "registers";
     protected $fillable = ['request_id','name','email','document','address','tel','age','position_id','marital_status',
     'photo','rh','state','letter1','letter2','letter3','letter4','date_end',
-    'place_residence','neighborhood','date_birth','eps','arl','pension','emergency_contact','emergency_contact_number','shirt_size','pant_size','shoe_size','nationality','weight','height','type_bank_account','bank_account','date'];
+    'place_residence','neighborhood','date_birth','eps','arl','pension','emergency_contact','emergency_contact_number','shirt_size','pant_size','shoe_size','nationality','weight','height','type_bank_account','bank_account','date','moto','car'];
     protected $guarder = ['id'];
     
     public function interview()

@@ -74,6 +74,31 @@
                                 </div>
                             </div>
                         </div>
+                        @php
+                            $hasDriver = false;
+                        @endphp
+                        @foreach ($id->files as $item)
+                            @if ($item->description == 'Fotocopia de licencia de condución')
+                                @php
+                                    $hasDriver = true;
+                                @endphp
+                            @endif
+                        @endforeach
+                        @if ($hasDriver)
+                            <div class="form-group">
+                                <label for="">Coductor</label>
+                                <br>
+                                <label for="car">
+                                    <input type="checkbox" name="car" id="car" {{$id->register->car ? 'checked' : ''}} value="1">
+                                    Moto
+                                </label>
+                                <br>
+                                <label for="moto">
+                                    <input type="checkbox" name="moto" id="moto" {{$id->register->moto ? 'checked' : ''}} value="1">
+                                    Carro
+                                </label>
+                            </div>
+                        @endif
                     </div>
                     <div class="col-md-4">
                         <label for="photo">Foto</label>

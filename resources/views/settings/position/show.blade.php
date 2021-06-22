@@ -38,6 +38,9 @@
                     <strong>Nombre para la solicitud de empleo</strong>
                     <p>{{$id->Description}}</p>
                     <hr>
+                    <strong>Bonificación administrativa</strong>
+                    <p>{{$id->bonus}}</p>
+                    <hr>
                     {{-- offer --}}
                     <strong>Disponible en la solicitud de empleo</strong>
                     <p>{{($id->offer == 1) ? 'SI' : 'No'}}</p>

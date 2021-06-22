@@ -44,6 +44,10 @@
                         <label for="description">Nombre para la solicitud de empleo</label>
                         <input type="text" name="description" id="description" value="{{$id->Description}}" class="form-control">
                     </div>
+                    <div class="form-group">
+                        <label for="bonus">Bonificación administrativa</label>
+                        <input type="text" name="bonus" id="bonus" value="{{$id->bonus}}" class="form-control">
+                    </div>
                     {{-- offer --}}
                     <div class="form-group">
                         <label for="offer">Diponible en la solicitud de empleo</label>

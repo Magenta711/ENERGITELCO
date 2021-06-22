@@ -442,7 +442,7 @@ class MinticController extends Controller
     public function tss($id)
     {
         $id = Mintic_School::with(['files'])->find($id);
-        return view('projects.mintic.pintures',compact('id' ));
+        return view('projects.mintic.tss3',compact('id' ));
     }
 
     public function upload_tss(Request $request)

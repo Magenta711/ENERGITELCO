@@ -507,7 +507,6 @@
     {{-- Notifications --}}
     </div>
 </section>
-
 @endsection
 
 @section('css')

@@ -834,7 +834,7 @@
                           auth()->user()->hasPermissionTo('Descargar acciones de mejora') ||
                           auth()->user()->hasPermissionTo('Eliminar acciones de mejora')
                         )
-                          <li class="{{ activeMenu('human_management/improvement_action*') }}"><a class="btn-send" href="{{route('improvement_action')}}"><i class="fa fa-money-check-alt"></i> ACCIONES DE MEJORA</a></li>
+                          <li class="{{ activeMenu('human_management/improvement_action*') }}"><a class="btn-send" href="{{route('improvement_action')}}"><i class="far fa-star"></i> ACCIONES DE MEJORA</a></li>
                         @endif
                       </ul>
                     </li>

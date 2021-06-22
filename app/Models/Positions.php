@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Positions extends Model
 {
     protected $table = "positions";
-    protected $fillable = ['name','type_evaluation','description','offer','state','jerarquia'];
+    protected $fillable = ['name','type_evaluation','description','offer','state','jerarquia','bonus','leader'];
     protected $guarder = ['id'];
 
     public function users()
