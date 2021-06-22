@@ -61,6 +61,34 @@
                                             <a href="{{ route('admin_bonuses_download',$item->id) }}" class="btn btn-sm btn-warning">Exportar</a>
                                         @endcan
                                     @endif
+                                    @if ($item->status == 2)
+                                        @can('Eliminar bonificaciones a administrativos y conductores')
+                                            <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete_{{$item->id}}">Eliminar</button>
+                                            <div class="modal fade" id="delete_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-md">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                            <h4 class="modal-title">Eliminar formato</h4>
+                                                        </div>
+                                                        <form action="{{route('admin_bonuses_delete',$item->id)}}" method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                            <div class="modal-body">
+                                                                <p>¿Está seguro que desa eliminar el registro?</p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-sm btn-secondary pull-left" data-dismiss="modal">Cancelar</button>
+                                                                <button class="btn btn-sm btn-danger">Eliminar</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endcan
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

@@ -48,7 +48,7 @@
                                             </li>
                                             <li class="list-group-item">
                                                 <label for="24_7_bonus_checked_{{ $user->id }}">
-                                                    <input type="checkbox" id="24_7_bonus_checked_{{ $user->id }}" class="check_concept 24_7_bonus_checked" name="24_7_bonus_check[{{ $user->id }}]" value="1" {{ (old('24_7_bonus_check')[$user->id]) ? 'checked' : (($user->b24_7) ? 'checked' : '') }}> Bonificación 24/7
+                                                    <input type="checkbox" id="24_7_bonus_checked_{{ $user->id }}" class="check_concept 24_7_bonus_checked" name="b24_7_check[{{ $user->id }}]" value="1" {{ (old('b24_7_check')[$user->id]) ? 'checked' : (($user->b24_7) ? 'checked' : '') }}> Bonificación 24/7
                                                 </label>
                                             </li>
                                             <li class="list-group-item hide">
@@ -157,7 +157,7 @@
                                                 <input type="hidden" name="total_admin[{{$user->id}}]" value="0" id="total_admin_{{$user->id}}" class="total_admin">
                                                 <span id="total_pay_admin_{{ $user->id }}">$0,00</span>
                                             </div>
-                                            <div class="col-md-4 block_bonus_driver_{{$user->id}}" style="display: none">
+                                            <div class="col-md-4 block_bonus_driver_{{$user->id}}" {!! old('drive_bonus_check')[$user->id] ? 'style="display: none"' : (($user->register && ($user->register->car || $user->register->moto)) ? '' : 'style="display: none"') !!}>
                                                 <h4>Total bonificación conductor</h4>
                                                 <input type="hidden" name="total_dirver[{{$user->id}}]" value="0" id="total_driver_{{$user->id}}" class="total_driver">
                                                 <span id="total_pay_driver_{{ $user->id }}">$0,00</span>
@@ -198,11 +198,13 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($user->report_24_7 as $item)
-                                                    <tr>
-                                                        <td>{{$item->description}}</td>
-                                                        <td>{{$item->plus ? 'Si' : 'No'}}</td>
-                                                        <td>{{$item->created_at}}</td>
-                                                    </tr>
+                                                    @if ($item->status == 0)
+                                                        <tr>
+                                                            <td>{{$item->description}}</td>
+                                                            <td>{{$item->plus ? 'Si' : 'No'}}</td>
+                                                            <td>{{$item->created_at}}</td>
+                                                        </tr>
+                                                    @endif
                                                 @endforeach
                                             </tbody>
                                         </table>

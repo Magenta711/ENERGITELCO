@@ -73,6 +73,7 @@ class adminBonusesController extends Controller
 
                 'admin_bonus_check' => isset($request->admin_bonus_check[$key]) ? 1 : 0 ,
                 'drive_bonus_check' => isset($request->drive_bonus_check[$key]) ? 1 : 0 ,
+                'b24_7_check' => isset($request->b24_7_check[$key]) ? 1 : 0 ,
                 'na_check' => isset($request->na_check[$key]) ? 1 : 0 ,
 
                 'admin_1' => $request->admin_1[$key],
@@ -92,6 +93,8 @@ class adminBonusesController extends Controller
                 'moto' => isset($request->moto[$key]) ? 1 : 0,
                 'driver_1' => $request->driver_1[$key],
                 'driver_2' => $request->driver_2[$key],
+
+                'bonus_24_7' => $request->bonus_24_7[$key],
                 
                 'percentage_admin' => $request->percentage_admin[$key],
                 'total_admin' => $request->total_admin[$key],
@@ -99,11 +102,9 @@ class adminBonusesController extends Controller
                 'total_user' => $request->total_user[$key],
                 'commentary' => $request->commentary[$key],
             ]);
-        }
 
-        $users = User::where('state',1)->get();
-        foreach ($users as $user) {
-            foreach ($user->report_24_7 as $item) {
+            $u = User::find($key);
+            foreach ($u->report_24_7 as $item) {
                 if ($id->status == 0) {
                     $item->update([
                         'bonus_id' => $id->id,
@@ -161,6 +162,7 @@ class adminBonusesController extends Controller
                 'admin_bonus_check' => isset($request->admin_bonus_check[$value->user_id]) ? 1 : 0,
                 'drive_bonus_check' => isset($request->drive_bonus_check[$value->user_id]) ? 1 : 0,
                 'na_checked_' => isset($request->na_checked_[$value->user_id]) ? 1 : 0,
+                'b24_7_check' => isset($request->b24_7_check[$value->user_id]) ? 1 : 0 ,
 
                 'admin_1' => $request->admin_1[$value->user_id],
                 'admin_2' => $request->admin_2[$value->user_id],
@@ -174,9 +176,11 @@ class adminBonusesController extends Controller
                 'admin_10' => $request->admin_10[$value->user_id],
                 'admin_11' => $request->admin_11[$value->user_id],
                 'admin_12' => $request->admin_12[$value->user_id],
+
+                'bonus_24_7' => $request->bonus_24_7[$value->user_id],
                 
-                'carro' => isset($request->carro[$key]) ? 1 : 0,
-                'moto' => isset($request->moto[$key]) ? 1 : 0,
+                'carro' => isset($request->carro[$value->user_id]) ? 1 : 0,
+                'moto' => isset($request->moto[$value->user_id]) ? 1 : 0,
                 'driver_1' => $request->driver_1[$value->user_id],
                 'driver_2' => $request->driver_2[$value->user_id],
                 

@@ -33,7 +33,7 @@
                                     <div class="modal-body">
                                         <div class="form-group">
                                             <label for="working_days">Días trabajados</label>
-                                            <input type="number" name="working_days[{{$item->user->id}}]" id="working_days_{{$item->user->id}}" class="form-control" value="{{$item->user->working_days}}">
+                                            <input type="number" name="working_days[{{$item->user->id}}]" id="working_days_{{$item->user->id}}" class="form-control working_days" value="{{$item->working_days}}">
                                         </div>
                                         <ul class="list-group">
                                             <li class="list-group-item">
@@ -44,6 +44,11 @@
                                             <li class="list-group-item">
                                                 <label for="drive_bonus_{{ $item->user->id }}">
                                                     <input type="checkbox" id="drive_bonus_checked_{{ $item->user->id }}" class="check_concept drive_bonus_checked" name="drive_bonus_check[{{ $item->user->id }}]" {{ $item->drive_bonus_check ? 'checked' : ''}} value="1"> Bonificación a conductores
+                                                </label>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <label for="24_7_bonus_checked_{{ $item->user->id }}">
+                                                    <input type="checkbox" id="24_7_bonus_checked_{{ $item->user->id }}" class="check_concept 24_7_bonus_checked" name="b24_7_check[{{ $item->user->id }}]" value="1" {{ $item->b24_7_check ? 'checked' : '' }}> Bonificación 24/7
                                                 </label>
                                             </li>
                                             <li class="list-group-item hide">
@@ -129,6 +134,12 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="block_bonus_24_7_{{$item->user->id}}" {!! !$item->b24_7_check ? 'style="display: none"' : '' !!}>
+                                            <div class="form-group">
+                                                <label for="bonus_24_7">Bonificación 24/7 (valor $)</label>
+                                                <input type="number" name="bonus_24_7[{{$item->user->id}}]" id="bonus_24_7_{{$item->user->id}}" class="form-control total_24_7" value="{{$item->bonus_24_7}}">
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <label for="commentary_{{$item->user->id}}">Comentarios</label>
                                             <textarea name="commentary[{{$item->user->id}}]" id="commentary_{{$item->user->id}}" cols="30" rows="3" class="form-control">{{$item->commentary}}</textarea>
@@ -164,6 +175,44 @@
                                 </div>
                             </div>
                         </div>
+                        <button type="button" class="btn btn-sm btn-success pl-4 pr-4" data-toggle="modal" data-target="#modal_report_{{$user->id}}">Reporte 24/7</button>
+                        <div class="modal fade" id="modal_report_{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <h4 class="modal-title" id="exampleModalLongTitle">{{$user->name}} - {{$user->position->name}}</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table table-striped table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Descripción</th>
+                                                    <th>Plus</th>
+                                                    <th>Fecha</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($user->report_24_7 as $item)
+                                                    @if ($item->bonus_id)
+                                                        <tr>
+                                                            <td>{{$item->description}}</td>
+                                                            <td>{{$item->plus ? 'Si' : 'No'}}</td>
+                                                            <td>{{$item->created_at}}</td>
+                                                        </tr>
+                                                    @endif
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             @endforeach
@@ -178,6 +227,7 @@
                     <th>Total empleados</th>
                     <th>Total bonificaciones a administrativos</th>
                     <th>Total bonificaciones a condutores</th>
+                    <th>Total bonificaciones 24/7</th>
                     <th>Total neto a pagar</th>
                 </tr>
             </thead>
@@ -195,6 +245,10 @@
                         <td>
                             <span id="total_driver">${{number_format($id->total_pay_drive,2,',','.')}}</span>
                             <input type="hidden" name="total_pay_drive" value="{{$id->total_pay_drive}}" id="total_pay_drive">
+                        </td>
+                        <td>
+                            <span id="total_24_7">${{number_format($id->total_pay_24_7,2,',','.')}}</span>
+                            <input type="hidden" name="total_pay_24_7" value="{{$id->total_pay_24_7}}" id="total_pay_24_7">
                         </td>
                         <th>
                             <h4><span id="total_all">${{number_format($id->total_pay,2,',','.')}}</span></h4>

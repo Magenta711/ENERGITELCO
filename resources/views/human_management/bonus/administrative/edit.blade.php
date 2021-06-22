@@ -18,6 +18,12 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Editar bonificación</h3>
+                    <div class="box-tools">
+                        <a href="{{route('admin_bonuses')}}" class="btn btn-sm btn-primary">Volver</a>
+                    </div>
+                </div>
                 <form action="{{ route('admin_bonuses_update',$id->id) }}" method="post" enctype="multipart/form-data" autocomplete="off">
                 <div class="box-body">
                     @csrf

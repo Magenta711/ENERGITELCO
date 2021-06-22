@@ -7,6 +7,18 @@ $(document).ready(function() {
         return d.submit();
     });
 
+    $('.working_days').blur(function () {
+        let user = this.id.split('_')[this.id.split('_').length - 1];
+        update_admin(user);
+        update_driver(user);
+    });
+
+    $('.check_user').click(function () {
+        let user = this.id.split('_')[this.id.split('_').length - 1];
+        update_admin(user);
+        update_driver(user);
+    });
+
     $('.admin_bonus_checked').click(function () {
         let user = this.id.split('_')[this.id.split('_').length - 1];
         if ( $('#'+this.id).is(':checked') ){
@@ -147,7 +159,7 @@ function update_driver(user) {
     pay = (pay * working_days) / 30;
 
     $('#total_pay_driver_'+user).text('$' + parseFloat(pay, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
-    $('#total_24_7_'+user).val(pay.toFixed(2));
+    $('#total_driver_'+user).val(pay.toFixed(2));
     totalPay(user);
 }
 
@@ -168,16 +180,19 @@ function totalAll() {
     let total_driver = $('.total_driver');
     let total_24_7 = $('.total_24_7');
     let total_user = $('.total_user');
+    let check_user = $('.check_user');
     total = 0;
     admin = 0;
     driver = 0;
     t24_7 = 0;
 
     for (let i = 0; i < total_user.length; i++) {
-        admin += parseFloat(total_admin[i].value);
-        driver += parseFloat(total_driver[i].value);
-        t24_7 += parseFloat(total_24_7[i].value);
-        total += parseFloat(total_user[i].value);
+        if (check_user[i].checked) {
+            admin += parseFloat(total_admin[i].value);
+            driver += parseFloat(total_driver[i].value);
+            t24_7 += parseFloat(total_24_7[i].value);
+            total += parseFloat(total_user[i].value);
+        }
     }
 
     $('#total_admin').text('$' + parseFloat((admin), 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
