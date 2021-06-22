@@ -31,6 +31,25 @@
                 <div class="form-group">
                     <input type="text" class="form-control" name="name" id="name" placeholder="Título del formulario" value="Formulario sin título">
                 </div>
+                <div id="is_format_div" style="display: none">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="code" placeholder="Código" id="code" value="{{old('code')}}">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="version" placeholder="Versión" id="version" value="{{old('version')}}">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="date" class="form-control" name="date" id="date" value="{{old('date')}}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group">
                     <textarea class="form-control" name="description" id="description" cols="30" rows="3" placeholder="Descripción de el formulario"></textarea>
                 </div>

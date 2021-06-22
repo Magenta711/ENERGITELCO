@@ -34,7 +34,26 @@
             <div class="box box-body mb-3">
                 <div class="form-group">
                     <input type="text" class="form-control" name="name" id="name" placeholder="Título del formulario" value="{{$id->name}}">
-                </div> 
+                </div>
+                <div id="is_format_div" style="display: none">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="code" placeholder="Código" id="code" value="{{$id->code}}">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="version" placeholder="Versión" id="version" value="{{$id->version}}">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="date" class="form-control" name="date" id="date" value="{{$id->date}}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group">
                     <textarea class="form-control" name="description" id="description" cols="30" rows="3" placeholder="Descripción de el formulario">{{$id->description}}</textarea>
                 </div>

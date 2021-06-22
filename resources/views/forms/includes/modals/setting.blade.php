@@ -72,6 +72,13 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                        <input type="checkbox" {!!isset($id) && $id->is_format ? 'checked' : ''!!}  name="is_format"  id="is_format" value="1">
+                        <label for="is_format">Formato versionable</label>
+                    </div>
+                    <hr>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
                         <input type="checkbox" {!!isset($id) && $id->limit_to_one ? 'checked' : ''!!}  name="limit_to_one"  id="limit_to_one" value="1">
                         <label for="limit_to_one">Limitar a una sola respuesta</label>
                     </div>

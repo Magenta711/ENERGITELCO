@@ -9,6 +9,11 @@ $(document).ready(function() {
     else
         $('#from_to_mail_div').hide();
     
+    if ($('#is_format').is(':checked'))
+        $('#is_format_div').show();
+    else
+        $('#is_format_div').hide();
+    
     formType();
 
     $('#from_to_auth').click(function () {
@@ -16,6 +21,13 @@ $(document).ready(function() {
             $('#from_to_auth_div').show();
         else 
             $('#from_to_auth_div').hide();
+    });
+    $('#is_format').click(function () {
+        console.log('Clic');
+        if (this.checked)
+            $('#is_format_div').show();
+        else 
+            $('#is_format_div').hide();
     });
     $('#from_to_mail').click(function () {
         if (this.checked)
