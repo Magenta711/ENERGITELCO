@@ -47,15 +47,20 @@
                                     @can('Editar proyectos de MINTIC')
                                         <a href="{{route('mintic_edit',$item->id)}}" class="btn btn-sm btn-primary">Editar</a>
                                     @endcan
+                                    @can('Adjuntar y ver fotos de proyectos mintic')
                                     <a href="{{route('mintic_pintures',$item->id)}}" class="btn btn-sm btn-warning">Estudio de campo</a>
-                                    @can('Ver implementación proyectos de MINTIC')
+                                    @endcan
+                                    @can('Adjuntar y ver fotos de proyectos mintic')
                                         <a href="{{route('mintic_install',$item->id)}}" class="btn btn-sm bg-teal">Instalación</a>
+                                    @endcan
+                                    @can('Adjuntar y ver fotos de proyectos mintic')
+                                        <a href="{{route('mintic_tss',$item->id)}}" class="btn btn-sm bg-maroon">TSS v3</a>
                                     @endcan
                                     @can('Ver implementación proyectos de MINTIC')
                                         <a href="{{route('mintic_add_consumables',$item->id)}}" class="btn btn-sm bg-purple">Implementación</a>
                                     @endcan
                                     @can('Eliminar proyectos de MINTIC')
-                                        <button type="button" class="btn btn-sm btn-danger pl-4 pr-4" data-toggle="modal" data-target="#modal_delete_{{$item->id}}">Eliminar</button>
+                                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal_delete_{{$item->id}}">Eliminar</button>
                                         {{-- Modal Delete --}}
                                         <div class="modal fade" id="modal_delete_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">

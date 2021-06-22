@@ -438,4 +438,68 @@ class MinticController extends Controller
             return response()->json(['success'=>'No se examino un archivo']);
         }
     }
+
+    public function tss($id)
+    {
+        $id = Mintic_School::with(['files'])->find($id);
+        return view('projects.mintic.pintures',compact('id' ));
+    }
+
+    public function upload_tss(Request $request)
+    {
+        if ($request->hasFile('file')){
+            $mintic = Mintic_School::find($request->id);
+            $file_exists = $mintic->files->where('description',$request->name_d)->first();
+            if ($file_exists){
+                Storage::delete('public/upload/mintic/'.$file_exists->name); 
+            }
+            $file = $request->file('file');
+            $name = time().str_random().'.'.$file->getClientOriginalExtension();
+            if ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg') {
+                $image = Image::make($request->file);
+                $image->resize(null, 500, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+                $size = '650';
+                $image->save(public_path('storage/upload/mintic/'.$name));
+            }else {
+                $size = $file->getClientSize() / 1000;
+                $path = Storage::putFileAs('public/upload/mintic', $file, $name);
+            }
+            if ($file_exists) {
+                $file_exists->update([
+                    'name' => $name,
+                    'description' => $request->name_d,
+                    'commentary' => $request->commentary,
+                    'size' => $size.' KB',
+                    'url' => 'public/upload/mintic/'.$name,
+                    'type' => $file->getClientOriginalExtension(),
+                    'state' => 1
+                ]);
+                return response()->json([
+                    'success'=>'Se subio y actualizo correctamente el archivo',
+                    'size' => $size.' KB',
+                    'name' => $name,
+                    'type' => $file->getClientOriginalExtension(),
+                ]);
+            }
+            $mintic->files()->create([
+                'name' => $name,
+                'description' => $request->name_d,
+                'commentary' => $request->commentary,
+                'size' => $size.' KB',
+                'url' => 'public/upload/mintic/'.$name,
+                'type' => $file->getClientOriginalExtension(),
+                'state' => 1
+            ]);
+            return response()->json([
+                'success'=>'Se subio correctamente el archivo',
+                'size' => $size.' KB',
+                'name' => $name,
+                'type' => $file->getClientOriginalExtension(),
+            ]);
+        }else {
+            return response()->json(['success'=>'No se examino un archivo']);
+        }
+    }
 }

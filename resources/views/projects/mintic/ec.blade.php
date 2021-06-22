@@ -1,4 +1,4 @@
-<h4>1. Registro fotográfico</h4>
+            <h4>1. Registro fotográfico</h4>
             @include('projects.mintic.includes.upload_show',[
                 'ltt' => '1',
                 'num' => $i++,

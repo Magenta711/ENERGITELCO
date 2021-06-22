@@ -693,8 +693,10 @@ Route::put('project/mintic/ec/not_approval/{id}','projects\MinticController@not_
 Route::post('project/mintic/ec/upload','projects\MinticController@upload')->name('mintic_marke');
 Route::delete('project/mintic/ec/{id}','projects\MinticController@destroy')->name('mintic_delete');
 Route::get('project/mintic/ec/{id}','projects\MinticController@pintures')->name('mintic_pintures');
-Route::get('project/mintic/intall/{id}','projects\MinticController@install')->name('mintic_install');
+Route::get('project/mintic/install/{id}','projects\MinticController@install')->name('mintic_install');
 Route::post('project/mintic/install','projects\MinticController@upload_install')->name('mintic_marke_install');
+Route::get('project/mintic/tss/{id}','projects\MinticController@tss')->name('mintic_tss');
+Route::post('project/mintic/tss','projects\MinticController@upload_tss')->name('mintic_marke_tss');
 
 Route::get('project/mintic/add/{id}','projects\MinticImplementController@index')->name('mintic_add_consumables');
 Route::get('project/mintic/add/{id}/show/{item}','projects\MinticImplementController@show')->name('mintic_add_consumables_show');

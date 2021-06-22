@@ -3,13 +3,13 @@
 @section('content')
 <section class="content-header">
     <h1>
-        Editar proyeto mintic <small>MINTIC</small>
+        TSS v3 proyeto mintic <small>MINTIC</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
         <li><a href="#">Proyectos</a></li>
         <li><a href="#">Mintic</a></li>
-        <li class="active">Editar</li>
+        <li class="active">TSS v3</li>
     </ol>
 </section>
 <section class="content">
@@ -227,5 +227,5 @@
 @endsection
 
 @section('js')
-    <script src="{{asset('js/project/mintic/water_marker/upload.js')}}"></script>
+    <script src="{{asset('js/project/mintic/water_marker/tss.js')}}"></script>
 @endsection
