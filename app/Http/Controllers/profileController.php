@@ -51,15 +51,16 @@ class profileController extends Controller
             'height' => ['required'],
             'weight' => ['required'],
         ]);
-        // if ($request->hasFile('foto')){
-        //     $file = $request->file('foto');
-        //     $name = time().str_random().'.'.$file->getClientOriginalExtension();
-        //     $file->move(public_path().'/img/',$name);
-        //     User::find(auth()->id())->update(['foto'=>$name,]);
-        // }
+        if ($request->hasFile('foto')){
+            $file = $request->file('foto');
+            $name = time().str_random().'.'.$file->getClientOriginalExtension();
+            $file->move(public_path().'/img/',$name);
+            User::find(auth()->id())->update(['foto'=>$name,]);
+        }
         $last_24_7 = null;
         $menssage = '';
         $time = auth()->user()->time_24_7;
+        return json_encode($time);
         if (!auth()->user()->b24_7 && isset($request->b24_7)) {
             $last_24_7 = now();
         }
@@ -83,7 +84,8 @@ class profileController extends Controller
             'telefono' => $request->telefono,
             'b24_7' => $request->b24_7,
             'last_24_7' => $last_24_7,
-            'time_24_7' => $time ? json_encode($time) : null
+            'cut_24_7' => auth()->user()->cut_24_7 ?? now(),
+            'time_24_7' => is_array($time) ? json_encode($time) : $time
         ]);
 
         if (auth()->user()->register) {
@@ -170,7 +172,8 @@ class profileController extends Controller
     {
         auth()->user()->update([
             'b24_7' => 1,
-            'last_24_7' => now()
+            'last_24_7' => now(),
+            'cut_24_7' => auth()->user()->cut_24_7 ?? now(),
         ]);
 
         return response()->json(['success'=>'Good']);
@@ -188,10 +191,10 @@ class profileController extends Controller
         }
         $diff = $startDate->diff($endDate);
         return [
-            'm' => $diff->m,
-            'd' => $diff->d,
-            'h' => $diff->h,
-            'i' => $diff->i
+            "m" => $diff->m,
+            "d" => $diff->d,
+            "h" => $diff->h,
+            "i" => $diff->i
         ];
     }
 }

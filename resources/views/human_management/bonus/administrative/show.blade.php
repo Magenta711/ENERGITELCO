@@ -52,7 +52,7 @@
                                             <td id="total_pay_td_{{ $item->user->id }}">${{number_format($item->total_user,2,',','.')}}</td>
                                             <td>
                                                 <button type="button" class="btn btn-sm btn-primary pl-4 pr-4" data-toggle="modal" data-target="#modal_edit_{{$item->user->id}}">Detalles</button>
-                                                <p>{{-- Modal description --}}</p>
+                                                <button type="button" class="btn btn-sm btn-success pl-4 pr-4" data-toggle="modal" data-target="#modal_report_{{$item->user->id}}">Reporte 24/7</button>
                                                 <div class="modal fade" id="modal_edit_{{$item->user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                                         <div class="modal-content">
@@ -194,6 +194,70 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="modal fade" id="modal_report_{{$item->user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                                <h4 class="modal-title" id="exampleModalLongTitle">{{$item->user->name}} - {{$item->user->position->name}}</h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="info_24_7" id="info_24_7_{{$item->user->id}}">
+                                                                    <input type="hidden" name="state_24_7[{{$item->user->id}}]" id="state_24_7_user_{{$item->user->id}}" value="{{$item->state_24_7}}">
+                                                                    <input type="hidden" name="last_24_7[{{$item->user->id}}]" id="last_24_7_user_{{$item->user->id}}" value="{{$item->last_24_7}}">
+                                                                    <input type="hidden" name="time_24_7[{{$item->user->id}}]" id="time_24_7_user_{{$item->user->id}}" value="{{$item->time_24_7}}">
+                                                                    <p>
+                                                                        Estado:
+                                                                        <span class="state_24_7" id="state_24_7_{{$item->user->id}}">{{$item->state_24_7 ? 'Activo' : 'Inactivo'}}</span>
+                                                                    </p>
+                                                                    @if ($item->state_24_7)
+                                                                        <p>
+                                                                            Fecha de última activacion:
+                                                                            <span class="last_24_7">{{$item->last_24_7}}</span>
+                                                                        </p>
+                                                                    @endif
+                                                                    @php
+                                                                        $time = json_decode($item->time_24_7,true)
+                                                                    @endphp
+                                                                    <p>
+                                                                        Tiempo: 
+                                                                        <span class="time_24_7" id="time_24_7_{{$item->user->id}}">Meses: {{ $time['m'] ?? 0 }}, Días: {{ $time['d'] ?? 0 }}, Horas: {{ $time['h'] ?? 0 }}, Minutos: {{ $time['i'] ?? 0 }}</span>
+                                                                    </p>
+                                                                </div>
+                                                                <table class="table table-striped table-bordered">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Descripción</th>
+                                                                            <th>Plus</th>
+                                                                            <th>Fecha</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        @foreach ($item->user->report_24_7 as $item)
+                                                                            @if ($item->bonus_id == $id->id)
+                                                                                <tr>
+                                                                                    <td>{{$item->description}}</td>
+                                                                                    <td>{{$item->plus ? 'Si' : 'No'}}</td>
+                                                                                    <td>{{$item->created_at}}</td>
+                                                                                </tr>
+                                                                            @endif
+                                                                        @endforeach
+                                                                        @if (!isset($item))
+                                                                            <tr>
+                                                                                <td colspan="3" class="text-center">Sin reportes</td>
+                                                                            </tr>
+                                                                        @endif
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -208,6 +272,7 @@
                                             <th>Total empleados</th>
                                             <th>Total bonificaciones a administrativos</th>
                                             <th>Total bonificaciones a condutores</th>
+                                            <th>Total bonificaciones 24/7</th>
                                             <th>Total neto a pagar</th>
                                         </tr>
                                     </thead>
@@ -221,6 +286,9 @@
                                             </td>
                                             <td>
                                                 <span id="total_driver">${{number_format($id->total_pay_drive,2,',','.')}}</span>
+                                            </td>
+                                            <td>
+                                                <span id="total_24_7">${{number_format($id->total_pay_24_7,2,',','.')}}</span>
                                             </td>
                                             <th>
                                                 <h4><span id="total_all">${{number_format($id->total_pay,2,',','.')}}</span></h4>

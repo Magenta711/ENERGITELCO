@@ -268,6 +268,7 @@ function calification_drive(num,value) {
 function time_24_7() {
     let info = $('.info_24_7');
     for (let i = 0; i < info.length; i++) {
+        let user = info[i].id.split('_')[(info[i].id.split('_').length - 1)];
         let status = $('#'+info[i].id).children().children('.state_24_7').text();
         if (status == 'Activo') {
             
@@ -311,18 +312,9 @@ function time_24_7() {
             numdays = Math.floor(diffMinutes / 1440);
             numhours = Math.floor((diffMinutes % 1440) / 60); 
             numminutes = Math.floor((diffMinutes % 1440) % 60);
-
             $('#'+info[i].id).children().children('.time_24_7').text('Meses: '+nummonths+', Días: '+numdays+', Horas: '+numhours+', Minutos: '+numminutes);
+            $('#time_24_7_user_'+user).val(('{"m":'+nummonths+',"d":'+numdays+',"h":'+numhours+',"i":'+numminutes+'}'));
         }
 
     }
 }
-
-// 2021-06-10 08:00:00
-// 0 "months" 13 " day(s) " 3 "h " 52 "m"
-
-// 2021-06-21 10:43:52
-// 0 "months" 2 " day(s) " 1 "h " 8 "m"
-
-// 0 "month(s)" 13 "day(s)" 4 "h" 7 "m"
-// 0 "month(s)" 10 "day(s)" 1 "h" 23 "m"

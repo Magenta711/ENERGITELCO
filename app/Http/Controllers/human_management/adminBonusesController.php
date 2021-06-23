@@ -5,6 +5,7 @@ namespace App\Http\Controllers\human_management;
 use App\Exports\bonusPayExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\bonus24;
 use App\Models\bonus\bonu;
 use App\Models\bonus\bonusUser;
 use App\Models\SystemMessages;
@@ -95,6 +96,9 @@ class adminBonusesController extends Controller
                 'driver_2' => $request->driver_2[$key],
 
                 'bonus_24_7' => $request->bonus_24_7[$key],
+                'state_24_7' => $request->state_24_7[$key],
+                'last_24_7' => $request->last_24_7[$key],
+                'time_24_7' => $request->time_24_7[$key],
                 
                 'percentage_admin' => $request->percentage_admin[$key],
                 'total_admin' => $request->total_admin[$key],
@@ -106,15 +110,15 @@ class adminBonusesController extends Controller
             $u = User::find($key);
             if ($u->b24_7 || $u->time != '') {
                 $u->update([
-                    'cut_24_7' => $u->cut_24_7 ?? now(),
-                    'time' => null,
+                    'cut_24_7' => $id->created_at,
+                    'time_24_7' => null,
                 ]);
             }
             foreach ($u->report_24_7 as $item) {
-                if ($id->status == 0) {
+                if ($item->status == 0) {
                     $item->update([
                         'bonus_id' => $id->id,
-                        'status' => 1,
+                        'status' => 1
                     ]);
                 }
             }
@@ -184,6 +188,9 @@ class adminBonusesController extends Controller
                 'admin_12' => $request->admin_12[$value->user_id],
 
                 'bonus_24_7' => $request->bonus_24_7[$value->user_id],
+                'state_24_7' => $request->state_24_7[$value->user_id],
+                'last_24_7' => $request->last_24_7[$value->user_id],
+                'time_24_7' => $request->time_24_7[$value->user_id],
                 
                 'carro' => isset($request->carro[$value->user_id]) ? 1 : 0,
                 'moto' => isset($request->moto[$value->user_id]) ? 1 : 0,

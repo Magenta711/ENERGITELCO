@@ -20,6 +20,7 @@
                     <td id="total_pay_td_{{ $user->id }}">$0,00</td>
                     <td>
                         <button type="button" class="btn btn-sm btn-primary pl-4 pr-4" data-toggle="modal" data-target="#modal_edit_{{$user->id}}">Evaluar</button>
+                        <button type="button" class="btn btn-sm btn-success pl-4 pr-4" data-toggle="modal" data-target="#modal_report_{{$user->id}}">Reporte 24/7</button>
                         {{-- Modal description --}}
                         <div class="modal fade" id="modal_edit_{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -177,7 +178,6 @@
                             </div>
                         </div>
 
-                        <button type="button" class="btn btn-sm btn-success pl-4 pr-4" data-toggle="modal" data-target="#modal_report_{{$user->id}}">Reporte 24/7</button>
                         <div class="modal fade" id="modal_report_{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
@@ -189,30 +189,26 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="info_24_7" id="info_24_7_{{$user->id}}">
+                                            <input type="hidden" name="state_24_7[{{$user->id}}]" id="state_24_7_user_{{$user->id}}" value="{{$user->b24_7}}">
+                                            <input type="hidden" name="last_24_7[{{$user->id}}]" id="last_24_7_user_{{$user->id}}" value="{{$user->cut_24_7 ?? $user->last_24_7}}">
+                                            <input type="hidden" name="time_24_7[{{$user->id}}]" id="time_24_7_user_{{$user->id}}" value="{{$user->time_24_7}}">
                                             <p>
                                                 Estado actual: 
                                                 <span class="state_24_7" id="state_24_7_{{$user->id}}">{{$user->b24_7 ? 'Activo' : 'Inactivo'}}</span>
                                             </p>
                                             @if ($user->b24_7)
                                                 <p>
-                                                    Fecha de última activacion:
-                                                    <span class="last_24_7">{{$user->last_24_7}}</span>
+                                                    Última fecha:
+                                                    <span class="last_24_7">{{$user->cut_24_7 ?? $user->last_24_7 }}</span>
                                                 </p>
                                             @endif
-                                            @if ($user->time_24_7)
                                             @php
                                                 $time = json_decode($user->time_24_7,true)
                                             @endphp
-                                                <p>
-                                                    Tiempo: 
-                                                    <span class="time_24_7" id="time_24_7_{{$user->id}}">Meses: {{ $time['m'] }}, Días: {{ $time['d'] }}, Horas: {{ $time['h'] }}, Minutos: {{ $time['i'] }}</span>
-                                                </p>
-                                            @else
-                                                <p>
-                                                    Tiempo: 
-                                                    <span class="time_24_7" id="time_24_7_{{$user->id}}">Meses: 0, Días: 0, Horas: 0, Minutos: 0</span>
-                                                </p>
-                                            @endif
+                                            <p>
+                                                Tiempo: 
+                                                <span class="time_24_7" id="time_24_7_{{$user->id}}">Meses: {{ $time['m'] ?? 0 }}, Días: {{ $time['d'] ?? 0 }}, Horas: {{ $time['h'] ?? 0 }}, Minutos: {{ $time['i'] ?? 0 }}</span>
+                                            </p>
                                         </div>
                                         <table class="table table-striped table-bordered">
                                             <thead>
