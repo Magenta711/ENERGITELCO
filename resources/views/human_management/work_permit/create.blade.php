@@ -1,3 +1,24 @@
+@php
+    function expirateDate($enrollment_date,$soat_date,$gases_date,$technomechanical_date,$first_aid_kit_date)
+    {
+        if ($enrollment_date && $enrollment_date < now()) {
+            return true;
+        }
+        if ($soat_date && $soat_date < now()) {
+            return true;
+        }
+        if ($gases_date && $gases_date < now()) {
+            return true;
+        }
+        if ($technomechanical_date && $technomechanical_date < now()) {
+            return true;
+        }
+        if ($first_aid_kit_date && $first_aid_kit_date < now()) {
+            return true;
+        }
+        return false;
+    }
+@endphp
 @extends('lte.layouts')
 
 @section('content')

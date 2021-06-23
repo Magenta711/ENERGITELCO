@@ -106,23 +106,15 @@
             </div>
             <div class="form-group">
                 <label for="placa">Placa del vehículo en el cual se moviliza</label>
-                @if (count($vehicles))
-                <div class="row">
-                    <div class="col-xs-6">
-                        <select name="vehicle_id" id="vehicle_id" class="form-control">
-                            <option selected disabled>Seleccione la placa del vehículo</option>
-                            @foreach ($vehicles as $item)
-                                <option {{ old('vehicle_id') == $item->id ? 'selected' : ''}} value="{{$item->id}}">{{$item->plate}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-xs-6">
-                        <input type="text" class="form-control" id="placa" placeholder="Digite la placa si no está registrada" name="placa_vehiculo" value="{{ old('placa_vehiculo')}}">
-                    </div>
-                </div>
-                @else
-                    <input type="text" class="form-control" id="placa" placeholder="Placa del vehículo" name="placa_vehiculo" value="{{ old('placa_vehiculo')}}">
-                @endif
+                <select name="vehicle_id" id="vehicle_id" class="form-control">
+                    <option selected disabled>Seleccione la placa del vehículo</option>
+                    @foreach ($vehicles as $item)
+                        @php
+                            $state = expirateDate($item->enrollment_date,$item->soat_date,$item->gases_date,$item->technomechanical_date,$item->first_aid_kit_date);
+                        @endphp
+                        <option {!! $state ? 'disabled' : '' !!} {{ old('vehicle_id') == $item->id ? 'selected' : ''}} value="{{$item->id}}">{{$item->plate}} {!! $state ? '(No mueva este vehículo, tiene documentos vencidos)' : '' !!}</small></option>
+                    @endforeach
+                </select>
             </div>
             <div class="form-group">
                 Estado

@@ -38,7 +38,7 @@
                     </thead>
                     <tbody>
                         @foreach ($indicators as $item)
-                            <tr class="active">
+                            <tr>
                                 <td>{{ $item->id }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->process_id }}</td>
