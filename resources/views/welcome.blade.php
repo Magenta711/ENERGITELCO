@@ -24,12 +24,14 @@
                     Menu
                     <i class="fas fa-bars"></i>
                 </button>
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">Nosotros</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#projects">Servicios</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#signup">Contáctanos</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="https://www.energitelco.com.co/login"><i class="far fa-user-circle"></i></a></li>
-                </ul>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">Nosotros</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#projects">Servicios</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#signup">Contáctanos</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="https://www.energitelco.com.co/login"><i class="far fa-user-circle"></i></a></li>
+                    </ul>
+                </div>
             </div>
         </nav>
         <!-- Masthead-->

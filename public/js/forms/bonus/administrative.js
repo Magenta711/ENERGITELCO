@@ -2,6 +2,9 @@ var bPreguntar = true;
     
 window.onbeforeunload = preguntarAntesDeSalir;
 $(document).ready(function() {
+
+    time_24_7();
+
     $('#send').click(function (){
         bPreguntar = false;
         return d.submit();
@@ -261,3 +264,65 @@ function calification_drive(num,value) {
             break;
     }
 }
+
+function time_24_7() {
+    let info = $('.info_24_7');
+    for (let i = 0; i < info.length; i++) {
+        let status = $('#'+info[i].id).children().children('.state_24_7').text();
+        if (status == 'Activo') {
+            
+            let last = $('#'+info[i].id).children().children('.last_24_7').text();
+
+            let end = new Date();
+            let startDate = moment(last);
+            let endDate = moment(end);
+
+            let time = $('#'+info[i].id).children().children('.time_24_7').text();
+            let arrTime = time.split(', ');
+
+            let diffMinutes = endDate.diff(startDate,'minutes');
+
+            let nummonths = Math.floor((diffMinutes / 1440) / 30);
+            let numdays = Math.floor(diffMinutes / 1440);
+            let numhours = Math.floor((diffMinutes % 1440) / 60); 
+            let numminutes = Math.floor((diffMinutes % 1440) % 60);
+        
+            for (let j = 0; j < arrTime.length; j++) {
+                let arrData = arrTime[j].split(': ');
+                if (arrData[1] != '') {
+                    if (arrData[0] == 'Meses') {
+                        endDate.add(arrData[1],'months');
+                    }
+                    if (arrData[0] == 'Días') {
+                        endDate.add(arrData[1],'days');
+                    }
+                    if (arrData[0] == 'Horas') {
+                        endDate.add(arrData[1],'hours');
+                    }
+                    if (arrData[0] == 'Minutos') {
+                        endDate.add(arrData[1],'minutes');
+                    }
+                }
+            }
+            
+            diffMinutes = endDate.diff(startDate,'minutes');
+
+            nummonths = Math.floor((diffMinutes / 1440) / 30);
+            numdays = Math.floor(diffMinutes / 1440);
+            numhours = Math.floor((diffMinutes % 1440) / 60); 
+            numminutes = Math.floor((diffMinutes % 1440) % 60);
+
+            $('#'+info[i].id).children().children('.time_24_7').text('Meses: '+nummonths+', Días: '+numdays+', Horas: '+numhours+', Minutos: '+numminutes);
+        }
+
+    }
+}
+
+// 2021-06-10 08:00:00
+// 0 "months" 13 " day(s) " 3 "h " 52 "m"
+
+// 2021-06-21 10:43:52
+// 0 "months" 2 " day(s) " 1 "h " 8 "m"
+
+// 0 "month(s)" 13 "day(s)" 4 "h" 7 "m"
+// 0 "month(s)" 10 "day(s)" 1 "h" 23 "m"

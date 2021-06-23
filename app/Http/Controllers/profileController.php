@@ -51,25 +51,26 @@ class profileController extends Controller
             'height' => ['required'],
             'weight' => ['required'],
         ]);
-        $name = auth()->user()->foto;
-        if ($request->hasFile('foto')){
-            $file = $request->file('foto');
-            $name = time().str_random().'.'.$file->getClientOriginalExtension();
-            $file->move(public_path().'/img/',$name);
-            User::find(auth()->id())->update(['foto'=>$name,]);
-        }
+        // if ($request->hasFile('foto')){
+        //     $file = $request->file('foto');
+        //     $name = time().str_random().'.'.$file->getClientOriginalExtension();
+        //     $file->move(public_path().'/img/',$name);
+        //     User::find(auth()->id())->update(['foto'=>$name,]);
+        // }
         $last_24_7 = null;
         $menssage = '';
+        $time = auth()->user()->time_24_7;
         if (!auth()->user()->b24_7 && isset($request->b24_7)) {
             $last_24_7 = now();
         }
         if (auth()->user()->b24_7) {
             if (!$request->b24_7) {
-                $menssage = '<br>No puedes desabilitar el 24/7 hasta que cumpla con el tiempo de 7 días';
                 if (now()->subDays(7) < auth()->user()->last_24_7) {
+                    $menssage = '<br>No puedes desabilitar el 24/7 hasta que cumpla con el tiempo de 7 días';
                     $request['b24_7'] = 1;
                     $last_24_7 = auth()->user()->last_24_7;
                 }else {
+                    $time = $this->diffDateBy24_7(auth()->user()->last_24_7,now()->format('Y-m-d h:i:s'),json_decode(auth()->user()->time_24_7,true));
                     $request['b24_7'] = 0;
                     $last_24_7 = null;
                 }
@@ -77,12 +78,12 @@ class profileController extends Controller
                 $last_24_7 = auth()->user()->last_24_7;
             }
         }
-
         auth()->user()->update([
             'direccion' => $request->direccion,
             'telefono' => $request->telefono,
             'b24_7' => $request->b24_7,
             'last_24_7' => $last_24_7,
+            'time_24_7' => $time ? json_encode($time) : null
         ]);
 
         if (auth()->user()->register) {
@@ -169,9 +170,28 @@ class profileController extends Controller
     {
         auth()->user()->update([
             'b24_7' => 1,
-            'last_24_7' => now(),
+            'last_24_7' => now()
         ]);
 
         return response()->json(['success'=>'Good']);
+    }
+
+    public function diffDateBy24_7($start, $end,$time = null)
+    {
+        $startDate = new Carbon($start);
+        $endDate = new Carbon($end);
+        if ($time) {
+            $endDate->addMonths($time['m']);
+            $endDate->addDays($time['d']);
+            $endDate->addHours($time['h']);
+            $endDate->addMinutes($time['i']);
+        }
+        $diff = $startDate->diff($endDate);
+        return [
+            'm' => $diff->m,
+            'd' => $diff->d,
+            'h' => $diff->h,
+            'i' => $diff->i
+        ];
     }
 }

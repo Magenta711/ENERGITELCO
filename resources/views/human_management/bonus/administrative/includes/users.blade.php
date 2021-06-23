@@ -188,7 +188,33 @@
                                         <h4 class="modal-title" id="exampleModalLongTitle">{{$user->name}} - {{$user->position->name}}</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <table class="table table-striped table-bordered table-hover">
+                                        <div class="info_24_7" id="info_24_7_{{$user->id}}">
+                                            <p>
+                                                Estado actual: 
+                                                <span class="state_24_7" id="state_24_7_{{$user->id}}">{{$user->b24_7 ? 'Activo' : 'Inactivo'}}</span>
+                                            </p>
+                                            @if ($user->b24_7)
+                                                <p>
+                                                    Fecha de última activacion:
+                                                    <span class="last_24_7">{{$user->last_24_7}}</span>
+                                                </p>
+                                            @endif
+                                            @if ($user->time_24_7)
+                                            @php
+                                                $time = json_decode($user->time_24_7,true)
+                                            @endphp
+                                                <p>
+                                                    Tiempo: 
+                                                    <span class="time_24_7" id="time_24_7_{{$user->id}}">Meses: {{ $time['m'] }}, Días: {{ $time['d'] }}, Horas: {{ $time['h'] }}, Minutos: {{ $time['i'] }}</span>
+                                                </p>
+                                            @else
+                                                <p>
+                                                    Tiempo: 
+                                                    <span class="time_24_7" id="time_24_7_{{$user->id}}">Meses: 0, Días: 0, Horas: 0, Minutos: 0</span>
+                                                </p>
+                                            @endif
+                                        </div>
+                                        <table class="table table-striped table-bordered">
                                             <thead>
                                                 <tr>
                                                     <th>Descripción</th>
@@ -206,6 +232,11 @@
                                                         </tr>
                                                     @endif
                                                 @endforeach
+                                                @if (!isset($item))
+                                                    <tr>
+                                                        <td colspan="3" class="text-center">Sin reportes</td>
+                                                    </tr>
+                                                @endif
                                             </tbody>
                                         </table>
                                     </div>

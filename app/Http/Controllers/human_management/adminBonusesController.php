@@ -104,11 +104,17 @@ class adminBonusesController extends Controller
             ]);
 
             $u = User::find($key);
+            if ($u->b24_7 || $u->time != '') {
+                $u->update([
+                    'cut_24_7' => $u->cut_24_7 ?? now(),
+                    'time' => null,
+                ]);
+            }
             foreach ($u->report_24_7 as $item) {
                 if ($id->status == 0) {
                     $item->update([
                         'bonus_id' => $id->id,
-                        'status' => 1
+                        'status' => 1,
                     ]);
                 }
             }
