@@ -430,7 +430,32 @@ class clearingController extends Controller
                 }
             }
         }
+        
+        $arrLetters = ['E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+        $counta = 0;
+        $countb = 0;
 
-        return (new CleatingExport($id, $files ))->download($id->id.'_SITE_FOLDER_GI_DESMONTE.xlsx');
+        foreach ($id->inventories as $value){
+            if ($value->station == 'a' && $value->file){
+                $str = str_random();
+                $filesInv[$str]['name'] = $value->file->name;
+                $filesInv[$str]['description'] = $value->file->description;
+                $filesInv[$str]['path'] = public_path('/storage/upload/clearing/'.$value->file->name);
+                $filesInv[$str]['height'] = 200;
+                $filesInv[$str]['coordinates'] = $arrLetters[$counta].'5';
+                $counta++;
+            }
+            if ($value->station == 'b' && $value->file){
+                $str = str_random();
+                $filesInv[$str]['name'] = $value->name;
+                $filesInv[$str]['description'] = $value->file->description;
+                $filesInv[$str]['path'] = public_path('/storage/upload/clearing/'.$value->file->name);
+                $filesInv[$str]['height'] = 200;
+                $filesInv[$str]['coordinates'] = $arrLetters[$countb].'10';
+                $countb++;
+            }
+        }
+
+        return (new CleatingExport($id, $files,$filesInv ))->download($id->id.'_SITE_FOLDER_GI_DESMONTE.xlsx');
     }
 }
