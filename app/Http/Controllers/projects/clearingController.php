@@ -117,6 +117,7 @@ class clearingController extends Controller
                 'station' => $request->estation[$i],
                 'serial_part' => $request->serial_part[$i],
                 'type_active' => $request->type_active[$i],
+                'status' => 1
             ]);
             if ($request->hasFile('file')) {
                 if ($file = $request->file('file')[$i]) {
@@ -199,11 +200,119 @@ class clearingController extends Controller
         $request['status'] = ($request->value_send == 'Firmar') ? 0 : 4;
         $id->update($request->all());
 
-        // Cambar el estado de todos los inventarios
+        // Cambiar el estado de todos los inventarios
+        ClearingInventory::where('clearing_id',1)->update(['status' => 0]);
         // agregar inventario codigo de arriba
-            // Pero tener en cuenta los files relacionados // posible solucion, por estacion a o b
-        // Si hay mas productos, agregarlos
-        // los que queden con estado negativo se eliminan
+        for ($i=0; $i < count($request->serial_part); $i++) {
+            if ($request->estation[$i] == 'a') {
+                if ($request->inv_id[$i]) {
+                    $clearing_inventory = ClearingInventory::where('id',$request->inv_id[$i])->update([
+                        'name_element' => $request->name_element[$i],
+                        'code_material' => $request->code_material[$i],
+                        'serial_part' => $request->serial_part[$i],
+                        'type_active' => $request->type_active[$i],
+                        'status' => 1
+                    ]);
+                    if ($request->hasFile('file')) {
+                        if ($file = $request->file('file')[$i]) {
+                            $name = time().str_random().'.'.$file->getClientOriginalExtension();
+                            $size = $file->getClientSize() / 1000;
+                            $path = Storage::putFileAs('public/upload/clearing', $file, $name);
+                            $clearing_inventory->file()->delete();
+                            $clearing_inventory->file()->create([
+                                'name' => $name,
+                                'description' => $request->name_element[$i],
+                                'size' => $size.' KB',
+                                'url' => $path,
+                                'type' => $file->getClientOriginalExtension(),
+                                'state' => 1
+                            ]);
+                        }
+                    }
+                }else {
+                    $clearing_inventory = ClearingInventory::create([
+                        'clearing_id' => $id->id,
+                        'name_element' => $request->name_element[$i],
+                        'code_material' => $request->code_material[$i],
+                        'station' => $request->estation[$i],
+                        'serial_part' => $request->serial_part[$i],
+                        'type_active' => $request->type_active[$i],
+                        'status' => 1
+                    ]);
+                    if ($request->hasFile('file')) {
+                        if ($file = $request->file('file')[$i]) {
+                            $name = time().str_random().'.'.$file->getClientOriginalExtension();
+                            $size = $file->getClientSize() / 1000;
+                            $path = Storage::putFileAs('public/upload/clearing', $file, $name);
+                            $clearing_inventory->file()->create([
+                                'name' => $name,
+                                'description' => $request->name_element[$i],
+                                'size' => $size.' KB',
+                                'url' => $path,
+                                'type' => $file->getClientOriginalExtension(),
+                                'state' => 1
+                            ]);
+                        }
+                    }
+                }
+            }
+        }
+        for ($i=0; $i < count($request->serial_part); $i++) {
+            if ($request->estation[$i] == 'b') {
+                if ($request->inv_id[$i]) {
+                    $clearing_inventory = ClearingInventory::where('id',$request->inv_id[$i])->update([
+                        'name_element' => $request->name_element[$i],
+                        'code_material' => $request->code_material[$i],
+                        'serial_part' => $request->serial_part[$i],
+                        'type_active' => $request->type_active[$i],
+                        'status' => 1
+                    ]);
+                    if ($request->hasFile('file')) {
+                        if ($file = $request->file('file')[$i]) {
+                            $name = time().str_random().'.'.$file->getClientOriginalExtension();
+                            $size = $file->getClientSize() / 1000;
+                            $path = Storage::putFileAs('public/upload/clearing', $file, $name);
+                            $clearing_inventory->file()->delete();
+                            $clearing_inventory->file()->create([
+                                'name' => $name,
+                                'description' => $request->name_element[$i],
+                                'size' => $size.' KB',
+                                'url' => $path,
+                                'type' => $file->getClientOriginalExtension(),
+                                'state' => 1
+                            ]);
+                        }
+                    }
+                }else {
+                    $clearing_inventory = ClearingInventory::create([
+                        'clearing_id' => $id->id,
+                        'name_element' => $request->name_element[$i],
+                        'code_material' => $request->code_material[$i],
+                        'station' => $request->estation[$i],
+                        'serial_part' => $request->serial_part[$i],
+                        'type_active' => $request->type_active[$i],
+                        'status' => 1
+                    ]);
+                    if ($request->hasFile('file')) {
+                        if ($file = $request->file('file')[$i]) {
+                            $name = time().str_random().'.'.$file->getClientOriginalExtension();
+                            $size = $file->getClientSize() / 1000;
+                            $path = Storage::putFileAs('public/upload/clearing', $file, $name);
+                            $clearing_inventory->file()->create([
+                                'name' => $name,
+                                'description' => $request->name_element[$i],
+                                'size' => $size.' KB',
+                                'url' => $path,
+                                'type' => $file->getClientOriginalExtension(),
+                                'state' => 1
+                            ]);
+                        }
+                    }
+                }
+            }
+        }
+        
+        ClearingInventory::where('status',0)->delete();
         
         $id->responsable->notify(new notificationMain($id->id,'Proyecto de desnomte fue editado '.$id->id,'project/clearing/show/'));
         

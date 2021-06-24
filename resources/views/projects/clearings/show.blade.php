@@ -505,6 +505,7 @@
                     'it'=>'d',
                     'label'=>'Foto de PDB abierto'
                 ])
+                <hr>
                 @include('projects.clearings.includes.upload_show',[
                     'ltt' => 'b',
                     'num' => $i++,

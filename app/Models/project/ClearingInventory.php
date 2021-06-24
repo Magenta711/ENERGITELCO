@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ClearingInventory extends Model
 {
     protected $table = 'clearning_inventories';
-    protected $fillable = ['clearing_id','name_element','code_material','type_active','station','serial_part'];
+    protected $fillable = ['clearing_id','name_element','code_material','type_active','station','serial_part','status'];
     protected $guarde = ['id'];
 
     public function file()

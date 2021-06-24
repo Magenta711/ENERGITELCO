@@ -125,329 +125,330 @@
         </form>
         <div class="row">
             <div class="col-md-6">
-        <h3>Estación A</h3>
-        <hr>
-        @php
-            $i = 1;
-        @endphp
-       <h3>2. Capturas de pantalla antes de apagado y ejecución del desmonte</h3>
-       @include('projects.clearings.includes.upload',[
-           'place' => 'C24' ,
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>'a',
-           'label'=>'Pantallazo de niveles dBs',
-           'description' => 'Antes de apagar radio y desmontar'
-       ])
-       <hr>
-       @include('projects.clearings.includes.upload',[
-           'place' => 'C25',
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>'b',
-           'label'=>'Pantallazo de alarmas',
-           'description' => 'Antes de apagar radio y desmontar'
-       ])
-       <hr>
-       <h3>3. Registro fotográfico antes</h3>
-       @include('projects.clearings.includes.upload',[
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>'a',
-           'label'=>'Foto indoor estación base',
-           'description'=>'Sitio limpio'
-       ])
-       <hr>
-       @include('projects.clearings.includes.upload',[
-           'place' => 'C12',
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>'a',
-           'label'=>'Foto outdoor estación base',
-           'description'=>'Sitio limpio'
-       ])
-       <hr>
-       {{-- @include('projects.clearings.includes.upload',[
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>'b',
-           'label'=>'Foto antena'
-       ])
-       <hr> --}}
-       @include('projects.clearings.includes.upload',[
-           'place' => 'C13' ,
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>'b',
-           'label'=>'Foto torres sin antena desmontada',
-           'description'=>'Sitio limpio'
-       ])
-       <hr>
-       @include('projects.clearings.includes.upload',[
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>'b',
-           'label'=>'Foto ODU'
-       ])
-       <hr>
-       @include('projects.clearings.includes.upload',[
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>'b',
-           'label'=>'Foto mástil'
-       ])
-       <hr>
-       @include('projects.clearings.includes.upload',[
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>'c',
-           'label'=>'Foto de cuarto de equipos, shelter, rack, gabinete o donde esta instalada la IDU'
-       ])
-       <hr>
-       @include('projects.clearings.includes.upload',[
-           'place' => 'C15' ,
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>'d',
-           'label'=>'Foto PDB abierto sin acomedidas desmontadas'
-       ])
-       <hr>
-       @include('projects.clearings.includes.upload',[
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>'d',
-           'label'=>'Foto de PDB abierto'
-       ])
-       <hr>
-       @include('projects.clearings.includes.upload',[
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>'d',
-           'label'=>'Foto de PDB cerrado'
-       ])
-       <hr>
-       @include('projects.clearings.includes.upload',[
-           'place' => 'C14',
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>'e',
-           'label'=>'Foto de rack mw'
-       ])
-       <hr>
-       @include('projects.clearings.includes.upload',[
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>'d',
-           'label'=>'Foto de busbar sin tierra desmontada'
-       ])
-       <hr>
-       @include('projects.clearings.includes.upload',[
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>'b',
-           'label'=>'Foto rack o gabinete sin idu desmontada'
-       ])
-       <hr>
+                <h3>Estación A</h3>
+                <hr>
+                @php
+                    $i = 1;
+                @endphp
+                <h3>2. Capturas de pantalla antes de apagado y ejecución del desmonte</h3>
+                @include('projects.clearings.includes.upload',[
+                    'place' => 'C24' ,
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>'a',
+                    'label'=>'Pantallazo de niveles dBs',
+                    'description' => 'Antes de apagar radio y desmontar'
+                ])
+                <hr>
+                @include('projects.clearings.includes.upload',[
+                    'place' => 'C25',
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>'b',
+                    'label'=>'Pantallazo de alarmas',
+                    'description' => 'Antes de apagar radio y desmontar'
+                ])
+                <hr>
+                <h3>3. Registro fotográfico antes</h3>
+                @include('projects.clearings.includes.upload',[
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>'a',
+                    'label'=>'Foto indoor estación base',
+                    'description'=>'Sitio limpio'
+                ])
+                <hr>
+                @include('projects.clearings.includes.upload',[
+                    'place' => 'C12',
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>'a',
+                    'label'=>'Foto outdoor estación base',
+                    'description'=>'Sitio limpio'
+                ])
+                <hr>
+                {{-- @include('projects.clearings.includes.upload',[
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>'b',
+                    'label'=>'Foto antena'
+                ])
+                <hr> --}}
+                @include('projects.clearings.includes.upload',[
+                    'place' => 'C13' ,
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>'b',
+                    'label'=>'Foto torres sin antena desmontada',
+                    'description'=>'Sitio limpio'
+                ])
+                <hr>
+                @include('projects.clearings.includes.upload',[
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>'b',
+                    'label'=>'Foto ODU'
+                ])
+                <hr>
+                @include('projects.clearings.includes.upload',[
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>'b',
+                    'label'=>'Foto mástil'
+                ])
+                <hr>
+                @include('projects.clearings.includes.upload',[
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>'c',
+                    'label'=>'Foto de cuarto de equipos, shelter, rack, gabinete o donde esta instalada la IDU'
+                ])
+                <hr>
+                @include('projects.clearings.includes.upload',[
+                    'place' => 'C15' ,
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>'d',
+                    'label'=>'Foto PDB abierto sin acomedidas desmontadas'
+                ])
+                <hr>
+                @include('projects.clearings.includes.upload',[
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>'d',
+                    'label'=>'Foto de PDB abierto'
+                ])
+                <hr>
+                @include('projects.clearings.includes.upload',[
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>'d',
+                    'label'=>'Foto de PDB cerrado'
+                ])
+                <hr>
+                @include('projects.clearings.includes.upload',[
+                    'place' => 'C14',
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>'e',
+                    'label'=>'Foto de rack mw'
+                ])
+                <hr>
+                @include('projects.clearings.includes.upload',[
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>'d',
+                    'label'=>'Foto de busbar sin tierra desmontada'
+                ])
+                <hr>
+                @include('projects.clearings.includes.upload',[
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>'b',
+                    'label'=>'Foto rack o gabinete sin idu desmontada'
+                ])
+                <hr>
 
 
-       <h3>4. Registro fotográfico equipos desinstalados</h3>
-       @include('projects.clearings.includes.upload',[
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>1,
-           'label'=>'Placa antena 1 desmontada'
-       ])
-       <hr>
-       @include('projects.clearings.includes.upload',[
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>1,
-           'label'=>'Placa antena 2 desmontada'
-       ])
-       <hr>
-       @include('projects.clearings.includes.upload',[
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>2,
-           'label'=>'Placa ODU MAIN vertical desmontado'
-       ])
-       <hr>
-       @include('projects.clearings.includes.upload',[
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>2,
-           'label'=>'Placa ODU STAN BY vertical desmontado'
-       ])
-       <hr>
-       @include('projects.clearings.includes.upload',[
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>2,
-           'label'=>'Placa ODU MAIN horizontal desmontado'
-       ])
-       <hr>
-       @include('projects.clearings.includes.upload',[
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>2,
-           'label'=>'Placa ODU STAN BY horizontal desmontado'
-       ])
-       <hr>
-       @include('projects.clearings.includes.upload',[
-           'place' => 'I19' ,
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>3,
-           'label'=>'Foto HYBRIDO vertical desinstalado'
-       ])
-       <hr>
-       @include('projects.clearings.includes.upload',[
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>3,
-           'label'=>'Foto HYBRIDO horizontal desinstalado'
-       ])
-       <hr>
-       @include('projects.clearings.includes.upload',[
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>3,
-           'label'=>'Foto RG desmontado'
-       ])
-       <hr>
-       @include('projects.clearings.includes.upload',[
-           'place' => 'G19',
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>3,
-           'label'=>'Foto IDU vertical desmontado'
-       ])
-       <hr>
-       @include('projects.clearings.includes.upload',[
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>3,
-           'label'=>'Foto IDU horizontal desmontado'
-       ])
-       <hr>
-       @include('projects.clearings.includes.upload',[
-           'place' => 'J19' ,
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>5,
-           'label'=>'Foto conectores de energía'
-       ])
-       <hr>
-       @include('projects.clearings.includes.upload',[
-           'place' => 'K19' ,
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>6,
-           'label'=>'Otros accesorios'
-       ])
-       <hr>
-       
+                <h3>4. Registro fotográfico equipos desinstalados</h3>
+                @include('projects.clearings.includes.upload',[
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>1,
+                    'label'=>'Placa antena 1 desmontada'
+                ])
+                <hr>
+                @include('projects.clearings.includes.upload',[
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>1,
+                    'label'=>'Placa antena 2 desmontada'
+                ])
+                <hr>
+                @include('projects.clearings.includes.upload',[
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>2,
+                    'label'=>'Placa ODU MAIN vertical desmontado'
+                ])
+                <hr>
+                @include('projects.clearings.includes.upload',[
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>2,
+                    'label'=>'Placa ODU STAN BY vertical desmontado'
+                ])
+                <hr>
+                @include('projects.clearings.includes.upload',[
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>2,
+                    'label'=>'Placa ODU MAIN horizontal desmontado'
+                ])
+                <hr>
+                @include('projects.clearings.includes.upload',[
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>2,
+                    'label'=>'Placa ODU STAN BY horizontal desmontado'
+                ])
+                <hr>
+                @include('projects.clearings.includes.upload',[
+                    'place' => 'I19' ,
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>3,
+                    'label'=>'Foto HYBRIDO vertical desinstalado'
+                ])
+                <hr>
+                @include('projects.clearings.includes.upload',[
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>3,
+                    'label'=>'Foto HYBRIDO horizontal desinstalado'
+                ])
+                <hr>
+                @include('projects.clearings.includes.upload',[
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>3,
+                    'label'=>'Foto RG desmontado'
+                ])
+                <hr>
+                @include('projects.clearings.includes.upload',[
+                    'place' => 'G19',
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>3,
+                    'label'=>'Foto IDU vertical desmontado'
+                ])
+                <hr>
+                @include('projects.clearings.includes.upload',[
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>3,
+                    'label'=>'Foto IDU horizontal desmontado'
+                ])
+                <hr>
+                @include('projects.clearings.includes.upload',[
+                    'place' => 'J19' ,
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>5,
+                    'label'=>'Foto conectores de energía'
+                ])
+                <hr>
+                @include('projects.clearings.includes.upload',[
+                    'place' => 'K19' ,
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>6,
+                    'label'=>'Otros accesorios'
+                ])
+                <hr>
+                
 
 
 
-       <h3>6. Registro fotográfico después</h3>
-       @include('projects.clearings.includes.upload',[
-           'place' => 'G13' ,
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>'a',
-           'label'=>'Foto torres con antena desmontada',
-           'description'=>'Sitio limpio'
-       ])
-       <hr>
-       @include('projects.clearings.includes.upload',[
-           'place' => 'C19' ,
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>'b',
-           'label'=>'Foto antena desmontada'
-       ])
-       <hr>
-       @include('projects.clearings.includes.upload',[
-           'place' => 'E19',
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>'b',
-           'label'=>'Foto ODU desmontado'
-       ])
-       <hr>
-       @include('projects.clearings.includes.upload',[
-           'place' => 'G14',
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>'b',
-           'label'=>'Foto rack o gabinete con idu desmontada'
-       ])
-       <hr>
-       @include('projects.clearings.includes.upload',[
-           'place' => 'G15' ,
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>'c',
-           'label'=>'Foto PDB abierto con acomedidas desmontadas'
-       ])
-       <hr>
-       @include('projects.clearings.includes.upload',[
-           'place' => 'G12' ,
-           'ltt' => 'a',
-           'num' => $i++,
-           'it'=>'d',
-           'label'=>'Foto de estación base después'
-       ])
-       <hr>
-       <h3>7. Inventario</h3>
-       <hr>
-                @foreach ($id->inventories as $item)
-                @if ($item->station == 'b')
-                <div class="origen" id="origen_a">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="name_element_a_1">Nombre del elemento</label>
-                                <input type="text" name="name_element[]" value="{{ $item->name_element }}" id="name_element_a_1" class="form-control">
-                                <input type="hidden" name="estation[]" id="estation_a_1" value="a">
+                <h3>6. Registro fotográfico después</h3>
+                @include('projects.clearings.includes.upload',[
+                    'place' => 'G13' ,
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>'a',
+                    'label'=>'Foto torres con antena desmontada',
+                    'description'=>'Sitio limpio'
+                ])
+                <hr>
+                @include('projects.clearings.includes.upload',[
+                    'place' => 'C19' ,
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>'b',
+                    'label'=>'Foto antena desmontada'
+                ])
+                <hr>
+                @include('projects.clearings.includes.upload',[
+                    'place' => 'E19',
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>'b',
+                    'label'=>'Foto ODU desmontado'
+                ])
+                <hr>
+                @include('projects.clearings.includes.upload',[
+                    'place' => 'G14',
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>'b',
+                    'label'=>'Foto rack o gabinete con idu desmontada'
+                ])
+                <hr>
+                @include('projects.clearings.includes.upload',[
+                    'place' => 'G15' ,
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>'c',
+                    'label'=>'Foto PDB abierto con acomedidas desmontadas'
+                ])
+                <hr>
+                @include('projects.clearings.includes.upload',[
+                    'place' => 'G12' ,
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>'d',
+                    'label'=>'Foto de estación base después'
+                ])
+                <hr>
+                <h3>7. Inventario</h3>
+                <hr>
+                <div id="destino_a">
+                    @foreach ($id->inventories as $item)
+                        @if ($item->station == 'a')
+                            <div class="origen" id="origen_a">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="name_element_a_1">Nombre del elemento</label>
+                                            <input type="text" name="name_element[]" value="{{ $item->name_element }}" id="name_element_a_1" class="form-control">
+                                            <input type="hidden" name="estation[]" id="estation_a_{{$item->id}}" value="a">
+                                            <input type="hidden" name="inv_id[]" id="inv_id_a_{{$item->id}}" value="{{$item->id}}" class="inv_id">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="code_material_a_{{$item->id}}">Codigo material</label>
+                                            <input type="text" name="code_material[]" value="{{ $item->code_material }}" id="code_material_a_{{$item->id}}" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="serial_part_a_{{$item->id}}">Serial/numero parte</label>
+                                            <input type="text" name="serial_part[]" value="{{ $item->serial_part }}" id="serial_part_a_{{$item->id}}" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="type_active_a_{{$item->id}}">Tipo de activo</label>
+                                            <input type="text" name="type_active[]" value="{{ $item->type_active }}" id="type_active_a_{{$item->id}}" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            @if ($item->file)
+                                                <img src="/storage/upload/clearing/{{$item->file->name}}" width="35%" alt="Attachment">
+                                            @endif
+                                            <label for="file_a_{{$item->id}}" class="form-control text-center" id="label_file_{{$item->id}}"><i class="fa fa-upload"></i></label>
+                                            <input type="file" accept="image/*" name="file[]" id="file_a_{{$item->id}}" class="file_input hide">
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- @include('projects.clearings.includes.upload',['num' => $i++,'it'=>'a','label'=>'Fotos de la estacion base']) --}}
+                                <hr>
                             </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="code_material_a_1">Codigo material</label>
-                                <input type="text" name="code_material[]" value="{{ $item->code_material }}" id="code_material_a_1" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="serial_part_a_1">Serial/numero parte</label>
-                                <input type="text" name="serial_part[]" value="{{ $item->serial_part }}" id="serial_part_a_1" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="serial_part_a_1">Tipo de activo</label>
-                                <input type="text" name="type_active[]" value="{{ $item->type_active }}" id="type_active_b_1" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                @if ($item->file)
-                                    <img src="/storage/upload/clearing/{{$item->file->name}}" width="35%" alt="Attachment">
-                                @else
-                                    <label for="file_a_1" class="form-control text-center" id="label_file_1"><i class="fa fa-upload"></i></label>
-                                    <input type="file" accept="image/*" name="file[]" id="file_a_1" class="file_input hide">
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                    {{-- @include('projects.clearings.includes.upload',['num' => $i++,'it'=>'a','label'=>'Fotos de la estacion base']) --}}
-                    <hr>
+                        @endif
+                    @endforeach
                 </div>
-                @endif
-                @endforeach
-                <div id="destino_a"></div>
                 <button type="button" class="btn btn-sm btn-link add_element"  id="add_element_a"><i class="fa fa-plus"></i> Agregar equipo</button>
             </div>
             <div class="col-md-6">
@@ -541,6 +542,7 @@
                     'it'=>'d',
                     'label'=>'Foto de PDB abierto'
                 ])
+                <hr>
                 @include('projects.clearings.includes.upload',[
                     'ltt' => 'b',
                     'num' => $i++,
@@ -719,78 +721,78 @@
                 <hr>
                 <h3>7. Inventario</h3>
                 <hr>
-                @foreach ($id->inventories as $item)
-                @if ($item->station == 'b')
-                <div class="origen" id="origen_b">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="name_element_b_1">Nombre del elemento</label>
-                                <input type="text" name="name_element[]" value="{{ $item->name_element }}" id="name_element_b_1" class="form-control">
-                                <input type="hidden" name="estation[]" id="estation_b_1" value="a">
+                <div id="destino_b">
+                    @foreach ($id->inventories as $item)
+                        @if ($item->station == 'b')
+                            <div class="origen" id="origen_b">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="name_element_b_{{$item->id}}">Nombre del elemento</label>
+                                            <input type="text" name="name_element[]" value="{{ $item->name_element }}" id="name_element_b_{{$item->id}}" class="form-control">
+                                            <input type="hidden" name="estation[]" id="estation_b_{{$item->id}}" value="b">
+                                            <input type="hidden" name="inv_id[]" id="inv_id_b_{{$item->id}}" value="{{$item->id}}" class="inv_id">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="code_material_b_{{$item->id}}">Codigo material</label>
+                                            <input type="text" name="code_material[]" value="{{ $item->code_material }}" id="code_material_b_{{$item->id}}" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="serial_part_b_{{$item->id}}">Serial/numero parte</label>
+                                            <input type="text" name="serial_part[]" value="{{ $item->serial_part }}" id="serial_part_b_{{$item->id}}" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="type_active_b_{{$item->id}}">Tipo de activo</label>
+                                            <input type="text" name="type_active[]" value="{{ $item->type_active }}" id="type_active_b_{{$item->id}}" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            @if ($item->file)
+                                                <img src="/storage/upload/clearing/{{$item->file->name}}" width="35%" alt="{{$item->file->name}}">
+                                            @endif
+                                            <label for="file_b_{{$item->id}}" class="form-control text-center" id="label_file_{{$item->id}}"><i class="fa fa-upload"></i></label>
+                                            <input type="file" accept="image/*" name="file[]" id="file_b_{{$item->id}}" class="file_input hide">
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- @include('projects.clearings.includes.upload',['num' => $i++,'it'=>'b','label'=>'Fotos de la estacion base']) --}}
+                                <hr>
                             </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="code_material_b_1">Codigo material</label>
-                                <input type="text" name="code_material[]" value="{{ $item->code_material }}" id="code_material_b_1" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="serial_part_b_1">Serial/numero parte</label>
-                                <input type="text" name="serial_part[]" value="{{ $item->serial_part }}" id="serial_part_b_1" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="serial_part_a_1">Tipo de activo</label>
-                                <input type="text" name="type_active[]" value="{{ $item->type_active }}" id="type_active_b_1" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                @if ($item->file)
-                                    <img src="/storage/upload/clearing/{{$item->file->name}}" width="35%" alt="Attachment">
-                                @else
-                                    <label for="file_b_1" class="form-control text-center" id="label_file_1"><i class="fa fa-upload"></i></label>
-                                    <input type="file" accept="image/*" name="file[]" id="file_b_1" class="file_input hide">
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                    {{-- @include('projects.clearings.includes.upload',['num' => $i++,'it'=>'a','label'=>'Fotos de la estacion base']) --}}
-                    <hr>
+                        @endif
+                    @endforeach
                 </div>
-                @endif
-                @endforeach
-            <div id="destino_a"></div>
-            <button type="button" class="btn btn-sm btn-link add_element"  id="add_element_a"><i class="fa fa-plus"></i> Agregar equipo</button>
+            <button type="button" class="btn btn-sm btn-link add_element"  id="add_element_b"><i class="fa fa-plus"></i> Agregar equipo</button>
         </div>
         <hr>
-    </div>
-    <hr>
-    <h3>Información referente de las actividades referentes a la gestión y recepción de la infraestructura</h3>
-    <div class="row">
-        <div class="col-md-6">
-            @include('projects.clearings.includes.upload',[
-                'place' => 'B32' ,
-                'ltt' => 'a',
-                'num' => $i++,
-                'it'=>'a',
-                'label'=>'Captura pantalla correo NOC TX o CHG gestión cerrado'
-            ])
         </div>
-        <div class="col-md-6">
-            @include('projects.clearings.includes.upload',[
-                'place' => 'G32' ,
-                'ltt' => 'a',
-                'num' => $i++,
-                'it'=>'b',
-                'label'=>'Captura pantalla aceptación site owner'
-            ])
-        </div>
-    </div>
+        <hr>
+        <h3>Información referente de las actividades referentes a la gestión y recepción de la infraestructura</h3>
+        <div class="row">
+            <div class="col-md-6">
+                @include('projects.clearings.includes.upload',[
+                    'place' => 'B32' ,
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>'a',
+                    'label'=>'Captura pantalla correo NOC TX o CHG gestión cerrado'
+                ])
+            </div>
+            <div class="col-md-6">
+                @include('projects.clearings.includes.upload',[
+                    'place' => 'G32' ,
+                    'ltt' => 'a',
+                    'num' => $i++,
+                    'it'=>'b',
+                    'label'=>'Captura pantalla aceptación site owner'
+                ])
+            </div>
         </div>
         <div class="box-footer">
             <button onclick="document.getElementById('value_send').value = 'Firmar';document.getElementById('form_send').submit();" class="btn btn-sm btn-primary btn-send">Enviar y firmar</button>

@@ -14,16 +14,18 @@ $(document).ready(function() {
         upload_again(this.id);
     });
     $('.file_input').change(function () {
-        num = this.id.split('_')[this.id.split('_').length - 1];
-        $('#label_file_'+num).addClass('text-aqua');
+        $($('#'+this.id).parent().children('label')).addClass('text-aqua');
     });
 
-    incre = 1;
+    let incre = $('.origen').length;
     $('.add_element').click(function (e){
         e.preventDefault();
         incre++;
         let ltt = this.id.split("_")[this.id.split("_").length - 1];
         select = $('#origen_'+ltt).clone().appendTo('#destino_'+ltt).attr('id','origen_'+ltt+'_'+incre);
+        select.children().children('.col-md-3').children('.form-group').children('.form-control').val('');
+        select.children().children('.col-md-3').children('.form-group').children('.inv_id').val('');
+        select.children().children('.col-md-12').children('.form-group').children('img').remove();
         select.children().children('.col-md-12').children('.form-group').children('.form-control').attr('for','file_'+ltt+'_'+incre).attr('id','label_file_'+incre);
         select.children().children('.col-md-12').children('.form-group').children('.file_input').attr('id','file_'+ltt+'_'+incre);
     });
