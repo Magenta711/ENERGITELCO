@@ -392,6 +392,7 @@
                     'it'=>'d',
                     'label'=>'Foto de PDB abierto'
                 ])
+                <hr>
                 @include('projects.clearings.includes.upload',[
                     'ltt' => 'b',
                     'num' => $i++,

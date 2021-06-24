@@ -50,7 +50,7 @@
                     </div>
                 </div>
                 <hr>
-                <h4>Técnicos GI que realizanla actividad</h4>
+                <h4>Técnicos GI que realiza la actividad</h4>
                 <div id="destino_user">
                     <div id="origen_user">
                         <div class="row" id="div_user_0">
@@ -94,17 +94,17 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="aliado_gdrt">Aliado GDRT:Escalamiento N1</label>
+                            <label for="aliado_gdrt">Aliado GDRT: Escalamiento N1</label>
                             <input type="text" name="aliado_gdrt" value="{{ old('aliado_gdrt') }}" id="aliado_gdrt" class="form-control">
-                            <label for="tel_aliado_gdrt">Telefono de contacto</label>
+                            <label for="tel_aliado_gdrt">Teléfono de contacto</label>
                             <input type="tel" name="tel_aliado_gdrt" value="{{ old('tel_aliado_gdrt') }}" id="tel_aliado_gdrt" class="form-control">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="solicitante_gdrt">Solicitante GDRT:Escalamiento N2</label>
+                            <label for="solicitante_gdrt">Solicitante GDRT: Escalamiento N2</label>
                             <input type="text" name="solicitante_gdrt" value="{{ old('solicitante_gdrt') }}" id="solicitante_gdrt" class="form-control">
-                            <label for="tel_solicitante_gdrt">Telefono de contacto</label>
+                            <label for="tel_solicitante_gdrt">Teléfono de contacto</label>
                             <input type="tel" name="tel_solicitante_gdrt" value="{{ old('tel_solicitante_gdrt') }}" id="tel_solicitante_gdrt" class="form-control">
                         </div>
                     </div>
@@ -161,7 +161,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="tecnology_0">Tecnologia <small>2G/3G/4G</small></label>
+                                    <label for="tecnology_0">Tecnología <small>2G/3G/4G</small></label>
                                     <input type="text" name="tecnology[]" id="tecnology_0" class="form-control">
                                 </div>
                             </div>
@@ -182,7 +182,7 @@
                                             <div class="row">
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label for="nemonico_0_0">Nemonico</label>
+                                                        <label for="nemonico_0_0">Nemónico</label>
                                                         <input type="text" name="nemonico[]" id="nemonico_0_0" class="form-control">
                                                     </div>
                                                 </div>
@@ -211,7 +211,7 @@
                                             <div class="row">
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label for="nemonico_0_0">Nemonico</label>
+                                                        <label for="nemonico_0_0">Nemónico</label>
                                                         <input type="text" name="nemonico[]" id="nemonico_0_0" class="form-control">
                                                     </div>
                                                 </div>
@@ -240,7 +240,7 @@
                                             <div class="row">
                                                 <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label for="nemonico_0_0">Nemonico</label>
+                                                        <label for="nemonico_0_0">Nemónico</label>
                                                         <input type="text" name="nemonico[]" id="nemonico_0_0" class="form-control">
                                                     </div>
                                                 </div>
@@ -295,7 +295,7 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="file_inventory_then_0_0">Foto equipos a invertir despues</label>
+                                                        <label for="file_inventory_then_0_0">Foto equipos a invertir después</label>
                                                         <label for="file_inventory_then_0_0" class="form-control text-center"><i class="fa fa-upload"></i></label>
                                                         <input type="file" accept="image/*" name="file_inventory_then[]" id="file_inventory_then_0_0" class="hide photos">
                                                     </div>

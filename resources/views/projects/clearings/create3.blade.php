@@ -50,8 +50,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="type_active_a_1">Tiene activo</label>
-                            <br>
-                            <input type="checkbox" name="type_active" id="type_active_a_1" class="form-contol">
+                            <input type="text" name="type_active[]" id="type_active_a_1" class="form-contol">
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -94,7 +93,7 @@
                         <div class="form-group">
                             <label for="type_active_b_1">Tiene activo</label>
                             <br>
-                            <input type="checkbox" name="type_active" id="type_active_b_1" class="form-contol">
+                            <input type="text" name="type_active[]" id="type_active_b_1" class="form-contol">
                         </div>
                     </div>
                     <div class="col-md-12">

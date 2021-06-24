@@ -113,8 +113,10 @@ class clearingController extends Controller
             $clearing_inventory = ClearingInventory::create([
                 'clearing_id' => $id->id,
                 'name_element' => $request->name_element[$i],
+                'code_material' => $request->code_material[$i],
                 'station' => $request->estation[$i],
                 'serial_part' => $request->serial_part[$i],
+                'type_active' => $request->type_active[$i],
             ]);
             if ($request->hasFile('file')) {
                 if ($file = $request->file('file')[$i]) {
