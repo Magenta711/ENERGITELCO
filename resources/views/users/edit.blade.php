@@ -214,8 +214,8 @@
                     </div>
                     @if (auth()->user()->hasPermissionTo('Editar contrato'))
                     <hr>
-                    <h3>Información Contracto</h3>
                     {{-- Informacion de contrato --}}
+                    <h3>Información Contracto</h3>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">

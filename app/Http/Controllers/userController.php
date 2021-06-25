@@ -22,6 +22,7 @@ use App\Models\document;
 use App\Models\file;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 
 class userController extends Controller
 {
@@ -179,15 +180,18 @@ class userController extends Controller
         
         $id->assignRole($request->roles);
         
-        if ($id->register) {
+        if ($id->register)
+        {
             $id->register->update($request->all());
             $register = $id->register;
-        }else {
+        }else
+        {
             $register = Register::create($request->all());
             $id->update(['register_id' => $register->id]);
         }
         $mensaje = '';
-        if (auth()->user()->hasPermissionTo('Editar contrato')) {
+        if (auth()->user()->hasPermissionTo('Editar contrato'))
+        {
             $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
             $day = date('d', strtotime($request->date));
             $month = date('n', strtotime($request->date));
@@ -197,17 +201,22 @@ class userController extends Controller
             // Convertir fecha
             $date = ['day' => $day,'month' => $meses[($month -1)],'year' => $year];
             $end_date = null;
-            if ($request->months) {
+            if ($request->months)
+            {
                 $end_date = Carbon::create($request->date)->addMonth($request->months);
             }
-            if ($request->hasFile('contract_file')) {
+            if ($request->hasFile('contract_file'))
+            {
                 $file = $request->file('contract_file');
                 $path = Storage::putFileAs('public/contratos/', $file, $time.'contrato.pdf');
                 $size = $file->getClientSize() / 1000;
-                Contract::where('register_id',$register->id)->where('status',1)->update([
+                Contract::where('register_id',$register->id)->where(function (Builder $query) {
+                    return $query->where('status',1)->orWhere('status',2);
+                })->update([
                     'status' => 0,
                     'last_date' => $request->date
                 ]);
+                $status = $id->register->curriculum == 'Completo' || $id->curriculum == 'Pendiente' ? 1 : 2;
                 $contract = Contract::create([
                     'register_id' => $id->register->id,
                     'type_contract' => $request->type_contract,
@@ -218,7 +227,7 @@ class userController extends Controller
                     'salary' => $request->salary,
                     'isAuto' => 0,
                     'renovation' => 1,
-                    'status' => 1,
+                    'status' => $status,
                 ]);
         
                 $contract->file()->create([
@@ -230,12 +239,16 @@ class userController extends Controller
                     'state' => 1,
                 ]);
                 $mensaje = ' junto con el contracto';
-            }else {
-                if(!$register->hasContract()){
-                    if ($request->date && $request->day_breack && $request->salary && $request->type_contract && $request->nationality) {
+            }else 
+            {
+                if(!$register->hasContract() || ($register->hasContract() && ($register->hasContract()->type_contract != $request->type_contract || $register->hasContract()->start_date != $request->date || $register->hasContract()->day_breack != $request->day_breack || $register->hasContract()->months != $request->months || $register->hasContract()->salary != $request->salary)))
+                {
+                    if ($request->date && $request->day_breack && $request->salary && $request->type_contract && $request->nationality)
+                    {
                         $request["date_birth"] = date('d-m-Y', strtotime($request->date_birth));
                         $pdf = PDF::loadView('documents/contract',['data'=>$request,'id' => $register, 'date' => $date]);
                         $pdf->save(storage_path('app/public/contratos/') .$time.'contrato.pdf');
+
                         Contract::where('register_id',$register->id)->where('status',1)->update([
                             'status' => 0,
                             'end_date' => $request->date
@@ -268,8 +281,10 @@ class userController extends Controller
         // Notification
         $users = User::where('state',1)->get();
         
-        foreach ($users as $user) {
-            if ($user->hasPermissionTo('Editar usuarios')) {
+        foreach ($users as $user)
+        {
+            if ($user->hasPermissionTo('Editar usuarios'))
+            {
                 $user->notify(new notificationMain($id->id,'Usuario actualizado '.$id->id.$mensaje,'users/show/'));
             }
         }
