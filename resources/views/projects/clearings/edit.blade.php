@@ -20,7 +20,7 @@
                 <a href="{{route('clearings')}}" class="btn btn-sm btn-primary">Volver</a>
             </div>
         </div>
-        <form action="{{ route('clearings_update',$id->id) }}" method="post" autocomplete="off" id="form_send">
+        <form action="{{ route('clearings_update',$id->id) }}" method="post" autocomplete="off" id="form_send" enctype="multipart/form-data">
             @csrf
             @method('PUT')
         <div class="box-body">

@@ -119,7 +119,7 @@ class clearingController extends Controller
                 'type_active' => $request->type_active[$i],
                 'status' => 1
             ]);
-            if ($request->hasFile('file')) {
+            if ($request->hasFile('file') && isset($request->file('file')[$i])) {
                 if ($file = $request->file('file')[$i]) {
                     $name = time().str_random().'.'.$file->getClientOriginalExtension();
                     $size = $file->getClientSize() / 1000;
@@ -206,19 +206,22 @@ class clearingController extends Controller
         for ($i=0; $i < count($request->serial_part); $i++) {
             if ($request->estation[$i] == 'a') {
                 if ($request->inv_id[$i]) {
-                    $clearing_inventory = ClearingInventory::where('id',$request->inv_id[$i])->update([
+                    $clearing_inventory = ClearingInventory::where('id',$request->inv_id[$i])->first();
+                    $clearing_inventory->update([
                         'name_element' => $request->name_element[$i],
                         'code_material' => $request->code_material[$i],
                         'serial_part' => $request->serial_part[$i],
                         'type_active' => $request->type_active[$i],
                         'status' => 1
                     ]);
-                    if ($request->hasFile('file')) {
+                    if ($request->hasFile('file') && isset($request->file('file')[$i])) {
                         if ($file = $request->file('file')[$i]) {
                             $name = time().str_random().'.'.$file->getClientOriginalExtension();
                             $size = $file->getClientSize() / 1000;
                             $path = Storage::putFileAs('public/upload/clearing', $file, $name);
-                            $clearing_inventory->file()->delete();
+                            if ($clearing_inventory->file) {
+                                $clearing_inventory->file()->delete();
+                            }
                             $clearing_inventory->file()->create([
                                 'name' => $name,
                                 'description' => $request->name_element[$i],
@@ -239,7 +242,7 @@ class clearingController extends Controller
                         'type_active' => $request->type_active[$i],
                         'status' => 1
                     ]);
-                    if ($request->hasFile('file')) {
+                    if ($request->hasFile('file') && isset($request->file('file')[$i])) {
                         if ($file = $request->file('file')[$i]) {
                             $name = time().str_random().'.'.$file->getClientOriginalExtension();
                             $size = $file->getClientSize() / 1000;
@@ -260,19 +263,22 @@ class clearingController extends Controller
         for ($i=0; $i < count($request->serial_part); $i++) {
             if ($request->estation[$i] == 'b') {
                 if ($request->inv_id[$i]) {
-                    $clearing_inventory = ClearingInventory::where('id',$request->inv_id[$i])->update([
+                    $clearing_inventory = ClearingInventory::where('id',$request->inv_id[$i])->first();
+                    $clearing_inventory->update([
                         'name_element' => $request->name_element[$i],
                         'code_material' => $request->code_material[$i],
                         'serial_part' => $request->serial_part[$i],
                         'type_active' => $request->type_active[$i],
                         'status' => 1
                     ]);
-                    if ($request->hasFile('file')) {
+                    if ($request->hasFile('file') && isset($request->file('file')[$i])) {
                         if ($file = $request->file('file')[$i]) {
                             $name = time().str_random().'.'.$file->getClientOriginalExtension();
                             $size = $file->getClientSize() / 1000;
                             $path = Storage::putFileAs('public/upload/clearing', $file, $name);
-                            $clearing_inventory->file()->delete();
+                            if ($clearing_inventory->file) {
+                                $clearing_inventory->file()->delete();
+                            }
                             $clearing_inventory->file()->create([
                                 'name' => $name,
                                 'description' => $request->name_element[$i],
@@ -293,7 +299,7 @@ class clearingController extends Controller
                         'type_active' => $request->type_active[$i],
                         'status' => 1
                     ]);
-                    if ($request->hasFile('file')) {
+                    if ($request->hasFile('file') && isset($request->file('file')[$i])) {
                         if ($file = $request->file('file')[$i]) {
                             $name = time().str_random().'.'.$file->getClientOriginalExtension();
                             $size = $file->getClientSize() / 1000;
