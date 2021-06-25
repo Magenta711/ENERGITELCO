@@ -383,7 +383,7 @@
                         <div class="row">
                             <div class="col-md-1">
                                 <label for="">Número</label>
-                                <p>{{ $i }}</p>
+                                <p>{{ $i++ }}</p>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -691,7 +691,7 @@
                             <div class="row">
                                 <div class="col-md-1">
                                     <label for="">Número</label>
-                                    <p>{{ $i }}</p>
+                                    <p>{{ $i++ }}</p>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">

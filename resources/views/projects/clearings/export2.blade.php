@@ -29,7 +29,7 @@
         @endforeach
     </tr>
     <tr>
-        <td rowspan="9" style="border: 1px solid #000000;">Adjuntar en este espacio el NE Inventory</td>
+        <th rowspan="9" style="border: 1px solid #000000;text-align: center;">Adjuntar en este<br>espacio el NE<br>Inventory</th>
         <td rowspan="9"></td>
         <td style="background:#8DB4E2;border: 1px solid #000000">
             NOMBRE ELEMENTO
@@ -57,7 +57,7 @@
         @endforeach
     </tr>
     <tr>
-        <td style="background:#8DB4E2;border: 1px solid #000000;"><br><br><br><br><br>SITIO A<br><br><br><br><br></td>
+        <td style="background:#8DB4E2;border: 1px solid #000000;text-align: center;"><br><br><br><br><br>SITIO A<br><br><br><br><br></td>
         @foreach ($id->inventories as $item)
             @if ($item->station == 'a')
                 <td style="border: 1px solid #000000;text-align: center;color: #D9D9D9;">Foto</td>
@@ -99,10 +99,10 @@
         @endforeach
     </tr>
     <tr>
-        <td style="background:#8DB4E2;border: 1px solid #000000"><br><br><br><br><br>SITIO B<br><br><br><br><br></td>
+        <td style="background:#8DB4E2;border: 1px solid #000000;text-align: center;"><br><br><br><br><br>SITIO B<br><br><br><br><br></td>
         @foreach ($id->inventories as $item)
             @if ($item->station == 'b')
-            <td style="border: 1px solid #000000;text-align: center;color: #D9D9D9;">Foto</td>
+                <td style="border: 1px solid #000000;text-align: center;color: #D9D9D9;">Foto</td>
             @endif
         @endforeach
     </tr>

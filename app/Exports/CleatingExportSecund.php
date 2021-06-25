@@ -8,8 +8,10 @@ use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class CleatingExportSecund implements FromView,WithDrawings, ShouldAutoSize,WithTitle
+class CleatingExportSecund implements FromView,WithDrawings, WithStyles,ShouldAutoSize,WithTitle
 {
     protected $id;
     protected $files;
@@ -31,6 +33,14 @@ class CleatingExportSecund implements FromView,WithDrawings, ShouldAutoSize,With
             $array[$key]->setCoordinates($value['coordinates']);
         }
         return $array;
+    }
+
+    public function styles(Worksheet $sheet)
+    {
+        return [
+            1    => ['font' => ['bold' => true]],
+            'D'    => ['font' => ['bold' => true]],
+        ];
     }
 
     public function view(): View

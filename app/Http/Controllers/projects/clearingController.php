@@ -442,22 +442,26 @@ class clearingController extends Controller
         $countb = 0;
 
         foreach ($id->inventories as $value){
-            if ($value->station == 'a' && $value->file){
-                $str = str_random();
-                $filesInv[$str]['name'] = $value->file->name;
-                $filesInv[$str]['description'] = $value->file->description;
-                $filesInv[$str]['path'] = public_path('/storage/upload/clearing/'.$value->file->name);
-                $filesInv[$str]['height'] = 200;
-                $filesInv[$str]['coordinates'] = $arrLetters[$counta].'5';
+            if ($value->station == 'a'){
+                if ($value->file) {
+                    $str = str_random();
+                    $filesInv[$str]['name'] = $value->file->name;
+                    $filesInv[$str]['description'] = $value->file->description;
+                    $filesInv[$str]['path'] = public_path('/storage/upload/clearing/'.$value->file->name);
+                    $filesInv[$str]['height'] = 200;
+                    $filesInv[$str]['coordinates'] = $arrLetters[$counta].'5';
+                }
                 $counta++;
             }
-            if ($value->station == 'b' && $value->file){
-                $str = str_random();
-                $filesInv[$str]['name'] = $value->name;
-                $filesInv[$str]['description'] = $value->file->description;
-                $filesInv[$str]['path'] = public_path('/storage/upload/clearing/'.$value->file->name);
-                $filesInv[$str]['height'] = 200;
-                $filesInv[$str]['coordinates'] = $arrLetters[$countb].'10';
+            if ($value->station == 'b'){
+                if ($value->file) {
+                    $str = str_random();
+                    $filesInv[$str]['name'] = $value->name;
+                    $filesInv[$str]['description'] = $value->file->description;
+                    $filesInv[$str]['path'] = public_path('/storage/upload/clearing/'.$value->file->name);
+                    $filesInv[$str]['height'] = 200;
+                    $filesInv[$str]['coordinates'] = $arrLetters[$countb].'10';
+                }
                 $countb++;
             }
         }
