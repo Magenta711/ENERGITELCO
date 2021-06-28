@@ -1,4 +1,4 @@
-@php
+{{-- @php
     function numberToText(int $num)
     {
         $unidades = ['','uno','dos','tres','cuatro','cinco','seis','siete','ocho','nueve'];
@@ -91,7 +91,7 @@
         return $text;
     }
 
-@endphp
+@endphp --}}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -218,10 +218,10 @@
                         <th colspan="2">Total</th>
                         <th class="text-right">$ {{ number_format($total, 2) }}</th>
                     </tr>
-                    <tr class="active">
+                    {{-- <tr class="active">
                         <th>Valor en letras</th>
                         <th colspan="2" class="text-right">{{ numberToText($total) }}</th>
-                    </tr>
+                    </tr> --}}
                 </tbody>
             </table>
         </div>

@@ -197,10 +197,10 @@ Route::get('execution_works/review_assignment_tools','execution_works\reviewAssi
 Route::get('execution_works/review_assignment_tools/create','execution_works\reviewAssignmentTools@create')->name('review_assignment_tools_create');
 Route::post('execution_works/review_assignment_tools','execution_works\reviewAssignmentTools@store')->name('review_assignment_tools_store');
 Route::get('execution_works/review_assignment_tools/show/{id}','execution_works\reviewAssignmentTools@show')->name('review_assignment_tools_show');
-// Route::get('execution_works/review_assignment_tools/edit/{id}','execution_works\reviewAssignmentTools@edit')->name('review_assignment_tools_edit');
-// Route::put('execution_works/review_assignment_tools/{id}','execution_works\reviewAssignmentTools@update')->name('review_assignment_tools_update');
+Route::get('execution_works/review_assignment_tools/edit/{id}','execution_works\reviewAssignmentTools@edit')->name('review_assignment_tools_edit');
+Route::put('execution_works/review_assignment_tools/{id}','execution_works\reviewAssignmentTools@update')->name('review_assignment_tools_update');
 Route::get('execution_works/review_assignment_tools/download/{id}','execution_works\reviewAssignmentTools@download')->name('review_assignment_tools_download');
-Route::put('execution_works/review_assignment_tools/{id}','execution_works\reviewAssignmentTools@approve')->name('review_assignment_tools_approve');
+Route::patch('execution_works/review_assignment_tools/{id}','execution_works\reviewAssignmentTools@approve')->name('review_assignment_tools_approve');
 Route::delete('execution_works/review_assignment_tools/delete/{id}','execution_works\reviewAssignmentTools@delete')->name('review_assignment_tools_delete');
 
 // end contract

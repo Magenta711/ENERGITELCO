@@ -105,7 +105,7 @@
                     </div>
                 </div>
                 <div class="box-footer">
-                    <button class="btn btn-primary">Continuar</button>
+                    <button class="btn btn-primary btn-send">Guardar</button>
                 </div>
             </form>
         </div>

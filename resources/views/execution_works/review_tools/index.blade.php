@@ -48,6 +48,7 @@
                                 </td>
                                 <td>
                                     <a href="{{route('review_assignment_tools_show',$review_tool->id)}}" class="btn btn-sm btn-success">Ver</a>
+                                    <a href="{{route('review_assignment_tools_edit',$review_tool->id)}}" class="btn btn-sm btn-primary">Editar</a>
                                     @if ($review_tool->estado == 'Aprobado')
                                         {{-- @can($text_permission) --}}
                                             <a href="{{route("review_assignment_tools_download",$review_tool->id)}}" class="btn btn-warning btn-sm">Descargar</a>

@@ -425,13 +425,13 @@
                             </a>
                             <form id="approval_work_no_4" action="{{ route('review_assignment_tools_approve',$id->id) }}" method="POST" style="display: none;">
                                 @csrf
-                                @method('PUT')
+                                @method('PATCH')
                                 <input type="hidden" name="status" value="No aprobado">
                                 <textarea name="commentary" id="commentary_b" class="hide" cols="30" rows="3">{{old('commentary')}}</textarea>
                             </form>
                             <form id="approval_work_4" action="{{ route('review_assignment_tools_approve',$id->id) }}" method="POST" style="display: none;">
                                 @csrf
-                                @method('PUT')
+                                @method('PATCH')
                                 <input type="hidden" name="status" value="Aprobado">
                                 <textarea name="commentary" id="commentary_a" class="hide" cols="30" rows="3">{{old('commentary')}}</textarea>
                             </form>
