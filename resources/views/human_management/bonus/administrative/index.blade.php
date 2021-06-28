@@ -4,11 +4,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-       Bonificaciones de amdinistrativos y conductores <small></small>
+       Bonificaciones de administrativos y conductores <small></small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
-        <li class="active"><a href="#">Bonificaciones de amdinistrativos y conductores</a></li>
+        <li class="active"><a href="#">Bonificaciones de administrativos y conductores</a></li>
     </ol>
 </section>
 <section class="content">
@@ -30,6 +30,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>Código</th>
                             <th>Responsable</th>
                             <th>Aprobador</th>
                             <th>Periodo </th>
@@ -42,6 +43,7 @@
                         @foreach ($bonus as $item)
                             <tr>
                                 <td>{{ $item->id }}</td>
+                                <td>D-FR-29-{{ $item->id }}</td>
                                 <td>{{ $item->responsable->name }}</td>
                                 <td>{{ $item->approve ? $item->approve->name : '' }}</td>
                                 <td>{{ $item->start_date.' / '.$item->end_date }}</td>

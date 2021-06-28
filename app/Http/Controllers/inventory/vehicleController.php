@@ -122,6 +122,14 @@ class vehicleController extends Controller
             $path = Storage::putFileAs('public/inventory/vehicle', $file, $name);
             $request['first_aid_kit'] = $name;
         }
+        if ($request->hasFile('liability_insurances')) {
+            $file = $request->file('liability_insurances');
+            $str = Str::random(5);
+            $name = time().$str.'.'.$file->getClientOriginalExtension();
+            $size = $file->getClientSize() / 1000;
+            $path = Storage::putFileAs('public/inventory/vehicle', $file, $name);
+            $request['liability_insurance'] = $name;
+        }
         $request['status'] = 1;
         $vehicle = invVehicle::create($request->all());
         //Files
@@ -245,6 +253,16 @@ class vehicleController extends Controller
             $request['first_aid_kit'] = $name;
         }else {
             $request['first_aid_kit'] = $id->first_aid_kit;
+        }
+        if ($request->hasFile('liability_insurances')) {
+            $file = $request->file('liability_insurances');
+            $str = Str::random(5);
+            $name = time().$str.'.'.$file->getClientOriginalExtension();
+            $size = $file->getClientSize() / 1000;
+            $path = Storage::putFileAs('public/inventory/vehicle', $file, $name);
+            $request['liability_insurance'] = $name;
+        }else {
+            $request['liability_insurance'] = $id->liability_insurance;
         }
         $id->update($request->all());
         //Files

@@ -1,5 +1,5 @@
 @php
-    function expirateDate($enrollment_date,$soat_date,$gases_date,$technomechanical_date,$first_aid_kit_date)
+    function expirateDate($enrollment_date,$soat_date,$gases_date,$technomechanical_date)
     {
         if ($enrollment_date && $enrollment_date < now()) {
             return true;
@@ -11,9 +11,6 @@
             return true;
         }
         if ($technomechanical_date && $technomechanical_date < now()) {
-            return true;
-        }
-        if ($first_aid_kit_date && $first_aid_kit_date < now()) {
             return true;
         }
         return false;

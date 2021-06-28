@@ -40,7 +40,7 @@
                                             <p>{{ $id->plate }}</p>
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="num_enrollment">Numero de matricula</label>
+                                            <label for="num_enrollment">Número de matricula</label>
                                             <p>{{ $id->num_enrollment }}</p>
                                         </div>
                                         <div class="col-md-6">
@@ -92,12 +92,16 @@
                                             <p>{{ $id->toll_ship }}</p>
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="tires">Numero de llantas</label>
+                                            <label for="tires">Número de llantas</label>
                                             <p>{{ $id->tires }}</p>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="spare_tire">¿Tiene llanta de repuesto?</label>
                                             <p>{{ $id->spare_tire }}</p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="date_extinguisher">Fecha vencimiento de extintor</label>
+                                            <p>{{$id->date_extinguisher}}</p>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="status">Estado</label>
@@ -318,6 +322,47 @@
                                                     <span class="mailbox-attachment-size">
                                                         .
                                                         <a target="_black" href="/storage/inventory/vehicle/{{$id->first_aid_kit}}" class="btn btn-default btn-xs pull-right"><i class="fa fa-download"></i></a>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @else
+                                        <p>Sin archivo</p>
+                                    @endif
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="liability_insurances">Seguro de responsabilidad civil</label>
+                                    @if ($id->liability_insurance)
+                                            <p>Fecha vencimiento <small class="label {{ $id->liability_insurance_date < now() ? 'bg-red' : 'bg-blue' }}">{{ $id->liability_insurance_date ?? 'xxxx-xx-xx' }}</small></p>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                @php
+                                                    $type=explode('.',$id->liability_insurance)[count(explode('.',$id->liability_insurance)) - 1];
+                                                @endphp
+                                                <span class="mailbox-attachment-icon {{$type == "jpg" || $type == "png" || $type == "jpeg" ? 'has-img' : ''}}" id="icon">
+                                                    <div id="type">
+                                                        @if ($type=='pdf')
+                                                            <i class="fa fa-file-pdf"></i>
+                                                        @endif
+                                                        @if ($type=='docx' || $type=='doc')
+                                                            <i class="fa fa-file-word"></i>
+                                                        @endif
+                                                        @if ($type=='xlsx' || $type=='xls')
+                                                            <i class="fa  fa-file-excel"></i>
+                                                        @endif
+                                                        @if ($type=='pptx' || $type=='ppt')
+                                                            <i class="fa  fa-file-powerpoint"></i>
+                                                        @endif
+                                                        @if ($type == 'png' || $type == 'jpg' || $type == 'jpeg')
+                                                            <img src="/storage/inventory/vehicle/{{$id->liability_insurance}}" style="width: 100%;" alt="Attachment">
+                                                        @endif
+                                                    </div>
+                                                </span>
+                                                <div class="mailbox-attachment-info">
+                                                    <p class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> {{$id->liability_insurance}}</p>
+                                                    <span class="mailbox-attachment-size">
+                                                        .
+                                                        <a target="_black" href="/storage/inventory/vehicle/{{$id->liability_insurance}}" class="btn btn-default btn-xs pull-right"><i class="fa fa-download"></i></a>
                                                     </span>
                                                 </div>
                                             </div>

@@ -3,7 +3,7 @@
 @section('content')
 <section class="content-header">
     <h1>
-        REPORTE DE NOVEDADES DE NOMINA Y HORAS EXTRAS
+        Bonificaciones de administrativos y conductores
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>

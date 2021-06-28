@@ -1,5 +1,5 @@
 @php
-    function expirateDate($enrollment_date,$soat_date,$gases_date,$technomechanical_date,$first_aid_kit_date)
+    function expirateDate($enrollment_date,$soat_date,$gases_date,$technomechanical_date,$first_aid_kit_date,$date_extinguisher,$liability_insurance_date)
     {
         if ($enrollment_date && $enrollment_date < now()) {
             return true;
@@ -14,6 +14,12 @@
             return true;
         }
         if ($first_aid_kit_date && $first_aid_kit_date < now()) {
+            return true;
+        }
+        if ($date_extinguisher && $date_extinguisher < now()) {
+            return true;
+        }
+        if ($liability_insurance_date && $liability_insurance_date < now()) {
             return true;
         }
         return false;
@@ -32,7 +38,7 @@
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
         <li><a href="#">Logística</a></li>
         <li><a href="#">Inventario</a></li>
-        <li class="active">vehículos</li>
+        <li class="active">Vehículos</li>
     </ol>
 </section>
 {{-- Content main --}}
@@ -65,7 +71,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($vehicles as $item)
-                                <tr {!! expirateDate($item->enrollment_date,$item->soat_date,$item->gases_date,$item->technomechanical_date,$item->first_aid_kit_date)  ? 'class="bg-red" data-toggle="tooltip" data-placement="top" title="Tiene documentos vencidos"' : '' !!}}}>
+                                <tr {!! expirateDate($item->enrollment_date,$item->soat_date,$item->gases_date,$item->technomechanical_date,$item->first_aid_kit_date,$item->date_extinguisher,$item->liability_insurance_date)  ? 'class="bg-red" data-toggle="tooltip" data-placement="top" title="Tiene documentos vencidos"' : '' !!}}}>
                                     <td>{{$item->id}}</td>
                                     <td>{{$item->plate}}</td>
                                     <td>{{$item->brand}}</td>

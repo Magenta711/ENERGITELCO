@@ -78,7 +78,7 @@
                                 <input type="file" accept="image/*" class="hide files" id="avatars" name="avatars" value="{{ $id->avatars }}">
                             </div>
                             <div class="col-md-6">
-                                <label for="num_enrollment">Numero de matricula</label>
+                                <label for="num_enrollment">Número de matricula</label>
                                 <input type="text" class="form-control" id="num_enrollment" name="num_enrollment" value="{{ $id->num_enrollment }}">
                             </div>
                             <div class="col-md-6">
@@ -130,12 +130,16 @@
                                 <input type="text" class="form-control" id="toll_ship" name="toll_ship" value="{{ $id->toll_ship }}">
                             </div>
                             <div class="col-md-6">
-                                <label for="tires">Numero de llantas</label>
+                                <label for="tires">Número de llantas</label>
                                 <input type="text" class="form-control" id="tires" name="tires" value="{{ $id->tires }}">
                             </div>
                             <div class="col-md-6">
                                 <label for="spare_tire">¿Tiene llanta de repuesto?</label>
                                 <input type="text" class="form-control" id="spare_tire" name="spare_tire" value="{{ $id->spare_tire }}">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="date_extinguisher">Fecha vencimiento de extintor</label>
+                                <input type="text" class="form-control" id="date_extinguisher" name="date_extinguisher" value="{{ $id->date_extinguisher }}">
                             </div>
                             <div class="col-md-6">
                                 <label for="status">Estado</label>
@@ -384,6 +388,53 @@
                             <div class="col-md-6">
                                 <label for="first_aid_kit_date">Fecha de vencimiento botiquín</label>
                                 <input type="date" class="form-control" id="first_aid_kit_date" name="first_aid_kit_date" value="{{ $id->first_aid_kit_date }}">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="liability_insurances">Seguro de responsabilidad civil</label>
+                                @if ($id->liability_insurance)
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            @php
+                                                $type=explode('.',$id->liability_insurance)[count(explode('.',$id->liability_insurance)) - 1];
+                                            @endphp
+                                            <span class="mailbox-attachment-icon {{$type == "jpg" || $type == "png" || $type == "jpeg" ? 'has-img' : ''}}" id="icon">
+                                                <div id="type">
+                                                    @if ($type=='pdf')
+                                                        <i class="fa fa-file-pdf"></i>
+                                                    @endif
+                                                    @if ($type=='docx' || $type=='doc')
+                                                        <i class="fa fa-file-word"></i>
+                                                    @endif
+                                                    @if ($type=='xlsx' || $type=='xls')
+                                                        <i class="fa  fa-file-excel"></i>
+                                                    @endif
+                                                    @if ($type=='pptx' || $type=='ppt')
+                                                        <i class="fa  fa-file-powerpoint"></i>
+                                                    @endif
+                                                    @if ($type == 'png' || $type == 'jpg' || $type == 'jpeg')
+                                                        <img src="/storage/inventory/vehicle/{{$id->liability_insurance}}" style="width: 100%;" alt="Attachment">
+                                                    @endif
+                                                </div>
+                                            </span>
+                                            <div class="mailbox-attachment-info">
+                                                <p class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> {{$id->liability_insurance}}</p>
+                                                <span class="mailbox-attachment-size">
+                                                    .
+                                                    <a target="_black" href="/storage/inventory/vehicle/{{$id->liability_insurance}}" class="btn btn-default btn-xs pull-right"><i class="fa fa-download"></i></a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                                <label for="liability_insurances" class="form-control text-center"><i class="fa fa-upload"></i></label>
+                                <input type="file" class="hide files" id="liability_insurances" name="liability_insurances" value="{{ $id->liability_insurances }}">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="liability_insurance_date">Fecha de vencimiento seguro de responsabilidad civil</label>
+                                <input type="date" class="form-control" id="liability_insurance_date" name="liability_insurance_date" value="{{ $id->liability_insurance_date }}">
                             </div>
                         </div>
                     </div>

@@ -42,7 +42,7 @@
                                     <input type="file" accept="image/*" class="hide files" id="avatars" name="avatars" value="{{ old('avatars') }}">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="num_enrollment">Numero de matricula</label>
+                                    <label for="num_enrollment">Número de matricula</label>
                                     <input type="text" class="form-control" id="num_enrollment" name="num_enrollment" value="{{ old('num_enrollment') }}">
                                 </div>
                                 <div class="col-md-6">
@@ -94,12 +94,16 @@
                                     <input type="text" class="form-control" id="toll_ship" name="toll_ship" value="{{ old('toll_ship') }}">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="tires">Numero de llantas</label>
+                                    <label for="tires">Número de llantas</label>
                                     <input type="text" class="form-control" id="tires" name="tires" value="{{ old('tires') }}">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="spare_tire">¿Tiene llanta de repuesto?</label>
                                     <input type="text" class="form-control" id="spare_tire" name="spare_tire" value="{{ old('spare_tire') }}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="date_extinguisher">Fecha vencimiento de extintor</label>
+                                    <input type="text" class="form-control" id="date_extinguisher" name="date_extinguisher" value="{{ old('date_extinguisher') }}">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="status">Estado</label>
@@ -173,6 +177,17 @@
                                 <div class="col-md-6">
                                     <label for="first_aid_kit_date">Fecha de vencimiento botiquín</label>
                                     <input type="date" class="form-control" id="first_aid_kit_date" name="first_aid_kit_date" value="{{ old('first_aid_kit_date') }}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="liability_insurances">Seguro de responsabilidad civil</label>
+                                    <label for="liability_insurances" class="form-control text-center"><i class="fa fa-upload"></i></label>
+                                    <input type="file" class="hide files" id="liability_insurances" name="liability_insurances" value="{{ old('liability_insurances') }}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="liability_insurance_date">Fecha de vencimiento seguro de responsabilidad civil</label>
+                                    <input type="date" class="form-control" id="liability_insurance_date" name="liability_insurance_date" value="{{ old('liability_insurance_date') }}">
                                 </div>
                             </div>
                         </div>

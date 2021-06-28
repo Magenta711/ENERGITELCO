@@ -34,11 +34,12 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>Código</th>
                                     <th>Serial</th>
                                     <th>Marca</th>
-                                    <th>ROM</th>
-                                    <th>RAM</th>
+                                    <th>Modelo</th>
                                     <th>Estado</th>
+                                    <th>Asignado</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -46,10 +47,11 @@
                                 @foreach ($computers as $item)
                                 <tr>
                                     <td>{{$item->id}}</td>
+                                    <td>L-FR-11-{{$item->id}}</td>
                                     <td>{{$item->serial}}</td>
                                     <td>{{$item->brand}}</td>
-                                    <td>{{$item->rom}}</td>
-                                    <td>{{$item->ram}}</td>
+                                    <td>{{$item->model}}</td>
+                                    <td>{{$item->user ? $item->user->name : 'N/A'}}</td>
                                     <td>
                                         {{ ($item->status == '3') ? 'Asignado' : '' }}
                                         {{ ($item->status == '1') ? 'Sin asignar' : '' }}

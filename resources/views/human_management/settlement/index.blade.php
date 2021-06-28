@@ -28,6 +28,7 @@
                         <thead>
                             <tr>
                                 <th scope="col"></th>
+                                <th scope="col">Código</th>
                                 <th scope="col">Responsable</th>
                                 <th scope="col">Aprobador</th>
                                 <th scope="col">Funcionario</th>
@@ -40,6 +41,7 @@
                             @foreach ($settlements as $item)
                                 <tr>
                                     <td>{{$item->id}}</td>
+                                    <td>H-FR-32-{{$item->id}}</td>
                                     <td>{{$item->responsable->name}}</td>
                                     <td>{{$item->approve ? $item->approve->name:''}}</td>
                                     <td>{{$item->user->name}}</td>

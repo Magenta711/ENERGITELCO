@@ -3,12 +3,12 @@
 @section('content')
 <section class="content-header">
     <h1>
-        Bonificaciones de amdinistrativos y conductores
+        Bonificaciones de administrativos y conductores
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
         <li><a href="#">Formatos de gestión</a></li>
-        <li>Bonificaciones de amdinistrativos y conductores</li>
+        <li>Bonificaciones de administrativos y conductores</li>
         <li class="active">Crear</li>
     </ol>
 </section>

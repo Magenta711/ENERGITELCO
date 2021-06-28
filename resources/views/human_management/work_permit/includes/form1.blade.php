@@ -110,7 +110,7 @@
                     <option selected disabled>Seleccione la placa del vehículo</option>
                     @foreach ($vehicles as $item)
                         @php
-                            $state = expirateDate($item->enrollment_date,$item->soat_date,$item->gases_date,$item->technomechanical_date,$item->first_aid_kit_date);
+                            $state = expirateDate($item->enrollment_date,$item->soat_date,$item->gases_date,$item->technomechanical_date);
                         @endphp
                         <option {!! $state ? 'disabled' : '' !!} {{ old('vehicle_id') == $item->id ? 'selected' : ''}} value="{{$item->id}}">{{$item->plate}} {!! $state ? '(No mueva este vehículo, tiene documentos vencidos)' : '' !!}</small></option>
                     @endforeach

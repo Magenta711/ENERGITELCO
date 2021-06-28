@@ -27,6 +27,7 @@
                         <thead>
                             <tr>
                                 <th scope="col"></th>
+                                <th scope="col">Código</th>
                                 <th scope="col">Motivo</th>
                                 <th scope="col">Responsable</th>
                                 <th scope="col">Asistentes e invitados</th>
@@ -39,6 +40,7 @@
                             @foreach ($proceedings as $proceeding)
                             <tr>
                                 <th scope="row">{{ $proceeding->id }}</th>
+                                <th scope="row">D-FR-12-{{ $proceeding->id }}</th>
                                 <td scope="row">{{ $proceeding->affair }}</td>
                                 <td>{{ $proceeding->responsable->name }}</td>
                                 <td>
