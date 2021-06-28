@@ -592,18 +592,29 @@
                             <div class="col-sm-6"{{$id->coordinadorAcargo->name}}></div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-6"><strong>Fecha del permiso</strong></div>
+                            <div class="col-sm-6"><strong>Fecha de solicitud del permiso</strong></div>
                             <div class="col-sm-6">{{$id->created_at}}</div>
                         </div>
                         @if ($id->estado == 'Sin aprobar' && (auth()->user()->hasPermissionTo('Aprobar solicitud de Permisos de trabajo') || (auth()->user()->hasPermissionTo('Aprobar solicitudes permisos propios') && auth()->id() == $id->coordinador)))
                                 <div class="form-group">
+                                    <label for="fecha_valido_desde">Fecha y hora desde donde autoriza</label>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <input type="date" class="form-control" name="fecha_valido_desde" id="fecha_valido_desde" value="{{now()->format('Y-m-d')}}">
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <input type="time" class="form-control" name="hora_inicio" id="" value="{{now()->format('H:i')}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label for="fecha_hasta">Fecha y hora hasta donde autoriza</label>
                                     <div class="row">
                                         <div class="col-xs-6">
-                                            <input type="date" class="form-control" name="fecha_valido_hasta" id="fecha_hasta">
+                                            <input type="date" class="form-control" name="fecha_valido_hasta" id="fecha_hasta" value="{{old('fecha_valido_hasta') ?? now()->format('Y-m-d')}}">
                                         </div>
                                         <div class="col-xs-6">
-                                            <input type="time" class="form-control" name="hora_final" id="">
+                                            <input type="time" class="form-control" name="hora_final" id="" value="{{old('hora_final') ?? '18:00'}}">
                                         </div>
                                     </div>
                                 </div>

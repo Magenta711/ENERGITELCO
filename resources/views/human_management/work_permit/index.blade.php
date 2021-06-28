@@ -17,14 +17,10 @@
             <div class="box-header">
                 <h3 class="box-title">Lista de permisos de trabajo</h3>
                 <div class="box-tools">
-                    {{-- @if ($list == 1)
-                        @can('Lista de bonificaciones de permisos de trabajo') --}}
-                            <a href="{{ route('work_permit',['all' => true]) }}" class="btn btn-sm btn-warning">Todos</a>
-                        {{-- @endcan
-                    @endif --}}
-                    {{-- @can($text_permission_create) --}}
-                            <a href="{{route('work_permit_create')}}" class="btn btn-sm btn-success">Crear</a>
-                    {{-- @endcan --}}
+                    <a href="{{ route('work_permit',['all' => true]) }}" class="btn btn-sm btn-warning">Todos</a>
+                    @can('Digitar formulario de Permisos de trabajo')
+                        <a href="{{route('work_permit_create')}}" class="btn btn-sm btn-success">Crear</a>
+                    @endcan
                 </div>
             </div>
             <div class="box-body">
@@ -73,13 +69,15 @@
                                     <small class="label {{($work_permit->estado == 'Sin aprobar') ? 'bg-green' : (($work_permit->estado == 'Aprobado') ? 'bg-blue' : 'bg-red') }}">{{$work_permit->estado}}</small>
                                 </td>
                                 <td>
-                                    <a href="{{route('work_permit_show',$work_permit->id)}}" class="btn btn-sm btn-success">Ver</a>
+                                    @can('Consultar permisos de trabajo')
+                                        <a href="{{route('work_permit_show',$work_permit->id)}}" class="btn btn-sm btn-success">Ver</a>
+                                    @endcan
                                     @if ($work_permit->estado == 'Aprobado')
-                                        {{-- @can($text_permission) --}}
+                                        @can('Descargar PDF de permisos de trabajo')
                                             <a href="{{route("work_permit_download",$work_permit->id)}}" class="btn btn-warning btn-sm">Descargar</a>
-                                        {{-- @endcan --}}
+                                        @endcan
                                     @endif
-                                    {{-- @can($text_permission_delete) --}}
+                                    @can('Eliminar formato de permisos de trabajo')
                                         <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete_{{$work_permit->id}}">Eliminar</button>
                                         <div class="modal fade" id="delete_{{$work_permit->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-md">
@@ -104,7 +102,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    {{-- @endcan --}}
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

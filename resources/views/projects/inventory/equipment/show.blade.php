@@ -41,6 +41,10 @@
                             <p>{{$id->brand}}</p>
                         </div>
                     </div>
+                    <div class="col-md-12">
+                        <label for="commentary">Comentarios</label>
+                        <p>{{$id->commentary}}</p>
+                    </div>
                 </div>
             </div>
         </div>

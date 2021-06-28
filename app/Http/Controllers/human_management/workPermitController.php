@@ -330,6 +330,8 @@ class workPermitController extends Controller
     {
         if ($request->status == 'Aprobado') {
             $request->validate([
+                'fecha_valido_desde' => 'required',
+                'hora_inicio' => 'required',
                 'fecha_valido_hasta' => 'required',
                 'hora_final' => 'required'
             ]);
@@ -337,12 +339,12 @@ class workPermitController extends Controller
             $id->update([
                 'estado'=>"Aprobado",
                 'fecha_valido_hasta'=>$request->fecha_valido_hasta,
-                'fecha_validez_permiso'=>now()->format('Y-m-d'),
+                'fecha_validez_permiso'=>now(),
                 'hora_final' => $request->hora_final,
                 'fecha_aprobacion'=>now()->format('Y-m-d'),
-                'hora_aprobacion'=>now()->format('H:i:s'),
-                'fecha_valido_desde'=>now()->format('Y-m-d'),
-                'hora_inicio'=>now()->format('H:i:s'),
+                'hora_aprobacion'=>now(),
+                'fecha_valido_desde'=>$request->fecha_inicio,
+                'hora_inicio'=>$request->hora_inicio,
                 'coordinador' => auth()->id(),
                 'commentary'=>$request->commentary,
             ]);

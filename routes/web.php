@@ -730,6 +730,7 @@ Route::put('human_management/bonus/minor_box/{id}','human_management\bonus\Minor
 Route::get('human_management/bonus/minor_box/{id}/export','human_management\bonus\MinorBoxController@export')->name('bonus_minor_box_export');
 Route::post('human_management/bonus/minor_box/add_user','human_management\bonus\MinorBoxController@add_user')->name('bonus_minor_box_add_user');
 
+// inventarios de equipos
 Route::get('project/mintic/inventory/equipment','projects\inventory\EquipmentController@index')->name('mintic_inventory_equipment');
 Route::get('project/mintic/inventory/equipment/create','projects\inventory\EquipmentController@create')->name('mintic_inventory_equipment_create');
 Route::post('project/mintic/inventory/equipment','projects\inventory\EquipmentController@store')->name('mintic_inventory_equipment_store');
@@ -738,6 +739,7 @@ Route::get('project/mintic/inventory/equipment/{id}/edit','projects\inventory\Eq
 Route::put('project/mintic/inventory/equipment/{id}','projects\inventory\EquipmentController@update')->name('mintic_inventory_equipment_update');
 Route::delete('project/mintic/inventory/equipment/{id}','projects\inventory\EquipmentController@destroy')->name('mintic_inventory_equipment_delete');
 
+//Inventarios de consumible
 Route::get('project/mintic/inventory/consumable','projects\inventory\ConsumablesController@index')->name('mintic_inventory_consumables');
 Route::get('project/mintic/inventory/consumable/create','projects\inventory\ConsumablesController@create')->name('mintic_inventory_consumables_create');
 Route::post('project/mintic/inventory/consumable','projects\inventory\ConsumablesController@store')->name('mintic_inventory_consumables_store');
@@ -746,6 +748,7 @@ Route::get('project/mintic/inventory/consumable/{id}/edit','projects\inventory\C
 Route::put('project/mintic/inventory/consumable/{id}','projects\inventory\ConsumablesController@update')->name('mintic_inventory_consumables_update');
 Route::delete('project/mintic/inventory/consumable/{id}','projects\inventory\ConsumablesController@destroy')->name('mintic_inventory_consumables_delete');
 
+//Inventario de herramientas
 Route::get('execution_works/inventory/tool','execution_works\invToolController@index')->name('inventory_tools');
 Route::get('execution_works/inventory/tool/create','execution_works\invToolController@create')->name('inventory_tools_create');
 Route::post('execution_works/inventory/tool','execution_works\invToolController@store')->name('inventory_tools_store');
@@ -754,6 +757,7 @@ Route::get('execution_works/inventory/tool/{id}/edit','execution_works\invToolCo
 Route::put('execution_works/inventory/tool/{id}','execution_works\invToolController@update')->name('inventory_tools_update');
 Route::delete('execution_works/inventory/tool/{id}','execution_works\invToolController@destroy')->name('inventory_tools_delete');
 
+// actas
 Route::get('human_management/proceeding','human_management\proceedingController@index')->name('proceeding');
 Route::get('human_management/proceeding/create','human_management\proceedingController@create')->name('proceeding_create');
 Route::post('human_management/proceeding','human_management\proceedingController@store')->name('proceeding_store');
@@ -818,3 +822,13 @@ Route::get('answers/guest/ready','forms\answerController@ready')->name("answers_
 Route::delete('answers/{id}','forms\answerController@delete')->name("answers_delete");
 Route::get('answers/login/{form}','forms\answerController@register_email')->name("answers_email");
 Route::post('answers/login/{form}','forms\answerController@register_email_store')->name("answers_email_store");
+
+Route::get('human_management/assistance','human_management\assistanceController@index')->name('assistance');
+Route::get('human_management/assistance/create','human_management\assistanceController@create')->name('assistance_create');
+Route::post('human_management/assistance','human_management\assistanceController@store')->name('assistance_store');
+Route::get('human_management/assistance/show/{id}','human_management\assistanceController@show')->name('assistance_show');
+Route::patch('human_management/assistance/{id}','human_management\assistanceController@approve')->name('assistance_approve');
+Route::get('human_management/assistance/{id}/edit','human_management\assistanceController@edit')->name('assistance_edit');
+Route::put('human_management/assistance/{id}','human_management\assistanceController@update')->name('assistance_update');
+Route::get('human_management/assistance/download/{id}','human_management\assistanceController@download')->name('assistance_download');
+Route::delete('human_management/assistance/{id}','human_management\assistanceController@destroy')->name('assistance_delete');

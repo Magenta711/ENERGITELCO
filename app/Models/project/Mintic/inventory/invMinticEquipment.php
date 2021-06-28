@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class invMinticEquipment extends Model
 {
-    protected $fillable = ['serial','item','brand','status'];
+    protected $fillable = ['serial','item','brand','status','commentary'];
 
     public function productables()
     {

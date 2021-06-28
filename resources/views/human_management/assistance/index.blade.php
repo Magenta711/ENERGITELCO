@@ -2,13 +2,12 @@
 @section('content')
 <section class="content-header">
     <h1>
-        
+        Asistencias
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
         <li><a href="#"> Gestión humana</a></li>
-        <li><a href="#"> Formatos</a></li>
-        <li class="active"></li>
+        <li class="active">Asistencia</li>
     </ol>
 </section>
 <section class="content">
@@ -17,7 +16,7 @@
             <div class="box-header">
                 <h3 class="box-title"></h3>
                 <div class="box-tools">
-                    <a href="#" class="btn btn-sm btn-success">Crear</a>
+                    <a href="{{route('assistance_create')}}" class="btn btn-sm btn-success">Crear</a>
                 </div>
             </div>
             <div class="box-body">
@@ -26,14 +25,17 @@
                         <thead>
                             <tr>
                                 <th scope="col"></th>
+                                <th scope="col">Responsable</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @foreach ($improvement_actions as $item)
+                            @foreach ($assistances as $item)
                                 <tr>
                                     <th scope="row">{{ $item->id }}</th>
                                 </tr>
-                            @endforeach --}}
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

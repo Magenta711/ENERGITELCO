@@ -43,6 +43,10 @@
                                 <input type="text" class="form-control" name="brand" id="brand" value="{{old('brand')}}">
                             </div>
                         </div>
+                        <div class="col-md-12">
+                            <label for="commentary">Comentarios</label>
+                            <textarea name="commentary" id="commentary" cols="30" rows="3">{{old('commentary')}}</textarea>
+                        </div>
                     </div>
                 </div>
                 <div class="box-footer">
