@@ -33,7 +33,13 @@
                         <tbody>
                             @foreach ($assistances as $item)
                                 <tr>
-                                    <th scope="row">{{ $item->id }}</th>
+                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $item->responsable->name }}</td>
+                                    <td>{{ $item->date }}</td>
+                                    <td>
+                                        <a href="{{route('assistance_show',$item->id)}}" class="btn btn-sm btn-success">Ver</a>
+                                        <a href="{{route('assistance_edit',$item->id)}}" class="btn btn-sm btn-primary">Editar</a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

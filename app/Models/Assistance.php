@@ -13,4 +13,9 @@ class Assistance extends Model
     {
         return $this->hasOne(User::class, 'id','responsable_id');
     }
+    
+    public function attendees()
+    {
+        return $this->hasMany(AssistanceUser::class,'assistance_id','id');
+    }
 }

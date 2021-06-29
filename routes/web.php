@@ -827,8 +827,8 @@ Route::get('human_management/assistance','human_management\assistanceController@
 Route::get('human_management/assistance/create','human_management\assistanceController@create')->name('assistance_create');
 Route::post('human_management/assistance','human_management\assistanceController@store')->name('assistance_store');
 Route::get('human_management/assistance/show/{id}','human_management\assistanceController@show')->name('assistance_show');
-Route::patch('human_management/assistance/{id}','human_management\assistanceController@approve')->name('assistance_approve');
 Route::get('human_management/assistance/{id}/edit','human_management\assistanceController@edit')->name('assistance_edit');
-Route::put('human_management/assistance/{id}','human_management\assistanceController@update')->name('assistance_update');
+Route::post('human_management/assistance/{id}','human_management\assistanceController@update')->name('assistance_update');
 Route::get('human_management/assistance/download/{id}','human_management\assistanceController@download')->name('assistance_download');
+Route::patch('human_management/assistance/{id}','human_management\assistanceController@approve')->name('assistance_approve');
 Route::delete('human_management/assistance/{id}','human_management\assistanceController@destroy')->name('assistance_delete');

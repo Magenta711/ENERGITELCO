@@ -32,7 +32,7 @@
             <div class="box-header">
                 <h3 class="box-title">Crear asistencia</h3>
                 <div class="box-tools">
-                    <a href="#" class="btn btn-sm btn-primary">Volver</a>
+                    <a href="{{route('assistance')}}" class="btn btn-sm btn-primary">Volver</a>
                 </div>
             </div>
             <form action="{{route('assistance_store')}}" method="post">
