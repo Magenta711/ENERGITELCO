@@ -832,3 +832,14 @@ Route::put('human_management/assistance/{id}','human_management\assistanceContro
 Route::get('human_management/assistance/download/{id}','human_management\assistanceController@download')->name('assistance_download');
 Route::patch('human_management/assistance/{id}','human_management\assistanceController@approve')->name('assistance_approve');
 Route::delete('human_management/assistance/{id}','human_management\assistanceController@destroy')->name('assistance_delete');
+
+//frente de traajo
+Route::get('tasking','taskingController@index')->name('tasking');
+// Route::get('tasking/create','taskingController@create')->name('tasking_create');
+Route::post('tasking','taskingController@store')->name('tasking_store');
+// Route::get('tasking/show/{id}','taskingController@show')->name('tasking_show');
+// Route::get('tasking/{id}/edit','taskingController@edit')->name('tasking_edit');
+Route::put('tasking/{id}','taskingController@update')->name('tasking_update');
+// Route::get('tasking/download/{id}','taskingController@download')->name('tasking_download');
+// Route::patch('tasking/{id}','taskingController@approve')->name('tasking_approve');
+Route::delete('tasking/{id}','taskingController@destroy')->name('tasking_delete');

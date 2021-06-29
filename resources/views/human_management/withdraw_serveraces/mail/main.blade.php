@@ -55,7 +55,7 @@
                 <table class="table-form">
                     <thead>
                         <tr>
-                            @if ($id->reason == 'carta laboral')
+                            @if ($format->reason == 'carta laboral')
                                 <th colspan="4">SOLICITUD DE CARTA LABORAL</th>
                             @else
                                 <th colspan="4">SOLICITUD DE CARTA DE RETIRO CESANTÍAS</th>

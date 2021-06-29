@@ -76,8 +76,8 @@
 <!-- AdminLTE for demo purposes -->
 {{-- <script src="{{asset("assets/$theme/dist/js/demo.js")}}"></script> --}}
 
-<script src="{{asset("js/datatables/jquery.dataTables.min.js")}}" defer></script>
-<script src="{{asset("js/datatables/dataTables.bootstrap4.min.js")}}" defer></script>
+<script src="{{asset("js/datatables/jquery.dataTables.min.js")}}" ></script>
+<script src="{{asset("js/datatables/dataTables.bootstrap4.min.js")}}" ></script>
 <script src="{{asset("js/datatables/sweetalert2.js")}}"></script>
 <script src="{{asset("js/main.js")}}"></script>
 @yield('js')
