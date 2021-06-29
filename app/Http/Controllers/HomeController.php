@@ -19,11 +19,13 @@ use App\Models\Provider;
 use App\Models\SuggestionsMailbox;
 use App\Models\SystemMessages;
 use App\Models\Work8;
+use App\Models\Work8Users;
 use App\Models\WorkWithUs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Barryvdh\DomPDF\Facade as PDF;
+use DB;
 
 class HomeController extends Controller
 {
@@ -75,7 +77,7 @@ class HomeController extends Controller
         $providers = Provider::where('state',1)->count();
         $interviews = interview::count();
         $job_application = WorkWithUs::count();
-        $proof_payment = Work8::where('estado','Aprobado')->get()->last();
+        $proof_payment = Work8Users::where('user_id',auth()->id())->get()->last();
         return view('home',compact('usuarios','total_sin_aprobar','trabajos1','bill_types','start_mesage','proyectos','customers','providers','job_application','interviews','proof_payment'));
     }
 

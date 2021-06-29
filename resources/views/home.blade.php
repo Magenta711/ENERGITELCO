@@ -344,16 +344,16 @@
             </div>
             <!-- /.box -->
         </div>
-        @if ($proof_payment && $proof_payment->thereIsPaymentForMe())
+        @if ($proof_payment)
             <div class="col-md-4">
                 <div class="box box-danger">
                     <div class="box-header with-border">
                         <h3 class="box-title">
                             <div class="col-xs-8 col-sm-10 col-md-9">
-                                Descargar comprobante de pago {{ $proof_payment->start_date }} - {{ $proof_payment->end_date }}
+                                Descargar comprobante de pago {{ $proof_payment->work->start_date }} - {{ $proof_payment->work->end_date }}
                             </div>
                             <div class="col-xs-4 col-sm-2 col-md-3">
-                                <a href="{{route('payroll_overtime_news_report_export',$proof_payment->id)}}" class="btn btn-danger">
+                                <a href="{{route('payroll_overtime_news_report_export',$proof_payment->work->id)}}" class="btn btn-danger">
                                     <i class="fa fa-download"></i>
                                 </a>
                             </div>
