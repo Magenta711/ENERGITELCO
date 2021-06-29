@@ -46,8 +46,10 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
+                                <td>Asistencia</td>
                                 <td>Documento</td>
                                 <td>Nombre</td>
+                                <td>Cargo</td>
                                 <td>Oficina</td>
                                 <td>Campo</td>
                                 <td>Hora de llegada</td>
@@ -61,13 +63,15 @@
                                     $hasPermission = hasPermission($user->id,$arrayPermissionUsers);
                                 @endphp
                                 <tr>
+                                    <td><input type="checkbox" class="assistance_check" name="assistance[{{$user->id}}]" value="{{$user->id}}" id="assistance_{{$user->id}}" {{ $hasPermission ? 'checked' : ''}}></td>
                                     <td>{{$user->cedula}}</td>
                                     <td>{{$user->name}}</td>
-                                    <td><input type="radio" name="where[{{$user->id}}]" id="" checked></td>
-                                    <td><input type="radio" name="where[{{$user->id}}]" id="" {{ $hasPermission ? 'checked' : ''}}></td>
-                                    <td><input type="time" name="start_time[{{$user->id}}]" class="form-control" value="{{$hasPermission ? $hasPermission['startTime'] : '07:30'}}" {{ $hasPermission ? 'readonly' : ''}}></td>
-                                    <td><input type="time" name="end_time[{{$user->id}}]" class="form-control" value="{{$hasPermission ? $hasPermission['endTime'] : '17:00'}}" {{ $hasPermission ? 'readonly' : ''}}></td>
-                                    <td><textarea name="comentary[{{$user->id}}]" id="" cols="30" rows="2" class="form-control"></textarea></td>
+                                    <td>{{$user->position->name}}</td>
+                                    <td><input type="radio" name="where[{{$user->id}}]" id="where_1_{{$user->id}}" value="Oficina" disabled></td>
+                                    <td><input type="radio" name="where[{{$user->id}}]" {{ $hasPermission ? 'checked' : ''}} id="where_2_{{$user->id}}" value="Campo" disabled></td>
+                                    <td><input type="time" name="start_time[{{$user->id}}]" id="start_time_{{$user->id}}" class="form-control" value="{{$hasPermission ? $hasPermission['startTime'] : '07:30'}}" disabled></td>
+                                    <td><input type="time" name="end_time[{{$user->id}}]" id="end_time_{{$user->id}}" class="form-control" value="{{$hasPermission ? $hasPermission['endTime'] : '17:00'}}" disabled></td>
+                                    <td><textarea name="commentary[{{$user->id}}]" cols="30" rows="2" class="form-control"></textarea></td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -80,4 +84,25 @@
             </form>
         </div>
     </section>
+@endsection
+
+@section('js')
+    <script>
+        var assistance_users = $('.assistance_check');
+        for (let i = 0; i < assistance_users.length; i++) {
+            let user = assistance_users[i].id.split('_')[1];
+            assistance(user,assistance_users[i].checked);
+        }
+        $('.assistance_check').click(function () {
+            let user = this.id.split('_')[1];
+            assistance(user,this.checked);
+        });
+        function assistance(user,status) {
+            console.log(status);
+            $('#start_time_'+user).prop("disabled", !status);
+            $('#end_time_'+user).prop("disabled", !status);
+            $('#where_1_'+user).prop("disabled", !status);
+            $('#where_2_'+user).prop("disabled", !status);
+        }
+    </script>
 @endsection
