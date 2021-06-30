@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\invVehicle;
+use App\Models\project\Mintic\inventory\invMinticConsumable;
+use App\Models\project\Mintic\inventory\invMinticEquipment;
 use App\Models\project\Mintic\Mintic_School;
 use App\Models\Work1;
 use App\User;
@@ -10,6 +12,11 @@ use Illuminate\Http\Request;
 
 class taskingController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('verified');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +28,9 @@ class taskingController extends Controller
         $mintics = Mintic_School::get();
         $works = Work1::get();
         $vehicles = invVehicle::get();
-        return view('tasking.index',compact('users','mintics','works','vehicles'));
+        $consumables = invMinticConsumable::where('status',1)->get();
+        $equipments = invMinticEquipment::where('status',1)->get();
+        return view('tasking.index',compact('users','mintics','works','vehicles','equipments','consumables'));
     }
 
     /**
@@ -42,7 +51,8 @@ class taskingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request;
+        
     }
 
     /**
