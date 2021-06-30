@@ -51,85 +51,85 @@
                                     <label for="department">Departamento</label>
                                     <select name="department" id="department" disabled class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona el departamento" style="width: 100%;" data-select2-id="3" tabindex="-1" aria-hidden="true">
                                         <option disabled selected></option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="ABEJORRAL" value="ABEJORRAL">ABEJORRAL</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="ABRIAQUÍ" value="ABRIAQUÍ">ABRIAQUÍ</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="ALEJANDRÍA" value="ALEJANDRÍA">ALEJANDRÍA</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="AMAGA" value="AMAGA">AMAGA</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="AMALFI" value="AMALFI">AMALFI</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="ANDES" value="ANDES">ANDES</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="ANGOSTURA" value="ANGOSTURA">ANGOSTURA</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="ANORI" value="ANORI">ANORI</option>
-                                        <option style="display:none" class="CALDAS" data-select2-id="ARANZAZU" value="ARANZAZU">ARANZAZU</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="ARBOLETES" value="ARBOLETES">ARBOLETES</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="ARGELIA" value="ARGELIA">ARGELIA</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="BARBOSA" value="BARBOSA">BARBOSA</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="BETULIA" value="BETULIA">BETULIA</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="BRICEÑO" value="BRICEÑO">BRICEÑO</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="BURITICÁ" value="BURITICÁ">BURITICÁ</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="CACERES" value="CACERES">CACERES</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="CAMPAMENTO" value="CAMPAMENTO">CAMPAMENTO</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="CAÑASGORDAS" value="CAÑASGORDAS">CAÑASGORDAS</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="CARMEN DE VIVORAL" value="CARMEN DE VIVORAL">CARMEN DE VIVORAL</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="CAROLINA" value="CAROLINA">CAROLINA</option>
-                                        <option style="display:none" class="CALDAS" data-select2-id="Chinchina" value="Chinchina">Chinchina</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="DABEIDA" value="DABEIDA">DABEIDA</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="DON MATIAS" value="DON MATIAS">DON MATIAS</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="EL BAGRE" value="EL BAGRE">EL BAGRE</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="EL CARMEN DE VIBORAL" value="EL CARMEN DE VIBORAL">EL CARMEN DE VIBORAL</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="EL PEÑOL" value="EL PEÑOL">EL PEÑOL</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="ENTRERRIOS" value="ENTRERRIOS">ENTRERRIOS</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="ENVIGADO" value="ENVIGADO">ENVIGADO</option>
-                                        <option style="display:none" class="CALDAS" data-select2-id="FILADELFIA" value="FILADELFIA">FILADELFIA</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="FREDONIA" value="FREDONIA">FREDONIA</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="FRONTINO" value="FRONTINO">FRONTINO</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="GOMEZ PLATA" value="GOMEZ PLATA">GOMEZ PLATA</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="GRANADA" value="GRANADA">GRANADA</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="GUADALUPE" value="GUADALUPE">GUADALUPE</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="GUARNE" value="GUARNE">GUARNE</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="GUATAPÉ" value="GUATAPÉ">GUATAPÉ</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="HISPANIA" value="HISPANIA">HISPANIA</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="ITUANGO" value="ITUANGO">ITUANGO</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="JARDÍN" value="JARDÍN">JARDÍN</option>
-                                        <option style="display:none" class="CALDAS" data-select2-id="LA DORADA" value="LA DORADA">LA DORADA</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="LA PINTADA" value="LA PINTADA">LA PINTADA</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="LA UNIÓN" value="LA UNIÓN">LA UNIÓN</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="LIBORINA" value="LIBORINA">LIBORINA</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="MACEO" value="MACEO">MACEO</option>
-                                        <option style="display:none" class="CALDAS" data-select2-id="MANIZALES" value="MANIZALES">MANIZALES</option>
-                                        <option style="display:none" class="CALDAS" data-select2-id="MANZANARES" value="MANZANARES">MANZANARES</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="MARINILLA" value="MARINILLA">MARINILLA</option>
-                                        <option style="display:none" class="CALDAS" data-select2-id="MARQUETALIA" value="MARQUETALIA">MARQUETALIA</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="MEDELLÍN" value="MEDELLÍN">MEDELLÍN</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="MONTEBELLO" value="MONTEBELLO">MONTEBELLO</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="MURINDÓ" value="MURINDÓ">MURINDÓ</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="MUTATÁ" value="MUTATÁ">MUTATÁ</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="NECOCLÍ" value="NECOCLÍ">NECOCLÍ</option>
-                                        <option style="display:none" class="CALDAS" data-select2-id="NEIRA" value="NEIRA">NEIRA</option>
-                                        <option style="display:none" class="CALDAS" data-select2-id="PACORA" value="PACORA">PACORA</option>
-                                        <option style="display:none" class="CALDAS" data-select2-id="PENSILVANIA" value="PENSILVANIA">PENSILVANIA</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="PEQUE" value="PEQUE">PEQUE</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="PUERTO TRIUNFO" value="PUERTO TRIUNFO">PUERTO TRIUNFO</option>
-                                        <option style="display:none" class="CALDAS" data-select2-id="RIOSUCIO" value="RIOSUCIO">RIOSUCIO</option>
-                                        <option style="display:none" class="CALDAS" data-select2-id="RISARALDA" value="RISARALDA">RISARALDA</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="SABANALARGA" value="SABANALARGA">SABANALARGA</option>
-                                        <option style="display:none" class="CALDAS" data-select2-id="SALAMINA" value="SALAMINA">SALAMINA</option>
-                                        <option style="display:none" class="CALDAS" data-select2-id="SAMANÁ" value="SAMANÁ">SAMANÁ</option>
-                                        <option style="display:none" class="CALDAS" data-select2-id="SAN ANDRES DE CUERQUIA" value="SAN ANDRES DE CUERQUIA">SAN ANDRES DE CUERQUIA</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="SAN JOSÉ" value="SAN JOSÉ">SAN JOSÉ</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="SAN PEDRO" value="SAN PEDRO">SAN PEDRO</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="SAN PEDRO DE LOS MILAGROS" value="SAN PEDRO DE LOS MILAGROS">SAN PEDRO DE LOS MILAGROS</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="SANTA ROSA DE OSOS" value="SANTA ROSA DE OSOS">SANTA ROSA DE OSOS</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="SONSÓN" value="SONSÓN">SONSÓN</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="SOPETRÁN" value="SOPETRÁN">SOPETRÁN</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="TAMESIS" value="TAMESIS">TAMESIS</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="TARAZÁ" value="TARAZÁ">TARAZÁ</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="TOLEDO" value="TOLEDO">TOLEDO</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="VALDIVIA" value="VALDIVIA">VALDIVIA</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="VEGACHÍ" value="VEGACHÍ">VEGACHÍ</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="YALÁ" value="YALÁ">YALÁ</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="YARUMAL" value="YARUMAL">YARUMAL</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="YOLOMBÓ" value="YOLOMBÓ">YOLOMBÓ</option>
-                                        <option style="display:none" class="ANTIOQUIA" data-select2-id="ZARAGOZA" value="ZARAGOZA">ZARAGOZA</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="ABEJORRAL" value="ABEJORRAL">ABEJORRAL</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="ABRIAQUÍ" value="ABRIAQUÍ">ABRIAQUÍ</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="ALEJANDRÍA" value="ALEJANDRÍA">ALEJANDRÍA</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="AMAGA" value="AMAGA">AMAGA</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="AMALFI" value="AMALFI">AMALFI</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="ANDES" value="ANDES">ANDES</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="ANGOSTURA" value="ANGOSTURA">ANGOSTURA</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="ANORI" value="ANORI">ANORI</option>
+                                        <option class="option-department CALDAS" data-select2-id="ARANZAZU" value="ARANZAZU">ARANZAZU</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="ARBOLETES" value="ARBOLETES">ARBOLETES</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="ARGELIA" value="ARGELIA">ARGELIA</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="BARBOSA" value="BARBOSA">BARBOSA</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="BETULIA" value="BETULIA">BETULIA</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="BRICEÑO" value="BRICEÑO">BRICEÑO</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="BURITICÁ" value="BURITICÁ">BURITICÁ</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="CACERES" value="CACERES">CACERES</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="CAMPAMENTO" value="CAMPAMENTO">CAMPAMENTO</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="CAÑASGORDAS" value="CAÑASGORDAS">CAÑASGORDAS</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="CARMEN DE VIVORAL" value="CARMEN DE VIVORAL">CARMEN DE VIVORAL</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="CAROLINA" value="CAROLINA">CAROLINA</option>
+                                        <option class="option-department CALDAS" data-select2-id="Chinchina" value="Chinchina">Chinchina</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="DABEIDA" value="DABEIDA">DABEIDA</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="DON MATIAS" value="DON MATIAS">DON MATIAS</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="EL BAGRE" value="EL BAGRE">EL BAGRE</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="EL CARMEN DE VIBORAL" value="EL CARMEN DE VIBORAL">EL CARMEN DE VIBORAL</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="EL PEÑOL" value="EL PEÑOL">EL PEÑOL</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="ENTRERRIOS" value="ENTRERRIOS">ENTRERRIOS</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="ENVIGADO" value="ENVIGADO">ENVIGADO</option>
+                                        <option class="option-department CALDAS" data-select2-id="FILADELFIA" value="FILADELFIA">FILADELFIA</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="FREDONIA" value="FREDONIA">FREDONIA</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="FRONTINO" value="FRONTINO">FRONTINO</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="GOMEZ PLATA" value="GOMEZ PLATA">GOMEZ PLATA</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="GRANADA" value="GRANADA">GRANADA</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="GUADALUPE" value="GUADALUPE">GUADALUPE</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="GUARNE" value="GUARNE">GUARNE</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="GUATAPÉ" value="GUATAPÉ">GUATAPÉ</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="HISPANIA" value="HISPANIA">HISPANIA</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="ITUANGO" value="ITUANGO">ITUANGO</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="JARDÍN" value="JARDÍN">JARDÍN</option>
+                                        <option class="option-department CALDAS" data-select2-id="LA DORADA" value="LA DORADA">LA DORADA</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="LA PINTADA" value="LA PINTADA">LA PINTADA</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="LA UNIÓN" value="LA UNIÓN">LA UNIÓN</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="LIBORINA" value="LIBORINA">LIBORINA</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="MACEO" value="MACEO">MACEO</option>
+                                        <option class="option-department CALDAS" data-select2-id="MANIZALES" value="MANIZALES">MANIZALES</option>
+                                        <option class="option-department CALDAS" data-select2-id="MANZANARES" value="MANZANARES">MANZANARES</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="MARINILLA" value="MARINILLA">MARINILLA</option>
+                                        <option class="option-department CALDAS" data-select2-id="MARQUETALIA" value="MARQUETALIA">MARQUETALIA</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="MEDELLÍN" value="MEDELLÍN">MEDELLÍN</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="MONTEBELLO" value="MONTEBELLO">MONTEBELLO</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="MURINDÓ" value="MURINDÓ">MURINDÓ</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="MUTATÁ" value="MUTATÁ">MUTATÁ</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="NECOCLÍ" value="NECOCLÍ">NECOCLÍ</option>
+                                        <option class="option-department CALDAS" data-select2-id="NEIRA" value="NEIRA">NEIRA</option>
+                                        <option class="option-department CALDAS" data-select2-id="PACORA" value="PACORA">PACORA</option>
+                                        <option class="option-department CALDAS" data-select2-id="PENSILVANIA" value="PENSILVANIA">PENSILVANIA</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="PEQUE" value="PEQUE">PEQUE</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="PUERTO TRIUNFO" value="PUERTO TRIUNFO">PUERTO TRIUNFO</option>
+                                        <option class="option-department CALDAS" data-select2-id="RIOSUCIO" value="RIOSUCIO">RIOSUCIO</option>
+                                        <option class="option-department CALDAS" data-select2-id="RISARALDA" value="RISARALDA">RISARALDA</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="SABANALARGA" value="SABANALARGA">SABANALARGA</option>
+                                        <option class="option-department CALDAS" data-select2-id="SALAMINA" value="SALAMINA">SALAMINA</option>
+                                        <option class="option-department CALDAS" data-select2-id="SAMANÁ" value="SAMANÁ">SAMANÁ</option>
+                                        <option class="option-department CALDAS" data-select2-id="SAN ANDRES DE CUERQUIA" value="SAN ANDRES DE CUERQUIA">SAN ANDRES DE CUERQUIA</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="SAN JOSÉ" value="SAN JOSÉ">SAN JOSÉ</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="SAN PEDRO" value="SAN PEDRO">SAN PEDRO</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="SAN PEDRO DE LOS MILAGROS" value="SAN PEDRO DE LOS MILAGROS">SAN PEDRO DE LOS MILAGROS</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="SANTA ROSA DE OSOS" value="SANTA ROSA DE OSOS">SANTA ROSA DE OSOS</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="SONSÓN" value="SONSÓN">SONSÓN</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="SOPETRÁN" value="SOPETRÁN">SOPETRÁN</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="TAMESIS" value="TAMESIS">TAMESIS</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="TARAZÁ" value="TARAZÁ">TARAZÁ</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="TOLEDO" value="TOLEDO">TOLEDO</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="VALDIVIA" value="VALDIVIA">VALDIVIA</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="VEGACHÍ" value="VEGACHÍ">VEGACHÍ</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="YALÁ" value="YALÁ">YALÁ</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="YARUMAL" value="YARUMAL">YARUMAL</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="YOLOMBÓ" value="YOLOMBÓ">YOLOMBÓ</option>
+                                        <option class="option-department ANTIOQUIA" data-select2-id="ZARAGOZA" value="ZARAGOZA">ZARAGOZA</option>
                                     </select>
                                 </div>
                                 <div class="col-md-4">
@@ -151,7 +151,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label for="eb">Estación base</label>
-                                    <select name="eb" id="eb" disabled class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona la estación base" style="width: 100%;" data-select2-id="5" tabindex="-1" aria-hidden="true">
+                                    <select name="eb" id="eb" class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona la estación base" style="width: 100%;" data-select2-id="5" tabindex="-1" aria-hidden="true">
                                         <option disabled selected></option>
                                         @foreach ($mintics as $mintic)
                                             <option class="project-mintic" data-select2-id="{{$mintic->id}}" value="{{$mintic->id}}">{{$mintic->name}}</option>
@@ -174,7 +174,7 @@
                                 <div class="col-md-4">
                                     <label for="">Disposición</label>
                                     <br>
-                                    <label for="am"><input type="checkbox" disabled name="am" id="am" value="1"> AM</label> <label for="pm"><input type="checkbox" name="pm" id="pm" value="1"> PM</label>
+                                    <label for="am"><input type="checkbox" name="am" id="am" value="1"> AM</label> <label for="pm"><input type="checkbox" name="pm" id="pm" value="1"> PM</label>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -187,10 +187,12 @@
                                         <label for="activities"><i class="fa fa-list"></i> Actividades</label>
                                     </div>
                                     <div class="col-sm-2 text-right">
-                                        <button class="btn btn-sm btn-secundary"><i class="fa fa-plus"></i></button>
+                                        <button type="button" class="btn btn-sm btn-secundary" id="add-activities"><i class="fa fa-plus"></i></button>
                                     </div>
                                 </div>
-                                <input type="text" name="activities[]" id="activities" class="form-control">
+                                <div id="destino-activities">
+                                    <input type="text" name="activities[]" id="activities" class="form-control" style="margin-bottom: 5px">
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="commentaries"><i class="fa fa-align-left"></i> Comentarios</label>
@@ -202,10 +204,10 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <button  type="button" class="btn btn-sm btn-block btn-secundary text-left" style="text-align: left !important" data-toggle="modal" data-target="#equipment-modal">
+                            <button type="button" class="btn btn-sm btn-block btn-secundary text-left open-modal-inv" style="text-align: left !important" data-toggle="modal" data-target="#equipment-modal">
                                 <i class="fa fa-hdd"></i> Equipos
                             </button>
-                            <button type="button" class="btn btn-sm btn-block btn-secundary text-left" style="text-align: left !important" data-toggle="modal" data-target="#consumables-modal">
+                            <button type="button" class="btn btn-sm btn-block btn-secundary text-left open-modal-inv" style="text-align: left !important" data-toggle="modal" data-target="#consumables-modal">
                                 <i class="fa fa-plug"></i> Consumibles
                             </button>
                             <div class="modal fade" id="equipment-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -215,6 +217,11 @@
                                             <h4 class="modal-title">Equipos</h4>
                                         </div>
                                         <div class="modal-body">
+                                            <div class="form-group">
+                                                <select name="inv_user" class="form-control inv_user">
+                                                    <option selected disabled>Selecciona el usuario para asignar bodega</option>
+                                                </select>
+                                            </div>
                                             <div class="table-responsive">
                                                 <table class="table table-striped table-bordered table-hover">
                                                     <thead>
@@ -248,6 +255,11 @@
                                             <h4 class="modal-title">Consumibles</h4>
                                         </div>
                                         <div class="modal-body">
+                                            <div class="form-group">
+                                                <select name="inv_user" class="form-control inv_user">
+                                                    <option selected disabled>Selecciona el usuario para asignar bodega</option>
+                                                </select>
+                                            </div>
                                             <div class="table-responsive">
                                                 <table class="table table-striped table-bordered table-hover">
                                                     <thead>
@@ -264,7 +276,7 @@
                                                                 <td>{{$item->item}} {{$item->type}}</td>
                                                                 <td>
                                                                     <div class="col-md-9" style="padding-right: 2px;">
-                                                                        <input type="text" class="form-control" name="amount[{{$item->id}}]" value="0">
+                                                                        <input type="number" class="form-control" name="amount[{{$item->id}}]" value="0">
                                                                     </div>
                                                                     <div class="col-md-3" style="padding-left: 2px">
                                                                         / {{$item->amount}}
@@ -527,13 +539,25 @@
             vehiclesDisable();
         });
         $('#municipality').change(function () {
-            $('.select2-results__option').hide();
+            // $('.option-department').prop('disabled',true );
             $('#department').prop('disabled',false);
-            let mun = $('.'+this.value);
-            for (let i = 0; i < mun.length; i++) {
-                console.log(mun[i].value);
-                $('#select2-department-result-owi0-'+mun[i].value).show();
-            }
+            // $('.'+this.value).prop('disabled',false);
+        });
+        $('#add-activities').click(function () {
+            $('#activities').clone().appendTo('#destino-activities');
+        });
+        $('.open-modal-inv').click(function () {
+            let users = $('#users').val();
+            users.forEach(idU => {
+                let name = $('#option_user_'+idU).text();
+                $('<option>',{
+                    'value' : idU,
+                    'text' : name,
+                }).appendTo('.inv_user');
+            });
+        });
+        $('.inv_user').change(function (){
+            $('.inv_user').val(this.value);
         });
     });
 

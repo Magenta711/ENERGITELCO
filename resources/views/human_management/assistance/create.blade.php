@@ -98,7 +98,6 @@
             assistance(user,this.checked);
         });
         function assistance(user,status) {
-            console.log(status);
             $('#start_time_'+user).prop("disabled", !status);
             $('#end_time_'+user).prop("disabled", !status);
             $('#where_1_'+user).prop("disabled", !status);

@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class InvUser extends Model
 {
-    protected $fillable = ['inventaryble_id','inventaryble_type','tickets','departures','stock'];
+    protected $fillable = ['user_id','inventaryble_id','inventaryble_type','tickets','departures','stock'];
 }
