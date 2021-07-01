@@ -3,6 +3,7 @@
 namespace App\Models\project\Mintic;
 
 use App\Models\file;
+use App\Models\taskEb;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,5 +29,10 @@ class Mintic_School extends Model
     public function files()
     {
         return $this->morphMany(file::class, 'fileble');
+    }
+
+    public function taskings()
+    {
+        return $this->morphMany(taskEb::class, 'projectble');
     }
 }

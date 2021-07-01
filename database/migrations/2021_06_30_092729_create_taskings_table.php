@@ -27,7 +27,6 @@ class CreateTaskingsTable extends Migration
             $table->text('commentaries');
             $table->text('report');
             $table->boolean('status');
-            
             $table->timestamps();
         });
     }

@@ -6,5 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class taskEb extends Model
 {
-    protected $fillable = ['baseble_type','baseble_id','task_id'];
+    protected $fillable = ['projectble_type','projectble_id','task_id'];
+
+    public function projectble()
+    {
+        return $this->morphTo();
+    }
 }

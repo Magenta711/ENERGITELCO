@@ -15,6 +15,8 @@ class CreateTaskVehiclesTable extends Migration
     {
         Schema::create('task_vehicles', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('vehicle_id');
+            $table->unsignedBigInteger('task_id');
             $table->timestamps();
         });
     }

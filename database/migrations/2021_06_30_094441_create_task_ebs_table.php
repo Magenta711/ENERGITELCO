@@ -15,6 +15,8 @@ class CreateTaskEbsTable extends Migration
     {
         Schema::create('task_ebs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('task_id');
+            $table->morphs('projectble');
             $table->timestamps();
         });
     }

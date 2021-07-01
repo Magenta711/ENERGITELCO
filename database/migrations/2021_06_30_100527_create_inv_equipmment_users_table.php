@@ -13,10 +13,11 @@ class CreateInvEquipmmentUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('inv_equipmment_users', function (Blueprint $table) {
+        Schema::create('inv_users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->morphs('inventaryble');
             $table->integer('tickets');
+            $table->unsignedBigInteger('user_id');
             $table->integer('departures');
             $table->integer('stock');
             $table->timestamps();
@@ -30,6 +31,6 @@ class CreateInvEquipmmentUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inv_equipmment_users');
+        Schema::dropIfExists('inv_users');
     }
 }
