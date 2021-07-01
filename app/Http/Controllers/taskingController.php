@@ -166,9 +166,49 @@ class taskingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,Tasking $id)
     {
-        return $request;
+        $id->update([
+            'responsable_id' => auth()->id(),
+            'date_start' => $request->date_start,
+            'municipality' => $request->municipality,
+            'department' => $request->department,
+            'project' => $request->project,
+            'eb_id' => $request->eb,
+            'am' => (isset($request->am)) ? 1 : 0,
+            'pm' => (isset($request->pm)) ? 1 : 0,
+            'description' => $request->description,
+            'commentaries' => $request->commentaries,
+            'report' => $request->report,
+            'status' => 2,
+        ]);
+        Responsable::where('responsibles_type','App\Models\Tasking')->where('responsibles_id',$id->id)->delete();
+        for ($i=0; $i < count($request->users); $i++) { 
+            Responsable::create([
+                'user_id' => $request->users[$i],
+                'responsibles_type' => 'App\Models\Tasking',
+                'responsibles_id' => $id->id,
+            ]);
+        }
+        $id->vehicles()->delete();
+        for ($i=0; $i < count($request->vehicles); $i++) { 
+            $id->vehicles()->create([
+                'vehicle_id' => $request->vehicles[$i]
+            ]);
+        }
+        $id->activities()->delete();
+        for ($i=0; $i < count($request->activities); $i++) {
+            $id->activities()->create([
+                'text' => $request->activities[$i],
+                'status' => 1
+            ]);
+        }
+        $id->eb()->update([
+            'projectble_id' => $request->eb,
+            'projectble_type' => 'App\Models\project\Mintic\Mintic_School',
+        ]);
+
+        return redirect()->route('tasking')->with('success','Se editado la programación correctamente');
     }
 
     /**

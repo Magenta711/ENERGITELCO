@@ -195,13 +195,13 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <button type="button" class="btn btn-sm btn-block btn-secundary text-left open-modal-inv" style="text-align: left !important" data-toggle="modal" data-target="#equipment-edit-modal">
+                        <button type="button" class="btn btn-sm btn-block btn-secundary text-left open-modal-inv" style="text-align: left !important" data-toggle="modal" data-target="#equipment-edit-{{$item->id}}-modal">
                             <i class="fa fa-hdd"></i> Equipos
                         </button>
-                        <button type="button" class="btn btn-sm btn-block btn-secundary text-left open-modal-inv" style="text-align: left !important" data-toggle="modal" data-target="#consumables-edit-modal">
+                        <button type="button" class="btn btn-sm btn-block btn-secundary text-left open-modal-inv" style="text-align: left !important" data-toggle="modal" data-target="#consumables-edit-{{$item->id}}-modal">
                             <i class="fa fa-plug"></i> Consumibles
                         </button>
-                        <div class="modal fade" id="equipment-edit-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="equipment-edit-{{$item->id}}-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-md">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -229,7 +229,7 @@
                                                 <tbody>
                                                     @foreach ($equipments as $equiment)
                                                         <tr>
-                                                            <td><input type="checkbox" name="equipment[{{$equiment->id}}]" id="equipment_{{$equiment->id}}" value="{{$equiment->id}}"></td>
+                                                            <td><input type="checkbox" name="equipment[{{$equiment->id}}]" id="equipment-edit_{{$equiment->id}}" value="{{$equiment->id}}"></td>
                                                             <td>{{$equiment->serial}}</td>
                                                             <td>{{$equiment->item}}</td>
                                                             <td>{{$equiment->brand }}</td>
@@ -242,7 +242,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="modal fade" id="consumables-edit-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="consumables-edit-{{$item->id}}-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-md">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -272,7 +272,7 @@
                                                             $hasCosumable = $item->consumables ? hasConsumable($item->consumables,$consumable->id,'App\Models\project\Mintic\inventory\invMinticConsumable') : false;
                                                         @endphp
                                                         <tr>
-                                                            <td><input type="checkbox" name="consumable[{{$consumable->id}}]" id="consumable_{{$consumable->id}}" value="{{$consumable->id}}" {{$hasCosumable ? 'checked' : ''}}></td>
+                                                            <td><input type="checkbox" name="consumable[{{$consumable->id}}]" id="consumable-edit_{{$consumable->id}}" value="{{$consumable->id}}" {{$hasCosumable ? 'checked' : ''}}></td>
                                                             <td>{{$consumable->item}} {{$consumable->type}}</td>
                                                             <td>
                                                                 <div class="col-md-9" style="padding-right: 2px;">

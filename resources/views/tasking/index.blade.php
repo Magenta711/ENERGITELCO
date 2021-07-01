@@ -59,18 +59,18 @@
                                         <tr>
                                             <td>
                                                 <div class="row" style="cursor: pointer" data-toggle="modal" data-target="#edit-modal-{{$item->id}}">
-                                                    <div class="col-sm-6">
-                                                        {{$item->eb->projectble->name}}
+                                                    <div class="col-xs-6">
+                                                        <p>{{$item->eb->projectble->name}}</p>
                                                     </div>
-                                                    <div class="col-sm-6 text-right">
-                                                        {{$item->date_start}}
+                                                    <div class="col-xs-6 text-right">
+                                                        <p>{{$item->date_start}}</p>
                                                     </div>
-                                                    <div class="col-sm-6">
+                                                    <div class="col-xs-6">
                                                         @foreach ($item->users as $user)
                                                             <p>{{$user->name}}</p>
                                                         @endforeach
                                                     </div>
-                                                    <div class="col-sm-6 text-right">
+                                                    <div class="col-xs-6 text-right">
                                                         {{$item->am ? 'AM'.($item->pm ? ' / ' : '') : ''}} {{$item->pm ? 'PM' : ''}}
                                                     </div>
                                                 </div>
@@ -105,20 +105,20 @@
                                     @if ($item->date_start <= now()->format('Y-m-d H:i:s') && !$item->report)
                                         <tr>
                                             <td>
-                                                <div class="row" style="cursor: pointer" data-toggle="modal" data-target="#edit-modal-1">
-                                                    <div class="col-sm-6">
-                                                        {{$item->eb}}
+                                                <div class="row" style="cursor: pointer" data-toggle="modal" data-target="#show-modal-{{$item->id}}">
+                                                    <div class="col-xs-6">
+                                                        <p>{{$item->eb->projectble->name}}</p>
                                                     </div>
-                                                    <div class="col-sm-6 text-right">
-                                                        {{$item->date_start}}
+                                                    <div class="col-xs-6 text-right">
+                                                        <p>{{$item->date_start}}</p>
                                                     </div>
-                                                    <div class="col-sm-6">
+                                                    <div class="col-xs-6">
                                                         @foreach ($item->users as $user)
                                                             <p>{{$user->name}}</p>
                                                         @endforeach
                                                     </div>
-                                                    <div class="col-sm-6 text-right">
-                                                        {{$item->am}} {{$item->pm}}
+                                                    <div class="col-xs-6 text-right">
+                                                        {{$item->am ? 'AM'.($item->pm ? ' / ' : '') : ''}} {{$item->pm ? 'PM' : ''}}
                                                     </div>
                                                 </div>
                                                 @include('tasking.includes.modals.show')
@@ -152,20 +152,20 @@
                                     @if ($item->date_start <= now()->format('Y-m-d H:i:s') && $item->report)
                                         <tr>
                                             <td>
-                                                <div class="row" style="cursor: pointer" data-toggle="modal" data-target="#edit-modal-1">
-                                                    <div class="col-sm-6">
-                                                        {{$item->eb}}
+                                                <div class="row" style="cursor: pointer" data-toggle="modal" data-target="#show-modal-{{$item->id}}">
+                                                    <div class="col-xs-6">
+                                                        <p>{{$item->eb->projectble->name}}</p>
                                                     </div>
-                                                    <div class="col-sm-6 text-right">
-                                                        {{$item->date_start}}
+                                                    <div class="col-xs-6 text-right">
+                                                        <p>{{$item->date_start}}</p>
                                                     </div>
-                                                    <div class="col-sm-6">
+                                                    <div class="col-xs-6">
                                                         @foreach ($item->users as $user)
                                                             <p>{{$user->name}}</p>
                                                         @endforeach
                                                     </div>
-                                                    <div class="col-sm-6 text-right">
-                                                        {{$item->am}} {{$item->pm}}
+                                                    <div class="col-xs-6 text-right">
+                                                        {{$item->am ? 'AM'.($item->pm ? ' / ' : '') : ''}} {{$item->pm ? 'PM' : ''}}
                                                     </div>
                                                 </div>
                                                 @include('tasking.includes.modals.show')
