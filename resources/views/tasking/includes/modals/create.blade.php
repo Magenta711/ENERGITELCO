@@ -59,10 +59,10 @@
                                     <option class="option-department ANTIOQUIA" data-select2-id="CAROLINA" value="CAROLINA">CAROLINA</option>
                                     <option class="option-department CALDAS" data-select2-id="Chinchina" value="Chinchina">Chinchina</option>
                                     <option class="option-department ANTIOQUIA" data-select2-id="DABEIDA" value="DABEIDA">DABEIDA</option>
-                                    <option class="option-department ANTIOQUIA" data-select2-id="DON MATIAS" value="DON MATIAS">DON MATIAS</option>
-                                    <option class="option-department ANTIOQUIA" data-select2-id="EL BAGRE" value="EL BAGRE">EL BAGRE</option>
-                                    <option class="option-department ANTIOQUIA" data-select2-id="EL CARMEN DE VIBORAL" value="EL CARMEN DE VIBORAL">EL CARMEN DE VIBORAL</option>
-                                    <option class="option-department ANTIOQUIA" data-select2-id="EL PEÑOL" value="EL PEÑOL">EL PEÑOL</option>
+                                    <option class="option-department ANTIOQUIA" data-select2-id="DON_MATIAS" value="DON MATIAS">DON MATIAS</option>
+                                    <option class="option-department ANTIOQUIA" data-select2-id="EL_BAGRE" value="EL BAGRE">EL BAGRE</option>
+                                    <option class="option-department ANTIOQUIA" data-select2-id="EL_CARMEN_DE_VIBORAL" value="EL CARMEN DE VIBORAL">EL CARMEN DE VIBORAL</option>
+                                    <option class="option-department ANTIOQUIA" data-select2-id="EL_PEÑOL" value="EL PEÑOL">EL PEÑOL</option>
                                     <option class="option-department ANTIOQUIA" data-select2-id="ENTRERRIOS" value="ENTRERRIOS">ENTRERRIOS</option>
                                     <option class="option-department ANTIOQUIA" data-select2-id="ENVIGADO" value="ENVIGADO">ENVIGADO</option>
                                     <option class="option-department CALDAS" data-select2-id="FILADELFIA" value="FILADELFIA">FILADELFIA</option>
@@ -76,9 +76,9 @@
                                     <option class="option-department ANTIOQUIA" data-select2-id="HISPANIA" value="HISPANIA">HISPANIA</option>
                                     <option class="option-department ANTIOQUIA" data-select2-id="ITUANGO" value="ITUANGO">ITUANGO</option>
                                     <option class="option-department ANTIOQUIA" data-select2-id="JARDÍN" value="JARDÍN">JARDÍN</option>
-                                    <option class="option-department CALDAS" data-select2-id="LA DORADA" value="LA DORADA">LA DORADA</option>
-                                    <option class="option-department ANTIOQUIA" data-select2-id="LA PINTADA" value="LA PINTADA">LA PINTADA</option>
-                                    <option class="option-department ANTIOQUIA" data-select2-id="LA UNIÓN" value="LA UNIÓN">LA UNIÓN</option>
+                                    <option class="option-department CALDAS" data-select2-id="LA_DORADA" value="LA DORADA">LA DORADA</option>
+                                    <option class="option-department ANTIOQUIA" data-select2-id="LA_PINTADA" value="LA PINTADA">LA PINTADA</option>
+                                    <option class="option-department ANTIOQUIA" data-select2-id="LA_UNIÓN" value="LA UNIÓN">LA UNIÓN</option>
                                     <option class="option-department ANTIOQUIA" data-select2-id="LIBORINA" value="LIBORINA">LIBORINA</option>
                                     <option class="option-department ANTIOQUIA" data-select2-id="MACEO" value="MACEO">MACEO</option>
                                     <option class="option-department CALDAS" data-select2-id="MANIZALES" value="MANIZALES">MANIZALES</option>
@@ -94,17 +94,17 @@
                                     <option class="option-department CALDAS" data-select2-id="PACORA" value="PACORA">PACORA</option>
                                     <option class="option-department CALDAS" data-select2-id="PENSILVANIA" value="PENSILVANIA">PENSILVANIA</option>
                                     <option class="option-department ANTIOQUIA" data-select2-id="PEQUE" value="PEQUE">PEQUE</option>
-                                    <option class="option-department ANTIOQUIA" data-select2-id="PUERTO TRIUNFO" value="PUERTO TRIUNFO">PUERTO TRIUNFO</option>
+                                    <option class="option-department ANTIOQUIA" data-select2-id="PUERTO_TRIUNFO" value="PUERTO TRIUNFO">PUERTO TRIUNFO</option>
                                     <option class="option-department CALDAS" data-select2-id="RIOSUCIO" value="RIOSUCIO">RIOSUCIO</option>
                                     <option class="option-department CALDAS" data-select2-id="RISARALDA" value="RISARALDA">RISARALDA</option>
                                     <option class="option-department ANTIOQUIA" data-select2-id="SABANALARGA" value="SABANALARGA">SABANALARGA</option>
                                     <option class="option-department CALDAS" data-select2-id="SALAMINA" value="SALAMINA">SALAMINA</option>
                                     <option class="option-department CALDAS" data-select2-id="SAMANÁ" value="SAMANÁ">SAMANÁ</option>
-                                    <option class="option-department CALDAS" data-select2-id="SAN ANDRES DE CUERQUIA" value="SAN ANDRES DE CUERQUIA">SAN ANDRES DE CUERQUIA</option>
-                                    <option class="option-department ANTIOQUIA" data-select2-id="SAN JOSÉ" value="SAN JOSÉ">SAN JOSÉ</option>
-                                    <option class="option-department ANTIOQUIA" data-select2-id="SAN PEDRO" value="SAN PEDRO">SAN PEDRO</option>
-                                    <option class="option-department ANTIOQUIA" data-select2-id="SAN PEDRO DE LOS MILAGROS" value="SAN PEDRO DE LOS MILAGROS">SAN PEDRO DE LOS MILAGROS</option>
-                                    <option class="option-department ANTIOQUIA" data-select2-id="SANTA ROSA DE OSOS" value="SANTA ROSA DE OSOS">SANTA ROSA DE OSOS</option>
+                                    <option class="option-department CALDAS" data-select2-id="SAN_ANDRES_DE_CUERQUIA" value="SAN ANDRES DE CUERQUIA">SAN ANDRES DE CUERQUIA</option>
+                                    <option class="option-department ANTIOQUIA" data-select2-id="SAN_JOSÉ" value="SAN JOSÉ">SAN JOSÉ</option>
+                                    <option class="option-department ANTIOQUIA" data-select2-id="SAN_PEDRO" value="SAN PEDRO">SAN PEDRO</option>
+                                    <option class="option-department ANTIOQUIA" data-select2-id="SAN_PEDRO_DE_LOS_MILAGROS" value="SAN PEDRO DE LOS MILAGROS">SAN PEDRO DE LOS MILAGROS</option>
+                                    <option class="option-department ANTIOQUIA" data-select2-id="SANTA_ROSA_DE_OSOS" value="SANTA ROSA DE OSOS">SANTA ROSA DE OSOS</option>
                                     <option class="option-department ANTIOQUIA" data-select2-id="SONSÓN" value="SONSÓN">SONSÓN</option>
                                     <option class="option-department ANTIOQUIA" data-select2-id="SOPETRÁN" value="SOPETRÁN">SOPETRÁN</option>
                                     <option class="option-department ANTIOQUIA" data-select2-id="TAMESIS" value="TAMESIS">TAMESIS</option>
@@ -122,17 +122,17 @@
                                 <label for="project">Proyecto</label>
                                 <select name="project" id="project" class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona el proyecto" style="width: 100%;" data-select2-id="4" tabindex="-1" aria-hidden="true">
                                     <option disabled selected></option>
-                                    <option data-select2-id="MINTIC ESTUDIO DE CAMPO" value="MINTIC ESTUDIO DE CAMPO">MINTIC ESTUDIO DE CAMPO</option>
-                                    <option data-select2-id="MINTIC INSTALACIÓN" value="MINTIC INSTALACIÓN">MINTIC INSTALACIÓN</option>
-                                    <option data-select2-id="MINTIC SOPORTE" value="MINTIC SOPORTE">MINTIC SOPORTE</option>
-                                    <option data-select2-id="RUTAS DE TX" value="RUTAS DE TX">RUTAS DE TX</option>
-                                    <option data-select2-id="DESMONTES ENLACES MW" value="DESMONTES ENLACES MW">DESMONTES ENLACES MW</option>
-                                    <option data-select2-id="INSTALACIÓN ENLACES MW" value="INSTALACIÓN ENLACES MW">INSTALACIÓN ENLACES MW</option>
-                                    <option data-select2-id="DESMONTES ESTACIÓN BASE" value="DESMONTES ESTACIÓN BASE">DESMONTES ESTACIÓN BASE</option>
-                                    <option data-select2-id="INSTALACIÓN ESTACIÓN BASE" value="INSTALACIÓN ESTACIÓN BASE">INSTALACIÓN ESTACIÓN BASE</option>
-                                    <option data-select2-id="MIGRACIONES" value="MIGRACIONES">MIGRACIONES</option>
-                                    <option data-select2-id="SOLUCIONES 2G, 3G O 4G" value="SOLUCIONES 2G, 3G O 4G">SOLUCIONES 2G, 3G O 4G</option>
-                                    <option data-select2-id="OBRAS CIVILES MENORES" value="OBRAS CIVILES MENORES">OBRAS CIVILES MENORES</option>
+                                    <option data-select2-id="MINTIC_ESTUDIO_DE_CAMPO" value="MINTIC ESTUDIO DE CAMPO">MINTIC ESTUDIO DE CAMPO</option>
+                                    <option data-select2-id="MINTIC_INSTALACIÓN" value="MINTIC INSTALACIÓN">MINTIC INSTALACIÓN</option>
+                                    <option data-select2-id="MINTIC_SOPORTE" value="MINTIC SOPORTE">MINTIC SOPORTE</option>
+                                    <option data-select2-id="RUTAS_DE_TX" value="RUTAS DE TX">RUTAS DE TX</option>
+                                    <option data-select2-id="DESMONTES_ENLACES_MW" value="DESMONTES ENLACES MW">DESMONTES ENLACES MW</option>
+                                    <option data-select2-id="INSTALACIÓN_ENLACES_MW" value="INSTALACIÓN ENLACES MW">INSTALACIÓN ENLACES MW</option>
+                                    <option data-select2-id="DESMONTES_ESTACIÓN_BASE" value="DESMONTES ESTACIÓN BASE">DESMONTES ESTACIÓN BASE</option>
+                                    <option data-select2-id="INSTALACIÓN_ESTACIÓN_BASE" value="INSTALACIÓN ESTACIÓN BASE">INSTALACIÓN ESTACIÓN BASE</option>
+                                    <option data-select2-id="MIGRACIONES value="MIGRACIONES">MIGRACIONES</option>
+                                    <option data-select2-id="SOLUCIONES_2G" value="SOLUCIONES 2G, 3G O 4G">SOLUCIONES 2G, 3G O 4G</option>
+                                    <option data-select2-id="OBRAS_CIVILES_MENORES" value="OBRAS CIVILES MENORES">OBRAS CIVILES MENORES</option>
                                 </select>
                             </div>
                             <div class="col-md-4">

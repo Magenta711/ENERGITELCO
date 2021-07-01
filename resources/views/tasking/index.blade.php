@@ -1,5 +1,25 @@
 @extends('lte.layouts')
 
+@php
+    function selected($array,$id){
+        foreach ($array as $key => $value) {
+            if ($id == $value->id) {
+                return true;
+            }
+        }
+        return false;
+    }
+    function hasConsumable($consumables,$id,$type)
+    {
+        foreach ($consumables as $key => $item) {
+            if ($item->inventaryble_id == $id && $item->inventaryble_type == $type) {
+                return $item;
+            }
+        }
+        return false;
+    }
+@endphp
+
 @section('content')
 <section class="content-header">
     <h1>
@@ -68,7 +88,7 @@
         <div class="col-md-4">
             <div class="box">
                 <div class="box-header">
-                    <div class="box-title">En proceso</div>
+                    <div class="box-title">En proceso o sin reporte</div>
                     <div class="box-tools">
                     </div>
                 </div>
@@ -82,7 +102,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($taskings as $item)
-                                    @if ($item->date_start <= now()->format('Y-m-d H:i:s'))
+                                    @if ($item->date_start <= now()->format('Y-m-d H:i:s') && !$item->report)
                                         <tr>
                                             <td>
                                                 <div class="row" style="cursor: pointer" data-toggle="modal" data-target="#edit-modal-1">
@@ -128,25 +148,31 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="row" style="cursor: pointer">
-                                            <div class="col-sm-6">
-                                                Suramericana
-                                            </div>
-                                            <div class="col-sm-6 text-right">
-                                                {{now()->format('Y-m-d')}}
-                                            </div>
-                                            <div class="col-sm-6">
-                                                Esteban
-                                            </div>
-                                            <div class="col-sm-6 text-right">
-                                                AM/PM
-                                            </div>
-                                        </div>
-                                        @include('tasking.includes.modals.show')
-                                    </td>
-                                </tr>
+                                @foreach ($taskings as $item)
+                                    @if ($item->date_start <= now()->format('Y-m-d H:i:s') && $item->report)
+                                        <tr>
+                                            <td>
+                                                <div class="row" style="cursor: pointer" data-toggle="modal" data-target="#edit-modal-1">
+                                                    <div class="col-sm-6">
+                                                        {{$item->eb}}
+                                                    </div>
+                                                    <div class="col-sm-6 text-right">
+                                                        {{$item->date_start}}
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        @foreach ($item->users as $user)
+                                                            <p>{{$user->name}}</p>
+                                                        @endforeach
+                                                    </div>
+                                                    <div class="col-sm-6 text-right">
+                                                        {{$item->am}} {{$item->pm}}
+                                                    </div>
+                                                </div>
+                                                @include('tasking.includes.modals.show')
+                                            </td>
+                                        </tr>
+                                    @endif
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
