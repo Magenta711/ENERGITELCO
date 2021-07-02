@@ -34,6 +34,18 @@
     </ol>
     @include('tasking.includes.modals.create')
 </section>
+<div class="hide">
+    {{-- Permisos de trabajo --}}
+    @foreach ($permissions as $permission)
+        <input type="hidden" value="{{$permission->cedula_trabajador}}" class="permission-idUser">
+        <input type="hidden" value="{{$permission->fecha_inicio}}" class="permission-dateStart">
+        <input type="hidden" value="{{$permission->hora_inicio}}" class="permission-timeStart">
+        <input type="hidden" value="{{$permission->fecha_finalizacion}}" class="permission-dateEnd">
+        <input type="hidden" value="{{$permission->hora_finalizacion}}" class="permission-timeEnd">
+        <input type="hidden" value="{{$permission->tipo_solicitud}}" class="permission-type">
+        <input type="hidden" value="{{$permission->estado}}" class="permission-status">
+    @endforeach
+</div>
 <section class="content">
     @include('includes.alerts')
     {{-- Tables --}}
@@ -63,11 +75,11 @@
                                                         <p>{{$item->eb->projectble->name}}</p>
                                                     </div>
                                                     <div class="col-xs-6 text-right">
-                                                        <p>{{$item->date_start}}</p>
+                                                        <p class="date-starts">{{$item->date_start}}</p>
                                                     </div>
-                                                    <div class="col-xs-6">
+                                                    <div class="col-xs-6 list-user">
                                                         @foreach ($item->users as $user)
-                                                            <p>{{$user->name}}</p>
+                                                            <p id="list-user-{{$item->id}}-{{$user->id}}">{{$user->name}}</p>
                                                         @endforeach
                                                     </div>
                                                     <div class="col-xs-6 text-right">
@@ -110,11 +122,11 @@
                                                         <p>{{$item->eb->projectble->name}}</p>
                                                     </div>
                                                     <div class="col-xs-6 text-right">
-                                                        <p>{{$item->date_start}}</p>
+                                                        <p class="date-starts">{{$item->date_start}}</p>
                                                     </div>
-                                                    <div class="col-xs-6">
+                                                    <div class="col-xs-6 list-user">
                                                         @foreach ($item->users as $user)
-                                                            <p>{{$user->name}}</p>
+                                                            <p id="list-user-{{$item->id}}-{{$user->id}}">{{$user->name}}</p>
                                                         @endforeach
                                                     </div>
                                                     <div class="col-xs-6 text-right">
@@ -157,11 +169,11 @@
                                                         <p>{{$item->eb->projectble->name}}</p>
                                                     </div>
                                                     <div class="col-xs-6 text-right">
-                                                        <p>{{$item->date_start}}</p>
+                                                        <p class="date-starts">{{$item->date_start}}</p>
                                                     </div>
-                                                    <div class="col-xs-6">
+                                                    <div class="col-xs-6 list-user">
                                                         @foreach ($item->users as $user)
-                                                            <p>{{$user->name}}</p>
+                                                            <p id="list-user-{{$item->id}}-{{$user->id}}">{{$user->name}}</p>
                                                         @endforeach
                                                     </div>
                                                     <div class="col-xs-6 text-right">
@@ -236,7 +248,8 @@
     </style>
 @endsection
 @section('js')
-    <script src="{{asset("assets/$theme//bower_components/select2/dist/js/select2.full.min.js")}}"></script>
+    <script src="{{asset("assets/$theme/bower_components/select2/dist/js/select2.full.min.js")}}"></script>
+    <script src="{{asset("js/moment/moment.js")}}"></script>
 <script>
     $(function () {
         $('.select2').select2();
@@ -274,8 +287,8 @@
             if (this.value) {
                 $('#users').prop('disabled',false);
                 $('#vehicles').prop('disabled',false);
-                usersDisable();
-                vehiclesDisable();
+                usersDisable(this.value);
+                vehiclesDisable(this.value);
             }
         });
         $('#municipality').change(function () {
@@ -301,13 +314,44 @@
         });
     });
 
-    function usersDisable() {
-        let id = 14;
-        $('#option_user_'+id).prop('disabled',true);
+    function usersDisable(date) {
+        newDate = moment(date);
+        dates = $('.date-starts');
+        // Usuarios ya programados
+        for (let i = 0; i < dates.length; i++) {
+            let newDates = moment(dates[i].innerHTML);
+            if (newDate.format('YYYY-MM-DD') == newDates.format('YYYY-MM-DD')) {
+                let eleUsers = $(dates[i]).parent().parent().children('.list-user').children();
+                for (let j = 0; j < eleUsers.length; j++) {
+                    let id = eleUsers[j].id.split('-')[(eleUsers[j].id.split('-').length - 1)];
+                    $('#option_user_'+id).prop('disabled',true).text(eleUsers[j].innerHTML+' (no disponible)');
+                }
+            }
+        }
+
+        // Usuarios de permisos
+        let datesStart = $('.permission-dateStart');
+        let datesEnd = $('.permission-dateEnd');
+        let timeStart = $('.permission-timeStart');
+        let timeEnd = $('.permission-timeEnd');
+        let idUser = $('.permission-idUser');
+        let type = $('.permission-type');
+        let status = $('.permission-status');
+        for (let i = 0; i < datesStart.length; i++) {
+            let newDatesStart = moment(datesStart[i].value);
+            let newDatesEnd = moment(datesEnd[i].value);
+            if (newDate.format('YYYY-MM-DD') >= newDatesStart.format('YYYY-MM-DD') && newDate.format('YYYY') <= newDatesEnd.format('YYYY-MM-DD')) {
+                if (status[i].value != 'No aprobado') {
+                    let state = status[i].value == 'Aprobado' ? true : false;
+                    let textState = status[i].value == 'Sin aprobar' ? ' sin aprobar' : '';
+                    $('#option_user_'+idUser[i].value).prop('disabled',state).text($('#option_user_'+idUser[i].value).text()+' ('+type[i].value+textState+')');
+                }
+            }
+        }
     }
     function vehiclesDisable() {
-        let id = 14;
-        $('#option_vehicle_'+id).prop('disabled',true);
+        
+        // $('#option_vehicle_'+id).prop('disabled',true);
     }
     
 </script>

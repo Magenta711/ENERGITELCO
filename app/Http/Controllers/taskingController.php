@@ -10,6 +10,7 @@ use App\Models\project\Mintic\Mintic_School;
 use App\Models\Responsable;
 use App\Models\Tasking;
 use App\Models\Work1;
+use App\Models\Work7;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -34,7 +35,10 @@ class taskingController extends Controller
         $vehicles = invVehicle::get();
         $consumables = invMinticConsumable::where('status',1)->get();
         $equipments = invMinticEquipment::where('status',1)->get();
-        return view('tasking.index',compact('taskings','users','mintics','works','vehicles','equipments','consumables'));
+
+        $permissions = Work7::where('fecha_inicio','>=',now()->format('Y-m-d'))->get();
+
+        return view('tasking.index',compact('taskings','users','mintics','works','vehicles','equipments','consumables','permissions'));
     }
 
     /**
