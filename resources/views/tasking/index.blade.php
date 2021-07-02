@@ -18,6 +18,22 @@
         }
         return false;
     }
+    function expirateDate($enrollment_date,$soat_date,$gases_date,$technomechanical_date)
+    {
+        if ($enrollment_date && $enrollment_date < now()) {
+            return true;
+        }
+        if ($soat_date && $soat_date < now()) {
+            return true;
+        }
+        if ($gases_date && $gases_date < now()) {
+            return true;
+        }
+        if ($technomechanical_date && $technomechanical_date < now()) {
+            return true;
+        }
+        return false;
+    }
 @endphp
 
 @section('content')
@@ -126,11 +142,16 @@
                                                     </div>
                                                     <div class="col-xs-6 list-user">
                                                         @foreach ($item->users as $user)
-                                                            <p id="list-user-{{$item->id}}-{{$user->id}}">{{$user->name}}</p>
+                                                            <span class="label label-primary" id="list-user-{{$item->id}}-{{$user->id}}">{{$user->name}}</span>
                                                         @endforeach
                                                     </div>
                                                     <div class="col-xs-6 text-right">
-                                                        {{$item->am ? 'AM'.($item->pm ? ' / ' : '') : ''}} {{$item->pm ? 'PM' : ''}}
+                                                        <p>{{$item->am ? 'AM'.($item->pm ? ' / ' : '') : ''}} {{$item->pm ? 'PM' : ''}}</p>
+                                                    </div>
+                                                    <div class="col-xs-6 text-right list-vehicles">
+                                                        @foreach ($item->vehicles as $vehicle)
+                                                            <span class="label label-success" id="list-vehicle-{{$item->id}}-{{$vehicle->vehicle->id}}">{{$vehicle->vehicle->plate}} - {{$vehicle->vehicle->brand}}</span>
+                                                        @endforeach
                                                     </div>
                                                 </div>
                                                 @include('tasking.includes.modals.show')
@@ -317,7 +338,6 @@
     function usersDisable(date) {
         newDate = moment(date);
         dates = $('.date-starts');
-        // Usuarios ya programados
         for (let i = 0; i < dates.length; i++) {
             let newDates = moment(dates[i].innerHTML);
             if (newDate.format('YYYY-MM-DD') == newDates.format('YYYY-MM-DD')) {
@@ -349,9 +369,21 @@
             }
         }
     }
-    function vehiclesDisable() {
-        
-        // $('#option_vehicle_'+id).prop('disabled',true);
+    function vehiclesDisable(date) {
+        newDate = moment(date);
+        dates = $('.date-starts');
+        for (let i = 0; i < dates.length; i++) {
+            let newDates = moment(dates[i].innerHTML);
+            if (newDate.format('YYYY-MM-DD') == newDates.format('YYYY-MM-DD')) {
+                let eleVehicles = $(dates[i]).parent().parent().children('.list-vehicles').children();
+                for (let j = 0; j < eleVehicles.length; j++) {
+                    console.log('yes');
+                    let id = eleVehicles[j].id.split('-')[(eleVehicles[j].id.split('-').length - 1)];
+                    console.log(id);
+                    $('#option_vehicle_'+id).prop('disabled',true).text(eleVehicles[j].innerHTML+' (no disponible)');
+                }
+            }
+        }
     }
     
 </script>
