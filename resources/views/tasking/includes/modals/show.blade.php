@@ -19,7 +19,7 @@
                                 <label for="users-show">Funcionarios</label>
                                 <p>
                                     @foreach ($item->users as $user)
-                                        <span class="label label-primary">{{$user->name}}</span>
+                                        <span class="label label-default">{{$user->name}}</span>
                                     @endforeach
                                 </p>
                             </div>
@@ -43,7 +43,7 @@
                                 <label for="vehicles-show">Vehículos</label>
                                 <p>
                                     @foreach ($item->vehicles as $vehicle)
-                                        <span>{{$vehicle->vehicle->plate}} - {{$vehicle->vehicle->brand}}</span>
+                                        <span class="label label-default">{{$vehicle->vehicle->plate}} - {{$vehicle->vehicle->brand}}</span>
                                     @endforeach
                                 </p>
                             </div>

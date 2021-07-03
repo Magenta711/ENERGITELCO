@@ -36,7 +36,7 @@ class taskingController extends Controller
         $consumables = invMinticConsumable::where('status',1)->get();
         $equipments = invMinticEquipment::where('status',1)->get();
 
-        $permissions = Work7::where('fecha_inicio','>=',now()->format('Y-m-d'))->get();
+        $permissions = Work7::where('fecha_inicio','>=',now()->format('Y-m-d'))->orWhere('fecha_finalizacion','>=',now()->format('Y-m-d'))->get();
 
         return view('tasking.index',compact('taskings','users','mintics','works','vehicles','equipments','consumables','permissions'));
     }

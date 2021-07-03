@@ -26,15 +26,18 @@
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <label for="municipality">Municipio</label>
+                                <label for="municipality">Departamentos</label>
                                 <select name="municipality" id="municipality" class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona el municipio" style="width: 100%;" data-select2-id="2" tabindex="-1" aria-hidden="true">
                                     <option disabled selected></option>
                                     <option data-select2-id="ANTIOQUIA" value="ANTIOQUIA">ANTIOQUIA</option>
                                     <option data-select2-id="CALDAS" value="CALDAS">CALDAS</option>
+                                    <option data-select2-id="CALDAS" value="CALDAS">CHOCO</option>
+                                    <option data-select2-id="CALDAS" value="CALDAS">RISARALDAS</option>
+                                    <option data-select2-id="CALDAS" value="CALDAS">QUINDIO</option>
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <label for="department">Departamento</label>
+                                <label for="department">Municiopio</label>
                                 <select name="department" id="department" disabled class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona el departamento" style="width: 100%;" data-select2-id="3" tabindex="-1" aria-hidden="true">
                                     <option disabled selected></option>
                                     <option class="option-department ANTIOQUIA" data-select2-id="ABEJORRAL" value="ABEJORRAL">ABEJORRAL</option>
@@ -127,6 +130,8 @@
                                     <option data-select2-id="MINTIC_MANTANIMIENTO" value="MINTIC MANTANIMIENTO">MINTIC MANTANIMIENTO</option>
                                     <option data-select2-id="RUTAS_DE_TX" value="RUTAS DE TX">RUTAS DE TX</option>
                                     <option data-select2-id="DESMONTES_ENLACES_MW" value="DESMONTES ENLACES MW">DESMONTES ENLACES MW</option>
+                                    <option data-select2-id="DESMONTES_ENLACES_MW" value="DESMONTES ENLACES MW">TSS MW</option>
+                                    <option data-select2-id="DESMONTES_ENLACES_MW" value="DESMONTES ENLACES MW">TSS RF</option>
                                     <option data-select2-id="INSTALACIÓN_ENLACES_MW" value="INSTALACIÓN ENLACES MW">INSTALACIÓN ENLACES MW</option>
                                     <option data-select2-id="DESMONTES_ESTACIÓN_BASE" value="DESMONTES ESTACIÓN BASE">DESMONTES ESTACIÓN BASE</option>
                                     <option data-select2-id="INSTALACIÓN_ESTACIÓN_BASE" value="INSTALACIÓN ESTACIÓN BASE">INSTALACIÓN ESTACIÓN BASE</option>
@@ -156,7 +161,7 @@
                                         @php
                                             $stateVehicle = expirateDate($vehicle->enrollment_date,$vehicle->soat_date,$vehicle->gases_date,$vehicle->technomechanical_date);
                                         @endphp
-                                        <option id="option_vehicle_{{$vehicle->id}}" data-select2-id="{{$vehicle->id}}" value="{{$vehicle->id}}" {{$stateVehicle ? 'disabled' : ''}}>{{$vehicle->plate}} - {{$vehicle->brand}} {{$stateVehicle ? '(Documentos vencidos)' : ''}}</option>
+                                        <option id="option_vehicle_{{$vehicle->id}}" data-select2-id="{{$vehicle->id}}" value="{{$vehicle->id}}" {{$stateVehicle ? 'disabled' : ''}}>{{$vehicle->plate}} - {{$vehicle->brand}}{{$stateVehicle ? ' (documentos vencidos)' : ''}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -265,11 +270,9 @@
                                                             <td>{{$item->item}} {{$item->type}}</td>
                                                             <td>
                                                                 <div class="col-md-9" style="padding-right: 2px;">
-                                                                    <input type="number" class="form-control" name="amount[{{$item->id}}]" value="0">
+                                                                    <input type="number" id="amount-cosumable-{{$item->id}}" class="form-control amounts-consumables" name="amount[{{$item->id}}]" value="0">
                                                                 </div>
-                                                                <div class="col-md-3" style="padding-left: 2px">
-                                                                    / {{$item->amount}}
-                                                                </div>
+                                                                <div class="col-md-3" style="padding-left: 2px">/ {{$item->amount}}</div>
                                                             </td>
                                                         </tr>
                                                     @endforeach
