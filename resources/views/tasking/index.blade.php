@@ -104,7 +104,7 @@
                                                     </div>
                                                     <div class="col-xs-6 list-user">
                                                         @foreach ($item->users as $user)
-                                                        <span class="label label-default" id="list-user-{{$item->id}}-{{$user->id}}">{{$user->name}}</span>
+                                                            <span class="label label-default" id="list-user-{{$item->id}}-{{$user->id}}">{{$user->name}}</span>
                                                         @endforeach
                                                     </div>
                                                     <div class="col-xs-6 text-right">

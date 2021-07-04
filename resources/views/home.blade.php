@@ -6,8 +6,7 @@
         Página principal <small>Sistema de gestión de calidad de Energitelco S.A.S</small>
     </h1>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
-        <li class="active">Cartelera</li>
+        <li class="active">Inicio</li>
     </ol>
 </section>
 <section class="content">
@@ -245,6 +244,20 @@
     </div>
     <div class="row">
         <div class="col-md-8">
+            <div class="box box-danger">
+                <div class="box-header">
+                    Frente de trabajo
+                </div>
+                <div class="box-body">
+                    <table class="table table-striped table-hover table-bordered">
+                        <thead>
+                            <tr>
+                               <th>Actividades</th>
+                            </tr>
+                       </thead>
+                    </table>
+                </div>
+            </div>
         @can('Consultar cartelera')
             <div class="box box-primary">
                 <div class="box-header with-border">

@@ -181,7 +181,7 @@
                                 @forelse($item->activities as $activity)
                                     <input type="text" name="activities[]" id="activities-edit-{{$activity->id}}" class="form-control" style="margin-bottom: 5px" value="{{$activity->text}}">
                                 @empty
-                                    <input type="text" name="activities[]" id="activities-edit-{{$activity->id}}" class="form-control" style="margin-bottom: 5px">
+                                    <input type="text" name="activities[]" id="activities-edit" class="form-control" style="margin-bottom: 5px">
                                 @endforelse
                             </div>
                         </div>

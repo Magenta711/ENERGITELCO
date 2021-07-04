@@ -65,6 +65,7 @@ class taskingController extends Controller
             'municipality' => $request->municipality,
             'department' => $request->department,
             'project' => $request->project,
+            'user_inv' => $request->user_inv,
             'eb_id' => $request->eb,
             'am' => (isset($request->am)) ? 1 : 0,
             'pm' => (isset($request->pm)) ? 1 : 0,
@@ -81,24 +82,32 @@ class taskingController extends Controller
                 'responsibles_id' => $id->id,
             ]);
         }
-        for ($i=0; $i < count($request->vehicles); $i++) { 
-            $id->vehicles()->create([
-                'vehicle_id' => $request->vehicles[$i]
-            ]);
+        if ($request->vehicles) {
+            for ($i=0; $i < count($request->vehicles); $i++) { 
+                if ($request->vehicles[$i]) {
+                    $id->vehicles()->create([
+                        'vehicle_id' => $request->vehicles[$i]
+                    ]);
+                }
+            }
         }
-        for ($i=0; $i < count($request->activities); $i++) { 
-            $id->activities()->create([
-                'text' => $request->activities[$i],
-                'status' => 1
-            ]);
+        if ($request->activities) {
+            for ($i=0; $i < count($request->activities); $i++) { 
+                if ($request->activities[$i]) {
+                    $id->activities()->create([
+                        'text' => $request->activities[$i],
+                        'status' => 1
+                    ]);
+                }
+            }
         }
         $id->eb()->create([
             'projectble_id' => $request->eb,
             'projectble_type' => 'App\Models\project\Mintic\Mintic_School',
         ]);
-        if ($request->equipments) {
-            for ($i=0; $i < count($request->equipments); $i++) {
-                $inv = InvUser::where('user_id',$request->inv_user)->where('inventaryble_type','App\Models\project\Mintic\inventory\invMinticEquipment')->where('inventaryble_id',$request->equipments[$i])->first();
+        if ($request->equipment) {
+            foreach ($request->equipment as $key => $value) {
+                $inv = InvUser::where('user_id',$request->inv_user)->where('inventaryble_type','App\Models\project\Mintic\inventory\invMinticEquipment')->where('inventaryble_id',$key)->first();
                 if ($inv) {
                     $inv->update([
                         'tickets' => 1,
@@ -108,7 +117,7 @@ class taskingController extends Controller
                 }else {
                     InvUser::create([
                         'user_id' => $request->inv_user,
-                        'inventaryble_id' => $request->equipments[$i],
+                        'inventaryble_id' => $key,
                         'inventaryble_type' => 'App\Models\project\Mintic\inventory\invMinticEquipment',
                         'tickets' => 1,
                         'departures' => 0,
@@ -118,21 +127,21 @@ class taskingController extends Controller
             }
         }
         if (isset($request->consumable)) {
-            for ($i=0; $i < count($request->consumable); $i++) { 
-                $inv = InvUser::where('user_id',$request->inv_user)->where('inventaryble_type','App\Models\project\Mintic\inventory\invMinticConsumable')->where('inventaryble_id',$request->consumable[$i])->first();
+            foreach ($request->consumable as $key => $value) {
+                $inv = InvUser::where('user_id',$request->inv_user)->where('inventaryble_type','App\Models\project\Mintic\inventory\invMinticConsumable')->where('inventaryble_id',$request->consumable[$key])->first();
                 if ($inv) {
                     $inv->update([
-                        'tickets' => $request->amount[$request->consumable[$i]] + $inv->tickets,
-                        'stock' => $request->amount[$request->consumable[$i]] + $inv->stock
+                        'tickets' => $request->amount[$key] + $inv->tickets,
+                        'stock' => $request->amount[$key] + $inv->stock
                     ]);
                 }else {
                     InvUser::create([
                         'user_id' => $request->inv_user,
-                        'inventaryble_id' => $request->equipments[$i],
+                        'inventaryble_id' => $key,
                         'inventaryble_type' => 'App\Models\project\Mintic\inventory\invMinticConsumable',
-                        'tickets' => $request->amount[$request->consumable[$i]],
+                        'tickets' => $request->amount[$key],
                         'departures' => 0,
-                        'stock' => $request->amount[$request->consumable[$i]],
+                        'stock' => $request->amount[$key],
                     ]);
                 }
             }
@@ -187,7 +196,7 @@ class taskingController extends Controller
             'status' => 2,
         ]);
         Responsable::where('responsibles_type','App\Models\Tasking')->where('responsibles_id',$id->id)->delete();
-        for ($i=0; $i < count($request->users); $i++) { 
+        for ($i=0; $i < count($request->users); $i++) {
             Responsable::create([
                 'user_id' => $request->users[$i],
                 'responsibles_type' => 'App\Models\Tasking',
@@ -211,6 +220,8 @@ class taskingController extends Controller
             'projectble_id' => $request->eb,
             'projectble_type' => 'App\Models\project\Mintic\Mintic_School',
         ]);
+
+        
 
         return redirect()->route('tasking')->with('success','Se editado la programación correctamente');
     }
