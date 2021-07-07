@@ -8,7 +8,7 @@
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
-        <li class="active"><a href="#">Bonificaciones de administrativos y conductores</a></li>
+        <li class="active">Bonificaciones de administrativos y conductores</li>
     </ol>
 </section>
 <section class="content">

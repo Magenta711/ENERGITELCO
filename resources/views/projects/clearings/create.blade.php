@@ -121,6 +121,24 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="lat">Latitud</label>
+                        <input type="text" id="lat" name="lat" value="{{ old('lat') }}" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="long">Longitud</label>
+                        <input type="text" id="long" name="long" value="{{ old('long') }}" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="height">Altitud</label>
+                        <input type="text" id="height" name="height" value="{{ old('height') }}" class="form-control">
+                    </div>
+                </div>
             </div>
         </div>
         <div class="box-footer">

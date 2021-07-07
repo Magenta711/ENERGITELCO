@@ -85,15 +85,17 @@
                     </li>
                 @endif
                 @if (
-                  auth()->user()->hasPermissionTo('Lista de indicadores') ||
-                  auth()->user()->hasPermissionTo('Crear indicadores') ||
-                  auth()->user()->hasPermissionTo('Informe de indicadores') ||
-                  auth()->user()->hasPermissionTo('Seguimiento de indicadores') ||
-                  auth()->user()->hasPermissionTo('Administración de indicadores')
+                    auth()->user()->hasPermissionTo('Lista de indicadores') ||
+                    auth()->user()->hasPermissionTo('Crear indicadores') ||
+                    auth()->user()->hasPermissionTo('Informe de indicadores') ||
+                    auth()->user()->hasPermissionTo('Seguimiento de indicadores') ||
+                    auth()->user()->hasPermissionTo('Administración de indicadores')
                   )
                     <li class="{{ activeMenu('indicators*') }}"><a class="btn-send" href="{{ route('indicators') }}"><i class="fa fa-chart-pie"></i> INDICADORES</a></li>
                 @endif
                 <li class="hide"><a href="#"><i class="fa fa-shopping-cart"></i> PROCEDIMIENTOS DE  COMPRAS Y ADQUISICIONES</a></li>
+                <li class="{{ activeMenu('tasking*') }}"><a href="{{route('tasking')}}"><i class="fa fa-shopping-cart"></i> FRENTE DE TRABAJO</a></li>
+                <li class="{{ activeMenu('forms*') }}"><a href="{{route('forms')}}"><i class="fa fa-shopping-cart"></i> FORMULARIOS</a></li>
                 @if (
                   auth()->user()->hasPermissionTo('Crear proveedores') ||
                   auth()->user()->hasPermissionTo('Editar proveedores') ||
@@ -429,7 +431,7 @@
                                   auth()->user()->hasPermissionTo('Ver asiganción de implemetación de MINTIC') ||
                                   auth()->user()->hasPermissionTo('Eliminar asiganción de implemetación de MINTIC')
                                 )
-                                    <li class="{{ activeMenu('project/mintic/ec*') }} {{ activeMenu('project/mintic/add*') }}">
+                                    <li class="{{ activeMenu('project/mintic/ec*') }}{{ activeMenu('project/mintic/maintenance*') }}{{ activeMenu('project/mintic/add*') }}">
                                       <a class="btn-send"href="{{ route('mintic') }}"><i class="fa fa-laptop-house"></i> ESCUELAS</a>
                                     </li>
                                 @endif

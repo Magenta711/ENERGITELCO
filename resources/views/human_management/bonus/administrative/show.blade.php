@@ -8,7 +8,7 @@
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
         <li><a href="#">Formatos de gestión</a></li>
-        <li>Bonificaciones de amdinistrativos y conductores</li>
+        <li><a href="#">Bonificaciones de amdinistrativos y conductores</a></li>
         <li class="active">Ver</li>
     </ol>
 </section>

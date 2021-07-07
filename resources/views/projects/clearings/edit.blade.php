@@ -120,6 +120,24 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="lat">Latitud</label>
+                        <input type="text" id="lat" name="lat" value="{{ $id->lat }}" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="long">Longitud</label>
+                        <input type="text" id="long" name="long" value="{{ $id->long }}" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="height">Altitud</label>
+                        <input type="text" id="height" name="height" value="{{ $id->height }}" class="form-control">
+                    </div>
+                </div>
                 <input type="text" name="value_send" id="value_send" class="hide">
             </div>
         </form>

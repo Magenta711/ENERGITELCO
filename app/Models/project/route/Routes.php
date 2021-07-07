@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Routes extends Model
 {
     protected $table = 'routes';
-    protected $fillable = ['responsable_id','project_name','approver_id','id_orden','ot','order_description','aliado_gdrt','tel_aliado_gdrt','solicitante_gdrt','tel_solicitante_gdrt','solicitante_gi','critical','observation','commentary','status'];
+    protected $fillable = ['responsable_id','project_name','approver_id','id_orden','ot','order_description','aliado_gdrt','tel_aliado_gdrt','solicitante_gdrt','tel_solicitante_gdrt','solicitante_gi','critical','observation','commentary','status','lat','long','height'];
     protected $guarder = ['id'];
 
     public function responsable()

@@ -1,7 +1,7 @@
 <form id="form_{{$num}}">
     <div class="form-group">
         <label for="item_{{$num}}">{{$it}}. {{$label}}</label><br>
-        <small>{{ $description ?? '' }}</small>
+        <small>{!! $description ?? '' !!}</small>
         <div class="row">
             <div class="col-md-8">
     @php
@@ -64,11 +64,11 @@
                     <div class="row">
                         <div class="form-group col-sm-6">
                             <label for="color">Color letra</label>
-                            <input type="color" name="color" value="#FFFFFF" id="color" class="form-control">
+                            <input type="color" name="color" value="#FFFFFF" id="color_{{$num}}" class="form-control">
                         </div>
                         <div class="form-group col-sm-6">
                             <label for="commentary">Comentario</label>
-                            <input type="text" name="commentary" id="commentary" class="form-control">
+                            <input type="text" name="commentary" id="commentary_{{$num}}" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">

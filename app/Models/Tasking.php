@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tasking extends Model
 {
-    protected $fillable = ['responsable_id','date_start','municipality','department','project','eb_id','am','pm','description','commentaries','report','user_inv','status'];
+    protected $fillable = ['responsable_id','date_start','municipality','department','project','eb_id','am','pm','description','commentaries','report','user_inv','report_user','status','station_name','lat','long','height','inv_user'];
 
     public function users()
     {
@@ -32,5 +32,18 @@ class Tasking extends Model
     public function consumables()
     {
         return $this->hasMany(taskDetailConsumable::class,'task_id','id');
+    }
+
+    public function invetory_user()
+    {
+        return $this->hasOne(User::class,'id','user_inv');
+    }
+    public function responsable()
+    {
+        return $this->hasOne(User::class,'id','responsable_id');
+    }
+    public function user_report()
+    {
+        return $this->hasOne(User::class,'id','report_user');
     }
 }

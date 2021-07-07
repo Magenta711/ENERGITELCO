@@ -9,7 +9,7 @@ use App\User;
 class Clearing extends Model
 {
     protected $table = 'clearings';
-    protected $fillable = ['responsable_id','approver_id','date','id_ot','ot_rr','region','estation_a','estation_b','brand_radion','model','banda','sud_banda','concept_technical','concept_fisico','status'];
+    protected $fillable = ['responsable_id','approver_id','date','id_ot','ot_rr','region','estation_a','estation_b','brand_radion','model','banda','sud_banda','concept_technical','concept_fisico','status','lat','long','height'];
     protected $guarder = ['id'];
 
     public function responsable()

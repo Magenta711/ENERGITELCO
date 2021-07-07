@@ -21,11 +21,13 @@ use App\Models\SystemMessages;
 use App\Models\Work8;
 use App\Models\Work8Users;
 use App\Models\WorkWithUs;
+use App\Models\Tasking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Barryvdh\DomPDF\Facade as PDF;
 use DB;
+use Illuminate\Database\Eloquent\Builder;
 
 class HomeController extends Controller
 {
@@ -78,7 +80,11 @@ class HomeController extends Controller
         $interviews = interview::count();
         $job_application = WorkWithUs::count();
         $proof_payment = Work8Users::where('user_id',auth()->id())->get()->last();
-        return view('home',compact('usuarios','total_sin_aprobar','trabajos1','bill_types','start_mesage','proyectos','customers','providers','job_application','interviews','proof_payment'));
+        $taskings = Tasking::where('report',null)->whereHas('users',function ($query)
+        {
+            return $query->where('id',auth()->id());
+        })->get();
+        return view('home',compact('usuarios','total_sin_aprobar','trabajos1','bill_types','start_mesage','proyectos','customers','providers','job_application','interviews','proof_payment','taskings'));
     }
 
     public function notification()

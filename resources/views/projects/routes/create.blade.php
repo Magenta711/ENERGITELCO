@@ -48,6 +48,24 @@
                             <input type="text" name="project_name" value="{{old('project_name')}}" id="project_name" class="form-control">
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="lat">Latitud</label>
+                            <input type="text" id="lat" name="lat" value="{{ old('lat') }}" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="long">Longitud</label>
+                            <input type="text" id="long" name="long" value="{{ old('long') }}" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="height">Altitud</label>
+                            <input type="text" id="height" name="height" value="{{ old('height') }}" class="form-control">
+                        </div>
+                    </div>
                 </div>
                 <hr>
                 <h4>Técnicos GI que realiza la actividad</h4>

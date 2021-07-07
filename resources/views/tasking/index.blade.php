@@ -9,6 +9,14 @@
         }
         return false;
     }
+    function selectedVehicles($array,$id){
+        foreach ($array as $key => $value) {
+            if ($id == $value->vehicle->id) {
+                return true;
+            }
+        }
+        return false;
+    }
     function hasConsumable($consumables,$id,$type)
     {
         foreach ($consumables as $key => $item) {
@@ -97,7 +105,7 @@
                                             <td>
                                                 <div class="row" style="cursor: pointer" data-toggle="modal" data-target="#edit-modal-{{$item->id}}">
                                                     <div class="col-xs-6">
-                                                        <p>{{$item->eb->projectble->name}}</p>
+                                                        <p>{{$item->eb ? $item->eb->projectble->name : $item->station_name}}</p>
                                                     </div>
                                                     <div class="col-xs-6 text-right">
                                                         <p class="date-starts">{{$item->date_start}}</p>
@@ -151,7 +159,7 @@
                                             <td>
                                                 <div class="row" style="cursor: pointer" data-toggle="modal" data-target="#show-modal-{{$item->id}}">
                                                     <div class="col-xs-6">
-                                                        <p>{{$item->eb->projectble->name}}</p>
+                                                        <p>{{$item->eb ? $item->eb->projectble->name : $item->station_name}}</p>
                                                     </div>
                                                     <div class="col-xs-6 text-right">
                                                         <p class="date-starts">{{$item->date_start}}</p>
@@ -205,7 +213,7 @@
                                             <td>
                                                 <div class="row" style="cursor: pointer" data-toggle="modal" data-target="#show-modal-{{$item->id}}">
                                                     <div class="col-xs-6">
-                                                        <p>{{$item->eb->projectble->name}}</p>
+                                                        <p>{{$item->eb ? $item->eb->projectble->name : $item->station_name}}</p>
                                                     </div>
                                                     <div class="col-xs-6 text-right">
                                                         <p class="date-starts">{{$item->date_start}}</p>
@@ -370,6 +378,21 @@
             amount = elem.parent().parent().children('.col-md-3').text().split('/ ')[1];
             if (parseFloat(value) > parseFloat(amount)) {
                 elem.parent().addClass('has-error');
+            }
+        });
+        $('#eb').change(function(){
+            if (this.value == 0) {
+                console.log('Otra estacion');
+                $('.station-other').show();
+            }else {
+                $('.station-other').hide();
+            }
+            let project = $('#'+this.id+' option:selected').attr('class');
+            if (project == 'project-mintic') {
+                $('#type_eb').val('App\\Models\\project\\Mintic\\Mintic_School');
+            }
+            if (project == 'project-cleaner') {
+                $('#type_eb').val("App\\Models\\project\\Clearing");
             }
         });
     });

@@ -18,8 +18,15 @@
                             <div class="col-md-4">
                                 <label for="users-show">Funcionarios</label>
                                 <p>
+                                    @php
+                                        $canReport = $item->responsable_id == auth()->id() ? true : false;
+                                    @endphp
                                     @foreach ($item->users as $user)
                                         <span class="label label-default">{{$user->name}}</span>
+                                        @php
+                                            if ($user->id == auth()->id())
+                                                $canReport = true;
+                                        @endphp
                                     @endforeach
                                 </p>
                             </div>
@@ -38,6 +45,18 @@
                             <div class="col-md-4">
                                 <label for="eb-show">Estación base</label>
                                 <p>{{$item->eb->projectble->name}}</p>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="eb-show">Latitud</label>
+                                <p>{{ $item->eb->projectble->lat }}</p>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="eb-show">Longitud</label>
+                                <p>{{ $item->eb->projectble->long }}</p>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="eb-show">Altitud</label>
+                                <p>{{ $item->eb->projectble->height }}</p>
                             </div>
                             <div class="col-md-4">
                                 <label for="vehicles-show">Vehículos</label>
@@ -68,10 +87,23 @@
                             <label for="commentaries-show"><i class="fa fa-align-left"></i> Comentarios</label>
                             <p>{{$item->commentaries}}</p>
                         </div>
+                        <form action="{{route('tasking_report',$item->id)}}" method="post">
                         <div class="form-group">
                             <label for="report-show"><i class="fa fa-align-left"></i> Reporte de cierre</label>
-                            <p>{{$item->report}}</p>
+                            @if ($item->report)
+                                <p>{{$item->report}}</p>
+                            @else
+                                @if ($canReport)
+                                    @csrf
+                                    @method('PATCH')
+                                    <textarea name="report" id="report-show" cols="30" rows="3" class="form-control"></textarea>
+                                @endif
+                            @endif
                         </div>
+                        @if (!$item->report && $canReport)
+                            <button class="btn btn-sm btn-success">Enviar reporte</button>
+                        @endif
+                        </form>
                     </div>
                     <div class="col-md-4">
                         <button type="button" class="btn btn-sm btn-block btn-secundary text-left open-modal-inv" style="text-align: left !important" data-toggle="modal" data-target="#equipment-show-{{$item->id}}-modal">
@@ -86,15 +118,12 @@
                                     <div class="modal-header">
                                         <h4 class="modal-title">Equipos</h4>
                                     </div>
+                                    <form action="{{route('tasking_consumables',$item->id)}}" method="POST">
+                                        @csrf
                                     <div class="modal-body">
                                         <div class="form-group">
                                             <label for="">Asignado para inventario</label>
-                                            {{-- <select name="inv_user" class="form-control inv_user">
-                                                <option selected disabled>Selecciona el usuario para asignar bodega</option>
-                                                @foreach ($item->users as $user)
-                                                    <option {{$user->id == $item->user_inv ? 'selected' : ''}} value="{{$user->id}}">{{$user->name}}</option>
-                                                @endforeach
-                                            </select> --}}
+                                            <p>{{$item->user_inv ? $item->invetory_user->name : ''}}</p>
                                         </div>
                                         <div class="table-responsive">
                                             <table class="table table-striped table-bordered table-hover">
@@ -107,18 +136,44 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {{-- @foreach ($equipments as $equiment)
-                                                        <tr>
-                                                            <td><input type="checkbox" name="equipment[{{$equiment->id}}]" id="equipment_{{$equiment->id}}" value="{{$equiment->id}}"></td>
-                                                            <td>{{$equiment->serial}}</td>
-                                                            <td>{{$equiment->item}}</td>
-                                                            <td>{{$equiment->brand }}</td>
-                                                        </tr>
-                                                    @endforeach --}}
+                                                    @php
+                                                        $hasConsumable = false;
+                                                    @endphp
+                                                    @foreach ($item->consumables as $equiment)
+                                                        @if ($equiment->inventaryble_type == 'App\Models\project\Mintic\inventory\invMinticEquipment')
+                                                            <tr>
+                                                                <td>{{$equiment->id}}</td>
+                                                                <td>{{$equiment->inventaryble->serial}}</td>
+                                                                <td>{{$equiment->inventaryble->item}}</td>
+                                                                <td>{{$equiment->inventaryble->brand }}</td>
+                                                            </tr>
+                                                            @php
+                                                                $hasConsumable = true;
+                                                            @endphp
+                                                        @endif
+                                                    @endforeach
+                                                    @if (!$hasConsumable && $item->user_inv == auth()->id())
+                                                        @foreach (auth()->user()->inventories as $equiment)
+                                                            @if ($equiment->inventaryble_type == 'App\Models\project\Mintic\inventory\invMinticEquipment')
+                                                                <tr>
+                                                                    <td><input type="checkbox" name="equipment[{{$equiment->inventaryble_id}}]" id="equipment_{{$equiment->id}}" value="{{$equiment->id}}"></td>
+                                                                    <td>{{$equiment->inventaryble->serial}}</td>
+                                                                    <td>{{$equiment->inventaryble->item}}</td>
+                                                                    <td>{{$equiment->inventaryble->brand }}</td>
+                                                                </tr>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
+                                    @if (!$hasConsumable && $item->user_inv == auth()->id())
+                                        <div class="box-footer">
+                                            <button class="btn btn-sm btn-primary btn-send">Guardar</button>
+                                        </div>
+                                    @endif
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -128,15 +183,12 @@
                                     <div class="modal-header">
                                         <h4 class="modal-title">Consumibles</h4>
                                     </div>
+                                    <form action="{{route('tasking_consumables',$item->id)}}" method="POST">
+                                        @csrf
                                     <div class="modal-body">
                                         <div class="form-group">
                                             <label for="">Asignado para inventario</label>
-                                            {{-- <select name="inv_user" class="form-control inv_user">
-                                                <option selected disabled>Selecciona el usuario para asignar bodega</option>
-                                                @foreach ($item->users as $user)
-                                                    <option {{$user->id == $item->user_inv ? 'selected' : ''}} value="{{$user->id}}">{{$user->name}}</option>
-                                                @endforeach
-                                            </select> --}}
+                                            <p>{{$item->user_inv ? $item->invetory_user->name : ''}}</p>
                                         </div>
                                         <div class="table-responsive">
                                             <table class="table table-striped table-bordered table-hover">
@@ -148,27 +200,49 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {{-- @foreach ($consumables as $consumable)
-                                                        @php
-                                                            $hasCosumable = $item->consumables ? hasConsumable($item->consumables,$consumable->id,'App\Models\project\Mintic\inventory\invMinticConsumable') : false;
-                                                        @endphp
-                                                        <tr>
-                                                            <td><input type="checkbox" name="consumable[{{$consumable->id}}]" id="consumable_{{$consumable->id}}" value="{{$consumable->id}}" {{$hasCosumable ? 'checked' : ''}}></td>
-                                                            <td>{{$consumable->item}} {{$consumable->type}}</td>
-                                                            <td>
-                                                                <div class="col-md-9" style="padding-right: 2px;">
-                                                                    <input type="number" class="form-control" name="amount[{{$item->id}}]" value="{{$hasCosumable ? $hasCosumable->amount : 0}}">
-                                                                </div>
-                                                                <div class="col-md-3" style="padding-left: 2px">
-                                                                    / {{$consumable->amount + ($hasCosumable->amount ?? 0)}}
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach --}}
+                                                    @php
+                                                        $hasConsumable = false;
+                                                    @endphp
+                                                    @foreach ($item->consumables as $consumable)
+                                                        @if ($consumable->inventaryble_type == 'App\Models\project\Mintic\inventory\invMinticConsumable')
+                                                            <tr>
+                                                                <td>{{$consumable->id}}</td>
+                                                                <td>{{$consumable->inventaryble->item}} {{$consumable->inventaryble->type}}</td>
+                                                                <td>
+                                                                    {{$consumable->inventaryble->amount}}
+                                                                </td>
+                                                            </tr>
+                                                            @php
+                                                                $hasConsumable = true;
+                                                            @endphp
+                                                        @endif
+                                                    @endforeach
+                                                    @if (!$hasConsumable && $item->user_inv == auth()->id())
+                                                        @foreach (auth()->user()->inventories as $consumable)
+                                                            @if ($consumable->inventaryble_type == 'App\Models\project\Mintic\inventory\invMinticConsumable')
+                                                                <tr>
+                                                                    <td><input type="checkbox" name="consumable[{{$consumable->inventaryble_id}}]" id="consumable_{{$consumable->inventaryble_id}}" value="1"></td>
+                                                                    <td>{{$consumable->inventaryble->item}} {{$consumable->inventaryble->type}}</td>
+                                                                    <td>
+                                                                        <div class="col-md-9" style="padding-right: 2px;">
+                                                                            <input type="number" id="amount-cosumable-{{$consumable->id}}" class="form-control amounts-consumables" name="amount[{{$consumable->inventaryble_id}}]" value="0">
+                                                                        </div>
+                                                                        <div class="col-md-3" style="padding-left: 2px">/ {{$consumable->stock}}</div>
+                                                                    </td>
+                                                                </tr>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
+                                    @if (!$hasConsumable && $item->user_inv == auth()->id())
+                                        <div class="box-footer">
+                                            <button class="btn btn-sm btn-primary btn-send">Guardar</button>
+                                        </div>
+                                    @endif
+                                    </form>
                                 </div>
                             </div>
                         </div>

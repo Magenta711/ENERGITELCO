@@ -21,6 +21,7 @@ use App\Models\bonus24;
 use App\Models\bonus\MinorBoxUser;
 use App\Models\project\route\Routes;
 use App\Models\Work8Users;
+use App\Models\InvUser;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -151,6 +152,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function report_24_7()
     {
         return $this->hasMany(bonus24::class, 'user_id','id');
+    }
+
+    public function inventories()
+    {
+        return $this->hasMany(InvUser::class, 'user_id','id');
     }
 }
 // UPDATE `signatures` SET `signatures_type`='App\Models\document' WHERE `signatures_type` like 'App\User'

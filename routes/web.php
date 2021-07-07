@@ -698,6 +698,16 @@ Route::post('project/mintic/install','projects\MinticController@upload_install')
 Route::get('project/mintic/tss/{id}','projects\MinticController@tss')->name('mintic_tss');
 Route::post('project/mintic/tss','projects\MinticController@upload_tss')->name('mintic_marke_tss');
 
+Route::get('project/mintic/maintenance/{id}','projects\MinticController@maintenance')->name('mintic_maintenance');
+Route::get('project/mintic/maintenance/{id}/create','projects\MinticController@create_maintenance')->name('mintic_maintenance_create');
+Route::post('project/mintic/maintenance/{id}','projects\MinticController@store_maintenance')->name('mintic_maintenance_store');
+Route::get('project/mintic/maintenance/{id}/{item}/edit','projects\MinticController@edit_maintenance')->name('mintic_maintenance_edit');
+Route::put('project/mintic/maintenance/{id}/{item}','projects\MinticController@update_maintenance')->name('mintic_maintenance_update');
+Route::get('project/mintic/maintenance/{id}/{item}','projects\MinticController@show_maintenance')->name('mintic_maintenance_show');
+Route::get('project/mintic/maintenance/{id}/{item}/export','projects\MinticController@export_maintenance')->name('mintic_maintenance_export');
+Route::get('project/mintic/maintenance/{id}/{item}/photos','projects\MinticController@photos_maintenance')->name('mintic_maintenance_photos');
+Route::post('project/mintic/maintenance/{id}/{item}','projects\MinticController@upload_maintenance')->name('mintic_marke_maintenance');
+
 Route::get('project/mintic/add/{id}','projects\MinticImplementController@index')->name('mintic_add_consumables');
 Route::get('project/mintic/add/{id}/show/{item}','projects\MinticImplementController@show')->name('mintic_add_consumables_show');
 Route::get('project/mintic/add/{id}/create','projects\MinticImplementController@create')->name('mintic_add_consumables_create');
@@ -843,3 +853,5 @@ Route::put('tasking/{id}','taskingController@update')->name('tasking_update');
 // Route::get('tasking/download/{id}','taskingController@download')->name('tasking_download');
 // Route::patch('tasking/{id}','taskingController@approve')->name('tasking_approve');
 Route::delete('tasking/{id}','taskingController@destroy')->name('tasking_delete');
+Route::patch('tasking/{id}','taskingController@report')->name('tasking_report');
+Route::post('tasking/{id}','taskingController@consumables')->name('tasking_consumables');

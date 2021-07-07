@@ -95,6 +95,24 @@
                         <p>{{ $id->concept_fisico }}</p>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="lat">Latitud</label>
+                        <p>{{ $id->lat }}</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="long">Longitud</label>
+                        <p>{{ $id->long }}</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="height">Altitud</label>
+                        <p>{{ $id->height }}</p>
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-6">

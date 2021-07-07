@@ -142,17 +142,36 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="eb">Estación base</label>
+                                <input type="hidden" name="type_eb" id="type_eb">
                                 <select name="eb" id="eb" class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona la estación base" style="width: 100%;" data-select2-id="5" tabindex="-1" aria-hidden="true">
                                     <option disabled selected></option>
+                                    <option value="0">Otra</option>
                                     @foreach ($mintics as $mintic)
                                         <option class="project-mintic" data-select2-id="{{$mintic->id}}" value="{{$mintic->id}}">{{$mintic->name}}</option>
                                     @endforeach
-                                    @foreach ($works as $work)
-                                        @if ($work->nombre_eb)
-                                            <option style="display:none" class="project-works" data-select2-id="{{$work->id}}" value="{{$work->id}}">{{$work->nombre_eb}}</option>
-                                        @endif
+                                    @foreach ($cleaner1 as $cleaner)
+                                        <option class="project-cleaner" data-select2-id="{{$cleaner->id}}" value="{{$cleaner->id}}">{{$cleaner->estation_a}}</option>
+                                    @endforeach
+                                    @foreach ($cleaner2 as $cleaner)
+                                        <option class="project-cleaner" data-select2-id="{{$cleaner->id}}" value="{{$cleaner->id}}">{{$cleaner->estation_b}}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="col-md-4 station-other" style="display: none">
+                                <label for="station_name">Nombre de la estación base</label>
+                                <input type="text" value="{{old('station_name')}}" name="station_name" id="station_name" class="form-control">
+                            </div>
+                            <div class="col-md-4 station-other" style="display: none">
+                                <label for="lat">Latitud</label>
+                                <input type="text" value="{{old('lat')}}" name="lat" id="lat" class="form-control">
+                            </div>
+                            <div class="col-md-4 station-other" style="display: none">
+                                <label for="long">Longitud</label>
+                                <input type="text" value="{{old('long')}}" name="long" id="long" class="form-control">
+                            </div>
+                            <div class="col-md-4 station-other" style="display: none">
+                                <label for="height">Altitud</label>
+                                <input type="text" value="{{old('height')}}" name="height" id="height" class="form-control">
                             </div>
                             <div class="col-md-4">
                                 <label for="vehicles">Vehículos</label>

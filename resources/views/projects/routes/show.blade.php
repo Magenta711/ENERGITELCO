@@ -41,6 +41,24 @@
                         <p>{{$id->project_name}}</p>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="lat">Latitud</label>
+                        <p>{{ $id->lat }}</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="long">Longitud</label>
+                        <p>{{ $id->long }}</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="height">Altitud</label>
+                        <p>{{ $id->height }}</p>
+                    </div>
+                </div>
             </div>
             <hr>
             <h4>Técnicos GI que realizanla actividad</h4>

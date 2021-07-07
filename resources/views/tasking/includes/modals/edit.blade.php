@@ -138,23 +138,45 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="eb-edit">Estación base</label>
+                                <input type="hidden" name="type_eb" id="type_eb-edit" value="{{$item->eb ? $item->eb->projectble_type : ''}}">
                                 <select name="eb" id="eb-edit" class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona la estación base" style="width: 100%;" data-select2-id="5" tabindex="-1" aria-hidden="true">
                                     <option disabled selected></option>
+                                    <option {{!$item->eb ? 'selected' : ''}} value="0">Otra</option>
                                     @foreach ($mintics as $mintic)
-                                        <option {{$item->eb->projectble_type == 'App\Models\project\Mintic\Mintic_School' && $item->eb->projectble_id == $mintic->id ? 'selected' : '' }} class="project-mintic" data-select2-id="{{$mintic->id}}" value="{{$mintic->id}}">{{$mintic->name}}</option>
+                                        <option {{$item->eb && $item->eb->projectble_type == 'App\Models\project\Mintic\Mintic_School' && $item->eb->projectble_id == $mintic->id ? 'selected' : '' }} class="project-mintic" data-select2-id="{{$mintic->id}}" value="{{$mintic->id}}">{{$mintic->name}}</option>
                                     @endforeach
-                                    @foreach ($works as $work)
-                                        @if ($work->nombre_eb)
-                                            <option style="display:none" class="project-works" data-select2-id="{{$work->id}}" value="{{$work->id}}">{{$work->nombre_eb}}</option>
-                                        @endif
+                                    @foreach ($cleaner1 as $cleaner)
+                                        <option {{$item->eb && $item->eb->projectble_type == 'App\Models\project\Clearing' && $item->eb->projectble_id == $cleaner->id ? 'selected' : '' }} class="project-cleaner" data-select2-id="{{$cleaner->id}}" value="{{$cleaner->id}}">{{$cleaner->estation_a}}</option>
+                                    @endforeach
+                                    @foreach ($cleaner2 as $cleaner)
+                                        <option {{$item->eb && $item->eb->projectble_type == 'App\Models\project\Clearing' && $item->eb->projectble_id == $cleaner->id ? 'selected' : '' }} class="project-cleaner" data-select2-id="{{$cleaner->id}}" value="{{$cleaner->id}}">{{$cleaner->estation_b}}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="col-md-4 station-other" {!! $item->eb ? 'style="display: none"' : '' !!}>
+                                <label for="station_name">Nombre de la estación base</label>
+                                <input type="text" value="{{$item->station_name}}" name="station_name" id="station_name" class="form-control">
+                            </div>
+                            <div class="col-md-4 station-other" {!! $item->eb ? 'style="display: none"' : '' !!}>
+                                <label for="lat">Latitud</label>
+                                <input type="text" value="{{$item->lat}}" name="lat" id="lat" class="form-control">
+                            </div>
+                            <div class="col-md-4 station-other" {!! $item->eb ? 'style="display: none"' : '' !!}>
+                                <label for="long">Longitud</label>
+                                <input type="text" value="{{$item->long}}" name="long" id="long" class="form-control">
+                            </div>
+                            <div class="col-md-4 station-other" {!! $item->eb ? 'style="display: none"' : '' !!}>
+                                <label for="height">Altitud</label>
+                                <input type="text" value="{{$item->height}}" name="height" id="height" class="form-control">
                             </div>
                             <div class="col-md-4">
                                 <label for="vehicles-edit">Vehículos</label>
                                 <select name="vehicles[]" id="vehicles-edit" class="form-control select2 select2-hidden-accessible" multiple="" data-placeholder="Selecciona un vehículos" style="width: 100%;" data-select2-id="6" tabindex="-1" aria-hidden="true">
                                     @foreach ($vehicles as $vehicle)
-                                        <option {{ selected($item->vehicles,$vehicle->id) ? 'selected' : '' }}  id="option_vehicle_{{$vehicle->id}}" data-select2-id="{{$vehicle->id}}" value="{{$vehicle->id}}">{{$vehicle->plate}} - {{$vehicle->brand}}</option>
+                                        @php
+                                            $stateVehicle = expirateDate($vehicle->enrollment_date,$vehicle->soat_date,$vehicle->gases_date,$vehicle->technomechanical_date);
+                                        @endphp
+                                        <option {{ selectedVehicles($item->vehicles,$vehicle->id) ? 'selected' : '' }}  id="option_vehicle_{{$vehicle->id}}" data-select2-id="{{$vehicle->id}}" value="{{$vehicle->id}}" {{$stateVehicle ? 'disabled' : ''}} {{$stateVehicle ? ' (documentos vencidos)' : ''}}>{{$vehicle->plate}} - {{$vehicle->brand}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -276,10 +298,10 @@
                                                             <td>{{$consumable->item}} {{$consumable->type}}</td>
                                                             <td>
                                                                 <div class="col-md-9" style="padding-right: 2px;">
-                                                                    <input type="number" class="form-control" name="amount[{{$item->id}}]" value="{{$hasCosumable ? $hasCosumable->amount : 0}}">
+                                                                    <input type="number" class="form-control" name="amount[{{$consumable->id}}]" value="{{$hasCosumable ? $hasCosumable->stock : 0}}">
                                                                 </div>
                                                                 <div class="col-md-3" style="padding-left: 2px">
-                                                                    / {{$consumable->amount + ($hasCosumable->amount ?? 0)}}
+                                                                    / {{$consumable->stock + ($hasCosumable->stock ?? 0)}}
                                                                 </div>
                                                             </td>
                                                         </tr>
