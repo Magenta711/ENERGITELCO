@@ -1,120 +1,199 @@
 <table>
     <tr>
-        <td rowspan="40"></td>
+        <td></td>
         <td colspan="15"></td>
+        <td></td>
     </tr>
     <tr>
-        <td colspan="4"></td>
-        <td colspan="8">FORMATO NOTIFICACIÓN DEMANTENIMIENTO DE CENTROS DIGITALES</td>
-        <td colspan="3"></td>
+        <td></td>
+        <td rowspan="7" colspan="4" style="border: 1px solid #000000;"></td>
+        <td rowspan="7" colspan="8" style="border: 1px solid #000000;">FORMATO NOTIFICACIÓN DEMANTENIMIENTO DE CENTROS DIGITALES</td>
+        <td rowspan="7" colspan="3" style="border: 1px solid #000000;"></td>
     </tr>
     <tr>
-        <td colspan="15"></td>
+        <td></td>
     </tr>
     <tr>
-        <td>N° DE CASO:</td>
-        <td colspan="4">{{$id->num}}</td>
-        <td>Fecha:</td>
-        <td colspan="2">{{$id->date}}</td>
-        <td colspan="2">Empresa colaboradora</td>
-        <td colspan="5">{{$id->collaborating_company}}</td>
+        <td></td>
     </tr>
     <tr>
-        <td colspan="15">1. INFORMACIÓN GENERAL</td>
+        <td></td>
     </tr>
     <tr>
-        <td colspan="4">CONTRATO No.</td>
-        <td colspan="11">Contratista</td>
+        <td></td>
     </tr>
     <tr>
-        <td colspan="4">1042 de 2020</td>
-        <td colspan="11">COMCEL SAS</td>
+        <td></td>
     </tr>
     <tr>
-        <td colspan="4">DEPARTAMENTO</td>
-        <td colspan="5">MUNICIPIO</td>
-        <td colspan="3">CENTRO POBLADO</td>
-        <td colspan="3">SEDE INSTITUCIÓN</td>
+        <td></td>
     </tr>
     <tr>
-        <td colspan="4">{{$id->department}}</td>
-        <td colspan="5">{{$id->municpality}}</td>
-        <td colspan="3">{{$id->population}}</td>
-        <td colspan="3">{{$id->name}}</td>
+        <td></td>
+        <td style="border: 2px solid #000000;">N° DE CASO:</td>
+        <td colspan="4" style="border: 2px solid #000000;">{{$id->num}}</td>
+        <td style="border: 2px solid #000000;">Fecha:</td>
+        <td colspan="2" style="border: 2px solid #000000;">{{$id->date}}</td>
+        <td colspan="2" style="border: 2px solid #000000;">Empresa colaboradora</td>
+        <td colspan="5" style="border: 2px solid #000000;">{{$id->collaborating_company}}</td>
     </tr>
     <tr>
-        <td colspan="4">ID BENEFICIARIO</td>
-        <td colspan="5">NOMBRE DEL RESPONSABLE (RESPONSABLE DE LA INSTITUCIÓN EDUCATIVA / AUTORIDAD COMPENTE)</td>
-        <td colspan="3">NÚMERO DE CEDULA</td>
-        <td colspan="3">NÚMERO DE CONTACTO</td>
+        <td></td>
+        <td colspan="15" style="text-align: center; background: #A6A6A6;border: 1px solid #000000;">1. INFORMACIÓN GENERAL</td>
     </tr>
     <tr>
-        <td colspan="4">{{$id->code}}</td>
-        <td colspan="5">{{$id->responsable_name}}</td>
-        <td colspan="3">{{$id->responsable_cc}}</td>
-        <td colspan="3">{{$id->responsable_number}}</td>
+        <td></td>
+        <td colspan="4" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">CONTRATO No.</td>
+        <td colspan="11" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">Contratista</td>
     </tr>
     <tr>
-        <td colspan="15">CORREO ELECTRÓNICO</td>
+        <td></td>
+        <td colspan="4" style="border: 1px solid #000000;">1042 de 2020</td>
+        <td colspan="11" style="border: 1px solid #000000;">COMCEL SAS</td>
     </tr>
     <tr>
-        <td colspan="15">
+        <td></td>
+        <td colspan="4" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">DEPARTAMENTO</td>
+        <td colspan="5" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">MUNICIPIO</td>
+        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">CENTRO POBLADO</td>
+        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">SEDE INSTITUCIÓN</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="4" style="border: 1px solid #000000;">{{$id->department}}</td>
+        <td colspan="5" style="border: 1px solid #000000;">{{$id->municpality}}</td>
+        <td colspan="3" style="border: 1px solid #000000;">{{$id->population}}</td>
+        <td colspan="3" style="border: 1px solid #000000;">{{$id->name}}</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="4" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">ID BENEFICIARIO</td>
+        <td colspan="5" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">NOMBRE DEL RESPONSABLE (RESPONSABLE DE LA INSTITUCIÓN EDUCATIVA / AUTORIDAD COMPENTE)</td>
+        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">NÚMERO DE CEDULA</td>
+        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">NÚMERO DE CONTACTO</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="4" style="border: 1px solid #000000;">{{$id->code}}</td>
+        <td colspan="5" style="border: 1px solid #000000;">{{$id->responsable_name}}</td>
+        <td colspan="3" style="border: 1px solid #000000;">{{$id->responsable_cc}}</td>
+        <td colspan="3" style="border: 1px solid #000000;">{{$id->responsable_number}}</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="15" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">CORREO ELECTRÓNICO</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="15" style="border: 1px solid #000000;">
             {{$id->responsable_email}}
         </td>
     </tr>
     <tr>
-        <td colspan="15">2. EQUIPOS INSTALADOS/RETIRADOS</td>
+        <td></td>
+        <td colspan="15" style="text-align: center;background: #A6A6A6;border: 1px solid #000000;">2. EQUIPOS INSTALADOS/RETIRADOS</td>
     </tr>
     <tr>
-        <td>SAP</td>
-        <td colspan="8">Descripción</td>
-        <td colspan="3">Cantidad Retirado</td>
-        <td colspan="3">Cantidad Instalado</td>
+        <td></td>
+        <td style="text-align: center;background: #D0CECE;border: 1px solid #000000;">SAP</td>
+        <td colspan="8" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">Descripción</td>
+        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">Cantidad Retirado</td>
+        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">Cantidad Instalado</td>
     </tr>
-    {{-- @for ($i = 0; $i < count($equiments); $i++)
+    @foreach ($equiments as $equiment)
         <tr>
-            <td>{{$equiment[$i]->sap}}</td>
-            <td colspan="8">{{$equiment[$i]->name}}</td>
-            <td colspan="3">
-                <input type="checkbox" name="" id=""> 1
-                <input type="checkbox" name="" id=""> 2
+            <td></td>
+            <td style="border: 1px solid #000000;">{{$equiment->sap}}</td>
+            <td colspan="8" style="border: 1px solid #000000;">{{$equiment->name}}</td>
+            <td colspan="3" style="border: 1px solid #000000;">
+                {{-- <input type="checkbox" name="" id=""> 1 --}}
+                {{-- <input type="checkbox" name="" id=""> 2
                 <input type="checkbox" name="" id=""> 3
-                <input type="checkbox" name="" id=""> 4
+                <input type="checkbox" name="" id=""> 4 --}}
             </td>
-            <td colspan="3">
-                <input type="checkbox" name="" id=""> 1
+            <td colspan="3" style="border: 1px solid #000000;">
+                {{-- <input type="checkbox" name="" id=""> 1 --}}
+                {{-- <input type="checkbox" name="" id=""> 2
                 <input type="checkbox" name="" id="">
-                <input type="checkbox" name="" id="">
-                <input type="checkbox" name="" id="">
+                <input type="checkbox" name="" id=""> --}}
             </td>
         </tr>
-    @endfor --}}
+    @endforeach
     <tr>
-        <td colspan="15">{{$equiments}}</td>
+        <td></td>
+        <td colspan="15" style="text-align: center;background: #A6A6A6;border: 1px solid #000000;">SERIAL EQUIPO/S RETIRADOS E INSTALADOS</td>
     </tr>
     <tr>
-        <td colspan="15">SERIAL EQUIPO/S RETIRADOS E INSTALADOS</td>
+        <td></td>
+        <td colspan="8" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">SERIAL EQUIPO/S RETIRADOS</td>
+        <td colspan="7" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">SERIAL EQUIPO/S INSTALADOS</td>
     </tr>
     <tr>
-        <td colspan="4"></td>
-        <td colspan="4"></td>
-        <td colspan="4"></td>
-        <td colspan="3"></td>
+        <td></td>
+        <td colspan="4" style="border: 1px solid #000000;"></td>
+        <td colspan="4" style="border: 1px solid #000000;"></td>
+        <td colspan="4" style="border: 1px solid #000000;"></td>
+        <td colspan="3" style="border: 1px solid #000000;"></td>
     </tr>
     <tr>
-        <td colspan="15">3. DESCRIPCIÓN DE LA FALLA</td>
+        <td></td>
+        <td colspan="4" style="border: 1px solid #000000;"></td>
+        <td colspan="4" style="border: 1px solid #000000;"></td>
+        <td colspan="4" style="border: 1px solid #000000;"></td>
+        <td colspan="3" style="border: 1px solid #000000;"></td>
     </tr>
     <tr>
+        <td></td>
+        <td colspan="4" style="border: 1px solid #000000;"></td>
+        <td colspan="4" style="border: 1px solid #000000;"></td>
+        <td colspan="4" style="border: 1px solid #000000;"></td>
+        <td colspan="3" style="border: 1px solid #000000;"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="4" style="border: 1px solid #000000;"></td>
+        <td colspan="4" style="border: 1px solid #000000;"></td>
+        <td colspan="4" style="border: 1px solid #000000;"></td>
+        <td colspan="3" style="border: 1px solid #000000;"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="4" style="border: 1px solid #000000;"></td>
+        <td colspan="4" style="border: 1px solid #000000;"></td>
+        <td colspan="4" style="border: 1px solid #000000;"></td>
+        <td colspan="3" style="border: 1px solid #000000;"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="4" style="border: 1px solid #000000;"></td>
+        <td colspan="4" style="border: 1px solid #000000;"></td>
+        <td colspan="4" style="border: 1px solid #000000;"></td>
+        <td colspan="3" style="border: 1px solid #000000;"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="4" style="border: 1px solid #000000;"></td>
+        <td colspan="4" style="border: 1px solid #000000;"></td>
+        <td colspan="4" style="border: 1px solid #000000;"></td>
+        <td colspan="3" style="border: 1px solid #000000;"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="15" style="text-align: center;background: #A6A6A6;border: 1px solid #000000;">3. DESCRIPCIÓN DE LA FALLA</td>
+    </tr>
+    <tr>
+        <td></td>
         <td colspan="15"></td>
     </tr>
     <tr>
-        <td colspan="15">4. DECLARACIÓN</td>
+        <td></td>
+        <td colspan="15" style="text-align: center;background: #A6A6A6;border: 1px solid #000000;">4. DECLARACIÓN</td>
     </tr>
     <tr>
-        <td colspan="15">
+        <td></td>
+        <td  rowspan="8" colspan="15" style="border: 1px solid #000000;">
             <p>
-                "Yo, ____________________________________________________________ identificado con cédula de ciudadanía No. ________________________________ actuando en nombre y representación de la Institución Publica: _____________________________________________________ ubicada en el Centro Poblado del municipio de ___________________________________, del Departamento de: ______________________________.
-                <br>
+                "Yo, ____________________________________________________________ identificado con cédula de ciudadanía No. ________________________________ actuando en nombre y representación de la Institución Publica: _____________________________________________________ ubicada en el Centro Poblado del municipio de ___________________________________, del Departamento de: ______________________________.<br><br>
                 Manifiesto satisfacción en el servicio de Mantenimiento del Centro Digital y certifico además que: <br><br>
                 1.	El servicio de conectividad quedó habilitado <br>
                 2.	Recibí la capacitación sobre el funcionamiento del Centro Digital y la socialización de la información del proyecto <br>
@@ -125,32 +204,58 @@
             </p>
         </td>
     </tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
     <tr>
-        <td colspan="8">DATOS DE QUIEN RECIBE EL CENTRO DIGITAL (RECTOR, DOCENTE, AUTORIDAD COMPETENTE)</td>
-        <td colspan="7">DATOS DE QUIEN REPARA EL SERVICIO EN EL CENTRO DIGITAL</td>
+        <td></td>
+        <td colspan="8" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">DATOS DE QUIEN RECIBE EL CENTRO DIGITAL (RECTOR, DOCENTE, AUTORIDAD COMPETENTE)</td>
+        <td colspan="7" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">DATOS DE QUIEN REPARA EL SERVICIO EN EL CENTRO DIGITAL</td>
     </tr>
     <tr>
-        <td colspan="8">NOMBRES Y APELLIDOS:</td>
-        <td colspan="7">NOMBRES Y APELLIDOS:</td>
+        <td></td>
+        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">NOMBRES Y APELLIDOS:</td>
+        <td colspan="5" style="border: 1px solid #000000;"></td>
+        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">NOMBRES Y APELLIDOS:</td>
+        <td colspan="4" style="border: 1px solid #000000;"></td>
     </tr>
     <tr>
-        <td colspan="8">CARGO:</td>
-        <td colspan="7">CARGO:</td>
+        <td></td>
+        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">CARGO:</td>
+        <td colspan="5" style="border: 1px solid #000000;"></td>
+        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">CARGO:</td>
+        <td colspan="4" style="border: 1px solid #000000;"></td>
     </tr>
     <tr>
-        <td colspan="8">NÚMERO DE CEDULA:</td>
-        <td colspan="7">NÚMERO DE CEDULA:</td>
+        <td></td>
+        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">NÚMERO DE CEDULA:</td>
+        <td colspan="5" style="border: 1px solid #000000;"></td>
+        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">NÚMERO DE CEDULA:</td>
+        <td colspan="4" style="border: 1px solid #000000;"></td>
     </tr>
     <tr>
-        <td colspan="8">NÚMERO DE TELEFONO O CEDULAR:</td>
-        <td colspan="7">NÚMERO DE TELEFONO O CEDULAR:</td>
+        <td></td>
+        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">NÚMERO DE TELEFONO O CEDULAR:</td>
+        <td colspan="5" style="border: 1px solid #000000;"></td>
+        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">NÚMERO DE TELEFONO O CEDULAR:</td>
+        <td colspan="4" style="border: 1px solid #000000;"></td>
     </tr>
     <tr>
-        <td colspan="8">CORREO ELECTRÓNICO:</td>
-        <td colspan="7">CORREO ELECTRÓNICO:</td>
+        <td></td>
+        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">CORREO ELECTRÓNICO:</td>
+        <td colspan="5" style="border: 1px solid #000000;"></td>
+        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">CORREO ELECTRÓNICO:</td>
+        <td colspan="4" style="border: 1px solid #000000;"></td>
     </tr>
     <tr>
-        <td colspan="8">FIRMA:</td>
-        <td colspan="7">FIRMA:</td>
+        <td></td>
+        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;"><br>FIRMA:<br></td>
+        <td colspan="5" style="border: 1px solid #000000;"></td>
+        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;"><br>FIRMA:<br></td>
+        <td colspan="4" style="border: 1px solid #000000;"></td>
     </tr>
 </table>

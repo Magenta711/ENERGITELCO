@@ -24,6 +24,7 @@ class CleatingExportSecund implements FromView,WithDrawings, WithStyles,ShouldAu
 
     public function drawings()
     {
+        $array = array();
         foreach ($this->files as $key => $value) {
             $array[$key] = new Drawing();
             $array[$key]->setName($value['name']);

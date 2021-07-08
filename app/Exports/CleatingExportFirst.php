@@ -25,6 +25,7 @@ class CleatingExportFirst implements FromView, WithDrawings, WithStyles, ShouldA
 
     public function drawings()
     {
+        $array = array();
         foreach ($this->files as $key => $value) {
             $array[$key] = new Drawing();
             $array[$key]->setName($value['name']);

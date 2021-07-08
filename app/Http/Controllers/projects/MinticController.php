@@ -13,6 +13,7 @@ use App\Models\project\Mintic\mintic_maintenance;
 use Image;
 use App\User;
 use App\Exports\minticMaintenanceExport;
+use Illuminate\Support\Arr;
 
 class MinticController extends Controller
 {
@@ -551,7 +552,37 @@ class MinticController extends Controller
     public function export_maintenance($id,mintic_maintenance $item)
     {
         $equiments = EquimentDetail::get();
-        return (new minticMaintenanceExport($item,$equiments))->download($id.'_mintic_maintenance.xlsx');
+
+        $files = array();
+        $files['logo_mintic']['name'] = 'Logo_mintic';
+        $files['logo_mintic']['description'] = 'Logo de MinTIC';
+        $files['logo_mintic']['path'] = public_path('/img/mintic.png');
+        $files['logo_mintic']['height'] = 90;
+        $files['logo_mintic']['coordinates'] = 'B3';
+        $files['logo_mintic']['place'] = 3;
+
+        $files['logo_claro']['name'] = 'Logo_Claro';
+        $files['logo_claro']['description'] = 'Logo de Claro';
+        $files['logo_claro']['path'] = public_path('/img/claro.png');
+        $files['logo_claro']['height'] = 80;
+        $files['logo_claro']['coordinates'] = 'N3';
+        $files['logo_claro']['place'] = 3;
+
+        if ($item->files)
+        {
+            foreach ($item->files as $key => $value) {
+                $place = explode('.',$value->description,2);
+                $str = str_random();
+                $files[$str]['name'] = $value->name;
+                $files[$str]['description'] = $value->description;
+                $files[$str]['path'] = public_path('/storage/upload/mintic/'.$value->name);
+                $files[$str]['height'] = 200;
+                $files[$str]['coordinates'] = $value->place;
+                $files[$str]['place'] = $place[0];
+            }
+        }
+
+        return (new minticMaintenanceExport($item,$equiments,$files))->download($id.'_mintic_maintenance.xlsx');
     }
 
     public function upload_maintenance(Request $request)
@@ -624,6 +655,7 @@ class MinticController extends Controller
                     'size' => $size.' KB',
                     'url' => 'public/upload/mintic/'.$name,
                     'type' => $file->getClientOriginalExtension(),
+                    'place' => $request->place,
                     'state' => 1
                 ]);
                 return response()->json([
@@ -640,6 +672,7 @@ class MinticController extends Controller
                 'size' => $size.' KB',
                 'url' => 'public/upload/mintic/'.$name,
                 'type' => $file->getClientOriginalExtension(),
+                'place' => $request->place,
                 'state' => 1
             ]);
             return response()->json([

@@ -41,6 +41,7 @@ class MinticImplementController extends Controller
      */
     public function create($id)
     {
+        return redirect()->route('mintic_add_consumables',$id);
         $users = User::where('state',1)->get();
         $consumables = invMinticConsumable::where('status',1)->get();
         $equipments = invMinticEquipment::where('status',1)->get();
@@ -121,6 +122,7 @@ class MinticImplementController extends Controller
      */
     public function edit($id,MinticConsumableImplement $item)
     {
+        return redirect()->route('mintic_add_consumables',$id);
         $users = User::where('state',1)->get();
         $consumables = invMinticConsumable::get();
         $equipments = invMinticEquipment::get();
@@ -208,6 +210,7 @@ class MinticImplementController extends Controller
 
     public function run($id,MinticConsumableImplement $item)
     {
+        return redirect()->route('mintic_add_consumables',$id);
         return view('projects.mintic.add.run',compact('id','item'));
     }
 

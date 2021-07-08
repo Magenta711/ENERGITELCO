@@ -12,6 +12,11 @@
     </section>
     <section class="content">
         @include('includes.alerts')
+        <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4><i class="icon fa fa-ban"></i> Mantenimiento!</h4>
+            <p>Modulo en mantenimiento</p>
+        </div>
         <div class="box">
             <div class="box-header">
                 <div class="box-title">Implementación proyecto MINTIC</div>

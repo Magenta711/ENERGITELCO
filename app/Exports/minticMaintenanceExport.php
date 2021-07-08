@@ -7,23 +7,25 @@ use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
 class minticMaintenanceExport implements WithMultipleSheets
 {
-    use Exportable;
-
     protected $id;
     protected $equiments;
+    protected $files;
     
-    public function __construct(object $id,object $equiments)
+    use Exportable;
+    
+    public function __construct(object $id, object $equiments, $files)
     {
         $this->id = $id;
         $this->equiments = $equiments;
+        $this->files = $files;
     }
     
     public function sheets(): array
     {
         return [
-            'ACTA DE INSTALACIÓN_20032021' => new minticMaintenanceExportFirst($this->id,$this->equiments),
-            'REGISTRO FOTOGRÁFICO ANTES' => new minticMaintenanceExportSecund($this->id),
-            'REGISTRO FOTOGRÁFICO DESPÚES' => new minticMaintenanceExportThird($this->id)
+            'ACTA DE INSTALACIÓN_20032021' => new minticMaintenanceExportFirst($this->id,$this->equiments,$this->files),
+            'REGISTRO FOTOGRÁFICO ANTES' => new minticMaintenanceExportSecund($this->id,$this->files),
+            'REGISTRO FOTOGRÁFICO DESPÚES' => new minticMaintenanceExportThird($this->id,$this->files)
         ];
     }
 }

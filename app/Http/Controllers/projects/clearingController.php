@@ -440,7 +440,7 @@ class clearingController extends Controller
         $arrLetters = ['E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
         $counta = 0;
         $countb = 0;
-
+        $filesInv = array();
         foreach ($id->inventories as $value){
             if ($value->station == 'a'){
                 if ($value->file) {

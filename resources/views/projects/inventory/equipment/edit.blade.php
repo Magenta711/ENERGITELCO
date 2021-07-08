@@ -46,7 +46,7 @@
                         </div>
                         <div class="col-md-12">
                             <label for="commentary">Comentarios</label>
-                            <textarea name="commentary" id="commentary" cols="30" rows="3">{{$id->commentary}}</textarea>
+                            <textarea name="commentary" id="commentary" cols="30" rows="3" class="form-control">{{$id->commentary}}</textarea>
                         </div>
                     </div>
                 </div>

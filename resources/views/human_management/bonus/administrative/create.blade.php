@@ -67,6 +67,6 @@
 </section>
 @endsection
 @section('js')
-    <script src="http://momentjs.com/downloads/moment.min.js"></script>
+    <script src="{{ asset('js/moment/moment.js') }}"></script>
     <script src="{{ asset('js/forms/bonus/administrative.js') }}"></script>
 @endsection

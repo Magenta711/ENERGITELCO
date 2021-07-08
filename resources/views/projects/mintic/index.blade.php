@@ -44,14 +44,30 @@
                                         <div class="dropdown">
                                             <button class="btn btn-default btn-xs pull-right dropdown-toggle" type="button" id="dropdownMenuButton-{{$item->id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton-{{$item->id}}">
-                                                <a class="dropdown-item" href="{{route('mintic_show',$item->id)}}">Ver</a>
-                                                <a class="dropdown-item" href="{{route('mintic_edit',$item->id)}}">Editar</a>
-                                                <a class="dropdown-item" href="{{route('mintic_pintures',$item->id)}}">Estudio de campo</a>
-                                                <a class="dropdown-item" href="{{route('mintic_install',$item->id)}}">Intalación</a>
-                                                <a class="dropdown-item" href="{{route('mintic_tss',$item->id)}}">TSS V3</a>
-                                                <a class="dropdown-item" href="{{route('mintic_add_consumables',$item->id)}}">Implementaciones</a>
-                                                <a class="dropdown-item" href="{{route('mintic_maintenance',$item->id)}}">Mantenimiento</a>
-                                                <a class="dropdown-item" data-toggle="modal" data-target="#modal_delete_{{$item->id}}">Eliminar</a>
+                                                @can('Ver proyectos de MINTIC')
+                                                    <a class="dropdown-item" href="{{route('mintic_show',$item->id)}}">Ver</a>
+                                                @endcan
+                                                @can('Editar proyectos de MINTIC')
+                                                    <a class="dropdown-item" href="{{route('mintic_edit',$item->id)}}">Editar</a>
+                                                @endcan
+                                                @can('Adjuntar y ver fotos de proyectos mintic')
+                                                    <a class="dropdown-item" href="{{route('mintic_pintures',$item->id)}}">Estudio de campo</a>
+                                                @endcan
+                                                @can('Adjuntar y ver fotos de proyectos mintic')
+                                                    <a class="dropdown-item" href="{{route('mintic_install',$item->id)}}">Intalación</a>
+                                                @endcan
+                                                @can('Adjuntar y ver fotos de proyectos mintic')
+                                                    <a class="dropdown-item" href="{{route('mintic_tss',$item->id)}}">TSS V3</a>
+                                                @endcan
+                                                @can('Ver implementación proyectos de MINTIC')
+                                                    <a class="dropdown-item" href="{{route('mintic_add_consumables',$item->id)}}">Implementaciones</a>
+                                                @endcan
+                                                {{-- @can('Adjuntar y ver fotos de proyectos mintic') --}}
+                                                    <a class="dropdown-item" href="{{route('mintic_maintenance',$item->id)}}">Mantenimiento</a>
+                                                {{-- @endcan --}}
+                                                @can('Eliminar proyectos de MINTIC')
+                                                    <a class="dropdown-item" data-toggle="modal" data-target="#modal_delete_{{$item->id}}">Eliminar</a>
+                                                @endcan
                                             </div>
                                         </div>
                                         <div class="modal fade" id="modal_delete_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

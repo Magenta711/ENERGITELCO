@@ -75,6 +75,7 @@
                         <input type="hidden" name="id" value="{{$id->id}}" class="form-control">
                         <input type="hidden" name="vol" value="{{ $energy_measurement ?? '' }}">
                         <input type="hidden" name="name_d" value="{{ $ltt }}. {{$label}}" class="form-control">
+                        <input type="hidden" name="place" value="{{ $place ?? ''}}" class="form-control">
                         <label for="item_{{$num}}" class="form-control text-center" id="label_file_{{ $num }}"><i class="fa fa-upload"></i></label>
                         <input type="file" accept="{{ $accept }}" {{ ($hasFile) ? 'disabled' : ''}} name="file" id="item_{{$num}}" class="file_input hide">
                     </div>
