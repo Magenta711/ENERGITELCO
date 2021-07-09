@@ -28,7 +28,7 @@
             <p>EVIDENCIA FOTOGRÁFICA<br>(Foto o fotos  de la institución a la BTS)</p>
             <p>Fotos tomadas desde la escuela hacia la estación base Claro</p>
             @include('projects.mintic.includes.upload',[
-                'ltt' => '1',
+                'ltt' => '3',
                 'num' => $i++,
                 'it'=>'1',
                 'label' => 'Línea de vista de CD a EB',
@@ -36,7 +36,7 @@
             ])
             <hr>
             @include('projects.mintic.includes.upload',[
-                'ltt' => '1',
+                'ltt' => '3',
                 'num' => $i++,
                 'it'=>'1',
                 'label' => 'Línea de vista de CD a EB con zoom máximo',
@@ -44,7 +44,7 @@
             ])
             <hr>
             @include('projects.mintic.includes.upload',[
-                'ltt' => '1',
+                'ltt' => '3',
                 'num' => $i++,
                 'it'=>'1',
                 'label' => 'Línea de vista con brújula, azimut',
@@ -54,7 +54,7 @@
             <p>EVIDENCIA FOTOGRÁFICA<br>(Foto o fotos de la BTS al centro digital)</p>
             <p>Fotos tomadas desde la estación base Claro hacia la escuela</p>
             @include('projects.mintic.includes.upload',[
-                'ltt' => '1',
+                'ltt' => '3',
                 'num' => $i++,
                 'it'=>'2',
                 'label' => 'Línea de vista desde la altura donde se instalará la antena',
@@ -62,7 +62,7 @@
             ])
             <hr>
             @include('projects.mintic.includes.upload',[
-                'ltt' => '1',
+                'ltt' => '3',
                 'num' => $i++,
                 'it'=>'2',
                 'label' => 'Línea de vista desde la altura donde se instalará la antena con zoom máximo',
@@ -70,7 +70,7 @@
             ])
             <hr>
             @include('projects.mintic.includes.upload',[
-                'ltt' => '1',
+                'ltt' => '3',
                 'num' => $i++,
                 'it'=>'2',
                 'label' => 'Lugar donde se instalará la antena, foto con brújula donde se vea el azimut a la escuela',
@@ -78,7 +78,7 @@
             ])
             <hr>
             @include('projects.mintic.includes.upload',[
-                'ltt' => '1',
+                'ltt' => '3',
                 'num' => $i++,
                 'it'=>'3',
                 'label' => 'Objetos que puedan estar bloqueando  la línea de vista como árboles y edificios, especificar la altura.',
@@ -88,7 +88,7 @@
             <h3>FORMATO TSS V.3</h3>
             <h4>Entrada al sitio</h4>
             @include('projects.mintic.includes.upload',[
-                'ltt' => '1',
+                'ltt' => '3',
                 'num' => $i++,
                 'it'=>'1',
                 'label' => 'Fotos de la entrada a la escuela y foto de la entrada de la EB',
@@ -97,7 +97,7 @@
             <hr>
             <h4>CONDICIONES DE CERRAMIENTO</h4>
             @include('projects.mintic.includes.upload',[
-                'ltt' => '1',
+                'ltt' => '3',
                 'num' => $i++,
                 'it'=>'2',
                 'label' => 'Foto desde la torre a una altura baja donde se aprecie el cerramiento de la EB',
@@ -106,7 +106,7 @@
             <hr>
             <h4>ESPACIO DISPONIBLE DC</h4>
             @include('projects.mintic.includes.upload',[
-                'ltt' => '1',
+                'ltt' => '3',
                 'num' => $i++,
                 'it'=>'3',
                 'label' => 'Fotos del PDB',
@@ -115,7 +115,7 @@
             <hr>
             <h4>ESPACION DISPONIBLE AC</h4>
             @include('projects.mintic.includes.upload',[
-                'ltt' => '1',
+                'ltt' => '3',
                 'num' => $i++,
                 'it'=>'4',
                 'label' => 'Foto del TDG DE LA EB Y FOTO MEDIDA AC EN TOMA',
@@ -123,7 +123,7 @@
             ])
             <hr>
             @include('projects.mintic.includes.upload',[
-                'ltt' => '1',
+                'ltt' => '3',
                 'num' => $i++,
                 'it'=>'5',
                 'label' => 'Fotos general de la estación base',
@@ -132,7 +132,7 @@
             ])
             <hr>
             @include('projects.mintic.includes.upload',[
-                'ltt' => '1',
+                'ltt' => '3',
                 'num' => $i++,
                 'it'=>'6',
                 'label' => 'Fotos patas de la torre',
@@ -141,7 +141,7 @@
             ])
             <hr>
             @include('projects.mintic.includes.upload',[
-                'ltt' => '1',
+                'ltt' => '3',
                 'num' => $i++,
                 'it'=>'7',
                 'label' => 'Caras de la torre desde piso',
@@ -150,7 +150,7 @@
             ])
             <hr>
             @include('projects.mintic.includes.upload',[
-                'ltt' => '1',
+                'ltt' => '3',
                 'num' => $i++,
                 'it'=>'8',
                 'label' => 'Ubicación sugerida instalación del radio',
@@ -159,7 +159,7 @@
             ])
             <hr>
             @include('projects.mintic.includes.upload',[
-                'ltt' => '1',
+                'ltt' => '3',
                 'num' => $i++,
                 'it'=>'9',
                 'label' => 'Recorrido cable de alimentación radio',
@@ -168,7 +168,7 @@
             ])
             <hr>
             @include('projects.mintic.includes.upload',[
-                'ltt' => '1',
+                'ltt' => '3',
                 'num' => $i++,
                 'it'=>'10',
                 'label' => 'Recorrido cable de IF (PISO)',
@@ -177,7 +177,7 @@
             ])
             <hr>
             @include('projects.mintic.includes.upload',[
-                'ltt' => '1',
+                'ltt' => '3',
                 'num' => $i++,
                 'it'=>'11',
                 'label' => 'Fotos de baterías existentes',
@@ -186,7 +186,7 @@
             ])
             <hr>
             @include('projects.mintic.includes.upload',[
-                'ltt' => '1',
+                'ltt' => '3',
                 'num' => $i++,
                 'it'=>'12',
                 'label' => 'Fotos de planta (si aplica)',
@@ -195,7 +195,7 @@
             ])
             <hr>
             @include('projects.mintic.includes.upload',[
-                'ltt' => '1',
+                'ltt' => '3',
                 'num' => $i++,
                 'it'=>'13',
                 'label' => 'Fotos barraje de tierra radio',
@@ -204,7 +204,7 @@
             ])
             <hr>
             @include('projects.mintic.includes.upload',[
-                'ltt' => '1',
+                'ltt' => '3',
                 'num' => $i++,
                 'it'=>'14',
                 'label' => 'Recorrido tierra radio (si aplica)',
@@ -213,7 +213,7 @@
             ])
             <hr>
             @include('projects.mintic.includes.upload',[
-                'ltt' => '1',
+                'ltt' => '3',
                 'num' => $i++,
                 'it'=>'15',
                 'label' => 'Posible ubicación de antena microondas hacia centro digital',

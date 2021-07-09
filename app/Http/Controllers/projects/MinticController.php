@@ -161,9 +161,11 @@ class MinticController extends Controller
                 $text3 = $mintic->date.' '.$mintic->time;
 
                 $image = Image::make($request->file);
-                $image->resize(null, 400, function ($constraint) {
-                    $constraint->aspectRatio();
-                });
+                if ($request->size != 'org') {
+                    $image->resize(null, 500, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
+                }
 
                 if ($request->vol && $request->vol != '') {
                     $image->text($request->vol, $image->width() - 10, $image->height() - 62, function($font) use($request) {
@@ -308,9 +310,11 @@ class MinticController extends Controller
                     $text3 = $mintic->date_install && $mintic->time_install ? $mintic->date_install.' '.$mintic->time_install : now()->format('Y-m-d H:i:s');
     
                     $image = Image::make($request->file);
-                    $image->resize(null, 500, function ($constraint) {
-                        $constraint->aspectRatio();
-                    });
+                    if ($request->size != 'org') {
+                        $image->resize(null, 500, function ($constraint) {
+                            $constraint->aspectRatio();
+                        });
+                    }
                     
                     $image->text('CLARO MINTIC 7K', $image->width() - 10, $image->height() - 86, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
@@ -362,9 +366,11 @@ class MinticController extends Controller
                     $text3 = $mintic->date_install && $mintic->time_install ? $mintic->date_install.' '.$mintic->time_install : now()->format('Y-m-d H:i:s');
     
                     $image = Image::make($request->file);
-                    $image->resize(null, 500, function ($constraint) {
-                        $constraint->aspectRatio();
-                    });
+                    if ($request->size != 'org') {
+                        $image->resize(null, 500, function ($constraint) {
+                            $constraint->aspectRatio();
+                        });
+                    }
 
                     $image->text('COD '.$mintic->code, $image->width() - 10, $image->height() - 68, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
@@ -461,9 +467,11 @@ class MinticController extends Controller
             $name = time().str_random().'.'.$file->getClientOriginalExtension();
             if ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg') {
                 $image = Image::make($request->file);
-                $image->resize(null, 500, function ($constraint) {
-                    $constraint->aspectRatio();
-                });
+                if ($request->size != 'org') {
+                    $image->resize(null, 500, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
+                }
                 $size = '650';
                 $image->save(public_path('storage/upload/mintic/'.$name));
             }else {
@@ -603,9 +611,11 @@ class MinticController extends Controller
                 $text3 = $mintic->date;
 
                 $image = Image::make($request->file);
-                $image->resize(null, 500, function ($constraint) {
-                    $constraint->aspectRatio();
-                });
+                if ($request->size != 'org') {
+                    $image->resize(null, 500, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
+                }
                 
                 $image->text('ID '.$mintic->code, $image->width() - 10, $image->height() - 76, function($font) use($request) {
                     $font->file(public_path('fonts/Arial/ARIAL.TTF'));

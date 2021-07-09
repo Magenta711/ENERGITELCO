@@ -44,19 +44,19 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="eb-show">Estación base</label>
-                                <p>{{$item->eb->projectble->name}}</p>
+                                <p>{{$item->eb ? $item->eb->projectble->name : $item->station_name}}</p>
                             </div>
                             <div class="col-md-4">
                                 <label for="eb-show">Latitud</label>
-                                <p>{{ $item->eb->projectble->lat }}</p>
+                                <p>{{ $item->eb ? $item->eb->projectble->lat : $item->lat }}</p>
                             </div>
                             <div class="col-md-4">
                                 <label for="eb-show">Longitud</label>
-                                <p>{{ $item->eb->projectble->long }}</p>
+                                <p>{{ $item->eb ? $item->eb->projectble->long : $item->long }}</p>
                             </div>
                             <div class="col-md-4">
                                 <label for="eb-show">Altitud</label>
-                                <p>{{ $item->eb->projectble->height }}</p>
+                                <p>{{ $item->eb ? $item->eb->projectble->height : $item->height }}</p>
                             </div>
                             <div class="col-md-4">
                                 <label for="vehicles-show">Vehículos</label>

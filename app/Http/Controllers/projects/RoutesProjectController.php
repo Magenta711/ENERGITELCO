@@ -98,7 +98,7 @@ class RoutesProjectController extends Controller
                         $file_material = time().str_random().'.'.$file->getClientOriginalExtension();
                         if ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg') {
                             $image = Image::make($file->getRealPath())
-                                ->resize(null, 200, function ($constraint) {
+                                ->resize(null, 500, function ($constraint) {
                                     $constraint->aspectRatio();
                                 })->save(public_path('storage/upload/routes/'.$file_material));
                         }else{
@@ -113,7 +113,7 @@ class RoutesProjectController extends Controller
                         $file_equipment_room = time().str_random().'.'.$file->getClientOriginalExtension();
                         if ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg') {
                             $image = Image::make($file->getRealPath())
-                                ->resize(null, 200, function ($constraint) {
+                                ->resize(null, 500, function ($constraint) {
                                     $constraint->aspectRatio();
                                 })->save(public_path('storage/upload/routes/'.$file_equipment_room));
 
@@ -128,7 +128,7 @@ class RoutesProjectController extends Controller
                         $file_cabling = time().str_random().'.'.$file->getClientOriginalExtension();
                         if ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg') {
                             $image = Image::make($file->getRealPath())
-                                ->resize(null, 200, function ($constraint) {
+                                ->resize(null, 500, function ($constraint) {
                                     $constraint->aspectRatio();
                                 })->save(public_path('storage/upload/routes/'.$file_cabling));
 
@@ -143,7 +143,7 @@ class RoutesProjectController extends Controller
                         $file_inventory_before = time().str_random().'.'.$file->getClientOriginalExtension();
                         if ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg') {
                             $image = Image::make($file->getRealPath())
-                                ->resize(null, 200, function ($constraint) {
+                                ->resize(null, 500, function ($constraint) {
                                     $constraint->aspectRatio();
                                 })->save(public_path('storage/upload/routes/'.$file_inventory_before));
 
@@ -158,7 +158,7 @@ class RoutesProjectController extends Controller
                         $file_inventory_then = time().str_random().'.'.$file->getClientOriginalExtension();
                         if ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg') {
                             $image = Image::make($file->getRealPath())
-                                ->resize(null, 200, function ($constraint) {
+                                ->resize(null, 500, function ($constraint) {
                                     $constraint->aspectRatio();
                                 })->save(public_path('storage/upload/routes/'.$file_inventory_then));
 
@@ -173,7 +173,7 @@ class RoutesProjectController extends Controller
                         $file_marcked = time().str_random().'.'.$file->getClientOriginalExtension();
                         if ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg') {
                             $image = Image::make($file->getRealPath())
-                                ->resize(null, 200, function ($constraint) {
+                                ->resize(null, 500, function ($constraint) {
                                     $constraint->aspectRatio();
                                 })->save(public_path('storage/upload/routes/'.$file_marcked));
 
@@ -335,7 +335,7 @@ class RoutesProjectController extends Controller
                         $file_material = time().str_random().'.'.$file->getClientOriginalExtension();
                         if ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg') {
                             $image = Image::make($file->getRealPath())
-                                ->resize(null, 200, function ($constraint) {
+                                ->resize(null, 500, function ($constraint) {
                                     $constraint->aspectRatio();
                                 })->save(public_path('storage/upload/routes/'.$file_material));
 
@@ -355,7 +355,7 @@ class RoutesProjectController extends Controller
                         $file_equipment_room = time().str_random().'.'.$file->getClientOriginalExtension();
                         if ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg') {
                             $image = Image::make($file->getRealPath())
-                                ->resize(null, 200, function ($constraint) {
+                                ->resize(null, 500, function ($constraint) {
                                     $constraint->aspectRatio();
                                 })->save(public_path('storage/upload/routes/'.$file_equipment_room));
 
@@ -375,7 +375,7 @@ class RoutesProjectController extends Controller
                         $file_cabling = time().str_random().'.'.$file->getClientOriginalExtension();
                         if ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg') {
                             $image = Image::make($file->getRealPath())
-                                ->resize(null, 200, function ($constraint) {
+                                ->resize(null, 500, function ($constraint) {
                                     $constraint->aspectRatio();
                                 })->save(public_path('storage/upload/routes/'.$file_cabling));
 
@@ -395,7 +395,7 @@ class RoutesProjectController extends Controller
                         $file_inventory_before = time().str_random().'.'.$file->getClientOriginalExtension();
                         if ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg') {
                             $image = Image::make($file->getRealPath())
-                                ->resize(null, 200, function ($constraint) {
+                                ->resize(null, 500, function ($constraint) {
                                     $constraint->aspectRatio();
                                 })->save(public_path('storage/upload/routes/'.$file_inventory_before));
 
@@ -415,7 +415,7 @@ class RoutesProjectController extends Controller
                         $file_inventory_then = time().str_random().'.'.$file->getClientOriginalExtension();
                         if ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg') {
                             $image = Image::make($file->getRealPath())
-                                ->resize(null, 200, function ($constraint) {
+                                ->resize(null, 500, function ($constraint) {
                                     $constraint->aspectRatio();
                                 })->save(public_path('storage/upload/routes/'.$file_inventory_then));
 
@@ -435,7 +435,7 @@ class RoutesProjectController extends Controller
                         $file_marcked = time().str_random().'.'.$file->getClientOriginalExtension();
                         if ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg') {
                             $image = Image::make($file->getRealPath())
-                                ->resize(null, 200, function ($constraint) {
+                                ->resize(null, 500, function ($constraint) {
                                     $constraint->aspectRatio();
                                 })->save(public_path('storage/upload/routes/'.$file_marcked));
 

@@ -268,7 +268,7 @@
                                                 <div class="row" style="cursor: pointer" data-toggle="modal"
                                                     data-target="#show-modal-{{ $tasking->id }}">
                                                     <div class="col-xs-6">
-                                                        <p>{{ $tasking->eb->projectble->name }}</p>
+                                                        <p>{{$item->eb ? $item->eb->projectble->name : $item->station_name}}</p>
                                                     </div>
                                                     <div class="col-xs-6 text-right">
                                                         <p class="date-starts">{{ $tasking->date_start }}</p>

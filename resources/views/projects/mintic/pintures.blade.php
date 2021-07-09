@@ -350,6 +350,7 @@
             'num' => $i++,
             'it'=>'4',
             'label'=>'Línea de vista sitio remoto A',
+            'size' => 'org',
             'accept' => 'image/*'
             ])
             <hr>
@@ -577,6 +578,7 @@
                 'num' => $i++,
                 'it'=>'1',
                 'label' => 'Línea de vista de CD a EB',
+                'size' => 'org',
                 'accept' => 'image/*'
             ])
             <hr>
@@ -585,6 +587,7 @@
                 'num' => $i++,
                 'it'=>'1',
                 'label' => 'Línea de vista de CD a EB con zoom máximo',
+                'size' => 'org',
                 'accept' => 'image/*'
             ])
             <hr>
@@ -593,6 +596,7 @@
                 'num' => $i++,
                 'it'=>'1',
                 'label' => 'Línea de vista con brújula, azimut',
+                'size' => 'org',
                 'accept' => 'image/*'
             ])
             <hr>
@@ -603,6 +607,7 @@
                 'num' => $i++,
                 'it'=>'2',
                 'label' => 'Línea de vista desde la altura donde se instalará la antena',
+                'size' => 'org',
                 'accept' => 'image/*'
             ])
             <hr>
@@ -611,6 +616,7 @@
                 'num' => $i++,
                 'it'=>'2',
                 'label' => 'Línea de vista desde la altura donde se instalará la antena con zoom máximo',
+                'size' => 'org',
                 'accept' => 'image/*'
             ])
             <hr>
