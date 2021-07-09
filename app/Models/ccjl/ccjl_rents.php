@@ -35,6 +35,13 @@ class ccjl_rents extends Model
                 $resp = "Al día";
             }
         }else {
+            foreach ($this->details as $value) {
+                if ($value->productable_type == 'App\Models\ccjl\ccjl_pro_local') {
+                    ccjl_pro_local::find($value->productable_id)->update([
+                        'status' => 1
+                    ]);
+                }
+            }
             $resp = "Finalizado";
         }
         return $resp;

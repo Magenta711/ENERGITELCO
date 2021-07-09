@@ -240,9 +240,17 @@ class ccjlRentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(ccjl_rents $id)
     {
-        //
+        foreach ($id->details as $value) {
+            if ($value->productable_type == 'App\Models\ccjl\ccjl_pro_local') {
+                ccjl_pro_local::find($value->productable_id)->update([
+                    'status' => 1
+                ]);
+            }
+        }
+        $id->delete();
+        return redirect()->route('CCJL_rents')->with('success','Se ha eliminado la renta correctamente');
     }
 
     public function pay(ccjl_invoice $id)
@@ -266,20 +274,13 @@ class ccjlRentController extends Controller
 
         $id->update([
             'total' => $total,
+            'diff' => $diff,
             'cash' => $request->cash_value,
             'qr' => $request->qr_value,
             'card' => $request->card_value,
             'date_pay' => now(),
             'status' => 1,
         ]);
-
-        foreach ($id->rent->details as $value) {
-            if ($value->productable_type == 'App\Models\ccjl\ccjl_pro_local') {
-                $value->productable->update([
-                    'status' => 0,
-                ]);
-            }
-        }   
 
         // traid for rest to month to month
         

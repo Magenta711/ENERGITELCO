@@ -104,6 +104,7 @@
                 $i = 1;
                 $rest = $id->total;
                 $pay = false;
+                $diff = 0;
             @endphp
             <h4>Recibos</h4>
             <div class="table responsive">
@@ -115,6 +116,9 @@
                             <th>Fecha</th>
                             <th>Estado</th>
                             <th>Valor</th>
+                            <th>Valor</th>
+                            <th>Total pago</th>
+                            <th>Diferencia</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -125,7 +129,9 @@
                                 <td>{{ $item->cod }}</td>
                                 <td>{{ $item->expiration_date }}</td>
                                 <td>{{ $item->status == 1 ? 'Pago' : 'Sin pagar' }}</td>
-                                <td>${{ number_format($item->total_pay,2) }}</td>
+                                <td>${{ number_format($item->total_pay + (-($diff)),2) }}</td>
+                                <td>${{ number_format($item->total,2) }}</td>
+                                <td>${{ number_format($diff = $item->diff,2) }}</td>
                                 <td>
                                     @if ($item->status == 1)
                                         <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#modelDetail_{{ $item->id }}">Detalle</button>
@@ -151,7 +157,17 @@
                                                             </div>
                                                         </div>
                                                         <hr>
-                                                        <p>Valor<b></b><br>${{ number_format($item->total_pay,2) }}</p>
+                                                        <div class="row">
+                                                            <div class="col-sm-4">
+                                                                <p>Valor<b></b><br>${{ number_format($item->total_pay,2) }}</p>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <p>Total pago<b></b><br>${{ number_format($item->total,2) }}</p>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <p>Diferencia<b></b><br>${{ number_format($item->diff,2) }}</p>
+                                                            </div>
+                                                        </div>
                                                         <hr>
                                                         <h4>Medio de pago</h4>
                                                         <div class="row">

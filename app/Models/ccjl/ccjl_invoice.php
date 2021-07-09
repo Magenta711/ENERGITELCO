@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ccjl_invoice extends Model
 {
     protected $table = "ccjl_invoices";
-    protected $fillable = ['rent_id','cod','month','expiration_date','total_pay','total','rest','plus','cash','qr','card','date_pay','token','status'];
+    protected $fillable = ['rent_id','cod','month','expiration_date','total_pay','total','rest','plus','cash','qr','card','date_pay','token','status','diff'];
     protected $guarder = ['id'];
 
     public function rent()

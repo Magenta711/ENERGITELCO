@@ -106,7 +106,6 @@ class RoutesProjectController extends Controller
                         }
                     }
                 }
-                return $request;
                 if ($request->file_equipment_room[$k]) {
                     if ($request->hasFile('file_equipment_room')) {
                         $file = $request->file('file_equipment_room')[$k];

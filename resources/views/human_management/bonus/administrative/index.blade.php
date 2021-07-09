@@ -73,7 +73,7 @@
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
-                                                            <h4 class="modal-title">Eliminar formato</h4>
+                                                            <h4 class="modal-title">Eliminar bonificación</h4>
                                                         </div>
                                                         <form action="{{route('admin_bonuses_delete',$item->id)}}" method="post">
                                                         @csrf

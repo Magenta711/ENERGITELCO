@@ -45,7 +45,10 @@
                                         <td>{{ $item->id }}</td>
                                         <td>{{ $item->client->name }}</td>
                                         <td>{{ $item->created_at }}</td>
-                                        <td>{{ $item->statusCheck() }}</td>
+                                        @php
+                                            $status = $item->statusCheck();
+                                        @endphp
+                                        <td><span class="label {{ $status == 'Pendiente' ? 'label-danger' : ($status == 'Al día') ? 'label-success' : 'label-primary' }}">{{$status}}</span></td>
                                         <td>
                                             @if (
                                                 auth()->user()->haspermissionTo('CCJL Ver rentas') ||
@@ -56,6 +59,32 @@
                                             @endif
                                             @can('CCJL Editar rentas')
                                                 <a href="{{ route('CCJL_rents_edit',$item->id) }}" class="btn btn-sm btn-primary">Editar</a>
+                                            @endcan
+                                            @can('CCJL Editar rentas')
+                                                <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete_{{$item->id}}">Eliminar</button>
+                                                <div class="modal fade" id="delete_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-md">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                                <h4 class="modal-title">Eliminar renta de CCJL</h4>
+                                                            </div>
+                                                            <form action="{{route('CCJL_rents_delete',$item->id)}}" method="post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                                <div class="modal-body">
+                                                                    <p>¿Está seguro que desa eliminar la renta?</p>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-sm btn-secondary pull-left" data-dismiss="modal">Cancelar</button>
+                                                                    <button class="btn btn-sm btn-danger">Eliminar</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             @endcan
                                         </td>
                                     </tr>

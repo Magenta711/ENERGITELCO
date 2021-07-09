@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <input type="number" name="qr_value" id="qr_value" placeholder="Valor QR" class="form-control ">
+                                <input type="number" name="qr_value" id="qr_value" placeholder="Valor QR" class="form-control">
                             </div>
                         </div>
                         <div class="row" style="margin-bottom: 3px">
@@ -62,7 +62,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <input type="number" name="card_value" id="card_value" placeholder="Valor tarjeta" class="form-control ">
+                                <input type="number" name="card_value" id="card_value" placeholder="Valor tarjeta" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -136,6 +136,17 @@
                         <tr class="active">
                             <th class="text-right" colspan="3"><h3>Total</h3></th>
                             <th><h3>$ {{ number_format($total, 2) }}</h3></th>
+                            <input type="hidden" value="{{$total}}" id="total_month">
+                        </tr>
+                        <tr class="active">
+                            <th class="text-right" colspan="3"><h3>Total pago</h3></th>
+                            <th><h3 id="total_pay">$ {{ number_format($total, 2) }}</h3></th>
+                            <input type="hidden" value="{{$total}}" id="total_pay_input">
+                        </tr>
+                        <tr style="display: none;">
+                            <th class="text-right" colspan="3"><h4>Diferencia</h4></th>
+                            <th><h4 id="total_diff">$ 0.00</h4></th>
+                            <input type="hidden" value="0" id="total_diff_input">
                         </tr>
                     </tbody>
                 </table>
@@ -150,7 +161,6 @@
 @endsection
 
 @section('js')
-    <script src="{{ asset('js/cvs/sale.js') }}"></script>
     <script>
         var bPreguntar = true;
     
@@ -164,12 +174,41 @@
                 bPreguntar = false;
                 return true;
             });
+            $('#cash_value').blur(function () {
+                validateTotal();
+            })
+            $('#qr_value').blur(function () {
+                validateTotal();
+            })
+            $('#card_value').blur(function () {
+                validateTotal();
+            })
         });
         
         function preguntarAntesDeSalir()
         {
             if (bPreguntar)
             return "¿Seguro que quieres salir?";
+        }
+
+        function validateTotal() {
+            let cash = $('#cash_value').val() ? parseFloat($('#cash_value').val()) : 0;
+            let qr = $('#qr_value').val() ? parseFloat($('#qr_value').val()) : 0;
+            let card = $('#card_value').val() ? parseFloat($('#card_value').val()) : 0;
+            let total_month = parseFloat($('#total_month').val());
+
+            let total = cash + qr + card;
+
+            $('#total_pay').text('$ ' + parseFloat(total, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+            $('#total_pay_input').val(total);
+
+            if (total_month != total) {
+                $('#total_diff').parent().parent().show();
+                $('#total_diff').text('$ ' + parseFloat((total - total_month), 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+                $('#total_diff_input').val((total - total_month));
+            }else {
+                $('#total_diff').parent().parent().hide();
+            }
         }
     </script>
 @endsection

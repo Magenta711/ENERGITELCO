@@ -118,7 +118,15 @@
                     @endforeach
                     <tr class="active">
                         <th colspan="4">Total</th>
+                        <th class="text-right" colspan="4">$ {{ number_format($id->total_pay, 2) }}</th>
+                    </tr>
+                    <tr class="active">
+                        <th colspan="4">Total abonado</th>
                         <th class="text-right" colspan="4">$ {{ number_format($id->total, 2) }}</th>
+                    </tr>
+                    <tr class="active">
+                        <th colspan="4">Diferencia</th>
+                        <th class="text-right" colspan="4">$ {{ number_format($id->diff, 2) }}</th>
                     </tr>
                 </tbody>
             </table>

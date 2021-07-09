@@ -551,7 +551,6 @@ class MinticController extends Controller
 
     public function update_maintenance(Request $request,$id,mintic_maintenance $item)
     {
-        return $request;
         $id->update($request->all());
 
         return redirect()->route('mintic_maintenance',$id)->with('success','Se ha actualizado el mantenimiento correctamente');

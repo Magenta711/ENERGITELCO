@@ -608,6 +608,7 @@ Route::put('ccjl/rent/{id}','ccjl\ccjlRentController@update')->name('CCJL_rents_
 Route::get('ccjl/rent/{id}/pay','ccjl\ccjlRentController@pay')->name('CCJL_rents_pay');
 Route::put('ccjl/rent/pay/{id}','ccjl\ccjlRentController@save')->name('CCJL_rents_save');
 Route::post('ccjl/rent/remember/{id}','ccjl\ccjlRentController@remember')->name('CCJL_rents_remember');
+Route::delete('ccjl/rent/{id}','ccjl\ccjlRentController@destroy')->name('CCJL_rents_delete');
 
 // CLIENTS
 Route::get('ccjl/client','ccjl\ccjlClientController@index')->name('CCJL_clients');
