@@ -255,44 +255,55 @@ class ccjlRentController extends Controller
 
     public function pay(ccjl_invoice $id)
     {
-        return view('ccjl.rents.pay',compact('id'));
+        if ($id->status == 0) {
+            $last = ccjl_invoice::where('rent_id', $id->rent_id)->where('status',1)->get()->last();
+            if ($last && $last->diff != 0) {
+                $diff = $last->diff;
+            }else {
+                $diff = 0;
+            }
+            return view('ccjl.rents.pay',compact('id','diff'));
+        }
+        return redirect()->route('CCJL_rents_show',$id->rent_id)->with('success','Acción no valida');
     }
 
     public function save(Request $request, ccjl_invoice $id)
     {
-        $total = 0;
-        if (isset($request->cash)) {
-            $total += $request->cash_value;
-        }
-        if (isset($request->qr)) {
-            $total += $request->cash_value;
-        }
-        if (isset($request->card)) {
-            $total += $request->cash_value;
-        }
-        $diff = $total - $id->total_pay;
+        if ($id->status == 0) {
+            $total = 0;
+            if (isset($request->cash)) {
+                $total += $request->cash_value;
+            }
+            if (isset($request->qr)) {
+                $total += $request->cash_value;
+            }
+            if (isset($request->card)) {
+                $total += $request->cash_value;
+            }
 
-        $id->update([
-            'total' => $total,
-            'diff' => $diff,
-            'cash' => $request->cash_value,
-            'qr' => $request->qr_value,
-            'card' => $request->card_value,
-            'date_pay' => now(),
-            'status' => 1,
-        ]);
+            $id->update([
+                'total' => $total,
+                'diff' => $request->total_diff_input,
+                'cash' => $request->cash_value,
+                'qr' => $request->qr_value,
+                'card' => $request->card_value,
+                'date_pay' => now(),
+                'status' => 1,
+            ]);
 
-        // traid for rest to month to month
-        
-        $pdf = PDF::loadView('ccjl.rents.invoice_pdf',['id'=>$id]);
-        $pdf->save(storage_path('app/public/ccjl/invoice/') .$id->token.'.pdf');
-        Mail::send('ccjl.email.invoice',['id' => $id] , function ($mail) use ($pdf,$id) {
-            $mail->subject("CENTRO COMERCIAL JOSE LUIS Recibo de pago");
-            $mail->to($id->rent->client->email, $id->rent->client->name);
-            $mail->attachData($pdf->output(), $id->cod.'.pdf');
-        });
+            // traid for rest to month to month
+            
+            $pdf = PDF::loadView('ccjl.rents.invoice_pdf',['id'=>$id]);
+            $pdf->save(storage_path('app/public/ccjl/invoice/') .$id->token.'.pdf');
+            Mail::send('ccjl.email.invoice',['id' => $id] , function ($mail) use ($pdf,$id) {
+                $mail->subject("CENTRO COMERCIAL JOSE LUIS Recibo de pago");
+                $mail->to($id->rent->client->email, $id->rent->client->name);
+                $mail->attachData($pdf->output(), $id->cod.'.pdf');
+            });
 
-        return redirect()->route('CCJL_rents')->with('success','Se ha realizado el pago correctamente');
+            return redirect()->route('CCJL_rents')->with('success','Se ha realizado el pago correctamente');
+        }
+        return redirect()->route('CCJL_rents_show',$id->rent_id)->with('success','Acción no valida');
     }
 
     public function remember(ccjl_invoice $id)

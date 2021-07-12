@@ -36,7 +36,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <input type="number" name="cash_value" id="cash_value" value="{{ $id->total_pay }}" placeholder="Valor efectivo" class="form-control">
+                                <input type="number" name="cash_value" id="cash_value" value="{{ $id->total_pay + (-$diff) }}" placeholder="Valor efectivo" class="form-control">
                             </div>
                         </div>
                         <div class="row" style="margin-bottom: 3px">
@@ -133,20 +133,26 @@
                                 </tr>
                             @endif
                         @endforeach
+                        @if ($diff)
+                            <tr>
+                                <th colspan="3">Ajuste pagos anteriores</th>
+                                <th>{{$total += (-$diff)}}</th>
+                            </tr>
+                        @endif
                         <tr class="active">
                             <th class="text-right" colspan="3"><h3>Total</h3></th>
                             <th><h3>$ {{ number_format($total, 2) }}</h3></th>
-                            <input type="hidden" value="{{$total}}" id="total_month">
+                            <input type="hidden" value="{{$total}}" id="total_month" name="total_month">
                         </tr>
                         <tr class="active">
                             <th class="text-right" colspan="3"><h3>Total pago</h3></th>
                             <th><h3 id="total_pay">$ {{ number_format($total, 2) }}</h3></th>
-                            <input type="hidden" value="{{$total}}" id="total_pay_input">
+                            <input type="hidden" value="{{$total}}" id="total_pay_input" name="total_pay_input">
                         </tr>
                         <tr style="display: none;">
                             <th class="text-right" colspan="3"><h4>Diferencia</h4></th>
                             <th><h4 id="total_diff">$ 0.00</h4></th>
-                            <input type="hidden" value="0" id="total_diff_input">
+                            <input type="hidden" value="0" id="total_diff_input" name="total_diff_input">
                         </tr>
                     </tbody>
                 </table>

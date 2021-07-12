@@ -176,6 +176,7 @@ class proceedingController extends Controller
             'development' => ['required'],
         ]);
         $total_guest = $request->guest_id ? count($request->guest_id) : 0;
+        $total_assistants = count($request->assistants_id);
         $id->update([
             'date' => $request->date,
             'city' => $request->city,
@@ -187,35 +188,35 @@ class proceedingController extends Controller
             'development' => $request->development,
             'affair' => $request->affair,
             'status' => ($request->user_id) ? 2 : 1,
-            'assistant' => count($request->assistants_id),
+            'assistant' => $total_assistants,
             'guest' => $total_guest,
         ]);
         $i = 0;
         $acount = count($id->users);
-        $total_assis = count($request->assistants_id) + $total_guest;
+        $total_assis = $total_assistants + $total_guest;
         foreach ($id->users as $user) {
-            if (count($request->assistants_id) > $i) {
-                $user->update([
+            if ($total_assistants > $i) {
+                Responsable::where('responsibles_type','App\Models\Proceeding')->where('responsibles_id',$id->id)->where('user_id',$user->id)->update([
                     'user_id' => $request->assistants_id[$i],
                 ]);
             }
-            if ($request->guest_id && count($request->assistants_id) >= $i && $total_assis < $i) {
-                $user->update([
+            if ($request->guest_id && $total_assistants >= $i && $total_assis < $i) {
+                Responsable::where('responsibles_type','App\Models\Proceeding')->where('responsibles_id',$id->id)->where('user_id',$user->id)->update([
                     'user_id' => $request->guest_id[$i],
                 ]);
             }
             $i++;
         }
         if ($acount < $total_assis) {
-            if (count($request->assistants_id) < $i) {
-                for ($j=$i; $j < count($request->assistants_id); $j++) { 
+            if ($total_assistants > $i) {
+                for ($j=$i; $j < $total_assistants; $j++) {
                     Responsable::create([
                         'user_id' => $request->assistants_id[$j],
                         'responsibles_type' => 'App\Models\Proceeding',
                         'responsibles_id' => $id->id,
                     ]);
                 }
-                $i += $j;
+                $i = $j;
             }
             if ($request->guest_id) {
                 for ($j= $i; $j < $total_guest; $j++) { 
@@ -264,13 +265,13 @@ class proceedingController extends Controller
             }
         }
 
-        Mail::send('human_management.proceedings.mail.main', ['id' => $id], function ($menssage) use ($id)
-        {
-            foreach ($id->users as $value) {
-                $menssage->to($value->email,$value->name)->subject("Energitelco S.A.S. Acta de reuniones actualizada ".$id->affair);
-            }
-            $menssage->subject("Energitelco S.A.S. Acta de reuniones ".$id->affair);
-        });
+        // Mail::send('human_management.proceedings.mail.main', ['id' => $id], function ($menssage) use ($id)
+        // {
+        //     foreach ($id->users as $value) {
+        //         $menssage->to($value->email,$value->name)->subject("Energitelco S.A.S. Acta de reuniones actualizada ".$id->affair);
+        //     }
+        //     $menssage->subject("Energitelco S.A.S. Acta de reuniones ".$id->affair);
+        // });
 
         return redirect()->route('proceeding')->with('success','Se ha actualizado el acta correctamente');
     }

@@ -74,9 +74,13 @@
                     @php
                         $i = 0;
                         $total = $id->assistant + $id->guest;
+                        $hasGuest = false; 
                     @endphp
                     @foreach ($id->users as $user)
                         @if ($i >= $id->assistant && $i < $total)
+                        @php
+                            $hasGuest = true;
+                        @endphp
                             <div id="origen_guest" class="row">
                                 <div class="col-sm-3">
                                     <label for="guest_id_{{$i}}">Cedula</label>
@@ -102,8 +106,33 @@
                         @endif
                         @php
                             $i++;
-                        @endphp    
+                        @endphp
                     @endforeach
+                    @if (!$hasGuest)
+                        <div id="origen_guest" class="row">
+                            <div class="col-sm-3">
+                                <label for="guest_id_0">Cedula</label>
+                                <select class="form-control user_id" name="guest_id[]" id="guest_id_0">
+                                    <option disabled selected></option>
+                                    @foreach ($users as $user)
+                                        <option value="{{$user->id}}">{{$user->cedula}} - {{$user->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="guest_name_0">Nombre</label>
+                                <input type="text" class="form-control name" name="name[]" id="guest_name_0" readonly>
+                            </div>
+                            <div class="col-sm-4">
+                                <label for="guest_position_0"></label>
+                                <input type="text" class="form-control position" name="position[]" id="guest_position_0" readonly>
+                            </div>
+                            <div class="col-auto">
+                                <br>
+                                <i class="fa fa-trash remove" id="guest_remove_0"></i>
+                            </div>
+                        </div>
+                    @endif
                 </div>
                 <button type="button" class="btn btn-sm btn-link btn-clonar" id="guest_clonar"><i class="fa fa-plus"></i> Agegar invitado</button>
                 <hr>

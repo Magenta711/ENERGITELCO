@@ -116,7 +116,6 @@
                             <th>Fecha</th>
                             <th>Estado</th>
                             <th>Valor</th>
-                            <th>Valor</th>
                             <th>Total pago</th>
                             <th>Diferencia</th>
                             <th>Acciones</th>
