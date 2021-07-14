@@ -134,18 +134,21 @@
                             @endif
                         @endforeach
                         @if ($diff)
+                        @php
+                            $total += (-$diff);
+                        @endphp
                             <tr>
                                 <th colspan="3">Ajuste pagos anteriores</th>
-                                <th>{{$total += (-$diff)}}</th>
+                                <th>$ {{number_format((-$diff),2)}}</th>
                             </tr>
                         @endif
                         <tr class="active">
-                            <th class="text-right" colspan="3"><h3>Total</h3></th>
+                            <th class="text-right" colspan="3"><h3>Pago mínimo</h3></th>
                             <th><h3>$ {{ number_format($total, 2) }}</h3></th>
                             <input type="hidden" value="{{$total}}" id="total_month" name="total_month">
                         </tr>
                         <tr class="active">
-                            <th class="text-right" colspan="3"><h3>Total pago</h3></th>
+                            <th class="text-right" colspan="3"><h3>Total recive</h3></th>
                             <th><h3 id="total_pay">$ {{ number_format($total, 2) }}</h3></th>
                             <input type="hidden" value="{{$total}}" id="total_pay_input" name="total_pay_input">
                         </tr>
@@ -214,6 +217,8 @@
                 $('#total_diff_input').val((total - total_month));
             }else {
                 $('#total_diff').parent().parent().hide();
+                $('#total_diff').text('$ ' + parseFloat(0, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+                $('#total_diff_input').val(0);
             }
         }
     </script>

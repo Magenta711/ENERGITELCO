@@ -96,7 +96,7 @@
                                 @if ($canReport)
                                     @csrf
                                     @method('PATCH')
-                                    <textarea name="report" id="report-show" cols="30" rows="3" class="form-control"></textarea>
+                                    <textarea name="report" id="report-show-{{$item->id}}" cols="30" rows="3" class="form-control"></textarea>
                                 @endif
                             @endif
                         </div>
