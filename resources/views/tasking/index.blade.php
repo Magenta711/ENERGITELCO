@@ -105,7 +105,7 @@
                                             <td>
                                                 <div class="row" style="cursor: pointer" data-toggle="modal" data-target="#edit-modal-{{$item->id}}">
                                                     <div class="col-xs-6">
-                                                        <p>{{$item->eb ? $item->eb->projectble->name : $item->station_name}}</p>
+                                                        <p>{{$item->station_name}}</p>
                                                     </div>
                                                     <div class="col-xs-6 text-right">
                                                         <p class="date-starts">{{$item->date_start}}</p>
@@ -159,7 +159,7 @@
                                             <td>
                                                 <div class="row" style="cursor: pointer" data-toggle="modal" data-target="#show-modal-{{$item->id}}">
                                                     <div class="col-xs-6">
-                                                        <p>{{$item->eb ? $item->eb->projectble->name : $item->station_name}}</p>
+                                                        <p>{{$item->station_name}}</p>
                                                     </div>
                                                     <div class="col-xs-6 text-right">
                                                         <p class="date-starts">{{$item->date_start}}</p>
@@ -213,14 +213,14 @@
                                             <td>
                                                 <div class="row" style="cursor: pointer" data-toggle="modal" data-target="#show-modal-{{$item->id}}">
                                                     <div class="col-xs-6">
-                                                        <p>{{$item->eb ? $item->eb->projectble->name : $item->station_name}}</p>
+                                                        <p>{{$item->station_name}}</p>
                                                     </div>
                                                     <div class="col-xs-6 text-right">
                                                         <p class="date-starts">{{$item->date_start}}</p>
                                                     </div>
                                                     <div class="col-xs-6 list-user">
                                                         @foreach ($item->users as $user)
-                                                            <p id="list-user-{{$item->id}}-{{$user->id}}">{{$user->name}}</p>
+                                                            <span class="label label-default" id="list-user-{{$item->id}}-{{$user->id}}">{{$user->name}}</span>
                                                         @endforeach
                                                     </div>
                                                     <div class="col-xs-6 text-right">

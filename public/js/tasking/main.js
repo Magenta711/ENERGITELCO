@@ -13,13 +13,13 @@ $(function () {
     request.onload = function() {
         request.response.CD.forEach(element => {
             data.push({
-                id: element.DEPARTAMENTO,
+                id: element.DEPARTAMENTO.toUpperCase(),
                 text: element.DEPARTAMENTO.toUpperCase()
             });
         });
         request.response.EB.forEach(element => {
             data.push({
-                id: element.departamento,
+                id: element.departamento.toUpperCase(),
                 text: element.departamento.toUpperCase()
             });
         });
@@ -28,6 +28,7 @@ $(function () {
         });
         dataMapArr = new Map(dataMap)
         unicos = [...dataMapArr.values()];
+        unicos.sort(GetSortOrder("text"));
         $("#department").select2({
             data: unicos
         }).change(function () {
@@ -112,10 +113,15 @@ $(document).ready(function() {
     });
     $('#eb').change(function(){
         if (this.value == 0) {
-            console.log('Otra estacion');
             $('.station-other').show();
+            $('#station_name').val('');
+            $('#lat').val('');
+            $('#long').val('');
         }else {
             $('.station-other').hide();
+            $('#station_name').val('');
+            $('#lat').val('');
+            $('#long').val('');
         }
         let project = $('#'+this.id+' option:selected').attr('class');
         if (project == 'project-mintic') {
@@ -212,6 +218,7 @@ function resetUsers() {
         }
     }
 }
+
 function resetVehicles() {
     let vehiclesOption =  $('#vehicles').children();
     for (let i = 0; i < vehiclesOption.length; i++) {
@@ -224,17 +231,17 @@ function resetVehicles() {
 function selectMunicipaly(value,response) {
     data = [];
     response.CD.forEach(element => {
-        if (element.DEPARTAMENTO == value) {
+        if (element.DEPARTAMENTO.toUpperCase() == value) {
             data.push({
-                id: element.MUNICIPIOANM,
+                id: element.MUNICIPIOANM.toUpperCase(),
                 text: element.MUNICIPIOANM.toUpperCase()
             });
         }
     });
     response.EB.forEach(element => {
-        if (element.departamento == value) {
+        if (element.departamento.toUpperCase() == value) {
             data.push({
-                id: element.municipio,
+                id: element.municipio.toUpperCase(),
                 text: element.municipio.toUpperCase()
             });
         }
@@ -250,6 +257,7 @@ function selectMunicipaly(value,response) {
         disabled: true,
         selected: true
     });
+    unicos.sort(GetSortOrder("text"));
     $("#municipality").empty()
     $("#municipality").select2({
         data: unicos
@@ -260,14 +268,9 @@ function selectMunicipaly(value,response) {
 }
 
 function selectEB(value,response) {
-    data = [{
-        id: '',
-        text: '',
-        disabled: true,
-        selected: true
-    }];
+    data = [];
     response.CD.forEach(element => {
-        if (element.MUNICIPIOANM == value) {
+        if (element.MUNICIPIOANM.toUpperCase() == value) {
             data.push({
                 id: element.Consecutivo_Sede,
                 text: (element.INSTITUCIÓN_EDUCATIVA+' '+element.NOMBRE_SEDE).toUpperCase()
@@ -275,7 +278,7 @@ function selectEB(value,response) {
         }
     });
     response.EB.forEach(element => {
-        if (element.municipio == value) {
+        if (element.municipio.toUpperCase() == value) {
             data.push({
                 id: element.id,
                 text: element.sitio.toUpperCase()
@@ -287,6 +290,12 @@ function selectEB(value,response) {
     });
     dataMapArr = new Map(dataMap)
     unicos = [...dataMapArr.values()];
+    
+    unicos.sort(GetSortOrder("text"));
+    unicos.unshift({
+        id: 0,
+        text: "OTRA"
+    });
     unicos.unshift({
         id: '',
         text: '',
@@ -296,5 +305,36 @@ function selectEB(value,response) {
     $("#eb").empty()
     $("#eb").select2({
         data: unicos
+    }).change(function () {
+        $('#eb').prop('disabled',false);
+        selectLocation(this.value,response);
     });
 }
+
+function selectLocation(value,response) {
+    response.CD.forEach(element => {
+        if (element.Consecutivo_Sede == value) {
+            $('#station_name').val(element.NOMBRE_SEDE);
+            $('#lat').val(element.LATITUD);
+            $('#long').val(element.LONGITUD);
+        }
+    });
+    response.EB.forEach(element => {
+        if (element.id == value) {
+            $('#station_name').val(element.sitio);
+            $('#lat').val(element.Latitud);
+            $('#long').val(element.Longitud);
+        }
+    });
+}
+
+function GetSortOrder(prop) {
+    return function(a, b) {
+        if (a[prop] > b[prop]) {
+            return 1;
+        } else if (a[prop] < b[prop]) {    
+            return -1;
+        }
+        return 0;
+    }
+}   

@@ -41,11 +41,11 @@
                                     <option {{$item->department == 'ABEJORRAL' ? 'selected' : ''}} class="option-department ANTIOQUIA" data-select2-id="ABEJORRAL" value="ABEJORRAL">ABEJORRAL</option>
                                     <option {{$item->department == 'ABRIAQUÍ' ? 'selected' : ''}} class="option-department ANTIOQUIA" data-select2-id="ABRIAQUÍ" value="ABRIAQUÍ">ABRIAQUÍ</option>
                                     <option {{$item->department == 'ALEJANDRÍA' ? 'selected' : ''}} class="option-department ANTIOQUIA" data-select2-id="ALEJANDRÍA" value="ALEJANDRÍA">ALEJANDRÍA</option>
-                                    <option {{$item->department == 'AMAGA' ? 'selected' : ''}} class="option-department ANTIOQUIA" data-select2-id="AMAGA" value="AMAGA">AMAGA</option>
+                                    <option {{$item->department == 'AMAGA' ? 'selected' : ''}} class="option-department ANTIOQUIA" data-select2-id="AMAGÁ" value="AMAGÁ">AMAGA</option>
                                     <option {{$item->department == 'AMALFI' ? 'selected' : ''}} class="option-department ANTIOQUIA" data-select2-id="AMALFI" value="AMALFI">AMALFI</option>
                                     <option {{$item->department == 'ANDES' ? 'selected' : ''}} class="option-department ANTIOQUIA" data-select2-id="ANDES" value="ANDES">ANDES</option>
                                     <option {{$item->department == 'ANGOSTURA' ? 'selected' : ''}} class="option-department ANTIOQUIA" data-select2-id="ANGOSTURA" value="ANGOSTURA">ANGOSTURA</option>
-                                    <option {{$item->department == 'ANORI' ? 'selected' : ''}} class="option-department ANTIOQUIA" data-select2-id="ANORI" value="ANORI">ANORI</option>
+                                    <option {{$item->department == 'ANORI' ? 'selected' : ''}} class="option-department ANTIOQUIA" data-select2-id="ANORÍ" value="ANORÍ">ANORI</option>
                                     <option {{$item->department == 'ARANZAZU' ? 'selected' : ''}} class="option-department CALDAS" data-select2-id="ARANZAZU" value="ARANZAZU">ARANZAZU</option>
                                     <option {{$item->department == 'ARBOLETES' ? 'selected' : ''}} class="option-department ANTIOQUIA" data-select2-id="ARBOLETES" value="ARBOLETES">ARBOLETES</option>
                                     <option {{$item->department == 'ARGELIA' ? 'selected' : ''}} class="option-department ANTIOQUIA" data-select2-id="ARGELIA" value="ARGELIA">ARGELIA</option>

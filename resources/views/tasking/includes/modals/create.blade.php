@@ -67,17 +67,13 @@
                                 <label for="station_name">Nombre de la estación base</label>
                                 <input type="text" value="{{old('station_name')}}" name="station_name" id="station_name" class="form-control">
                             </div>
-                            <div class="col-md-4 station-other" style="display: none">
+                            <div class="col-md-4">
                                 <label for="lat">Latitud</label>
                                 <input type="text" value="{{old('lat')}}" name="lat" id="lat" class="form-control">
                             </div>
-                            <div class="col-md-4 station-other" style="display: none">
+                            <div class="col-md-4">
                                 <label for="long">Longitud</label>
                                 <input type="text" value="{{old('long')}}" name="long" id="long" class="form-control">
-                            </div>
-                            <div class="col-md-4 station-other" style="display: none">
-                                <label for="height">Altitud</label>
-                                <input type="text" value="{{old('height')}}" name="height" id="height" class="form-control">
                             </div>
                             <div class="col-md-4">
                                 <label for="vehicles">Vehículos</label>

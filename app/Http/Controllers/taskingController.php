@@ -69,12 +69,14 @@ class taskingController extends Controller
             'department' => $request->department,
             'project' => $request->project,
             'user_inv' => $request->user_inv,
-            'eb_id' => $request->eb,
             'am' => (isset($request->am)) ? 1 : 0,
             'pm' => (isset($request->pm)) ? 1 : 0,
             'description' => $request->description,
             'commentaries' => $request->commentaries,
             'report' => $request->report,
+            'station_name' => $request->station_name,
+            'lat' => $request->lat,
+            'long' => $request->long,
             'status' => 2,
         ]);
 
@@ -103,12 +105,6 @@ class taskingController extends Controller
                     ]);
                 }
             }
-        }
-        if ($request->eb > 0) {
-            $id->eb()->create([
-                'projectble_id' => $request->eb,
-                'projectble_type' => $request->type_eb,
-            ]);
         }
         if (isset($request->equipment)) {
             foreach ($request->equipment as $key => $value) {
