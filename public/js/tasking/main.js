@@ -11,38 +11,14 @@ $(function () {
     data = [];
 
     request.onload = function() {
-        request.response.CD.forEach(element => {
-            data.push({
-                id: element.DEPARTAMENTO.toUpperCase(),
-                text: element.DEPARTAMENTO.toUpperCase()
-            });
-        });
-        request.response.EB.forEach(element => {
-            data.push({
-                id: element.departamento.toUpperCase(),
-                text: element.departamento.toUpperCase()
-            });
-        });
-        dataMap = data.map(item=>{
-            return [item.id,item]
-        });
-        dataMapArr = new Map(dataMap)
-        unicos = [...dataMapArr.values()];
-        unicos.sort(GetSortOrder("text"));
-        $("#department").select2({
-            data: unicos
-        }).change(function () {
-            $('#municipality').prop('disabled',false);
-            selectMunicipaly(this.value,request.response);
-        });
+        selectDep(request.response);
+
+        //edit Select2
+        llenarSelect2Edit(request.response);
     }
     
-    $("#users").select2();
-    $("#department").select2();
-    $("#municipality").select2();
-    $("#eb").select2();
-    $("#project").select2();
-    $("#vehicles").select2();
+    // Select2 edit
+    $(".select2").select2();
     
     $('.table').DataTable( {
         order: [[ 0, 'desc' ]],
@@ -122,13 +98,6 @@ $(document).ready(function() {
             $('#station_name').val('');
             $('#lat').val('');
             $('#long').val('');
-        }
-        let project = $('#'+this.id+' option:selected').attr('class');
-        if (project == 'project-mintic') {
-            $('#type_eb').val('App\\Models\\project\\Mintic\\Mintic_School');
-        }
-        if (project == 'project-cleaner') {
-            $('#type_eb').val("App\\Models\\project\\Clearing");
         }
     });
 });
@@ -228,6 +197,34 @@ function resetVehicles() {
     }
 }
 
+function selectDep(response) {
+    response.CD.forEach(element => {
+        data.push({
+            id: element.DEPARTAMENTO.toUpperCase(),
+            text: element.DEPARTAMENTO.toUpperCase()
+        });
+    });
+    response.EB.forEach(element => {
+        data.push({
+            id: element.departamento.toUpperCase(),
+            text: element.departamento.toUpperCase()
+        });
+    });
+    dataMap = data.map(item=>{
+        return [item.id,item]
+    });
+    dataMapArr = new Map(dataMap)
+    unicos = [...dataMapArr.values()];
+    unicos.sort(GetSortOrder("text"));
+    $("#department").select2({
+        data: unicos
+    }).change(function () {
+        $('#municipality').prop('disabled',false);
+        $("#eb").empty()
+        selectMunicipaly(this.value,response);
+    });
+}
+
 function selectMunicipaly(value,response) {
     data = [];
     response.CD.forEach(element => {
@@ -302,7 +299,7 @@ function selectEB(value,response) {
         disabled: true,
         selected: true
     });
-    $("#eb").empty()
+    $("#eb").empty();
     $("#eb").select2({
         data: unicos
     }).change(function () {
@@ -328,6 +325,23 @@ function selectLocation(value,response) {
     });
 }
 
+function selectEditLocation(id,value,response) {
+    response.CD.forEach(element => {
+        if (element.Consecutivo_Sede == value) {
+            $('#station_name-edit-'+id).val(element.NOMBRE_SEDE);
+            $('#lat-edit-'+id).val(element.LATITUD);
+            $('#long-edit-'+id).val(element.LONGITUD);
+        }
+    });
+    response.EB.forEach(element => {
+        if (element.id == value) {
+            $('#station_name-edit-'+id).val(element.sitio);
+            $('#lat-edit-'+id).val(element.Latitud);
+            $('#long-edit-'+id).val(element.Longitud);
+        }
+    });
+}
+
 function GetSortOrder(prop) {
     return function(a, b) {
         if (a[prop] > b[prop]) {
@@ -337,4 +351,141 @@ function GetSortOrder(prop) {
         }
         return 0;
     }
-}   
+}
+
+function llenarSelect2Edit(response) {
+    let elements = $('.select2');
+    for (let i = 0; i < elements.length; i++) {
+        idEdit = elements[i].id.split('-');
+        if (idEdit.length > 1 && idEdit[0] == "department") {
+            console.log();
+            selectEditDep(idEdit[(idEdit.length - 1)],response);
+        }
+    }
+}
+
+function selectEditDep(id,response) {
+    let value = $("#department-edit-"+id).attr('value');
+    response.CD.forEach(element => {
+        selected = element.DEPARTAMENTO.toUpperCase() == value ? true : false;
+        data.push({
+            id: element.DEPARTAMENTO.toUpperCase(),
+            text: element.DEPARTAMENTO.toUpperCase(),
+            selected: selected
+        });
+    });
+    response.EB.forEach(element => {
+        selected = element.departamento.toUpperCase() == value ? true : false;
+        data.push({
+            id: element.departamento.toUpperCase(),
+            text: element.departamento.toUpperCase(),
+            selected: selected
+        });
+    });
+    dataMap = data.map(item=>{
+        return [item.id,item]
+    });
+    dataMapArr = new Map(dataMap)
+    unicos = [...dataMapArr.values()];
+    unicos.sort(GetSortOrder("text"));
+    $("#department-edit-"+id).select2({
+        data: unicos
+    }).change(function () {
+        let id = this.id.split('-')[(this.id.split('-').length - 1)];
+        $("#eb-edit-"+id).empty();
+        selectEditMun(id,this.value,response);
+    });
+    selectEditMun(id,value,response);
+}
+function selectEditMun(id,value,response) {
+    value2 =  $("#municipality-edit-"+id).attr('value');
+    data = [];
+    response.CD.forEach(element => {
+        if (element.DEPARTAMENTO.toUpperCase() == value) {
+            selected = element.MUNICIPIOANM.toUpperCase() == value2 ? true : false;
+            data.push({
+                id: element.MUNICIPIOANM.toUpperCase(),
+                text: element.MUNICIPIOANM.toUpperCase(),
+                selected: selected
+            });
+        }
+    });
+    response.EB.forEach(element => {
+        if (element.departamento.toUpperCase() == value) {
+            selected = element.municipio.toUpperCase() == value2 ? true : false;
+            data.push({
+                id: element.municipio.toUpperCase(),
+                text: element.municipio.toUpperCase(),
+                selected: selected
+            });
+        }
+    });
+    dataMap = data.map(item=>{
+        return [item.id,item]
+    });
+    dataMapArr = new Map(dataMap)
+    unicos = [...dataMapArr.values()];
+    unicos.unshift({
+        id: '',
+        text: '',
+        disabled: true,
+        selected: true
+    });
+    unicos.sort(GetSortOrder("text"));
+    $("#municipality-edit-"+id).empty()
+    $("#municipality-edit-"+id).select2({
+        data: unicos
+    }).change(function () {
+        let id = this.id.split('-')[(this.id.split('-').length - 1)];
+        selectEditEB(id,this.value,response);
+    });
+    selectEditEB(id,value2,response);
+}
+function selectEditEB(id,value,response) {
+    value2 =  $("#eb-edit-"+id).attr('value');
+    data = [];
+    response.CD.forEach(element => {
+        if (element.MUNICIPIOANM.toUpperCase() == value) {
+            selected = element.Consecutivo_Sede.toUpperCase() == value2 ? true : false;
+            data.push({
+                id: element.Consecutivo_Sede,
+                text: (element.INSTITUCIÓN_EDUCATIVA+' '+element.NOMBRE_SEDE).toUpperCase(),
+                selected: selected
+            });
+        }
+    });
+    response.EB.forEach(element => {
+        if (element.municipio.toUpperCase() == value) {
+            selected = element.id.toUpperCase() == value2 ? true : false;
+            data.push({
+                id: element.id,
+                text: element.sitio.toUpperCase(),
+                selected: selected
+            });
+        }
+    });
+    dataMap = data.map(item=>{
+        return [item.id,item]
+    });
+    dataMapArr = new Map(dataMap)
+    unicos = [...dataMapArr.values()];
+    
+    unicos.sort(GetSortOrder("text"));
+    unicos.unshift({
+        id: 0,
+        text: "OTRA"
+    });
+    unicos.unshift({
+        id: '',
+        text: '',
+        disabled: true,
+        selected: true
+    });
+    $("#eb-edit-"+id).empty();
+    $("#eb-edit-"+id).select2({
+        data: unicos
+    }).change(function () {
+        let id = this.id.split('-')[(this.id.split('-').length - 1)];
+        selectEditLocation(id,this.value,response);
+    });
+}

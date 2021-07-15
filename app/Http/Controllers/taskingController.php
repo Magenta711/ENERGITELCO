@@ -65,8 +65,8 @@ class taskingController extends Controller
         $id = Tasking::create([
             'responsable_id' => auth()->id(),
             'date_start' => $request->date_start,
-            'municipality' => $request->municipality,
             'department' => $request->department,
+            'municipality' => $request->municipality,
             'project' => $request->project,
             'user_inv' => $request->user_inv,
             'am' => (isset($request->am)) ? 1 : 0,
@@ -74,6 +74,7 @@ class taskingController extends Controller
             'description' => $request->description,
             'commentaries' => $request->commentaries,
             'report' => $request->report,
+            'eb_id' => $request->eb_id,
             'station_name' => $request->station_name,
             'lat' => $request->lat,
             'long' => $request->long,

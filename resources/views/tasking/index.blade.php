@@ -105,7 +105,11 @@
                                             <td>
                                                 <div class="row" style="cursor: pointer" data-toggle="modal" data-target="#edit-modal-{{$item->id}}">
                                                     <div class="col-xs-6">
-                                                        <p>{{$item->station_name}}</p>
+                                                        <p>
+                                                            <a target="_blank" href="https://www.google.com/maps/search/{{$item->lat}}+{{$item->long}}/">
+                                                                {{$item->station_name}}
+                                                            </a>
+                                                        </p>
                                                     </div>
                                                     <div class="col-xs-6 text-right">
                                                         <p class="date-starts">{{$item->date_start}}</p>

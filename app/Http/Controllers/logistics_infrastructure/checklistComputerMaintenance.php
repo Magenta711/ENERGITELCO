@@ -94,7 +94,7 @@ class checklistComputerMaintenance extends Controller
         
         foreach ($users as $user) {
             if ($user->hasPermissionTo('Aprobar solicitud de lista de verificación para el mantenimiento de computadores')){
-                $user->notify(new notificationMain($id->id,'Solicitud de mantenimiento de computadores '.$id->id,'logistics_infrastructure/checklist_computer_maintenance/show/'));
+                $user->notify(new notificationMain($id->id,'Solicitud de mantenimiento de computadores '.$id->id,'logistics_infrastructure/checklist_computer/show/'));
             }
         }
         
@@ -183,7 +183,7 @@ class checklistComputerMaintenance extends Controller
      */
     public function download(Work6 $id)
     {
-        $pdf = PDF::loadView('logistics_infrastructure/checklist_computer_maintenance/pdf/main',['trabajo' => $id]);
+        $pdf = PDF::loadView('logistics_infrastructure/checklist_computer/pdf/main',['trabajo' => $id]);
         return $pdf->download($id->codigo_formulario.'-'.$id->id.'_LISTA_VERIFICACION_PARA_EL_MANTENIMIENTO_DE_LOS_COMPUTADORES.pdf');
     }
     
@@ -205,8 +205,8 @@ class checklistComputerMaintenance extends Controller
                 'coordinador' => auth()->id(),
             ]);
             
-            $id->responsableAcargo->notify(new notificationMain($id->id,'Se ha aprobado la solicitud de mantenimiento de computadores '.$id->id,'logistics_infrastructure/checklist_computer_maintenance/show/'));
-            $id->tecnico->notify(new notificationMain($id->id,'Se ha aprobado la solicitud de mantenimiento de computadores '.$id->id,'logistics_infrastructure/checklist_computer_maintenance/show/'));
+            $id->responsableAcargo->notify(new notificationMain($id->id,'Se ha aprobado la solicitud de mantenimiento de computadores '.$id->id,'logistics_infrastructure/checklist_computer/show/'));
+            $id->tecnico->notify(new notificationMain($id->id,'Se ha aprobado la solicitud de mantenimiento de computadores '.$id->id,'logistics_infrastructure/checklist_computer/show/'));
             
             Mail::send('logistics_infrastructure.checklist_computer.mail.main', ['format' => $id], function ($menssage) use ($id)
             {
@@ -230,8 +230,8 @@ class checklistComputerMaintenance extends Controller
                 'coordinador' => auth()->id(),
             ]);
     
-            $id->responsableAcargo->notify(new notificationMain($id->id,'No se aprobó la solicitud de mantenimiento de computadores '.$id->id,'logistics_infrastructure/checklist_computer_maintenance/show/'));
-            $id->tecnico->notify(new notificationMain($id->id,'No se aprobó la solicitud de mantenimiento de computadores '.$id->id,'logistics_infrastructure/checklist_computer_maintenance/show/'));
+            $id->responsableAcargo->notify(new notificationMain($id->id,'No se aprobó la solicitud de mantenimiento de computadores '.$id->id,'logistics_infrastructure/checklist_computer/show/'));
+            $id->tecnico->notify(new notificationMain($id->id,'No se aprobó la solicitud de mantenimiento de computadores '.$id->id,'logistics_infrastructure/checklist_computer/show/'));
     
             return redirect()->route('approval')->with(['success'=>'Se ha desaprobado la solicitud correctamente','sudmenu'=>6]);
         }

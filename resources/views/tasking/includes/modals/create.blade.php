@@ -18,7 +18,7 @@
                                 <input type="datetime-local" name="date_start" id="date_start" class="form-control">
                             </div>
                             <div class="col-md-4">
-                                <label for="  ">Funcionarios</label>
+                                <label for="users">Funcionarios</label>
                                 <select name="users[]" id="users" disabled class="form-control select2 select2-hidden-accessible" multiple="" data-placeholder="Selecciona un funcionario" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                     @foreach ($users as $user)
                                         <option id="option_user_{{$user->id}}" data-select2-id="{{$user->id}}" value="{{$user->id}}">{{$user->name}}</option>
