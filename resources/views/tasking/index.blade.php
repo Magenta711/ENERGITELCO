@@ -84,7 +84,7 @@
     {{-- Tables --}}
     <div class="row">
         <div class="col-md-4">
-            <div class="box">
+            <div class="box box-success">
                 <div class="box-header">
                     <div class="box-title">Programadas</div>
                     <div class="box-tools">
@@ -142,7 +142,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="box">
+            <div class="box box-danger">
                 <div class="box-header">
                     <div class="box-title">En proceso o sin reporte</div>
                     <div class="box-tools">
@@ -161,9 +161,13 @@
                                     @if ($item->date_start <= now()->format('Y-m-d H:i:s') && !$item->report)
                                         <tr>
                                             <td>
-                                                <div class="row" style="cursor: pointer" data-toggle="modal" data-target="#show-modal-{{$item->id}}">
+                                                <div class="row" style="cursor: pointer" data-toggle="modal" data-target="#edit-modal-{{$item->id}}">
                                                     <div class="col-xs-6">
-                                                        <p>{{$item->station_name}}</p>
+                                                        <p>
+                                                            <a target="_blank" href="https://www.google.com/maps/search/{{$item->lat}}+{{$item->long}}/">
+                                                                {{$item->station_name}}
+                                                            </a>
+                                                        </p>
                                                     </div>
                                                     <div class="col-xs-6 text-right">
                                                         <p class="date-starts">{{$item->date_start}}</p>
@@ -184,7 +188,7 @@
                                                         @endforeach
                                                     </div>
                                                 </div>
-                                                @include('tasking.includes.modals.show')
+                                                @include('tasking.includes.modals.edit')
                                             </td>
                                         </tr>
                                     @endif
@@ -196,7 +200,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="box">
+            <div class="box box-primary">
                 <div class="box-header">
                     <div class="box-title">Finalizadas</div>
                     <div class="box-tools">
@@ -217,7 +221,11 @@
                                             <td>
                                                 <div class="row" style="cursor: pointer" data-toggle="modal" data-target="#show-modal-{{$item->id}}">
                                                     <div class="col-xs-6">
-                                                        <p>{{$item->station_name}}</p>
+                                                        <p>
+                                                            <a target="_blank" href="https://www.google.com/maps/search/{{$item->lat}}+{{$item->long}}/">
+                                                                {{$item->station_name}}
+                                                            </a>
+                                                        </p>
                                                     </div>
                                                     <div class="col-xs-6 text-right">
                                                         <p class="date-starts">{{$item->date_start}}</p>

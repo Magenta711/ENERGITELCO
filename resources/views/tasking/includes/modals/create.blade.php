@@ -63,7 +63,7 @@
                                     <option disabled selected></option>
                                 </select>
                             </div>
-                            <div class="col-md-4 station-other" style="display: none">
+                            <div class="col-md-4" style="display: none">
                                 <label for="station_name">Nombre de la estación base</label>
                                 <input type="text" value="{{old('station_name')}}" name="station_name" id="station_name" class="form-control">
                             </div>

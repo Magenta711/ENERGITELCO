@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class taskDetailConsumable extends Model
 {
-    protected $fillable = ['inventaryble_type','inventaryble_id','task_id','amount'];
+    protected $fillable = ['inventaryble_type','inventaryble_id','task_id','preamount','amount','status'];
 
     public function inventaryble()
     {

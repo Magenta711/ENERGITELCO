@@ -61,7 +61,7 @@
                                     <option disabled selected></option>
                                 </select>
                             </div>
-                            <div class="col-md-4 station-other" {!! $item->eb_id == 0 ? '' : 'style="display: none"' !!}>
+                            <div class="col-md-4" {!! $item->eb_id == "0" ? 'style=""' : 'style="display: none"' !!}>
                                 <label for="station_name-edit-{{$item->id}}">Nombre de la estación base</label>
                                 <input type="text" value="{{$item->station_name}}" name="station_name" id="station_name-edit-{{$item->id}}" class="form-control">
                             </div>
@@ -100,12 +100,12 @@
                                     <label for="activities"><i class="fa fa-list"></i> Actividades</label>
                                 </div>
                                 <div class="col-sm-2 text-right">
-                                    <button type="button" class="btn btn-sm btn-secundary" id="add-activities-edit-{{$item->id}}"><i class="fa fa-plus"></i></button>
+                                    <button type="button" class="btn btn-sm btn-secundary btn-activities" id="add-activities-edit-{{$item->id}}"><i class="fa fa-plus"></i></button>
                                 </div>
                             </div>
-                            <div id="destino-activities">
+                            <div id="destino-activities-{{$item->id}}">
                                 @forelse($item->activities as $activity)
-                                    <input type="text" name="activities[]" id="activities-edit-{{$activity->id}}" class="form-control" style="margin-bottom: 5px" value="{{$activity->text}}">
+                                    <input type="text" name="activities[]" id="activities-edit-{{$item->id}}-{{$activity->id}}" class="form-control" style="margin-bottom: 5px" value="{{$activity->text}}">
                                 @empty
                                     <input type="text" name="activities[]" id="activities-edit-{{$item->id}}" class="form-control" style="margin-bottom: 5px">
                                 @endforelse
@@ -127,6 +127,7 @@
                         <button type="button" class="btn btn-sm btn-block btn-secundary text-left open-modal-inv" style="text-align: left !important" data-toggle="modal" data-target="#consumables-edit-{{$item->id}}-modal">
                             <i class="fa fa-plug"></i> Consumibles
                         </button>
+                        <input type="submit" name="add_inv_user" value="Asignar inventario al usuario" class="btn btn-sm btn-block btn-primary">
                         <div class="modal fade" id="equipment-edit-{{$item->id}}-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-md">
                                 <div class="modal-content">
@@ -155,7 +156,7 @@
                                                 <tbody>
                                                     @foreach ($equipments as $equiment)
                                                         <tr>
-                                                            <td><input type="checkbox" name="equipment[{{$equiment->id}}]" id="equipment-edit_{{$equiment->id}}" value="{{$equiment->id}}"></td>
+                                                            <td><input type="checkbox" name="equipment[{{$equiment->id}}]" id="equipment-edit_{{$item->id}}-{{$equiment->id}}" value="{{$equiment->id}}"></td>
                                                             <td>{{$equiment->serial}}</td>
                                                             <td>{{$equiment->item}}</td>
                                                             <td>{{$equiment->brand }}</td>
@@ -198,7 +199,7 @@
                                                             $hasCosumable = $item->consumables ? hasConsumable($item->consumables,$consumable->id,'App\Models\project\Mintic\inventory\invMinticConsumable') : false;
                                                         @endphp
                                                         <tr>
-                                                            <td><input type="checkbox" name="consumable[{{$consumable->id}}]" id="consumable-edit_{{$consumable->id}}" value="{{$consumable->id}}" {{$hasCosumable ? 'checked' : ''}}></td>
+                                                            <td><input type="checkbox" name="consumable[{{$consumable->id}}]" id="consumable-edit_{{$item->id}}-{{$consumable->id}}" value="{{$consumable->id}}" {{$hasCosumable ? 'checked' : ''}}></td>
                                                             <td>{{$consumable->item}} {{$consumable->type}}</td>
                                                             <td>
                                                                 <div class="col-md-9" style="padding-right: 2px;">

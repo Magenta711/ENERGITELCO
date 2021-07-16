@@ -44,9 +44,18 @@
                                 <td scope="row">{{ $proceeding->affair }}</td>
                                 <td>{{ $proceeding->responsable->name }}</td>
                                 <td>
+                                    @php
+                                        $on = 0;
+                                    @endphp
                                     @foreach ($proceeding->users as $item)
-                                        - {{$item->name}}<br>
+                                        @if ($on < 4)
+                                            - {{$item->name}}<br>
+                                            @php
+                                                $on++;
+                                            @endphp
+                                        @endif
                                     @endforeach
+                                    {{$on < count($proceeding->users) ? '...' : ''}}
                                 </td>
                                 <td>{{ $proceeding->date }}</td>
                                 <td>

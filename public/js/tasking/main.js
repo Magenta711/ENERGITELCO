@@ -64,6 +64,10 @@ $(document).ready(function() {
     $('#add-activities').click(function () {
         $('#activities').clone().appendTo('#destino-activities').val('');
     });
+    $('.btn-activities').click(function () {
+        let id = this.id.split('-')[(this.id.split('-').length - 1)];
+        $('#activities').clone().appendTo('#destino-activities-'+id).val('');
+    });
     $('.open-modal-inv').click(function () {
         let users = $('#users').val();
         users.forEach(idU => {
@@ -89,7 +93,7 @@ $(document).ready(function() {
     });
     $('#eb').change(function(){
         if (this.value == 0) {
-            $('.station-other').show();
+            $('#station_name').parent().show();
             $('#station_name').val('');
             $('#lat').val('');
             $('#long').val('');
@@ -172,7 +176,6 @@ function vehiclesDisable(date) {
         if (newDate.format('YYYY-MM-DD') > newEnrollmentDate.format('YYYY-MM-DD') || newDate.format('YYYY-MM-DD') > newSoatDate.format('YYYY-MM-DD') || newDate.format('YYYY-MM-DD') > newGasesDate.format('YYYY-MM-DD') || newDate.format('YYYY-MM-DD') > newTechnomechanicalDate.format('YYYY-MM-DD')) {
             let textOrg = $('#option_vehicle_'+id[i].value).text();
             if (textOrg.indexOf(' (') == -1) {
-                console.log('Para la fecha',textOrg);
                 $('#option_vehicle_'+id[i].value).prop('disabled',false).text(textOrg+' (documentos vencidos para la fecha)');
             }
         }
@@ -198,6 +201,7 @@ function resetVehicles() {
 }
 
 function selectDep(response) {
+    data = [];
     response.CD.forEach(element => {
         data.push({
             id: element.DEPARTAMENTO.toUpperCase(),
@@ -358,7 +362,6 @@ function llenarSelect2Edit(response) {
     for (let i = 0; i < elements.length; i++) {
         idEdit = elements[i].id.split('-');
         if (idEdit.length > 1 && idEdit[0] == "department") {
-            console.log();
             selectEditDep(idEdit[(idEdit.length - 1)],response);
         }
     }
@@ -366,6 +369,7 @@ function llenarSelect2Edit(response) {
 
 function selectEditDep(id,response) {
     let value = $("#department-edit-"+id).attr('value');
+    data = [];
     response.CD.forEach(element => {
         selected = element.DEPARTAMENTO.toUpperCase() == value ? true : false;
         data.push({
@@ -469,11 +473,12 @@ function selectEditEB(id,value,response) {
     });
     dataMapArr = new Map(dataMap)
     unicos = [...dataMapArr.values()];
-    
     unicos.sort(GetSortOrder("text"));
+    selected = 0 == value2 ? true : false;
     unicos.unshift({
         id: 0,
-        text: "OTRA"
+        text: "OTRA",
+        selected: selected
     });
     unicos.unshift({
         id: '',
@@ -486,6 +491,11 @@ function selectEditEB(id,value,response) {
         data: unicos
     }).change(function () {
         let id = this.id.split('-')[(this.id.split('-').length - 1)];
+        if (this.value == 0) {
+            $("station_name-edit-"+id).parent().show();
+        }else {
+            $("station_name-edit-"+id).parent().hide();
+        }
         selectEditLocation(id,this.value,response);
     });
 }
