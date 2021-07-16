@@ -63,6 +63,14 @@ class taskingController extends Controller
      */
     public function store(Request $request)
     {
+        return $request;
+        $request->validate([
+            'date_start' => ['required','date'],
+            'department' => ['required'],
+            'municipality' => ['required'],
+            'project' => ['required'],
+            'municipality' => ['required'],
+        ]);
         $id = Tasking::create([
             'responsable_id' => auth()->id(),
             'date_start' => $request->date_start,
@@ -74,22 +82,22 @@ class taskingController extends Controller
             'pm' => (isset($request->pm)) ? 1 : 0,
             'description' => $request->description,
             'commentaries' => $request->commentaries,
-            'report' => $request->report,
             'eb_id' => $request->eb,
             'station_name' => $request->station_name,
             'lat' => $request->lat,
             'long' => $request->long,
             'status' => 2,
         ]);
-
-        for ($i=0; $i < count($request->users); $i++) { 
-            Responsable::create([
-                'user_id' => $request->users[$i],
-                'responsibles_type' => 'App\Models\Tasking',
-                'responsibles_id' => $id->id,
-            ]);
+        if (isset($request->users)) {
+            for ($i=0; $i < count($request->users); $i++) { 
+                Responsable::create([
+                    'user_id' => $request->users[$i],
+                    'responsibles_type' => 'App\Models\Tasking',
+                    'responsibles_id' => $id->id,
+                ]);
+            }
         }
-        if (count($request->vehicles)) {
+        if (isset($request->vehicles)) {
             for ($i=0; $i < count($request->vehicles); $i++) { 
                 if ($request->vehicles[$i]) {
                     $id->vehicles()->create([
@@ -98,7 +106,7 @@ class taskingController extends Controller
                 }
             }
         }
-        if (count($request->activities)) {
+        if (isset($request->activities)) {
             for ($i=0; $i < count($request->activities); $i++) { 
                 if ($request->activities[$i]) {
                     $id->activities()->create([
@@ -110,7 +118,6 @@ class taskingController extends Controller
         }
         if (isset($request->equipment)) {
             foreach ($request->equipment as $key => $value) {
-                // $inv = InvUser::where('user_id',$request->inv_user)->where('inventaryble_type','App\Models\project\Mintic\inventory\invMinticEquipment')->where('inventaryble_id',$key)->first();
                 $id->consumables()->create([
                     'inventaryble_type' => 'App\Models\project\Mintic\inventory\invMinticEquipment',
                     'inventaryble_id' => $key,
@@ -118,30 +125,10 @@ class taskingController extends Controller
                     'amount' => 0,
                     'status' => 0
                 ]);
-                // if ($inv) {
-                //     $inv->update([
-                //         'tickets' => 1,
-                //         'departures' => 0,
-                //         'stock' => 1
-                //     ]);
-                // }else {
-                //     InvUser::create([
-                //         'user_id' => $request->inv_user,
-                //         'inventaryble_id' => $key,
-                //         'inventaryble_type' => 'App\Models\project\Mintic\inventory\invMinticEquipment',
-                //         'tickets' => 1,
-                //         'departures' => 0,
-                //         'stock' => 1
-                //     ]);
-                // }
-                // invMinticEquipment::find($key)->update([
-                //     'status' => 2,
-                // ]);
             }
         }
         if (isset($request->consumable)) {
             foreach ($request->consumable as $key => $value) {
-                // $inv = InvUser::where('user_id',$request->inv_user)->where('inventaryble_type','App\Models\project\Mintic\inventory\invMinticConsumable')->where('inventaryble_id',$request->consumable[$key])->first();
                 $id->consumables()->create([
                     'inventaryble_type' => 'App\Models\project\Mintic\inventory\invMinticConsumable',
                     'inventaryble_id' => $key,
@@ -149,28 +136,6 @@ class taskingController extends Controller
                     'amount' => 0,
                     'status' => 0
                 ]);
-                // if ($inv) {
-                //     $inv->update([
-                //         'tickets' => $request->amount[$key] + $inv->tickets,
-                //         'stock' => $request->amount[$key] + $inv->stock
-                //     ]);
-                // }else {
-                //     InvUser::create([
-                //         'user_id' => $request->inv_user,
-                //         'inventaryble_id' => $key,
-                //         'inventaryble_type' => 'App\Models\project\Mintic\inventory\invMinticConsumable',
-                //         'tickets' => $request->amount[$key],
-                //         'departures' => 0,
-                //         'stock' => $request->amount[$key],
-                //     ]);
-                // }
-                // $consumable = invMinticConsumable::find($key);
-                // $rest = $consumable->stock - $request->amount[$key];
-                // $consumable->update([
-                //     'stock' => $rest,
-                //     'departures' => $request->amount[$key] + $consumable->departures,
-                //     'status' => $rest == 0 ? 0 : 1,
-                // ]);
             }
         }
 

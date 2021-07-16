@@ -15,7 +15,7 @@
                         <div class="row form-group">
                             <div class="col-md-4">
                                 <label for="date_start">Fecha de salida</label>
-                                <input type="datetime-local" name="date_start" id="date_start" class="form-control">
+                                <input type="datetime-local" name="date_start" id="date_start" class="form-control" value="{{old('date_start')}}">
                             </div>
                             <div class="col-md-4">
                                 <label for="users">Funcionarios</label>
@@ -78,12 +78,12 @@
                             <div class="col-md-4">
                                 <label for="vehicles">Vehículos</label>
                                 <select name="vehicles[]" id="vehicles" disabled class="form-control select2 select2-hidden-accessible" multiple="" data-placeholder="Selecciona un vehículos" style="width: 100%;" data-select2-id="6" tabindex="-1" aria-hidden="true">
-                                    @foreach ($vehicles as $vehicle)
+                                    {{-- @foreach ($vehicles as $vehicle)
                                         @php
                                             $stateVehicle = expirateDate($vehicle->enrollment_date,$vehicle->soat_date,$vehicle->gases_date,$vehicle->technomechanical_date);
                                         @endphp
                                         <option id="option_vehicle_{{$vehicle->id}}" data-select2-id="{{$vehicle->id}}" value="{{$vehicle->id}}" {{$stateVehicle ? 'disabled' : ''}}>{{$vehicle->plate}} - {{$vehicle->brand}}{{$stateVehicle ? ' (documentos vencidos)' : ''}}</option>
-                                    @endforeach
+                                    @endforeach --}}
                                 </select>
                             </div>
                             <div class="col-md-4">
@@ -112,10 +112,6 @@
                         <div class="form-group">
                             <label for="commentaries"><i class="fa fa-align-left"></i> Comentarios</label>
                             <textarea name="commentaries" id="commentaries" cols="30" rows="3" class="form-control"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="report"><i class="fa fa-align-left"></i> Reporte de cierre</label>
-                            <textarea name="report" id="report" cols="30" rows="3" class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -150,7 +146,9 @@
                                                 <tbody>
                                                     @foreach ($equipments as $item)
                                                         <tr>
-                                                            <td><input type="checkbox" name="equipment[{{$item->id}}]" id="equipment_{{$item->id}}" value="{{$item->id}}"></td>
+                                                            <td>
+                                                                <input type="checkbox" name="equipment[{{$item->id}}]" id="equipment_{{$item->id}}" value="{{$item->id}}">
+                                                            </td>
                                                             <td>{{$item->serial}}</td>
                                                             <td>{{$item->item}}</td>
                                                             <td>{{$item->brand }}</td>

@@ -140,6 +140,7 @@
             </div>
             <div class="box-footer">
                 <button type="submit" id="send" class="btn btn-sm btn-primary">Guardar</button>
+                <button type="submit" id="send" class="btn btn-sm btn-danger">Eliminar</button>
             </div>
         </form>
     </div>

@@ -56,7 +56,6 @@ $(document).ready(function() {
             $('#vehicles').prop('disabled',false);
             usersDisable(this.value);
             vehiclesDisable(this.value);
-
             $('#vehicles').val(null).trigger('change');
             $('#users').val(null).trigger('change');
         }
@@ -141,45 +140,57 @@ function usersDisable(date) {
         }
     }
 }
-function vehiclesDisable(date) {
-    resetVehicles();
-    newDate = moment(date);
-    dates = $('.date-starts');
-    for (let i = 0; i < dates.length; i++) {
-        let newDates = moment(dates[i].innerText);
-        if (newDate.format('YYYY-MM-DD') == newDates.format('YYYY-MM-DD')) {
-            let eleVehicles = $(dates[i]).parent().parent().children('.list-vehicles').children();
-            for (let j = 0; j < eleVehicles.length; j++) {
-                let id = eleVehicles[j].id.split('-')[(eleVehicles[j].id.split('-').length - 1)];
-                let text = $('#option_vehicle_'+id).text();
-                if (text.indexOf(" (") == -1) {
-                    $('#option_vehicle_'+id).prop('disabled',true).text(text+' (no disponible)');
-                    if ($('#vehicles').find("option[value='" + data.id + "']").length) {
-                        
-                    }
-                }
-            }
-        }
-    }
-
+function vehiclesDisable(date)
+{
     let id = $('.data-vehicles-id');
     let plate = $('.data-vehicles-plate');
+    let brand = $('.data-vehicles-brand');
     let enrollmentDate = $('.data-vehicles-enrollment-date');
     let soatDate = $('.data-vehicles-soat-date');
     let gasesDate = $('.data-vehicles-gases-date');
     let technomechanicalDate = $('.data-vehicles-technomechanical-date');
+    let newDate = moment(date);
+    data = [];
     for (let i = 0; i < id.length; i++) {
         let newEnrollmentDate = moment(enrollmentDate[i].value);
         let newSoatDate = moment(soatDate[i].value);
         let newGasesDate = moment(gasesDate[i].value);
         let newTechnomechanicalDate = moment(technomechanicalDate[i].value);
-        if (newDate.format('YYYY-MM-DD') > newEnrollmentDate.format('YYYY-MM-DD') || newDate.format('YYYY-MM-DD') > newSoatDate.format('YYYY-MM-DD') || newDate.format('YYYY-MM-DD') > newGasesDate.format('YYYY-MM-DD') || newDate.format('YYYY-MM-DD') > newTechnomechanicalDate.format('YYYY-MM-DD')) {
-            let textOrg = $('#option_vehicle_'+id[i].value).text();
-            if (textOrg.indexOf(' (') == -1) {
-                $('#option_vehicle_'+id[i].value).prop('disabled',false).text(textOrg+' (documentos vencidos para la fecha)');
+        disabled = expirateDateVehicle(newEnrollmentDate,newSoatDate,newGasesDate,newTechnomechanicalDate,newDate) ? true : false;
+        dateDisable = dateVehicleDisable(newDate,id[i].value) ? true : false;
+        textDisabled = disabled ? " (documentos vencidos)" : '';
+        if (dateDisable) {
+            disabled = dateDisable;
+            textDisabled = disabled ? " (no disponible)" : '';
+        }
+        data.push({
+            id: id[i].value,
+            text: plate[i].value+" "+brand[i].value+textDisabled,
+            disabled: disabled
+        });
+    }
+
+    $("#vehicles").empty();
+    $('#vehicles').select2({
+        data: data
+    });
+}
+
+function dateVehicleDisable(date,id) {
+    dates = $('.date-starts');
+    for (let i = 0; i < dates.length; i++) {
+        let newDates = moment(dates[i].innerText);
+        if (newDates.format('YYYY-MM-DD') == date.format('YYYY-MM-DD')) {
+            let eleVehicles = $(dates[i]).parent().parent().children('.list-vehicles').children();
+            for (let j = 0; j < eleVehicles.length; j++) {
+                let idVehicle = eleVehicles[j].id.split('-')[(eleVehicles[j].id.split('-').length - 1)];
+                if (idVehicle == id) {
+                    return true;
+                }
             }
         }
     }
+    return false;
 }
 
 function resetUsers() {
@@ -187,15 +198,6 @@ function resetUsers() {
     for (let i = 0; i < usersOption.length; i++) {
         if (usersOption[i].innerText.indexOf('(') != -1) {
             $('#option_user_'+usersOption[i].value).prop('disabled',false).text(usersOption[i].innerText.split(' (')[0]);
-        }
-    }
-}
-
-function resetVehicles() {
-    let vehiclesOption =  $('#vehicles').children();
-    for (let i = 0; i < vehiclesOption.length; i++) {
-        if (vehiclesOption[i].innerText.indexOf(' (no disponible)') != -1 || vehiclesOption[i].innerText.indexOf(' (documentos vencidos para la fecha)') != -1) {
-            $('#option_vehicle_'+vehiclesOption[i].value).prop('disabled',false).text(vehiclesOption[i].innerText.split(' (')[0]);
         }
     }
 }
@@ -316,7 +318,7 @@ function selectLocation(value,response) {
     response.CD.forEach(element => {
         if (element.Consecutivo_Sede == value) {
             $('#station_name').val(element.NOMBRE_SEDE);
-            $('#lat').val(element.LATITUD);
+            $('#lat').val(element.Latitud);
             $('#long').val(element.LONGITUD);
         }
     });
@@ -333,7 +335,7 @@ function selectEditLocation(id,value,response) {
     response.CD.forEach(element => {
         if (element.Consecutivo_Sede == value) {
             $('#station_name-edit-'+id).val(element.NOMBRE_SEDE);
-            $('#lat-edit-'+id).val(element.LATITUD);
+            $('#lat-edit-'+id).val(element.Latitud);
             $('#long-edit-'+id).val(element.LONGITUD);
         }
     });
@@ -498,4 +500,21 @@ function selectEditEB(id,value,response) {
         }
         selectEditLocation(id,this.value,response);
     });
+}
+
+function expirateDateVehicle(enrollment_date,soat_date,gases_date,technomechanical_date,date)
+{
+    if (enrollment_date && enrollment_date < date) {
+        return true;
+    }
+    if (soat_date && soat_date < date) {
+        return true;
+    }
+    if (gases_date && gases_date < date) {
+        return true;
+    }
+    if (technomechanical_date && technomechanical_date < date) {
+        return true;
+    }
+    return false;
 }

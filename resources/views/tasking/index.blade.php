@@ -26,22 +26,6 @@
         }
         return false;
     }
-    function expirateDate($enrollment_date,$soat_date,$gases_date,$technomechanical_date)
-    {
-        if ($enrollment_date && $enrollment_date < now()) {
-            return true;
-        }
-        if ($soat_date && $soat_date < now()) {
-            return true;
-        }
-        if ($gases_date && $gases_date < now()) {
-            return true;
-        }
-        if ($technomechanical_date && $technomechanical_date < now()) {
-            return true;
-        }
-        return false;
-    }
 @endphp
 
 @section('content')
@@ -73,6 +57,7 @@
     @foreach ($vehicles as $vehicle)
         <input type="hidden" value="{{$vehicle->id}}" class="data-vehicles-id">
         <input type="hidden" value="{{$vehicle->plate}}" class="data-vehicles-plate">
+        <input type="hidden" value="{{$vehicle->brand}}" class="data-vehicles-brand">
         <input type="hidden" value="{{$vehicle->enrollment_date}}" class="data-vehicles-enrollment-date">
         <input type="hidden" value="{{$vehicle->soat_date}}" class="data-vehicles-soat-date">
         <input type="hidden" value="{{$vehicle->gases_date}}" class="data-vehicles-gases-date">
@@ -122,13 +107,13 @@
                                                     <div class="col-xs-6 text-right">
                                                         {{$item->am ? 'AM'.($item->pm ? ' / ' : '') : ''}} {{$item->pm ? 'PM' : ''}}
                                                     </div>
-                                                </div>
-                                                <div class="col-xs-6 text-right list-vehicles">
-                                                    @foreach ($item->vehicles as $vehicle)
-                                                        <span class="label label-default" id="list-vehicle-{{$item->id}}-{{$vehicle->vehicle->id}}">
-                                                            {{$vehicle->vehicle->plate}} - {{$vehicle->vehicle->brand}}
-                                                        </span>
-                                                    @endforeach
+                                                    <div class="col-xs-6 text-right list-vehicles">
+                                                        @foreach ($item->vehicles as $vehicle)
+                                                            <span class="label label-default" id="list-vehicle-{{$item->id}}-{{$vehicle->vehicle->id}}">
+                                                                {{$vehicle->vehicle->plate}} - {{$vehicle->vehicle->brand}}
+                                                            </span>
+                                                        @endforeach
+                                                    </div>
                                                 </div>
                                                 @include('tasking.includes.modals.edit')
                                             </td>
