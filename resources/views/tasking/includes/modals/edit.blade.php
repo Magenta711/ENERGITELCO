@@ -75,13 +75,14 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="vehicles-edit-{{$item->id}}">Vehículos</label>
-                                <select name="vehicles[]" id="vehicles-edit-{{$item->id}}" class="form-control select2 select2-hidden-accessible" multiple="" data-placeholder="Selecciona un vehículos" style="width: 100%;" data-select2-id="6" tabindex="-1" aria-hidden="true">
-                                    {{-- @foreach ($vehicles as $vehicle)
-                                        @php
-                                            $stateVehicle = expirateDate($vehicle->enrollment_date,$vehicle->soat_date,$vehicle->gases_date,$vehicle->technomechanical_date);
-                                        @endphp
-                                        <option {{ selectedVehicles($item->vehicles,) ? 'selected' : '' }}  id="option_vehicle_{{$vehicle->id}}" data-select2-id="{{$vehicle->id}}" value="{{$vehicle->id}}" {{$stateVehicle ? 'disabled' : ''}} {{$stateVehicle ? ' (documentos vencidos)' : ''}}>{{$vehicle->plate}} - {{$vehicle->brand}}</option>
-                                    @endforeach --}}
+                                @php
+                                    $valuesVehicles = array();
+                                    foreach ($item->vehicles as $vehicle){
+                                        $valuesVehicles[] = $vehicle->vehicle->id;
+                                    }
+                                @endphp
+                                <select name="vehicles[]" id="vehicles-edit-{{$item->id}}" class="form-control select2 select2-hidden-accessible" multiple="" data-placeholder="Selecciona un vehículos" style="width: 100%;" data-select2-id="6" tabindex="-1" aria-hidden="true" value="{{implode('-',$valuesVehicles)}}">
+
                                 </select>
                             </div>
                             <div class="col-md-4">

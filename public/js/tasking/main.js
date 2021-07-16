@@ -366,6 +366,9 @@ function llenarSelect2Edit(response) {
         if (idEdit.length > 1 && idEdit[0] == "department") {
             selectEditDep(idEdit[(idEdit.length - 1)],response);
         }
+        if (idEdit.length > 1 && idEdit[0] == "department") {
+            selectEditVehicle(idEdit[(idEdit.length - 1)]);
+        }
     }
 }
 
@@ -517,4 +520,51 @@ function expirateDateVehicle(enrollment_date,soat_date,gases_date,technomechanic
         return true;
     }
     return false;
+}
+
+function selectEditVehicle(id) {
+    console.log(id);
+    let idVehicle = $('.data-vehicles-id');
+    let plate = $('.data-vehicles-plate');
+    let brand = $('.data-vehicles-brand');
+    let enrollmentDate = $('.data-vehicles-enrollment-date');
+    let soatDate = $('.data-vehicles-soat-date');
+    let gasesDate = $('.data-vehicles-gases-date');
+    let technomechanicalDate = $('.data-vehicles-technomechanical-date');
+    let date = $('#date-start-show-'+id).text();
+    console.log(date);
+    let newDate = moment(date);
+    console.log(newDate);
+    data = [];
+    values = $("#vehicles-edit-"+id).attr('value');
+    arrValues = values.split('-').filter(function(el) { return el; });
+    for (let i = 0; i < idVehicle.length; i++) {
+        selected = arrValues.indexOf(idVehicle[i].value) != -1 ? true : false;
+        let newEnrollmentDate = moment(enrollmentDate[i].value);
+        let newSoatDate = moment(soatDate[i].value);
+        let newGasesDate = moment(gasesDate[i].value);
+        let newTechnomechanicalDate = moment(technomechanicalDate[i].value);
+        disabled = expirateDateVehicle(newEnrollmentDate,newSoatDate,newGasesDate,newTechnomechanicalDate,newDate) ? true : false;
+        // console.log('newEnrollmentDate-->',newEnrollmentDate,'newSoatDate-->',newSoatDate,'newGasesDate-->',newGasesDate,'newTechnomechanicalDate-->',newTechnomechanicalDate,'newDate-->',newDate);
+        dateDisable = dateVehicleDisable(newDate,idVehicle[i].value) ? true : false;
+        textDisabled = disabled ? " (documentos vencidos)" : '';
+        if (dateDisable && !selected) {
+            disabled = dateDisable;
+            console.log(disabled);
+            textDisabled = disabled ? " (no disponible)" : '';
+        }
+        data.push({
+            id: idVehicle[i].value,
+            text: plate[i].value+" "+brand[i].value+textDisabled,
+            selected: selected,
+            disabled: disabled
+        });
+    }
+
+    // console.log(data);
+    
+    $("#vehicles-edit-"+id).empty();
+    $('#vehicles-edit-'+id).select2({
+        data: data
+    });
 }

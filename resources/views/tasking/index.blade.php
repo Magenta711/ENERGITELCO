@@ -97,7 +97,7 @@
                                                         </p>
                                                     </div>
                                                     <div class="col-xs-6 text-right">
-                                                        <p class="date-starts">{{$item->date_start}}</p>
+                                                        <p class="date-starts" id="date-start-show-{{$item->id}}">{{$item->date_start}}</p>
                                                     </div>
                                                     <div class="col-xs-6 list-user">
                                                         @foreach ($item->users as $user)
@@ -155,7 +155,7 @@
                                                         </p>
                                                     </div>
                                                     <div class="col-xs-6 text-right">
-                                                        <p class="date-starts">{{$item->date_start}}</p>
+                                                        <p class="date-starts" id="date-start-show-{{$item->id}}">{{$item->date_start}}</p>
                                                     </div>
                                                     <div class="col-xs-6 list-user">
                                                         @foreach ($item->users as $user)
@@ -213,7 +213,7 @@
                                                         </p>
                                                     </div>
                                                     <div class="col-xs-6 text-right">
-                                                        <p class="date-starts">{{$item->date_start}}</p>
+                                                        <p class="date-starts" id="date-start-show-{{$item->id}}">{{$item->date_start}}</p>
                                                     </div>
                                                     <div class="col-xs-6 list-user">
                                                         @foreach ($item->users as $user)

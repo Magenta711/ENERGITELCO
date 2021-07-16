@@ -63,7 +63,6 @@ class taskingController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
         $request->validate([
             'date_start' => ['required','date'],
             'department' => ['required'],
@@ -116,28 +115,28 @@ class taskingController extends Controller
                 }
             }
         }
-        if (isset($request->equipment)) {
-            foreach ($request->equipment as $key => $value) {
-                $id->consumables()->create([
-                    'inventaryble_type' => 'App\Models\project\Mintic\inventory\invMinticEquipment',
-                    'inventaryble_id' => $key,
-                    'preamount' => 1,
-                    'amount' => 0,
-                    'status' => 0
-                ]);
-            }
-        }
-        if (isset($request->consumable)) {
-            foreach ($request->consumable as $key => $value) {
-                $id->consumables()->create([
-                    'inventaryble_type' => 'App\Models\project\Mintic\inventory\invMinticConsumable',
-                    'inventaryble_id' => $key,
-                    'preamount' => $request->amount[$key],
-                    'amount' => 0,
-                    'status' => 0
-                ]);
-            }
-        }
+        // if (isset($request->equipment)) {
+        //     foreach ($request->equipment as $key => $value) {
+        //         $id->consumables()->create([
+        //             'inventaryble_type' => 'App\Models\project\Mintic\inventory\invMinticEquipment',
+        //             'inventaryble_id' => $key,
+        //             'preamount' => 1,
+        //             'amount' => 0,
+        //             'status' => 0
+        //         ]);
+        //     }
+        // }
+        // if (isset($request->consumable)) {
+        //     foreach ($request->consumable as $key => $value) {
+        //         $id->consumables()->create([
+        //             'inventaryble_type' => 'App\Models\project\Mintic\inventory\invMinticConsumable',
+        //             'inventaryble_id' => $key,
+        //             'preamount' => $request->amount[$key],
+        //             'amount' => 0,
+        //             'status' => 0
+        //         ]);
+        //     }
+        // }
 
         return redirect()->route('tasking')->with('success','Se creado la programación correctamente');
     }
