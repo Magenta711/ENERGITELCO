@@ -201,6 +201,14 @@ function resetUsers() {
         }
     }
 }
+function resetEditUsers(id) {
+    let usersOption =  $('#users-edit-'+id).children();
+    for (let i = 0; i < usersOption.length; i++) {
+        if (usersOption[i].innerText.indexOf('(') != -1) {
+            $('#option_user-edit-'+id+'-'+usersOption[i].value).prop('disabled',false).text(usersOption[i].innerText.split(' (')[0]);
+        }
+    }
+}
 
 function selectDep(response) {
     data = [];
@@ -364,10 +372,17 @@ function llenarSelect2Edit(response) {
     for (let i = 0; i < elements.length; i++) {
         idEdit = elements[i].id.split('-');
         if (idEdit.length > 1 && idEdit[0] == "department") {
-            selectEditDep(idEdit[(idEdit.length - 1)],response);
-        }
-        if (idEdit.length > 1 && idEdit[0] == "department") {
-            selectEditVehicle(idEdit[(idEdit.length - 1)]);
+            let id = idEdit[(idEdit.length - 1)];
+            selectEditDep(id,response);
+
+            $('#date_start-edit-'+id).blur(function () {
+                id = this.id.split('-')[(this.id.split('-').length - 1)];
+                selectEditVehicle(id,this.value);
+                selectEditUsers(id,this.value);
+            });
+            let date = $('#date-start-show-'+id).text();
+            selectEditVehicle(id,date);
+            selectEditUsers(id,date);
         }
     }
 }
@@ -522,8 +537,7 @@ function expirateDateVehicle(enrollment_date,soat_date,gases_date,technomechanic
     return false;
 }
 
-function selectEditVehicle(id) {
-    console.log(id);
+function selectEditVehicle(id,date) {
     let idVehicle = $('.data-vehicles-id');
     let plate = $('.data-vehicles-plate');
     let brand = $('.data-vehicles-brand');
@@ -531,10 +545,8 @@ function selectEditVehicle(id) {
     let soatDate = $('.data-vehicles-soat-date');
     let gasesDate = $('.data-vehicles-gases-date');
     let technomechanicalDate = $('.data-vehicles-technomechanical-date');
-    let date = $('#date-start-show-'+id).text();
-    console.log(date);
+    
     let newDate = moment(date);
-    console.log(newDate);
     data = [];
     values = $("#vehicles-edit-"+id).attr('value');
     arrValues = values.split('-').filter(function(el) { return el; });
@@ -545,12 +557,10 @@ function selectEditVehicle(id) {
         let newGasesDate = moment(gasesDate[i].value);
         let newTechnomechanicalDate = moment(technomechanicalDate[i].value);
         disabled = expirateDateVehicle(newEnrollmentDate,newSoatDate,newGasesDate,newTechnomechanicalDate,newDate) ? true : false;
-        // console.log('newEnrollmentDate-->',newEnrollmentDate,'newSoatDate-->',newSoatDate,'newGasesDate-->',newGasesDate,'newTechnomechanicalDate-->',newTechnomechanicalDate,'newDate-->',newDate);
         dateDisable = dateVehicleDisable(newDate,idVehicle[i].value) ? true : false;
         textDisabled = disabled ? " (documentos vencidos)" : '';
         if (dateDisable && !selected) {
             disabled = dateDisable;
-            console.log(disabled);
             textDisabled = disabled ? " (no disponible)" : '';
         }
         data.push({
@@ -560,11 +570,44 @@ function selectEditVehicle(id) {
             disabled: disabled
         });
     }
-
-    // console.log(data);
     
     $("#vehicles-edit-"+id).empty();
     $('#vehicles-edit-'+id).select2({
         data: data
     });
+}
+
+function selectEditUsers(id,date) {
+    resetEditUsers(id);
+    newDate = moment(date);
+    dates = $('.date-starts');
+    for (let i = 0; i < dates.length; i++) {
+        let newDates = moment(dates[i].innerText);
+        if (newDate.format('YYYY-MM-DD') == newDates.format('YYYY-MM-DD')) {
+            let eleUsers = $(dates[i]).parent().parent().children('.list-user').children();
+            for (let j = 0; j < eleUsers.length; j++) {
+                let idUser = eleUsers[j].id.split('-')[(eleUsers[j].id.split('-').length - 1)];
+                $('#option_user-edit-'+id+'-'+idUser).prop('disabled',true).text(eleUsers[j].innerText+' (no disponible)');
+            }
+        }
+    }
+
+    let datesStart = $('.permission-dateStart');
+    let datesEnd = $('.permission-dateEnd');
+    let timeStart = $('.permission-timeStart');
+    let timeEnd = $('.permission-timeEnd');
+    let idUser = $('.permission-idUser');
+    let type = $('.permission-type');
+    let status = $('.permission-status');
+    for (let i = 0; i < datesStart.length; i++) {
+        let newDatesStart = moment(datesStart[i].value);
+        let newDatesEnd = moment(datesEnd[i].value);
+        if (newDate.format('YYYY-MM-DD') >= newDatesStart.format('YYYY-MM-DD') && newDate.format('YYYY-MM-DD') <= newDatesEnd.format('YYYY-MM-DD')) {
+            if (status[i].value != 'No aprobado' && $('#option_user_'+idUser[i].value).text().indexOf(' (') == -1) {
+                let state = status[i].value == 'Aprobado' ? true : false;
+                let textState = status[i].value == 'Sin aprobar' ? ' sin aprobar' : '';
+                $('#option_user-edit-'+id+'-'+idUser[i].value).prop('disabled',state).text($('#option_user_'+idUser[i].value).text()+' ('+type[i].value+textState+')');
+            }
+        }
+    }
 }
