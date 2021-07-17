@@ -17,9 +17,9 @@
             <div class="box-header">
                 <h3 class="box-title">Lista de solicitudes de permiso laboral o notificaciones de incapacidades médicas</h3>
                 <div class="box-tools">
-                    {{-- @can($text_permission_create) --}}
+                    @can('Digitar formulario de solicitud de permiso laboral o notificación de incapacidad')
                             <a href="{{route('work_permits_notifications_medical_incapacity_create')}}" class="btn btn-sm btn-success">Crear</a>
-                    {{-- @endcan --}}
+                    @endcan
                 </div>
             </div>
             <div class="box-body">
@@ -50,13 +50,19 @@
                                     <small class="label {{($medical_incapacity->estado == 'Sin aprobar') ? 'bg-green' : (($medical_incapacity->estado == 'Aprobado') ? 'bg-blue' : 'bg-red') }}">{{$medical_incapacity->estado}}</small>
                                 </td>
                                 <td>
+                                    @if (
+                                        auth()->user()->hasPermissionTo('Aprobar solicitud de permiso laboral o notificación de incapacidad') ||
+                                        auth()->user()->hasPermissionTo('Consultar solicitud de permisos laborales o notificaciones de incapacidad médica')
+                                    )
+                                        
+                                    @endif
                                     <a href="{{route('work_permits_notifications_medical_incapacity_show',$medical_incapacity->id)}}" class="btn btn-sm btn-success">Ver</a>
                                     @if ($medical_incapacity->estado == 'Aprobado')
-                                        {{-- @can($text_permission) --}}
+                                        @can('Descargar PDF de solicitud de permisos laborales o notificaciones de incapacidad médica')
                                             <a href="{{route("work_permits_notifications_medical_incapacity_download",$medical_incapacity->id)}}" class="btn btn-warning btn-sm">Descargar</a>
-                                        {{-- @endcan --}}
+                                        @endcan
                                     @endif
-                                    {{-- @can($text_permission_delete) --}}
+                                    @can('Eliminar formato de solicitud de permisos laborales o notificaciones de incapacidad')
                                         <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete_{{$medical_incapacity->id}}">Eliminar</button>
                                         <div class="modal fade" id="delete_{{$medical_incapacity->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-md">
@@ -81,7 +87,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    {{-- @endcan --}}
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

@@ -888,6 +888,30 @@
                         {{($trabajo->observaciones) ? $trabajo->observaciones : ' '}}
                     </td>
                 </tr>
+                <tr>
+                    <td colspan="2">Firmado electrónicamente por el responsable del trabajo o líder</td>
+                    <td></td>
+                    <td colspan="2">Firmado electrónicamente por el auditor o coordinador</td>
+                </tr>
+                <tr>
+                    <td>Nombre</td>
+                    <td>{{$trabajo->responsableAcargo->name}}</td>
+                    <td></td>
+                    <td>Nombre</td>
+                    <td>{{$trabajo->coordinadorAcargo->name}}</td>
+                </tr>
+                <tr>
+                    <td>Cédula</td>
+                    <td>{{$trabajo->responsableAcargo->cedula}}</td>
+                    <td></td>
+                    <td>Cédula</td>
+                    <td>{{$trabajo->coordinadorAcargo->cedula}}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Solicitud elaborada inicialmente y firmada electrónicamente por <strong>{{$trabajo->responsableAcargo->name}}</strong>, en rol de {{$trabajo->responsableAcargo->getRoleNames()[0] }} habilitado por Energitelco, con conocimiento de funciones y contenido del presente documento. Se cumple Ley 527 de 1999 y Decreto 19 de 2012</td>
+                    <td></td>
+                    <td colspan="2">Solicitud aprobada y firmada electrónicamente por <strong>{{$trabajo->coordinadorAcargo->name}}</strong> en rol de {{$trabajo->coordinadorAcargo->getRoleNames()[0] }} Energitelco, con conocimiento de funciones y contenido del presente documento. Se cumple Ley 527 de 1999 y Decreto 19 de 2012</td>
+                </tr>
                 @if ($trabajo->created_at > '2020-12-14 11:00:00') 
                 <tr>
                     <th>
@@ -956,30 +980,6 @@
                     </td>
                 </tr>
                 @endif
-                <tr>
-                    <td colspan="2">Firmado electrónicamente por el responsable del trabajo o líder</td>
-                    <td></td>
-                    <td colspan="2">Firmado electrónicamente por el auditor o coordinador</td>
-                </tr>
-                <tr>
-                    <td>Nombre</td>
-                    <td>{{$trabajo->responsableAcargo->name}}</td>
-                    <td></td>
-                    <td>Nombre</td>
-                    <td>{{$trabajo->coordinadorAcargo->name}}</td>
-                </tr>
-                <tr>
-                    <td>Cédula</td>
-                    <td>{{$trabajo->responsableAcargo->cedula}}</td>
-                    <td></td>
-                    <td>Cédula</td>
-                    <td>{{$trabajo->coordinadorAcargo->cedula}}</td>
-                </tr>
-                <tr>
-                    <td colspan="2">Solicitud elaborada inicialmente y firmada electrónicamente por <strong>{{$trabajo->responsableAcargo->name}}</strong>, en rol de {{$trabajo->responsableAcargo->getRoleNames()[0] }} habilitado por Energitelco, con conocimiento de funciones y contenido del presente documento. Se cumple Ley 527 de 1999 y Decreto 19 de 2012</td>
-                    <td></td>
-                    <td colspan="2">Solicitud aprobada y firmada electrónicamente por <strong>{{$trabajo->coordinadorAcargo->name}}</strong> en rol de {{$trabajo->coordinadorAcargo->getRoleNames()[0] }} Energitelco, con conocimiento de funciones y contenido del presente documento. Se cumple Ley 527 de 1999 y Decreto 19 de 2012</td>
-                </tr>
             </tbody>
         </table>
         <p>SEÑOR FUNCIONARIO EMISOR DEL PRESENTE PERMISO DE TRABAJO, TENGA PRESENTE QUE ES OBLIGATORIO ANTES DE INICIAR ACTIVIDADES, GARANTIZAR EL CONOCIMIENTO Y LAS RESTRICCIONES DEL PRESENTE PERMISO A LOS DEMÁS COMPAÑEROS INVOLUCRADOS EN LA PRESENTE ACTIVIDAD DE FORMA DIGITAL MEDIANTE EL MAIL ENVIADO A CADA UNO DE LOS FUNCIONARIOS INVOLUCRADOS EN LA PRESENTE ACTIVIDAD Y EN CASO DE QUE EL TRABAJO SE REALICE EN SITIOS DONDE INTERVIENEN TERCEROS AJENOS A ENERGITELCO SAS, TENGA PRESENTE QUE ANTES DE INICIAR LABORES, OBLIGATORIAMENTE DEBE PROCEDER A IMPRIMIR FÍSICAMENTE EL PRESENTE DOCUMENTO Y PUBLICARLO EN LOS LÍMITES DE LA ZONA DE TRABAJO O DE LA DEMARCACIÓN Y CERRAMIENTO QUE HIZO DE SU ZONA DE TRABAJO.</p>

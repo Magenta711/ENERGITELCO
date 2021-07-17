@@ -17,9 +17,9 @@
             <div class="box-header">
                 <h3 class="box-title">Lista de inpecciones de equipos contra caídas</h3>
                 <div class="box-tools">
-                    {{-- @can($text_permission_create) --}}
-                            <a href="{{route('checklist_computer_maintenance_create')}}" class="btn btn-sm btn-success">Crear</a>
-                    {{-- @endcan --}}
+                    @can('Digitar formulario de lista de verificación para el mantenimiento de computadores')
+                        <a href="{{route('checklist_computer_maintenance_create')}}" class="btn btn-sm btn-success">Crear</a>
+                    @endcan
                 </div>
             </div>
             <div class="box-body">
@@ -48,13 +48,18 @@
                                     <small class="label {{($checklist_computer->estado == 'Sin aprobar') ? 'bg-green' : (($checklist_computer->estado == 'Aprobado') ? 'bg-blue' : 'bg-red') }}">{{$checklist_computer->estado}}</small>
                                 </td>
                                 <td>
-                                    <a href="{{route('checklist_computer_maintenance_show',$checklist_computer->id)}}" class="btn btn-sm btn-success">Ver</a>
-                                    @if ($checklist_computer->estado == 'Aprobado')
-                                        {{-- @can($text_permission) --}}
-                                            <a href="{{route("checklist_computer_maintenance_download",$checklist_computer->id)}}" class="btn btn-warning btn-sm">Descargar</a>
-                                        {{-- @endcan --}}
+                                    @if (
+                                        auth()->user()->hasPermissionTo('Aprobar solicitud de lista de verificación para el mantenimiento de computadores') ||
+                                        auth()->user()->hasPermissionTo('Consultar listas de verificación para el mantenimiento de los computadores')
+                                    )
+                                        <a href="{{route('checklist_computer_maintenance_show',$checklist_computer->id)}}" class="btn btn-sm btn-success">Ver</a>
                                     @endif
-                                    {{-- @can($text_permission_delete) --}}
+                                    @if ($checklist_computer->estado == 'Aprobado')
+                                        @can('Descargar PDF de listas de verificación para el mantenimiento de los computadores')
+                                            <a href="{{route("checklist_computer_maintenance_download",$checklist_computer->id)}}" class="btn btn-warning btn-sm">Descargar</a>
+                                        @endcan
+                                    @endif
+                                    @can('Eliminar formato de listas de verificación para el mantenimiento de los computadores')
                                         <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete_{{$checklist_computer->id}}">Eliminar</button>
                                         <div class="modal fade" id="delete_{{$checklist_computer->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-md">
@@ -79,7 +84,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    {{-- @endcan --}}
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

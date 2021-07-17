@@ -60,7 +60,7 @@
                                             @can('CCJL Editar rentas')
                                                 <a href="{{ route('CCJL_rents_edit',$item->id) }}" class="btn btn-sm btn-primary">Editar</a>
                                             @endcan
-                                            @can('CCJL Editar rentas')
+                                            @can('CCJL Eliminar rentas')
                                                 <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete_{{$item->id}}">Eliminar</button>
                                                 <div class="modal fade" id="delete_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-md">

@@ -8,18 +8,16 @@
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
         <li><a href="#"> Gestión humana</a></li>
         <li><a href="#"> Actas</a></li>
-        <li class="active">Crear actas</li>
+        <li class="active">Editar actas</li>
     </ol>
 </section>
 <section class="content">
     @include('includes.alerts')
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Crear acta</h3>
+                <h3 class="box-title">Editar acta</h3>
                 <div class="box-tools">
-                    {{-- @can($text_permission_create) --}}
-                        <a href="{{route('proceeding')}}" class="btn btn-sm btn-primary">Volver</a>
-                    {{-- @endcan --}}
+                    <a href="{{route('proceeding')}}" class="btn btn-sm btn-primary">Volver</a>
                 </div>
             </div>
             <div class="hide">

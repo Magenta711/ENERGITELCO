@@ -22,6 +22,9 @@ class taskingController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('verified');
+        $this->middleware('permission:Lista de programaciones en frente de trabajo|Ver programaciones en frente de trabajo|Crear programacion en frente de trabajo|Editar programaciones en frente de trabajo', ['only' => ['index']]);
+        $this->middleware('permission:Crear programacion en frente de trabajo', ['only' => ['store']]);
+        $this->middleware('permission:Editar programaciones en frente de trabajo', ['only' => ['update']]);
     }
     /**
      * Display a listing of the resource.
@@ -219,23 +222,23 @@ class taskingController extends Controller
                 }
             }
         }
-        if (isset($request->equipment)) {
-            foreach ($request->equipment as $key => $value) {
+        // if (isset($request->equipment)) {
+        //     foreach ($request->equipment as $key => $value) {
                 // $inv = InvUser::where('user_id',$request->inv_user)->where('inventaryble_type','App\Models\project\Mintic\inventory\invMinticEquipment')->where('inventaryble_id',$key)->first();
-                $detail = taskDetailConsumable::where('inventaryble_type','App\Models\project\Mintic\inventory\invMinticEquipment')->where('inventaryble_id', $key)->where('task_id',$id->id)->first();
-                if ($detail) {
-                    $detail->update([
-                        'preamount' => 1
-                    ]);
-                }else {
-                    $id->consumables()->create([
-                        'inventaryble_type' => 'App\Models\project\Mintic\inventory\invMinticEquipment',
-                        'inventaryble_id' => $key,
-                        'preamount' => 1,
-                        'amount' => 0,
-                        'status' => 0
-                    ]);
-                }
+                // $detail = taskDetailConsumable::where('inventaryble_type','App\Models\project\Mintic\inventory\invMinticEquipment')->where('inventaryble_id', $key)->where('task_id',$id->id)->first();
+                // if ($detail) {
+                //     $detail->update([
+                //         'preamount' => 1
+                //     ]);
+                // }else {
+                //     $id->consumables()->create([
+                //         'inventaryble_type' => 'App\Models\project\Mintic\inventory\invMinticEquipment',
+                //         'inventaryble_id' => $key,
+                //         'preamount' => 1,
+                //         'amount' => 0,
+                //         'status' => 0
+                //     ]);
+                // }
                 // if ($inv) {
                 //     $inv->update([
                 //         'tickets' => 1,
@@ -255,25 +258,25 @@ class taskingController extends Controller
                 // invMinticEquipment::find($key)->update([
                 //     'status' => 2,
                 // ]);
-            }
-        }
-        if (isset($request->consumable)) {
-            foreach ($request->consumable as $key => $value) {
+        //     }
+        // }
+        // if (isset($request->consumable)) {
+        //     foreach ($request->consumable as $key => $value) {
                 // $inv = InvUser::where('user_id',$request->inv_user)->where('inventaryble_type','App\Models\project\Mintic\inventory\invMinticConsumable')->where('inventaryble_id',$request->consumable[$key])->first();
-                $detail = taskDetailConsumable::where('inventaryble_type','App\Models\project\Mintic\inventory\invMinticConsumable')->where('inventaryble_id', $key)->where('task_id',$id->id)->first();
-                if ($detail) {
-                    $detail->update([
-                        'preamount' => $request->amount[$key] + $detail->preamount
-                    ]);
-                }else {
-                    $id->consumables()->create([
-                        'inventaryble_type' => 'App\Models\project\Mintic\inventory\invMinticConsumable',
-                        'inventaryble_id' => $key,
-                        'preamount' => $request->amount[$key],
-                        'amount' => 0,
-                        'status' => 0
-                    ]);
-                }
+                // $detail = taskDetailConsumable::where('inventaryble_type','App\Models\project\Mintic\inventory\invMinticConsumable')->where('inventaryble_id', $key)->where('task_id',$id->id)->first();
+                // if ($detail) {
+                //     $detail->update([
+                //         'preamount' => $request->amount[$key] + $detail->preamount
+                //     ]);
+                // }else {
+                //     $id->consumables()->create([
+                //         'inventaryble_type' => 'App\Models\project\Mintic\inventory\invMinticConsumable',
+                //         'inventaryble_id' => $key,
+                //         'preamount' => $request->amount[$key],
+                //         'amount' => 0,
+                //         'status' => 0
+                //     ]);
+                // }
                 
                 // if ($inv) {
                 //     $inv->update([
@@ -297,8 +300,8 @@ class taskingController extends Controller
                 //     'departures' => $request->amount[$key] + $consumable->departures,
                 //     'status' => $rest == 0 ? 0 : 1,
                 // ]);
-            }
-        }
+        //     }
+        // }
 
         return redirect()->route('tasking')->with('success','Se editado la programación correctamente');
     }
@@ -361,89 +364,89 @@ class taskingController extends Controller
 
     public function addConsumablesUser(Request $request,$id)
     {
-        $id->update([
-            'user_add_inv' => auth()->id()
-        ]);
-        if (isset($request->equipment)) {
-            foreach ($request->equipment as $key => $value) {
-                $inv = InvUser::where('user_id',$request->inv_user)->where('inventaryble_type','App\Models\project\Mintic\inventory\invMinticEquipment')->where('inventaryble_id',$key)->first();
-                $detail = taskDetailConsumable::where('inventaryble_type','App\Models\project\Mintic\inventory\invMinticEquipment')->where('inventaryble_id', $key)->where('task_id',$id->id)->first();
-                if ($detail) {
-                    $detail->update([
-                        'preamount' => 1
-                    ]);
-                }else {
-                    $id->consumables()->create([
-                        'inventaryble_type' => 'App\Models\project\Mintic\inventory\invMinticEquipment',
-                        'inventaryble_id' => $key,
-                        'preamount' => 1,
-                        'amount' => 0,
-                        'status' => 0
-                    ]);
-                }
-                if ($inv) {
-                    $inv->update([
-                        'tickets' => 1,
-                        'departures' => 0,
-                        'stock' => 1
-                    ]);
-                }else {
-                    InvUser::create([
-                        'user_id' => $request->inv_user,
-                        'inventaryble_id' => $key,
-                        'inventaryble_type' => 'App\Models\project\Mintic\inventory\invMinticEquipment',
-                        'tickets' => 1,
-                        'departures' => 0,
-                        'stock' => 1
-                    ]);
-                }
-                invMinticEquipment::find($key)->update([
-                    'status' => 2,
-                ]);
-            }
-        }
-        if (isset($request->consumable)) {
-            foreach ($request->consumable as $key => $value) {
-                $inv = InvUser::where('user_id',$request->inv_user)->where('inventaryble_type','App\Models\project\Mintic\inventory\invMinticConsumable')->where('inventaryble_id',$request->consumable[$key])->first();
-                $detail = taskDetailConsumable::where('inventaryble_type','App\Models\project\Mintic\inventory\invMinticConsumable')->where('inventaryble_id', $key)->where('task_id',$id->id)->first();
-                if ($detail) {
-                    $detail->update([
-                        'preamount' => $detail->preamount
-                    ]);
-                }else {
-                    $id->consumables()->create([
-                        'inventaryble_type' => 'App\Models\project\Mintic\inventory\invMinticConsumable',
-                        'inventaryble_id' => $key,
-                        'preamount' => $request->amount[$key],
-                        'amount' => 0,
-                        'status' => 0
-                    ]);
-                }
+        // $id->update([
+        //     'user_add_inv' => auth()->id()
+        // ]);
+        // if (isset($request->equipment)) {
+        //     foreach ($request->equipment as $key => $value) {
+        //         $inv = InvUser::where('user_id',$request->inv_user)->where('inventaryble_type','App\Models\project\Mintic\inventory\invMinticEquipment')->where('inventaryble_id',$key)->first();
+        //         $detail = taskDetailConsumable::where('inventaryble_type','App\Models\project\Mintic\inventory\invMinticEquipment')->where('inventaryble_id', $key)->where('task_id',$id->id)->first();
+        //         if ($detail) {
+        //             $detail->update([
+        //                 'preamount' => 1
+        //             ]);
+        //         }else {
+        //             $id->consumables()->create([
+        //                 'inventaryble_type' => 'App\Models\project\Mintic\inventory\invMinticEquipment',
+        //                 'inventaryble_id' => $key,
+        //                 'preamount' => 1,
+        //                 'amount' => 0,
+        //                 'status' => 0
+        //             ]);
+        //         }
+        //         if ($inv) {
+        //             $inv->update([
+        //                 'tickets' => 1,
+        //                 'departures' => 0,
+        //                 'stock' => 1
+        //             ]);
+        //         }else {
+        //             InvUser::create([
+        //                 'user_id' => $request->inv_user,
+        //                 'inventaryble_id' => $key,
+        //                 'inventaryble_type' => 'App\Models\project\Mintic\inventory\invMinticEquipment',
+        //                 'tickets' => 1,
+        //                 'departures' => 0,
+        //                 'stock' => 1
+        //             ]);
+        //         }
+        //         invMinticEquipment::find($key)->update([
+        //             'status' => 2,
+        //         ]);
+        //     }
+        // }
+        // if (isset($request->consumable)) {
+        //     foreach ($request->consumable as $key => $value) {
+        //         $inv = InvUser::where('user_id',$request->inv_user)->where('inventaryble_type','App\Models\project\Mintic\inventory\invMinticConsumable')->where('inventaryble_id',$request->consumable[$key])->first();
+        //         $detail = taskDetailConsumable::where('inventaryble_type','App\Models\project\Mintic\inventory\invMinticConsumable')->where('inventaryble_id', $key)->where('task_id',$id->id)->first();
+        //         if ($detail) {
+        //             $detail->update([
+        //                 'preamount' => $detail->preamount
+        //             ]);
+        //         }else {
+        //             $id->consumables()->create([
+        //                 'inventaryble_type' => 'App\Models\project\Mintic\inventory\invMinticConsumable',
+        //                 'inventaryble_id' => $key,
+        //                 'preamount' => $request->amount[$key],
+        //                 'amount' => 0,
+        //                 'status' => 0
+        //             ]);
+        //         }
                 
-                if ($inv) {
-                    $inv->update([
-                        'tickets' => $request->amount[$key] + $inv->tickets,
-                        'stock' => $request->amount[$key] + $inv->stock
-                    ]);
-                }else {
-                    InvUser::create([
-                        'user_id' => $request->inv_user,
-                        'inventaryble_id' => $key,
-                        'inventaryble_type' => 'App\Models\project\Mintic\inventory\invMinticConsumable',
-                        'tickets' => $request->amount[$key],
-                        'departures' => 0,
-                        'stock' => $request->amount[$key],
-                    ]);
-                }
-                $consumable = invMinticConsumable::find($key);
-                $rest = $consumable->stock - $request->amount[$key];
-                $consumable->update([
-                    'stock' => $rest,
-                    'departures' => $request->amount[$key] + $consumable->departures,
-                    'status' => $rest == 0 ? 0 : 1,
-                ]);
-            }
-        }
+        //         if ($inv) {
+        //             $inv->update([
+        //                 'tickets' => $request->amount[$key] + $inv->tickets,
+        //                 'stock' => $request->amount[$key] + $inv->stock
+        //             ]);
+        //         }else {
+        //             InvUser::create([
+        //                 'user_id' => $request->inv_user,
+        //                 'inventaryble_id' => $key,
+        //                 'inventaryble_type' => 'App\Models\project\Mintic\inventory\invMinticConsumable',
+        //                 'tickets' => $request->amount[$key],
+        //                 'departures' => 0,
+        //                 'stock' => $request->amount[$key],
+        //             ]);
+        //         }
+        //         $consumable = invMinticConsumable::find($key);
+        //         $rest = $consumable->stock - $request->amount[$key];
+        //         $consumable->update([
+        //             'stock' => $rest,
+        //             'departures' => $request->amount[$key] + $consumable->departures,
+        //             'status' => $rest == 0 ? 0 : 1,
+        //         ]);
+        //     }
+        // }
         return redirect()->route('tasking')->with('success','Se asigno los consumibles a un tecnico');
     }
 }

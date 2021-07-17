@@ -28,6 +28,7 @@ class ccjlRentController extends Controller
         $this->middleware('permission:CCJL Ver rentas|CCJL Recordar pago de rentas|CCJL Pagar rentas',['only' => ['show']]);
         $this->middleware('permission:CCJL Pagar rentas',['only' => ['pay','save']]);
         $this->middleware('permission:CCJL Recordar pago de rentas',['only' => ['remember']]);
+        $this->middleware('permission:CCJL Eliminar rentas',['only' => ['remember']]);
     }
     /**
      * Display a listing of the resource.

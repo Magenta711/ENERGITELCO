@@ -24,6 +24,7 @@ class reviewAssignmentTools extends Controller
         $this->middleware('permission:Consultar revisión y asignación de herramientas',['only' => ['show']]);
         $this->middleware('permission:Descargar PDF de revisión y asignación de herramientas',['only' => ['download']]);
         $this->middleware('permission:Digitar formulario de Revisión y asignación de herramientas',['only' => ['create','store']]);
+        $this->middleware('permission:Editar de Revisión y asignación de herramientas',['only' => ['edit','update']]);
         $this->middleware('permission:Eliminar formato de revisión y asignación de herramientas',['only' => ['destroy']]);
         $this->middleware('permission:Aprobar solicitud de Revisión y asignación de herramientas',['only' => ['approve']]);
         $this->message = SystemMessages::where('state',1)->where('name','Envio de formatos')->first();

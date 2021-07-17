@@ -23,7 +23,7 @@ class formController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('verified');
-        $this->middleware('permission:Lista de formularios', ['only' => ['index']]);
+        $this->middleware('permission:Lista de formularios|Ver formularios|Crear formularios|Editar formularios|Eliminar formularios|Ver respuestas de formularios', ['only' => ['index']]);
         $this->middleware('permission:Ver formularios', ['only' => ['show']]);
         $this->middleware('permission:Crear formularios', ['only' => ['create','store']]);
         $this->middleware('permission:Editar formularios', ['only' => ['edit','update']]);

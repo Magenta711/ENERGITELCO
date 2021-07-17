@@ -17,9 +17,7 @@
             <div class="box-header">
                 <h3 class="box-title">Crear acta</h3>
                 <div class="box-tools">
-                    {{-- @can($text_permission_create) --}}
-                        <a href="{{route('proceeding')}}" class="btn btn-sm btn-primary">Volver</a>
-                    {{-- @endcan --}}
+                    <a href="{{route('proceeding')}}" class="btn btn-sm btn-primary">Volver</a>
                 </div>
             </div>
             <div class="hide">

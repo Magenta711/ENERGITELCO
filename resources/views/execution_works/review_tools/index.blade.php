@@ -16,9 +16,9 @@
             <div class="box-header">
                 <h3 class="box-title">Lista de revisión y asignación de herramientas</h3>
                 <div class="box-tools">
-                    {{-- @can($text_permission_create) --}}
-                            <a href="{{route('review_assignment_tools_create')}}" class="btn btn-sm btn-success">Crear</a>
-                    {{-- @endcan --}}
+                    @can('Digitar formulario de Revisión y asignación de herramientas')
+                        <a href="{{route('review_assignment_tools_create')}}" class="btn btn-sm btn-success">Crear</a>
+                    @endcan
                 </div>
             </div>
             <div class="box-body">
@@ -47,14 +47,21 @@
                                     <small class="label {{($review_tool->estado == 'Sin aprobar') ? 'bg-green' : (($review_tool->estado == 'Aprobado') ? 'bg-blue' : 'bg-red') }}">{{$review_tool->estado}}</small>
                                 </td>
                                 <td>
-                                    <a href="{{route('review_assignment_tools_show',$review_tool->id)}}" class="btn btn-sm btn-success">Ver</a>
-                                    <a href="{{route('review_assignment_tools_edit',$review_tool->id)}}" class="btn btn-sm btn-primary">Editar</a>
-                                    @if ($review_tool->estado == 'Aprobado')
-                                        {{-- @can($text_permission) --}}
-                                            <a href="{{route("review_assignment_tools_download",$review_tool->id)}}" class="btn btn-warning btn-sm">Descargar</a>
-                                        {{-- @endcan --}}
+                                    @if (
+                                        auth()->user()->hasPermissionTo('Aprobar solicitud de Revisión y asignación de herramientas') ||
+                                        auth()->user()->hasPermissionTo('Consultar revisión y asignación de herramientas')
+                                    )
+                                        <a href="{{route('review_assignment_tools_show',$review_tool->id)}}" class="btn btn-sm btn-success">Ver</a>
                                     @endif
-                                    {{-- @can($text_permission_delete) --}}
+                                    @can('Editar de Revisión y asignación de herramientas')
+                                        <a href="{{route('review_assignment_tools_edit',$review_tool->id)}}" class="btn btn-sm btn-primary">Editar</a>
+                                    @endcan
+                                    @if ($review_tool->estado == 'Aprobado')
+                                        @can('Descargar PDF de revisión y asignación de herramientas')
+                                            <a href="{{route("review_assignment_tools_download",$review_tool->id)}}" class="btn btn-warning btn-sm">Descargar</a>
+                                        @endcan
+                                    @endif
+                                    @can('Eliminar formato de revisión y asignación de herramientas')
                                         <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete_{{$review_tool->id}}">Eliminar</button>
                                         <div class="modal fade" id="delete_{{$review_tool->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-md">
@@ -79,7 +86,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    {{-- @endcan --}}
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

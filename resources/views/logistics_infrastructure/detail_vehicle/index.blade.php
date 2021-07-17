@@ -15,11 +15,11 @@
     @include('includes.alerts')
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Lista de inpecciones de equipos contra caídas</h3>
+                <h3 class="box-title">Lista de inpecciones detallada de vehículos</h3>
                 <div class="box-tools">
-                    {{-- @can($text_permission_create) --}}
-                            <a href="{{route('detailed_inspection_vehicles_create')}}" class="btn btn-sm btn-success">Crear</a>
-                    {{-- @endcan --}}
+                    @can('Digitar formulario de inspección detallada de vehículos')
+                        <a href="{{route('detailed_inspection_vehicles_create')}}" class="btn btn-sm btn-success">Crear</a>
+                    @endcan
                 </div>
             </div>
             <div class="box-body">
@@ -48,13 +48,18 @@
                                     <small class="label {{($detail_vehicle->estado == 'Sin aprobar') ? 'bg-green' : (($detail_vehicle->estado == 'Aprobado') ? 'bg-blue' : 'bg-red') }}">{{$detail_vehicle->estado}}</small>
                                 </td>
                                 <td>
-                                    <a href="{{route('detailed_inspection_vehicles_show',$detail_vehicle->id)}}" class="btn btn-sm btn-success">Ver</a>
-                                    @if ($detail_vehicle->estado == 'Aprobado')
-                                        {{-- @can($text_permission) --}}
-                                            <a href="{{route("detailed_inspection_vehicles_download",$detail_vehicle->id)}}" class="btn btn-warning btn-sm">Descargar</a>
-                                        {{-- @endcan --}}
+                                    @if (
+                                        auth()->user()->hasPermissionTo('Aprobar solicitud de Inspección detallada de vehículos') ||
+                                        auth()->user()->hasPermissionTo('Consultar inspecciones detalladas de vehículos')
+                                    )
+                                        <a href="{{route('detailed_inspection_vehicles_show',$detail_vehicle->id)}}" class="btn btn-sm btn-success">Ver</a>
                                     @endif
-                                    {{-- @can($text_permission_delete) --}}
+                                    @if ($detail_vehicle->estado == 'Aprobado')
+                                        @can('Descargar PDF de inspecciones detalladas de vehículos')
+                                            <a href="{{route("detailed_inspection_vehicles_download",$detail_vehicle->id)}}" class="btn btn-warning btn-sm">Descargar</a>
+                                        @endcan
+                                    @endif
+                                    @can('Eliminar formato de inspecciones detalladas de vehículos')
                                         <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete_{{$detail_vehicle->id}}">Eliminar</button>
                                         <div class="modal fade" id="delete_{{$detail_vehicle->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-md">
@@ -79,7 +84,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    {{-- @endcan --}}
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

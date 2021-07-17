@@ -53,7 +53,7 @@
           auth()->user()->hasPermissionTo('Lista de evaluaciones de proveedores') ||
           auth()->user()->hasPermissionTo('Ver evaluaciones de proveedores')
           )
-            <li class="treeview {{ activeMenu('approval*') }}{{ activeMenu('provider*') }}{{ activeMenu('indicators*') }}{{ activeMenu('supplier_evaluation*') }}">
+            <li class="treeview {{ activeMenu('tasking*') }}{{ activeMenu('forms*') }}{{ activeMenu('approval*') }}{{ activeMenu('provider*') }}{{ activeMenu('indicators*') }}{{ activeMenu('supplier_evaluation*') }}">
               <a href="#">
                 <i class="fa fa-user-shield"></i> <span>DIRECCIÓN</span><span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
@@ -94,8 +94,24 @@
                     <li class="{{ activeMenu('indicators*') }}"><a class="btn-send" href="{{ route('indicators') }}"><i class="fa fa-chart-pie"></i> INDICADORES</a></li>
                 @endif
                 <li class="hide"><a href="#"><i class="fa fa-shopping-cart"></i> PROCEDIMIENTOS DE  COMPRAS Y ADQUISICIONES</a></li>
-                <li class="{{ activeMenu('tasking*') }}"><a href="{{route('tasking')}}"><i class="fa fa-shopping-cart"></i> FRENTE DE TRABAJO</a></li>
-                <li class="{{ activeMenu('forms*') }}"><a href="{{route('forms')}}"><i class="fa fa-shopping-cart"></i> FORMULARIOS</a></li>
+                @if (
+                  auth()->user()->hasPermissionTo('Lista de programaciones en frente de trabajo') ||
+                  auth()->user()->hasPermissionTo('Ver programaciones en frente de trabajo') ||
+                  auth()->user()->hasPermissionTo('Crear programacion en frente de trabajo') ||
+                  auth()->user()->hasPermissionTo('Editar programaciones en frente de trabajo')
+                )
+                  <li class="{{ activeMenu('tasking*') }}"><a href="{{route('tasking')}}"><i class="fa fa-tasks"></i> FRENTE DE TRABAJO</a></li>
+                @endif
+                @if (
+                  auth()->user()->hasPermissionTo('Lista de formularios') ||
+                  auth()->user()->hasPermissionTo('Ver formularios') ||
+                  auth()->user()->hasPermissionTo('Crear formularios') ||
+                  auth()->user()->hasPermissionTo('Editar formularios') ||
+                  auth()->user()->hasPermissionTo('Eliminar formularios') ||
+                  auth()->user()->hasPermissionTo('Ver respuestas de formularios')
+                )
+                    <li class="{{ activeMenu('forms*') }}"><a href="{{route('forms')}}"><i class="fab fa-wpforms"></i> FORMULARIOS</a></li>
+                @endif
                 @if (
                   auth()->user()->hasPermissionTo('Crear proveedores') ||
                   auth()->user()->hasPermissionTo('Editar proveedores') ||

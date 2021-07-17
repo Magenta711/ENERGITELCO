@@ -104,3 +104,12 @@
     </div>
 </section>
 @endsection
+
+@section('js')
+    <script>
+        function copy_url(item){
+            document.getElementById('url_'+item).select();
+            document.execCommand("copy");
+        }
+    </script>
+@endsection

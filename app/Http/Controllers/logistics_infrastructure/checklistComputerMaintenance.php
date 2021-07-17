@@ -25,7 +25,7 @@ class checklistComputerMaintenance extends Controller
         $this->middleware('permission:Aprobar solicitud de lista de verificación para el mantenimiento de computadores|Consultar listas de verificación para el mantenimiento de los computadores|Descargar PDF de listas de verificación para el mantenimiento de los computadores|Digitar formulario de lista de verificación para el mantenimiento de computadores|Eliminar formato de listas de verificación para el mantenimiento de los computadores',['only' => ['index']]);
         $this->middleware('permission:Consultar listas de verificación para el mantenimiento de los computadores',['only' => ['show']]);
         $this->middleware('permission:Descargar PDF de listas de verificación para el mantenimiento de los computadores',['only' => ['download']]);
-        $this->middleware('permission:|Digitar formulario de lista de verificación para el mantenimiento de computadores',['only' => ['create','store']]);
+        $this->middleware('permission:Digitar formulario de lista de verificación para el mantenimiento de computadores',['only' => ['create','store']]);
         $this->middleware('permission:Eliminar formato de listas de verificación para el mantenimiento de los computadores',['only' => ['destroy']]);
         $this->middleware('permission:Aprobar solicitud de lista de verificación para el mantenimiento de computadores',['only' => ['approve']]);
         $this->message = SystemMessages::where('state',1)->where('name','Envio de formatos')->first();

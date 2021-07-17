@@ -17,9 +17,9 @@
             <div class="box-header">
                 <h3 class="box-title">Lista de inpecciones de equipos contra caídas</h3>
                 <div class="box-tools">
-                    {{-- @can($text_permission_create) --}}
-                            <a href="{{route('fall_protection_equipment_inspection_create')}}" class="btn btn-sm btn-success">Crear</a>
-                    {{-- @endcan --}}
+                    @can('Digitar formulario de Inspección de equipos de protección contra caídas')
+                        <a href="{{route('fall_protection_equipment_inspection_create')}}" class="btn btn-sm btn-success">Crear</a>
+                    @endcan
                 </div>
             </div>
             <div class="box-body">
@@ -48,13 +48,18 @@
                                     <small class="label {{($fall_protection->estado == 'Sin aprobar') ? 'bg-green' : (($fall_protection->estado == 'Aprobado') ? 'bg-blue' : 'bg-red') }}">{{$fall_protection->estado}}</small>
                                 </td>
                                 <td>
-                                    <a href="{{route('fall_protection_equipment_inspection_show',$fall_protection->id)}}" class="btn btn-sm btn-success">Ver</a>
-                                    @if ($fall_protection->estado == 'Aprobado')
-                                        {{-- @can($text_permission) --}}
-                                            <a href="{{route("fall_protection_equipment_inspection_download",$fall_protection->id)}}" class="btn btn-warning btn-sm">Descargar</a>
-                                        {{-- @endcan --}}
+                                    @if (
+                                        auth()->user()->hasPermissionTo('Consultar inspecciones de equipos de protección contra caídas') ||
+                                        auth()->user()->hasPermissionTo('Aprobar solicitud de Inspección y protección contra caídas')
+                                    )
+                                        <a href="{{route('fall_protection_equipment_inspection_show',$fall_protection->id)}}" class="btn btn-sm btn-success">Ver</a>
                                     @endif
-                                    {{-- @can($text_permission_delete) --}}
+                                    @if ($fall_protection->estado == 'Aprobado')
+                                        @can('Descargar PDF de inspecciones de equipos de protección contra caídas')
+                                            <a href="{{route("fall_protection_equipment_inspection_download",$fall_protection->id)}}" class="btn btn-warning btn-sm">Descargar</a>
+                                        @endcan
+                                    @endif
+                                    @can('Eliminar formato de inspecciones de equipos de protección contra caídas')
                                         <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete_{{$fall_protection->id}}">Eliminar</button>
                                         <div class="modal fade" id="delete_{{$fall_protection->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-md">
@@ -79,7 +84,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    {{-- @endcan --}}
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

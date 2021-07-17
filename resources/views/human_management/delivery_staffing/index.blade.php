@@ -17,9 +17,9 @@
             <div class="box-header">
                 <h3 class="box-title">Lista de entrega de dotación personal</h3>
                 <div class="box-tools">
-                    {{-- @can($text_permission_create) --}}
+                    @can('Digitar formulario de entrega de dotación personal')
                         <a href="{{route('delivery_staffing_create')}}" class="btn btn-sm btn-success">Crear</a>
-                    {{-- @endcan --}}
+                    @endcan
                 </div>
             </div>
             <div class="box-body">
@@ -48,13 +48,18 @@
                                     <small class="label {{($delivery_staffings->estado == 'Sin aprobar') ? 'bg-green' : (($delivery_staffings->estado == 'Aprobado') ? 'bg-blue' : 'bg-red') }}">{{$delivery_staffings->estado}}</small>
                                 </td>
                                 <td>
-                                    <a href="{{route('delivery_staffing_show',$delivery_staffings->id)}}" class="btn btn-sm btn-success">Ver</a>
-                                    @if ($delivery_staffings->estado == 'Aprobado')
-                                        {{-- @can($text_permission) --}}
-                                            <a href="{{route("delivery_staffing_download",$delivery_staffings->id)}}" class="btn btn-warning btn-sm">Descargar</a>
-                                        {{-- @endcan --}}
+                                    @if (
+                                        auth()->user()->hasPermissionTo('Aprobar solicitud de entrega de dotación personal') ||
+                                        auth()->user()->hasPermissionTo('Consultar entrega de dotación personal')
+                                    )
+                                        <a href="{{route('delivery_staffing_show',$delivery_staffings->id)}}" class="btn btn-sm btn-success">Ver</a>
                                     @endif
-                                    {{-- @can($text_permission_delete) --}}
+                                    @if ($delivery_staffings->estado == 'Aprobado')
+                                        @can('Descargar PDF de entrega de dotación personal')
+                                            <a href="{{route("delivery_staffing_download",$delivery_staffings->id)}}" class="btn btn-warning btn-sm">Descargar</a>
+                                        @endcan
+                                    @endif
+                                    @can('Eliminar formato de entrega de dotación personal')
                                         <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete_{{$delivery_staffings->id}}">Eliminar</button>
                                         <div class="modal fade" id="delete_{{$delivery_staffings->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-md">
@@ -79,7 +84,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    {{-- @endcan --}}
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

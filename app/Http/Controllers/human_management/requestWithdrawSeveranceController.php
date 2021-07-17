@@ -23,7 +23,6 @@ class requestWithdrawSeveranceController extends Controller
         $this->middleware('verified');
         $this->middleware('permission:Aprobar retiro de cesantías|Digitar solicitud de retiro de cesantías|Eliminar solicitud de retiro de cesantías',['only' => ['index']]);
         $this->middleware('permission:Consultar retiro de cesantías',['only' => ['show']]);
-        $this->middleware('permission:Descargar PDF de permisos de trabajo',['only' => ['download']]);
         $this->middleware('permission:Digitar solicitud de retiro de cesantías',['only' => ['create','store']]);
         $this->middleware('permission:Eliminar solicitud de retiro de cesantías',['only' => ['destroy']]);
         $this->middleware('permission:Aprobar retiro de cesantías',['only' => ['approve']]);

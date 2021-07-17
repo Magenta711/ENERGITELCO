@@ -16,9 +16,9 @@
             <div class="box-header">
                 <h3 class="box-title">Lista de solicitudes de retiro de cesantías</h3>
                 <div class="box-tools">
-                    {{-- @can($text_permission_create) --}}
+                    @can('Digitar solicitud de retiro de cesantías')
                         <a href="{{route('request_withdraw_severance_create')}}" class="btn btn-sm btn-success">Crear</a>
-                    {{-- @endcan --}}
+                    @endcan
                 </div>
             </div>
             <div class="box-body">
@@ -47,9 +47,14 @@
                                     <small class="label {{($withdraw_serverace->estado == 'Sin aprobar') ? 'bg-green' : (($withdraw_serverace->estado == 'Aprobado') ? 'bg-blue' : 'bg-red') }}">{{$withdraw_serverace->estado}}</small>
                                 </td>
                                 <td>
-                                    <a href="{{route('request_withdraw_severance_show',$withdraw_serverace->id)}}" class="btn btn-sm btn-success">Ver</a>
+                                    @if (
+                                        auth()->user()->hasPermissionTo('Aprobar retiro de cesantías') || 
+                                        auth()->user()->hasPermissionTo('Consultar retiro de cesantías')
+                                    )
+                                        <a href="{{route('request_withdraw_severance_show',$withdraw_serverace->id)}}" class="btn btn-sm btn-success">Ver</a>
+                                    @endif
                                    
-                                    {{-- @can($text_permission_delete) --}}
+                                    @can('Eliminar solicitud de retiro de cesantías')
                                         <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete_{{$withdraw_serverace->id}}">Eliminar</button>
                                         <div class="modal fade" id="delete_{{$withdraw_serverace->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-md">
@@ -74,7 +79,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    {{-- @endcan --}}
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach
