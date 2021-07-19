@@ -78,6 +78,13 @@
                                                                             </p>
                                                                         </li>
                                                                     @endif
+                                                                    @if ($item->b24_7_check)
+                                                                        <li class="list-group-item">
+                                                                            <p>
+                                                                                Bonificación 24/7
+                                                                            </p>
+                                                                        </li>
+                                                                    @endif
                                                                     @if ($item->na_checked)
                                                                         <li class="list-group-item">
                                                                             <p>
@@ -87,7 +94,7 @@
                                                                     @endif
                                                                 </ul>
                                                                 <hr>
-                                                                <div class="block_bonus_administrative_{{$item->user->id}}" {!! !$item->admin_bonus_check ? 'style="display: none"' : ''!!}>
+                                                                <div {!! !$item->admin_bonus_check ? 'style="display: none"' : ''!!}>
                                                                     <div class="form-group">
                                                                         <label for="value_bonus_{{$item->user->id}}">Bonificación segun su cargo</label>
                                                                         <p>{{number_format($item->value_bonus,2,',','.')}}</p>
@@ -168,21 +175,25 @@
                                                                     <p>{!! str_replace("\n", '</br>', addslashes($item->commentary)) !!}</p>
                                                                 </div>
                                                                 <div class="row">
-                                                                    <div class="col-md-6 block_bonus_administrative_{{$item->user->id}}" {!! !$item->admin_bonus_check ? 'style="display: none"' : ''!!}>
+                                                                    <div class="col-md-6" {!! !$item->admin_bonus_check ? 'style="display: none"' : ''!!}>
                                                                         <h4>Porcentaje bonificación administrativa</h4>
                                                                         <span id="percentage_admin_{{ $item->user->id }}">${{number_format($item->percentage_admin,2,',','.')}}</span>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">
-                                                                    <div class="col-md-4 block_bonus_administrative_{{$item->user->id}}" {!! !$item->admin_bonus_check ? 'style="display: none"' : ''!!}>
+                                                                    <div class="col-md-3" {!! !$item->b24_7_check ? 'style="display: none"' : '' !!}>
+                                                                        <h4>Total bonificación 24/7</h4>
+                                                                        <span id="total_pay_admin_{{ $item->user->id }}">${{number_format($item->bonus_24_7,2,',','.')}}</span>
+                                                                    </div>
+                                                                    <div class="col-md-3" {!! !$item->admin_bonus_check ? 'style="display: none"' : ''!!}>
                                                                         <h4>Total bonificación administrativa</h4>
                                                                         <span id="total_pay_admin_{{ $item->user->id }}">${{number_format($item->total_admin,2,',','.')}}</span>
                                                                     </div>
-                                                                    <div class="col-md-4 block_bonus_driver_{{$item->user->id}}" {!! !$item->drive_bonus_check ? 'style="display: none"' : ''!!}>
+                                                                    <div class="col-md-3 block_bonus_driver_{{$item->user->id}}" {!! !$item->drive_bonus_check ? 'style="display: none"' : ''!!}>
                                                                         <h4>Total bonificación conductor</h4>
                                                                         <span id="total_pay_driver_{{ $item->user->id }}">${{number_format($item->total_dirver,2,',','.')}}</span>
                                                                     </div>
-                                                                    <div class="col-md-4">
+                                                                    <div class="col-md-3">
                                                                         <h3>Total neto a pagar</h3>
                                                                         <span id="total_pay_{{ $item->user->id }}">${{number_format($item->total_user,2,',','.')}}</span>
                                                                     </div>
