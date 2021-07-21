@@ -137,8 +137,14 @@
                                         </div>
                                         <div class="block_bonus_24_7_{{$user->id}}" {!!old('24_7_bonus_check')[$user->id] || $user->b24_7 ? '' : 'style="display:none"'!!}>
                                             <div class="form-group">
-                                                <label for="bonus_24_7">Bonificación 24/7 (valor $)</label>
+                                                <label for="bonus_24_7_{{$user->id}}">Bonificación 24/7 (valor $)</label>
                                                 <input type="number" name="bonus_24_7[{{$user->id}}]" id="bonus_24_7_{{$user->id}}" class="form-control total_24_7" value="{{old('bonus_24_7')[$user->id] ?? 0 }}">
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="form-group">
+                                                <label for="discount_{{$user->id}}">Descuentos</label>
+                                                <input type="number" name="discount" id="discount_{{$user->id}}" class="form-control total_discount" value="{{old('discount')[$user->id] ?? 0}}">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -257,6 +263,7 @@
                     <th>Total bonificaciones a administrativos</th>
                     <th>Total bonificaciones a condutores</th>
                     <th>Total bonificaciones 24/7</th>
+                    <th>Total descuentos</th>
                     <th>Total neto a pagar</th>
                 </tr>
             </thead>
@@ -278,6 +285,10 @@
                         <td>
                             <span id="total_24_7">$0,00</span>
                             <input type="hidden" name="total_pay_24_7" value="0" id="total_pay_24_7">
+                        </td>
+                        <td>
+                            <span id="total_discount">$0,00</span>
+                            <input type="hidden" name="total_pay_discount" value="0" id="total_pay_discount">
                         </td>
                         <th>
                             <h4><span id="total_all">$0,00</span></h4>

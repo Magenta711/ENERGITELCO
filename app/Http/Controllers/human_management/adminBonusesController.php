@@ -99,6 +99,8 @@ class adminBonusesController extends Controller
                 'state_24_7' => $request->state_24_7[$key],
                 'last_24_7' => $request->last_24_7[$key],
                 'time_24_7' => $request->time_24_7[$key],
+
+                'discount' => $request->discount[$key],
                 
                 'percentage_admin' => $request->percentage_admin[$key],
                 'total_admin' => $request->total_admin[$key],
@@ -196,6 +198,8 @@ class adminBonusesController extends Controller
                 'moto' => isset($request->moto[$value->user_id]) ? 1 : 0,
                 'driver_1' => $request->driver_1[$value->user_id],
                 'driver_2' => $request->driver_2[$value->user_id],
+                
+                'discount' => $request->discount[$value->user_id],
                 
                 'percentage_admin' => $request->percentage_admin[$value->user_id],
                 'total_admin' => $request->total_admin[$value->user_id],

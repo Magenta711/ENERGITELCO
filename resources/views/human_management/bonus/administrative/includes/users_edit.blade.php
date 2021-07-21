@@ -141,6 +141,12 @@
                                                 <input type="number" name="bonus_24_7[{{$item->user->id}}]" id="bonus_24_7_{{$item->user->id}}" class="form-control total_24_7" value="{{$item->bonus_24_7}}">
                                             </div>
                                         </div>
+                                        <div>
+                                            <div class="form-group">
+                                                <label for="discount-{{$item->user->id}}">Descuentos</label>
+                                                <input type="number" name="discount" id="discount-{{$item->user->id}}" class="form-control" value="{{$item->discount}}">
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <label for="commentary_{{$item->user->id}}">Comentarios</label>
                                             <textarea name="commentary[{{$item->user->id}}]" id="commentary_{{$item->user->id}}" cols="30" rows="3" class="form-control">{{$item->commentary}}</textarea>

@@ -63,6 +63,11 @@
                                                     <p>Bonificación 24/7 <br>${{number_format($data->bonus_24_7,2,',','.')}}</p>
                                                 </div>
                                             @endif
+                                            @if ($data->discount)
+                                                <div style="padding: 10px; text-align: center">
+                                                    <p>Descuentos <br>${{number_format($data->discount,2,',','.')}}</p>
+                                                </div>
+                                            @endif
                                             <div style="padding: 10px; text-align: center">
                                                 <p>Total <br>${{ number_format($data->total_user,2,',','.') }}</p>
                                             </div>

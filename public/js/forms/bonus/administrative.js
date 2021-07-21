@@ -119,6 +119,11 @@ $(document).ready(function() {
         update_driver(user);
     });
 
+    $('.total_discount').blur(function () {
+        let user = this.id.split('_')[this.id.split('_').length - 1];
+        totalPay(user);
+    });
+
     $('.total_24_7').blur(function () {
         let user = this.id.split('_')[this.id.split('_').length - 1];
         totalPay(user);
@@ -170,7 +175,8 @@ function totalPay(user){
     let admin = parseFloat($('#total_admin_'+user).val());
     let driver = parseFloat($('#total_driver_'+user).val());
     let b24_7 = parseFloat($('#bonus_24_7_'+user).val());
-    let total = admin + driver + b24_7;
+    let discount = parseFloat($('#discount_'+user).val());
+    let total = admin + driver + b24_7 - discount;
     $('#total_pay_'+user).text('$' + parseFloat((total), 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
     $('#total_pay_td_'+user).text('$' + parseFloat((total), 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
     $('#total_'+user).val((total).toFixed(2));
@@ -183,17 +189,25 @@ function totalAll() {
     let total_driver = $('.total_driver');
     let total_24_7 = $('.total_24_7');
     let total_user = $('.total_user');
+    let discount = $('.total_discount');
     let check_user = $('.check_user');
     total = 0;
     admin = 0;
     driver = 0;
     t24_7 = 0;
+    tdiscount = 0;
 
     for (let i = 0; i < total_user.length; i++) {
         if (check_user[i].checked) {
+            console.log(total_admin[i].value);
             admin += parseFloat(total_admin[i].value);
+            console.log(total_driver[i].value);
             driver += parseFloat(total_driver[i].value);
+            console.log(total_24_7[i].value);
             t24_7 += parseFloat(total_24_7[i].value);
+            console.log(discount[i].value);
+            tdiscount += parseFloat(discount[i].value);
+            console.log(total_user[i].value);
             total += parseFloat(total_user[i].value);
         }
     }
@@ -204,6 +218,8 @@ function totalAll() {
     $('#total_pay_drive').val(driver.toFixed(2));
     $('#total_24_7').text('$' + parseFloat((t24_7), 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
     $('#total_pay_24_7').val(t24_7.toFixed(2));
+    $('#total_discount').text('$' + parseFloat((tdiscount), 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+    $('#total_pay_discount').val(tdiscount.toFixed(2));
     $('#total_all').text('$' + parseFloat((total), 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
     $('#total_pay').val(total.toFixed(2));
 }

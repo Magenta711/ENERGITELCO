@@ -193,6 +193,10 @@
                                                                         <h4>Total bonificación conductor</h4>
                                                                         <span id="total_pay_driver_{{ $item->user->id }}">${{number_format($item->total_dirver,2,',','.')}}</span>
                                                                     </div>
+                                                                    <div class="col-md-3 block_bonus_driver_{{$item->user->id}}" {!! !$item->drive_bonus_check ? 'style="display: none"' : ''!!}>
+                                                                        <h4>Descuentos</h4>
+                                                                        <span id="total_pay_driver_{{ $item->user->id }}">${{number_format($item->discount,2,',','.')}}</span>
+                                                                    </div>
                                                                     <div class="col-md-3">
                                                                         <h3>Total neto a pagar</h3>
                                                                         <span id="total_pay_{{ $item->user->id }}">${{number_format($item->total_user,2,',','.')}}</span>

@@ -36,7 +36,7 @@
                 $ok = true;
             }
             if (!$ok) {
-                echo '<label class="text-left" for="'.$formula[$i].'">'.implode(' ',explode('_',$formula[$i])).'</label><input type="number" class="form-control input-formula" placeholder="'.$formula[$i].'" id="'.$formula[$i].'">';
+                echo '<label class="text-left" for="'.$formula[$i].'">'.implode(' ',explode('_',$formula[$i])).'</label><input type="number" name="input[]" class="form-control input-formula" placeholder="'.$formula[$i].'" id="'.$formula[$i].'">';
             }
             echo '</div>';
         }
@@ -109,11 +109,19 @@
                 <hr>
                 <h4>Fechas de cortes</h4>
                 <div class="row" id="destino_breack">
+                    @php
+                        $lastCut = $id->lastCut();
+                    @endphp
                     @foreach ($id->months as $item)
                         @if ($item->type == 1)
                             <div class="origen_breack col-sm-3" id="origen_breack">
                                 <div class="form-group">
-                                    {{ $item->getDateBreack() }}
+                                    @php
+                                        $date = $item->getDateBreack();
+                                    @endphp
+                                    {!! $date == $lastCut ? '<span class="label bg-primary">' : '' !!}
+                                        {{ $date }}
+                                    {!! $date == $lastCut ? '</span>' : '' !!}
                                 </div>
                             </div>
                         @endif
@@ -122,7 +130,10 @@
                 <hr>
                 @if (!$id->isAuto)
                     <input type="hidden" id="hasFormula" value="{{ $id->hasFormula }}">
-                <div class="row">
+                    <div class="row">
+                    <div class="col-md-12">
+                        <p><b>Formula: </b> <span class="text-muted">{{$id->hasFormula}}</span></p>
+                    </div>
                     {{ getFormula($id->hasFormula) }}
                 </div>
                 <input type="hidden" name="value" id="value">
@@ -131,7 +142,7 @@
                 
             </div>
             <div class="box-footer">
-                <button class="btn btn-sm btn-success">Guardar</button>
+                <button class="btn btn-sm btn-success btn-send">Guardar</button>
             </div>
         </form>
     </div>

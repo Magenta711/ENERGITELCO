@@ -26,7 +26,7 @@ class indicatorsController extends Controller
      */
     public function index()
     {
-        $indicators = Indicator::get(['id','name','process_id']);
+        $indicators = Indicator::get(['id','name','calification','process_id']);
         return view('indicators.index',compact('indicators'));
     }
 
@@ -185,9 +185,10 @@ class indicatorsController extends Controller
     {
         $lastCut = $id->lastCut();
         $register = $id->lastRegister();
-        if ($register) {
+        if ($register && $register->cut == $lastCut) {
             $register->update([
                 'date' => now(),
+                'inputs' => implode('-',$request->input),
                 'value' => $request->value,
                 'goal' => $id->goal,
                 'formula' => $id->hasFormula
@@ -195,6 +196,7 @@ class indicatorsController extends Controller
         }else {
             $register = IndicatorRegister::create([
                 'date' => now(),
+                'inputs' => implode('-',$request->input),
                 'value' => $request->value,
                 'goal' => $id->goal,
                 'cut' => $lastCut,

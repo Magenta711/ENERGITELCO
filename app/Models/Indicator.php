@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Indicator extends Model
 {
     protected $table = "indicators";
-    protected $fillable = ['name','goal','formula','periodicity','process_id','analysis','isAuto','hasFormula','status'];
+    protected $fillable = ['name','goal','formula','calification','periodicity','process_id','analysis','isAuto','hasFormula','status'];
     protected $guarder = "id";
 
     public function months()
@@ -23,16 +23,20 @@ class Indicator extends Model
 
     public function lastCut()
     {
-        $cut = Carbon::create(now()->format('Y-m-d'))->subYears(2)->format('Y-m-d');
+        $date = [
+            'week' => 53,
+            'date' => now()->format('Y-m-d'),
+        ];
         foreach ($this->months as $value) {
-            if (now()->weekOfYear <= $value->week) {
-                $date = $value->getDateBreack();
-            }else {
-                $date = $value->getDateBreack();
+            if ($value->type == 1 && now()->weekOfYear <= $value->week && $value->week <= $date['week']) {
+                $date = [
+                    'week' => $value->week,
+                    'date' => $value->getDateBreack()
+                ];
             }
         }
         
-        return $date;
+        return $date['date'];
     }
 
     public function lastRegister()

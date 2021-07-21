@@ -42,13 +42,15 @@ function validateForm() {
         }
     }
     $('#hasFormula').parent().addClass('has-error');
-    $('#save').attr('disabled',true);
+    $('.box-footer .btn-send').attr('disabled',true);
     $('#preview_form').text('Sin resultado');
+    
     
     if (total = evaluatesArithmetic(f.join(''))) {
         $('#hasFormula').parent().removeClass('has-error');
         $('#preview_form').text('Total: '+total+' %');
         $('#value').val(total);
+        $('.box-footer .btn-send').attr('disabled',false);
     }
 }
 

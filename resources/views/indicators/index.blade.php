@@ -44,7 +44,18 @@
                                 <td>{{ $item->process_id }}</td>
                                 <td>{{ $lastRegister = $item->lastRegister()->value ?? 0 }}</td>
                                 <td>
-                                    <small class="label {{ $lastRegister < 70 ? 'bg-red' : (($lastRegister <= 89) ? 'bg-yellow' : 'bg-green') }}">{{ $lastRegister < 70 ? 'Alarma' : (($lastRegister <= 89) ? 'Alerta' : 'Cumple') }}</small>
+                                    @php
+                                        $calification = explode('-',$item->calification);
+                                        if ($calification[0] != 100) {
+                                            $bg = $lastRegister < intval($calification[0])  ? 'bg-red' : (($lastRegister <= intval($calification[1])) ? 'bg-yellow' : 'bg-green');
+                                            $status = $lastRegister < intval($calification[0])  ? 'Alarma' : (($lastRegister <= intval($calification[1])) ? 'Alerta' : 'Cumple');
+                                        }
+                                        if ($calification[0] == 100) {
+                                            $bg = $lastRegister > intval($calification[1])  ? 'bg-red' : 'bg-green';
+                                            $status = $lastRegister > intval($calification[1])  ? 'Alarma' : 'Cumple';
+                                        }
+                                    @endphp
+                                    <small class="label {{$bg}}">{{$status }}</small>
                                 </td>
                                 <td>{{ $item->lastCut() }}</td>
                                 <td>
