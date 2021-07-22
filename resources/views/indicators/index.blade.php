@@ -30,34 +30,46 @@
                             <th>#</th>
                             <th>Nombre</th>
                             <th>Proceso</th>
+                            <th>Corte anterior</th>
                             <th>Porcentaje actual</th>
                             <th>Estado</th>
-                            <th>Corte</th>
+                            <th>Siguiente corte</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($indicators as $item)
+                            @php
+                                $lRegister = $item->lastRegister();
+                                $lastRegister = $lRegister->value ?? 0;
+                            @endphp
                             <tr>
                                 <td>{{ $item->id }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->process_id }}</td>
-                                <td>{{ $lastRegister = $item->lastRegister()->value ?? 0 }}</td>
+                                <td>{{ $lastCut = $item->lastCut()['date'] }}</td>
+                                <td>{{ $lRegister->cut >= $lastCut ? $lastRegister.' %' : '0.00 %' }}</td>
                                 <td>
                                     @php
-                                        $calification = explode('-',$item->calification);
-                                        if ($calification[0] != 100) {
-                                            $bg = $lastRegister < intval($calification[0])  ? 'bg-red' : (($lastRegister <= intval($calification[1])) ? 'bg-yellow' : 'bg-green');
-                                            $status = $lastRegister < intval($calification[0])  ? 'Alarma' : (($lastRegister <= intval($calification[1])) ? 'Alerta' : 'Cumple');
-                                        }
-                                        if ($calification[0] == 100) {
-                                            $bg = $lastRegister > intval($calification[1])  ? 'bg-red' : 'bg-green';
-                                            $status = $lastRegister > intval($calification[1])  ? 'Alarma' : 'Cumple';
+                                        if ($lRegister->cut >= $lastCut) {
+                                            $calification = explode('-',$item->calification);
+                                            if ($calification[0] != 100) {
+                                                $bg = $lastRegister < intval($calification[0])  ? 'bg-red' : (($lastRegister <= intval($calification[1])) ? 'bg-yellow' : 'bg-green');
+                                                $status = $lastRegister < intval($calification[0])  ? 'Alarma' : (($lastRegister <= intval($calification[1])) ? 'Alerta' : 'Cumple');
+                                            }
+                                            if ($calification[0] == 100) {
+                                                $bg = $lastRegister > intval($calification[1])  ? 'bg-red' : 'bg-green';
+                                                $status = $lastRegister > intval($calification[1])  ? 'Alarma' : 'Cumple';
+                                            }
+                                        }else {
+                                            $lRegister = $item->updateTracing($lastCut);
+                                            $bg = 'bg-red';
+                                            $status = 'Alarma';
                                         }
                                     @endphp
-                                    <small class="label {{$bg}}">{{$status }}</small>
+                                    <small class="label {{$bg}}">{{ $status }}</small>
                                 </td>
-                                <td>{{ $item->lastCut() }}</td>
+                                <td>{{ $item->nextCut()['date'] }}</td>
                                 <td>
                                     @can('Informe de indicadores')
                                         <a href="{{ route('indicators_show',$item->id) }}" class="btn btn-sm btn-success">Informe</a>

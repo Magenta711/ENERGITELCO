@@ -11,7 +11,7 @@ class IndicatorMonth extends Model
     protected $fillable = ['indicator_id','week','type','status'];
     protected $guarder = "id";
 
-    public function getDateBreack()
+    public function getDateBreack($isNow = null)
     {
         Carbon::setWeekEndsAt(Carbon::FRIDAY);
         $year = now()->format('Y');
@@ -19,7 +19,7 @@ class IndicatorMonth extends Model
             $this->week = '0'.$this->week;
         }
         $date = Carbon::create($year.'-W'.$this->week)->endOfWeek();
-        if ($date->format('Y-m-d') < now()->format('Y-m-d')) {
+        if ($date->format('Y-m-d') < now()->format('Y-m-d') && !$isNow) {
             $year = $year + 1;
             $date = Carbon::create($year.'-W'.$this->week)->endOfWeek();
         }

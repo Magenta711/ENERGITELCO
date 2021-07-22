@@ -110,7 +110,7 @@
                 <h4>Fechas de cortes</h4>
                 <div class="row" id="destino_breack">
                     @php
-                        $lastCut = $id->lastCut();
+                        $nextCut = $id->nextCut()['date'];
                     @endphp
                     @foreach ($id->months as $item)
                         @if ($item->type == 1)
@@ -119,9 +119,9 @@
                                     @php
                                         $date = $item->getDateBreack();
                                     @endphp
-                                    {!! $date == $lastCut ? '<span class="label bg-primary">' : '' !!}
+                                    {!! $date == $nextCut ? '<span class="label bg-primary">' : '' !!}
                                         {{ $date }}
-                                    {!! $date == $lastCut ? '</span>' : '' !!}
+                                    {!! $date == $nextCut ? '</span>' : '' !!}
                                 </div>
                             </div>
                         @endif

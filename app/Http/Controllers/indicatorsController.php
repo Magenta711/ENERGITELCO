@@ -26,7 +26,7 @@ class indicatorsController extends Controller
      */
     public function index()
     {
-        $indicators = Indicator::get(['id','name','calification','process_id']);
+        $indicators = Indicator::get(['id','name','calification','process_id','goal','hasFormula']);
         return view('indicators.index',compact('indicators'));
     }
 
@@ -183,9 +183,9 @@ class indicatorsController extends Controller
 
     public function save(Request $request,Indicator $id)
     {
-        $lastCut = $id->lastCut();
+        $nextCut = $id->nextCut()['date'];
         $register = $id->lastRegister();
-        if ($register && $register->cut == $lastCut) {
+        if ($register && $register->cut == $nextCut) {
             $register->update([
                 'date' => now(),
                 'inputs' => implode('-',$request->input),
@@ -194,12 +194,15 @@ class indicatorsController extends Controller
                 'formula' => $id->hasFormula
             ]);
         }else {
+            if ($register->status == 1) {
+                $register->update([ 'status' => 0 ]);
+            }
             $register = IndicatorRegister::create([
                 'date' => now(),
                 'inputs' => implode('-',$request->input),
                 'value' => $request->value,
                 'goal' => $id->goal,
-                'cut' => $lastCut,
+                'cut' => $nextCut,
                 'formula' => $id->hasFormula,
                 'indicator_id' => $id->id,
                 'status' => 1
