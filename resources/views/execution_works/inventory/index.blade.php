@@ -34,7 +34,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Herramienta</th>
+                                    <th>Código</th>
                                     <th>Herramienta</th>
                                     <th>Estado</th>
                                     <th>Acciones</th>

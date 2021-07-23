@@ -104,7 +104,7 @@
                 </div>
                 <div class="form-group">
                     <label for="analysis">Análisis</label>
-                    <p>{{ $id->analysis }}</p>
+                    <textarea name="analysis" id="analysis" cols="30" rows="3" class="form-control">{{ $id->analysis }}</textarea>
                 </div>
                 <hr>
                 <h4>Fechas de cortes</h4>

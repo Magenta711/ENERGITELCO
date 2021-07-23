@@ -183,6 +183,9 @@ class indicatorsController extends Controller
 
     public function save(Request $request,Indicator $id)
     {
+        $id->update([
+            'analysis' => $request->analysis,
+        ]);
         $nextCut = $id->nextCut()['date'];
         $register = $id->lastRegister();
         if ($register && $register->cut == $nextCut) {

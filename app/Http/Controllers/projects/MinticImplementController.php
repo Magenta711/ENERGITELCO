@@ -4,6 +4,7 @@ namespace App\Http\Controllers\projects;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\InvUser;
 use App\Models\project\Mintic\inventory\invMinticConsumable;
 use App\Models\project\Mintic\inventory\invMinticEquipment;
 use App\Models\project\Mintic\MinticConsumableImplement;
@@ -12,7 +13,7 @@ use App\User;
 
 class MinticImplementController extends Controller
 {
-    public function __construct() 
+    public function __construct()
     {
         $this->middleware(['auth']);
         $this->middleware('verified');
@@ -41,7 +42,6 @@ class MinticImplementController extends Controller
      */
     public function create($id)
     {
-        return redirect()->route('mintic_add_consumables',$id);
         $users = User::where('state',1)->get();
         $consumables = invMinticConsumable::where('status',1)->get();
         $equipments = invMinticEquipment::where('status',1)->get();
@@ -78,10 +78,27 @@ class MinticImplementController extends Controller
                     'spent' => 0,
                     'margin' => 0,
                 ]);
+                $inv = InvUser::where('user_id',$request->user_id)->where('inventaryble_type','App\Models\project\Mintic\inventory\invMinticConsumable')->where('inventaryble_id',$request->description[$i])->first();
+                if ($inv) {
+                    $inv->update([
+                        'tickets' => $request->amount[$i] + $inv->tickets,
+                        'stock' => $request->amount[$i] + $inv->stock
+                    ]);
+                }else {
+                    InvUser::create([
+                        'user_id' => $request->user_id,
+                        'inventaryble_id' => $request->description[$i],
+                        'inventaryble_type' => 'App\Models\project\Mintic\inventory\invMinticConsumable',
+                        'tickets' => $request->amount[$i],
+                        'departures' => 0,
+                        'stock' => $request->amount[$i],
+                    ]);
+                }
                 $consumable = invMinticConsumable::find($request->description[$i]);
-                $rest = $consumable->amount - $request->amount[$i];
+                $rest = $consumable->stock - $request->amount[$i];
                 $consumable->update([
-                    'amount' => $rest,
+                    'stock' => $rest,
+                    'departures' => $consumable->departures + $request->amount[$i],
                     'status' => $rest == 0 ? 0 : 1,
                 ]);
             }
@@ -94,6 +111,23 @@ class MinticImplementController extends Controller
                     'spent' => 0,
                     'margin' => 0,
                 ]);
+                $inv = InvUser::where('user_id',$request->user_id)->where('inventaryble_type','App\Models\project\Mintic\inventory\invMinticEquipment')->where('inventaryble_id',$request->description[$i])->first();
+                if ($inv) {
+                    $inv->update([
+                        'tickets' => 1,
+                        'departures' => 0,
+                        'stock' => 1
+                    ]);
+                }else {
+                    InvUser::create([
+                        'user_id' => $request->user_id,
+                        'inventaryble_id' => $request->description[$i],
+                        'inventaryble_type' => 'App\Models\project\Mintic\inventory\invMinticEquipment',
+                        'tickets' => 1,
+                        'departures' => 0,
+                        'stock' => 1
+                    ]);
+                }
                 invMinticEquipment::find($request->description[$i])->update([
                     'status' => 2,
                 ]);
@@ -122,7 +156,6 @@ class MinticImplementController extends Controller
      */
     public function edit($id,MinticConsumableImplement $item)
     {
-        return redirect()->route('mintic_add_consumables',$id);
         $users = User::where('state',1)->get();
         $consumables = invMinticConsumable::get();
         $equipments = invMinticEquipment::get();
@@ -210,7 +243,6 @@ class MinticImplementController extends Controller
 
     public function run($id,MinticConsumableImplement $item)
     {
-        return redirect()->route('mintic_add_consumables',$id);
         return view('projects.mintic.add.run',compact('id','item'));
     }
 

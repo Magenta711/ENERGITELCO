@@ -718,7 +718,7 @@ Route::put('project/mintic/add/{id}/{item}','projects\MinticImplementController@
 Route::get('project/mintic/add/{id}/{item}','projects\MinticImplementController@run')->name('mintic_add_consumables_run');
 Route::patch('project/mintic/add/{id}/{item}','projects\MinticImplementController@save')->name('mintic_add_consumables_save');
 Route::post('project/mintic/add/{id}/{item}/approve','projects\MinticImplementController@approve')->name('mintic_add_consumables_approve');
-Route::delete('project/mintic/add/{id}/{item}','projects\MinticImplementController@delete')->name('mintic_add_consumables_delete');
+Route::delete('project/mintic/add/{id}/{item}','projects\MinticImplementController@destroy')->name('mintic_add_consumables_delete');
 
 //Rutas
 Route::get('project/routes','projects\RoutesProjectController@index')->name('routes');
@@ -856,3 +856,11 @@ Route::put('tasking/{id}','taskingController@update')->name('tasking_update');
 Route::delete('tasking/{id}','taskingController@destroy')->name('tasking_delete');
 Route::patch('tasking/{id}','taskingController@report')->name('tasking_report');
 Route::post('tasking/{id}','taskingController@consumables')->name('tasking_consumables');
+
+Route::get('execution_works/inventary/technical','execution_works\inventaryTechnicalController@index')->name('inventary_technical');
+Route::get('execution_works/inventary/technical/create','execution_works\inventaryTechnicalController@create')->name('inventary_technical_create');
+Route::post('execution_works/inventary/technical','execution_works\inventaryTechnicalController@store')->name('inventary_technical_store');
+Route::get('execution_works/inventary/technical/{id}/edit','execution_works\inventaryTechnicalController@edit')->name('inventary_technical_edit');
+Route::post('execution_works/inventary/technical/{id}','execution_works\inventaryTechnicalController@update')->name('inventary_technical_update');
+Route::get('execution_works/inventary/technical/{id}','execution_works\inventaryTechnicalController@show')->name('inventary_technical_show');
+Route::delete('execution_works/inventary/technical/{id}','execution_works\inventaryTechnicalController@destroy')->name('inventary_technical_delete');

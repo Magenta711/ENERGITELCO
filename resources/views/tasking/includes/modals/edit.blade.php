@@ -144,28 +144,18 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="table-responsive">
-                                            <table class="table table-striped table-bordered table-hover">
-                                                <thead>
-                                                    <tr>
-                                                        <th>/</th>
-                                                        <th>Seriral</th>
-                                                        <th>Nombre</th>
-                                                        <th>Marcar</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($equipments as $equiment)
-                                                        <tr>
-                                                            <td><input type="checkbox" name="equipment[{{$equiment->id}}]" id="equipment-edit_{{$item->id}}-{{$equiment->id}}" value="{{$equiment->id}}"></td>
-                                                            <td>{{$equiment->serial}}</td>
-                                                            <td>{{$equiment->item}}</td>
-                                                            <td>{{$equiment->brand }}</td>
-                                                        </tr>
+                                        {{-- <div id="destino_equipment-edit-{{$item->id}}">
+                                            <div class="form-group" id="origen_equipment-{{$item->id}}">
+                                                <label for="equipment">Descripción</label>
+                                                <select name="equipment[]" id="equipment" class="form-control select2">
+                                                    <option selected disabled></option>
+                                                    @foreach ($equipments as $equipment)
+                                                        <option value="{{$equipment->id}}">{{$equipment->serial}} - {{$equipment->item}} - {{$equipment->brand }}</option>
                                                     @endforeach
-                                                </tbody>
-                                            </table>
+                                                </select>
+                                            </div>
                                         </div>
+                                        <button type="button" id="add_equipment" class="btn btn-sm btn-link add-consumable">Agregar consumible</button> --}}
                                     </div>
                                 </div>
                             </div>
@@ -185,36 +175,24 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="table-responsive">
-                                            <table class="table table-striped table-bordered table-hover">
-                                                <thead>
-                                                    <tr>
-                                                        <th>/</th>
-                                                        <th>Nombre</th>
-                                                        <th>Cantidad</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($consumables as $consumable)
-                                                        @php
-                                                            $hasCosumable = $item->consumables ? hasConsumable($item->consumables,$consumable->id,'App\Models\project\Mintic\inventory\invMinticConsumable') : false;
-                                                        @endphp
-                                                        <tr>
-                                                            <td><input type="checkbox" name="consumable[{{$consumable->id}}]" id="consumable-edit_{{$item->id}}-{{$consumable->id}}" value="{{$consumable->id}}" {{$hasCosumable ? 'checked' : ''}}></td>
-                                                            <td>{{$consumable->item}} {{$consumable->type}}</td>
-                                                            <td>
-                                                                <div class="col-md-9" style="padding-right: 2px;">
-                                                                    <input type="number" class="form-control" name="amount[{{$consumable->id}}]" value="{{$hasCosumable ? $hasCosumable->stock : 0}}">
-                                                                </div>
-                                                                <div class="col-md-3" style="padding-left: 2px">
-                                                                    / {{$consumable->stock + ($hasCosumable->stock ?? 0)}}
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
+                                        {{-- <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="consumable">Descripción</label>
+                                                    <select name="consumable[]" id="consumable" class="form-control select2">
+                                                        <option selected disabled></option>
+                                                        @foreach ($consumables as $consumable)
+                                                            <option value="{{$consumable->id}}">{{$consumable->item}} - {{$consumable->type}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="amount">Cantidad</label>
+                                                <input type="number" name="amount[]" id="amount" class="form-control" value="0">
+                                            </div>
                                         </div>
+                                        <button type="button" id="add_consumable" class="btn btn-sm btn-link add-consumable">Agregar consumible</button> --}}
                                     </div>
                                 </div>
                             </div>

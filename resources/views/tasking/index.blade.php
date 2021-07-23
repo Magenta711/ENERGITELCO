@@ -37,10 +37,12 @@
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
         <li class="active">Frente de trabajo</li>
         <li>
-            <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#create-modal"><i class="fa fa-plus"></i> Crear</button>
+            @can('Crear programacion en frente de trabajo')
+                <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#create-modal"><i class="fa fa-plus"></i> Crear</button>
+                @include('tasking.includes.modals.create')
+            @endcan
         </li>
     </ol>
-    @include('tasking.includes.modals.create')
 </section>
 <div class="hide">
     {{-- Permisos de trabajo --}}
@@ -88,7 +90,11 @@
                                     @if ($item->date_start > now()->format('Y-m-d H:i:s'))
                                         <tr>
                                             <td>
-                                                <div class="row" style="cursor: pointer" data-toggle="modal" data-target="#edit-modal-{{$item->id}}">
+                                                @can('Editar programaciones en frente de trabajo')
+                                                    <div class="row" style="cursor: pointer" data-toggle="modal" data-target="#edit-modal-{{$item->id}}">
+                                                @elsecan('Ver programaciones en frente de trabajo')
+                                                    <div class="row" style="cursor: pointer" data-toggle="modal" data-target="#show-modal-{{$item->id}}">
+                                                @endcan
                                                     <div class="col-xs-6">
                                                         <p>
                                                             <a target="_blank" href="https://www.google.com/maps/search/{{$item->lat}}+{{$item->long}}/">
@@ -115,7 +121,11 @@
                                                         @endforeach
                                                     </div>
                                                 </div>
-                                                @include('tasking.includes.modals.edit')
+                                                @can('Editar programaciones en frente de trabajo')
+                                                    @include('tasking.includes.modals.edit')
+                                                @elsecan('Ver programaciones en frente de trabajo')
+                                                    @include('tasking.includes.modals.show')
+                                                @endcan
                                             </td>
                                         </tr>
                                     @endif
@@ -146,7 +156,11 @@
                                     @if ($item->date_start <= now()->format('Y-m-d H:i:s') && !$item->report)
                                         <tr>
                                             <td>
-                                                <div class="row" style="cursor: pointer" data-toggle="modal" data-target="#edit-modal-{{$item->id}}">
+                                                @can('Editar programaciones en frente de trabajo')
+                                                    <div class="row" style="cursor: pointer" data-toggle="modal" data-target="#edit-modal-{{$item->id}}">
+                                                @elsecan('Ver programaciones en frente de trabajo')
+                                                    <div class="row" style="cursor: pointer" data-toggle="modal" data-target="#show-modal-{{$item->id}}">
+                                                @endcan
                                                     <div class="col-xs-6">
                                                         <p>
                                                             <a target="_blank" href="https://www.google.com/maps/search/{{$item->lat}}+{{$item->long}}/">
@@ -173,7 +187,11 @@
                                                         @endforeach
                                                     </div>
                                                 </div>
-                                                @include('tasking.includes.modals.edit')
+                                                @can('Editar programaciones en frente de trabajo')
+                                                    @include('tasking.includes.modals.edit')
+                                                @elsecan('Ver programaciones en frente de trabajo')
+                                                    @include('tasking.includes.modals.show')
+                                                @endcan
                                             </td>
                                         </tr>
                                     @endif
@@ -204,34 +222,39 @@
                                     @if ($item->date_start <= now()->format('Y-m-d H:i:s') && $item->report)
                                         <tr>
                                             <td>
-                                                <div class="row" style="cursor: pointer" data-toggle="modal" data-target="#show-modal-{{$item->id}}">
+                                                @can('Ver programaciones en frente de trabajo')
+                                                    <div class="row" style="cursor: pointer" data-toggle="modal" data-target="#show-modal-{{$item->id}}">
+                                                @endcannot
+                                                <div class="row">
                                                     <div class="col-xs-6">
-                                                        <p>
-                                                            <a target="_blank" href="https://www.google.com/maps/search/{{$item->lat}}+{{$item->long}}/">
-                                                                {{$item->station_name}}
-                                                            </a>
-                                                        </p>
+                                                            <p>
+                                                                <a target="_blank" href="https://www.google.com/maps/search/{{$item->lat}}+{{$item->long}}/">
+                                                                    {{$item->station_name}}
+                                                                </a>
+                                                            </p>
+                                                        </div>
+                                                        <div class="col-xs-6 text-right">
+                                                            <p class="date-starts" id="date-start-show-{{$item->id}}">{{$item->date_start}}</p>
+                                                        </div>
+                                                        <div class="col-xs-6 list-user">
+                                                            @foreach ($item->users as $user)
+                                                                <span class="label label-default" id="list-user-{{$item->id}}-{{$user->id}}">{{$user->name}}</span>
+                                                            @endforeach
+                                                        </div>
+                                                        <div class="col-xs-6 text-right">
+                                                            {{$item->am ? 'AM'.($item->pm ? ' / ' : '') : ''}} {{$item->pm ? 'PM' : ''}}
+                                                        </div>
+                                                        <div class="col-xs-6 text-right list-vehicles">
+                                                            @foreach ($item->vehicles as $vehicle)
+                                                                <span class="label label-default" id="list-vehicle-{{$item->id}}-{{$vehicle->vehicle->id}}">
+                                                                    {{$vehicle->vehicle->plate}} - {{$vehicle->vehicle->brand}}
+                                                                </span>
+                                                            @endforeach
+                                                        </div>
                                                     </div>
-                                                    <div class="col-xs-6 text-right">
-                                                        <p class="date-starts" id="date-start-show-{{$item->id}}">{{$item->date_start}}</p>
-                                                    </div>
-                                                    <div class="col-xs-6 list-user">
-                                                        @foreach ($item->users as $user)
-                                                            <span class="label label-default" id="list-user-{{$item->id}}-{{$user->id}}">{{$user->name}}</span>
-                                                        @endforeach
-                                                    </div>
-                                                    <div class="col-xs-6 text-right">
-                                                        {{$item->am ? 'AM'.($item->pm ? ' / ' : '') : ''}} {{$item->pm ? 'PM' : ''}}
-                                                    </div>
-                                                    <div class="col-xs-6 text-right list-vehicles">
-                                                        @foreach ($item->vehicles as $vehicle)
-                                                            <span class="label label-default" id="list-vehicle-{{$item->id}}-{{$vehicle->vehicle->id}}">
-                                                                {{$vehicle->vehicle->plate}} - {{$vehicle->vehicle->brand}}
-                                                            </span>
-                                                        @endforeach
-                                                    </div>
-                                                </div>
-                                                @include('tasking.includes.modals.show')
+                                                @can('Ver programaciones en frente de trabajo')
+                                                    @include('tasking.includes.modals.show')
+                                                @endcannot
                                             </td>
                                         </tr>
                                     @endif

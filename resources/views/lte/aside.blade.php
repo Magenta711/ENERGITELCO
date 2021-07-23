@@ -529,6 +529,7 @@
                   )
                     <li class="{{activeMenu('execution_works/inventory/tool*')}}"><a href="{{route('inventory_tools')}}"><i class="fa fa-hammer"></i> HERRAMIENTAS</a></li>
                   @endif
+                  <li class="{{activeMenu('execution_works/inventary/technical*')}}"><a href="{{route('inventary_technical')}}"><i class="fa fa-hammer"></i> TÉCNICOS</a></li>
                 </ul>
               </li>
               @endif

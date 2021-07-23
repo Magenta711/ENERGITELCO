@@ -55,16 +55,16 @@
                                             $calification = explode('-',$item->calification);
                                             if ($calification[0] != 100) {
                                                 $bg = $lastRegister < intval($calification[0])  ? 'bg-red' : (($lastRegister <= intval($calification[1])) ? 'bg-yellow' : 'bg-green');
-                                                $status = $lastRegister < intval($calification[0])  ? 'Alarma' : (($lastRegister <= intval($calification[1])) ? 'Alerta' : 'Cumple');
+                                                $status = $lastRegister < intval($calification[0])  ? 'Alarma >' : (($lastRegister <= intval($calification[1])) ? 'Alerta >' : 'Cumple >');
                                             }
                                             if ($calification[0] == 100) {
                                                 $bg = $lastRegister > intval($calification[1])  ? 'bg-red' : 'bg-green';
-                                                $status = $lastRegister > intval($calification[1])  ? 'Alarma' : 'Cumple';
+                                                $status = $lastRegister > intval($calification[1])  ? 'Alarma <' : 'Cumple <';
                                             }
                                         }else {
                                             $lRegister = $item->updateTracing($lastCut);
                                             $bg = 'bg-red';
-                                            $status = 'Alarma';
+                                            $status = 'Alarma -';
                                         }
                                     @endphp
                                     <small class="label {{$bg}}">{{ $status }}</small>

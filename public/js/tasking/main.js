@@ -103,6 +103,20 @@ $(document).ready(function() {
             $('#long').val('');
         }
     });
+
+    $('.add-consumable').click(function () {
+        console.log('add_consumable',this.id);
+        if (this.id == 'add_equipment') {
+            newElement = $('#origen_equipment').clone().appendTo('#destino_equipment');
+            newElement.children('.select2-container').remove();
+            newElement.children('select').select2();
+        }
+        if (this.id == 'add_consumable') {
+            newElement = $('#origen_consumables').clone().appendTo('#destino_consumables');
+            newElement.children().children().children('.select2-container').remove();
+            newElement.children().children().children('select').select2();
+        }
+    });
 });
 
 function usersDisable(date) {

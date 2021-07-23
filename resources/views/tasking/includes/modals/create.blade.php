@@ -78,12 +78,6 @@
                             <div class="col-md-4">
                                 <label for="vehicles">Vehículos</label>
                                 <select name="vehicles[]" id="vehicles" disabled class="form-control select2 select2-hidden-accessible" multiple="" data-placeholder="Selecciona un vehículos" style="width: 100%;" data-select2-id="6" tabindex="-1" aria-hidden="true">
-                                    {{-- @foreach ($vehicles as $vehicle)
-                                        @php
-                                            $stateVehicle = expirateDate($vehicle->enrollment_date,$vehicle->soat_date,$vehicle->gases_date,$vehicle->technomechanical_date);
-                                        @endphp
-                                        <option id="option_vehicle_{{$vehicle->id}}" data-select2-id="{{$vehicle->id}}" value="{{$vehicle->id}}" {{$stateVehicle ? 'disabled' : ''}}>{{$vehicle->plate}} - {{$vehicle->brand}}{{$stateVehicle ? ' (documentos vencidos)' : ''}}</option>
-                                    @endforeach --}}
                                 </select>
                             </div>
                             <div class="col-md-4">
@@ -133,30 +127,18 @@
                                                 <option selected disabled>Selecciona el usuario para asignar bodega</option>
                                             </select>
                                         </div>
-                                        <div class="table-responsive">
-                                            <table class="table table-striped table-bordered table-hover">
-                                                <thead>
-                                                    <tr>
-                                                        <th>/</th>
-                                                        <th>Seriral</th>
-                                                        <th>Nombre</th>
-                                                        <th>Marcar</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($equipments as $item)
-                                                        <tr>
-                                                            <td>
-                                                                <input type="checkbox" name="equipment[{{$item->id}}]" id="equipment_{{$item->id}}" value="{{$item->id}}">
-                                                            </td>
-                                                            <td>{{$item->serial}}</td>
-                                                            <td>{{$item->item}}</td>
-                                                            <td>{{$item->brand }}</td>
-                                                        </tr>
+                                        <div id="destino_equipment">
+                                            <div class="form-group" id="origen_equipment">
+                                                <label for="equipment">Descripción</label>
+                                                <select name="equipment[]" id="equipment" class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona un equipo" style="width: 100%;" data-select2-id="6" tabindex="-1" aria-hidden="true">
+                                                    <option selected disabled></option>
+                                                    @foreach ($equipments as $equipment)
+                                                        <option value="{{$equipment->id}}">{{$equipment->serial}} - {{$equipment->item}} - {{$equipment->brand }}</option>
                                                     @endforeach
-                                                </tbody>
-                                            </table>
+                                                </select>
+                                            </div>
                                         </div>
+                                        <button type="button" id="add_equipment" class="btn btn-sm btn-link add-consumable">Agregar equipo</button>
                                     </div>
                                 </div>
                             </div>
@@ -173,31 +155,26 @@
                                                 <option selected disabled>Selecciona el usuario para asignar bodega</option>
                                             </select>
                                         </div>
-                                        <div class="table-responsive">
-                                            <table class="table table-striped table-bordered table-hover">
-                                                <thead>
-                                                    <tr>
-                                                        <th>/</th>
-                                                        <th>Nombre</th>
-                                                        <th>Cantidad</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($consumables as $item)
-                                                        <tr>
-                                                            <td><input type="checkbox" name="consumable[{{$item->id}}]" id="consumable_{{$item->id}}" value="{{$item->id}}"></td>
-                                                            <td>{{$item->item}} {{$item->type}}</td>
-                                                            <td>
-                                                                <div class="col-md-9" style="padding-right: 2px;">
-                                                                    <input type="number" id="amount-cosumable-{{$item->id}}" class="form-control amounts-consumables" name="amount[{{$item->id}}]" value="0">
-                                                                </div>
-                                                                <div class="col-md-3" style="padding-left: 2px">/ {{$item->amount}}</div>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
+                                        <div id="destino_consumables">
+                                            <div class="row" id="origen_consumables">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="consumable">Descripción</label>
+                                                        <select name="consumable[]" id="consumable" class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona un consumible" style="width: 100%;" data-select2-id="6" tabindex="-1" aria-hidden="true">
+                                                            <option selected disabled></option>
+                                                            @foreach ($consumables as $consumable)
+                                                                <option value="{{$consumable->id}}">{{$consumable->item}} - {{$consumable->type}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="amount">Cantidad</label>
+                                                    <input type="number" name="amount[]" id="amount" class="form-control" value="0">
+                                                </div>
+                                            </div>
                                         </div>
+                                        <button type="button" id="add_consumable" class="btn btn-sm btn-link add-consumable">Agregar consumible</button>
                                     </div>
                                 </div>
                             </div>
