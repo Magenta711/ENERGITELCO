@@ -155,8 +155,8 @@
                                                 <option selected disabled>Selecciona el usuario para asignar bodega</option>
                                             </select>
                                         </div>
-                                        <div id="destino_consumables">
-                                            <div class="row" id="origen_consumables">
+                                        <div id="destino_consumable">
+                                            <div class="row" id="origen_consumable">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="consumable">Descripción</label>

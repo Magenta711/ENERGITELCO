@@ -227,31 +227,31 @@
                                                 @endcannot
                                                 <div class="row">
                                                     <div class="col-xs-6">
-                                                            <p>
-                                                                <a target="_blank" href="https://www.google.com/maps/search/{{$item->lat}}+{{$item->long}}/">
-                                                                    {{$item->station_name}}
-                                                                </a>
-                                                            </p>
-                                                        </div>
-                                                        <div class="col-xs-6 text-right">
-                                                            <p class="date-starts" id="date-start-show-{{$item->id}}">{{$item->date_start}}</p>
-                                                        </div>
-                                                        <div class="col-xs-6 list-user">
-                                                            @foreach ($item->users as $user)
-                                                                <span class="label label-default" id="list-user-{{$item->id}}-{{$user->id}}">{{$user->name}}</span>
-                                                            @endforeach
-                                                        </div>
-                                                        <div class="col-xs-6 text-right">
-                                                            {{$item->am ? 'AM'.($item->pm ? ' / ' : '') : ''}} {{$item->pm ? 'PM' : ''}}
-                                                        </div>
-                                                        <div class="col-xs-6 text-right list-vehicles">
-                                                            @foreach ($item->vehicles as $vehicle)
-                                                                <span class="label label-default" id="list-vehicle-{{$item->id}}-{{$vehicle->vehicle->id}}">
-                                                                    {{$vehicle->vehicle->plate}} - {{$vehicle->vehicle->brand}}
-                                                                </span>
-                                                            @endforeach
-                                                        </div>
+                                                        <p>
+                                                            <a target="_blank" href="https://www.google.com/maps/search/{{$item->lat}}+{{$item->long}}/">
+                                                                {{$item->station_name}}
+                                                            </a>
+                                                        </p>
                                                     </div>
+                                                    <div class="col-xs-6 text-right">
+                                                        <p class="date-starts" id="date-start-show-{{$item->id}}">{{$item->date_start}}</p>
+                                                    </div>
+                                                    <div class="col-xs-6 list-user">
+                                                        @foreach ($item->users as $user)
+                                                            <span class="label label-default" id="list-user-{{$item->id}}-{{$user->id}}">{{$user->name}}</span>
+                                                        @endforeach
+                                                    </div>
+                                                    <div class="col-xs-6 text-right">
+                                                        <p>{{$item->am ? 'AM'.($item->pm ? ' / ' : '') : ''}} {{$item->pm ? 'PM' : ''}}</p>
+                                                    </div>
+                                                    <div class="col-xs-6 text-right list-vehicles">
+                                                        @foreach ($item->vehicles as $vehicle)
+                                                            <span class="label label-default" id="list-vehicle-{{$item->id}}-{{$vehicle->vehicle->id}}">
+                                                                {{$vehicle->vehicle->plate}} - {{$vehicle->vehicle->brand}}
+                                                            </span>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
                                                 @can('Ver programaciones en frente de trabajo')
                                                     @include('tasking.includes.modals.show')
                                                 @endcannot

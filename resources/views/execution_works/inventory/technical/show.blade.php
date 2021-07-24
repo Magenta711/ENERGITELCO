@@ -10,7 +10,8 @@
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
         <li><a href="#">Ejecución de obras</a></li>
         <li><a href="#">Inventario</a></li>
-        <li class="active">Herramientas</li>
+        <li><a href="#">Herramientas</a></li>
+        <li class="active">Usuario</li>
     </ol>
 </section>
 {{-- Content main --}}
@@ -31,32 +32,23 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Usuario</th>
-                                    <th>Acciones</th>
+                                    <th>Detalle</th>
+                                    <th>Tipo</th>
+                                    <th>Cantidad</th>
+                                    <th>Entradas</th>
+                                    <th>Salidas</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @php
-                                    $arrUser = array();
-                                @endphp
                                 @foreach ($inventories as $item)
-                                    @if (!in_array($item->user_id,$arrUser))
-                                        <tr>
-                                            <td>{{$item->id}}</td>
-                                            <td>{{$item->user->name}}</td>
-                                            <td>
-                                                @can('Ver inventario de herramientas')
-                                                    <a href="{{ route('inventary_technical_show',$item->user_id) }}" class="btn btn-sm btn-success">Ver</a>
-                                                @endcan
-                                                @can('Editar inventario de herramientas')
-                                                    <a href="{{ route('inventary_technical_edit',$item->user_id) }}" class="btn btn-sm btn-primary">Editar</a>
-                                                @endcan
-                                            </td>
-                                        </tr>
-                                        @php
-                                            $arrUser[$item->user_id] = $item->user_id;
-                                        @endphp
-                                    @endif
+                                    <tr>
+                                        <td>{{$item->id}}</td>
+                                        <td>{{$item->inventaryble->item}}</td>
+                                        <td>{{$item->inventaryble_type == 'App\Models\project\Mintic\inventory\invMinticEquipment' ? 'Equipo' : 'Consumible'}}</td>
+                                        <td>{{$item->stock}}</td>
+                                        <td>{{$item->tickets}}</td>
+                                        <td>{{$item->departures}}</td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>

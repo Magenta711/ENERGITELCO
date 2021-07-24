@@ -81,9 +81,7 @@
                                         $valuesVehicles[] = $vehicle->vehicle->id;
                                     }
                                 @endphp
-                                <select name="vehicles[]" id="vehicles-edit-{{$item->id}}" class="form-control select2 select2-hidden-accessible" multiple="" data-placeholder="Selecciona un vehículos" style="width: 100%;" data-select2-id="6" tabindex="-1" aria-hidden="true" value="{{implode('-',$valuesVehicles)}}">
-
-                                </select>
+                                <select name="vehicles[]" id="vehicles-edit-{{$item->id}}" class="form-control select2 select2-hidden-accessible" multiple="" data-placeholder="Selecciona un vehículos" style="width: 100%;" data-select2-id="6" tabindex="-1" aria-hidden="true" value="{{implode('-',$valuesVehicles)}}"></select>
                             </div>
                             <div class="col-md-4">
                                 <label for="">Disposición</label>
@@ -144,18 +142,39 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        {{-- <div id="destino_equipment-edit-{{$item->id}}">
-                                            <div class="form-group" id="origen_equipment-{{$item->id}}">
-                                                <label for="equipment">Descripción</label>
-                                                <select name="equipment[]" id="equipment" class="form-control select2">
-                                                    <option selected disabled></option>
-                                                    @foreach ($equipments as $equipment)
-                                                        <option value="{{$equipment->id}}">{{$equipment->serial}} - {{$equipment->item}} - {{$equipment->brand }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
+                                        <div id="destino_equipment-edit-{{$item->id}}">
+                                            @php
+                                                $hasEquipment = false;
+                                            @endphp
+                                            @foreach ($item->consumables as $equipmentItem)
+                                                @if ($equipmentItem->inventaryble_type == 'App\Models\project\Mintic\inventory\invMinticEquipment')
+                                                    @php
+                                                        $hasEquipment = true;
+                                                    @endphp
+                                                    <div class="form-group" id="origen_equipment-edit-{{$item->id}}">
+                                                        <label for="equipment-edit-{{$item->id}}-{{$equipmentItem->id}}">Descripción</label>
+                                                        <select name="equipment[]" id="equipment-edit-{{$item->id}}-{{$equipmentItem->id}}" class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona un consumible" style="width: 100%;" data-select2-id="6" tabindex="-1" aria-hidden="true">
+                                                            <option selected disabled></option>
+                                                            @foreach ($equipments as $equipment)
+                                                                <option {{$equipment->id == $equipmentItem->inventaryble_id ? 'selected' : ''}} value="{{$equipment->id}}">{{$equipment->item}} - {{$equipment->type}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                            @if (!$hasEquipment)
+                                                <div class="form-group" id="origen_equipment-edit-{{$item->id}}">
+                                                    <label for="equipment-edit-{{$item->id}}">Descripción</label>
+                                                    <select name="equipment[]" id="equipment-edit-{{$item->id}}" class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona un consumible" style="width: 100%;" data-select2-id="6" tabindex="-1" aria-hidden="true">
+                                                        <option selected disabled></option>
+                                                        @foreach ($equipments as $equipment)
+                                                            <option value="{{$equipment->id}}">{{$equipment->item}} - {{$equipment->type}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            @endif
                                         </div>
-                                        <button type="button" id="add_equipment" class="btn btn-sm btn-link add-consumable">Agregar consumible</button> --}}
+                                        <button type="button" id="add_equipment-edit-{{$item->id}}" class="btn btn-sm btn-link add-consumable">Agregar consumible</button>
                                     </div>
                                 </div>
                             </div>
@@ -175,24 +194,55 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        {{-- <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="consumable">Descripción</label>
-                                                    <select name="consumable[]" id="consumable" class="form-control select2">
-                                                        <option selected disabled></option>
-                                                        @foreach ($consumables as $consumable)
-                                                            <option value="{{$consumable->id}}">{{$consumable->item}} - {{$consumable->type}}</option>
-                                                        @endforeach
-                                                    </select>
+                                        @php
+                                            $hasConsumable = false;
+                                        @endphp
+                                        <div id="destino_consumable-edit-{{$item->id}}">
+                                        @foreach ($item->consumables as $consumableItem)
+                                            @if ($consumableItem->inventaryble_type == 'App\Models\project\Mintic\inventory\invMinticConsumable')
+                                                @php
+                                                    $hasConsumable = true;
+                                                @endphp
+                                                <div class="row" id="origen_consumable-edit-{{$item->id}}">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="consumable-edit-{{$item->id}}-{{$consumableItem->id}}">Descripción</label>
+                                                            <select name="consumable[]" id="consumable-edit-{{$item->id}}-{{$consumableItem->id}}" class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona un consumible" style="width: 100%;" data-select2-id="6" tabindex="-1" aria-hidden="true">
+                                                                <option selected disabled></option>
+                                                                @foreach ($consumables as $consumable)
+                                                                    <option {{$consumable->id == $consumableItem->inventaryble_id ? 'selected' : ''}} value="{{$consumable->id}}">{{$consumable->item}} - {{$consumable->type}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="amount-edit-{{$item->id}}-{{$consumableItem->id}}">Cantidad</label>
+                                                        <input type="number" name="amount[]" id="amount-edit-{{$item->id}}-{{$consumableItem->id}}" class="form-control" value="{{$consumableItem->preamount}}">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="amount">Cantidad</label>
-                                                <input type="number" name="amount[]" id="amount" class="form-control" value="0">
-                                            </div>
+                                                @endif
+                                            @endforeach
+                                            @if (!$hasConsumable)
+                                                <div class="row" id="origen_consumable-edit-{{$item->id}}">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="consumable-edit-{{$item->id}}">Descripción</label>
+                                                            <select name="consumable[]" id="consumable-edit-{{$item->id}}" class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona un consumible" style="width: 100%;" data-select2-id="6" tabindex="-1" aria-hidden="true">
+                                                                <option selected disabled></option>
+                                                                @foreach ($consumables as $consumable)
+                                                                    <option value="{{$consumable->id}}">{{$consumable->item}} - {{$consumable->type}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="amount-edit-{{$item->id}}">Cantidad</label>
+                                                        <input type="number" name="amount[]" id="amount-edit-{{$item->id}}" class="form-control" value="0">
+                                                    </div>
+                                                </div>
+                                            @endif
                                         </div>
-                                        <button type="button" id="add_consumable" class="btn btn-sm btn-link add-consumable">Agregar consumible</button> --}}
+                                        <button type="button" id="add_consumable-edit-{{$item->id}}" class="btn btn-sm btn-link add-consumable">Agregar consumible</button>
                                     </div>
                                 </div>
                             </div>

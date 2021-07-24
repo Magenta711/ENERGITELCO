@@ -48,7 +48,8 @@ class inventaryTechnicalController extends Controller
      */
     public function show($id)
     {
-        //
+        $inventories = InvUser::where('user_id',$id)->get();
+        return view('execution_works.inventory.technical.show',compact('inventories'));
     }
 
     /**
@@ -59,7 +60,8 @@ class inventaryTechnicalController extends Controller
      */
     public function edit($id)
     {
-        //
+        $inventories = InvUser::where('user_id',$id)->get();
+        return view('execution_works.inventory.technical.edit',compact('inventories'));
     }
 
     /**

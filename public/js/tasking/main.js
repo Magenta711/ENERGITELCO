@@ -105,14 +105,17 @@ $(document).ready(function() {
     });
 
     $('.add-consumable').click(function () {
-        console.log('add_consumable',this.id);
-        if (this.id == 'add_equipment') {
-            newElement = $('#origen_equipment').clone().appendTo('#destino_equipment');
+        arrId = this.id.split('_');
+        id = arrId[1];
+        arrType = id.split('-');
+        type = arrType[0];
+        if (type == 'equipment') {
+            newElement = $('#origen_'+id).clone().appendTo('#destino_'+id);
             newElement.children('.select2-container').remove();
             newElement.children('select').select2();
         }
-        if (this.id == 'add_consumable') {
-            newElement = $('#origen_consumables').clone().appendTo('#destino_consumables');
+        if (type == 'consumable') {
+            newElement = $('#origen_'+id).clone().appendTo('#destino_'+id);
             newElement.children().children().children('.select2-container').remove();
             newElement.children().children().children('select').select2();
         }
