@@ -451,45 +451,6 @@
                                       <a class="btn-send"href="{{ route('mintic') }}"><i class="fa fa-laptop-house"></i> ESCUELAS</a>
                                     </li>
                                 @endif
-                                @if (
-                                  auth()->user()->hasPermissionTo('Lista de inventarios de consumibles en bodega') ||
-                                  auth()->user()->hasPermissionTo('Crear consumible del inventario') ||
-                                  auth()->user()->hasPermissionTo('Editar consumible del inventario') ||
-                                  auth()->user()->hasPermissionTo('Ver consumible del inventario') ||
-                                  auth()->user()->hasPermissionTo('Eliminar consumible del inventario') ||
-                                  auth()->user()->hasPermissionTo('Lista de inventarios de equipos Mintic') ||
-                                  auth()->user()->hasPermissionTo('Crear equipo al inventario Mintic') ||
-                                  auth()->user()->hasPermissionTo('Editar equipo al inventario Mintic') ||
-                                  auth()->user()->hasPermissionTo('Ver equipo al inventario Mintic') ||
-                                  auth()->user()->hasPermissionTo('Eliminar equipo al inventario Mintic')
-                                )
-                                  <li class="treeview {{activeMenu('project/mintic/inventory*')}}">
-                                    <a href="#"><i class="fa fa-border-all"></i> INVENTARIOS<span class="pull-right-container">
-                                        <i class="fa fa-angle-left pull-right"></i>
-                                      </span>
-                                    </a>
-                                    <ul class="treeview-menu">
-                                      @if (
-                                        auth()->user()->hasPermissionTo('Lista de inventarios de equipos Mintic') ||
-                                        auth()->user()->hasPermissionTo('Crear equipo al inventario Mintic') ||
-                                        auth()->user()->hasPermissionTo('Ver equipo al inventario Mintic') ||
-                                        auth()->user()->hasPermissionTo('Editar equipo al inventario Mintic') ||
-                                        auth()->user()->hasPermissionTo('Eliminar equipo al inventario Mintic')
-                                      )
-                                          <li class="{{activeMenu('project/mintic/inventory/equipment*')}}"><a href="{{route('mintic_inventory_equipment')}}"><i class="fa fa-hdd"></i> EQUIPOS</a></li>
-                                      @endif
-                                      @if (
-                                        auth()->user()->hasPermissionTo('Lista de inventarios de consumibles en bodega') ||
-                                        auth()->user()->hasPermissionTo('Crear consumible del inventario') ||
-                                        auth()->user()->hasPermissionTo('Ver consumible del inventario') ||
-                                        auth()->user()->hasPermissionTo('Editar consumible del inventario') ||
-                                        auth()->user()->hasPermissionTo('Eliminar consumible del inventario')
-                                      )
-                                          <li class="{{activeMenu('project/mintic/inventory/consumable*')}}"><a href="{{route('mintic_inventory_consumables')}}"><i class="fa fa-plug"></i> CONSUMIBLES</a></li>
-                                      @endif
-                                    </ul>
-                                  </li>
-                                @endif
                               </ul>
                            </li>
                         @endif
@@ -511,9 +472,19 @@
                     auth()->user()->hasPermissionTo('Editar inventario de herramientas') ||
                     auth()->user()->hasPermissionTo('Ver inventario de herramientas') ||
                     auth()->user()->hasPermissionTo('Crear inventario de herramientas') ||
-                    auth()->user()->hasPermissionTo('Eliminar inventario de herramientas')
+                    auth()->user()->hasPermissionTo('Eliminar inventario de herramientas') ||
+                    auth()->user()->hasPermissionTo('Lista de inventarios de consumibles en bodega') ||
+                    auth()->user()->hasPermissionTo('Crear consumible del inventario') ||
+                    auth()->user()->hasPermissionTo('Editar consumible del inventario') ||
+                    auth()->user()->hasPermissionTo('Ver consumible del inventario') ||
+                    auth()->user()->hasPermissionTo('Eliminar consumible del inventario') ||
+                    auth()->user()->hasPermissionTo('Lista de inventarios de equipos Mintic') ||
+                    auth()->user()->hasPermissionTo('Crear equipo al inventario Mintic') ||
+                    auth()->user()->hasPermissionTo('Editar equipo al inventario Mintic') ||
+                    auth()->user()->hasPermissionTo('Ver equipo al inventario Mintic') ||
+                    auth()->user()->hasPermissionTo('Eliminar equipo al inventario Mintic')
                   )
-              <li class="treeview {{activeMenu('execution_works/inventory/tool*')}}">
+              <li class="treeview {{activeMenu('execution_works/inventory*')}}">
                 <a href="#"><i class="fa fa-border-all"></i> INVENTARIOS<span class="pull-right-container">
                     <i class="fa fa-angle-left pull-right"></i>
                   </span>
@@ -529,7 +500,25 @@
                   )
                     <li class="{{activeMenu('execution_works/inventory/tool*')}}"><a href="{{route('inventory_tools')}}"><i class="fa fa-hammer"></i> HERRAMIENTAS</a></li>
                   @endif
-                  <li class="{{activeMenu('execution_works/inventary/technical*')}}"><a href="{{route('inventary_technical')}}"><i class="fa fa-hammer"></i> TÉCNICOS</a></li>
+                  @if (
+                    auth()->user()->hasPermissionTo('Lista de inventarios de equipos Mintic') ||
+                    auth()->user()->hasPermissionTo('Crear equipo al inventario Mintic') ||
+                    auth()->user()->hasPermissionTo('Ver equipo al inventario Mintic') ||
+                    auth()->user()->hasPermissionTo('Editar equipo al inventario Mintic') ||
+                    auth()->user()->hasPermissionTo('Eliminar equipo al inventario Mintic')
+                  )
+                      <li class="{{activeMenu('execution_works/inventory/equipment*')}}"><a href="{{route('mintic_inventory_equipment')}}"><i class="fa fa-hdd"></i> EQUIPOS</a></li>
+                  @endif
+                  @if (
+                    auth()->user()->hasPermissionTo('Lista de inventarios de consumibles en bodega') ||
+                    auth()->user()->hasPermissionTo('Crear consumible del inventario') ||
+                    auth()->user()->hasPermissionTo('Ver consumible del inventario') ||
+                    auth()->user()->hasPermissionTo('Editar consumible del inventario') ||
+                    auth()->user()->hasPermissionTo('Eliminar consumible del inventario')
+                  )
+                      <li class="{{activeMenu('execution_works/inventory/consumable*')}}"><a href="{{route('mintic_inventory_consumables')}}"><i class="fa fa-plug"></i> CONSUMIBLES</a></li>
+                  @endif
+                  <li class="{{activeMenu('execution_works/inventory/technical*')}}"><a href="{{route('inventary_technical')}}"><i class="fas fa-users-cog"></i> TÉCNICOS</a></li>
                 </ul>
               </li>
               @endif

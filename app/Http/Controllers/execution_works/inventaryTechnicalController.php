@@ -5,9 +5,16 @@ namespace App\Http\Controllers\execution_works;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\InvUser;
+use App\Models\project\Mintic\inventory\invMinticConsumable;
+use App\Models\project\Mintic\inventory\invMinticEquipment;
 
 class inventaryTechnicalController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('verified');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -61,7 +68,7 @@ class inventaryTechnicalController extends Controller
     public function edit($id)
     {
         $inventories = InvUser::where('user_id',$id)->get();
-        return view('execution_works.inventory.technical.edit',compact('inventories'));
+        return view('execution_works.inventory.technical.edit',compact('inventories','id'));
     }
 
     /**
@@ -73,7 +80,30 @@ class inventaryTechnicalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        foreach ($request->amount as $key => $value) {
+            $inv = InvUser::find($key);
+            if ($inv->stock != $value) {
+                if ($inv->stock > $value) {
+                    $inv->devolver(($inv->stock - $value));
+                    
+                    if ($inv->inventaryble_type == 'App\Models\project\Mintic\inventory\invMinticConsumable') {
+                        invMinticConsumable::find($inv->inventaryble_id)->retroceso(($inv->stock - $value));
+                    }
+                    if ($inv->inventaryble_type == 'App\Models\project\Mintic\inventory\invMinticEquipment') {
+                        invMinticEquipment::find($inv->inventaryble_id)->update([
+                            'status' => 1
+                        ]);
+                    }
+                }
+                else {
+                    $inv->entrar(($inv->stock - $value));
+                    if ($inv->inventaryble_type == 'App\Models\project\Mintic\inventory\invMinticConsumable') {
+                        invMinticConsumable::find($inv->inventaryble_id)->retroceso(($inv->stock - $value));
+                    }
+                }
+            }
+        }
+        return redirect()->route('inventary_technical')->with('success','Se ha editado el inventario al usuario');
     }
 
     /**

@@ -222,10 +222,18 @@
                                     @if ($item->date_start <= now()->format('Y-m-d H:i:s') && $item->report)
                                         <tr>
                                             <td>
+                                                    @php
+                                                        $isReady = false;
+                                                    @endphp
                                                 @can('Ver programaciones en frente de trabajo')
                                                     <div class="row" style="cursor: pointer" data-toggle="modal" data-target="#show-modal-{{$item->id}}">
+                                                        @php
+                                                            $isReady = true;
+                                                        @endphp
                                                 @endcannot
-                                                <div class="row">
+                                                @if (!$isReady)
+                                                    <div class="row">
+                                                @endif
                                                     <div class="col-xs-6">
                                                         <p>
                                                             <a target="_blank" href="https://www.google.com/maps/search/{{$item->lat}}+{{$item->long}}/">

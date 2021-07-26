@@ -742,22 +742,22 @@ Route::get('human_management/bonus/minor_box/{id}/export','human_management\bonu
 Route::post('human_management/bonus/minor_box/add_user','human_management\bonus\MinorBoxController@add_user')->name('bonus_minor_box_add_user');
 
 // inventarios de equipos
-Route::get('project/mintic/inventory/equipment','projects\inventory\EquipmentController@index')->name('mintic_inventory_equipment');
-Route::get('project/mintic/inventory/equipment/create','projects\inventory\EquipmentController@create')->name('mintic_inventory_equipment_create');
-Route::post('project/mintic/inventory/equipment','projects\inventory\EquipmentController@store')->name('mintic_inventory_equipment_store');
-Route::get('project/mintic/inventory/equipment/{id}','projects\inventory\EquipmentController@show')->name('mintic_inventory_equipment_show');
-Route::get('project/mintic/inventory/equipment/{id}/edit','projects\inventory\EquipmentController@edit')->name('mintic_inventory_equipment_edit');
-Route::put('project/mintic/inventory/equipment/{id}','projects\inventory\EquipmentController@update')->name('mintic_inventory_equipment_update');
-Route::delete('project/mintic/inventory/equipment/{id}','projects\inventory\EquipmentController@destroy')->name('mintic_inventory_equipment_delete');
+Route::get('execution_works/inventory/equipment','projects\inventory\EquipmentController@index')->name('mintic_inventory_equipment');
+Route::get('execution_works/inventory/equipment/create','projects\inventory\EquipmentController@create')->name('mintic_inventory_equipment_create');
+Route::post('execution_works/inventory/equipment','projects\inventory\EquipmentController@store')->name('mintic_inventory_equipment_store');
+Route::get('execution_works/inventory/equipment/{id}','projects\inventory\EquipmentController@show')->name('mintic_inventory_equipment_show');
+Route::get('execution_works/inventory/equipment/{id}/edit','projects\inventory\EquipmentController@edit')->name('mintic_inventory_equipment_edit');
+Route::put('execution_works/inventory/equipment/{id}','projects\inventory\EquipmentController@update')->name('mintic_inventory_equipment_update');
+Route::delete('execution_works/inventory/equipment/{id}','projects\inventory\EquipmentController@destroy')->name('mintic_inventory_equipment_delete');
 
 //Inventarios de consumible
-Route::get('project/mintic/inventory/consumable','projects\inventory\ConsumablesController@index')->name('mintic_inventory_consumables');
-Route::get('project/mintic/inventory/consumable/create','projects\inventory\ConsumablesController@create')->name('mintic_inventory_consumables_create');
-Route::post('project/mintic/inventory/consumable','projects\inventory\ConsumablesController@store')->name('mintic_inventory_consumables_store');
-Route::get('project/mintic/inventory/consumable/{id}','projects\inventory\ConsumablesController@show')->name('mintic_inventory_consumables_show');
-Route::get('project/mintic/inventory/consumable/{id}/edit','projects\inventory\ConsumablesController@edit')->name('mintic_inventory_consumables_edit');
-Route::put('project/mintic/inventory/consumable/{id}','projects\inventory\ConsumablesController@update')->name('mintic_inventory_consumables_update');
-Route::delete('project/mintic/inventory/consumable/{id}','projects\inventory\ConsumablesController@destroy')->name('mintic_inventory_consumables_delete');
+Route::get('execution_works/inventory/consumable','projects\inventory\ConsumablesController@index')->name('mintic_inventory_consumables');
+Route::get('execution_works/inventory/consumable/create','projects\inventory\ConsumablesController@create')->name('mintic_inventory_consumables_create');
+Route::post('execution_works/inventory/consumable','projects\inventory\ConsumablesController@store')->name('mintic_inventory_consumables_store');
+Route::get('execution_works/inventory/consumable/{id}','projects\inventory\ConsumablesController@show')->name('mintic_inventory_consumables_show');
+Route::get('execution_works/inventory/consumable/{id}/edit','projects\inventory\ConsumablesController@edit')->name('mintic_inventory_consumables_edit');
+Route::put('execution_works/inventory/consumable/{id}','projects\inventory\ConsumablesController@update')->name('mintic_inventory_consumables_update');
+Route::delete('execution_works/inventory/consumable/{id}','projects\inventory\ConsumablesController@destroy')->name('mintic_inventory_consumables_delete');
 
 //Inventario de herramientas
 Route::get('execution_works/inventory/tool','execution_works\invToolController@index')->name('inventory_tools');
@@ -857,10 +857,10 @@ Route::delete('tasking/{id}','taskingController@destroy')->name('tasking_delete'
 Route::patch('tasking/{id}','taskingController@report')->name('tasking_report');
 Route::post('tasking/{id}','taskingController@consumables')->name('tasking_consumables');
 
-Route::get('execution_works/inventary/technical','execution_works\inventaryTechnicalController@index')->name('inventary_technical');
-Route::get('execution_works/inventary/technical/create','execution_works\inventaryTechnicalController@create')->name('inventary_technical_create');
-Route::post('execution_works/inventary/technical','execution_works\inventaryTechnicalController@store')->name('inventary_technical_store');
-Route::get('execution_works/inventary/technical/{id}/edit','execution_works\inventaryTechnicalController@edit')->name('inventary_technical_edit');
-Route::post('execution_works/inventary/technical/{id}','execution_works\inventaryTechnicalController@update')->name('inventary_technical_update');
-Route::get('execution_works/inventary/technical/{id}','execution_works\inventaryTechnicalController@show')->name('inventary_technical_show');
-Route::delete('execution_works/inventary/technical/{id}','execution_works\inventaryTechnicalController@destroy')->name('inventary_technical_delete');
+Route::get('execution_works/inventory/technical','execution_works\inventaryTechnicalController@index')->name('inventary_technical');
+Route::get('execution_works/inventory/technical/create','execution_works\inventaryTechnicalController@create')->name('inventary_technical_create');
+Route::post('execution_works/inventory/technical','execution_works\inventaryTechnicalController@store')->name('inventary_technical_store');
+Route::get('execution_works/inventory/technical/{id}/edit','execution_works\inventaryTechnicalController@edit')->name('inventary_technical_edit');
+Route::put('execution_works/inventory/technical/{id}','execution_works\inventaryTechnicalController@update')->name('inventary_technical_update');
+Route::get('execution_works/inventory/technical/{id}','execution_works\inventaryTechnicalController@show')->name('inventary_technical_show');
+Route::delete('execution_works/inventory/technical/{id}','execution_works\inventaryTechnicalController@destroy')->name('inventary_technical_delete');

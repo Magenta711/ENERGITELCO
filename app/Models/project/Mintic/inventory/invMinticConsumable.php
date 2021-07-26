@@ -19,4 +19,28 @@ class invMinticConsumable extends Model
     {
         return $this->morphMany(MinticConsumableImplementDetail::class, 'productable');
     }
+
+    public function gastar($amount)
+    {
+        $this->update([
+            'departures' => $this->departures + $amount,
+            'stock' => $this->stock - $amount
+        ]);
+    }
+
+    public function entrar($amount)
+    {
+        $this->update([
+            'tickets' => $this->tickets + $amount,
+            'stock' => $this->stock + $amount
+        ]);
+    }
+    
+    public function retroceso($amount)
+    {
+        $this->update([
+            'departures' => $this->departures - $amount,
+            'stock' => $this->stock + $amount
+        ]);
+    }
 }

@@ -38,11 +38,12 @@
                             <tbody>
                                 @php
                                     $arrUser = array();
+                                    $i = 0;
                                 @endphp
                                 @foreach ($inventories as $item)
-                                    @if (!in_array($item->user_id,$arrUser))
+                                    @if (!in_array($item->user_id,$arrUser) && ($item->stock > 0 || $item->tickets > 0 || $item->departures > 0))
                                         <tr>
-                                            <td>{{$item->id}}</td>
+                                            <td>{{++$i}}</td>
                                             <td>{{$item->user->name}}</td>
                                             <td>
                                                 @can('Ver inventario de herramientas')

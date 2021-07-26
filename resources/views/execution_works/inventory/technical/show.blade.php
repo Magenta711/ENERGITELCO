@@ -23,6 +23,7 @@
                 <div class="box-header">
                     <h3 class="box-title">Lista de técnicos con sus bodegas</h3>
                     <div class="box-tools">
+                        <a href="{{route('inventary_technical')}}" class="btn btn-sm btn-success">Volver</a>
                     </div>
                 </div>
                 <!-- /.box-header -->
@@ -41,14 +42,16 @@
                             </thead>
                             <tbody>
                                 @foreach ($inventories as $item)
-                                    <tr>
-                                        <td>{{$item->id}}</td>
-                                        <td>{{$item->inventaryble->item}}</td>
-                                        <td>{{$item->inventaryble_type == 'App\Models\project\Mintic\inventory\invMinticEquipment' ? 'Equipo' : 'Consumible'}}</td>
-                                        <td>{{$item->stock}}</td>
-                                        <td>{{$item->tickets}}</td>
-                                        <td>{{$item->departures}}</td>
-                                    </tr>
+                                    @if ($item->stock > 0 || $item->tickets > 0 || $item->departures > 0)
+                                        <tr>
+                                            <td>{{$item->id}}</td>
+                                            <td>{{$item->inventaryble->serial}} {{$item->inventaryble->serial ? '-' : ''}} {{$item->inventaryble->item}} - {{$item->inventaryble->brand}} {{$item->inventaryble->type}}</td>
+                                            <td>{{$item->inventaryble_type == 'App\Models\project\Mintic\inventory\invMinticEquipment' ? 'Equipo' : 'Consumible'}}</td>
+                                            <td>{{$item->stock}}</td>
+                                            <td>{{$item->tickets}}</td>
+                                            <td>{{$item->departures}}</td>
+                                        </tr>
+                                    @endif
                                 @endforeach
                             </tbody>
                         </table>

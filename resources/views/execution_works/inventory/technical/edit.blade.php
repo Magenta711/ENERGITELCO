@@ -27,6 +27,9 @@
                     </div>
                 </div>
                 <!-- /.box-header -->
+                <form action="{{route('inventary_technical_update',$id)}}" method="post">
+                    @csrf
+                    @method('PUT')
                 <div class="box-body">
                     <div class="table-responsive table-hover">
                         <table id="table_index" class="table table-striped table-bordered" data-page-length='15'>
@@ -40,21 +43,39 @@
                             </thead>
                             <tbody>
                                 @foreach ($inventories as $item)
-                                    <tr>
-                                        <td>{{$item->id}}</td>
-                                        <td>{{$item->inventaryble->item}}</td>
-                                        <td>{{$item->inventaryble_type == 'App\Models\project\Mintic\inventory\invMinticEquipment' ? 'Equipo' : 'Consumible'}}</td>
-                                        <td><input type="number" name="amount[{{$item->id}}]" class="form-control" value="{{$item->stock}}"></td>
-                                    </tr>
+                                    @if ($item->stock)
+                                        <tr>
+                                            <td>{{$item->id}}</td>
+                                            <td>{{$item->inventaryble->serial}} {{$item->inventaryble->serial ? '-' : ''}} {{$item->inventaryble->item}} - {{$item->inventaryble->brand}} {{$item->inventaryble->type}}</td>
+                                            <td>{{$item->inventaryble_type == 'App\Models\project\Mintic\inventory\invMinticEquipment' ? 'Equipo' : 'Consumible'}}</td>
+                                            <td><input type="number" name="amount[{{$item->id}}]" class="form-control input-amount" id="{{$item->inventaryble_type == 'App\Models\project\Mintic\inventory\invMinticEquipment' ? 'amount-equipment' : 'amount-consumable'}}" value="{{$item->stock}}"></td>
+                                        </tr>
+                                    @endif
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <div class="box-footer">Guardar</div>
+                <div class="box-footer">
+                    <button class="btn btn-sm btn-primary btn-send">Guardar</button>
+                </div>
+                </form>
             </div>
         </div>
     </div>
     </ul>
 </section>
+@endsection
+
+
+@section('js')
+    <script>
+        $('.input-amount').blur(function () {
+            if (this.id == 'amount-equipment') {
+                if (this.value > 1) {
+                    $(this).val(1);
+                }
+            }
+        });
+    </script>
 @endsection
