@@ -21,4 +21,9 @@ class MinticConsumableImplementDetail extends Model
     {
         return $this->morphTo();
     }
+
+    public function implement()
+    {
+        return $this->hasOne(MinticConsumableImplement::class,'id','implement_id');
+    }
 }

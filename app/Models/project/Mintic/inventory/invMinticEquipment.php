@@ -5,6 +5,7 @@ namespace App\Models\project\Mintic\inventory;
 use App\Models\project\Mintic\MinticConsumableImplementDetail;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\InvUser;
+use App\Models\taskDetailConsumable;
 
 class invMinticEquipment extends Model
 {
@@ -12,11 +13,11 @@ class invMinticEquipment extends Model
 
     public function productables()
     {
-        return $this->morphMany(MinticConsumableImplementDetail::class, 'productable');
+        return $this->morphOne(MinticConsumableImplementDetail::class, 'productable');
     }
 
     public function inventarybles()
     {
-        return $this->morphMany(InvUser::class, 'inv_users');
+        return $this->morphOne(taskDetailConsumable::class, 'inventaryble');
     }
 }

@@ -12,4 +12,9 @@ class taskDetailConsumable extends Model
     {
         return $this->morphTo();
     }
+
+    public function tasking()
+    {
+        return $this->hasOne(Tasking::class,'id','task_id');
+    }
 }

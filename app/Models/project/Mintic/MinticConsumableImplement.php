@@ -28,4 +28,9 @@ class MinticConsumableImplement extends Model
     {
         return $this->hasOne(User::class,'id','user_id');
     }
+    
+    public function project()
+    {
+        return $this->hasOne(Mintic_School::class,'id','project_id');
+    }
 }
