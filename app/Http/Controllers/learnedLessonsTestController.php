@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LearnedLeassonsTest;
+use App\Models\LearnedLeassonsTestOption;
 use Illuminate\Http\Request;
 
 class learnedLessonsTestController extends Controller
@@ -13,7 +15,7 @@ class learnedLessonsTestController extends Controller
      */
     public function index()
     {
-        $testings = [];
+        $testings = LearnedLeassonsTest::get();
         return view('learned_lessons.test.index',compact('testings'));
     }
 
@@ -35,7 +37,23 @@ class learnedLessonsTestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $test = LearnedLeassonsTest::create([
+            'responsable_id' => auth()->id(),
+            'question' => auth()->id(),
+            'status' => 1,
+        ]);
+        
+        foreach ($request->text_answer as $key => $value) {
+            LearnedLeassonsTestOption::create([
+                'text_answer' => $value,
+                'num' => $key + 1,
+                'answer' => isset($request->answer[$key]) ? 1 : 0,
+                'status' => 1,
+                'test_id' => $test->id,
+            ]);
+        }
+
+        return redirect()->route('learned_lessons_test')->with('success','Se ha creado la pregunta correctamente');
     }
 
     /**
@@ -67,9 +85,9 @@ class learnedLessonsTestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, LearnedLeassonsTest $id)
     {
-        //
+        return redirect()->route('learned_lessons_test')->with('success','Se ha actualizado la pregunta correctamente');
     }
 
     /**
@@ -78,8 +96,9 @@ class learnedLessonsTestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(LearnedLeassonsTest $id)
     {
-        //
+        $id->delete();
+        return redirect()->route('learned_lessons_test')->with('success','Se ha eliminado la pregunta correctamente');
     }
 }

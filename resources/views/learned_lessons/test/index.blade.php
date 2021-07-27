@@ -23,30 +23,8 @@
                     <h3 class="box-title">Lista de preguntas de entrada</h3>
                     <div class="box-tools">
                         @can('Crear computadores al inventario')
-                            <button type="button" class="btn btn-sm btn-danger pl-4 pr-4" data-toggle="modal" data-target="#modal_create">Crear</button>
-                            <div class="modal fade" id="modal_create" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <form action="{{ route('learned_lessons_test_delete',$item->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        <h4 class="modal-title" id="exampleModalLongTitle">Crear pregunta</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-sm btn-secondary pull-left" data-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
-                                    </div>
-                                    </form>
-                                </div>
-                                </div>
-                            </div>
+                            <button type="button" class="btn btn-sm btn-success pl-4 pr-4" data-toggle="modal" data-target="#modal_create">Crear</button>
+                            @include('learned_lessons.test.includes.modals.create')
                         @endcan
                     </div>
                 </div>
@@ -57,49 +35,33 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Fecha</th>
-                                    <th>Tema</th>
+                                    <th>Pregunta</th>
+                                    <th>Respuestas</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($testings as $item)
                                     <tr>
-                                        <td>{{$item->num}}</td>
-                                        <td>{{$item->date}}</td>
-                                        <td>{{$item->theme}}</td>
+                                        <td>{{$item->id}}</td>
+                                        <td>{{$item->question}}</td>
+                                        <td>{{$item->answers ? count($item->answers) : 0}}</td>
                                         <td>
                                             @can('Ver computadores del inventario')
-                                                <a href="{{ route('learned_lessons_show',$item->id) }}" class="btn btn-sm btn-success">Ver</a>
+                                                <button type="button" class="btn btn-sm btn-success pl-4 pr-4" data-toggle="modal" data-target="#modal_show_{{$item->id}}">Ver</button>
+                                                @include('learned_lessons.test.includes.modals.show')
                                             @endcan
                                             @can('Editar computadores del inventario')
-                                                <a href="{{ route('learned_lessons_edit',$item->id) }}" class="btn btn-sm btn-primary">Editar</a>
+                                                <button type="button" class="btn btn-sm btn-primary pl-4 pr-4" data-toggle="modal" data-target="#modal_edit_{{$item->id}}">Editar</button>
+                                                @include('learned_lessons.test.includes.modals.edit')
+                                            @endcan
+                                            @can('Editar computadores del inventario')
+                                                <button type="button" class="btn btn-sm btn-warning pl-4 pr-4" data-toggle="modal" data-target="#modal_answers_{{$item->id}}">Respuestas</button>
+                                                @include('learned_lessons.test.includes.modals.answers')
                                             @endcan
                                             @can('Eliminar computadores del inventario')
                                                 <button type="button" class="btn btn-sm btn-danger pl-4 pr-4" data-toggle="modal" data-target="#modal_delete_{{$item->id}}">Eliminar</button>
-                                                <div class="modal fade" id="modal_delete_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <form action="{{ route('learned_lessons_test_delete',$item->id) }}" method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                        <div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                            <h4 class="modal-title" id="exampleModalLongTitle">Eliminar computador</h4>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p>¿Está seguro de eliminar el la lección aprendida {{ $item->num }}?</p>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-sm btn-secondary pull-left" data-dismiss="modal">Cancelar</button>
-                                                            <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
-                                                        </div>
-                                                        </form>
-                                                    </div>
-                                                    </div>
-                                                </div>
+                                                @include('learned_lessons.test.includes.modals.delete')
                                             @endcan
                                         </td>
                                     </tr>
@@ -115,3 +77,27 @@
 </section>
 @endsection
 
+@section('js')
+    <script>
+        incre = 0;
+        $('#add-answer').click(function () {
+            incre++;
+            let newElement = $("#origen-option").clone().appendTo("#destino-option");
+            newElement.children().children('.input_radio').attr('name','answer['+incre+']');
+            newElement.children().children('.form-control').attr('name','text_answer['+incre+']');
+            newElement.children().children('button').click(function () {
+                $(this).parent().parent().remove();
+            })
+        });
+        $('.add-answer').click(function () {
+            let id = this.id.split("-")[this.id.split("-").length - 1];
+            let incre = ($("#destino-option-edit-"+id).children()).length;
+            let newElement = $("#origen-option-edit-"+id).clone().appendTo("#destino-option-edit-"+id);
+            newElement.children().children('.input_radio').attr('name','answer['+incre+']');
+            newElement.children().children('.form-control').attr('name','text_answer['+incre+']');
+            newElement.children().children('button').click(function () {
+                $(this).parent().parent().remove();
+            })
+        });
+    </script>
+@endsection

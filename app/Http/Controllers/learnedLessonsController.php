@@ -91,7 +91,7 @@ class learnedLessonsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(LearnedLeassons $id)
     {
         $id->delete();
         return redirect()->route('learned_lessons')->with('success','Se ha eliminado la lección aprendida correctamente');
