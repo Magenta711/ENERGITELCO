@@ -800,6 +800,29 @@
                 </td>
             </tr>
             <tr>
+                <td colspan="2">Firmado electrónicamente por el responsable del trabajo o líder</td>
+                <td colspan="2">Firmado electrónicamente por el auditor o coordinador</td>
+            </tr>
+            <tr>
+                <td>Nombre</td>
+                <td>{{$format->responsableAcargo->name}}</td>
+                <td>Nombre</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Cédula</td>
+                <td>{{$format->responsableAcargo->cedula}}</td>
+                <td>Cédula</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    Solicitud elaborada inicialmente y firmada electrónicamente por <strong>{{$format->responsableAcargo->name}}</strong>, en rol de {{$format->responsableAcargo->getRoleNames()[0]}}  habilitado por Energitelco, con conocimiento de funciones y contenido del presente documento. Se cumple Ley 527 de 1999 y Decreto 19 de 2012
+                </td>
+                <td colspan="2">
+                </td>
+            </tr>
+            <tr>
                 <th>
                     9
                 </th>
@@ -853,29 +876,6 @@
                 </td>
                 <td>
                     {{($format->work_add) ? $format->work_add->f9a3u3 : ''}}
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">Firmado electrónicamente por el responsable del trabajo o líder</td>
-                <td colspan="2">Firmado electrónicamente por el auditor o coordinador</td>
-            </tr>
-            <tr>
-                <td>Nombre</td>
-                <td>{{$format->responsableAcargo->name}}</td>
-                <td>Nombre</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Cédula</td>
-                <td>{{$format->responsableAcargo->cedula}}</td>
-                <td>Cédula</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    Solicitud elaborada inicialmente y firmada electrónicamente por <strong>{{$format->responsableAcargo->name}}</strong>, en rol de {{$format->responsableAcargo->getRoleNames()[0]}}  habilitado por Energitelco, con conocimiento de funciones y contenido del presente documento. Se cumple Ley 527 de 1999 y Decreto 19 de 2012
-                </td>
-                <td colspan="2">
                 </td>
             </tr>
         </tbody>
