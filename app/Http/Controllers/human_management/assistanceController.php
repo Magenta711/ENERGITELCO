@@ -15,6 +15,11 @@ class assistanceController extends Controller
     public function __construct() {
         $this->middleware('auth');
         $this->middleware('verified');
+        $this->middleware('permission:Tomar asistecia|Ver asistencia|Lista de asistencias|Editar asistencia|Eliminar asistencia',['only' => ['index']]);
+        $this->middleware('permission:Ver asistencia',['only' => ['show']]);
+        $this->middleware('permission:Tomar asistecia',['only' => ['create','store']]);
+        $this->middleware('permission:Editar asistencia',['only' => ['edit','update']]);
+        $this->middleware('permission:Eliminar asistencia',['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -123,8 +128,9 @@ class assistanceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Assistance $id)
     {
-        //
+        $id->delete();
+        return redirect()->route('assistance')->with('success','Se ha eliminado la asistencia correctamente');
     }
 }

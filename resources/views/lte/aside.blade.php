@@ -518,7 +518,13 @@
                   )
                       <li class="{{activeMenu('execution_works/inventory/consumable*')}}"><a href="{{route('mintic_inventory_consumables')}}"><i class="fa fa-plug"></i> CONSUMIBLES</a></li>
                   @endif
-                  <li class="{{activeMenu('execution_works/inventory/technical*')}}"><a href="{{route('inventary_technical')}}"><i class="fas fa-users-cog"></i> TÉCNICOS</a></li>
+                  @if (
+                    auth()->user()->hasPermissionTo('Ver inventario de técnicos') ||
+                    auth()->user()->hasPermissionTo('Editar inventario de técnicos') ||
+                    auth()->user()->hasPermissionTo('Lista de inventario de técnicos')
+                  )
+                    <li class="{{activeMenu('execution_works/inventory/technical*')}}"><a href="{{route('inventary_technical')}}"><i class="fas fa-users-cog"></i> TÉCNICOS</a></li>
+                  @endif
                 </ul>
               </li>
               @endif
@@ -957,7 +963,16 @@
                   auth()->user()->hasPermissionTo('Digitar solicitud de retiro de cesantías') ||
                   auth()->user()->hasPermissionTo('Eliminar solicitud de retiro de cesantías')
                 )
-                    <li class="{{ activeMenu('human_management/request_withdraw_severance*') }}"><a class="btn-send" href="{{route('request_withdraw_severance')}}"><i class="fa fa-file-invoice-dollar"></i> SOLICITUDES DE CARTA DE RETIRO DE CESANTÍAS O LABORAL</a></li>
+                  <li class="{{ activeMenu('human_management/request_withdraw_severance*') }}"><a class="btn-send" href="{{route('request_withdraw_severance')}}"><i class="fa fa-file-invoice-dollar"></i> SOLICITUDES DE CARTA DE RETIRO DE CESANTÍAS O LABORAL</a></li>
+                @endif
+                @if (
+                  auth()->user()->hasPermissionTo('Tomar asistencia') ||
+                  auth()->user()->hasPermissionTo('Ver asistencia') ||
+                  auth()->user()->hasPermissionTo('Lista de asistencias') ||
+                  auth()->user()->hasPermissionTo('Eliminar asistencia') ||
+                  auth()->user()->hasPermissionTo('Editar asistencia')
+                )  
+                  <li class="{{ activeMenu('human_management/assistance*') }}"><a class="btn-send" href="{{route('assistance')}}"><i class="fa fa-file-invoice-dollar"></i> ASISTENCIA</a></li>
                 @endif
               </ul>
             </li>

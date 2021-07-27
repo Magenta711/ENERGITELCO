@@ -16,7 +16,9 @@
             <div class="box-header">
                 <h3 class="box-title"></h3>
                 <div class="box-tools">
-                    <a href="{{route('assistance_create')}}" class="btn btn-sm btn-success">Crear</a>
+                    @can('Tomar asistecia')
+                        <a href="{{route('assistance_create')}}" class="btn btn-sm btn-success">Crear</a>
+                    @endcan
                 </div>
             </div>
             <div class="box-body">
@@ -37,8 +39,38 @@
                                     <td>{{ $item->responsable->name }}</td>
                                     <td>{{ $item->date }}</td>
                                     <td>
-                                        <a href="{{route('assistance_show',$item->id)}}" class="btn btn-sm btn-success">Ver</a>
-                                        <a href="{{route('assistance_edit',$item->id)}}" class="btn btn-sm btn-primary">Editar</a>
+                                        @can('Ver asistencia')
+                                            <a href="{{route('assistance_show',$item->id)}}" class="btn btn-sm btn-success">Ver</a>
+                                        @endcan
+                                        @can('Editar asistencia')
+                                            <a href="{{route('assistance_edit',$item->id)}}" class="btn btn-sm btn-primary">Editar</a>
+                                        @endcan
+                                        @can('Eliminar asistencia')
+                                            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal_delete_{{$user->id}}">Eliminar</button>
+                                            <div class="modal fade" id="modal_delete_{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <form action="{{ route('assistance_delete',$user->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                        <h4 class="modal-title" id="exampleModalLongTitle">Eliminar usuario</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>¿Está seguro de eliminar el usuario {{$user->name}}?</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-sm btn-secondary pull-left" data-dismiss="modal">Cancelar</button>
+                                                        <button type="submit" class="btn btn-sm btn-danger btn-send">Eliminar</button>
+                                                    </div>
+                                                    </form>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

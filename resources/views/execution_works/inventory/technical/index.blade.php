@@ -46,10 +46,10 @@
                                             <td>{{++$i}}</td>
                                             <td>{{$item->user->name}}</td>
                                             <td>
-                                                @can('Ver inventario de herramientas')
+                                                @can('Ver inventario de técnicos')
                                                     <a href="{{ route('inventary_technical_show',$item->user_id) }}" class="btn btn-sm btn-success">Ver</a>
                                                 @endcan
-                                                @can('Editar inventario de herramientas')
+                                                @can('Editar inventario de técnicos')
                                                     <a href="{{ route('inventary_technical_edit',$item->user_id) }}" class="btn btn-sm btn-primary">Editar</a>
                                                 @endcan
                                             </td>
