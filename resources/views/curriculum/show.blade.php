@@ -53,11 +53,19 @@
                 </div>
             </div>
             @if ($id->register->car || $id->register->moto)
-                <div class="form-group">
-                    <label for="">Coductor</label>
-                    {!! $id->register->car ? '<p>Carro</p>' : '' !!}
-                    {!! $id->register->moto ? '<p>Moto</p>' : '' !!}
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="">Coductor</label>
+                        {!! $id->register->car ? '<p>Carro</p>' : '' !!}
+                        {!! $id->register->moto ? '<p>Moto</p>' : '' !!}
+                    </div>
+                    <div class="col-md-3">
+                        <label for="">Tipo de categoria</label>
+                        <p>{{$id->register->type_license}}</p>
+                    </div>
                 </div>
+            </div>
             @endif
             <hr>
             <h5>Archivos</h5>

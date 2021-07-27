@@ -295,6 +295,9 @@ class taskingController extends Controller
                     'departures' => 1,
                     'stock' => 0
                 ]);
+                invMinticEquipment::find($key)->update([
+                    'status' => 3
+                ]);
             }
         }
         if ($consumables = $request->amount) {

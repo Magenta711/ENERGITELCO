@@ -85,19 +85,27 @@
                             @endif
                         @endforeach
                         @if ($hasDriver)
-                            <div class="form-group">
-                                <label for="">Coductor</label>
-                                <br>
-                                <label for="car">
-                                    <input type="checkbox" name="car" id="car" {{$id->register->car ? 'checked' : ''}} value="1">
-                                    Moto
-                                </label>
-                                <br>
-                                <label for="moto">
-                                    <input type="checkbox" name="moto" id="moto" {{$id->register->moto ? 'checked' : ''}} value="1">
-                                    Carro
-                                </label>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="">Coductor</label>
+                                    <br>
+                                    <label for="car">
+                                        <input type="checkbox" name="car" id="car" {{$id->register->car ? 'checked' : ''}} value="1">
+                                        Moto
+                                    </label>
+                                    <br>
+                                    <label for="moto">
+                                        <input type="checkbox" name="moto" id="moto" {{$id->register->moto ? 'checked' : ''}} value="1">
+                                        Carro
+                                    </label>
+                                </div>
                             </div>
+                            <div class="col-md-3">
+                                <label for="type_license">Tipo de categoria</label>
+                                <input type="text" name="type_license" id="type_license" class="form-control" value="{{$id->register->type_license}}">
+                            </div>
+                        </div>
                         @endif
                     </div>
                     <div class="col-md-4">
