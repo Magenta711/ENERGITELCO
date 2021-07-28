@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class learnedLessonsTestController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+        $this->middleware('verified');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -39,7 +43,7 @@ class learnedLessonsTestController extends Controller
     {
         $test = LearnedLeassonsTest::create([
             'responsable_id' => auth()->id(),
-            'question' => auth()->id(),
+            'question' => $request->question,
             'status' => 1,
         ]);
         
@@ -87,6 +91,38 @@ class learnedLessonsTestController extends Controller
      */
     public function update(Request $request, LearnedLeassonsTest $id)
     {
+        $id->update([
+            'question' => $request->question,
+            'status' => 1,
+        ]);
+        $numOption = count($id->options);
+        LearnedLeassonsTestOption::where('test_id',$id->id)->update([
+            'status' => 0
+        ]);
+        $j = 0;
+        foreach ($id->options as $key => $value) {
+            LearnedLeassonsTestOption::where('test_id',$id->id)->where('num',($j + 1))->update([
+                'text_answer' => $request->text_answer[$j],
+                'answer' => isset($request->answer[$j]) ? 1 : 0,
+                'status' => 1,
+            ]);
+            $j++;
+        }
+        $i = 0;
+        if ($numOption < count($request->text_answer)) {
+            foreach ($request->text_answer as $value) {
+                if ($i >= $j) {
+                    LearnedLeassonsTestOption::create([
+                        'text_answer' => $request->text_answer[$i],
+                        'num' => ($i + 1),
+                        'answer' => isset($request->answer[$i]) ? 1 : 0,
+                        'status' => 1,
+                        'test_id' => $id->id,
+                    ]);
+                }
+                $i++;
+            }
+        }
         return redirect()->route('learned_lessons_test')->with('success','Se ha actualizado la pregunta correctamente');
     }
 
