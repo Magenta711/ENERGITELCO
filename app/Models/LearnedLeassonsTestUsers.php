@@ -17,4 +17,9 @@ class LearnedLeassonsTestUsers extends Model
     {
         return $this->hasOne(LearnedLeassonsTestOption::class,'id','answer_id');
     }
+
+    public function test()
+    {
+        return $this->hasOne(LearnedLeassonsTest::class,'id','test_id');
+    }
 }

@@ -306,7 +306,7 @@
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <div class="box-title">
-                                <i class="fa fa-th"></i> Cartelera Virtual
+                                <i class="fa fa-th"></i> {{$question->test->question}}
                             </div>
 
                             <div class="box-tools pull-right">
@@ -621,7 +621,36 @@
                     toast.addEventListener('mouseup', Swal.resumeTimer)
                 }
             }).then((val) => {
-                if (!{{ auth()->user()->b24_7 }}) {
+                if (!{{$question->status}}){
+                    const inputOptions = new Promise((resolve) => {
+                        @php
+                            $i = 0;
+                        @endphp
+                        resolve({ @foreach ($question->test->options as $option) {{++$i > 1 ? ','.$option->id : $option->id}}: '{{$option->text_answer}}' @endforeach })
+                    })
+
+                    Swal.fire({
+                        title: '{{ $question->test->question }}',
+                        input: 'radio',
+                        width: 500,
+                        inputOptions: inputOptions,
+                        icon: 'question',
+                        inputValidator: (value) => {
+                            if (!value) {
+                                return '¡Selecciona una opción para continuar!'
+                            }
+                        }
+                    }).then((result) => {
+                        $url = '/learned_lessons/answer/home?answer_id='+result.value+'&id='+{{$question->id}};
+                        var jqxhr = $.post($url, function (data) {
+                            Swal.fire('Tu respuesta es : '+data['success']);
+                        })
+                        .fail(function() {
+                            console.log("error");
+                        });
+                    });
+                }
+                if (!{{ auth()->user()->b24_7 }} && {{$question->status}}) {
                     const swalWithBootstrapButtons = Swal.mixin({
                         customClass: {
                             confirmButton: 'btn btn-primary',
@@ -642,20 +671,21 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
                             var jqxhr = $.post('/profile/all_week', function name(data) {
-                                    swalWithBootstrapButtons.fire(
-                                        'Bien!',
-                                        'Tu estado como 24/7 se ha activado.',
-                                        'success'
-                                    )
-                                })
-                                .fail(function() {
-                                    alert("error");
-                                });
+                                swalWithBootstrapButtons.fire(
+                                    'Bien!',
+                                    'Tu estado como 24/7 se ha activado.',
+                                    'success'
+                                )
+                            })
+                            .fail(function() {
+                                alert("error");
+                            });
                         }
                     })
                 }
             })
         });
+
         // allowOutsideClick: false,
         $('#swal2-content').css('font-size', 14);
         $('.swal2-content').css('font-size', 14);

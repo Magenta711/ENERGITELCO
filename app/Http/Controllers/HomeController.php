@@ -15,6 +15,9 @@ use App\Models\billboard\billboard_type;
 use App\Models\bonus24;
 use App\Models\project\planing\Project;
 use App\Models\Customer;
+use App\Models\LearnedLeassonsTest;
+use App\Models\LearnedLeassonsTestOption;
+use App\Models\LearnedLeassonsTestUsers;
 use App\Models\Provider;
 use App\Models\SuggestionsMailbox;
 use App\Models\SystemMessages;
@@ -49,6 +52,18 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $question = LearnedLeassonsTestUsers::where('user_id',auth()->id())->whereBetween('created_at',[now()->format('Y-m-d 00:00:00'),now()->format('Y-m-d 23:59:59')])->first();
+        if (!$question) {
+            $question = LearnedLeassonsTest::where('status',1)->whereDoesntHave('answers',function ($query)
+            {
+                return $query->where('user_id',auth()->id());
+            })->inRandomOrder()->limit(5)->first();
+            $question = LearnedLeassonsTestUsers::create([
+                'user_id' => auth()->id(),
+                'test_id' => $question->id,
+                'status' => 0,
+            ]);
+        }
         $usuarios = User::with('roles')->where('state',1)->count();
         $aprobar1 = Work1::where('estado','Sin aprobar')->count();
         $aprobar2 = Work2::where('estado','Sin aprobar')->count();
@@ -84,7 +99,7 @@ class HomeController extends Controller
         {
             return $query->where('id',auth()->id());
         })->get();
-        return view('home',compact('usuarios','total_sin_aprobar','trabajos1','bill_types','start_mesage','proyectos','customers','providers','job_application','interviews','proof_payment','taskings'));
+        return view('home',compact('usuarios','total_sin_aprobar','trabajos1','bill_types','start_mesage','proyectos','customers','providers','job_application','interviews','proof_payment','taskings','question'));
     }
 
     public function notification()
@@ -257,5 +272,21 @@ class HomeController extends Controller
         }
 
         return $text;
+    }
+
+    public function test_leasson(Request $request)
+    {
+        $question = LearnedLeassonsTestUsers::find($request->id)->update([
+            'answer_id' => $request->answer_id,
+            'status' => 1
+        ]);
+
+        $answer = LearnedLeassonsTestOption::find($request->answer_id);
+
+        if ($answer->answer == 1) {
+            return response()->json(['success'=>'correcta']);
+        }
+        return response()->json(['success'=>'incorrecta']);
+
     }
 }
