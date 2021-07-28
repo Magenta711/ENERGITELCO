@@ -619,6 +619,7 @@
                 )
                     <li class="{{ activeMenu('logistics_infrastructure/checklist_computer_maintenance*') }}"><a class="btn-send" href="{{route('checklist_computer_maintenance')}}"><i class="fa fa-laptop-medical"></i> LISTA DE VERIFICACIÓN DE COMPUTADORES</a></li>
                 @endif
+                <li class="{{ activeMenu('logistics_infrastructure/drivers*') }}"><a class="btn-send" href="{{ route('drivers') }}"><i class="fa fa-car"></i> DOCUMENTACIÓN DE CONDUCTORES</a></li>
                 @if (
                   auth()->user()->hasPermissionTo('Lista de computadores del inventario') ||
                   auth()->user()->hasPermissionTo('Crear computadores al inventario') ||
@@ -653,7 +654,7 @@
                           auth()->user()->hasPermissionTo('Editar vehículos del inventario') ||
                           auth()->user()->hasPermissionTo('Eliminar vehículos del inventario')
                         )
-                            <li class="{{ activeMenu('invetory/vehicle*') }}"><a class="btn-send" href="{{ route('inv_vehicle') }}"><i class="fa fa-car"></i> VEHÍCULOS</a></li>
+                          <li class="{{ activeMenu('invetory/vehicle*') }}"><a class="btn-send" href="{{ route('inv_vehicle') }}"><i class="fa fa-car"></i> VEHÍCULOS</a></li>
                         @endif
                       </ul>
                     </li>

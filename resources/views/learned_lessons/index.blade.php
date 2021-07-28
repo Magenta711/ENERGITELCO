@@ -4,12 +4,12 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        Lecciones aprendidas <small></small>
+        Lesiones aprendidas <small></small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
         <li><a href="#">Administración del sistema</a></li>
-        <li class="active">Lecciones aprendidas</li>
+        <li class="active">Lesiones aprendidas</li>
     </ol>
 </section>
 {{-- Content main --}}
@@ -19,7 +19,7 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Lista de lecciones aprendidas</h3>
+                    <h3 class="box-title">Lista de lesiones aprendidas</h3>
                     <div class="box-tools">
                         @can('Crear computadores al inventario')
                             <a href="{{route('learned_lessons_create')}}" class="btn btn-sm btn-success">Crear</a>

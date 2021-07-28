@@ -4,12 +4,12 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        Lecciones aprendidas <small></small>
+        Lesiones aprendidas <small></small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
         <li><a href="#">Administración del sistema</a></li>
-        <li><a href="#">Lecciones aprendidas</a></li>
+        <li><a href="#">Lesiones aprendidas</a></li>
         <li class="active">Test de entrada</li>
     </ol>
 </section>

@@ -881,3 +881,12 @@ Route::put('learned_lesson/test/{id}','learnedLessonsTestController@update')->na
 Route::get('learned_lesson/test/{id}','learnedLessonsTestController@show')->name('learned_lessons_test_show');
 Route::delete('learned_lesson/test/{id}','learnedLessonsTestController@destroy')->name('learned_lessons_test_delete');
 Route::post('learned_lessons/answer/home','homeController@test_leasson')->name('learned_lessons_test_answer');
+
+Route::get('logistics_infrastructure/drivers','logistics_infrastructure\driversController@index')->name('drivers');
+Route::get('logistics_infrastructure/drivers/create','logistics_infrastructure\driversController@create')->name('drivers_create');
+Route::post('logistics_infrastructure/drivers','logistics_infrastructure\driversController@store')->name('drivers_store');
+Route::get('logistics_infrastructure/drivers/show/{id}','logistics_infrastructure\driversController@show')->name('drivers_show');
+Route::get('logistics_infrastructure/drivers/{id}/edit','logistics_infrastructure\driversController@edit')->name('drivers_edit');
+Route::put('logistics_infrastructure/drivers/{id}','logistics_infrastructure\driversController@update')->name('drivers_update');
+Route::get('logistics_infrastructure/drivers/download/{id}','logistics_infrastructure\driversController@download')->name('drivers_download');
+Route::delete('logistics_infrastructure/drivers/{id}','logistics_infrastructure\driversController@destroy')->name('drivers_delete');

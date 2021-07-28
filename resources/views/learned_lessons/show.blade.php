@@ -4,12 +4,12 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        Lecciones aprendidas <small></small>
+        Lesiones aprendidas <small></small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
         <li><a href="#">Administración del sistema</a></li>
-        <li><a href="#">Lecciones aprendidas</a></li>
+        <li><a href="#">Lesiones aprendidas</a></li>
         <li class="active">Ver</li>
     </ol>
 </section>
@@ -20,7 +20,7 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Lección aprendidas</h3>
+                    <h3 class="box-title">Lesión aprendidas</h3>
                     <div class="box-tools">
                         <a href="{{route('learned_lessons')}}" class="btn btn-sm btn-primary">Volver</a>
                     </div>
