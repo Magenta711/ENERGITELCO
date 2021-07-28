@@ -1124,12 +1124,12 @@
                     </li>
                 @endif
                 <li class="treeview {{activeMenu('learned_lesson*')}}">
-                  <a href="#"><i class="fa fa-wallet"></i> LECCIONES APRENDIDAS<span class="pull-right-container">
+                  <a href="#"><i class="fas fa-user-injured"></i> LECCIONES APRENDIDAS<span class="pull-right-container">
                       <i class="fa fa-angle-left pull-right"></i>
                     </span>
                   </a>
                   <ul class="treeview-menu">
-                    <li class="{{ activeMenu('learned_lessons*') }}"><a class="btn-send" href="{{route('learned_lessons')}}"><i class="fa fa-comment-alt"></i> REGISTROS</a></li>
+                    <li class="{{ activeMenu('learned_lessons*') }}"><a class="btn-send" href="{{route('learned_lessons')}}"><i class="fa fa-crutch"></i> REGISTROS</a></li>
                     <li class="{{ activeMenu('learned_lesson/test*') }}"><a class="btn-send" href="{{route('learned_lessons_test')}}"><i class="fa fa-comment-alt"></i> TEST DE ENTRADA</a></li>
                   </ul>
                 </li>

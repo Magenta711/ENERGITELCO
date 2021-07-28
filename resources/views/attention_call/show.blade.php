@@ -24,7 +24,7 @@
             @include('attention_call.include.attention_body')
         </div>
         <div class="box-footer">
-            @if ($id->state == 'Sin aprobar')
+            @if ($id->state == 'Sin aprobar'  || $id->state == 'Sin argumentos')
                 @can('Aprobar llamados de atención')
                     <a class="btn btn-sm btn-primary" href="{{ route('approve_call',$id->id) }}"
                         onclick="event.preventDefault();
@@ -42,9 +42,10 @@
                     </form>
                 @endcan
             @endif
-            @if ($id->state == 'Aprobado')
-                {{-- <a href="" class="btn btn-danger btn-sm">Descargar</a> --}}
-            @endif
+            {{-- @if ($id->state == 'Aprobado')
+                <a href="" class="btn btn-danger btn-sm">Descargar</a>
+            @endif --}}
+            <hr>
             <div class="row">
                 @if ($id->comment && $id->approver != $id->responsable)
                 <div class="col-md-4">

@@ -52,12 +52,12 @@
                     </div>
                 @endif
                 @can('Aprobar descargos de atención')
-                @if ($id->comment && $id->approverCall->id == auth()->id())
-                    <div class="form-group">
-                        <label for="comment">Comentarios</label>
-                        <textarea name="comment" id="comment" cols="30" rows="3" class="form-control">{{$id->comment}}</textarea>
-                    </div>
-                @endif
+                    @if ($id->comment && $id->approverCall->id == auth()->id())
+                        <div class="form-group">
+                            <label for="comment">Comentarios</label>
+                            <textarea name="comment" id="comment" cols="30" rows="3" class="form-control">{{$id->comment}}</textarea>
+                        </div>
+                    @endif
                 @endcan
         </div>
         <div class="box-footer">

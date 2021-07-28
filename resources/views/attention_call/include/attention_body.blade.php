@@ -9,9 +9,11 @@
 <h4>Referencias</h4>
 <p>{!!str_replace("\n", '</br>', addslashes($id->references))!!}</p>
 <hr>
-@if ($id->arguments)
 <h4>Argumentos que dio el trabajador</h4>
+@if ($id->arguments)
 <p>{!!str_replace("\n", '</br>', addslashes($id->arguments))!!}</p>
+@else
+<p>Sin argumentos</p>
 @endif
 @if ($id->type)
 <hr>
@@ -23,7 +25,7 @@
 <h4>Comentarios por el aprobador</h4>
 <p>{!!str_replace("\n", '</br>', addslashes($id->comment))!!}</p>
 @endif
-@if ($id->state == 'Sin aprobar')
+@if ($id->state == 'Sin aprobar' || $id->state == 'Sin argumentos')
     @can('Aprobar llamados de atención')
         <form id="approve_call" action="{{ route('approve_call',$id->id) }}" method="POST" autocomplete="off">
             @csrf
@@ -33,9 +35,9 @@
                 <label for="type">Tipo de descargo</label>
                 <select name="type" id="type" class="form-control">
                     <option selected disabled></option>
-                    <option value="Llamado de atención">Llamado de atención</option>
-                    <option value="Notificación">Notificación</option>
-                    <option value="Felicitaciones">Felicitaciones</option>
+                    <option {{$id->type == 'Llamado de atención' ? 'selected' : '' }} value="Llamado de atención">Llamado de atención</option>
+                    <option {{$id->type == 'Notificación' ? 'selected' : '' }} value="Notificación">Notificación</option>
+                    <option {{$id->type == 'Felicitaciones' ? 'selected' : '' }} value="Felicitaciones">Felicitaciones</option>
                 </select>
             </div>
             <div class="form-group">

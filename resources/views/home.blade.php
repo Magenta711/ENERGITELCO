@@ -635,6 +635,7 @@
                         width: 500,
                         inputOptions: inputOptions,
                         icon: 'question',
+                        allowOutsideClick: false,
                         inputValidator: (value) => {
                             if (!value) {
                                 return '¡Selecciona una opción para continuar!'
