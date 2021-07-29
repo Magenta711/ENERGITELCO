@@ -65,8 +65,8 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="">Tipo de vehículo que conduce</label> <br>
-                            <label for="moto"><input type="checkbox" name="moto" id="moto" {{old('moto') ? 'checked' : '' }}> Moto</label>
-                            <label for="car"><input type="checkbox" name="car" id="car" {{old('car') ? 'checked' : '' }}> Carro</label>
+                            <label for="moto"><input type="checkbox" name="moto" id="moto" {{old('moto') ? 'checked' : '' }} value="1"> Moto</label>
+                            <label for="car"><input type="checkbox" name="car" id="car" {{old('car') ? 'checked' : '' }} value="1"> Carro</label>
                         </div>
                     </div>
                     <hr>
@@ -103,8 +103,8 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="suject">Motivo</label>
-                                <textarea name="suject[]" id="suject" cols="30" rows="3" class="form-control"></textarea>
+                                <label for="report_suject">Motivo</label>
+                                <textarea name="report_suject[]" id="report_suject" cols="30" rows="3" class="form-control"></textarea>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -150,8 +150,8 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="suject">Motivo</label>
-                                <textarea name="suject[]" id="suject" cols="30" rows="3" class="form-control"></textarea>
+                                <label for="control_suject">Motivo</label>
+                                <textarea name="control_suject[]" id="control_suject" cols="30" rows="3" class="form-control"></textarea>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -254,8 +254,8 @@
                         </div>
                         <div class="col-md-5">
                             <div class="form-group">
-                                <label for="text_date">Fecha</label>
-                                <input type="date" name="text_date[]" id="text_date" class="form-control">
+                                <label for="test_date">Fecha</label>
+                                <input type="date" name="test_date[]" id="test_date" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-1 text-right">
@@ -319,9 +319,9 @@
                 </div>
                 <button class="btn btn-sm btn-link btn-add-block" id="training_add"><i class="fa fa-plus"></i> Agregar reporte</button>
             </div>
-        </div>
-        <div class="box-footer">
-            <button class="btn btn-sm btn-primary">Guardar</button>
+            <div class="box-footer">
+                <button class="btn btn-sm btn-primary">Guardar</button>
+            </div>
         </div>
         </form>
     </section>
