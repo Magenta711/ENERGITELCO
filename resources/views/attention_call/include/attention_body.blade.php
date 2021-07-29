@@ -25,7 +25,7 @@
 <h4>Comentarios por el aprobador</h4>
 <p>{!!str_replace("\n", '</br>', addslashes($id->comment))!!}</p>
 @endif
-@if ($id->state == 'Sin aprobar' || $id->state == 'Sin argumentos')
+@if (!isset($arg) && ($id->state == 'Sin aprobar' || $id->state == 'Sin argumentos'))
     @can('Aprobar llamados de atención')
         <form id="approve_call" action="{{ route('approve_call',$id->id) }}" method="POST" autocomplete="off">
             @csrf

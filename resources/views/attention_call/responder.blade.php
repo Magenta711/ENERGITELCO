@@ -24,7 +24,7 @@
             @csrf
             @method('PUT')
         <div class="box-body">
-            @include('attention_call.include.attention_body')
+            @include('attention_call.include.attention_body',['arg' => true])
             @if ($id->receiverCall->id == auth()->id() && !$id->arguments)
                 <div class="form-group">
                     <label for="arguments">Argumentos</label> <small>(Argumentos del trabajador)</small>
