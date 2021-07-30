@@ -205,7 +205,7 @@ class payrollOvertimeNewsReportController extends Controller
                 
                 'extras_sc' => $request->extras_sc[$value->user_id],
                 'surcharge_n' => $request->surcharge_n[$value->user_id],
-                'surcharge_n' => $request->extras_d[$value->user_id],
+                'extras_d' => $request->extras_d[$value->user_id],
                 'extras_dc' => $request->extras_dc[$value->user_id],
                 'extras_n' => $request->extras_n[$value->user_id],
                 'extras_s' => $request->extras_s[$value->user_id],

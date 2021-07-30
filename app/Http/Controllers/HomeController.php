@@ -94,7 +94,9 @@ class HomeController extends Controller
         $providers = Provider::where('state',1)->count();
         $interviews = interview::count();
         $job_application = WorkWithUs::count();
-        $proof_payment = Work8Users::where('user_id',auth()->id())->get()->last();
+        $proof_payment = Work8Users::where('user_id',auth()->id())->whereHas('work',function ($query) {
+            return $query->where('estado','Aprobado');
+        })->get()->last();
         $taskings = Tasking::where('report',null)->whereHas('users',function ($query)
         {
             return $query->where('id',auth()->id());

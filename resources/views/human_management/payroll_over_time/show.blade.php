@@ -163,21 +163,21 @@
                                                                             </tr>
                                                                             <tr>
                                                                                 <td>Licencia no remunerada</td>
-                                                                                <td>{{ $item->extras_hn }}</td>
+                                                                                <td>{{ $item->unpaid_leave }}</td>
                                                                                 <td>
                                                                                    $ {{ number_format($item->unpaid_leave_tx,2,',','.') }}
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td>Incapacidades ARL <small>(100%)</small></td>
-                                                                                <td>{{ $item->extras_hn }}</td>
+                                                                                <td>{{ $item->disabilities_1 }}</td>
                                                                                 <td>
                                                                                    $ {{ number_format($item->disabilities_1_tx,2,',','.') }}
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td>Incapacidades EPS <small>(67%)</small></td>
-                                                                                <td>{{ $item->extras_hn }}</td>
+                                                                                <td>{{ $item->disabilities_2 }}</td>
                                                                                 <td>
                                                                                    $ {{ number_format($item->disabilities_2_tx,2,',','.') }}
                                                                                 </td>

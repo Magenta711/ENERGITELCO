@@ -223,7 +223,7 @@
                     <tr>
                         <td>0%</td>
                         <td>Licencia no remunerada</td>
-                        <td>{{ $data->extras_hn }}</td>
+                        <td>{{ $data->unpaid_leave }}</td>
                         <td>
                            $ {{ number_format($data->unpaid_leave_tx,2,',','.') }}
                         </td>
@@ -235,7 +235,7 @@
                     <tr>
                         <td>100%</td>
                         <td>Incapacidades ARL</td>
-                        <td>{{ $data->extras_hn }}</td>
+                        <td>{{ $data->disabilities_1 }}</td>
                         <td>
                            $ {{ number_format($data->disabilities_1_tx,2,',','.') }}
                         </td>
@@ -247,7 +247,7 @@
                     <tr>
                         <td>67%</td>
                         <td>Incapacidades EPS <small>(67%)</small></td>
-                        <td>{{ $data->extras_hn }}</td>
+                        <td>{{ $data->disabilities_2 }}</td>
                         <td>
                            $ {{ number_format($data->disabilities_2_tx,2,',','.') }}
                         </td>
