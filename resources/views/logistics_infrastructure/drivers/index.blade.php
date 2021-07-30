@@ -46,7 +46,7 @@
                                 </td>
                                 <td>
                                     <a href="{{route('drivers_show',$driver->id)}}" class="btn btn-sm btn-success">Ver</a>
-                                    <a href="{{route('drivers_edit',$driver->id)}}" class="btn btn-sm btn-success">Editar</a>
+                                    <a href="{{route('drivers_edit',$driver->id)}}" class="btn btn-sm btn-primary">Editar</a>
                                     <a href="{{route("drivers_download",$driver->id)}}" class="btn btn-warning btn-sm">Descargar</a>
                                     @can('Eliminar formato de inspecciones detalladas de vehículos')
                                         <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete_{{$driver->id}}">Eliminar</button>

@@ -28,7 +28,7 @@ class driversController extends Controller
      */
     public function index()
     {
-        $drivers = [];
+        $drivers = Drivers::get();
         return view('logistics_infrastructure.drivers.index',compact('drivers'));
     }
 
@@ -52,6 +52,9 @@ class driversController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'user_id' => ['required','unique:drivers,user_id']
+        ]);
         $request['responsable_id'] = auth()->id();
         $driver = Drivers::create($request->all());
         
@@ -123,7 +126,7 @@ class driversController extends Controller
                 ]);
             }
         }
-        return redirect()->route('drivers')->with('success','Se ha creado el la documentación del conductor correctamente');
+        return redirect()->route('drivers')->with('success','Se ha creado la documentación del conductor correctamente');
     }
 
     /**
@@ -132,9 +135,9 @@ class driversController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Drivers $id)
     {
-        //
+        return view('logistics_infrastructure.drivers.show',compact('id'));
     }
 
     /**
@@ -143,9 +146,11 @@ class driversController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Drivers $id)
     {
-        //
+        $users = User::where('state',1)->get();
+        $vehicles = invVehicle::where('status','!=',0)->get();
+        return view('logistics_infrastructure.drivers.edit',compact('id','users','vehicles'));
     }
 
     /**
@@ -155,9 +160,92 @@ class driversController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Drivers $id)
     {
-        //
+        $request->validate([
+            'user_id' => ['required','unique:drivers,user_id,'.$id->id]
+        ]);
+
+        $id->update($request->all());
+
+        DriversReport::where('driver_id',$id->id)->delete();
+        foreach ($request->report_date as $key => $value) {
+            if ($value != '') {
+                DriversReport::create([
+                    'date' => $value,
+                    'city' => $request->report_city[$key],
+                    'vehicle_id' => $request->report_vehicle[$key],
+                    'suject' => $request->report_suject[$key],
+                    'observation' => $request->report_observation[$key],
+                    'driver_id' => $id->id
+                ]);
+            }
+        }
+        DriversControl::where('driver_id',$id->id)->delete();
+        foreach ($request->control_date as $key => $value) {
+            if ($value != '') {
+                DriversControl::create([
+                    'date' => $value,
+                    'city' => $request->control_city[$key],
+                    'vehicle_id' => $request->control_vehicle[$key],
+                    'suject' => $request->control_suject[$key],
+                    'observation' => $request->control_observation[$key],
+                    'driver_id' => $id->id
+                ]);
+            }
+        }
+        DriversAccident::where('driver_id',$id->id)->delete();
+        foreach ($request->accident_date as $key => $value) {
+            if ($value != '') {
+                DriversAccident::create([
+                    'date' => $value,
+                    'city' => $request->accident_city[$key],
+                    'vehicle_id' => $request->accident_vehicle[$key],
+                    'zone' => $request->accident_zone[$key],
+                    'details' => $request->accident_details[$key],
+                    'driver_id' => $id->id
+                ]);
+            }
+        }
+        DriversExam::where('driver_id',$id->id)->delete();
+        foreach ($request->exam_date as $key => $value) {
+            if ($value != '') {
+                DriversExam::create([
+                    'date' => $value,
+                    'type' => $request->exam_type[$key],
+                    'result' => $request->exam_result[$key],
+                    'commentary' => $request->exam_commentary[$key],
+                    'driver_id' => $id->id
+                ]);
+            }
+        }
+        DriversTest::where('driver_id',$id->id)->delete();
+        foreach ($request->test_date as $key => $value) {
+            if ($value != '') {
+                DriversTest::create([
+                    'date' => $value,
+                    'type' => $request->test_type[$key],
+                    'result' => $request->test_result[$key],
+                    'commentary' => $request->test_commentary[$key],
+                    'driver_id' => $id->id
+                ]);
+            }
+        }
+        DriversTraining::where('driver_id',$id->id)->delete();
+        foreach ($request->training_date as $key => $value) {
+            if ($value != '') {
+                DriversTraining::create([
+                    'date' => $value,
+                    'theme' => $request->training_theme[$key],
+                    'facilitator' => $request->training_facilitator[$key],
+                    'duration' => $request->training_duration[$key],
+                    'observation' => $request->training_observation[$key],
+                    'driver_id' => $id->id
+                ]);
+            }
+        }
+
+        return redirect()->route('drivers')->with('success','Se ha actualizado la documentación del conductor correctamente');
     }
 
     /**
@@ -166,8 +254,9 @@ class driversController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Drivers $id)
     {
-        //
+        $id->update(['update' => 0]);
+        return redirect()->route('drivers')->with('success','Se ha eliminado la documentación del conductor correctamente');
     }
 }

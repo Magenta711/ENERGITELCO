@@ -593,7 +593,7 @@
           auth()->user()->hasPermissionTo('Editar vehículos del inventario') ||
           auth()->user()->hasPermissionTo('Eliminar vehículos del inventario')
         )
-            <li class="treeview {{ activeMenu('logistics_infrastructure/detailed_inspection_vehicles*') }}{{ activeMenu('logistics_infrastructure/checklist_computer_maintenance*') }}{{ activeMenu('invetory/computer*') }}{{ activeMenu('invetory/vehicle*') }}">
+            <li class="treeview {{ activeMenu('logistics_infrastructure*') }}{{ activeMenu('invetory/computer*') }}{{ activeMenu('invetory/vehicle*') }}">
               <a href="#">
                 <i class="fa fa-warehouse"></i>
                 <span>LOGÍSTICA E INFRAESTRUCTURA</span><span class="pull-right-container">

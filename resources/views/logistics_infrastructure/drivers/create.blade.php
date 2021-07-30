@@ -88,7 +88,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="subpoina_vehicle">Vehículos</label>
+                                <label for="report_vehicle">Vehículos</label>
                                 <select name="report_vehicle[]" id="report_vehicle" class="form-control">
                                     <option selected disabled></option>
                                     <option value="otro">Otro</option>
@@ -116,7 +116,7 @@
                     </div>
                     <hr>
                 </div>
-                <button class="btn btn-sm btn-link btn-add-block" id="report_add"><i class="fa fa-plus"></i> Agregar reporte</button>
+                <button type="button" class="btn btn-sm btn-link btn-add-block" id="report_add"><i class="fa fa-plus"></i> Agregar reporte</button>
                 <hr>
                 <h4>Control de ingreso de conductores con deudas de comparendos y fotomultas</h4>
                 <div id="control_destino">
@@ -135,7 +135,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="subpoina_vehicle">Vehículos</label>
+                                <label for="control_vehicle">Vehículos</label>
                                 <select name="control_vehicle[]" id="control_vehicle" class="form-control">
                                     <option selected disabled></option>
                                     <option value="otro">Otro</option>
@@ -163,7 +163,7 @@
                     </div>
                     <hr>
                 </div>
-                <button class="btn btn-sm btn-link btn-add-block" id="control_add"><i class="fa fa-plus"></i> Agregar reporte</button>
+                <button type="button" class="btn btn-sm btn-link btn-add-block" id="control_add"><i class="fa fa-plus"></i> Agregar reporte</button>
                 <hr>
                 <h4>Reporte de accidentes</h4>
                 <div id="accident_destino">
@@ -183,7 +183,13 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="accident_vehicle">Vehículos</label>
-                                <input type="text" name="accident_vehicle[]" id="accident_vehicle" class="form-control">
+                                <select name="accident_vehicle[]" id="accident_vehicle" class="form-control">
+                                    <option selected disabled></option>
+                                    <option value="otro">Otro</option>
+                                    @foreach ($vehicles as $vehicle)
+                                        <option value="{{$vehicle->id}}">{{$vehicle->plate}} {{$vehicle->brand}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-1 text-right">
@@ -204,7 +210,7 @@
                     </div>
                     <hr>
                 </div>
-                <button class="btn btn-sm btn-link btn-add-block" id="accident_add"><i class="fa fa-plus"></i> Agregar reporte</button>
+                <button type="button" class="btn btn-sm btn-link btn-add-block" id="accident_add"><i class="fa fa-plus"></i> Agregar reporte</button>
                 <hr>
                 <h3>Acciones realizadas en seguridad vial</h3>
                 <hr>
@@ -241,7 +247,7 @@
                     </div>
                     <hr>
                 </div>
-                <button class="btn btn-sm btn-link btn-add-block" id="exam_add"><i class="fa fa-plus"></i> Agregar reporte</button>
+                <button type="button" class="btn btn-sm btn-link btn-add-block" id="exam_add"><i class="fa fa-plus"></i> Agregar reporte</button>
                 <hr>
                 <h4>Pruebas teóricas y prácticas realizadas</h4>
                 <div id="test_destino">
@@ -276,7 +282,7 @@
                     </div>
                     <hr>
                 </div>
-                <button class="btn btn-sm btn-link btn-add-block" id="test_add"><i class="fa fa-plus"></i> Agregar reporte</button>
+                <button type="button" class="btn btn-sm btn-link btn-add-block" id="test_add"><i class="fa fa-plus"></i> Agregar reporte</button>
                 <hr>
                 <h4>Capacitaciones recibidas</h4>
                 <div id="training_destino">
@@ -317,7 +323,7 @@
                     </div>
                     <hr>
                 </div>
-                <button class="btn btn-sm btn-link btn-add-block" id="training_add"><i class="fa fa-plus"></i> Agregar reporte</button>
+                <button type="button" class="btn btn-sm btn-link btn-add-block" id="training_add"><i class="fa fa-plus"></i> Agregar reporte</button>
             </div>
             <div class="box-footer">
                 <button class="btn btn-sm btn-primary">Guardar</button>
