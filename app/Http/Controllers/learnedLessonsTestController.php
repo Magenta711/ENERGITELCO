@@ -11,6 +11,11 @@ class learnedLessonsTestController extends Controller
     public function __construct() {
         $this->middleware('auth');
         $this->middleware('verified');
+        $this->middleware('permission:Lista de preguntas de lesiones aprendidas|Crear preguntas de lesiones aprendidas|Editar preguntas de lesiones aprendidas|Eliminar preguntas de lesiones aprendidas|Ver preguntas de lesiones aprendidas',['only' => ['index']]);
+        $this->middleware('permission:Crear preguntas de lesiones aprendidas',['only' => ['create','store']]);
+        $this->middleware('permission:Editar preguntas de lesiones aprendidas',['only' => ['edit','update']]);
+        $this->middleware('permission:Ver preguntas de lesiones aprendidas',['only' => ['show']]);
+        $this->middleware('permission:Eliminar preguntas de lesiones aprendidas',['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.

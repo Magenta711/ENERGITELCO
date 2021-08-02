@@ -53,7 +53,7 @@
                                             <p>Equipo</p>
                                         @endif
                                     </td>
-                                    <td>{{$detail->productable->item}} - {{$detail->productable->type}}</td>
+                                    <td>{{$detail->productable->serial}} {{$detail->productable->serial ? '-' : ''}} {{$detail->productable->item}} - {{$detail->productable->type}}</td>
                                     <td>{{$detail->amount}}</td>
                                     <td>{{$detail->spent}}</td>
                                     <td>{{$detail->delivered}}</td>

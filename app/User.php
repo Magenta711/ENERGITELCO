@@ -159,4 +159,3 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(InvUser::class, 'user_id','id');
     }
 }
-// UPDATE `signatures` SET `signatures_type`='App\Models\document' WHERE `signatures_type` like 'App\User'

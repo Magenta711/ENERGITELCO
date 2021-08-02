@@ -54,7 +54,7 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="description_1">Detalle</label>
-                                    <p>{{$detail->productable->item}} - {{$detail->productable->type}}</p>
+                                    <p>{{$detail->productable->serial}} {{$detail->productable->serial ? '-' : ''}} {{$detail->productable->item}} - {{$detail->productable->type}}</p>
                                 </div>
                             </div>
                             <div class="col-sm-3">

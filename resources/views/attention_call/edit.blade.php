@@ -48,14 +48,14 @@
                     </div>
                     <div class="form-group">
                         <label for="references">Referencias</label>
-                        <textarea name="references" id="references" cols="30" rows="3" class="form-control">{{$id->references}}</textarea>
+                        <textarea name="references" id="references" cols="30" rows="3" class="form-control textarea">{{$id->references}}</textarea>
                     </div>
                 @endif
                 @can('Aprobar descargos de atención')
                     @if ($id->comment && $id->approverCall->id == auth()->id())
                         <div class="form-group">
                             <label for="comment">Comentarios</label>
-                            <textarea name="comment" id="comment" cols="30" rows="3" class="form-control">{{$id->comment}}</textarea>
+                            <textarea name="comment" id="comment" cols="30" rows="3" class="form-control textarea">{{$id->comment}}</textarea>
                         </div>
                     @endif
                 @endcan
@@ -66,4 +66,17 @@
         </form>
     </div>
 </section>
+@endsection
+
+@section('css')
+{{-- wysihtml5-supported --}}
+    <link rel="stylesheet" href="{{asset("assets/$theme/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css")}}">
+@endsection
+@section('js')
+    <script src="{{asset("assets/$theme/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js")}}"></script>
+    <script>
+        $(function () {
+            $('.textarea').wysihtml5();
+        })
+    </script>
 @endsection

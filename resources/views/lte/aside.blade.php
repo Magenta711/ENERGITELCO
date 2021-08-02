@@ -1124,16 +1124,45 @@
                       </ul>
                     </li>
                 @endif
-                <li class="treeview {{activeMenu('learned_lesson*')}}">
-                  <a href="#"><i class="fas fa-user-injured"></i> LECCIONES APRENDIDAS<span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                  </a>
-                  <ul class="treeview-menu">
-                    <li class="{{ activeMenu('learned_lessons*') }}"><a class="btn-send" href="{{route('learned_lessons')}}"><i class="fa fa-crutch"></i> REGISTROS</a></li>
-                    <li class="{{ activeMenu('learned_lesson/test*') }}"><a class="btn-send" href="{{route('learned_lessons_test')}}"><i class="fa fa-comment-alt"></i> TEST DE ENTRADA</a></li>
-                  </ul>
-                </li>
+                @if (
+                  auth()->user()->hasPermissionTo('Lista de lesiones aprendidas') ||
+                  auth()->user()->hasPermissionTo('Crear lesiones aprendidas') ||
+                  auth()->user()->hasPermissionTo('Editar lesiones aprendidas') ||
+                  auth()->user()->hasPermissionTo('Eliminar lesiones aprendidas') ||
+                  auth()->user()->hasPermissionTo('Ver lesiones aprendidas') ||
+                  auth()->user()->hasPermissionTo('Lista de preguntas de lesiones aprendidas') ||
+                  auth()->user()->hasPermissionTo('Crear preguntas de lesiones aprendidas') ||
+                  auth()->user()->hasPermissionTo('Editar preguntas de lesiones aprendidas') ||
+                  auth()->user()->hasPermissionTo('Eliminar preguntas de lesiones aprendidas') ||
+                  auth()->user()->hasPermissionTo('Ver preguntas de lesiones aprendidas')
+                )
+                    <li class="treeview {{activeMenu('learned_lesson*')}}">
+                      <a href="#"><i class="fas fa-user-injured"></i> LESIONES APRENDIDAS<span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                      </a>
+                    <ul class="treeview-menu">
+                        @if (
+                          auth()->user()->hasPermissionTo('Lista de lesiones aprendidas') ||
+                          auth()->user()->hasPermissionTo('Crear lesiones aprendidas') ||
+                          auth()->user()->hasPermissionTo('Editar lesiones aprendidas') ||
+                          auth()->user()->hasPermissionTo('Eliminar lesiones aprendidas') ||
+                          auth()->user()->hasPermissionTo('Ver lesiones aprendidas')
+                        )
+                            <li class="{{ activeMenu('learned_lessons*') }}"><a class="btn-send" href="{{route('learned_lessons')}}"><i class="fa fa-crutch"></i> REGISTROS</a></li>
+                        @endif
+                        @if (
+                          auth()->user()->hasPermissionTo('Lista de preguntas de lesiones aprendidas') ||
+                          auth()->user()->hasPermissionTo('Crear preguntas de lesiones aprendidas') ||
+                          auth()->user()->hasPermissionTo('Editar preguntas de lesiones aprendidas') ||
+                          auth()->user()->hasPermissionTo('Eliminar preguntas de lesiones aprendidas') ||
+                          auth()->user()->hasPermissionTo('Ver preguntas de lesiones aprendidas')
+                        )
+                          <li class="{{ activeMenu('learned_lesson/test*') }}"><a class="btn-send" href="{{route('learned_lessons_test')}}"><i class="fa fa-spell-check"></i> TEST DE ENTRADA</a></li>
+                        @endif
+                      </ul>
+                    </li>
+                @endif
                 @can('Configurar mensajes en el sistema')
                   <li class="{{ activeMenu('setting/messages*') }}"><a class="btn-send" href="{{route('messages')}}"><i class="fa fa-comment-alt"></i> MENSAJES DEL SISTEMA</a></li>
                 @endcan

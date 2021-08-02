@@ -42,7 +42,7 @@
             </div>
             <div class="form-group">
                 <label for="comment">Comentarios</label>
-                <textarea name="comment" id="comment" cols="30" rows="3" class="form-control">{{old('comment')}}</textarea>
+                <textarea name="comment" id="comment" cols="30" rows="3" class="form-control textarea">{{old('comment')}}</textarea>
             </div>
         </form>
     @endcan

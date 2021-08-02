@@ -104,3 +104,16 @@
     </div>
 </section>
 @endsection
+
+@section('css')
+{{-- wysihtml5-supported --}}
+    <link rel="stylesheet" href="{{asset("assets/$theme/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css")}}">
+@endsection
+@section('js')
+    <script src="{{asset("assets/$theme/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js")}}"></script>
+    <script>
+        $(function () {
+            $('.textarea').wysihtml5();
+        })
+    </script>
+@endsection

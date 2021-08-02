@@ -55,7 +55,7 @@
             </div>
             <div class="form-group">
                 <label for="references">Referencias</label>
-                <textarea name="references" id="references" cols="4" rows="5" class="form-control">{{$id->references}}</textarea>
+                <textarea name="references" id="references" cols="4" rows="5" class="form-control textarea">{{$id->references}}</textarea>
             </div>
         </div>
         <div class="box-footer">
@@ -64,4 +64,16 @@
         </form>
     </div>
 </section>
+@endsection
+@section('css')
+{{-- wysihtml5-supported --}}
+    <link rel="stylesheet" href="{{asset("assets/$theme/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css")}}">
+@endsection
+@section('js')
+    <script src="{{asset("assets/$theme/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js")}}"></script>
+    <script>
+        $(function () {
+            $('.textarea').wysihtml5();
+        })
+    </script>
 @endsection

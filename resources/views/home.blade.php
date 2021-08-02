@@ -306,7 +306,7 @@
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <div class="box-title">
-                                <i class="fa fa-th"></i> {{$question->test->question}}
+                                <i class="fa fa-th"></i> Cartelera
                             </div>
 
                             <div class="box-tools pull-right">
@@ -621,37 +621,41 @@
                     toast.addEventListener('mouseup', Swal.resumeTimer)
                 }
             }).then((val) => {
-                if (!{{$question->status}}){
-                    const inputOptions = new Promise((resolve) => {
-                        @php
-                            $i = 0;
-                        @endphp
-                        resolve({ @foreach ($question->test->options as $option) {{++$i > 1 ? ','.$option->id : $option->id}}: '{{$option->text_answer}}' @endforeach })
-                    })
-
-                    Swal.fire({
-                        title: '{{ $question->test->question }}',
-                        input: 'radio',
-                        width: 500,
-                        inputOptions: inputOptions,
-                        icon: 'question',
-                        allowOutsideClick: false,
-                        inputValidator: (value) => {
-                            if (!value) {
-                                return '¡Selecciona una opción para continuar!'
-                            }
-                        }
-                    }).then((result) => {
-                        $url = '/learned_lessons/answer/home?answer_id='+result.value+'&id='+{{$question->id}};
-                        var jqxhr = $.post($url, function (data) {
-                            Swal.fire('Tu respuesta es : '+data['success']);
+                readyQuestion = false;
+                @if ($question)
+                    if (!{{$question->status}}){
+                        readyQuestion = true;
+                        const inputOptions = new Promise((resolve) => {
+                            @php
+                                $i = 0;
+                            @endphp
+                            resolve({ @foreach ($question->test->options as $option) {{++$i > 1 ? ','.$option->id : $option->id}}: '{{$option->text_answer}}' @endforeach })
                         })
-                        .fail(function() {
-                            console.log("error");
+
+                        Swal.fire({
+                            title: '{{ $question->test->question }}',
+                            input: 'radio',
+                            width: 500,
+                            inputOptions: inputOptions,
+                            icon: 'question',
+                            allowOutsideClick: false,
+                            inputValidator: (value) => {
+                                if (!value) {
+                                    return '¡Selecciona una opción para continuar!'
+                                }
+                            }
+                        }).then((result) => {
+                            $url = '/learned_lessons/answer/home?answer_id='+result.value+'&id='+{{$question->id}};
+                            var jqxhr = $.post($url, function (data) {
+                                Swal.fire('Tu respuesta es : '+data['success']);
+                            })
+                            .fail(function() {
+                                console.log("error");
+                            });
                         });
-                    });
-                }
-                if (!{{ auth()->user()->b24_7 }} && {{$question->status}}) {
+                    }
+                @endif
+                if (!{{ auth()->user()->b24_7 }} && !readyQuestion) {
                     const swalWithBootstrapButtons = Swal.mixin({
                         customClass: {
                             confirmButton: 'btn btn-primary',
