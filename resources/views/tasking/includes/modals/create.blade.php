@@ -32,7 +32,7 @@
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <label for="municipality">Municiopio</label>
+                                <label for="municipality">Municipio</label>
                                 <select name="municipality" id="municipality" disabled class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona el municipio" style="width: 100%;" data-select2-id="3" tabindex="-1" aria-hidden="true">
                                     <option disabled selected></option>
                                 </select>
@@ -42,7 +42,11 @@
                                 <select name="project" id="project" class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona el proyecto" style="width: 100%;" data-select2-id="4" tabindex="-1" aria-hidden="true">
                                     <option disabled selected></option>
                                     <option data-select2-id="MINTIC_ESTUDIO_DE_CAMPO" value="MINTIC ESTUDIO DE CAMPO">MINTIC ESTUDIO DE CAMPO</option>
-                                    <option data-select2-id="MINTIC_INSTALACIÓN" value="MINTIC INSTALACIÓN">MINTIC INSTALACIÓN</option>
+                                    <option data-select2-id="MINTIC_TSS_EB" value="MINTIC TSS EB">MINTIC TSS EB</option>
+                                    <option data-select2-id="MINTIC_INSTALACIÓN_CENTRO_DIGITAL" value="MINTIC INSTALACIÓN CENTRO DIGITAL">MINTIC INSTALACIÓN CENTRO DIGITAL</option>
+                                    <option data-select2-id="MINTIC_INSTALACIÓN_ESTACIÓN_BASE" value="MINTIC INSTALACIÓN ESTACIÓN BASE">MINTIC INSTALACIÓN ESTACIÓN BASE</option>
+                                    <option data-select2-id="MINTIC_INTEGRACIÓN_Y_ENTREGA_CENTRO_DIGITAL" value="MINTIC INTEGRACIÓN Y ENTREGA CENTRO DIGITAL">MINTIC INTEGRACIÓN Y ENTREGA CENTRO DIGITAL</option>
+                                    <option data-select2-id="MINTIC_ENTREGA_INTERVENTORIA_CENTRO_DIGITAL" value="MINTIC ENTREGA INTERVENTORIA CENTRO DIGITAL">MINTIC ENTREGA INTERVENTORIA CENTRO DIGITAL</option>
                                     <option data-select2-id="MINTIC_MANTANIMIENTO" value="MINTIC MANTANIMIENTO">MINTIC MANTANIMIENTO</option>
                                     <option data-select2-id="RUTAS_DE_TX" value="RUTAS DE TX">RUTAS DE TX</option>
                                     <option data-select2-id="DESMONTES_ENLACES_MW" value="DESMONTES ENLACES MW">DESMONTES ENLACES MW</option>

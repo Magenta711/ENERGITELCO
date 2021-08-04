@@ -80,10 +80,45 @@
             </button>
             <hr>
             {{-- EndUsers --}}
+            <h4 for="nombre_eb">Nombre de la EB donde se va trabajar</h4>
             {{-- Additional Information --}}
+            {{-- <div class="form-group">
+                <input type="text" class="form-control" id="nombre_eb" placeholder="Nombre de la EB" name="nombre_eb" value="{{ old('nombre_eb')}}">
+            </div> --}}
             <div class="form-group">
-                <label for="nombre_eb">Nombre de la EB donde se va trabajar</label>
-                    <input type="text" class="form-control" id="nombre_eb" placeholder="Nombre de la EB" name="nombre_eb" value="{{ old('nombre_eb')}}">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="department">Departamentos</label>
+                        <select name="department" id="department" class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona el departamento" style="width: 100%;" data-select2-id="2" tabindex="-1" aria-hidden="true">
+                            <option disabled selected></option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="municipality">Municipio</label>
+                        <select name="municipality" id="municipality" disabled class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona el municipio" style="width: 100%;" data-select2-id="3" tabindex="-1" aria-hidden="true">
+                            <option disabled selected></option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="eb">Estación base</label>
+                        <input type="hidden" name="type_eb" id="type_eb">
+                        <select name="eb" id="eb" class="form-control select2 select2-hidden-accessible" disabled style="width: 100%;" data-placeholder="Selecciona un EB o CD" data-select2-id="5" tabindex="-1" aria-hidden="true">
+                            <option disabled selected></option>
+                        </select>
+                    </div>
+                    <div class="col-md-4" style="display: none">
+                        <label for="station_name">Nombre de la estación base</label>
+                        <input type="text" value="{{old('station_name')}}" name="station_name" id="station_name" class="form-control">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="lat">Latitud</label>
+                        <input readonly type="text" value="{{old('lat')}}" name="lat" id="lat" class="form-control">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="long">Longitud</label>
+                        <input readonly type="text" value="{{old('long')}}" name="long" id="long" class="form-control">
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <label for="altura">Altura aprox. a la cual se realizará la actividad</label>

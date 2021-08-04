@@ -101,7 +101,12 @@
 </section>
 @endsection
 
+@section('css')
+    <link rel="stylesheet" href="{{asset("assets/$theme/bower_components/select2/dist/css/select2.min.css")}}">
+@endsection
+
 @section('js')
+    <script src="{{asset("assets/$theme/bower_components/select2/dist/js/select2.full.min.js")}}"></script>
     <script src="{{ asset('js/form1.js') }}" defer></script>
     <script>
         var bPreguntar = true;
