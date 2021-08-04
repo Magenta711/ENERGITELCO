@@ -195,15 +195,17 @@ class taskingController extends Controller
             'status' => 2,
         ]);
         Responsable::where('responsibles_type','App\Models\Tasking')->where('responsibles_id',$id->id)->delete();
-        for ($i=0; $i < count($request->users); $i++) {
-            Responsable::create([
-                'user_id' => $request->users[$i],
-                'responsibles_type' => 'App\Models\Tasking',
-                'responsibles_id' => $id->id,
-            ]);
+        if (isset($request->users)) {
+            for ($i=0; $i < count($request->users); $i++) {
+                Responsable::create([
+                    'user_id' => $request->users[$i],
+                    'responsibles_type' => 'App\Models\Tasking',
+                    'responsibles_id' => $id->id,
+                ]);
+            }
         }
         $id->vehicles()->delete();
-        if (count($request->vehicles)) {
+        if (isset($request->vehicles)) {
             for ($i=0; $i < count($request->vehicles); $i++) { 
                 $id->vehicles()->create([
                     'vehicle_id' => $request->vehicles[$i]
@@ -211,7 +213,7 @@ class taskingController extends Controller
             }
         }
         $id->activities()->delete();
-        if (count($request->activities)) {
+        if (isset($request->activities)) {
             for ($i=0; $i < count($request->activities); $i++) {
                 if ($request->activities[$i]) {
                     $id->activities()->create([
