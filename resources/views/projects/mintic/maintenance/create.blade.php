@@ -88,12 +88,6 @@
                <div class="col-md-3">
                    <div class="form-group">
                        <label for="responsable_number">Número de contacto</small></label>
-                       <input type="text" value="{{old('responsable_number')}}" name="responsable_number" id="responsable_number"" class="form-control">
-                   </div>
-               </div>
-               <div class="col-md-3">
-                   <div class="form-group">
-                       <label for="responsable_number">Número de contacto</small></label>
                        <input type="text" name="responsable_number" id="responsable_number" value="{{ $id->rector_number }}" class="form-control">
                    </div>
                </div>

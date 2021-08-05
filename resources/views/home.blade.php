@@ -647,11 +647,12 @@
                         }).then((result) => {
                             $url = '/learned_lessons/answer/home?answer_id='+result.value+'&id='+{{$question->id}};
                             var jqxhr = $.post($url, function (data) {
-                                Swal.fire('Tu respuesta es : '+data['success']);
+                                Swal.fire(data['success']);
                             })
                             .fail(function() {
                                 console.log("error");
                             });
+                            console.log(jqxhr);
                         });
                     }
                 @endif
@@ -683,7 +684,7 @@
                                 )
                             })
                             .fail(function() {
-                                alert("error");
+                                console.log("error");
                             });
                         }
                     })

@@ -54,15 +54,17 @@ class HomeController extends Controller
     {
         $question = LearnedLeassonsTestUsers::where('user_id',auth()->id())->whereBetween('created_at',[now()->format('Y-m-d 00:00:00'),now()->format('Y-m-d 23:59:59')])->first();
         if (!$question) {
-            $question = LearnedLeassonsTest::where('status',1)->whereDoesntHave('answers',function ($query)
+            $test = LearnedLeassonsTest::where('status',1)->whereDoesntHave('answers',function ($query)
             {
                 return $query->where('user_id',auth()->id());
             })->inRandomOrder()->limit(5)->first();
-            $question = LearnedLeassonsTestUsers::create([
-                'user_id' => auth()->id(),
-                'test_id' => $question->id,
-                'status' => 0,
-            ]);
+            if ($test) {
+                $question = LearnedLeassonsTestUsers::create([
+                    'user_id' => auth()->id(),
+                    'test_id' => $test->id,
+                    'status' => 0,
+                ]);
+            }
         }
         $usuarios = User::with('roles')->where('state',1)->count();
         $aprobar1 = Work1::where('estado','Sin aprobar')->count();
@@ -278,17 +280,22 @@ class HomeController extends Controller
 
     public function test_leasson(Request $request)
     {
-        $question = LearnedLeassonsTestUsers::find($request->id)->update([
-            'answer_id' => $request->answer_id,
-            'status' => 1
-        ]);
-
-        $answer = LearnedLeassonsTestOption::find($request->answer_id);
-
-        if ($answer->answer == 1) {
-            return response()->json(['success'=>'correcta']);
+        $question = LearnedLeassonsTestUsers::find($request->id);
+        if ($question->status == 0) {
+            return response()->json(['success'=>$request->id]);
+            $question->update([
+                'answer_id' => $request->answer_id,
+                'status' => 1
+            ]);
+    
+            $answer = LearnedLeassonsTestOption::where('test_id',$question->test_id)->where('answer',1)->first();
+    
+            $message = 'Tu respuesta es : Incorrecta: '.$answer->text_answer;
+            if ($answer->id == $request->answer_id) {
+                $message = 'Tu respuesta es : Correcta: '.$answer->text_answer;
+            }
+            return response()->json(['success'=>$message]);
         }
-        return response()->json(['success'=>'incorrecta']);
-
+        return response()->json(['success'=>'Ya contestaste']);
     }
 }

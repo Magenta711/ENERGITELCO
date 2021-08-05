@@ -880,7 +880,7 @@ Route::get('learned_lesson/test/{id}/edit','learnedLessonsTestController@edit')-
 Route::put('learned_lesson/test/{id}','learnedLessonsTestController@update')->name('learned_lessons_test_update');
 Route::get('learned_lesson/test/{id}','learnedLessonsTestController@show')->name('learned_lessons_test_show');
 Route::delete('learned_lesson/test/{id}','learnedLessonsTestController@destroy')->name('learned_lessons_test_delete');
-Route::post('learned_lessons/answer/home','homeController@test_leasson')->name('learned_lessons_test_answer');
+Route::post('learned_lessons/answer/home','HomeController@test_leasson')->name('learned_lessons_test_answer');
 
 Route::get('logistics_infrastructure/drivers','logistics_infrastructure\driversController@index')->name('drivers');
 Route::get('logistics_infrastructure/drivers/create','logistics_infrastructure\driversController@create')->name('drivers_create');
