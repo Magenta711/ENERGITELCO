@@ -4,7 +4,6 @@ namespace App\Http\Controllers\projects;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\interview;
 use App\Models\project\Mintic\Mintic_School;
 use App\Models\project\Mintic\inventory\EquimentDetail;
 use Illuminate\Support\Facades\Storage;
@@ -13,13 +12,13 @@ use App\Models\project\Mintic\mintic_maintenance;
 use Image;
 use App\User;
 use App\Exports\minticMaintenanceExport;
-use Illuminate\Support\Arr;
+use App\Models\project\Mintic\MinticVisit;
 
 class MinticController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth']);
+        $this->middleware('auth');
         $this->middleware('verified');
         $this->middleware('permission:Lista de proyectos de MINTIC|Crear proyectos de MINTIC|Eliminar proyectos de MINTIC|Ver proyectos de MINTIC|Editar proyectos de MINTIC|Aprobar proyectos de MINTIC',['only' => ['index']]);
         $this->middleware('permission:Ver proyectos de MINTIC',['only' => ['show']]);
@@ -76,6 +75,58 @@ class MinticController extends Controller
             }
         }
 
+        foreach ($request->date_ec as $key => $value) {
+            if ($value) {
+                MinticVisit::create([
+                    'date'=>$value,
+                    'project_id'=>$id->id,
+                    'time'=>$request->time_ec[$key],
+                    'technical_id'=>$request->technical_id_ec[$key],
+                    'commentary'=>$request->commentary_ec[$key],
+                    'type' => 'ec',
+                    'status' => 0
+                ]);
+            }
+        }
+        foreach ($request->date_install as $key => $value) {
+            if ($value) {
+                MinticVisit::create([
+                    'date'=>$value,
+                    'project_id'=>$id->id,
+                    'time'=>$request->time_install[$key],
+                    'technical_id'=>$request->technical_id_install[$key],
+                    'commentary'=>$request->commentary_install[$key],
+                    'type' => 'install',
+                    'status' => 0
+                ]);
+            }
+        }
+        foreach ($request->date_integration as $key => $value) {
+            if ($value) {
+                MinticVisit::create([
+                    'date'=>$value,
+                    'project_id'=>$id->id,
+                    'time'=>$request->time_integration[$key],
+                    'technical_id'=>$request->technical_id_integration[$key],
+                    'commentary'=>$request->commentary_integration[$key],
+                    'type' => 'integration',
+                    'status' => 0
+                ]);
+            }
+        }
+        foreach ($request->date_maintenance as $key => $value) {
+            if ($value) {
+                MinticVisit::create([
+                    'date'=>$value,
+                    'project_id'=>$id->id,
+                    'time'=>$request->time_maintenance[$key],
+                    'technical_id'=>$request->technical_id_maintenance[$key],
+                    'commentary'=>$request->commentary_maintenance[$key],
+                    'type' => 'maintenance',
+                    'status' => 0
+                ]);
+            }
+        }
         return redirect()->route('mintic')->with('success','Se ha creado el proyecto correctamente');
     }
     /**
@@ -333,13 +384,13 @@ class MinticController extends Controller
     public function pintures($id)
     {
         $id = Mintic_School::with(['files'])->find($id);
-        return view('projects.mintic.pintures',compact('id' ));
+        return view('projects.mintic.pintures',compact('id'));
     }
     
     public function install($id)
     {
         $id = Mintic_School::with(['files'])->find($id);
-        return view('projects.mintic.install',compact('id' ));
+        return view('projects.mintic.install',compact('id'));
     }
 
     public function upload_install(Request $request)

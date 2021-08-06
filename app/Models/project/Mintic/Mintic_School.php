@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class Mintic_School extends Model
 {
     protected $table = "mintic_schools";
-    protected $fillable = ['approver_id','technical_id','code','name','dep','mun','person_name','person_number','lat','long','height','date','time','rector_name','rector_number','observation','responsable_id','status','population','date_install','time_install'];
+    protected $fillable = ['approver_id','con_sede','code','name','dep','mun','person_name','person_number','lat','long','height','rector_name','rector_number','observation','responsable_id','status','population'];
     protected $guarder = ['id'];
 
     public function responsable()
@@ -34,5 +34,10 @@ class Mintic_School extends Model
     public function taskings()
     {
         return $this->morphMany(taskEb::class, 'projectble');
+    }
+
+    public function visits()
+    {
+        return $this->hasMany(MinticVisit::class,'project_id','id');
     }
 }

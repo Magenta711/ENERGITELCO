@@ -66,7 +66,7 @@
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
                                                                     </button>
-                                                                    <h4 class="modal-title" id="exampleModalLongTitle">Eliminar usuario</h4>
+                                                                    <h4 class="modal-title" id="exampleModalLongTitle">Eliminar equipo</h4>
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <p>¿Está seguro de eliminar el equipo {{ $equipment->item }}?</p>

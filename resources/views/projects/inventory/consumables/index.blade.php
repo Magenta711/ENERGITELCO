@@ -3,20 +3,20 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Inventario de consumibles <small>MINTIC</small>
+            Inventario de consumibles
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
-            <li><a href="#">Proyectos</a></li>
-            <li><a href="#">Mintic</a></li>
-            <li class="active">Inventario</li>
+            <li><a href="#">Ejecución de obras</a></li>
+            <li><a href="#">Inventario</a></li>
+            <li class="active">Consumibles</li>
         </ol>
     </section>
     <section class="content">
         @include('includes.alerts')
         <div class="box">
             <div class="box-header">
-                <div class="box-title">Estudio de campo proyecto MINTIC</div>
+                <div class="box-title">Inventario de consumibles</div>
                 <div class="box-tools">
                     @can('Crear consumible del inventario')
                         <a href="{{route('mintic_inventory_consumables_create')}}" class="btn btn-sm btn-success">Crear</a>
@@ -65,7 +65,7 @@
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
-                                                            <h4 class="modal-title" id="exampleModalLongTitle">Eliminar usuario</h4>
+                                                            <h4 class="modal-title" id="exampleModalLongTitle">Eliminar consumible</h4>
                                                         </div>
                                                         <div class="modal-body">
                                                             <p>¿Está seguro de eliminar el consumible {{ $consumable->item }}?</p>

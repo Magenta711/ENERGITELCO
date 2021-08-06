@@ -66,31 +66,31 @@
                                                     <a class="dropdown-item" href="{{route('mintic_maintenance',$item->id)}}">Mantenimiento</a>
                                                 {{-- @endcan --}}
                                                 @can('Eliminar proyectos de MINTIC')
-                                                    <a class="dropdown-item" data-toggle="modal" data-target="#modal_delete_{{$item->id}}">Eliminar</a>
+                                                    <button class="dropdown-item" data-toggle="modal" data-target="#modal_delete_{{$item->id}}">Eliminar</button>
                                                 @endcan
                                             </div>
                                         </div>
                                         <div class="modal fade" id="modal_delete_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <form action="{{route('mintic_delete',$item->id)}}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                    <h4 class="modal-title" id="exampleModalLongTitle">Eliminar usuario</h4>
+                                                <div class="modal-content">
+                                                    <form action="{{route('mintic_delete',$item->id)}}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                            <h4 class="modal-title" id="exampleModalLongTitle">Eliminar proyecto</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>¿Está seguro de eliminar el proyecto {{ $item->name }}?</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-sm btn-secondary pull-left" data-dismiss="modal">Cancelar</button>
+                                                            <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                                                        </div>
+                                                    </form>
                                                 </div>
-                                                <div class="modal-body">
-                                                    <p>¿Está seguro de eliminar el proyecto Desmonte MW{{ $item->estation_a.' - '.$item->estation_b }}?</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-sm btn-secondary pull-left" data-dismiss="modal">Cancelar</button>
-                                                    <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
-                                                </div>
-                                                </form>
-                                            </div>
                                             </div>
                                         </div>
                                     </td>
@@ -123,6 +123,21 @@
         .dropdown-item:hover{
             background: rgb(0,0,0,0.05);
             color: #444444;
+        }
+        .dropdown-menu>button{
+            color: #444444;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+            padding: 10px;
+            white-space: nowrap;
+            border-bottom: none;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            border: none;
+            background: #fff;
+            width: 100%;
+            text-align: left;
         }
     </style>
 @endsection

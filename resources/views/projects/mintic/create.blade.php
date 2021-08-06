@@ -18,6 +18,7 @@
         <div class="box-header">
             <div class="box-title"> Proyecto MINTIC</div>
             <div class="box-tools">
+                <a href="{{route('mintic')}}" class="btn btn-sm btn-primary">Volver</a>
             </div>
         </div>
         <div class="box-body">
@@ -56,7 +57,6 @@
                             <label for="long">Longitud</label>
                             <input type="text" value="{{old('long')}}" name="long" id="long" class="form-control">
                         </div>
-
                         <div class="form-group col-sm-6">
                             <label for="height">Altitud</label>
                             <input type="text" id="height" name="height" value="{{ old('height') }}" class="form-control">
@@ -93,115 +93,119 @@
                     <hr>
                     <h4>Estudio de campo</h4>
                     <div id="destino_ec">
-                        <div class="row">
+                        <div class="row" id="origen_ec">
                             <div class="form-group col-sm-6">
                                 <label for="date">Fecha visita</label>
-                                <input type="date" id="date" name="date" value="{{ old('date') ?? now()->format('Y-m-d') }}" class="form-control">
+                                <input type="date" id="date" name="date_ec[]" class="form-control">
                             </div>
                             <div class="form-group col-sm-6">
                                 <label for="time">Hora visita</label>
-                                <input type="time" id="time" name="time" value="{{ old('time') }}" class="form-control">
+                                <input type="time" id="time" name="time_ec[]" class="form-control">
                             </div>
                             <div class="form-group col-sm-6">
-                                <label for="technical_id">Técnico asignado</label>
-                                <select name="technical_id" id="technical_id" class="form-control">
+                                <label for="technical_id_ec">Técnico asignado</label>
+                                <select name="technical_id_ec[]" id="technical_id_ec" class="form-control">
                                     <option disabled selected></option>
                                     @foreach ($users as $item)
-                                    <option {{ old('technical_id') == $item->id ? 'selected' : '' }} value="{{$item->id}}">{{$item->cedula}}. {{$item->name}}</option>
+                                    <option value="{{$item->id}}">{{$item->cedula}}. {{$item->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group col-sm-6">
                                 <label for="commentary">Comentarios</label>
-                                <input type="text" id="commentary" name="commentary" value="{{ old('commentary') }}" class="form-control">
+                                <input type="text" id="commentary" name="commentary_ec[]" class="form-control">
                             </div>
+                            <hr>
                         </div>
                     </div>
-                    <button class="btn btn-sm btn-link" id="btn_add_ec"><i class="fa fa-plus"></i> Agregar visita</button>
+                    <button class="btn btn-sm btn-link btn-add-visit" id="btn_add_ec"><i class="fa fa-plus"></i> Agregar visita</button>
                     <hr>
                     <h4>Instalación</h4>
-                    <div id="destino-install">
-                        <div class="row">
+                    <div id="destino_install">
+                        <div class="row" id="origen_install">
                             <div class="form-group col-sm-6">
                                 <label for="date_install">Fecha visita</label>
-                                <input type="date" id="date_install" name="date_install" value="{{ old('date_install') }}" class="form-control">
+                                <input type="date" id="date_install" name="date_install[]" class="form-control">
                             </div>
                             <div class="form-group col-sm-6">
                                 <label for="time_install">Hora visita</label>
-                                <input type="time" id="time_install" name="time_install" value="{{ old('time_install') }}" class="form-control">
+                                <input type="time" id="time_install" name="time_install[]" class="form-control">
                             </div>
                             <div class="form-group col-sm-6">
-                                <label for="technical_id">Técnico asignado</label>
-                                <select name="technical_id" id="technical_id" class="form-control">
+                                <label for="technical_id_install">Técnico asignado</label>
+                                <select name="technical_id_install[]" id="technical_id_install" class="form-control">
                                     <option disabled selected></option>
                                     @foreach ($users as $item)
-                                    <option {{ old('technical_id') == $item->id ? 'selected' : '' }} value="{{$item->id}}">{{$item->cedula}}. {{$item->name}}</option>
+                                    <option value="{{$item->id}}">{{$item->cedula}}. {{$item->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group col-sm-6">
-                                <label for="commentary">Comentarios</label>
-                                <input type="text" id="commentary" name="commentary" value="{{ old('commentary') }}" class="form-control">
+                                <label for="commentary_install">Comentarios</label>
+                                <input type="text" id="commentary_install" name="commentary_install[]" class="form-control">
                             </div>
+                            <hr>
                         </div>
                     </div>
-                    <button class="btn btn-sm btn-link" id="btn_add_install"><i class="fa fa-plus"></i> Agregar visita</button>
+                    <button class="btn btn-sm btn-link btn-add-visit" id="btn_add_install"><i class="fa fa-plus"></i> Agregar visita</button>
                     <hr>
-                    <h4>Itegración y/o entrega</h4>
-                    <div id="destino-integration">
-                        <div class="row">
+                    <h4>Integración y/o entrega</h4>
+                    <div id="destino_integration">
+                        <div class="row" id="origen_integration">
                             <div class="form-group col-sm-6">
-                                <label for="date_install">Fecha visita</label>
-                                <input type="date" id="date_install" name="date_install" value="{{ old('date_install') }}" class="form-control">
+                                <label for="date_integration">Fecha visita</label>
+                                <input type="date" id="date_integration" name="date_integration[]" class="form-control">
                             </div>
                             <div class="form-group col-sm-6">
-                                <label for="time_install">Hora visita</label>
-                                <input type="time" id="time_install" name="time_install" value="{{ old('time_install') }}" class="form-control">
+                                <label for="time_integration">Hora visita</label>
+                                <input type="time" id="time_integration" name="time_integration[]" class="form-control">
                             </div>
                             <div class="form-group col-sm-6">
-                                <label for="technical_id">Técnico asignado</label>
-                                <select name="technical_id" id="technical_id" class="form-control">
+                                <label for="technical_id_integration">Técnico asignado</label>
+                                <select name="technical_id_integration[]" id="technical_id_integration" class="form-control">
                                     <option disabled selected></option>
                                     @foreach ($users as $item)
-                                    <option {{ old('technical_id') == $item->id ? 'selected' : '' }} value="{{$item->id}}">{{$item->cedula}}. {{$item->name}}</option>
+                                    <option value="{{$item->id}}">{{$item->cedula}}. {{$item->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group col-sm-6">
-                                <label for="commentary">Comentarios</label>
-                                <input type="text" id="commentary" name="commentary" value="{{ old('commentary') }}" class="form-control">
+                                <label for="commentary_integration">Comentarios</label>
+                                <input type="text" id="commentary_integration" name="commentary_integration[]"  class="form-control">
                             </div>
+                            <hr>
                         </div>
                     </div>
-                    <button class="btn btn-sm btn-link" id="btn-add-integration"><i class="fa fa-plus"></i> Agregar visita</button>
+                    <button class="btn btn-sm btn-link btn-add-visit" id="btn_add_integration"><i class="fa fa-plus"></i> Agregar visita</button>
                     <hr>
                     <h4>Mantenimiento</h4>
-                    <div id="destino-maintenance">
-                        <div class="row">
+                    <div id="destino_maintenance">
+                        <div class="row" id="origen_maintenance">
                             <div class="form-group col-sm-6">
-                                <label for="date_install">Fecha visita</label>
-                                <input type="date" id="date_install" name="date_install" value="{{ old('date_install') }}" class="form-control">
+                                <label for="date_maintenance">Fecha visita</label>
+                                <input type="date" id="date_maintenance" name="date_maintenance[]" class="form-control">
                             </div>
                             <div class="form-group col-sm-6">
-                                <label for="time_install">Hora visita</label>
-                                <input type="time" id="time_install" name="time_install" value="{{ old('time_install') }}" class="form-control">
+                                <label for="time_maintenance">Hora visita</label>
+                                <input type="time" id="time_maintenance" name="time_maintenance[]" class="form-control">
                             </div>
                             <div class="form-group col-sm-6">
-                                <label for="technical_id">Técnico asignado</label>
-                                <select name="technical_id" id="technical_id" class="form-control">
+                                <label for="technical_id_maintenance">Técnico asignado</label>
+                                <select name="technical_id_maintenance[]" id="technical_id_maintenance" class="form-control">
                                     <option disabled selected></option>
                                     @foreach ($users as $item)
-                                    <option {{ old('technical_id') == $item->id ? 'selected' : '' }} value="{{$item->id}}">{{$item->cedula}}. {{$item->name}}</option>
+                                    <option value="{{$item->id}}">{{$item->cedula}}. {{$item->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group col-sm-6">
-                                <label for="commentary">Comentarios</label>
-                                <input type="text" id="commentary" name="commentary" value="{{ old('commentary') }}" class="form-control">
+                                <label for="commentary_maintenance">Comentarios</label>
+                                <input type="text" id="commentary_maintenance" name="commentary_maintenance[]" class="form-control">
                             </div>
+                            <hr>
                         </div>
                     </div>
-                    <button class="btn btn-sm btn-link" id="btn-add-maintenance"><i class="fa fa-plus"></i> Agregar visita</button>
+                    <button class="btn btn-sm btn-link btn-add-visit" id="btn_add_maintenance"><i class="fa fa-plus"></i> Agregar visita</button>
                 </div>
                 <div class="box-footer">
                     <button class="btn btn-primary btn-send">Guardar</button>
@@ -218,149 +222,5 @@
 
 @section('js')
     <script src="{{asset("assets/$theme/bower_components/select2/dist/js/select2.full.min.js")}}"></script>
-    <script>
-        $(document).ready(function() {
-            const cd = '/json/ec01wxyb1-4adc2.json';
-
-            const request = new XMLHttpRequest();
-
-            request.open('GET', cd);
-            request.responseType = 'json';
-            request.send();
-
-            request.onload = function() {
-                selectDep(request.response);
-            }
-
-            $('#eb').change(function(){
-                if (this.value == 0) {
-                    $('#station_name').parent().show();
-                    $('#station_name').val('');
-                    $('#lat').val('');
-                    $('#long').val('');
-                }else {
-                    $('.station-other').hide();
-                    $('#station_name').val('');
-                    $('#lat').val('');
-                    $('#long').val('');
-                }
-            });
-
-            $(".select2").select2();
-
-        });
-        
-        function selectDep(response) {
-            data = [];
-            response.CD.forEach(element => {
-                data.push({
-                    id: element.DEPARTAMENTO.toUpperCase(),
-                    text: element.DEPARTAMENTO.toUpperCase()
-                });
-            });
-            dataMap = data.map(item=>{
-                return [item.id,item]
-            });
-            dataMapArr = new Map(dataMap)
-            unicos = [...dataMapArr.values()];
-            unicos.sort(GetSortOrder("text"));
-            $("#department").select2({
-                data: unicos
-            }).change(function () {
-                $('#municipality').prop('disabled',false);
-                $("#eb").empty().prop('disabled',true);;
-                selectMunicipaly(this.value,response);
-            });
-        }
-
-        function selectMunicipaly(value,response) {
-            data = [];
-            response.CD.forEach(element => {
-                if (element.DEPARTAMENTO.toUpperCase() == value) {
-                    data.push({
-                        id: element.MUNICIPIOANM.toUpperCase(),
-                        text: element.MUNICIPIOANM.toUpperCase()
-                    });
-                }
-            });
-            dataMap = data.map(item=>{
-                return [item.id,item]
-            });
-            dataMapArr = new Map(dataMap)
-            unicos = [...dataMapArr.values()];
-            unicos.unshift({
-                id: '',
-                text: '',
-                disabled: true,
-                selected: true
-            });
-            unicos.sort(GetSortOrder("text"));
-            $("#municipality").empty()
-            $("#municipality").select2({
-                data: unicos
-            }).change(function () {
-                $('#eb').prop('disabled',false);
-                selectEB(this.value,response);
-            });
-        }
-
-        function selectEB(value,response) {
-            data = [];
-            response.CD.forEach(element => {
-                if (element.MUNICIPIOANM.toUpperCase() == value) {
-                    data.push({
-                        id: element.Consecutivo_Sede,
-                        text: (element.INSTITUCIÓN_EDUCATIVA+' '+element.NOMBRE_SEDE).toUpperCase()
-                    });
-                }
-            });
-            dataMap = data.map(item=>{
-                return [item.id,item]
-            });
-            dataMapArr = new Map(dataMap)
-            unicos = [...dataMapArr.values()];
-            
-            unicos.sort(GetSortOrder("text"));
-            unicos.unshift({
-                id: 0,
-                text: "OTRA"
-            });
-            unicos.unshift({
-                id: '',
-                text: '',
-                disabled: true,
-                selected: true
-            });
-            $("#eb").empty();
-            $("#eb").select2({
-                data: unicos
-            }).change(function () {
-                $('#eb').prop('disabled',false);
-                selectLocation(this.value,response);
-            });
-        }
-
-        function selectLocation(value,response) {
-            response.CD.forEach(element => {
-                if (element.Consecutivo_Sede == value) {
-                    $('#station_name').val(element.NOMBRE_SEDE);
-                    $('#lat').val(element.Latitud);
-                    $('#long').val(element.LONGITUD);
-                    $('#code').val(element.ID_BENEFICIARIO);
-                    $('#population').val(element.CENTRO_POBLADO);
-                }
-            });
-        }
-
-        function GetSortOrder(prop) {
-            return function(a, b) {
-                if (a[prop] > b[prop]) {
-                    return 1;
-                } else if (a[prop] < b[prop]) {    
-                    return -1;
-                }
-                return 0;
-            }
-        }
-    </script>
+    <script src="{{asset("js/project/mintic/create.js")}}"></script>
 @endsection

@@ -18,6 +18,7 @@
         <div class="box-header">
             <div class="box-title"> proyecto MINTIC</div>
             <div class="box-tools">
+                <a href="{{route('mintic')}}" class="btn btn-sm btn-primary">Volver</a>
             </div>
         </div>
         <div class="box-body">
