@@ -45,7 +45,7 @@
                     </div>
                     <div class="form-group col-md-6" style="display: none">
                         <label for="station_name">Nombre de la sede educativa</label>
-                        <input type="text" value="{{old('name')}}" name="name" id="station_name" class="form-control">
+                        <input type="text" value="{{$id->name}}" name="name" id="station_name" class="form-control">
                     </div>
                     <div class="form-group col-sm-6">
                         <label for="lat">Latitud</label>

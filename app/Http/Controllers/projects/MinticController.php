@@ -68,12 +68,6 @@ class MinticController extends Controller
         $id = Mintic_School::create($request->all());
 
         $users = User::where('state',1)->get();
-        
-        foreach ($users as $user) {
-            if ($user->hasPermissionTo('Lista de proyectos de MINTIC')) {
-                $user->notify(new notificationMain($id->id,'Nuevo proyecto MINTIC '.$id->id,'project/mintic/ec/show/'));
-            }
-        }
 
         foreach ($request->date_ec as $key => $value) {
             if ($value) {
@@ -127,6 +121,13 @@ class MinticController extends Controller
                 ]);
             }
         }
+
+        foreach ($users as $user) {
+            if ($user->hasPermissionTo('Lista de proyectos de MINTIC')) {
+                $user->notify(new notificationMain($id->id,'Nuevo proyecto MINTIC '.$id->id,'project/mintic/ec/show/'));
+            }
+        }
+        
         return redirect()->route('mintic')->with('success','Se ha creado el proyecto correctamente');
     }
     /**
@@ -163,21 +164,61 @@ class MinticController extends Controller
      */
     public function update(Request $request, Mintic_School $id)
     {
-        $request['status'] = ($request->value_send == 'Firmar') ? 0 : 4;
-        
-        $users = User::where('state',1)->get();
-        foreach ($users as $user) {
-            if($request->value_send == 'Firmar'){
-                if ($user->hasPermissionTo('Crear proyectos de MINTIC')) {  
-                    $user->notify(new notificationMain($id->id,'Proyecto MINTIC '.$id->id.' por aprobar ','project/mintic/ec/show/'));
-                }
-            }else{
-                if ($user->hasPermissionTo('Aprobar proyectos de MINTIC')) {  
-                    $user->notify(new notificationMain($id->id,'Proyecto MINTIC '.$id->id.' modificado ','project/mintic/ec/show/'));
-                }
+        $id->update($request->all());
+        MinticVisit::where('project_id',$id->id)->delete();
+        foreach ($request->date_ec as $key => $value) {
+            if ($value) {
+                MinticVisit::create([
+                    'date'=>$value,
+                    'project_id'=>$id->id,
+                    'time'=>$request->time_ec[$key],
+                    'technical_id'=>$request->technical_id_ec[$key],
+                    'commentary'=>$request->commentary_ec[$key],
+                    'type' => 'ec',
+                    'status' => 0
+                ]);
             }
         }
-        $id->update($request->all());
+        foreach ($request->date_install as $key => $value) {
+            if ($value) {
+                MinticVisit::create([
+                    'date'=>$value,
+                    'project_id'=>$id->id,
+                    'time'=>$request->time_install[$key],
+                    'technical_id'=>$request->technical_id_install[$key],
+                    'commentary'=>$request->commentary_install[$key],
+                    'type' => 'install',
+                    'status' => 0
+                ]);
+            }
+        }
+        foreach ($request->date_integration as $key => $value) {
+            if ($value) {
+                MinticVisit::create([
+                    'date'=>$value,
+                    'project_id'=>$id->id,
+                    'time'=>$request->time_integration[$key],
+                    'technical_id'=>$request->technical_id_integration[$key],
+                    'commentary'=>$request->commentary_integration[$key],
+                    'type' => 'integration',
+                    'status' => 0
+                ]);
+            }
+        }
+        foreach ($request->date_maintenance as $key => $value) {
+            if ($value) {
+                MinticVisit::create([
+                    'date'=>$value,
+                    'project_id'=>$id->id,
+                    'time'=>$request->time_maintenance[$key],
+                    'technical_id'=>$request->technical_id_maintenance[$key],
+                    'commentary'=>$request->commentary_maintenance[$key],
+                    'type' => 'maintenance',
+                    'status' => 0
+                ]);
+            }
+        }
+
         return redirect()->route('mintic')->with('success','Se ha actualizado el proyecto correctamente');
     }
 
