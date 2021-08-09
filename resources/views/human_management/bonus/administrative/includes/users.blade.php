@@ -144,7 +144,7 @@
                                         <div>
                                             <div class="form-group">
                                                 <label for="discount_{{$user->id}}">Descuentos</label>
-                                                <input type="number" name="discount" id="discount_{{$user->id}}" class="form-control total_discount" value="{{old('discount')[$user->id] ?? 0}}">
+                                                <input type="number" name="discount[{{$user->id}}]" id="discount_{{$user->id}}" class="form-control total_discount" value="{{old('discount')[$user->id] ?? 0}}">
                                             </div>
                                         </div>
                                         <div class="form-group">

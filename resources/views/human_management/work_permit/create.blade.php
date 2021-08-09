@@ -50,6 +50,31 @@
             </ul>
         </div>
     @endif --}}
+    <div class="hide">
+        @foreach ($users as $user)
+            <input type="hidden" disabled value="{{$user->name}}" id="name_{{$user->id}}">
+            <input type="hidden" disabled value="{{$user->position->name}}" id="position_{{$user->id}}">
+        @endforeach
+        @foreach ($taskings as $task)
+            <input type="hidden" value="{{$task->municipality}}" id="task_municipality_{{$task->id}}">
+            <input type="hidden" value="{{$task->department}}" id="task_department_{{$task->id}}">
+            <input type="hidden" value="{{$task->eb_id}}" id="task_eb_id_{{$task->id}}">
+            <input type="hidden" value="{{$task->station_name}}" id="task_station_name_{{$task->id}}">
+            <input type="hidden" value="{{$task->lat}}" id="task_lat_{{$task->id}}">
+            <input type="hidden" value="{{$task->long}}" id="task_long_{{$task->id}}">
+            @foreach ($task->vehicles as $vehicle)
+                <input type="hidden" class="task_vehicle_{{$task->id}}" value="{{$vehicle->vehicle_id}}" id="task_vehicle_{{$task->id}}_{{$vehicle->vehicle_id}}">
+            @endforeach
+            @foreach ($task->users as $user)
+                <input type="hidden" class="task_user_{{$user->id}}" value="{{$task->id}}" id="task_user_{{$task->id}}_{{$user->id}}">
+            @endforeach
+        @endforeach
+        @foreach ($works as $work)
+            @foreach ($work->users as $user)
+                <input type="hidden" value="{{$work->id}}" class="work_{{$user->id}}">
+            @endforeach
+        @endforeach
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="box box-solid">

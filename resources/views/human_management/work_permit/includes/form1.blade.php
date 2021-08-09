@@ -9,10 +9,6 @@
     <div id="collapseOne" class="panel-collapse collapse in">
         <div class="box-body">
             <small><b>RELACIÓN DE PERSONAL A INTERVENIR EN LA ESTACIÓN BASE Y ROL AUTORIZADO.</b> (Cada uno sólo podrá    ejecutar el rol autorizado)</small>
-            @foreach ($usuarios as $usuario)
-                <input type="hidden" disabled value="{{$usuario->name}}" id="name_{{$usuario->id}}">
-                <input type="hidden" disabled value="{{$usuario->position->name}}" id="position_{{$usuario->id}}">
-            @endforeach
             {{-- User 1 --}}
             <div id="destino">
                 @if (old('cedula') > 0)
@@ -23,8 +19,8 @@
                                     <label for="users_id_{{$i}}">Número de documento</label>
                                     <select name="cedula[]" id="users_id_{{$i}}" class="form-control select_user">
                                         <option value="" disabled selected></option>
-                                        @foreach ($usuarios as $usuario)
-                                            <option {{ (old('cedula')[$i] == $usuario->id) ? 'selected' : '' }} value="{{$usuario->id}}">{!!$usuario->cedula.'&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;'.$usuario->name!!}</option>
+                                        @foreach ($users as $user)
+                                            <option {{ (old('cedula')[$i] == $user->id) ? 'selected' : '' }} value="{{$user->id}}">{!!$user->cedula.'&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;'.$user->name!!}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -52,8 +48,8 @@
                                 <label for="users_id_0">Número de documento</label>
                                 <select name="cedula[]" id="users_id_0" class="form-control select_user">
                                     <option value="" disabled selected></option>
-                                    @foreach ($usuarios as $usuario)
-                                        <option value="{{$usuario->id}}">{!!$usuario->cedula.'&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;'.$usuario->name!!}</option>
+                                    @foreach ($users as $user)
+                                        <option value="{{$user->id}}">{!!$user->cedula.'&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;'.$user->name!!}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -89,26 +85,27 @@
                 <div class="row">
                     <div class="col-md-4">
                         <label for="department">Departamentos</label>
-                        <select name="department" id="department" class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona el departamento" style="width: 100%;" data-select2-id="2" tabindex="-1" aria-hidden="true">
+                        <select name="department" id="department" class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona el departamento" style="width: 100%;" data-select2-id="2" tabindex="-1" aria-hidden="true" value"{{old('department')}}">
                             <option disabled selected></option>
                         </select>
                     </div>
                     <div class="col-md-4">
                         <label for="municipality">Municipio</label>
-                        <select name="municipality" id="municipality" disabled class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona el municipio" style="width: 100%;" data-select2-id="3" tabindex="-1" aria-hidden="true">
+                        <select name="municipality" id="municipality" disabled class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona el municipio" style="width: 100%;" data-select2-id="3" tabindex="-1" aria-hidden="true" value="municipality">
                             <option disabled selected></option>
                         </select>
                     </div>
                     <div class="col-md-4">
                         <label for="eb">Estación base</label>
                         <input type="hidden" name="type_eb" id="type_eb">
-                        <select name="eb" id="eb" class="form-control select2 select2-hidden-accessible" disabled style="width: 100%;" data-placeholder="Selecciona un EB o CD" data-select2-id="5" tabindex="-1" aria-hidden="true">
+                        <select name="eb" id="eb" class="form-control select2 select2-hidden-accessible" disabled style="width: 100%;" data-placeholder="Selecciona un EB o CD" data-select2-id="5" tabindex="-1" aria-hidden="true" value="{{old('eb')}}">
                             <option disabled selected></option>
                         </select>
                     </div>
                     <div class="col-md-4" style="display: none">
                         <label for="station_name">Nombre de la estación base</label>
-                        <input type="text" value="{{old('station_name')}}" name="station_name" id="station_name" class="form-control">
+                        <input type="text" value="{{old('nombre_eb')}}" name="nombre_eb" id="station_name" class="form-control">
+                        <input type="hidden" value="{{old('task_id')}}" name="task_id" id="task_id" class="form-control">
                     </div>
                     <div class="col-md-4">
                         <label for="lat">Latitud</label>
@@ -147,7 +144,7 @@
                         @php
                             $state = expirateDate($item->enrollment_date,$item->soat_date,$item->gases_date,$item->technomechanical_date);
                         @endphp
-                        <option {!! $state ? 'disabled' : '' !!} {{ old('vehicle_id') == $item->id ? 'selected' : ''}} value="{{$item->id}}">{{$item->plate}} {!! $state ? '(No mueva este vehículo, tiene documentos vencidos)' : '' !!}</small></option>
+                        <option {!! $state ? 'disabled' : '' !!} {{ old('vehicle_id') == $item->id ? 'selected' : ''}} value="{{$item->id}}">{{$item->plate}} {{$item->brand}} {!! $state ? '(No mueva este vehículo, tiene documentos vencidos)' : '' !!}</small></option>
                     @endforeach
                 </select>
             </div>

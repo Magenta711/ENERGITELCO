@@ -18,9 +18,9 @@
                     <label for="coordinador">Coordinador</label>
                     <select name="coordinador" id="coordinador" class="form-control">
                         <option value="" selected disabled>Selecciona el coordinador para la aprovación</option>
-                        @foreach ($usuarios as $usuario)
-                            @if($usuario->hasPermissionTo('Aprobar solicitud de Permisos de trabajo') || ($usuario->hasPermissionTo('Aprobar solicitudes permisos propios') && $usuario->id == auth()->id()) )
-                                <option {{(old('coordinador') == $usuario->id) ? 'selected' : ''}} value="{{ $usuario->id }}">{!!$usuario->cedula.'&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;'.$usuario->name!!} </option>
+                        @foreach ($users as $user)
+                            @if($user->hasPermissionTo('Aprobar solicitud de Permisos de trabajo') || ($user->hasPermissionTo('Aprobar solicitudes permisos propios') && $user->id == auth()->id()) )
+                                <option {{(old('coordinador') == $user->id) ? 'selected' : ''}} value="{{ $user->id }}">{!!$user->cedula.'&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;'.$user->name!!} </option>
                             @endif
                         @endforeach
                     </select>

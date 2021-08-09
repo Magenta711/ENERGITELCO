@@ -18,7 +18,7 @@ $(document).ready(function() {
             $('#lat').val('');
             $('#long').val('');
         }else {
-            $('.station-other').hide();
+            $('#station_name').parent().hide();
             $('#station_name').val('');
             $('#lat').val('');
             $('#long').val('');
@@ -33,6 +33,8 @@ $(document).ready(function() {
     });
     $('.select_user').change(function () {
         select_user(this.id);
+        checkTasking(this.value);
+        checkWork(this.value);
     });
     $("#clonar_user").click(function() {
         if ($('.select_user').length < 4) {
@@ -43,6 +45,8 @@ $(document).ready(function() {
             newELement.children().children('.col-sm-4').children('.user_rol').attr('id','user_rol_'+incre).val('');
             newELement.children().children('.col-sm-3').children('.select_user').attr('id','users_id_'+incre).change(function () {
                 select_user(this.id);
+                checkTasking(this.value);
+                checkWork(this.value);
             });
             newELement.children().children('.col-sm-1').children('.remove_user').attr('id','remove_user_'+incre).click(function () {
                 remove_user(this.id);
@@ -88,7 +92,11 @@ function selectDep(response) {
         data: unicos
     }).change(function () {
         $('#municipality').prop('disabled',false);
-        $("#eb").empty()
+        $("#eb").empty();
+        $('#station_name').parent().hide();
+        $('#station_name').val('');
+        $('#lat').val('');
+        $('#long').val('');
         selectMunicipaly(this.value,response);
     });
 }
@@ -201,5 +209,47 @@ function GetSortOrder(prop) {
             return -1;
         }
         return 0;
+    }
+}
+function checkTasking(userId) {
+    works = $('.task_user_'+userId);
+    if (works.length > 0) {
+        department = $('#task_department_'+works.val()).val();
+        municipality = $('#task_municipality_'+works.val()).val();
+        eb_id = $('#task_eb_id_'+works.val()).val();
+        station_name = $('#task_station_name_'+works.val()).val();
+        lat = $('#task_lat_'+works.val()).val();
+        long = $('#task_long_'+works.val()).val();
+        vehicle_id = $('.task_vehicle_'+works.val());
+        $("#department").val(department);
+        $("#department").trigger('change');
+        $("#municipality").val(municipality).prop('disabled',false);
+        $("#municipality").trigger('change');
+        $("#eb").val(eb_id).prop('disabled',false);
+        $("#eb").trigger('change');
+        if (eb_id == 0) {
+            $('#station_name').val(station_name).parent().show();
+        }else {
+            $('#station_name').val(station_name).parent().hide();
+        }
+        $("#task_id").val(works.val());
+        $("#lat").val(lat);
+        $("#long").val(long);
+        $("#vehicle_id").val(vehicle_id[0].value);
+    }
+}
+
+function checkWork(userId) {
+    works = $('.work_'+userId);
+    if (works.length > 0) {
+        Swal.fire({
+            title: 'Alerta',
+            text: 'Ya hay un permiso de trabajo con esté número de documento con el código de registro H-FR-23-'+works[0].value+" el día de hoy",
+            footer: '<a href="/human_management/work_permit/show/'+works[0].value+'" target="_blank"><i class="fa.fa-plus"></i> Ver permiso de trabajo</a>',
+            width: 600,
+            icon: 'warning',
+        })
+        $('#swal2-content').css('font-size', 14);
+        $('.swal2-content').css('font-size', 14);
     }
 }

@@ -16,6 +16,7 @@ use App\Models\work1_add;
 use App\Models\Responsable;
 use App\Models\system_setting;
 use App\Models\general_setting;
+use App\Models\Tasking;
 use App\Notifications\notificationMain;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -57,12 +58,14 @@ class workPermitController extends Controller
      */
     public function create()
     {
-        $usuarios = User::where('state',1)->with('roles')->get();
+        $users = User::where('state',1)->with('roles')->get();
         $projects = Project::get();
         $vehicles = invVehicle::where('status','!=',0)->get();
         $bonus_techinicals = commission_technical::get();
+        $taskings = Tasking::whereYear('created_at',now())->whereMonth('created_at',now())->whereDay('created_at',now())->get();
+        $works = Work1::whereYear('created_at',now())->whereMonth('created_at',now())->whereDay('created_at',now())->get();
         $message = $this->message;
-        return view('human_management.work_permit.create',compact('usuarios','message','projects','vehicles','bonus_techinicals'));
+        return view('human_management.work_permit.create',compact('users','message','projects','vehicles','bonus_techinicals','taskings','works'));
     }
 
     /**
@@ -205,6 +208,12 @@ class workPermitController extends Controller
         $request['work_id'] = $id->id;
 
         work1_add::create($request->all());
+
+        if ($request->task_id && $request->task_id != '') {
+            Tasking::find($request->task_id)->update([
+                'permit_id' => $id->id
+            ]);
+        }
 
         if($request->hasFile('archivos')){
             for ($i=0; $i < count($request->file('archivos')); $i++) { 

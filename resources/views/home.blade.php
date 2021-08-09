@@ -652,7 +652,6 @@
                             .fail(function() {
                                 console.log("error");
                             });
-                            console.log(jqxhr);
                         });
                     }
                 @endif

@@ -144,7 +144,7 @@
                                         <div>
                                             <div class="form-group">
                                                 <label for="discount-{{$item->user->id}}">Descuentos</label>
-                                                <input type="number" name="discount" id="discount-{{$item->user->id}}" class="form-control" value="{{$item->discount}}">
+                                                <input type="number" name="discount[{{$item->user->id}}]" id="discount-{{$item->user->id}}" class="form-control" value="{{$item->discount}}">
                                             </div>
                                         </div>
                                         <div class="form-group">

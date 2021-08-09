@@ -9,6 +9,9 @@
             if (!$item->register->hasContract()) {
                 $message[] = "no cuenta con contracto activo";
             }
+            if ($item->register->hasContract() && $item->register->hasContract()->signatured_at == '') {
+                $message[] = "contracto sin firmar";
+            }
             return $message;
         }
         return '';
