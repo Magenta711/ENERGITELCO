@@ -15,9 +15,9 @@ class assistanceController extends Controller
     public function __construct() {
         $this->middleware('auth');
         $this->middleware('verified');
-        $this->middleware('permission:Tomar asistecia|Ver asistencia|Lista de asistencias|Editar asistencia|Eliminar asistencia',['only' => ['index']]);
+        $this->middleware('permission:Tomar asistencia|Ver asistencia|Lista de asistencias|Editar asistencia|Eliminar asistencia',['only' => ['index']]);
         $this->middleware('permission:Ver asistencia',['only' => ['show']]);
-        $this->middleware('permission:Tomar asistecia',['only' => ['create','store']]);
+        $this->middleware('permission:Tomar asistencia',['only' => ['create','store']]);
         $this->middleware('permission:Editar asistencia',['only' => ['edit','update']]);
         $this->middleware('permission:Eliminar asistencia',['only' => ['destroy']]);
     }

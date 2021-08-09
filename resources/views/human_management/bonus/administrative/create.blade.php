@@ -15,6 +15,14 @@
 
 <section class="content">
     @include('includes.alerts')
+    <div class="hide">
+        @foreach ($bonusTechnical as $key => $bonu)
+            @foreach ($bonu as $item)
+                <input type="hidden" value="{{$item['bonification']}}" class="bonus_user_{{$item['id']}}">
+            @endforeach
+        @endforeach
+        <input type="hidden">
+    </div>
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="box">

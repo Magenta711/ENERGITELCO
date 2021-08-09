@@ -9,6 +9,8 @@ use App\Models\bonus24;
 use App\Models\bonus\bonu;
 use App\Models\bonus\bonusUser;
 use App\Models\SystemMessages;
+use App\Models\Work1;
+use App\Models\work1_cut_bonus;
 use App\Notifications\notificationMain;
 use App\User;
 use Illuminate\Support\Facades\Mail;
@@ -48,7 +50,12 @@ class adminBonusesController extends Controller
     {
         $users = User::where('state',1)->get();
         $message = $this->message;
-        return view('human_management.bonus.administrative.create',compact('users','message'));
+        $bonus = work1_cut_bonus::whereYear('created_at',now())->whereMonth('created_at',now())->get();
+        foreach ($bonus as $key => $value) {
+            $bonusTechnical[$key] = $this->getCutBonusTechnical($value);
+        }
+        return $bonusTechnical;
+        return view('human_management.bonus.administrative.create',compact('users','message','bonusTechnical'));
     }
 
     /**
@@ -257,5 +264,49 @@ class adminBonusesController extends Controller
             $id->responsable->notify(new notificationMain($id->id,'No se aprobó las el pago de bonificaciones a administradores y conductores'.$id->id,'human_management/bonus/administratives/show/'));
             return redirect()->route('admin_bonuses')->with('success','Se ha reprobado el pago de las bonificaciones administradores y conductores correctamente');
         }
+    }
+
+    public function getCutBonusTechnical($cut)
+    {
+        $items = Work1::whereBetween('created_at',[$cut->start_date, $cut->end_date])->where('estado','!=','No aprobado')->get();
+
+        $array = array();
+        $m = 0;
+        foreach ($items as $item) {
+            $i = 1;
+            foreach ($item->users as $user) {
+                switch($i){
+                    case(1):
+                        $bonification = $item->work_add->f9a1u1 && is_numeric($item->work_add->f9a1u1) ? $item->work_add->f9a1u1 : 0;
+                        break;
+                    case(2):
+                        $bonification = $item->work_add->f9a1u2 && is_numeric($item->work_add->f9a1u2) ? $item->work_add->f9a1u2 : 0;
+                        break;
+                    case(3):
+                        $bonification = $item->work_add->f9a1u3 && is_numeric($item->work_add->f9a1u3) ? $item->work_add->f9a1u3 : 0;
+                        break;
+                    case(4):
+                        $bonification = $item->work_add->f9a1u4 && is_numeric($item->work_add->f9a1u4) ? $item->work_add->f9a1u4 : 0;
+                        break;
+                    default:
+                }
+                
+                if (array_key_exists($user->id,$array)) {
+                    $bonus = $array[$user->id]['bonification'];
+                    $array[$user->id] = [
+                        'id' => $user->id,
+                        'bonification' => $bonification + $bonus,
+                    ];
+                }else {
+                    $array[$user->id] = [
+                        'id' => $user->id,
+                        'bonification' => $bonification,
+                    ];
+                }
+                $i++;
+            }
+        }
+
+        return $array;
     }
 }

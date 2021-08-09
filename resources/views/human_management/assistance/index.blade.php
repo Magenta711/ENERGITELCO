@@ -16,7 +16,7 @@
             <div class="box-header">
                 <h3 class="box-title"></h3>
                 <div class="box-tools">
-                    @can('Tomar asistecia')
+                    @can('Tomar asistencia')
                         <a href="{{route('assistance_create')}}" class="btn btn-sm btn-success">Crear</a>
                     @endcan
                 </div>
@@ -46,11 +46,11 @@
                                             <a href="{{route('assistance_edit',$item->id)}}" class="btn btn-sm btn-primary">Editar</a>
                                         @endcan
                                         @can('Eliminar asistencia')
-                                            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal_delete_{{$user->id}}">Eliminar</button>
-                                            <div class="modal fade" id="modal_delete_{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal_delete_{{$item->id}}">Eliminar</button>
+                                            <div class="modal fade" id="modal_delete_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
-                                                    <form action="{{ route('assistance_delete',$user->id) }}" method="POST">
+                                                    <form action="{{ route('assistance_delete',$item->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                     <div class="modal-header">
@@ -60,7 +60,7 @@
                                                         <h4 class="modal-title" id="exampleModalLongTitle">Eliminar asistencia</h4>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <p>¿Está seguro de eliminar asistencia {{$user->date}}?</p>
+                                                        <p>¿Está seguro de eliminar asistencia {{$item->date}}?</p>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-sm btn-secondary pull-left" data-dismiss="modal">Cancelar</button>

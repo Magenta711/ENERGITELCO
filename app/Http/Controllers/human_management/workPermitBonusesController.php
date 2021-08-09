@@ -41,7 +41,6 @@ class workPermitBonusesController extends Controller
     public function index()
     {
         $cuts = work1_cut_bonus::with('responsable')->get();
-        $cuts = work1_cut_bonus::with('responsable')->get();
         $minor_boxes = MinorBoxUser::with('user')->where('status',1)->get();
         return view('human_management.bonus.technical.index',compact('cuts','minor_boxes'));
     }
@@ -54,7 +53,7 @@ class workPermitBonusesController extends Controller
     public function create()
     {
         $cut = work1_cut_bonus::where('status',1)->get()->last();
-        $now =  now()->format('Y-m-d H:i:s');
+        $now = now()->format('Y-m-d H:i:s');
         if ($cut){
             $items = Work1::whereBetween('created_at',[$cut->end_date,$now])->where('estado','!=','No aprobado')->get();
         }else {
