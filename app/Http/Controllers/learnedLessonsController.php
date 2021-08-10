@@ -46,7 +46,7 @@ class learnedLessonsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'date' => ['required'],
+            'date' => ['required','date'],
             'num' => ['required']
         ]);
         $request['responsable_id'] = auth()->id();

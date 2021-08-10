@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ccjl_rents extends Model
 {
     protected $table = "ccjl_rents";
-    protected $fillable = ['client_id','user_id','total','total_months','date_start','date_end','status'];
+    protected $fillable = ['client_id','user_id','total','total_months','date_start','date_end','from','status'];
     protected $guarder = ['id'];
 
     public function client()

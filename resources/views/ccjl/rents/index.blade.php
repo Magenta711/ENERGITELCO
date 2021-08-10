@@ -34,6 +34,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Cliente</th>
+                                    <th>Dentino</th>
                                     <th>Fecha</th>
                                     <th>Estado</th>
                                     <th>Acciones</th>
@@ -44,6 +45,7 @@
                                     <tr>
                                         <td>{{ $item->id }}</td>
                                         <td>{{ $item->client->name }}</td>
+                                        <td>{{ $item->from }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         @php
                                             $status = $item->statusCheck();

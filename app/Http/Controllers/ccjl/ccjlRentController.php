@@ -90,6 +90,7 @@ class ccjlRentController extends Controller
             'date_start' => $request->date_start,
             'total_months' => $request->total_months,
             'date_end' => $date_end,
+            'from' => $request->from,
             'status' => 3
         ]);
 

@@ -91,6 +91,13 @@
                         <span class="help-block" style="display: none;">Este campo es obligatorio</span>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="">Destino</label><br>
+                        <label for="from_0"><input type="radio" name="from" id="from_0" value="CCJL"> CCJL</label>
+                        <label for="from_1"><input type="radio" name="from" id="from_1" value="Energitelco"> Energitelco</label>
+                    </div>
+                </div>
             </div>
             <hr>
             <div class="row">

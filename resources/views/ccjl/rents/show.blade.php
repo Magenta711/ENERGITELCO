@@ -64,6 +64,12 @@
                         <p>{{ $id->client->number }}</p>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="">Destino</label><br>
+                        <p>{{$id->from}}</p>
+                    </div>
+                </div>
             </div>
             <hr>
             @php
