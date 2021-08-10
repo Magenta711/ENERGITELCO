@@ -32,6 +32,7 @@
                                         <h4 class="modal-title" id="exampleModalLongTitle">{{$item->user->name}} - {{$item->user->position->name}}</h4>
                                     </div>
                                     <div class="modal-body">
+                                        <p class="text-muted">Total de bonificaciones técnicas: <span id="total_bonus_technical_{{$user->id}}">{{number_format($item->total_bonus_technical)}}</span> con <span id="total_permit_work_{{$user->id}}">{{$item->total_work_permit}}</span> permisos de trabajo</p>
                                         <div class="form-group">
                                             <label for="working_days">Días trabajados</label>
                                             <input type="number" name="working_days[{{$item->user->id}}]" id="working_days_{{$item->user->id}}" class="form-control working_days" value="{{$item->working_days}}">

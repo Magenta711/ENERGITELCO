@@ -17,8 +17,9 @@
     @include('includes.alerts')
     <div class="hide">
         @foreach ($bonusTechnical as $key => $bonu)
-            @foreach ($bonu as $item)
-                <input type="hidden" value="{{$item['bonification']}}" class="bonus_user_{{$item['id']}}">
+            @foreach ($bonu as $key => $item)
+                <input type="hidden" value="{{$item['bonification']}}" class="bonus_user_{{$key}}">
+                <input type="hidden" value="{{$item['count']}}" class="permit_w_user_{{$key}}">
             @endforeach
         @endforeach
         <input type="hidden">

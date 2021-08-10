@@ -13,6 +13,7 @@ use App\Models\Work1;
 use App\Models\work1_cut_bonus;
 use App\Notifications\notificationMain;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 
 class adminBonusesController extends Controller
@@ -50,11 +51,11 @@ class adminBonusesController extends Controller
     {
         $users = User::where('state',1)->get();
         $message = $this->message;
-        $bonus = work1_cut_bonus::whereYear('created_at',now())->whereMonth('created_at',now())->get();
+        $bonusTechnical = array();
+        $bonus = work1_cut_bonus::whereBetween('created_at',[now()->subMonth()->format('Y-m-01'), now()->subMonth()->format('Y-m-30')])->get();
         foreach ($bonus as $key => $value) {
             $bonusTechnical[$key] = $this->getCutBonusTechnical($value);
         }
-        return $bonusTechnical;
         return view('human_management.bonus.administrative.create',compact('users','message','bonusTechnical'));
     }
 
@@ -108,6 +109,9 @@ class adminBonusesController extends Controller
                 'time_24_7' => $request->time_24_7[$key],
 
                 'discount' => $request->discount[$key],
+
+                'total_bonus_technical' => $request->total_bonus_technical[$key],
+                'total_work_permit' => $request->total_permit_work[$key],
                 
                 'percentage_admin' => $request->percentage_admin[$key],
                 'total_admin' => $request->total_admin[$key],
@@ -271,7 +275,6 @@ class adminBonusesController extends Controller
         $items = Work1::whereBetween('created_at',[$cut->start_date, $cut->end_date])->where('estado','!=','No aprobado')->get();
 
         $array = array();
-        $m = 0;
         foreach ($items as $item) {
             $i = 1;
             foreach ($item->users as $user) {
@@ -293,13 +296,14 @@ class adminBonusesController extends Controller
                 
                 if (array_key_exists($user->id,$array)) {
                     $bonus = $array[$user->id]['bonification'];
+                    $count = $array[$user->id]['count'];
                     $array[$user->id] = [
-                        'id' => $user->id,
+                        'count' => $count + 1,
                         'bonification' => $bonification + $bonus,
                     ];
                 }else {
                     $array[$user->id] = [
-                        'id' => $user->id,
+                        'count' => 1,
                         'bonification' => $bonification,
                     ];
                 }

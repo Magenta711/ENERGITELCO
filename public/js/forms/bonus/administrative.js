@@ -4,6 +4,7 @@ window.onbeforeunload = preguntarAntesDeSalir;
 $(document).ready(function() {
 
     time_24_7();
+    bonusTechnical();
 
     $('#send').click(function (){
         bPreguntar = false;
@@ -332,5 +333,24 @@ function time_24_7() {
             $('#time_24_7_user_'+user).val(('{"m":'+nummonths+',"d":'+numdays+',"h":'+numhours+',"i":'+numminutes+'}'));
         }
 
+    }
+}
+
+function bonusTechnical() {
+    let allUser = $('.check_user');
+    for (let i = 0; i < allUser.length; i++) {
+        let idU = allUser[i].value;
+        let total = 0;
+        let totalP = 0;
+        let bonus = $('.bonus_user_'+idU);
+        let permit = $('.permit_w_user_'+idU);
+        for (let j = 0; j < bonus.length; j++) {
+            total += parseFloat(bonus[j].value);
+            totalP += parseFloat(permit[j].value);
+        }
+        $('#total_bonus_technical_'+idU).text('$' + parseFloat((total), 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+        $('#total_bonus_technical_val_'+idU).val(total);
+        $('#total_permit_work_'+idU).text(totalP);
+        $('#total_permit_work_val_'+idU).val(totalP);
     }
 }

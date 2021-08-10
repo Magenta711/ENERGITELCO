@@ -63,6 +63,7 @@
                                                                 <h4 class="modal-title" id="exampleModalLongTitle">{{$item->user->name}} - {{$item->user->position->name}}</h4>
                                                             </div>
                                                             <div class="modal-body">
+                                                                <p class="text-muted">Total de bonificaciones técnicas: <span id="total_bonus_technical_{{$user->id}}">{{number_format($item->total_bonus_technical)}}</span> con <span id="total_permit_work_{{$user->id}}">{{$item->total_work_permit}}</span> permisos de trabajo</p>
                                                                 <ul class="list-group">
                                                                     @if ($item->admin_bonus_check)
                                                                         <li class="list-group-item">

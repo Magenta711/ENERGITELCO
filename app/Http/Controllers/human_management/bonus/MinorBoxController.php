@@ -32,7 +32,6 @@ class MinorBoxController extends Controller
     public function index()
     {
         $cuts = work1_cut_bonus::with('responsable')->get();
-        $cuts = work1_cut_bonus::with('responsable')->get();
         $users = User::where('state',1)->get(['id','name','cedula']);
         $minor_boxes = MinorBoxUser::with('user')->where('status',1)->get();
         return view('human_management.bonus.minor_box.index',compact('cuts','users','minor_boxes'));

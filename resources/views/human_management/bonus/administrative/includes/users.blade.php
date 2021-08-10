@@ -32,6 +32,9 @@
                                         <h4 class="modal-title" id="exampleModalLongTitle">{{$user->name}} - {{$user->position->name}}</h4>
                                     </div>
                                     <div class="modal-body">
+                                        <p class="text-muted">Total de bonificaciones técnicas: <span id="total_bonus_technical_{{$user->id}}">$0,00</span> con <span id="total_permit_work_{{$user->id}}">0</span> permisos de trabajo</p>
+                                        <input type="hidden" name="total_bonus_technical[{{$user->id}}]" id="total_bonus_technical_val_{{$user->id}}" value="0">
+                                        <input type="hidden" name="total_permit_work[{{$user->id}}]" id="total_permit_work_val_{{$user->id}}" value="0">
                                         <div class="form-group">
                                             <label for="working_days">Días trabajados</label>
                                             <input type="number" name="working_days[{{$user->id}}]" id="working_days_{{$user->id}}" class="form-control" value="30"> 
@@ -241,8 +244,6 @@
                                                 @endif
                                             </tbody>
                                         </table>
-                                        <hr>
-                                        
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Cerrar</button>
