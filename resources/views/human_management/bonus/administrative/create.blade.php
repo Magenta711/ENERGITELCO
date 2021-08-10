@@ -22,7 +22,6 @@
                 <input type="hidden" value="{{$item['count']}}" class="permit_w_user_{{$key}}">
             @endforeach
         @endforeach
-        <input type="hidden">
     </div>
     <div class="row justify-content-center">
         <div class="col-md-12">

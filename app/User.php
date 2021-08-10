@@ -19,6 +19,7 @@ use App\Models\Document;
 use App\Models\attention_call\AttentionCall;
 use App\Models\bonus24;
 use App\Models\bonus\MinorBoxUser;
+use App\Models\ccjl\ccjl_rents;
 use App\Models\project\route\Routes;
 use App\Models\Work8Users;
 use App\Models\InvUser;
@@ -157,5 +158,12 @@ class User extends Authenticatable implements MustVerifyEmail
     public function inventories()
     {
         return $this->hasMany(InvUser::class, 'user_id','id');
+    }
+
+    public function hasCredit()
+    {
+        return ccjl_rents::whereHas('client',function ($query) {
+            return $query->where('document',$this->cedula);
+        })->get();
     }
 }

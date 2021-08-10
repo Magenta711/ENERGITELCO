@@ -120,9 +120,14 @@ $(document).ready(function() {
         update_driver(user);
     });
 
-    $('.total_discount').blur(function () {
+    $('.discount').blur(function () {
         let user = this.id.split('_')[this.id.split('_').length - 1];
-        totalPay(user);
+        totalDiscount(user);
+    });
+
+    $('.discount_check').click(function () {
+        let user = this.id.split('_')[this.id.split('_').length - 1];
+        totalDiscount(user);
     });
 
     $('.total_24_7').blur(function () {
@@ -131,6 +136,21 @@ $(document).ready(function() {
     });
     
 });
+
+function totalDiscount(user) {
+    total = parseFloat($('#discount_'+user).val()); 
+    usersDiscount = $('.discount_user_'+user);
+    for (let i = 0; i < usersDiscount.length; i++) {
+        if (usersDiscount[i].checked) {
+            total += parseFloat($('#value_credit_'+user+'_'+usersDiscount[i].value).val());
+        }
+    }
+    console.log('total',total);
+    $('.block_bonus_discount_'+user).show();
+    $('#total_discount_'+user).val(total);
+    $('#total_discount_text_'+user).text('$' + parseFloat((total), 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+    totalPay(user);
+}
 function preguntarAntesDeSalir()
 {
     if (bPreguntar)
@@ -176,7 +196,7 @@ function totalPay(user){
     let admin = parseFloat($('#total_admin_'+user).val());
     let driver = parseFloat($('#total_driver_'+user).val());
     let b24_7 = parseFloat($('#bonus_24_7_'+user).val());
-    let discount = parseFloat($('#discount_'+user).val());
+    let discount = parseFloat($('#total_discount_'+user).val());
     let total = admin + driver + b24_7 - discount;
     $('#total_pay_'+user).text('$' + parseFloat((total), 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
     $('#total_pay_td_'+user).text('$' + parseFloat((total), 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());

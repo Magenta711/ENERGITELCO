@@ -144,10 +144,49 @@
                                                 <input type="number" name="bonus_24_7[{{$user->id}}]" id="bonus_24_7_{{$user->id}}" class="form-control total_24_7" value="{{old('bonus_24_7')[$user->id] ?? 0 }}">
                                             </div>
                                         </div>
+                                        <h4>Deudas o creditos</h4>
+                                        <small class="text-muted">En el momento de aprovar, se generará el pago y comprovante, desde que el valor a "Total neto apagar" capaz de suplir el valor de descuento que apliquen</small>
+                                        @php
+                                            $hasCredit = false;
+                                        @endphp
+                                        <table class="table table-hover">
+                                            <tr>
+                                                <th>Pagar</th>
+                                                <th>Valor</th>
+                                                <th>Fecha</th>
+                                            </tr>
+                                            @foreach ($user->hasCredit() as $credit)
+                                                @foreach ($credit->invoices as $item)
+                                                    @if (!$item->status && $item->expiration_date < now())
+                                                        @php
+                                                            $hasCredit = true;
+                                                        @endphp
+                                                        <tr>
+                                                            <td>
+                                                                <input type="checkbox" class="discount_check discount_user_{{$user->id}}" name="pay_credit[{{$user->id}}][{{$item->id}}]" id="pay_credit_{{$item->id}}_{{$user->id}}" value="{{$item->id}}">
+                                                            </td>
+                                                            <td>
+                                                                ${{ number_format($item->total_pay,2) }}
+                                                                <input type="hidden" name="value_pay_credit[{{$user->id}}][{{$item->id}}]" value="{{ $item->total_pay }}" id="value_credit_{{$user->id}}_{{$item->id}}">
+                                                            </td>
+                                                            <td>
+                                                                {{$item->expiration_date}}
+                                                                <input type="hidden" name="date_pay_credit[{{$user->id}}][{{$item->id}}]" value="{{ $item->expiration_date }}">
+                                                            </td>
+                                                        </tr>
+                                                    @endif
+                                                @endforeach
+                                            @endforeach
+                                            @if (!$hasCredit)
+                                                <tr>
+                                                    <td colspan="3"><p class="text-muted text-center">No se encontro resgistros</p></td>
+                                                </tr>
+                                            @endif
+                                        </table>
                                         <div>
                                             <div class="form-group">
                                                 <label for="discount_{{$user->id}}">Descuentos</label>
-                                                <input type="number" name="discount[{{$user->id}}]" id="discount_{{$user->id}}" class="form-control total_discount" value="{{old('discount')[$user->id] ?? 0}}">
+                                                <input type="number" name="discount[{{$user->id}}]" id="discount_{{$user->id}}" class="form-control discount" value="{{old('discount')[$user->id] ?? 0}}">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -162,6 +201,11 @@
                                             </div>
                                         </div>
                                         <div class="row">
+                                            <div class="col-md-4 block_bonus_discount_{{$user->id}}" style="display: none">
+                                                <h4>Total de descuentos</h4>
+                                                <input type="hidden" name="total_discount[{{$user->id}}]" value="0" id="total_discount_{{$user->id}}" class="total_discount">
+                                                <span id="total_discount_text_{{ $user->id }}">$0,00</span>
+                                            </div>
                                             <div class="col-md-4 block_bonus_administrative_{{$user->id}}" style="display: none">
                                                 <h4>Total bonificación administrativa</h4>
                                                 <input type="hidden" name="total_admin[{{$user->id}}]" value="0" id="total_admin_{{$user->id}}" class="total_admin">

@@ -5,15 +5,16 @@ namespace App\Http\Controllers\human_management;
 use App\Exports\bonusPayExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\bonus24;
 use App\Models\bonus\bonu;
 use App\Models\bonus\bonusUser;
+use App\Models\bonus\bonusUserDiscount;
+use App\Models\ccjl\ccjl_clients;
+use App\Models\ccjl\ccjl_rents;
 use App\Models\SystemMessages;
 use App\Models\Work1;
 use App\Models\work1_cut_bonus;
 use App\Notifications\notificationMain;
 use App\User;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 
 class adminBonusesController extends Controller
@@ -53,6 +54,7 @@ class adminBonusesController extends Controller
         $message = $this->message;
         $bonusTechnical = array();
         $bonus = work1_cut_bonus::whereBetween('created_at',[now()->subMonth()->format('Y-m-01'), now()->subMonth()->format('Y-m-30')])->get();
+
         foreach ($bonus as $key => $value) {
             $bonusTechnical[$key] = $this->getCutBonusTechnical($value);
         }
@@ -73,7 +75,7 @@ class adminBonusesController extends Controller
         $request['date'] = now();
         $id = bonu::create($request->all());
         foreach ($request->user_add as $key => $value) {
-            bonusUser::create([
+            $userBonu = bonusUser::create([
                 'bonus_id' => $id->id,
                 'user_id' => $key,
                 
@@ -109,6 +111,7 @@ class adminBonusesController extends Controller
                 'time_24_7' => $request->time_24_7[$key],
 
                 'discount' => $request->discount[$key],
+                'total_discount' => $request->total_discount[$key],
 
                 'total_bonus_technical' => $request->total_bonus_technical[$key],
                 'total_work_permit' => $request->total_permit_work[$key],
@@ -119,6 +122,17 @@ class adminBonusesController extends Controller
                 'total_user' => $request->total_user[$key],
                 'commentary' => $request->commentary[$key],
             ]);
+            if (isset($request->value_pay_credit[$key])) {
+                foreach ($request->value_pay_credit[$key] as $ke => $valu) {
+                    bonusUserDiscount::create([
+                        'bonu_user_id' => $userBonu->id,
+                        'value' => $valu,
+                        'date' => $request->date_pay_credit[$key][$ke],
+                        'status' => isset($request->pay_credit[$key][$ke]) ? 1 : 0,
+                        'credit_id' => $key,
+                    ]);
+                }
+            }
 
             $u = User::find($key);
             if ($u->b24_7 || $u->time != '') {
@@ -211,6 +225,7 @@ class adminBonusesController extends Controller
                 'driver_2' => $request->driver_2[$value->user_id],
                 
                 'discount' => $request->discount[$value->user_id],
+                'total_discount' => $request->total_discount[$value->user_id],
                 
                 'percentage_admin' => $request->percentage_admin[$value->user_id],
                 'total_admin' => $request->total_admin[$value->user_id],
