@@ -25,11 +25,14 @@
             @method('PUT')
         <div class="box-body">
             @include('attention_call.include.attention_body',['arg' => true])
-            @if ($id->receiverCall->id == auth()->id() && !$id->arguments)
+            @if ($id->receiverCall->id == auth()->id() && !$id->arguments && $id->created_at > now()->subMonths(3)->format('Y-m-d H:i:s'))
                 <div class="form-group">
                     <label for="arguments">Argumentos</label> <small>(Argumentos del trabajador)</small>
                     <textarea name="arguments" id="arguments" cols="30" rows="3" class="form-control">{{$id->arguments}}</textarea>
                 </div>
+            @endif
+            @if ($id->created_at < now()->subMonths(3)->format('Y-m-d H:i:s'))
+                <p>Ha expirado el tiempo para responder un llamado de atención</p>
             @endif
         </div>
         <div class="box-footer">

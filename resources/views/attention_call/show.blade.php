@@ -24,7 +24,7 @@
             @include('attention_call.include.attention_body')
         </div>
         <div class="box-footer">
-            @if ($id->state == 'Sin aprobar'  || $id->state == 'Sin argumentos')
+            @if ($id->state == 'Sin aprobar'  || $id->state == 'Sin argumentos' && $id->created_at < now()->subMonths(3)->format('Y-m-d H:i:s'))
                 @can('Aprobar llamados de atención')
                     <a class="btn btn-sm btn-primary" href="{{ route('approve_call',$id->id) }}"
                         onclick="event.preventDefault();
@@ -47,7 +47,7 @@
             @endif --}}
             <hr>
             <div class="row">
-                @if ($id->comment && $id->approver != $id->responsable)
+                @if ($id->comment && $id->approver != $id->responsable )
                 <div class="col-md-4">
                     <div class="box">
                         <div class="box-header">

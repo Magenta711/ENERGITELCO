@@ -20,10 +20,10 @@
                 <a href="{{route('attention_call')}}" class="btn btn-sm btn-primary">Volver</a>
             </div>
         </div>
-        <form action="{{route('call_store')}}" method="post">
+        <form action="{{route('call_store')}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="box-body">
-            @foreach ($usuarios as $usuario)
+            @foreach ($users as $usuario)
                 <input type="hidden" disabled value="{{$usuario->name}}" id="name_{{$usuario->id}}">
                 <input type="hidden" disabled value="{{$usuario->position->name}}" id="position_{{$usuario->id}}">
             @endforeach
@@ -33,7 +33,7 @@
                         <label for="users_id_0">Número de documento</label>
                         <select name="cedula[]" id="users_id_0" class="form-control select_user">
                             <option value="" disabled selected></option>
-                            @foreach ($usuarios as $usuario)
+                            @foreach ($users as $usuario)
                                 @if (auth()->user()->position->jerarquia < $usuario->position->jerarquia)
                                     <option value="{{$usuario->id}}">{!!$usuario->cedula.'&nbsp;&nbsp;&nbsp; - &nbsp;&nbsp;&nbsp;'.$usuario->name!!}</option>
                                 @endif
@@ -66,6 +66,11 @@
             <div class="form-group">
                 <label for="references">Referencias</label>
                 <textarea name="references" id="references" cols="30" rows="8" class="form-control textarea">{{old('references')}}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="file">Adjuntar archivos</label>
+                <label id="label_file" for="file" class="form-control text-center "><i class="fa fa-upload"></i></label>
+                <input class="hide file_input" type="file" multiple="true" name="files[]" id="file">
             </div>
         </div>
         <div class="box-footer">
@@ -123,5 +128,8 @@
         $('#user_name_'+idU).val($('#name_'+idUGet).val());
         $('#user_rol_'+idU).val($('#position_'+idUGet).val());
     }
+    $('.file_input').change(function (){
+        $($(this).parent().children('label')[1]).addClass('text-aqua');
+    });
 </script>
 @endsection

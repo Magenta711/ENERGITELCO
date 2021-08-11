@@ -9,6 +9,8 @@ use App\Models\system_setting;
 use App\Models\attention_call\AttentionCall;
 use App\Notifications\notificationMain;
 use Illuminate\Support\Facades\Mail;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\Storage;
 
 class AttentionCallController extends Controller
 {
@@ -39,8 +41,8 @@ class AttentionCallController extends Controller
 
     public function create()
     {
-        $usuarios = User::get();
-        return view('attention_call.create',compact('usuarios'));
+        $users = User::where('state',1)->get();
+        return view('attention_call.create',compact('users'));
     }
 
     public function store(Request $request)
@@ -62,6 +64,33 @@ class AttentionCallController extends Controller
                 'header' => $city.' '.$date,
                 'state' => 'Sin argumentos',
             ]);
+
+            if($request->hasFile('files')){
+                for ($i=0; $i < count($request->file('files')); $i++) { 
+                    $file = $request->file('files')[$i];
+                    $name = time().str_random().'.'.$file->getClientOriginalExtension();
+                    if ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg') {
+                        $size = 500;
+                        Image::make($file->getRealPath())
+                            ->resize(null, 500, function ($constraint) {
+                                $constraint->aspectRatio();
+                            })->save(public_path('storage/human_management/call_attention/'.$name));
+                            $size = $file->getClientSize() / 1000;
+                    }else{
+                        $size = $file->getClientSize() / 1000;
+                        $path = Storage::putFileAs('public/human_management/call_attention', $file, $name);
+                    }
+                    $id->files()->create([
+                        'name' => $name,
+                        'description' => "Descargo: ".$request->affair,
+                        'size' => $size.' KB',
+                        'url' => $path,
+                        'type' => $file->getClientOriginalExtension(),
+                        'state' => 1
+                    ]);
+                }
+            }
+
             // Mails
             $id->receiverCall->notify(new notificationMain($id->id,'Nuevo descargo '.$id->id,'called_responder/'));
             Mail::send('emails.attention_call', ['id'=>$id], function ($menssage) use($id)

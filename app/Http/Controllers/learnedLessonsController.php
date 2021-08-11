@@ -11,11 +11,12 @@ class learnedLessonsController extends Controller
     public function __construct() {
         $this->middleware('auth');
         $this->middleware('verified');
-        $this->middleware('permission:Lista de lesiones aprendidas|Crear lesiones aprendidas|Editar lesiones aprendidas|Eliminar lesiones aprendidas|Ver lesiones aprendidas',['only' => ['index']]);
+        $this->middleware('permission:Lista de lesiones aprendidas|Crear lesiones aprendidas|Editar lesiones aprendidas|Eliminar lesiones aprendidas|Ver lesiones aprendidas|Exportar lesiones aprendidas',['only' => ['index']]);
         $this->middleware('permission:Crear lesiones aprendidas',['only' => ['create','store']]);
         $this->middleware('permission:Editar lesiones aprendidas',['only' => ['edit','update']]);
         $this->middleware('permission:Ver lesiones aprendidas',['only' => ['show']]);
         $this->middleware('permission:Eliminar lesiones aprendidas',['only' => ['destroy']]);
+        $this->middleware('permission:Exportar lesiones aprendidas',['only' => ['export']]);
     }
     /**
      * Display a listing of the resource.

@@ -221,7 +221,7 @@ class workPermitController extends Controller
                 $name = time().str_random().'.'.$file->getClientOriginalExtension();
                 if ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg') {
                     Image::make($file->getRealPath())
-                        ->resize(null, 200, function ($constraint) {
+                        ->resize(null, 500, function ($constraint) {
                             $constraint->aspectRatio();
                         })->save(public_path('storage/human_management/work_permit/'.$name));
                 }else{

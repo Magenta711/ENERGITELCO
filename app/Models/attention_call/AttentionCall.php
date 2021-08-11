@@ -2,6 +2,7 @@
 
 namespace App\Models\attention_call;
 
+use App\Models\file;
 use App\User;
 
 use Illuminate\Database\Eloquent\Model;
@@ -25,5 +26,9 @@ class AttentionCall extends Model
     public function approverCall()
     {
         return $this->hasOne(User::class, 'id', 'approver');
+    }
+    public function files()
+    {
+        return $this->morphMany(file::class, 'fileble');
     }
 }

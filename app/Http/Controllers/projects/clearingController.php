@@ -352,7 +352,7 @@ class clearingController extends Controller
                     ->resize(null, 600, function ($constraint) {
                         $constraint->aspectRatio();
                     })->save(public_path('storage/upload/clearing/'.$name));
-                $size = '8';
+                $size = '420';
                 $path = "public/upload/clearing/".$name;
 
             }else{
