@@ -873,6 +873,7 @@ Route::get('learned_lessons/{id}/edit','learnedLessonsController@edit')->name('l
 Route::put('learned_lessons/{id}','learnedLessonsController@update')->name('learned_lessons_update');
 Route::get('learned_lessons/{id}','learnedLessonsController@show')->name('learned_lessons_show');
 Route::delete('learned_lessons/{id}','learnedLessonsController@destroy')->name('learned_lessons_delete');
+Route::get('learned_lessons/download/{id}','learnedLessonsController@download')->name('learned_lessons_download');
 
 Route::get('learned_lesson/test','learnedLessonsTestController@index')->name('learned_lessons_test');
 Route::get('learned_lesson/test/create','learnedLessonsTestController@create')->name('learned_lessons_test_create');

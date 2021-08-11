@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\LearnedLeassonsExport;
 use App\Models\LearnedLeassons;
 use Illuminate\Http\Request;
 
@@ -104,5 +105,10 @@ class learnedLessonsController extends Controller
     {
         $id->delete();
         return redirect()->route('learned_lessons')->with('success','Se ha eliminado la lección aprendida correctamente');
+    }
+
+    public function download(LearnedLeassons $id)
+    {
+        return (new LearnedLeassonsExport($id))->download(time().'_learned_leassons.xlsx');
     }
 }

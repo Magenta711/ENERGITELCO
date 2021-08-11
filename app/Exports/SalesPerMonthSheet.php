@@ -2,7 +2,6 @@
 
 namespace App\Exports;
 
-use App\Models\cvs\cvs_sale_detail;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\FromView;

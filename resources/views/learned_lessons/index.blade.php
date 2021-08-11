@@ -51,6 +51,7 @@
                                             @can('Editar computadores del inventario')
                                                 <a href="{{ route('learned_lessons_edit',$item->id) }}" class="btn btn-sm btn-primary">Editar</a>
                                             @endcan
+                                            <a href="{{ route('learned_lessons_download',$item->id) }}" class="btn btn-sm btn-warning">Exportar</a>
                                             @can('Eliminar computadores del inventario')
                                                 <button type="button" class="btn btn-sm btn-danger pl-4 pr-4" data-toggle="modal" data-target="#modal_delete_{{$item->id}}">Eliminar</button>
                                                 <div class="modal fade" id="modal_delete_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
