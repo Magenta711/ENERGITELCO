@@ -82,8 +82,12 @@
         <p>Cordialmente,</p>
         <br>
         <p>
-            Firmado electrónicamente por <b>JORGE ANDRES ORTEGA BEDOYA</b> en rol de Gerente General habilitado por Energitelco, con conocimiento de funciones y contenido del presente documento. Se cumple Ley 527 de 1999 y Decreto 19 de 2012.<br>
-            ___________________________
+            Firmado electrónicamente por <b>JORGE ANDRES ORTEGA BEDOYA</b> en rol de Gerente General habilitado por Energitelco, con conocimiento de funciones y contenido del presente documento. Se cumple Ley 527 de 1999 y Decreto 19 de 2012.
+        </p>
+        <p style="line-height: 0;">
+            <img src="{{ asset('img/pruhagafs/25522adadaf.jpg') }}" height="40px" style="margin-bottom: -20px" />
+            <br>
+            ______________________________________________
         </p>
         <p>
         Jorge Andrés Ortega Bedoya
