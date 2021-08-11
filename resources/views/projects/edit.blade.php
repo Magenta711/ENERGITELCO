@@ -2228,7 +2228,6 @@ function hasDeliveryFeedback($id,$item){
                     },
                     success:function(data){
                         $('.loader').hide('slow');
-                        console.log(data);
                     },
                     error: function (error) {
                         console.error("ERROR : ", error);

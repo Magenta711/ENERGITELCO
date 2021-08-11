@@ -94,7 +94,6 @@
         $(document).ready(function() {
             for (let i = 0; i < $('.form_checked').length; i++) {
                 let id = $($('.form_checked')[i]).children().attr('id');
-                console.log(id);
                 checkeLetter(id);
             }
             $('.form_checked').click(function () {

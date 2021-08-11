@@ -9,12 +9,14 @@ use App\Models\bonus\bonu;
 use App\Models\bonus\bonusUser;
 use App\Models\bonus\bonusUserDiscount;
 use App\Models\ccjl\ccjl_clients;
+use App\Models\ccjl\ccjl_invoice;
 use App\Models\ccjl\ccjl_rents;
 use App\Models\SystemMessages;
 use App\Models\Work1;
 use App\Models\work1_cut_bonus;
 use App\Notifications\notificationMain;
 use App\User;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Mail;
 
 class adminBonusesController extends Controller
@@ -276,6 +278,13 @@ class adminBonusesController extends Controller
                 $menssage->to('energitelco.011@gmail.com','ENERGITELCO SAS')->subject("Energitelco S.A.S, Notificación de pago de bonificaciones");
             });
             foreach ($id->users as $data) {
+                if (isset($data->credits)) {
+                    foreach ($data->credits as $value) {
+                        if ($value->status == 1) {
+                            $this->payCredit($value->credit_id);
+                        }
+                    }
+                }
                 Mail::send('human_management.bonus.administrative.email.user', ['data' => $data,'id' => $id], function ($menssage) use ($data)
                 {
                     $menssage->to($data->user->email,$data->user->name)->subject("Energitelco S.A.S, Notificación de pago de bonificaciones");
@@ -336,5 +345,27 @@ class adminBonusesController extends Controller
         }
 
         return $array;
+    }
+    
+    public function payCredit($idI)
+    {
+        $id = ccjl_invoice::find($idI);
+        $id->update([
+            'total' => $id->total_pay,
+            'diff' => 0,
+            'cash' => $id->total_pay,
+            'qr' => 0,
+            'card' => 0,
+            'date_pay' => now(),
+            'status' => 1,
+        ]);
+        $pdf = PDF::loadView('ccjl.rents.invoice_pdf',['id'=>$id]);
+        $pdf->save(storage_path('app/public/ccjl/invoice/') .$id->token.'.pdf');
+        Mail::send('ccjl.email.invoice',['id' => $id] , function ($mail) use ($pdf,$id) {
+            $mail->subject("CENTRO COMERCIAL JOSE LUIS Recibo de pago");
+            $mail->to($id->rent->client->email, $id->rent->client->name);
+            $mail->attachData($pdf->output(), $id->cod.'.pdf');
+        });
+        return true;
     }
 }

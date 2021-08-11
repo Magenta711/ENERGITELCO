@@ -80,11 +80,9 @@
             $('.item-permit').click(function () {
                 let item = $(this).children();
                 if (item.is(':checked')) {
-                    console.log('check');
                     let item = $(this).parent().addClass('bg-gray');
                 }else{
                     let item = $(this).parent().removeClass('bg-gray');
-                    console.log('no');
                 }
             });
         });
