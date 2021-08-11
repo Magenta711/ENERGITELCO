@@ -158,7 +158,6 @@ function signature_contract (id) {
     btn = id.split('_')[id.split('_').length - 1];
     let form = $("#form_contract_"+btn)[0];
     data = new FormData(form);
-    console.log('Hola');
     $.ajax({
         type:'POST',
         url:'/signature_contract',

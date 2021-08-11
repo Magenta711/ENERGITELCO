@@ -48,7 +48,6 @@ function upload(btn) {
         },
         success:function(data){
             $("#result_"+btn).addClass('text-success').text(data.success);
-            console.log(data.success);
             $("#"+btn).prop("disabled", false);
             if (data.success == 'Se subio correctamente el archivo' || data.success == 'Se subio y actualizo correctamente el archivo') {
                 $("#file_new_"+btn).hide();

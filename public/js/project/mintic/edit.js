@@ -31,7 +31,6 @@ $(document).ready(function() {
         e.preventDefault();
         incre++;
         let origen = this.id.split('_')[this.id.split('_').length - 1];
-        console.log(origen);
         let newElement = $("#origen_"+origen).clone().appendTo("#destino_"+origen).attr('id','origen_'+origen+'_'+incre);
         $('#origen_'+origen+'_'+incre+' input').val('');
     });
@@ -96,7 +95,6 @@ function selectEditMun(value,response) {
 }
 function selectEditEB(value,response) {
     value2 =  $("#eb").attr('value');
-    console.log(value2);
     data = [];
     response.CD.forEach(element => {
         if (element.MUNICIPIOANM.toUpperCase() == value) {

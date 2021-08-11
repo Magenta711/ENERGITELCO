@@ -647,7 +647,6 @@
                         }).then((result) => {
                             $url = '/learned_lessons/answer/home?answer_id='+result.value+'&id='+{{$question->id}};
                             var jqxhr = $.post($url, function (data) {
-                                console.log(data);
                                 Swal.fire(data['success']);
                             })
                             .fail(function() {

@@ -12,7 +12,6 @@ $(document).ready(function() {
     });
 
     $('.trash').click(function () {
-        console.log(this.id);
         destroyElement(this);
     });
 
@@ -126,7 +125,6 @@ function ValidateForm() {
     readyForm = true;
     if (!$('#user_id').val()) {
         readyForm = false;
-        console.log('change user',readyForm);
         $('#user_id').parent('.form-group').addClass('has-error').children('.help-block').show();
     }
     
@@ -134,7 +132,6 @@ function ValidateForm() {
     for (let i = 0; i < product.length; i++) {
         if (!($('#'+product[i].id).val())) {
             readyForm = false;
-            console.log('change produ',readyForm);
             $('#'+product[i].id).parent('.form-group').addClass('has-error').children('.help-block').show();
         }
     }

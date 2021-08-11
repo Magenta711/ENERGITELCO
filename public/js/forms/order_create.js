@@ -60,7 +60,6 @@ $(document).ready(function() {
                 item = types[i].id.split("_")[types[i].id.split("_").length - 1];
                 id = $('#'+types[i].id);
                 label = $('#label_file_input_'+item);
-                console.log(id);
                 if (id.val() == '') {
                     sema = false;
                     label.addClass("is-invalid").parent().addClass('has-error');

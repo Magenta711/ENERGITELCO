@@ -23,7 +23,6 @@ $(document).ready(function() {
             $('#from_to_auth_div').hide();
     });
     $('#is_format').click(function () {
-        console.log('Clic');
         if (this.checked)
             $('#is_format_div').show();
         else 

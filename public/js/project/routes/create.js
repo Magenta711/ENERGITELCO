@@ -101,7 +101,6 @@ function remove_user(id) {
     $('#div_user_'+idU).remove();
 }
 function remove_eb(id) {
-    console.log('remove-->',id);
     sv = id.split('_')[id.split('_').length - 2];
     eb = id.split('_')[id.split('_').length - 1];
     $('#div_eb_sv_'+sv+'_'+eb).remove();

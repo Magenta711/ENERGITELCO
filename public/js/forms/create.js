@@ -77,7 +77,6 @@ $(document).ready(function() {
 
 //Change type control question
 function changeControl(ele) {
-    // console.log(e.currentTarget.id);
     var item = ele.id.split("_")[ele.id.split("_").length - 1];
     let select = $('#type_'+item);
     let v = select.val();
@@ -275,8 +274,6 @@ function checkOptionFile(ele){
 
 function show_description(ele) {
     item = ele.id.split("_")[ele.id.split("_").length - 1];
-    console.log(ele);
-    console.log(item);
     if (ele.checked) {
         $('#description_question_'+item).show();
     }else {

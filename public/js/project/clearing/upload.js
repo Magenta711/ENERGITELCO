@@ -36,7 +36,6 @@ function upload(btn) {
         success:function(data){
             $("#result_"+btn).addClass('text-success').text(data.success);
             $("#"+btn).prop("disabled", false).text('Subir');
-            console.log('success-->',data.success);
             if (data.success == 'Se subio correctamente el archivo' || data.success == 'Se subio y actualizo correctamente el archivo') {
                 $("#file_new_"+btn).hide();
                 $("#upload_ready_"+btn).show();
