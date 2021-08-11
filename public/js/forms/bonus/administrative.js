@@ -166,7 +166,8 @@ function update_admin(user) {
         total += calification_admin((i+1),questions[i].value);
     }
     total = total.toFixed(2) * 10;
-    $('#percentage_admin_'+user).text(total+'%');
+    $('#percentage_admin_'+user).val(total);
+    $('#percentage_admin_text_'+user).text(total+'%');
     pay = (total / 100) * value_bonus;
     $('#total_pay_admin_'+user).text('$' + parseFloat(pay, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
     $('#total_admin_'+user).val(pay.toFixed(2));

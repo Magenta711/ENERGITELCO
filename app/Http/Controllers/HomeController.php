@@ -282,7 +282,6 @@ class HomeController extends Controller
     {
         $question = LearnedLeassonsTestUsers::find($request->id);
         if ($question->status == 0) {
-            return response()->json(['success'=>$request->id]);
             $question->update([
                 'answer_id' => $request->answer_id,
                 'status' => 1
@@ -290,9 +289,9 @@ class HomeController extends Controller
     
             $answer = LearnedLeassonsTestOption::where('test_id',$question->test_id)->where('answer',1)->first();
     
-            $message = 'Tu respuesta es : Incorrecta: '.$answer->text_answer;
+            $message = 'Incorrecta: la correcta es '.$answer->text_answer;
             if ($answer->id == $request->answer_id) {
-                $message = 'Tu respuesta es : Correcta: '.$answer->text_answer;
+                $message = 'Correcto: '.$answer->text_answer;
             }
             return response()->json(['success'=>$message]);
         }

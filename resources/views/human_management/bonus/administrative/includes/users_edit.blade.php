@@ -190,7 +190,7 @@
                                         <div class="row">
                                             <div class="col-md-6 block_bonus_administrative_{{$item->user_id}}" {!! !$item->admin_bonus_check ? 'style="display: none"' : ''!!}>
                                                 <h4>Porcentaje bonificación administrativa</h4>
-                                                <span id="percentage_admin_{{ $item->user_id }}">${{number_format($item->percentage_admin,2,',','.')}}</span>
+                                                <span id="percentage_admin_text_{{ $item->user_id }}">{{number_format($item->percentage_admin,2,',','.')}}%</span>
                                                 <input type="hidden" name="percentage_admin[{{$item->user_id}}]" value="{{$item->percentage_admin}}" id="percentage_admin_{{$item->user_id}}" class="percentage_admin">
                                             </div>
                                         </div>
@@ -302,6 +302,7 @@
                     <th>Total bonificaciones a administrativos</th>
                     <th>Total bonificaciones a condutores</th>
                     <th>Total bonificaciones 24/7</th>
+                    <th>Total descuentos</th>
                     <th>Total neto a pagar</th>
                 </tr>
             </thead>
@@ -323,6 +324,10 @@
                         <td>
                             <span id="total_24_7">${{number_format($id->total_pay_24_7,2,',','.')}}</span>
                             <input type="hidden" name="total_pay_24_7" value="{{$id->total_pay_24_7}}" id="total_pay_24_7">
+                        </td>
+                        <td>
+                            <span id="total_discount">${{number_format($id->total_pay_discount,2,',','.')}}</span>
+                            <input type="hidden" name="total_pay_discount" value="{{$id->total_pay_discount}}" id="total_pay_discount">
                         </td>
                         <th>
                             <h4><span id="total_all">${{number_format($id->total_pay,2,',','.')}}</span></h4>

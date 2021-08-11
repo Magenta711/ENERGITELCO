@@ -164,6 +164,7 @@
                                                         <tr>
                                                             <td>
                                                                 <input type="checkbox" class="discount_check discount_user_{{$user->id}}" name="pay_credit[{{$user->id}}][{{$item->id}}]" id="pay_credit_{{$item->id}}_{{$user->id}}" value="{{$item->id}}">
+                                                                {{$user->id}} {{$item->id}}
                                                             </td>
                                                             <td>
                                                                 ${{ number_format($item->total_pay,2) }}
@@ -196,7 +197,7 @@
                                         <div class="row">
                                             <div class="col-md-6 block_bonus_administrative_{{$user->id}}" style="display: none">
                                                 <h4>Porcentaje bonificación administrativa</h4>
-                                                <span id="percentage_admin_{{ $user->id }}">0,00%</span>
+                                                <span id="percentage_admin_text_{{ $user->id }}">0,00%</span>
                                                 <input type="hidden" name="percentage_admin[{{$user->id}}]" value="0" id="percentage_admin_{{$user->id}}" class="percentage_admin">
                                             </div>
                                         </div>
