@@ -129,7 +129,7 @@ class adminBonusesController extends Controller
                         'value' => $valu,
                         'date' => $request->date_pay_credit[$key][$ke],
                         'status' => isset($request->pay_credit[$key][$ke]) ? 1 : 0,
-                        'credit_id' => $key,
+                        'credit_id' => $ke,
                     ]);
                 }
             }
@@ -191,7 +191,7 @@ class adminBonusesController extends Controller
         $request['responsable'] = auth()->id();
         $request['date'] = now();
         $id->update($request->all());
-        foreach ($id->users as $key => $value) {
+        foreach ($id->users as $value) {
             $value->update([
                 'value_bonus' => $request->value_bonus[$value->user_id],
                 'working_days' => $request->working_days[$value->user_id],
@@ -233,6 +233,15 @@ class adminBonusesController extends Controller
                 'total_user' => $request->total_user[$value->user_id],
                 'commentary' => $request->commentary[$value->user_id],
             ]);
+            if (isset($value->credit )) {
+                foreach ($value->credit as $valu) {
+                    bonusUserDiscount::create([
+                        'value' => $request->value_pay_credit[$value->user_id][$valu->credit_id],
+                        'date' => $request->date_pay_credit[$value->user_id][$valu->credit_id],
+                        'status' => isset($request->pay_credit[$value->user_id][$valu->credit_id]) ? 1 : 0,
+                    ]);
+                }
+            }
         }
         return redirect()->route('admin_bonuses')->with('success','Se ha actualizado las bonificaciones administradores y conductores correctamente');
     }

@@ -14,4 +14,9 @@ class bonusUser extends Model
     {
         return $this->hasOne(User::class,'id','user_id');
     }
+
+    public function credits()
+    {
+        return $this->hasMany(bonusUserDiscount::class,'bonu_user_id','id');
+    }
 }

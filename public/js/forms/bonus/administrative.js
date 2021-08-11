@@ -145,7 +145,6 @@ function totalDiscount(user) {
             total += parseFloat($('#value_credit_'+user+'_'+usersDiscount[i].value).val());
         }
     }
-    console.log('total',total);
     $('.block_bonus_discount_'+user).show();
     $('#total_discount_'+user).val(total);
     $('#total_discount_text_'+user).text('$' + parseFloat((total), 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
@@ -220,15 +219,10 @@ function totalAll() {
 
     for (let i = 0; i < total_user.length; i++) {
         if (check_user[i].checked) {
-            console.log(total_admin[i].value);
             admin += parseFloat(total_admin[i].value);
-            console.log(total_driver[i].value);
             driver += parseFloat(total_driver[i].value);
-            console.log(total_24_7[i].value);
             t24_7 += parseFloat(total_24_7[i].value);
-            console.log(discount[i].value);
             tdiscount += parseFloat(discount[i].value);
-            console.log(total_user[i].value);
             total += parseFloat(total_user[i].value);
         }
     }
