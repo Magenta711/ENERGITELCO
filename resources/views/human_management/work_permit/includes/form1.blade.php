@@ -84,7 +84,7 @@
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-4">
-                        <label for="department">Departamentos</label>
+                        <label for="department">Departamentos <span id="text-loading-db">cargando...</span></label>
                         <select name="department" id="department" class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona el departamento" style="width: 100%;" data-select2-id="2" tabindex="-1" aria-hidden="true" value"{{old('department')}}">
                             <option disabled selected></option>
                         </select>

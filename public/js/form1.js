@@ -6,9 +6,12 @@ $(document).ready(function() {
     request.open('GET', cd);
     request.responseType = 'json';
     request.send();
-
+    $('#text-loading-db').show();
+    $('#station_name').parent().show();
     request.onload = function() {
         selectDep(request.response);
+        $('#station_name').parent().hide();
+        $('#text-loading-db').hide();
     }
 
     $('#eb').change(function(){

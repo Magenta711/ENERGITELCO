@@ -68,7 +68,6 @@
                         id="name_{{ $file->id }}">{{ $file->name }}</span>
                 </p>
                 <span class="mailbox-attachment-size">
-                    .
                     <span
                         id="size_{{ $file->id }}">{{ $file->size }}</span>
                     <a target="_black"

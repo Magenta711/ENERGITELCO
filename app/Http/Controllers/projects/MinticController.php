@@ -239,6 +239,8 @@ class MinticController extends Controller
         if ($request->hasFile('file')){
             $mintic = Mintic_School::find($request->id);
 
+            $visit = MinticVisit::where('project_id',$request->id)->where('type','ec')->first();
+
             $file_exists = $mintic->files->where('description',$request->name_d)->first();
 
             if ($file_exists){
@@ -250,7 +252,7 @@ class MinticController extends Controller
             if ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg') {
                 $text = $mintic->name.', '.$mintic->mun.', '.$mintic->dep;
                 $text2 = $mintic->lat.' '.$mintic->long.', '.$mintic->height.'.0 m';
-                $text3 = $mintic->date.' '.$mintic->time;
+                $text3 = $visit ? $visit->date.' '.$visit->time : now()->format('Y-m-d H:i:s');
 
                 $image = Image::make($request->file);
                 if ($request->size != 'org') {
@@ -438,7 +440,7 @@ class MinticController extends Controller
     {
         if ($request->hasFile('file')){
             $mintic = Mintic_School::find($request->id);
-
+            $visit = MinticVisit::where('project_id',$request->id)->where('type','install')->first();
             $file_exists = $mintic->files->where('description',$request->name_d)->first();
 
             if ($file_exists){
@@ -451,7 +453,7 @@ class MinticController extends Controller
                 if ($request->vol && $request->vol == 2) {
                     $text = $mintic->mun.', '.$mintic->dep.', '.$mintic->population;
                     $text2 = $mintic->long.' / '.$mintic->lat;
-                    $text3 = $mintic->date_install && $mintic->time_install ? $mintic->date_install.' '.$mintic->time_install : now()->format('Y-m-d H:i:s');
+                    $text3 = $visit ? $visit->date.' '.$visit->time : now()->format('Y-m-d H:i:s');
     
                     $image = Image::make($request->file);
                     if ($request->size != 'org') {
@@ -507,7 +509,7 @@ class MinticController extends Controller
                 }else {
                     $text = $mintic->name;
                     $text2 = $mintic->long.' / '.$mintic->lat;
-                    $text3 = $mintic->date_install && $mintic->time_install ? $mintic->date_install.' '.$mintic->time_install : now()->format('Y-m-d H:i:s');
+                    $text3 = $visit ? $visit->date.' '.$visit->time : now()->format('Y-m-d H:i:s');
     
                     $image = Image::make($request->file);
                     if ($request->size != 'org') {
@@ -740,7 +742,7 @@ class MinticController extends Controller
     {
         if ($request->hasFile('file')){
             $mintic = mintic_maintenance::find($request->id);
-
+            $visit = MinticVisit::where('project_id',$request->id)->where('type','maintenance')->first();
             $file_exists = $mintic->files->where('description',$request->name_d)->first();
 
             if ($file_exists){
@@ -751,7 +753,7 @@ class MinticController extends Controller
             $name = time().str_random().'.'.$file->getClientOriginalExtension();
             if ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg') {
                 $text2 = $mintic->project->long.' / '.$mintic->project->lat;
-                $text3 = $mintic->date;
+                $text3 = $visit ? $visit->date.' '.$visit->time : now()->format('Y-m-d H:i:s');
 
                 $image = Image::make($request->file);
                 if ($request->size != 'org') {

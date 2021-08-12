@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class Mintic_School extends Model
 {
     protected $table = "mintic_schools";
-    protected $fillable = ['approver_id','con_sede','code','name','dep','mun','person_name','person_number','lat','long','height','rector_name','rector_number','observation','responsable_id','status','population'];
+    protected $fillable = ['approver_id','con_sede','code','name','dep','mun','person_name','person_number','lat','long','height','rector_name','rector_number','observation'];
     protected $guarder = ['id'];
 
     public function responsable()
