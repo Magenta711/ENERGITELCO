@@ -93,6 +93,7 @@
                             <tr>
                                 <th>Funcionario</th>
                                 <th>Pendientes</th>
+                                <th>/</th>
                             </tr>
                         </thead>
                         <tbody>

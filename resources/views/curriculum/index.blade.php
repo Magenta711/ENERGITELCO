@@ -1,5 +1,5 @@
 @php
-    function statusCurriculum($item)
+    function statusCurriculum($item,$numDocument)
     {
         if ($item->register->user && $item->register->user->state) {
             $message = array();
@@ -11,6 +11,9 @@
             }
             if ($item->register->hasContract() && $item->register->hasContract()->signatured_at == '') {
                 $message[] = "contracto sin firmar";
+            }
+            if ($item->register->user->signature_curriculum_num() < $numDocument) {
+                $message[] = "tiene documentos sin firmar";
             }
             return $message;
         }
@@ -59,14 +62,22 @@
                     <tbody>
                         @foreach ($curriculums as $item)
                             @php
-                                $message = statusCurriculum($item);
+                                $message = statusCurriculum($item,$numDocument);
                             @endphp
                         <tr {!! $message ? 'class="bg-red" data-toggle="tooltip" data-placement="top" title="El usuario '.implode(" y ",$message).'"' : '' !!}>
                             <td>{{$item->id}}</td>
                             <td>{{$item->register->name ? $item->register->name : ''}}</td>
                             <td>{{$item->responsable->name}}</td>
-                            <td>{{$item->created_at}}</td>
-                            <td><span class="label label-default">{{$item->state}}</span></td>
+                            <td>{{$item->created_at }}</td>
+                            <td>
+                                <span class="label label-default">
+                                    @if ($item->register->user && $item->register->user->state == 0)
+                                        Eliminado
+                                    @else
+                                        {{$item->state}}
+                                    @endif
+                                </span>
+                            </td>
                             <td>
                                 @can('Ver hojas de vida')
                                 <a href="{{route('curriculum_show',$item->id)}}" class="btn btn-sm btn-success">Ver</a>

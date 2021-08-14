@@ -13,6 +13,29 @@
 </section>
 <section class="content">
     @include('includes.alerts')
+    @if ($id->minor_box && ($id->minor_box->charges > 0 || $id->minor_box->discharges > 0 || $id->minor_box->pending > 0 || ($id->register->hasContract() && $id->register->hasContract()->signatured_at == '') || !$id->register->hasContract()))
+    <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h4><i class="icon fa fa-ban"></i> Alerta!</h4>
+        <ul>
+            @if ($id->minor_box && $id->minor_box->charges > 0)
+            <li>El usuario cuenta con {{number_format($id->minor_box->charges,2,',','.')}} de caja menor por descargar</li>
+            @endif
+            @if ($id->minor_box && ($id->minor_box->discharges > 0 || $id->minor_box->pending > 0))
+                <li>El usuario cuenta con ${{number_format(($id->minor_box->discharges + $id->minor_box->pending),2,",",".")}} pendientes por pagarle</li>
+            @endif
+            @if (!$id->register->hasContract())
+                <li>El usuario no tiene contrato activo</li>
+            @endif
+            @if ($id->register->hasContract() && $id->register->hasContract()->signatured_at == '')
+                <li>El usuario no ha firmado el contrato</li>
+            @endif
+            @if ($id->register->car || $id->register->moto)
+                <li>El usuario es conductor, favor verificar multas</li>
+            @endif
+        </ul>
+    </div>
+    @endif
     {{-- Content main --}}
     <div class="box">
         <div class="box-header">

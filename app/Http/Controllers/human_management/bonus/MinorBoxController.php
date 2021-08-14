@@ -22,6 +22,7 @@ class MinorBoxController extends Controller
         $this->middleware('permission:Exportar bonificaciones de permisos de trabajo',['only' => ['export']]);
         $this->middleware('permission:Crear corte bonificaciones de permisos de trabajo',['only' => ['create','store']]);
         $this->middleware('permission:Editar bonificaciones de permisos de trabajo',['only' => ['edit','update']]);
+        $this->middleware('permission:Limpiar valores de bonificaciones y caja menor de técnicos',['only' => ['edit','update']]);
     }
     
     /**
@@ -365,5 +366,28 @@ class MinorBoxController extends Controller
             }
         }
         return null;
+    }
+
+    public function cleaner(Request $request,MinorBoxUser $id)
+    {
+        if (isset($request->charges)) {
+            $id->update([
+                'charges' => 0
+            ]);
+        }
+
+        if (isset($request->pending)) {
+            $id->update([
+                'pending' => 0
+            ]);
+        }
+
+        if (isset($request->discharges)) {
+            $id->update([
+                'discharges' => 0
+            ]);
+        }
+
+        return redirect()->back()->with('success','Se ha limpiado los valores del '.$id->user->name.' que se solicitaron correctamente');
     }
 }

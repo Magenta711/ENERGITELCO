@@ -161,11 +161,39 @@
                                     <tr>
                                         <td>{{$item->user->name}}</td>
                                         <td>${{number_format($item->charges,2,',','.')}}</td>
-                                        {{-- <td>${{number_format($item->pending,2,',','.')}}</td> --}}
                                         <td>${{number_format($item->discharges,2,',','.')}}</td>
-                                        {{-- <td>{{$item->rest}}</td> --}}
                                         <td>
                                             <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#historyModal_{{$item->id}}"><i class="fa fa-plus"></i></button>
+                                            @can('Limpiar valores de bonificaciones y caja menor de técnicos')
+                                                <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#clenerModal_{{$item->id}}">Limpiar</button>
+                                                <div class="modal fade" id="clenerModal_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="clenerModal_{{$item->id}}Label" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                                <h4 class="modal-title">Limpiar</h4>
+                                                            </div>
+                                                            <form action="{{route('bonus_minor_box_cleaner_user',$item->id)}}" method="POST">
+                                                                <div class="modal-body">
+                                                                    @csrf
+                                                                    @method('PATCH')
+                                                                    <ul class="list-group">
+                                                                        <li class="list-group-item"><label for="charges{{$item->id}}"><input type="checkbox" value="1" name="charges" id="charges_{{$item->id}}"> Pendiente por pagar</label> <span class="label label-primary">${{number_format($item->discharges,2,',','.')}}</span></li>
+                                                                        <li class="list-group-item"><label for="pending{{$item->id}}"><input type="checkbox" value="1" name="pending" id="pending_{{$item->id}}"> Caja menor</label> <span class="label label-primary">${{number_format($item->charges,2,',','.')}}</span></li>
+                                                                        <li class="list-group-item"><label for="discharges{{$item->id}}"><input type="checkbox" value="1" name="discharges" id="discharges_{{$item->id}}"> Pendiente por pagos meores a $50.000</label> <span class="label label-primary">${{number_format($item->pending,2,',','.')}}</span></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-sm btn-clener" data-dismiss="modal">Cancelar</button>
+                                                                    <button class="btn btn-sm btn-danger">Aceptar</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endcan
                                             <div class="modal fade" id="historyModal_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="historyModal_{{$item->id}}Label" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg">
                                                     <div class="modal-content">
@@ -173,7 +201,7 @@
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
-                                                            <h4 class="modal-title">Estados</h4>
+                                                            <h4 class="modal-title">Hitorial</h4>
                                                         </div>
                                                         <div class="modal-body">
                                                             <p>{!! str_replace("\n", '</br>', addslashes($item->history)) !!}</p>
@@ -186,14 +214,14 @@
                                             </div>
                                         </td>
                                     </tr>
-                                @endif
-                            @endforeach
-                        </tbody>
-                    </table>
+                                    @endif
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Cerrar</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>

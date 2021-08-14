@@ -17,7 +17,7 @@
                 <div class="box-header with-border">
                     <i class="fa fa-cubes"></i>
                     <h3 class="box-title">{{$id->name}}</h3>
-                    <div class="box-tools"><a href="{{route('position_setting')}}" class="btn nbtn-sm btn-success">Volver</a></div>
+                    <div class="box-tools"><a href="{{route('position_setting')}}" class="btn nbtn-sm btn-primary">Volver</a></div>
                 </div>
                     <!-- /.box-header -->
                 <div class="box-body">
@@ -46,7 +46,7 @@
                     <p>{{($id->offer == 1) ? 'SI' : 'No'}}</p>
                 </div>
                 <div class="box-footer">
-                    <a href="{{route('position_setting_edit',$id->id)}}" class="btn btn-sm btn-success">Editar</a>
+                    <a href="{{route('position_setting_edit',$id->id)}}" class="btn btn-sm btn-primary">Editar</a>
                 </div>
             </div>
 </section>

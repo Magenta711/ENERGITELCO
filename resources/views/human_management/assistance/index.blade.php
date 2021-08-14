@@ -14,7 +14,9 @@
     @include('includes.alerts')
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title"></h3>
+                <h3 class="box-title">
+                    Lista de asistencia
+                </h3>
                 <div class="box-tools">
                     @can('Tomar asistencia')
                         <a href="{{route('assistance_create')}}" class="btn btn-sm btn-success">Crear</a>

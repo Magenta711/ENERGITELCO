@@ -23,6 +23,7 @@ use App\Models\ccjl\ccjl_rents;
 use App\Models\project\route\Routes;
 use App\Models\Work8Users;
 use App\Models\InvUser;
+use App\Models\signature;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -165,5 +166,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return ccjl_rents::whereHas('client',function ($query) {
             return $query->where('document',$this->cedula);
         })->get();
+    }
+
+    public function signature_curriculum_num()
+    {
+        return signature::where('signatures_type','App\Models\document')->where('user_id',$this->id)->count();
     }
 }

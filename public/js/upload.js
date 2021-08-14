@@ -139,6 +139,7 @@ function signature (id){
             $("#sig_"+btn).prop("disabled", true);
         },
         success:function(data){
+            console.log(data);
             if (data.success == 'Se firmó') {
                 $("#result_signature_"+btn).show();
                 $("#sig_"+btn).hide();

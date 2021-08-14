@@ -39,18 +39,19 @@ class curriculumController extends Controller
     public function index()
     {
         $curriculums = curriculum::with([
-        'responsable',
-        'register'=>function ($query)
-        {
-            $query->with(['user',
+            'responsable',
+            'register'=>function ($query)
+            {
+                $query->with(['user',
                 'contracts' => function ($query)
                 {
                     $query->where('status',1);
                 }
             ]);
-
+            
         }])->get();
-        return view('curriculum.index',compact('curriculums'));
+        $numDocument = document::where('status','!=',3)->where('contract',1)->count();
+        return view('curriculum.index',compact('curriculums','numDocument'));
     }
 
     /**
@@ -392,7 +393,7 @@ class curriculumController extends Controller
     public function signature(Request $request)
     {
         signature::create([
-            'signatures_type' => 'App\User',
+            'signatures_type' => 'App\Models\document',
             'signatures_id' => $request->id,
             'user_id' => auth()->id(),
         ]);

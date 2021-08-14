@@ -92,12 +92,12 @@
                                     <br>
                                     <label for="car">
                                         <input type="checkbox" name="car" id="car" {{$id->register->car ? 'checked' : ''}} value="1">
-                                        Moto
+                                            Carro
                                     </label>
                                     <br>
                                     <label for="moto">
                                         <input type="checkbox" name="moto" id="moto" {{$id->register->moto ? 'checked' : ''}} value="1">
-                                        Carro
+                                            Moto
                                     </label>
                                 </div>
                             </div>

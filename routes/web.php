@@ -741,6 +741,7 @@ Route::get('human_management/bonus/minor_box/{id}/edit','human_management\bonus\
 Route::put('human_management/bonus/minor_box/{id}','human_management\bonus\MinorBoxController@update')->name('bonus_minor_box_update');
 Route::get('human_management/bonus/minor_box/{id}/export','human_management\bonus\MinorBoxController@export')->name('bonus_minor_box_export');
 Route::post('human_management/bonus/minor_box/add_user','human_management\bonus\MinorBoxController@add_user')->name('bonus_minor_box_add_user');
+Route::patch('human_management/bonus/minor_box/{id}/cleaner','human_management\bonus\MinorBoxController@cleaner')->name('bonus_minor_box_cleaner_user');
 
 // inventarios de equipos
 Route::get('execution_works/inventory/equipment','projects\inventory\EquipmentController@index')->name('mintic_inventory_equipment');

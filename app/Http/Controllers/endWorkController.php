@@ -186,9 +186,11 @@ class endWorkController extends Controller
             ]);
         }
         
-        Contract::where('id',$id->register->hasContract()->id)->update([
-            'last_date' => $request->date_end,
-        ]);
+        if ($id->register->hasContract()) {
+            Contract::where('id',$id->register->hasContract()->id)->update([
+                'last_date' => $request->date_end,
+            ]);
+        }
         $id->register->update([
             'date_start' => $request->date,
             'date_end' => $request->date_end,
