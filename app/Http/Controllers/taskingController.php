@@ -12,6 +12,7 @@ use App\Models\Tasking;
 use App\Models\Work7;
 use App\User;
 use App\Models\project\Clearing;
+use App\Models\project\Mintic\MinticVisit;
 use Illuminate\Http\Request;
 use App\Models\taskDetailConsumable;
 
@@ -89,6 +90,29 @@ class taskingController extends Controller
             'long' => $request->long,
             'status' => 2,
         ]);
+        if (
+            $request->project == "MINTIC ESTUDIO DE CAMPO"
+            || $request->project == "MINTIC TSS EB"
+            || $request->project == "MINTIC INSTALACIÓN CENTRO DIGITAL"
+            || $request->project == "MINTIC INSTALACIÓN ESTACIÓN BASE"
+            || $request->project == "MINTIC INTEGRACIÓN Y ENTREGA CENTRO DIGITAL"
+            || $request->project == "MINTIC ENTREGA INTERVENTORIA CENTRO DIGITAL"
+            || $request->project == "MINTIC MANTANIMIENTO"
+        ){
+            $mintic = Mintic_School::where('con_sede',$request->eb)->first();
+            if ($mintic) {
+                $type = ($request->project == "MINTIC ESTUDIO DE CAMPO" || $request->project == "MINTIC TSS EB") ? 'ec' : (($request->project == "MINTIC INSTALACIÓN CENTRO DIGITAL" || $request->project == "MINTIC INSTALACIÓN ESTACIÓN BASE") ? 'install' : (($request->project == "MINTIC INTEGRACIÓN Y ENTREGA CENTRO DIGITAL" || $request->project == "MINTIC ENTREGA INTERVENTORIA CENTRO DIGITAL") ? 'integration' : 'maintenance'));
+                MinticVisit::create([
+                    'date'=>$request->date_start,
+                    'project_id'=>$mintic->id,
+                    'time'=>$request->date_start,
+                    'technical_id'=>$request->users[0] ?? null,
+                    'commentary'=>'Auto',
+                    'type' => $type,
+                    'status' => 0
+                ]);
+            }
+        }
         if (isset($request->users)) {
             for ($i=0; $i < count($request->users); $i++) { 
                 Responsable::create([

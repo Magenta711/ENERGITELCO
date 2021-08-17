@@ -3,12 +3,12 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Mostrar usuario <small>Usuarios</small>
+            Ver usuario <small>Usuarios</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
             <li><a href="#"> Usuarios</a></li>
-            <li class="active">Mostrar usuarios</li>
+            <li class="active">Ver usuarios</li>
         </ol>
     </section>
     <section class="content">

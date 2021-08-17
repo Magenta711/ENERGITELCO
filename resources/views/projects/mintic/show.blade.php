@@ -64,18 +64,6 @@
                     <p>{{ $id->height }}</p>
                 </div>
                 <div class="form-group col-sm-6">
-                    <label for="rector_number">Técnico</label>
-                    <p>{{ $id->technical ? $id->technical->name : '' }}</p>
-                </div>
-                <div class="form-group col-sm-6">
-                    <label for="date">Fecha visita</label>
-                    <p>{{ $id->date }}</p>
-                </div>
-                <div class="form-group col-sm-6">
-                    <label for="time">Hora visita</label>
-                    <p>{{ $id->time }}</p>
-                </div>
-                <div class="form-group col-sm-6">
                     <label for="rector_name">Nombre del rector</label>
                     <p>{{ $id->rector_name }}</p>
                 </div>
@@ -83,23 +71,146 @@
                     <label for="rector_number">Numero del rector</label>
                     <p>{{ $id->rector_number }}</p>
                 </div>
-                <div class="form-group col-sm-6">
-                    <label for="date_install">Fecha instalación</label>
-                    <p>{{ $id->date_install }}</p>
-                </div>
-                <div class="form-group col-sm-6">
-                    <label for="time_install">Hora instalación</label>
-                    <p>{{ $id->time_install }}</p>
-                </div>
                 <div class="form-group col-sm-12">
                     <label for="observation">Observaciones</label>
                     <p>{!! str_replace("\n", '</br>', addslashes($id->observation)) !!}</p>
                 </div>
             </div>
+            <hr>
             @php
                 $i = 1;
             @endphp
-            
+            <h4>Estudio de campo</h4>
+            <div id="destino_ec">
+                @php
+                    $ec = false;
+                @endphp
+                @foreach ($id->visits as $item)
+                    @if ($item->type == "ec")
+                        @php
+                            $ec = true;
+                        @endphp
+                        <div class="row" id="origen_ec">
+                            <div class="form-group col-sm-6">
+                                <label for="date">Fecha visita</label>
+                                <p>{{$item->date}}</p>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="time">Hora visita</label>
+                                <p>{{$item->time}}</p>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="technical_id_ec">Técnico asignado</label>
+                                <p>{{$item->technical->name}}</p>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="commentary">Comentarios</label>
+                                <p>{{$item->commentary}}</p>
+                            </div>
+                            <hr>
+                        </div>
+                    @endif
+                @endforeach
+            </div>
+            <hr>
+            <h4>Instalación</h4>
+            <div id="destino_install">
+                @php
+                    $install = false;
+                @endphp
+                @foreach ($id->visits as $item)
+                    @if ($item->type == "install")
+                        @php
+                            $install = true;
+                        @endphp
+                        <div class="row" id="origen_install">
+                            <div class="form-group col-sm-6">
+                                <label for="date_install">Fecha visita</label>
+                                <p>{{$item->date}}</p>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="time_install">Hora visita</label>
+                                <p>{{$item->time}}</p>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="technical_id_install">Técnico asignado</label>
+                                <p>{{$item->technical->name}}</p>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="commentary_install">Comentarios</label>
+                                <p>{{$item->commentary}}</p>
+                            </div>
+                            <hr>
+                        </div>
+                    @endif
+                @endforeach
+            </div>
+            <hr>
+            <h4>Integración y/o entrega</h4>
+            <div id="destino_integration">
+                @php
+                    $integration = false;
+                @endphp
+                @foreach ($id->visits as $item)
+                    @if ($item->type == "integration")
+                        @php
+                            $integration = true;
+                        @endphp
+                        <div class="row" id="origen_integration">
+                            <div class="form-group col-sm-6">
+                                <label for="date_integration">Fecha visita</label>
+                                <p>{{$item->date}}</p>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="time_integration">Hora visita</label>
+                                <p>{{$item->time}}</p>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="technical_id_integration">Técnico asignado</label>
+                                <p>{{$item->technical->name}}</p>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="commentary_integration">Comentarios</label>
+                                <p>{{$item->commentary}}</p>
+                            </div>
+                            <hr>
+                        </div>
+                    @endif
+                @endforeach
+            </div>
+            <hr>
+            <h4>Mantenimiento</h4>
+            <div id="destino_maintenance">
+            @php
+                $maintenance = false;
+            @endphp
+            @foreach ($id->visits as $item)
+                @if ($item->type == "maintenance")
+                    @php
+                        $maintenance = true;
+                    @endphp
+                        <div class="row" id="origen_maintenance">
+                            <div class="form-group col-sm-6">
+                                <label for="date_maintenance">Fecha visita</label>
+                                <p>{{$item->date}}</p>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="time_maintenance">Hora visita</label>
+                                <p>{{$item->time}}</p>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="technical_id_maintenance">Técnico asignado</label>
+                                <p>{{$item->technical->name}}</p>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="commentary_maintenance">Comentarios</label>
+                                <p>{{$item->commentary}}</p>
+                            </div>
+                            <hr>
+                        </div>
+                    @endif
+                @endforeach
+            </div>
         </div>
         @if ($id->status == 0)
             <div class="box-footer">

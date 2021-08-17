@@ -41,7 +41,7 @@
                         <div class="form-group col-md-6">
                             <label for="eb">Sede educativa</label>
                             <input type="hidden" name="type_eb" id="type_eb">
-                            <select name="eb" id="eb" class="form-control select2 select2-hidden-accessible" disabled style="width: 100%;" data-placeholder="Selecciona una sede educativa" data-select2-id="5" tabindex="-1" aria-hidden="true">
+                            <select name="con_sede" id="eb" class="form-control select2 select2-hidden-accessible" disabled style="width: 100%;" data-placeholder="Selecciona una sede educativa" data-select2-id="5" tabindex="-1" aria-hidden="true">
                                 <option disabled selected></option>
                             </select>
                         </div>

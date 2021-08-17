@@ -74,15 +74,33 @@
                     </div>
                 </div>
                 <hr>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="date_end">Cartas </label><br>
-                        <label class="form_checked" for="letter_1"><input type="checkbox" name="letters[]" value="letter_1" id="letter_1" checked>Carta de recomendación</label><br>
-                        <label class="form_checked" for="letter_2"><input type="checkbox" name="letters[]" value="letter_2" id="letter_2" checked>Carta de examenes medicos</label><br>
-                        <label class="form_checked" for="letter_3"><input type="checkbox" name="letters[]" value="letter_3" id="letter_3" checked>Carta de terminación laboral</label><br>
-                        <label class="form_checked" for="letter_4"><input type="checkbox" name="letters[]" value="letter_4" id="letter_4" {{ $monthDff > 2 ? 'checked' : '' }}>Carta de retiro de cesantías</label><br>
-                    </div>
-                </div>
+                <label for="date_end">Cartas</label><br>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <label class="form_checked" for="letter_1">
+                            <input type="checkbox" name="letters[]" value="letter_1" id="letter_1" checked>
+                            Carta de recomendación
+                        </label>
+                    </li>
+                    <li class="list-group-item">
+                        <label class="form_checked" for="letter_2">
+                            <input type="checkbox" name="letters[]" value="letter_2" id="letter_2" checked>
+                            Carta de examenes medicos
+                        </label>
+                    </li>
+                    <li class="list-group-item">
+                        <label class="form_checked" for="letter_3">
+                            <input type="checkbox" name="letters[]" value="letter_3" id="letter_3" checked>
+                            Carta de terminación laboral
+                        </label>
+                    </li>
+                    <li class="list-group-item">
+                        <label class="form_checked" for="letter_4">
+                            <input type="checkbox" name="letters[]" value="letter_4" id="letter_4" {{ $monthDff > 2 ? 'checked' : '' }}>
+                            Carta de retiro de cesantías
+                        </label>
+                    </li>
+                </ul>
             </div>
             <div class="box-group" id="accordion">
                 {{-- Carta de recomendacion --}}
