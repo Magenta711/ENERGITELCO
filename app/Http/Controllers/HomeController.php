@@ -288,8 +288,8 @@ class HomeController extends Controller
             ]);
     
             $answer = LearnedLeassonsTestOption::where('test_id',$question->test_id)->where('answer',1)->first();
-    
-            $message = 'Incorrecta: la correcta es '.$answer->text_answer;
+
+            $message = 'Incorrecta: la respuesta es '.$answer->text_answer;
             if ($answer->id == $request->answer_id) {
                 $message = 'Correcto: '.$answer->text_answer;
             }

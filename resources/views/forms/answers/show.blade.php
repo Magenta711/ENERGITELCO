@@ -39,13 +39,13 @@ function answerQuestion($order, $question){
 @section('content')
 <section class="content-header">
     <h1>
-        Auto Form
+        Respuesta <small>Formularios</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
-        <li><a href="#"> Dirección</a></li>
-        <li><a href="#"> Indicadores</a></li>
-        <li class="active">Informe de indicadores</li>
+        <li><a href="#"> Formularios</a></li>
+        <li><a href="#"> Respuestas</a></li>
+        <li class="active">Ver</li>
     </ol>
 </section>
 <section class="content">

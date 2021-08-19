@@ -49,7 +49,7 @@
                                     <div class="modal fade" id="modal_delete_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
-                                                <form action="{{route('mintic_maintenance_delete',$item->id)}}" method="post">
+                                                <form action="{{route('mintic_maintenance_delete',[$id->id,$item->id])}}" method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                 <div class="modal-header">
@@ -59,7 +59,7 @@
                                                     <h4 class="modal-title" id="exampleModalLongTitle">Eliminar projecto</h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p>¿Está seguro de eliminar el proyecto {{$item->project_name}}?</p>
+                                                    <p>¿Está seguro de eliminar el mantenimiento {{$item->id}}?</p>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-sm btn-secondary pull-left" data-dismiss="modal">Cancelar</button>

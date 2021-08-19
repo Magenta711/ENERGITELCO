@@ -49,7 +49,8 @@
                                 <td>
                                     @if (
                                         auth()->user()->hasPermissionTo('Aprobar retiro de cesantías') || 
-                                        auth()->user()->hasPermissionTo('Consultar retiro de cesantías')
+                                        auth()->user()->hasPermissionTo('Consultar retiro de cesantías') ||
+                                        auth()->id() == $withdraw_serverace->responsable_id
                                     )
                                         <a href="{{route('request_withdraw_severance_show',$withdraw_serverace->id)}}" class="btn btn-sm btn-success">Ver</a>
                                     @endif

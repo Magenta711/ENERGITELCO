@@ -22,7 +22,7 @@ class requestWithdrawSeveranceController extends Controller
         $this->middleware('auth');
         $this->middleware('verified');
         $this->middleware('permission:Aprobar retiro de cesantías|Digitar solicitud de retiro de cesantías|Eliminar solicitud de retiro de cesantías',['only' => ['index']]);
-        $this->middleware('permission:Consultar retiro de cesantías',['only' => ['show']]);
+        // $this->middleware('permission:Consultar retiro de cesantías',['only' => ['show']]);
         $this->middleware('permission:Digitar solicitud de retiro de cesantías',['only' => ['create','store']]);
         $this->middleware('permission:Eliminar solicitud de retiro de cesantías',['only' => ['destroy']]);
         $this->middleware('permission:Aprobar retiro de cesantías',['only' => ['approve']]);
@@ -116,30 +116,38 @@ class requestWithdrawSeveranceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Work10 $id)
     {
-        $id = Work10::with(['files','coordinadorAcargo' => function ($query)
-        {
-            $query->with('roles');
-        },'responsableAcargo' => function ($query)
-        {
-            $query->with('roles');
-        }])->find($id);
-        if (!$id->responsableAcargo->register->hasContract()) {
-            return back()->with('success','Usuario no cuenta con contracto');
+        if (
+            auth()->user()->hasPermissionTo('Aprobar retiro de cesantías') || 
+            auth()->user()->hasPermissionTo('Consultar retiro de cesantías') ||
+            auth()->id() == $id->responsable_id
+        ) {
+            $id = Work10::with(['files','coordinadorAcargo' => function ($query)
+            {
+                $query->with('roles');
+            },'responsableAcargo' => function ($query)
+            {
+                $query->with('roles');
+            }])->find($id->id);
+            if (!$id->responsableAcargo->register->hasContract()) {
+                return back()->with('success','Usuario no cuenta con contracto');
+            }
+            $meses = array('0',"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+            $day = 0;
+            $month = 0;
+            $year = 0;
+            if ($id->responsableAcargo->register) {
+                $day = date('d', strtotime($id->responsableAcargo->register->date));
+                $month = date('n', strtotime($id->responsableAcargo->register->date));
+                $year = date('Y', strtotime($id->responsableAcargo->register->date));
+            }
+            // Convertir fecha
+            $date = ['day' => $day,'month' => $meses[($month)],'year' => $year, 'this_month' => $meses[intval(now()->format('m'))]];
+            return view('human_management.withdraw_serveraces.show',compact('id','date'));
+        }else {
+            return redirect()->route('home')->with('success','No tienes acceso a esta página');
         }
-        $meses = array('0',"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
-        $day = 0;
-        $month = 0;
-        $year = 0;
-        if ($id->responsableAcargo->register) {
-            $day = date('d', strtotime($id->responsableAcargo->register->date));
-            $month = date('n', strtotime($id->responsableAcargo->register->date));
-            $year = date('Y', strtotime($id->responsableAcargo->register->date));
-        }
-        // Convertir fecha
-        $date = ['day' => $day,'month' => $meses[($month)],'year' => $year, 'this_month' => $meses[intval(now()->format('m'))]];
-        return view('human_management.withdraw_serveraces.show',compact('id','date'));
     } 
 
     /**

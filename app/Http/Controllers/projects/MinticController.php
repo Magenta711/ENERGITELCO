@@ -436,6 +436,12 @@ class MinticController extends Controller
         return view('projects.mintic.install',compact('id'));
     }
 
+    public function destroy_maintenance($id,mintic_maintenance $item)
+    {
+        $item->delete();
+        return redirect()->route('mintic_maintenance',$id)->with(['success'=>'Se ha eliminado el mantenimiento correctamente']);
+    }
+
     public function upload_install(Request $request)
     {
         if ($request->hasFile('file')){

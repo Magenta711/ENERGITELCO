@@ -708,7 +708,7 @@ Route::get('project/mintic/maintenance/{id}/{item}','projects\MinticController@s
 Route::get('project/mintic/maintenance/{id}/{item}/export','projects\MinticController@export_maintenance')->name('mintic_maintenance_export');
 Route::get('project/mintic/maintenance/{id}/{item}/photos','projects\MinticController@photos_maintenance')->name('mintic_maintenance_photos');
 Route::post('project/mintic/maintenance/{id}/{item}','projects\MinticController@upload_maintenance')->name('mintic_marke_maintenance');
-Route::delete('project/mintic/maintenance/{id}/{item}','projects\MinticController@destroy')->name('mintic_maintenance_delete');
+Route::delete('project/mintic/maintenance/{id}/{item}','projects\MinticController@destroy_maintenance')->name('mintic_maintenance_delete');
 
 Route::get('project/mintic/add/{id}','projects\MinticImplementController@index')->name('mintic_add_consumables');
 Route::get('project/mintic/add/{id}/show/{item}','projects\MinticImplementController@show')->name('mintic_add_consumables_show');

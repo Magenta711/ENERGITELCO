@@ -84,11 +84,13 @@ class improvementActionController extends Controller
                 'type' => 'tracing',
                 'status' => 1
             ]);
-            for ($j=0; $j < count($request->user_tracing_id[$key]); $j++) { 
-                improvementActionDetailUser::create([
-                    'user_id' => $request->user_tracing_id[$key][$j],
-                    'detail_id' => $detail->id
-                ]);
+            if (isset($request->user_tracing_id[$key]) && $request->user_tracing_id[$key] != '') {
+                for ($j=0; $j < count($request->user_tracing_id[$key]); $j++) { 
+                    improvementActionDetailUser::create([
+                        'user_id' => $request->user_tracing_id[$key][$j],
+                        'detail_id' => $detail->id
+                    ]);
+                }
             }
         }
 

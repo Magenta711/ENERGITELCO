@@ -53,42 +53,40 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="department">Departamento</label>
-                                <input type="text" name="department" id="department" value="{{ $item->department }}"
+                                <input type="text" readonly name="department" id="department" value="{{ $item->department }}"
                                     class="form-control">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="municpality">Municipio</label>
-                                <input type="text" name="municpality" id="municpality" value="{{ $item->municpality }}"
+                                <input type="text" readonly name="municpality" id="municpality" value="{{ $item->municpality }}"
                                     class="form-control">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="population">Centro poblado</label>
-                                <input type="text" name="population" id="population" value="{{ $item->population }}"
+                                <input type="text" readonly name="population" id="population" value="{{ $item->population }}"
                                     class="form-control">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="name">Sede institución o caso especial</label>
-                                <input type="text" name="name" id="name" value="{{ $item->name }}" class="form-control">
+                                <input type="text" readonly name="name" id="name" value="{{ $item->name }}" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="code">Id de beneficiario</label>
-                                <input type="text" name="code" id="code" value="{{ $item->code }}" class="form-control">
+                                <input type="text" readonly name="code" id="code" value="{{ $item->code }}" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="responsable_name">Nombre del responsable <small>(Responsable de la institución
-                                        educativa / autoridad competente)</small></label>
-                                <input type="text" value="{{ $item->responsable_name }}" name="responsable_name"
-                                    id="responsable_name" value="{{ $item->responsable_name }}" class="form-control">
+                                <label for="responsable_name">Nombre del responsable <small>(Responsable de la institución educativa / autoridad competente)</small></label>
+                                <input type="text" value="{{ $item->responsable_name }}" name="responsable_name" id="responsable_name" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-3">
