@@ -22,7 +22,7 @@ class MinorBoxController extends Controller
         $this->middleware('permission:Exportar bonificaciones de permisos de trabajo',['only' => ['export']]);
         $this->middleware('permission:Crear corte bonificaciones de permisos de trabajo',['only' => ['create','store']]);
         $this->middleware('permission:Editar bonificaciones de permisos de trabajo',['only' => ['edit','update']]);
-        $this->middleware('permission:Limpiar valores de bonificaciones y caja menor de técnicos',['only' => ['edit','update']]);
+        $this->middleware('permission:Limpiar valores de bonificaciones y caja menor de técnicos',['only' => ['cleaner']]);
     }
     
     /**

@@ -38,10 +38,10 @@
                         </thead>
                         <tbody>
                             @foreach ($consumables as $consumable)
-                                <tr {!! $consumable->amount <= $consumable->alert ? 'class="bg-red" data-toggle="tooltip" data-placement="top" title="Hay muy pocos consumibles"' : '' !!}>
+                                <tr {!! $consumable->stock <= $consumable->alert ? 'class="bg-red" data-toggle="tooltip" data-placement="top" title="Hay muy pocos consumibles"' : '' !!}>
                                     <td>{{$consumable->id}}</td>
                                     <td>{{$consumable->item}} {{$consumable->type}}</td>
-                                    <td>{{$consumable->amount}} {{$consumable->unid}}</td>
+                                    <td>{{$consumable->stock}} {{$consumable->unid}}</td>
                                     <td>{{$consumable->updated_at}}</td>
                                     <td>{{$consumable->status == 1 ? 'Disponible' : 'Agotado' }}</td>
                                     <td>

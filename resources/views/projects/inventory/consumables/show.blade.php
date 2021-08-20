@@ -31,8 +31,26 @@
                     </div>
                     <div class="col-md-3 col-xs-6">
                         <div class="form-group">
-                            <label for="amount">Cantidades</label>
+                            <label for="amount">Cantidad inicial</label>
                             <p>{{$id->amount}} {{$id->unid}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xs-6">
+                        <div class="form-group">
+                            <label for="amount">Cantidad actual</label>
+                            <p>{{$id->stock}} {{$id->unid}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xs-6">
+                        <div class="form-group">
+                            <label for="amount">Entradas</label>
+                            <p>{{$id->tickets}} {{$id->unid}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xs-6">
+                        <div class="form-group">
+                            <label for="amount">Salidas</label>
+                            <p>{{$id->departures}} {{$id->unid}}</p>
                         </div>
                     </div>
                     <div class="col-md-3 col-xs-6">

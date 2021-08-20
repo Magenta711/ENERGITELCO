@@ -202,7 +202,7 @@ class improvementActionController extends Controller
             }
             $i++;
         }
-        improvementActionDetail::where('detail_id',$detail->id)->where('status',0)->delete();
+        improvementActionDetail::where('improvement_id',$id->id)->where('status',0)->delete();
         if ($i < $amuont_all) {
             if ($i < $amount_action) {
                 foreach ($request->action as $key => $value) {

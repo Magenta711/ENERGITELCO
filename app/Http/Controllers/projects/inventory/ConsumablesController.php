@@ -5,6 +5,7 @@ namespace App\Http\Controllers\projects\inventory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\project\Mintic\inventory\invMinticConsumable;
+use App\Models\project\Mintic\MinticConsumableImplementDetail;
 
 class ConsumablesController extends Controller
 {
@@ -27,6 +28,20 @@ class ConsumablesController extends Controller
     public function index()
     {
         $consumables = invMinticConsumable::get();
+        // $details = MinticConsumableImplementDetail::where('productable_type','App\Models\project\Mintic\inventory\invMinticConsumable')->get();
+        // foreach ($details as $key => $value) {
+        //     $id = invMinticConsumable::find($value->productable_id);
+        //     $id->update([
+        //         'tickets' => $id->tickets ? $id->tickets + $value->amount : $value->amount,
+        //         'departures' => $value->amount
+        //     ]);
+        // }
+        // foreach ($consumables as $key => $value) {
+        //     $value->update([
+        //         'stock' => $value->stock ? $value->amount + $value->stock : $value->amount,
+        //         'tickets' => $value->tickets ? $value->amount + $value->tickets : $value->amount
+        //     ]);
+        // }
         return view('projects.inventory.consumables.index',compact('consumables'));
     }
 
@@ -53,6 +68,8 @@ class ConsumablesController extends Controller
             'amount' => ['required'],
         ]);
         $request['status'] = 1;
+        $request['tickets'] = $request->amount;
+        $request['stock'] = $request->amount;
         invMinticConsumable::create($request->all());
         return redirect()->route('mintic_inventory_consumables')->with('success','Se ha creado el consumible correctamente');
     }
@@ -95,6 +112,9 @@ class ConsumablesController extends Controller
         if ($id->status == 0) {
             $request['status'] = $request->amount > 0 ? 1 : 0;
         }
+        $request['tickets'] = $id->tickets + $request->amount;
+        $request['stock'] = $request->amount;
+        $request['amount'] = $id->amount;
         $id->update($request->all());
         return redirect()->route('mintic_inventory_consumables')->with('success','Se ha creado el consumible correctamente');
     }

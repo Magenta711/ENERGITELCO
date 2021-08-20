@@ -182,7 +182,7 @@ class MinticImplementController extends Controller
             if ($value->productable_type == 'App\Models\project\Mintic\inventory\invMinticConsumable') {
                 $consumable = invMinticConsumable::find($value->productable_id);
                 $consumable->update([
-                    'amount' => $consumable->amount + $value->amount - $value->delivered,
+                    'stock' => $consumable->stock + $value->amount - $value->delivered,
                     'status' => 1,
                 ]);
             }
@@ -206,9 +206,9 @@ class MinticImplementController extends Controller
                     'margin' => 0,
                 ]);
                 $consumable = invMinticConsumable::find($request->description[$i]);
-                $rest = $consumable->amount - $request->amount[$i] + $deliverable;
+                $rest = $consumable->stock - $request->amount[$i] + $deliverable;
                 $consumable->update([
-                    'amount' => $rest,
+                    'stock' => $rest,
                     'status' => $rest == 0 ? 0 : 1,
                 ]);
             }

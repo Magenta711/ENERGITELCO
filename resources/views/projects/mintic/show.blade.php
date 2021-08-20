@@ -101,7 +101,7 @@
                             </div>
                             <div class="form-group col-sm-6">
                                 <label for="technical_id_ec">Técnico asignado</label>
-                                <p>{{$item->technical->name}}</p>
+                                <p>{{$item->technical ? $item->technical->name : ''}}</p>
                             </div>
                             <div class="form-group col-sm-6">
                                 <label for="commentary">Comentarios</label>
@@ -134,7 +134,7 @@
                             </div>
                             <div class="form-group col-sm-6">
                                 <label for="technical_id_install">Técnico asignado</label>
-                                <p>{{$item->technical->name}}</p>
+                                <p>{{$item->technical ? $item->technical->name : ''}}</p>
                             </div>
                             <div class="form-group col-sm-6">
                                 <label for="commentary_install">Comentarios</label>
@@ -167,7 +167,7 @@
                             </div>
                             <div class="form-group col-sm-6">
                                 <label for="technical_id_integration">Técnico asignado</label>
-                                <p>{{$item->technical->name}}</p>
+                                <p>{{$item->technical ? $item->technical->name : ''}}</p>
                             </div>
                             <div class="form-group col-sm-6">
                                 <label for="commentary_integration">Comentarios</label>
@@ -200,7 +200,7 @@
                             </div>
                             <div class="form-group col-sm-6">
                                 <label for="technical_id_maintenance">Técnico asignado</label>
-                                <p>{{$item->technical->name}}</p>
+                                <p>{{$item->technical ? $item->technical->name : ''}}</p>
                             </div>
                             <div class="form-group col-sm-6">
                                 <label for="commentary_maintenance">Comentarios</label>

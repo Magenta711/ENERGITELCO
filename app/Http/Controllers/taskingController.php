@@ -385,10 +385,10 @@ class taskingController extends Controller
         }
         if (isset($request->consumable)) {
             foreach ($request->consumable as $key => $value) {
-                $detail = taskDetailConsumable::where('inventaryble_type','App\Models\project\Mintic\inventory\invMinticConsumable')->where('inventaryble_id', $value)->where('task_id',$id->id)->first();
+                $detail = taskDetailConsumable::where('inventaryble_type','App\Models\project\Mintic\inventory\invMinticConsumable')->where('inventaryble_id', $value)->where('  ',$id->id)->first();
                 if ($detail) {
                     $detail->update([
-                        'preamount' => $detail->preamount
+                        'preamount' => $request->amount[$key]
                     ]);
                 }else {
                     $id->consumables()->create([

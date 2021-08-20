@@ -26,12 +26,6 @@
             <p class="text-muted">{{$id->email}}</p>
 
             <hr>
-
-            <strong><i class="fa fa-map-marker margin-r-5"></i> Direccion</strong>
-
-            <p class="text-muted">{{$id->direccion}}</p>
-
-            <hr>
             
             <strong><i class="fa fa-phone margin-r-5"></i>Teléfono</strong>
             
@@ -48,6 +42,16 @@
             <strong><i class="fa fa-chart-area margin-r-5"></i> Área</strong>
 
             <p class="text-muted"> {{$id->area}}</p>
+
+            <hr>
+
+            <strong><i class="fa fa-chart-area margin-r-5"></i>  Contacto de emergencia</strong>
+            <p>{{$id->register ? $id->register->emergency_contact : 'N/A'}}</p>
+            
+            <hr>
+
+            <strong><i class="fa fa-chart-area margin-r-5"></i>  Número de contacto de emergencia</strong>
+            <p>{{$id->register ? $id->register->emergency_contact_number : 'N/A'}}</p>
         </div>
         
         <div class="box-footer text-center">
