@@ -53,7 +53,30 @@
                                             @endcan
                                         @endif
                                         @can('Eliminar asiganción de implemetación de MINTIC')
-                                            <a href="{{route('mintic_add_consumables_delete',[$id,$implement->id])}}" class="btn btn-sm btn-danger">Eliminar</a>
+                                            <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal_delete_{{$implement->id}}">Eliminar</button>
+                                            <div class="modal fade" id="modal_delete_{{$implement->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <form action="{{route('mintic_add_consumables_delete',[$id,$implement->id])}}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                                <h4 class="modal-title" id="exampleModalLongTitle">Eliminar implementación</h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>¿Está seguro de eliminar la implementación?</p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-sm btn-secondary pull-left" data-dismiss="modal">Cancelar</button>
+                                                                <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         @endcan
                                     </td>
                                 </tr>
