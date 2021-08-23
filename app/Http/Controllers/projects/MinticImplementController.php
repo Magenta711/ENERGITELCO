@@ -195,7 +195,7 @@ class MinticImplementController extends Controller
                 if ($inv) {
                     $inv->entrar($request->amount[$i]);
                 }else {
-                    InvUser::create([
+                    $inv = InvUser::create([
                         'user_id' => $request->user_id,
                         'inventaryble_id' => $request->description[$i],
                         'inventaryble_type' => 'App\Models\project\Mintic\inventory\invMinticConsumable',
@@ -205,6 +205,10 @@ class MinticImplementController extends Controller
                     ]);
                 }
                 invMinticConsumable::find($request->description[$i])->gastar(($request->amount[$i] - $deliverable));
+
+                if ($deliverable > 0) {
+                    $inv->devolver($deliverable);
+                }
             }
             if ($request->product[$i] == 'equipment' && $request->description[$i]) {
                 $status = $item->status == 3 ? 2  : 0;
@@ -264,7 +268,11 @@ class MinticImplementController extends Controller
             MinticConsumableImplementDetail::find($detail->id)->update([
                 'spent' => $request->spent[$i] ? $request->spent[$i] : 0,
             ]);
+            if ($detail->productable_type == 'App\Models\project\Mintic\inventory\invMinticConsumable') {
+                InvUser::where('user_id',$item->user_id)->where('inventaryble_type',$detail->productable_type)->where('inventaryble_id',$detail->productable_id)->first()->gastar($request->spent[$i]);
+            }
             if ($detail->productable_type == 'App\Models\project\Mintic\inventory\invMinticEquipment') {
+                InvUser::where('user_id',$item->user_id)->where('inventaryble_type',$detail->productable_type)->where('inventaryble_id',$detail->productable_id)->first()->gastar(1);
                 invMinticEquipment::find($detail->productable_id)->update([
                     'status' => 0,
                 ]);

@@ -34,7 +34,7 @@
                             <tr>
                                 <th>Producto</th>
                                 <th>Detalle</th>
-                                <th>Cantidad</th>
+                                <th>Entregado</th>
                                 <th>Gastado</th>
                                 <th>Devuelto</th>
                                 @if ($item->status == 1)

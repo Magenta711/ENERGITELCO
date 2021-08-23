@@ -105,20 +105,23 @@
                                                     <div class="col-xs-6 text-right">
                                                         <p class="date-starts" id="date-start-show-{{$item->id}}">{{$item->date_start}}</p>
                                                     </div>
-                                                    <div class="col-xs-6 list-user">
+                                                    <div class="col-xs-6">
+                                                        <p>{{$item->project}}</p>
+                                                    </div>
+                                                    <div class="col-xs-6 text-right list-user">
                                                         @foreach ($item->users as $user)
                                                             <span class="label label-default" id="list-user-{{$item->id}}-{{$user->id}}">{{$user->name}}</span>
                                                         @endforeach
                                                     </div>
-                                                    <div class="col-xs-6 text-right">
-                                                        {{$item->am ? 'AM'.($item->pm ? ' / ' : '') : ''}} {{$item->pm ? 'PM' : ''}}
-                                                    </div>
-                                                    <div class="col-xs-6 text-right list-vehicles">
+                                                    <div class="col-xs-6 list-vehicles">
                                                         @foreach ($item->vehicles as $vehicle)
-                                                            <span class="label label-default" id="list-vehicle-{{$item->id}}-{{$vehicle->vehicle->id}}">
-                                                                {{$vehicle->vehicle->plate}} - {{$vehicle->vehicle->brand}}
-                                                            </span>
+                                                        <span class="label label-warning" id="list-vehicle-{{$item->id}}-{{$vehicle->vehicle->id}}">
+                                                            {{$vehicle->vehicle->plate}} - {{$vehicle->vehicle->brand}}
+                                                        </span>
                                                         @endforeach
+                                                    </div>
+                                                    <div class="col-xs-6 text-center">
+                                                        {{$item->am ? 'AM'.($item->pm ? ' / ' : '') : ''}} {{$item->pm ? 'PM' : ''}}
                                                     </div>
                                                 </div>
                                                 @can('Editar programaciones en frente de trabajo')
@@ -171,20 +174,23 @@
                                                     <div class="col-xs-6 text-right">
                                                         <p class="date-starts" id="date-start-show-{{$item->id}}">{{$item->date_start}}</p>
                                                     </div>
-                                                    <div class="col-xs-6 list-user">
+                                                    <div class="col-xs-6">
+                                                        <p>{{$item->project}}</p>
+                                                    </div>
+                                                    <div class="col-xs-6 text-right list-user">
                                                         @foreach ($item->users as $user)
                                                             <span class="label label-default" id="list-user-{{$item->id}}-{{$user->id}}">{{$user->name}}</span>
                                                         @endforeach
                                                     </div>
-                                                    <div class="col-xs-6 text-right">
-                                                        <p>{{$item->am ? 'AM'.($item->pm ? ' / ' : '') : ''}} {{$item->pm ? 'PM' : ''}}</p>
-                                                    </div>
-                                                    <div class="col-xs-6 text-right list-vehicles">
+                                                    <div class="col-xs-6 list-vehicles">
                                                         @foreach ($item->vehicles as $vehicle)
-                                                            <span class="label label-default" id="list-vehicle-{{$item->id}}-{{$vehicle->vehicle->id}}">
+                                                            <span class="label label-warning" id="list-vehicle-{{$item->id}}-{{$vehicle->vehicle->id}}">
                                                                 {{$vehicle->vehicle->plate}} - {{$vehicle->vehicle->brand}}
                                                             </span>
                                                         @endforeach
+                                                    </div>
+                                                    <div class="col-xs-6 text-center">
+                                                        <p>{{$item->am ? 'AM'.($item->pm ? ' / ' : '') : ''}} {{$item->pm ? 'PM' : ''}}</p>
                                                     </div>
                                                 </div>
                                                 @can('Editar programaciones en frente de trabajo')
@@ -244,20 +250,23 @@
                                                     <div class="col-xs-6 text-right">
                                                         <p class="date-starts" id="date-start-show-{{$item->id}}">{{$item->date_start}}</p>
                                                     </div>
-                                                    <div class="col-xs-6 list-user">
+                                                    <div class="col-xs-6">
+                                                        <p>{{$item->project}}</p>
+                                                    </div>
+                                                    <div class="col-xs-6 text-right list-user">
                                                         @foreach ($item->users as $user)
                                                             <span class="label label-default" id="list-user-{{$item->id}}-{{$user->id}}">{{$user->name}}</span>
                                                         @endforeach
                                                     </div>
-                                                    <div class="col-xs-6 text-right">
-                                                        <p>{{$item->am ? 'AM'.($item->pm ? ' / ' : '') : ''}} {{$item->pm ? 'PM' : ''}}</p>
-                                                    </div>
-                                                    <div class="col-xs-6 text-right list-vehicles">
+                                                    <div class="col-xs-6 list-vehicles">
                                                         @foreach ($item->vehicles as $vehicle)
-                                                            <span class="label label-default" id="list-vehicle-{{$item->id}}-{{$vehicle->vehicle->id}}">
+                                                            <span class="label label-warning" id="list-vehicle-{{$item->id}}-{{$vehicle->vehicle->id}}">
                                                                 {{$vehicle->vehicle->plate}} - {{$vehicle->vehicle->brand}}
                                                             </span>
                                                         @endforeach
+                                                    </div>
+                                                    <div class="col-xs-6 text-center">
+                                                        <p>{{$item->am ? 'AM'.($item->pm ? ' / ' : '') : ''}} {{$item->pm ? 'PM' : ''}}</p>
                                                     </div>
                                                 </div>
                                                 @can('Ver programaciones en frente de trabajo')

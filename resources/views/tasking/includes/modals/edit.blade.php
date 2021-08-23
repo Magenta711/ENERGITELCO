@@ -43,15 +43,21 @@
                                 <select name="project" id="project-edit-{{$item->id}}" class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona el proyecto" style="width: 100%;" data-select2-id="4" tabindex="-1" aria-hidden="true">
                                     <option disabled selected></option>
                                     <option {{$item->project == 'MINTIC ESTUDIO DE CAMPO' ? 'selected' : '' }} data-select2-id="MINTIC_ESTUDIO_DE_CAMPO" value="MINTIC ESTUDIO DE CAMPO">MINTIC ESTUDIO DE CAMPO</option>
-                                    <option {{$item->project == 'MINTIC INSTALACIÓN' ? 'selected' : '' }} data-select2-id="MINTIC_INSTALACIÓN" value="MINTIC INSTALACIÓN">MINTIC INSTALACIÓN</option>
+                                    <option {{$item->project == 'MINTIC TSS EB' ? 'selected' : '' }} data-select2-id="MINTIC_TSS_EB" value="MINTIC TSS EB">MINTIC TSS EB</option>
+                                    <option {{$item->project == 'MINTIC INSTALACIÓN CENTRO DIGITAL' ? 'selected' : '' }} data-select2-id="MINTIC_INSTALACIÓN_CENTRO_DIGITAL" value="MINTIC INSTALACIÓN CENTRO DIGITAL">MINTIC INSTALACIÓN CENTRO DIGITAL</option>
+                                    <option {{$item->project == 'MINTIC INSTALACIÓN ESTACIÓN BASE' ? 'selected' : '' }} data-select2-id="MINTIC_INSTALACIÓN_ESTACIÓN_BASE" value="MINTIC INSTALACIÓN ESTACIÓN BASE">MINTIC INSTALACIÓN ESTACIÓN BASE</option>
+                                    <option {{$item->project == 'MINTIC INTEGRACIÓN Y ENTREGA CENTRO DIGITAL' ? 'selected' : '' }} data-select2-id="MINTIC_INTEGRACIÓN_Y_ENTREGA_CENTRO_DIGITAL" value="MINTIC INTEGRACIÓN Y ENTREGA CENTRO DIGITAL">MINTIC INTEGRACIÓN Y ENTREGA CENTRO DIGITAL</option>
+                                    <option {{$item->project == 'MINTIC ENTREGA INTERVENTORIA CENTRO DIGITAL' ? 'selected' : '' }} data-select2-id="MINTIC_ENTREGA_INTERVENTORIA_CENTRO_DIGITAL" value="MINTIC ENTREGA INTERVENTORIA CENTRO DIGITAL">MINTIC ENTREGA INTERVENTORIA CENTRO DIGITAL</option>
                                     <option {{$item->project == 'MINTIC MANTANIMIENTO' ? 'selected' : '' }} data-select2-id="MINTIC_MANTANIMIENTO" value="MINTIC MANTANIMIENTO">MINTIC MANTANIMIENTO</option>
                                     <option {{$item->project == 'RUTAS DE TX' ? 'selected' : '' }} data-select2-id="RUTAS_DE_TX" value="RUTAS DE TX">RUTAS DE TX</option>
                                     <option {{$item->project == 'DESMONTES ENLACES MW' ? 'selected' : '' }} data-select2-id="DESMONTES_ENLACES_MW" value="DESMONTES ENLACES MW">DESMONTES ENLACES MW</option>
+                                    <option {{$item->project == 'TSS MW' ? 'selected' : '' }} data-select2-id="TSS_MW" value="TSS MW">TSS MW</option>
+                                    <option {{$item->project == 'TSS RF' ? 'selected' : '' }} data-select2-id="TSS_RF" value="TSS RF">TSS RF</option>
                                     <option {{$item->project == 'INSTALACIÓN ENLACES MW' ? 'selected' : '' }} data-select2-id="INSTALACIÓN_ENLACES_MW" value="INSTALACIÓN ENLACES MW">INSTALACIÓN ENLACES MW</option>
                                     <option {{$item->project == 'DESMONTES ESTACIÓN BASE' ? 'selected' : '' }} data-select2-id="DESMONTES_ESTACIÓN_BASE" value="DESMONTES ESTACIÓN BASE">DESMONTES ESTACIÓN BASE</option>
                                     <option {{$item->project == 'INSTALACIÓN ESTACIÓN BASE' ? 'selected' : '' }} data-select2-id="INSTALACIÓN_ESTACIÓN_BASE" value="INSTALACIÓN ESTACIÓN BASE">INSTALACIÓN ESTACIÓN BASE</option>
-                                    <option {{$item->project == 'MIGRACIONES' ? 'selected' : '' }} data-select2-id="MIGRACIONES" value="MIGRACIONES">MIGRACIONES</option>
-                                    <option {{$item->project == 'SOLUCIONES 2G' ? 'selected' : '' }} data-select2-id="SOLUCIONES_2G,_3G_O_4G" value="SOLUCIONES 2G, 3G O 4G">SOLUCIONES 2G, 3G O 4G</option>
+                                    <option {{$item->project == 'MIGRACIONES' ? 'selected' : '' }} data-select2-id="MIGRACIONES value="MIGRACIONES">MIGRACIONES</option>
+                                    <option {{$item->project == 'SOLUCIONES 2G, 3G O 4G' ? 'selected' : '' }} data-select2-id="SOLUCIONES_2G" value="SOLUCIONES 2G, 3G O 4G">SOLUCIONES 2G, 3G O 4G</option>
                                     <option {{$item->project == 'OBRAS CIVILES MENORES' ? 'selected' : '' }} data-select2-id="OBRAS_CIVILES_MENORES" value="OBRAS CIVILES MENORES">OBRAS CIVILES MENORES</option>
                                 </select>
                             </div>
@@ -126,7 +132,9 @@
                         <button type="button" class="btn btn-sm btn-block btn-secundary text-left open-modal-inv" style="text-align: left !important" data-toggle="modal" data-target="#consumables-edit-{{$item->id}}-modal">
                             <i class="fa fa-plug"></i> Consumibles
                         </button>
-                        <input type="submit" name="add_inv_user" value="Asignar inventario al usuario" class="btn btn-sm btn-block btn-primary">
+                        @if (!$item->user_add_inv)
+                            <input type="submit" name="add_inv_user" value="Asignar inventario al usuario" class="btn btn-sm btn-block btn-primary">
+                        @endif
                         <div class="modal fade" id="equipment-edit-{{$item->id}}-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-md">
                                 <div class="modal-content">

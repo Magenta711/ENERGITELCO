@@ -50,12 +50,12 @@
                                     <option data-select2-id="MINTIC_MANTANIMIENTO" value="MINTIC MANTANIMIENTO">MINTIC MANTANIMIENTO</option>
                                     <option data-select2-id="RUTAS_DE_TX" value="RUTAS DE TX">RUTAS DE TX</option>
                                     <option data-select2-id="DESMONTES_ENLACES_MW" value="DESMONTES ENLACES MW">DESMONTES ENLACES MW</option>
-                                    <option data-select2-id="DESMONTES_ENLACES_MW" value="DESMONTES ENLACES MW">TSS MW</option>
-                                    <option data-select2-id="DESMONTES_ENLACES_MW" value="DESMONTES ENLACES MW">TSS RF</option>
+                                    <option data-select2-id="TSS_MW" value="TSS MW">TSS MW</option>
+                                    <option data-select2-id="TSS RF" value="TSS RF">TSS RF</option>
                                     <option data-select2-id="INSTALACIÓN_ENLACES_MW" value="INSTALACIÓN ENLACES MW">INSTALACIÓN ENLACES MW</option>
                                     <option data-select2-id="DESMONTES_ESTACIÓN_BASE" value="DESMONTES ESTACIÓN BASE">DESMONTES ESTACIÓN BASE</option>
                                     <option data-select2-id="INSTALACIÓN_ESTACIÓN_BASE" value="INSTALACIÓN ESTACIÓN BASE">INSTALACIÓN ESTACIÓN BASE</option>
-                                    <option data-select2-id="MIGRACIONES value="MIGRACIONES">MIGRACIONES</option>
+                                    <option data-select2-id="MIGRACIONES" value="MIGRACIONES">MIGRACIONES</option>
                                     <option data-select2-id="SOLUCIONES_2G" value="SOLUCIONES 2G, 3G O 4G">SOLUCIONES 2G, 3G O 4G</option>
                                     <option data-select2-id="OBRAS_CIVILES_MENORES" value="OBRAS CIVILES MENORES">OBRAS CIVILES MENORES</option>
                                 </select>

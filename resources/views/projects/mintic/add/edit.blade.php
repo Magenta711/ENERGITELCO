@@ -93,7 +93,7 @@
                                     </div>
                                     <div class="col-md-2 col-sm-3">
                                         <div class="form-group">
-                                            <label for="amount">Cantidad</label>
+                                            <label for="amount">Entregado</label>
                                             <input type="number" name="amount[]" class="form-control amount" value="{{$detail->amount}}" id="amount_{{$i}}">
                                             <span class="help-block" id="message_validate" style="display: none;">Este campo es obligatorio</span>
                                             <span class="help-block" id="message_amount_{{$i}}" style="display: none;">Cantidad no disponible</span>
@@ -107,7 +107,7 @@
                                     </div>
                                     <div class="col-md-2 col-sm-3">
                                         <div class="form-group">
-                                            <label for="delivered">Entregado</label>
+                                            <label for="delivered">Devuelto</label>
                                             <input type="number" name="delivered[]" class="form-control delivered" value="{{$detail->delivered}}" id="delivered_{{$i}}">
                                         </div>
                                     </div>

@@ -16,7 +16,7 @@
         @include('includes.alerts')
         <div class="box">
             <div class="box-header">
-                <div class="box-title">Inventario de consumibles</div>
+                <div class="box-title">Lista consumibles</div>
                 <div class="box-tools">
                     @can('Crear consumible del inventario')
                         <a href="{{route('mintic_inventory_consumables_create')}}" class="btn btn-sm btn-success">Crear</a>

@@ -220,7 +220,7 @@
                         <div class="form-group">
                             <label for="report-show"><i class="fa fa-align-left"></i> Reporte de cierre</label>
                             @if (isset($item->consumables) && count($item->consumables) != ($hasEquipment + $hasConsumable))
-                                <p class="text-muted">El funcionario {{$item->invetory_user->name}} debe de consolidar los equipos y/o consumibles</p>
+                                <p class="text-muted">El funcionario {{$item->invetory_user->name}} debe de consolidar los equipos y/o consumibles para realizar el cierre</p>
                             @else
                                 @if ($item->report)
                                     <p>{{$item->report}}</p>
