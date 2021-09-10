@@ -65,11 +65,13 @@ class improvementActionController extends Controller
                 'type' => 'action',
                 'status' => 1
             ]);
-            for ($j=0; $j < count($request->user_action_id[$key]); $j++) { 
-                improvementActionDetailUser::create([
-                    'user_id' => $request->user_action_id[$key][$j],
-                    'detail_id' => $detail->id
-                ]);
+            if (isset($request->user_action_id[$key])) {
+                for ($j=0; $j < count($request->user_action_id[$key]); $j++) { 
+                    improvementActionDetailUser::create([
+                        'user_id' => $request->user_action_id[$key][$j],
+                        'detail_id' => $detail->id
+                    ]);
+                }
             }
         }
         foreach ($request->tracing as $key => $value) { 

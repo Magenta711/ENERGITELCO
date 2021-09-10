@@ -20,7 +20,6 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         'https://www.energitelco.com.co/human_management/payroll_overtime_news_report',
-        'http://energitelco.com.co/guest/message',
-        'http://sgi.test/guest/message',
+        'http://www.energitelco.com.co/guest/message'
     ];
 }

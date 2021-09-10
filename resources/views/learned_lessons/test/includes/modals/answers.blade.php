@@ -21,9 +21,11 @@
                     </thead>
                     <tbody>
                         @foreach ($item->answers as $answer)
-                            <td>{{$answer->user->name}}</td>
-                            <td>{!!$answer->answer ? '<span class="label '.(($answer->answer->answer == 1) ? 'label-primary' : 'label-danger').'">'.$answer->answer->text_answer.'</span>' : '<span class="label label-warning">Sin responder</span>'!!}</td>
-                            <td>{{$answer->created_at}}</td>
+                            <tr>
+                                <td>{{$answer->user->name}}</td>
+                                <td>{!!$answer->answer ? '<span class="label '.(($answer->answer->answer == 1) ? 'label-primary' : 'label-danger').'">'.$answer->answer->text_answer.'</span>' : '<span class="label label-warning">Sin responder</span>'!!}</td>
+                                <td>{{$answer->created_at}}</td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>

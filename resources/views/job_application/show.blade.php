@@ -29,7 +29,7 @@
             <hr>
             <p><Strong>Cargo al que aspira</Strong><br>{{$id->position->name}}</p>
             <hr>
-            <p><Strong>Comentarios</Strong><br>{{$id->comentary}}</p>
+            <p><Strong>Comentarios</Strong><br>{!! str_replace("\n", '</br>', addslashes($id->comentary))!!}</p>
             <hr>
             <p>
                 <Strong>Hoja de vida o archivo adjunto</Strong>

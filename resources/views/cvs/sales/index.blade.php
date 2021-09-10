@@ -22,10 +22,8 @@
                     <h3 class="box-title">Lista de ventas</h3>
                     <div class="box-tools">
                         @can('CVS Exportar reporte de ventas')
-
                             {{-- Modal --}}
                             <button type="button" class="btn btn-sm btn-primary pl-4 pr-4" data-toggle="modal" data-target="#modal_delete">Exportar</button>
-                                        
                             <div class="modal fade" id="modal_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
@@ -171,4 +169,8 @@
     </div>
     </ul>
 </section>
+@endsection
+
+@section('js')
+    <script src="{{asset('js/cvs/export.js')}}"></script>
 @endsection

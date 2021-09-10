@@ -84,6 +84,7 @@
 </section>
 @endsection
 @section('js')
+    <script src="{{ asset('js/moment/moment.js') }}" defer></script>
     <script src="{{ asset('js/forms/form9.js') }}" defer></script>
     <script>
         var bPreguntar = true;

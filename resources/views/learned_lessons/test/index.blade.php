@@ -26,6 +26,8 @@
                             <button type="button" class="btn btn-sm btn-success pl-4 pr-4" data-toggle="modal" data-target="#modal_create">Crear</button>
                             @include('learned_lessons.test.includes.modals.create')
                         @endcan
+                        <button type="button" class="btn btn-sm btn-primary pl-4 pr-4" data-toggle="modal" data-target="#modal_export">Exportar</button>
+                        @include('learned_lessons.test.includes.modals.export')
                     </div>
                 </div>
                 <!-- /.box-header -->
@@ -45,7 +47,18 @@
                                     <tr>
                                         <td>{{$item->id}}</td>
                                         <td>{{$item->question}}</td>
-                                        <td>{{$item->answers ? count($item->answers) : 0}}</td>
+                                        <td>
+                                            @php
+                                                $good = 0;
+                                            @endphp
+                                            @foreach ($item->answers as $answer)
+                                                @php
+                                                    $r = $answer->answer && $answer->answer->answer == 1 ? 1 : 0;
+                                                    $good += $r;
+                                                @endphp
+                                            @endforeach
+                                            {{$good}} / {{$item->answers ? count($item->answers) : 0}}
+                                        </td>
                                         <td>
                                             @can('Ver computadores del inventario')
                                                 <button type="button" class="btn btn-sm btn-success pl-4 pr-4" data-toggle="modal" data-target="#modal_show_{{$item->id}}">Ver</button>
@@ -100,4 +113,5 @@
             })
         });
     </script>
+    <script src="{{asset('js/cvs/export.js')}}"></script>
 @endsection
