@@ -28,4 +28,9 @@ class Proceeding extends Model
     {
         return $this->morphToMany(User::class, 'signatures');
     }
+
+    public function files()
+    {
+        return $this->morphMany(file::class, 'fileble');
+    }
 }

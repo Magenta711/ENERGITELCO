@@ -63,7 +63,7 @@
                 <p><b><i>LTD NIT 900.082.621-1</i></b></p>
             </div>
             <div class="text-right">
-                <img src="{{ asset('img/iso9001.jpg') }}" />
+                <img src="{{ asset('img/ICONTEC.png') }}" />
             </div>
         </div>
     </header>

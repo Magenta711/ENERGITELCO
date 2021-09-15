@@ -64,6 +64,7 @@ Route::post('guest/message','guestController@send')->name('guest_message_send');
 Auth::routes(['verify' => true]);
 
 Route::get('home','HomeController@index')->name('home');
+Route::get('home/callendar','HomeController@callendar')->name('home_callendar');
 Route::get('about','HomeController@about')->name('about');
 Route::post('suggestions_mailbox','HomeController@suggestions_mailbox')->name('suggestions_mailbox_save');
 Route::get('letters/working','HomeController@working_letter')->name('working_letter');
@@ -328,6 +329,7 @@ Route::get('setting/system','SettingsController@system')->name('system');
 Route::post('setting/system','SettingsController@system_store')->name('system_store');
 Route::get('setting/messages','SettingsController@messages')->name('messages');
 Route::post('setting/messages','SettingsController@messages_store')->name('messages_store');
+Route::post('setting/upload','SettingsController@upload')->name('setting_files');
 
 //Job application
 Route::get('job_application','JobApplicationController@index')->name('job_application')->middleware('auth')->middleware('verified');

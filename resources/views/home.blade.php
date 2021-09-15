@@ -353,8 +353,7 @@
                                                                     <i class="fa fa-file-powerpoint"></i>
                                                                 @endif
                                                                 @if (strtolower($type) == 'png' || strtolower($type) == 'jpg' || strtolower($type) == 'jpeg')
-                                                                    <img src="/file/billboard/{{ $cartel->document }}"
-                                                                        style="width: 100%;" alt="Attachment">
+                                                                    <img src="/file/billboard/{{ $cartel->document }}" style="width: 100%;" alt="Attachment">
                                                                 @endif
                                                                 @if (strtolower($type) == 'mp3')
                                                                     <i class="fa fa-file-audio"></i>
@@ -393,6 +392,21 @@
                         </div>
                     </div>
                 @endcan
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <div class="box-title">
+                            <i class="far fa-calendar-alt"></i> Calendario
+                        </div>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                title="Collapse">
+                                <i class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div id="calendar"></div>
+                    </div>
+                </div>
             </div>
             <div class="col-md-4">
                 <div class="box box-warning">
@@ -589,6 +603,7 @@
 @endsection
 
 @section('css')
+    <link href="{{asset('assets/'.$theme.'/bower_components/fullcalendar/dist/fullcalendar.css')}}" rel="stylesheet" />
     <style>
         .swal2-content {
             font-size: 15px !important;
@@ -597,11 +612,31 @@
     </style>
 @endsection
 @section('js')
+    <script src="{{asset('assets/'.$theme.'/bower_components/fullcalendar/jquery-ui.min.js')}}"></script>
+    <script src="{{asset('js/moment/moment.js')}}"></script>
+    <script src='{{asset('assets/'.$theme.'/bower_components/fullcalendar/dist/fullcalendar.min.js')}}'></script>
+    <script src='{{asset('assets/'.$theme.'/bower_components/fullcalendar/dist/locale/es.js')}}'></script>
     <script>
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
+        });
+        $(document).ready(function() {
+            var calendar = $('#calendar').fullCalendar({
+                editable: true,
+                events: '/home/callendar',
+                displayEventTime: false,
+                eventLimit: true,
+                defaultView: 'month',
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                selectable: true,
+                selectHelper: true,
+            });
         });
         let text_message = $('#menssage_user').text();
         Swal.fire({

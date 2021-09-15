@@ -13,6 +13,7 @@ use Image;
 use App\User;
 use App\Exports\minticMaintenanceExport;
 use App\Models\project\Mintic\MinticVisit;
+use App\Models\system_setting;
 
 class MinticController extends Controller
 {
@@ -710,6 +711,8 @@ class MinticController extends Controller
 
     public function export_maintenance($id,mintic_maintenance $item)
     {
+        $system = system_setting::where('state',1)->orderBy('id','DESC')->take(1)->first();
+
         $equiments = EquimentDetail::get();
 
         $files = array();

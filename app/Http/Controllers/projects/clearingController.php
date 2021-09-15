@@ -8,6 +8,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 use App\Exports\CleatingExport;
 use App\Models\project\Clearing;
 use App\Models\project\ClearingInventory;
+use App\Models\system_setting;
 use App\Notifications\notificationMain;
 use App\User;
 use Illuminate\Support\Facades\Storage;
@@ -412,6 +413,7 @@ class clearingController extends Controller
 
     public function export(Clearing $id)
     {
+        $system = system_setting::where('state',1)->orderBy('id','DESC')->take(1)->first();
         $files['logo_claro']['name'] = 'Logo_Claro';
         $files['logo_claro']['description'] = 'Logo de Claro';
         $files['logo_claro']['path'] = public_path('/img/claro.png');

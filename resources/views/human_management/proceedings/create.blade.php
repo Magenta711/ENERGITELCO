@@ -26,7 +26,7 @@
                     <input type="hidden" value="{{$user->position->name}}" id='position_user_{{$user->id}}'>
                 @endforeach
             </div>
-            <form action="{{route('proceeding_store')}}" method="POST">
+            <form action="{{route('proceeding_store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
             <div class="box-body">
                 <h4>Asistentes</h4>
@@ -166,6 +166,12 @@
                     </div>
                 </div>
                 <button type="button" class="btn btn-sm btn-link bnt-clone-commitment" id="commitment_clone"><i class="fa fa-plus"></i> Agregar compromiso</button>
+                <hr>
+                <div class="form-group">
+                    <label for="file">Adjuntar archivos</label>
+                    <label id="label_file" for="file" class="form-control text-center "><i class="fa fa-upload"></i></label>
+                    <input class="hide file_input" type="file" multiple="true" name="files[]" id="file">
+                </div>
             </div>
             <div class="box-footer">
                 <button class="btn btn-sm btn-primary btn-send">Enviar y firmar</button>

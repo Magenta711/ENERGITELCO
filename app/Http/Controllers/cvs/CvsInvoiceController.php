@@ -9,6 +9,7 @@ use App\Models\cvs\cvs_advertising;
 use App\Models\cvs\cvs_sale;
 use App\Models\cvs\cvs_sale_detail;
 use App\Models\cvs_payment_cut;
+use App\Models\system_setting;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -153,7 +154,8 @@ class CvsInvoiceController extends Controller
             }
         }
 
-        $pdf = PDF::loadView('cvs.invoice.invoice_pdf',['id'=>$id,'expire'=>$expire]);
+        $system = system_setting::where('state',1)->orderBy('id','DESC')->take(1)->first();
+        $pdf = PDF::loadView('cvs.invoice.invoice_pdf',['id'=>$id,'expire'=>$expire, 'system' => $system ]);
         $pdf->save(storage_path('app/public/cvs/invoice/') .$token.'.pdf');
 
         Mail::send('cvs.email.invoice',['id' => $id, 'expire' => $expire, 'advertising' => $advertising] , function ($mail) use ($pdf,$id) {

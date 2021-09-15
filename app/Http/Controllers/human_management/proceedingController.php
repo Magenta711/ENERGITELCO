@@ -9,8 +9,10 @@ use App\Models\ProceedingCommitment;
 use App\Models\Responsable;
 use App\Models\signature;
 use App\User;
+use Intervention\Image\ImageManagerStatic as Image;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class proceedingController extends Controller
 {
@@ -107,6 +109,32 @@ class proceedingController extends Controller
             }
         }
 
+        if($request->hasFile('files')){
+            for ($i=0; $i < count($request->file('files')); $i++) { 
+                $file = $request->file('files')[$i];
+                $name = time().str_random().'.'.$file->getClientOriginalExtension();
+                if ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg') {
+                    $size = 500;
+                    Image::make($file->getRealPath())
+                        ->resize(null, 500, function ($constraint) {
+                            $constraint->aspectRatio();
+                        })->save(public_path('storage/human_management/call_attention/'.$name));
+                        $size = $file->getClientSize() / 1000;
+                }else{
+                    $size = $file->getClientSize() / 1000;
+                    $path = Storage::putFileAs('public/human_management/call_attention', $file, $name);
+                }
+                $pro->files()->create([
+                    'name' => $name,
+                    'description' => "Descargo: ".$request->affair,
+                    'size' => $size.' KB',
+                    'url' => $path,
+                    'type' => $file->getClientOriginalExtension(),
+                    'state' => 1
+                ]);
+            }
+        }
+
         Mail::send('human_management.proceedings.mail.main', ['id' => $pro], function ($menssage) use ($pro)
         {
             foreach ($pro->users as $value) {
@@ -152,6 +180,7 @@ class proceedingController extends Controller
             $query->with('roles');
         },'commitments'])->find($id);
         $users = User::where('state',1)->get();
+
         return view('human_management.proceedings.edit',compact('id','users'));
     }
 
@@ -262,6 +291,32 @@ class proceedingController extends Controller
             }
             if ($status == $total) {
                 $id->update(['status' => 1]);
+            }
+        }
+
+        if($request->hasFile('files')){
+            for ($i=0; $i < count($request->file('files')); $i++) { 
+                $file = $request->file('files')[$i];
+                $name = time().str_random().'.'.$file->getClientOriginalExtension();
+                if ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg') {
+                    $size = 500;
+                    Image::make($file->getRealPath())
+                        ->resize(null, 500, function ($constraint) {
+                            $constraint->aspectRatio();
+                        })->save(public_path('storage/human_management/call_attention/'.$name));
+                        $size = $file->getClientSize() / 1000;
+                }else{
+                    $size = $file->getClientSize() / 1000;
+                    $path = Storage::putFileAs('public/human_management/call_attention', $file, $name);
+                }
+                $id->files()->create([
+                    'name' => $name,
+                    'description' => "Descargo: ".$request->affair,
+                    'size' => $size.' KB',
+                    'url' => $path,
+                    'type' => $file->getClientOriginalExtension(),
+                    'state' => 1
+                ]);
             }
         }
 

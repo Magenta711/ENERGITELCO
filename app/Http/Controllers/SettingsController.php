@@ -59,10 +59,61 @@ class SettingsController extends Controller
             'address' => ['required'],
             'email' => ['required','email']
         ]);
+
         $settings = general_setting::where('id',$request->current)->update(['state'=>0]);
         general_setting::create($request->all());
 
         $system = system_setting::where('id',$request->current)->first();
+
+        // if ($request->hasFile('file_main')){
+        //     $file = $request->file('file_main');
+        //     $name = time().str_random().'.'.$file->getClientOriginalExtension();
+        //     $file->move(public_path().'/img/',$name);
+        //     $request['file_main'] = $name;
+        // }else {
+        //     $request['file_main'] = $system->file_main;
+        // }
+        // if ($request->hasFile('file_main_small')){
+        //     $file = $request->file('file_main_small');
+        //     $name = time().str_random().'.'.$file->getClientOriginalExtension();
+        //     $file->move(public_path().'/img/',$name);
+        //     $request['file_main_small'] = $name;
+        // }else {
+        //     $request['file_main_small'] = $system->file_main_small;
+        // }
+        // if ($request->hasFile('file_ccjl')){
+        //     $file = $request->file('file_ccjl');
+        //     $name = time().str_random().'.'.$file->getClientOriginalExtension();
+        //     $file->move(public_path().'/img/',$name);
+        //     $request['file_ccjl'] = $name;
+        // }else {
+        //     $request['file_ccjl'] = $system->file_ccjl;
+        // }
+        // if ($request->hasFile('file_claro')){
+        //     $file = $request->file('file_claro');
+        //     $name = time().str_random().'.'.$file->getClientOriginalExtension();
+        //     $file->move(public_path().'/img/',$name);
+        //     $request['file_claro'] = $name;
+        // }else {
+        //     $request['file_claro'] = $system->file_claro;
+        // }
+        // if ($request->hasFile('file_cc')){
+        //     $file = $request->file('file_cc');
+        //     $name = time().str_random().'.'.$file->getClientOriginalExtension();
+        //     $file->move(public_path().'/img/',$name);
+        //     $request['file_cc'] = $name;
+        // }else {
+        //     $request['file_cc'] = $system->file_cc;
+        // }
+        // if ($request->hasFile('file_mintic')){
+        //     $file = $request->file('file_mintic');
+        //     $name = time().str_random().'.'.$file->getClientOriginalExtension();
+        //     $file->move(public_path().'/img/',$name);
+        //     $request['file_mintic'] = $name;
+        // }else {
+        //     $request['file_mintic'] = $system->file_mintic;
+        // }
+
         $system->update(['state'=>0]);
         $request['url'] = config('app.url');
         $request['approval_emails'] = $system->approval_emails;
@@ -220,5 +271,10 @@ class SettingsController extends Controller
         $id->update($request->all());
 
         return redirect()->route('position_setting')->with('success','Se ha actualizado el cargo correctamente');
+    }
+
+    public function upload()
+    {
+        return response()->json([ 'success' => 'Good' ]);
     }
 }

@@ -642,7 +642,8 @@ class workPermitBonusesController extends Controller
                 'value_box' => $AccTotalPagarBox,
             ]);
             $plus = 0;
-            $pdf = PDF::loadView('human_management.bonus.technical.pdf.main',compact('id','array','plus'));
+            $system = system_setting::where('state',1)->orderBy('id','DESC')->take(1)->first();
+            $pdf = PDF::loadView('human_management.bonus.technical.pdf.main',compact('id','array','plus','system'));
             Mail::send('human_management.bonus.technical.mail.main', ['bonus' => $id, 'users' => $array,'plus' => 0], function ($menssage) use ($id,$pdf)
             {
                 $emails = system_setting::where('state',1)->pluck('emails_before_approval')->first();
@@ -659,7 +660,7 @@ class workPermitBonusesController extends Controller
                 $menssage->attachData($pdf->output(), 'COMPROBANTE_EGRESOS.pdf');
             });
             $plus = $id->plus;
-            $pdf = PDF::loadView('human_management.bonus.technical.pdf.main',compact('id','array','plus'));
+            $pdf = PDF::loadView('human_management.bonus.technical.pdf.main',compact('id','array','plus','system'));
             Mail::send('human_management.bonus.technical.mail.main', ['bonus' => $id, 'users' => $array,'plus' => $id->plus], function ($menssage) use ($id,$pdf)
             {
                 $menssage->to('energitelco.011@gmail.com','ENERGITELCO SAS');

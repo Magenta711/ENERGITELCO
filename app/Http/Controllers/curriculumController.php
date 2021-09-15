@@ -231,7 +231,6 @@ class curriculumController extends Controller
             $file->move(public_path().'/img/interview/',$name);
             $id->register->update(['photo' => $name]);
         }
-
         
         $state = ($id->state == 'Sin aprobar' || $id->state == 'Envio de documentos' || $id->state == 'Documentos enviados') ? 'Sin aprobar' : (($id->files()->count() >= 18) ? 'Completo' : 'Pendiente');
         

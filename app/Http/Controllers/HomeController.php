@@ -297,4 +297,10 @@ class HomeController extends Controller
         }
         return response()->json(['success'=>'Ya contestaste']);
     }
+    public function callendar()
+    {
+        $data = array();
+        
+        return response()->json($data);
+    }
 }
