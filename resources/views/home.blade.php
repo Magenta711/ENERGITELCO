@@ -392,7 +392,7 @@
                         </div>
                     </div>
                 @endcan
-                <div class="box box-primary">
+                {{-- <div class="box box-primary">
                     <div class="box-header with-border">
                         <div class="box-title">
                             <i class="far fa-calendar-alt"></i> Calendario
@@ -406,7 +406,7 @@
                     <div class="box-body">
                         <div id="calendar"></div>
                     </div>
-                </div>
+                </div> --}}
             </div>
             <div class="col-md-4">
                 <div class="box box-warning">
@@ -623,20 +623,20 @@
             }
         });
         $(document).ready(function() {
-            var calendar = $('#calendar').fullCalendar({
-                editable: true,
-                events: '/home/callendar',
-                displayEventTime: false,
-                eventLimit: true,
-                defaultView: 'month',
-                header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'month,agendaWeek,agendaDay'
-                },
-                selectable: true,
-                selectHelper: true,
-            });
+            // var calendar = $('#calendar').fullCalendar({
+            //     editable: true,
+            //     events: '/home/callendar',
+            //     displayEventTime: false,
+            //     eventLimit: true,
+            //     defaultView: 'month',
+            //     header: {
+            //         left: 'prev,next today',
+            //         center: 'title',
+            //         right: 'month,agendaWeek,agendaDay'
+            //     },
+            //     selectable: true,
+            //     selectHelper: true,
+            // });
         });
         let text_message = $('#menssage_user').text();
         Swal.fire({

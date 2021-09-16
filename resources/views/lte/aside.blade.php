@@ -850,7 +850,8 @@
                           auth()->user()->hasPermissionTo('Eliminar acciones de mejora')
                         )
                           <li class="{{ activeMenu('human_management/improvement_action*') }}"><a class="btn-send" href="{{route('improvement_action')}}"><i class="far fa-star"></i> ACCIONES DE MEJORA</a></li>
-                        @endif
+                          @endif
+                        <li class="{{ activeMenu('human_management/premium*') }}"><a class="btn-send" href="{{route('premium')}}"><i class="far fa-star"></i> PRIMA DE SERVICIOS</a></li>
                       </ul>
                     </li>
                 @endif

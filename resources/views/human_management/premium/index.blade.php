@@ -2,24 +2,24 @@
 @section('content')
 <section class="content-header">
     <h1>
-        Liquidación prestaciones sociales
+        Prima de servicios
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
         <li><a href="#"> Gestión humana</a></li>
         <li><a href="#"> Formatos</a></li>
-        <li class="active">Liquidación prestaciones sociales</li>
+        <li class="active">Prima de servicios</li>
     </ol>
 </section>
 <section class="content">
     @include('includes.alerts')
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Liquidación prestaciones sociales</h3>
+                <h3 class="box-title">Prima de servicios</h3>
                 <div class="box-tools">
-                    @can('Crear liquidación de prestaciones sociales')
-                        <a href="{{route('settlement_create')}}" class="btn btn-sm btn-success">Crear</a>
-                    @endcan
+                    {{-- @can('Crear prima de servicios') --}}
+                        <a href="{{route('premium_create')}}" class="btn btn-sm btn-success">Crear</a>
+                    {{-- @endcan --}}
                 </div>
             </div>
             <div class="box-body">
@@ -37,7 +37,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($settlements as $item)
+                            @foreach ($premiums as $item)
                                 <tr>
                                     <td>{{$item->id}}</td>
                                     <td>H-FR-32-{{$item->id}}</td>
@@ -46,20 +46,20 @@
                                     <td>{{$item->created_at}}</td>
                                     <td>{{($item->status == 1) ? 'Aprobado' : (($item->status == 2 )? 'No aprobado' : 'Sin aprobar')}}</td>
                                     <td>
-                                        @can('Ver liquidación de prestaciones sociales')
-                                            <a href="{{route('settlement_show',$item->id)}}" class="btn btn-sm btn-success">Ver</a>
-                                        @endcan
+                                        {{-- @can('Ver prima de servicios') --}}
+                                            <a href="{{route('premium_show',$item->id)}}" class="btn btn-sm btn-success">Ver</a>
+                                        {{-- @endcan --}}
                                         @if ($item->status == 0)
-                                            @can('Editar liquidación de prestaciones sociales')
-                                                <a href="{{route('settlement_edit',$item->id)}}" class="btn btn-sm btn-primary">Editar</a>
-                                            @endcan
+                                            {{-- @can('Editar prima de servicios') --}}
+                                                <a href="{{route('premium_edit',$item->id)}}" class="btn btn-sm btn-primary">Editar</a>
+                                            {{-- @endcan --}}
                                         @endif
                                         @if ($item->status == 1)
-                                            @can('Descargar liquidación de prestaciones sociales')
-                                                <a href="{{route('settlement_download',$item->id)}}" class="btn btn-warning btn-sm">Descargar</a>
-                                            @endcan
+                                            {{-- @can('Descargar prima de servicios') --}}
+                                                <a href="{{route('premium_download',$item->id)}}" class="btn btn-warning btn-sm">Descargar</a>
+                                            {{-- @endcan --}}
                                         @endif
-                                        @can('Eliminar liquidación de prestaciones sociales')
+                                        {{-- @can('Eliminar prima de servicios') --}}
                                             <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete_{{$item->id}}">Eliminar</button>
                                             <div class="modal fade" id="delete_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-md">
@@ -68,13 +68,13 @@
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
-                                                            <h4 class="modal-title">Eliminar liquidación</h4>
+                                                            <h4 class="modal-title">Eliminar prima</h4>
                                                         </div>
-                                                        <form action="{{route('settlement_download',$item->id)}}" method="post">
+                                                        <form action="{{route('premium_download',$item->id)}}" method="post">
                                                         @csrf
                                                         @method('DELETE')
                                                             <div class="modal-body">
-                                                                <p>¿Está seguro que desa eliminar la liquidación?</p>
+                                                                <p>¿Está seguro que desa eliminar la prima?</p>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-sm btn-secondary pull-left" data-dismiss="modal">Cancelar</button>
@@ -84,7 +84,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endcan
+                                        {{-- @endcan --}}
                                     </td>
                                 </tr>
                             @endforeach

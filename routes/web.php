@@ -896,3 +896,12 @@ Route::get('logistics_infrastructure/drivers/{id}/edit','logistics_infrastructur
 Route::put('logistics_infrastructure/drivers/{id}','logistics_infrastructure\driversController@update')->name('drivers_update');
 Route::get('logistics_infrastructure/drivers/download/{id}','logistics_infrastructure\driversController@download')->name('drivers_download');
 Route::delete('logistics_infrastructure/drivers/{id}','logistics_infrastructure\driversController@destroy')->name('drivers_delete');
+
+Route::get('human_management/premium','human_management\premiumController@index')->name('premium');
+Route::get('human_management/premium/create','human_management\premiumController@create')->name('premium_create');
+Route::post('human_management/premium','human_management\premiumController@store')->name('premium_store');
+Route::get('human_management/premium/show/{id}','human_management\premiumController@show')->name('premium_show');
+Route::get('human_management/premium/{id}/edit','human_management\premiumController@edit')->name('premium_edit');
+Route::put('human_management/premium/{id}','human_management\premiumController@update')->name('premium_update');
+Route::get('human_management/premium/download/{id}','human_management\premiumController@download')->name('premium_download');
+Route::delete('human_management/premium/{id}','human_management\premiumController@destroy')->name('premium_delete');

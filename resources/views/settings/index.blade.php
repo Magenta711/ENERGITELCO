@@ -2,8 +2,6 @@
 
 @section('content')
 
-{{dd($system_setting)}}
-
 <section class="content-header">
     <h1>
         Configuraciones <small>Configuraciones</small>
