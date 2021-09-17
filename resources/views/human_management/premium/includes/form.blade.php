@@ -13,7 +13,7 @@
         <tbody>
             @foreach ($users as $user)
                 <tr>
-                    <th><input type="checkbox" name="user_add[{{ $user->id }}]" id="user_add_{{ $user->id }}" value="{{ $user->id }}" class="check_user" checked> {{ $user->id }}</th>
+                    <th><input type="checkbox" name="user_add[{{ $user->id }}]" id="user_add_{{ $user->id }}" value="{{ $user->id }}" class="check_user" checked></th>
                     <th>{{$user->cedula}}</th>
                     <td>{{$user->name}}</td>
                     <td id="total_pay_td_{{ $user->id }}">$ 0.00</td>
@@ -38,19 +38,19 @@
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="linked_days_{{$user->id}}">Días vinculados</label>
-                                                    <input type="text" class="form-control linked-days" name="linked_days[{{$user->id}}]" value="{{old('salary_month')[$user->id] ?? 0}}" id="linked_days_{{$user->id}}">
+                                                    <input type="text" class="form-control linked-days" name="linked_days[{{$user->id}}]" value="{{old('linked_days')[$user->id] ?? 0}}" id="linked_days_{{$user->id}}">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="license_days_{{$user->id}}">Días de licencia</label>
-                                                    <input type="text" class="form-control license-days" name="license_days[{{$user->id}}]" value="{{old('extras_month')[$user->id] ?? 0}}" id="license_days_{{$user->id}}">
+                                                    <input type="text" class="form-control license-days" name="license_days[{{$user->id}}]" value="{{old('license_days')[$user->id] ?? 0}}" id="license_days_{{$user->id}}">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="days_settle_{{$user->id}}">Número de días a liquidar</label>
-                                                    <input type="text" class="form-control days-settle" name="settle_days[{{$user->id}}]" value="{{old('assistance_month')[$user->id] ?? 0}}" id="days_settle_{{$user->id}}">
+                                                    <input type="text" class="form-control days-settle" name="settle_days[{{$user->id}}]" value="{{old('settle_days')[$user->id] ?? 0}}" id="days_settle_{{$user->id}}">
                                                 </div>
                                             </div>
                                         </div>
@@ -103,27 +103,6 @@
                                         <h3>Total neto a pagar</h3>
                                         <span id="total_pay_{{ $user->id }}">$ {{number_format((old('total_pay_user')[$user->id] ?? 0),2,',','.')}}</span>
                                         <input type="hidden" value="{{old('total_pay_user')[$user->id] ?? 0}}" name="total_pay_user[{{ $user->id }}]" id="total_item_{{ $user->id }}">
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-sm btn-secondary pull-left" data-dismiss="modal">Cancelar</button>
-                                        <button type="button" class="btn btn-sm btn-success" data-dismiss="modal">Aceptar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-sm btn-success pl-4 pr-4" data-toggle="modal" data-target="#modal_detail_{{$user->id}}">Detalles</button>
-                        {{-- Modal description --}}
-                        <div class="modal fade" id="modal_detail_{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        <h4 class="modal-title" id="exampleModalLongTitle">{{$user->name}}</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                       
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-sm btn-secondary pull-left" data-dismiss="modal">Cancelar</button>

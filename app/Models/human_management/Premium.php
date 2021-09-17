@@ -18,4 +18,9 @@ class Premium extends Model
     {
         return $this->hasOne(User::class,'id','approve_id');
     }
+
+    public function users()
+    {
+        return $this->hasMany(PremiumUser::class,'work_id','id');
+    }
 }

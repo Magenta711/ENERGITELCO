@@ -107,9 +107,9 @@ class premiumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Premium $id)
     {
-        //
+        return view('human_management.premium.show',compact('id'));
     }
 
     /**
@@ -118,9 +118,11 @@ class premiumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Premium $id)
     {
-        //
+        $users = User::where('state',1)->get();
+        $message = $this->message;
+        return view('human_management.premium.edit',compact('users','message','id'));
     }
 
     /**
@@ -130,9 +132,48 @@ class premiumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Premium $id)
     {
-        //
+        $request->validate([
+            'start_date' => ['required'],
+            'end_date' => ['required'],
+        ]);
+
+        $id->update($request->all());
+        PremiumUser::where('work_id',$id->id)->delete();
+        foreach ($request->user_add as $key => $value) {
+            $user = PremiumUser::create([
+                'work_id' => $id->id,
+                'user_id' => $key,
+
+                'linked_days' => $request->linked_days[$key],
+                'license_days' => $request->license_days[$key],
+                'settle_days' => $request->settle_days[$key],
+                
+                'total_devengado_salary' => $request->total_devengado_salary[$key],
+                'total_devengado_extras' => $request->total_devengado_extras[$key],
+                'total_devengado_assistance' => $request->total_devengado_assistance[$key],
+
+                'average_salary' => $request->average_salary[$key],
+                'average_extras' => $request->average_extras[$key],
+                'average_assistance' => $request->average_assistance[$key],
+                
+                'total_pay_user' => $request->total_pay_user[$key],
+                'status' => $request->status[$key],
+            ]);
+
+            foreach ($request->salary_month[$key] as $ke => $valu) {
+                PremiumUserDetail::create([
+                    'premium_user_id' => $user->id,
+                    'month' => $ke,
+                    'salary_month' => $request->salary_month[$key][$ke],
+                    'extras_month' => $request->extras_month[$key][$ke],
+                    'assistance_month' => $request->assistance_month[$key][$ke],
+                ]);
+            }
+        }
+
+        return redirect()->route('premium')->with('success','Se ha editado el formulario');
     }
 
     /**

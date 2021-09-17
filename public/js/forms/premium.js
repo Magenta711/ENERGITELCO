@@ -16,7 +16,6 @@
 // }
 
 $(document).ready(function () {
-    initialFn();
     $('#start_date').blur(function () {
         dateChange();
     });

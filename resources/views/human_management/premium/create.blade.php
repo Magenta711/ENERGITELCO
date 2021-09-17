@@ -3,6 +3,7 @@
     {
         $thisMonth = now()->format('m');
         if ($thisMonth > 6) {
+            return now()->format('Y-01-01');
             return now()->format('Y-07-01');
         }else{
             return now()->format('Y-01-01');
@@ -12,6 +13,7 @@
     {
         $thisMonth = now()->format('m');
         if ($thisMonth > 6) {
+            return now()->format('Y-06-30');
             return now()->format('Y-12-31');
         }else{
             return now()->format('Y-06-30');
@@ -117,4 +119,9 @@
 @section('js')
     <script src="{{ asset('js/moment/moment.js') }}" defer></script>
     <script src="{{ asset('js/forms/premium.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            initialFn();
+        });
+    </script>
 @endsection
