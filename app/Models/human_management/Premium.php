@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Premium extends Model
 {
-    protected $fillable = ['responsable_id','approve_id','total_employees','estado','date','start_date','end_date','total_pay'];
+    protected $fillable = ['responsable_id','approver_id','total_employees','estado','date','start_date','end_date','total_pay','commentary'];
 
     public function responsable()
     {
@@ -16,7 +16,7 @@ class Premium extends Model
 
     public function approve()
     {
-        return $this->hasOne(User::class,'id','approve_id');
+        return $this->hasOne(User::class,'id','approver_id');
     }
 
     public function users()

@@ -3,12 +3,12 @@
 @section('content')
 <section class="content-header">
     <h1>
-        REPORTE DE NOVEDADES DE NOMINA Y HORAS EXTRAS
+        Prima de servicios
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
         <li><a href="#">Formatos de gestión</a></li>
-        <li class="active">REPORTE DE NOVEDADES DE NOMINA Y HORAS EXTRAS</li>
+        <li class="active">Prima de servicios</li>
     </ol>
 </section>
 <section class="content">
@@ -181,9 +181,88 @@
                             </div>
                         </div>
                     </div>
+                    @if ($id->estado == 'Sin aprobar')
+                    <form action="{{route('premium_approve',$id->id)}}" id='approval_work_8' method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <input type="hidden" name="status" value="Aprobado">
+                            <label for="commentary">Observaciones del jefe inmediato (Quién aprueba el permiso)</label>
+                            <textarea name="commentary" id="commentary" cols="30" rows="3" class="form-control">{{old('commentary')}}</textarea>
+                        </div>
+                    </form>
+                    @else
+                    <h4>Observaciones del jefe inmediato</h4>
+                    <p>{!! str_replace("\n", '</br>', addslashes($id->commentary))!!}</p>
+                    @endif
+                    @if ($id->estado != 'Sin aprobar')
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="box">
+                                    <div class="box-body">
+                                        <h6>Firmado electrónicamente por el responsable del trabajo o líder</h6>
+                                        <div class="row">
+                                            <div class="col-md-6"><strong>Nombre: </strong>{{$id->responsable->name}}</div>
+                                            <div class="col-md-6"><strong>Cédula: </strong>{{$id->responsable->cedula}}</div>
+                                        </div>
+                                        <p>Solicitud elaborada inicialmente y firmada electrónicamente por <strong>{{$id->responsable->name}}</strong>, en rol de {{$id->responsable->getRoleNames()[0]}}  habilitado por Energitelco, con conocimiento de funciones y contenido del presente documento. Se cumple Ley 527 de 1999 y Decreto 19 de 2012</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="box">
+                                    <div class="box-body">
+                                        <h6>Firmado electrónicamente por el auditor o coordinador</h6>
+                                        <div class="row">
+                                            <div class="col-md-6"><strong>Nombre: </strong>{{$id->approve->name}}</div>
+                                            <div class="col-md-6"><strong>Cédula: </strong>{{$id->approve->cedula}}</div>
+                                        </div>
+                                        <p>Solicitud aprobada y firmada electrónicamente por <strong>{{$id->approve->name}}</strong> en rol de {{$id->approve->getRoleNames()[0]}} Energitelco, con conocimiento de funciones y contenido del presente documento. Se cumple Ley 527 de 1999 y Decreto 19 de 2012</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                    </div>
+                    <div class="box-footer">
+                        @if ($id->estado == 'Sin aprobar')
+                        <a class="btn btn-sm btn-primary btn-send" href="{{ route('premium_approve',$id->id) }}"
+                            onclick="aprobar()">
+                            Aprobar y firmar
+                        </a>
+                        <a class="btn btn-sm btn-danger btn-send" href="{{ route('premium_approve',$id->id) }}"
+                                onclick="no_aprobar()">
+                            No aprobar
+                        </a>
+                        <form id="approval_work_no_8" action="{{ route('premium_approve',$id->id) }}" method="POST" style="display: none;">
+                            @csrf
+                            <input type="hidden" name="status" value="No aprobado">
+                            <textarea name="commentary" id="commentary_2" class="hide" cols="30" rows="3">{{old('commentary')}}</textarea>
+                        </form>
+                        @endif
+                        @if ($id->estado == 'Aprobado')
+                            @can('Descargar PDF de solicitud de permisos laborales o notificaciones de incapacidad médica')
+                                <a href="{{route('payroll_overtime_news_report_download',$id->id)}}" class="btn btn-danger btn-sm">Descargar</a>
+                            @endcan
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+@endsection
+
+@section('js')
+    <script>
+    function no_aprobar() {
+        event.preventDefault();
+        document.getElementById('commentary_2').value=document.getElementById('commentary').value;
+        document.getElementById('approval_work_no_8').submit();
+    }
+    function aprobar() {
+        event.preventDefault();
+        document.getElementById('approval_work_8').submit();
+    }
+    </script>
 @endsection

@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers\human_management;
 
+use App\Exports\listPayPremium;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\general_setting;
 use App\Models\human_management\Premium;
 use App\Models\human_management\PremiumUser;
 use App\Models\human_management\PremiumUserDetail;
+use App\Models\system_setting;
 use App\Models\SystemMessages;
+use App\Notifications\notificationMain;
 use App\User;
+use Illuminate\Support\Facades\Mail;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class premiumController extends Controller
 {
@@ -182,8 +188,76 @@ class premiumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Premium $id)
     {
-        //
+        $id->delete();
+        return redirect()->route('premium')->with('success','Se ha editado el formulario');
+    }
+
+    public function download(Premium $id)
+    {
+        return (new listPayPremium($id))->download($id->start_date.$id->end_date.'_PRIMA.xlsx');
+    }
+
+    public function approve(Request $request,Premium $id)
+    {
+        if ($request->status == 'Aprobado') {
+            $id->update([
+                'estado'=>"Aprobado",
+                'commentary'=>$request->commentary,
+                'approver_id' => auth()->id(),
+            ]);
+            $id->responsable->notify(new notificationMain($id->id,'Se ha aprobado la prima de servicios '.$id->id,'human_management/premium/show/'));
+            // $i = 0;
+            foreach ($id->users as $key => $data) {
+                // PDF
+                // $pdf = PDF::loadView('pdf.formulario8',compact('data'));
+                // $pdf->setPaper('A4', 'landscape');
+                // $pdf->save(storage_path('app/public/vouchers/'.$data->work->codigo_formulario.'-'.$id->id.'-'.$data->id.'_COMPROBANTE_PAGO.pdf'));
+                // if ($i == 0) {
+                    Mail::send('human_management.premium.email.users', ['data' => $data], function ($menssage) use ($id,$data)
+                    {
+                        $menssage->to($data->user->email,$data->user->name)->subject("Energitelco S.A.S, Comprobante de pago de prima de servicios ".$id->id.'-'.$data->id);
+                        // $menssage->attachData($pdf->output(),'comprobante_pago.pdf');
+                    });
+                // }
+                // $i++;
+            }
+            Mail::send('human_management.premium.email.main', ['format' => $id], function ($menssage) use ($id)
+            {
+                $emails = system_setting::where('state',1)->pluck('approval_emails')->first();
+                $company = general_setting::where('state',1)->pluck('company')->first();
+                $email = explode(';',$emails);
+                for ($i=0; $i < count($email); $i++)
+                {
+                    if($email[$i] != ''){
+                        $menssage->to(trim($email[$i]),$company);
+                    }
+                }
+                $menssage->to($id->responsable->email,$id->responsable->name)->subject("Energitelco S.A.S PRIMA DE SERVICIOS ".$id->id);
+            });
+            
+            return redirect()->route('approval')->with(['success'=>'Se ha aprobado la solicitud '.$id->id.' correctamente','sudmenu' => 8]);
+        }else {
+            $id->update([
+                'estado' => "No aprobado",
+                'commentary'=>$request->commentary,
+                'coordinador' => auth()->id(),
+            ]);
+            $id->responsable->notify(new notificationMain($id->id,'No se aprobó la solicitud de prima de servicio '.$id->id,'human_management/premium/show/'));
+            return redirect()->route('approval')->with(['success'=>'Se ha desaprobado la solicitud correctamente','sudmenu'=>8]);
+        }
+    }
+
+    public function export(Premium $id)
+    {
+        foreach ($id->users as $key => $data) {
+            if ($data->user_id == 27) {
+                $pdf = PDF::loadView('human_management.premium.pdf.main',compact('data'));
+                $pdf->setPaper('A4', 'landscape');
+                return $pdf->download($id->id.'-'.$data->id.'_COMPROBANTE_PAGO.pdf');
+            }
+        }
+        return redirect()->route('home');
     }
 }

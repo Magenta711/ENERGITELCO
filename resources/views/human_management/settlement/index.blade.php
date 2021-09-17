@@ -70,7 +70,7 @@
                                                             </button>
                                                             <h4 class="modal-title">Eliminar liquidación</h4>
                                                         </div>
-                                                        <form action="{{route('settlement_download',$item->id)}}" method="post">
+                                                        <form action="{{route('settlement_delete',$item->id)}}" method="post">
                                                         @csrf
                                                         @method('DELETE')
                                                             <div class="modal-body">

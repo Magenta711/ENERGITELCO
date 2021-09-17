@@ -11,7 +11,7 @@ use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class bonusPayExport implements FromView, WithDrawings, WithStyles, ShouldAutoSize
+class listPayPremium implements FromView, WithDrawings, WithStyles, ShouldAutoSize
 {
     use Exportable;
 
@@ -47,7 +47,7 @@ class bonusPayExport implements FromView, WithDrawings, WithStyles, ShouldAutoSi
     */
     public function view(): View
     {
-        return view('human_management.bonus.administrative.export.list_pay', [
+        return view('human_management.premium.export.pay', [
             'data' => $this->data
         ]);
     }

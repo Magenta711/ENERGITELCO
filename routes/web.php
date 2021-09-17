@@ -904,4 +904,6 @@ Route::get('human_management/premium/show/{id}','human_management\premiumControl
 Route::get('human_management/premium/{id}/edit','human_management\premiumController@edit')->name('premium_edit');
 Route::put('human_management/premium/{id}','human_management\premiumController@update')->name('premium_update');
 Route::get('human_management/premium/download/{id}','human_management\premiumController@download')->name('premium_download');
+Route::get('human_management/premium/export/{id}','human_management\premiumController@export')->name('premium_export');
+Route::post('human_management/premium/{id}','human_management\premiumController@approve')->name('premium_approve');
 Route::delete('human_management/premium/{id}','human_management\premiumController@destroy')->name('premium_delete');

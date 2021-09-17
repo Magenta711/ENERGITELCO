@@ -26,12 +26,12 @@
 @section('content')
 <section class="content-header">
     <h1>
-        REPORTE DE NOVEDADES DE NOMINA Y HORAS EXTRAS
+        Prima de servicios
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
         <li><a href="#">Formatos de gestión</a></li>
-        <li class="active">REPORTE DE NOVEDADES DE NOMINA Y HORAS EXTRAS</li>
+        <li class="active">Prima de servicios</li>
     </ol>
 </section>
 <div class="hide">}

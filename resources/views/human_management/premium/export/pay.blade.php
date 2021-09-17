@@ -1,25 +1,25 @@
 <table class="table-form">
     <thead>
-        <tr style="background: cyan">
+        <tr style="background: #FABF8F">
             <th></th>
             <th colspan="3">
-                Lista de pagos
+                PRIMA DE SERVCIOS
             </th>
         </tr>
-        <tr>
+        <tr style="background: #FABF8F">
+            <th>Cédula</th>
             <th>Nombre</th>
             <th># Cuenta</th>
-            <th>Cédula</th>
             <th>Neto a pagar</th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($data->work_adds as $item)
+        @foreach ($data->users as $item)
             <tr>
                 <td>{{ $item->user->cedula }}</td>
                 <td>{{ $item->user->name }}</td>
                 <td>{{ $item->user->register ? $item->user->register->bank_account : '' }}</td>
-                <td>$ {{ number_format($item->total_pay,2,',','.') }}</td>
+                <td>$ {{ number_format($item->total_pay_user,2,',','.') }}</td>
             </tr>
         @endforeach
         <tr>

@@ -18,4 +18,9 @@ class PremiumUser extends Model
     {
         return $this->hasOne(User::class,'id','user_id');
     }
+
+    public function premium()
+    {
+        return $this->hasOne(Premium::class,'id','work_id');
+    }
 }

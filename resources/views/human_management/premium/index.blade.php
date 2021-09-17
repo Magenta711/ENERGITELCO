@@ -44,17 +44,17 @@
                                     <td>{{$item->responsable->name}}</td>
                                     <td>{{$item->approve ? $item->approve->name:''}}</td>
                                     <td>{{$item->created_at}}</td>
-                                    <td>{{($item->status == 1) ? 'Aprobado' : (($item->status == 2 )? 'No aprobado' : 'Sin aprobar')}}</td>
+                                    <td>{{$item->estado}}</td>
                                     <td>
                                         {{-- @can('Ver prima de servicios') --}}
                                             <a href="{{route('premium_show',$item->id)}}" class="btn btn-sm btn-success">Ver</a>
                                         {{-- @endcan --}}
-                                        @if ($item->status == 0)
+                                        @if ($item->estado == "Sin aprobar")
                                             {{-- @can('Editar prima de servicios') --}}
                                                 <a href="{{route('premium_edit',$item->id)}}" class="btn btn-sm btn-primary">Editar</a>
                                             {{-- @endcan --}}
                                         @endif
-                                        @if ($item->status == 1)
+                                        @if ($item->estado == "Aprobado")
                                             {{-- @can('Descargar prima de servicios') --}}
                                                 <a href="{{route('premium_download',$item->id)}}" class="btn btn-warning btn-sm">Descargar</a>
                                             {{-- @endcan --}}
@@ -70,7 +70,7 @@
                                                             </button>
                                                             <h4 class="modal-title">Eliminar prima</h4>
                                                         </div>
-                                                        <form action="{{route('premium_download',$item->id)}}" method="post">
+                                                        <form action="{{route('premium_delete',$item->id)}}" method="post">
                                                         @csrf
                                                         @method('DELETE')
                                                             <div class="modal-body">
