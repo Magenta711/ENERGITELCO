@@ -1,5 +1,18 @@
 @extends('lte.layouts')
 
+@php
+     function showMonth($month,$start,$end)
+    {
+        $x = intval(explode('-',$start)[1]);
+        $y = intval(explode('-',$end)[1]);
+        $m = intval($month);
+        if ($m >= $x && $m <= $y) {
+            return false;
+        }
+        return true;
+    }
+@endphp
+
 @section('content')
 <section class="content-header">
     <h1>
@@ -104,7 +117,7 @@
                                                                         </thead>
                                                                         <tbody>
                                                                             @foreach ($user->months as $item)
-                                                                                <tr class="tr-months tr_month_{{$item->month}}">
+                                                                                <tr class="tr-months tr_month_{{$item->month}}" {{ showMonth($item->month,$id->start_date,$id->end_date) ? 'style=display:none' : ''}}>
                                                                                     <th>{{$months[$item->month]}}</th>
                                                                                     <td>{{ $item->salary_month }}</td>
                                                                                     <td>{{ $item->extras_month }}</td>

@@ -1,3 +1,15 @@
+@php
+     function showMonth($month,$start,$end)
+    {
+        $x = intval(explode('-',$start)[1]);
+        $y = intval(explode('-',$end)[1]);
+        $m = intval($month);
+        if ($m >= $x && $m <= $y) {
+            return false;
+        }
+        return true;
+    }
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -120,7 +132,7 @@
         </thead>
         <tbody>
             @foreach ($data->months as $item)
-                <tr class="tr-months tr_month_{{$item->month}}">
+                <tr class="tr-months tr_month_{{$item->month}}" {{ showMonth($item->month,$data->premium->start_date,$data->premium->end_date) ? 'style=display:none' : ''}}>
                     <th>{{$months[$item->month]}}</th>
                     <td>{{ $item->salary_month }}</td>
                     <td>{{ $item->extras_month }}</td>
@@ -157,10 +169,10 @@
         <tr>
             <th colspan="2" style="text-align: center">Calculos</th>
         </tr>
-        <tr>
-            <td>Liquidacion por prima</td>
-            <td>$ {{ number_format($data->premium->total_pay,2,',','.') }}</td>
-        </tr>
+        {{-- <tr> --}}
+            {{-- <td>Liquidacion por prima</td> --}}
+            {{-- <td>$ {{ number_format($data->premium->total_pay,2,',','.') }}</td> --}}
+        {{-- </tr> --}}
         <tr>
             <td>TOTAL A PAGAR POR ESTA LIQUIDACIÓN</td>
             <td>$ {{ number_format($data->premium->total_pay,2,',','.') }}</td>

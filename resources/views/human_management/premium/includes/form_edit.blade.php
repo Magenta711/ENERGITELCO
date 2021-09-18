@@ -66,7 +66,7 @@
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($user->months as $item)
-                                                        <tr class="tr-months tr_month_{{$item->month}}">
+                                                        <tr class="tr-months tr_month_{{$item->month}}" {{ showMonth($item->month,$id->start_date,$id->end_date) ? 'style=display:none' : ''}}>
                                                             <th>{{$months[$item->month]}}</th>
                                                             <td><input type="text" name="salary_month[{{$user->user_id}}][{{$item->month}}]" id="salaryMonth_{{$user->user_id}}_{{$item->month}}" class="form-control text-right salary_month" value="{{ $item->salary_month }}"></td>
                                                             <td><input type="text" name="extras_month[{{$user->user_id}}][{{$item->month}}]" id="extrasMonth_{{$user->user_id}}_{{$item->month}}" class="form-control text-right extras_month" value="{{ $item->extras_month }}"></td>

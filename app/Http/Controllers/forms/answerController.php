@@ -15,9 +15,6 @@ use Illuminate\Support\Facades\Storage;
 class answerController extends Controller
 {
 
-    public function __construct() {
-        
-    }
 
     public function index()
     {
@@ -103,6 +100,9 @@ class answerController extends Controller
             'form_id' => $form->id,
             'user_id' => auth()->check() ? auth()->id() : null,
             'user_form_id' => $form->limit_to_one ? $user->id : null,
+            'name_require' => isset($request->name_require) ? $request->name_require : null,
+            'cc_require' => isset($request->cc_require) ? $request->cc_require : null,
+            'role_require' => isset($request->role_requir) ? $request->role_require : null
         ]);
         $nt = 0;
         $nta = 0;

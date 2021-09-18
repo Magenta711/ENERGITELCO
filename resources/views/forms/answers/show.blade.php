@@ -67,6 +67,28 @@ function answerQuestion($order, $question){
                 @endif
             @endforeach
         </div>
+        @if ($id->form->with_attach == 1)
+            <div class="box-footer">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="box">
+                            <div class="box-header">
+                                <div class="box-title">
+                                    Firmado electrónicamente por el responsable
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-md-6"><strong>Nombre: </strong>{{$id->name_require}}</div>
+                                    <div class="col-md-6"><strong>Cédula: </strong>{{$id->cc_require}}</div>
+                                </div>
+                                <p>Solicitud aprobada y firmada electrónicamente por <strong>{{$id->name_require}}</strong> en rol de {{$id->role_require}} Energitelco, con conocimiento de funciones y contenido del presente documento. Se cumple Ley 527 de 1999 y Decreto 19 de 2012</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
     </div>
 </section>
 @endsection

@@ -79,6 +79,7 @@ class formController extends Controller
             'from_to_mail' => $request->from_to_mail ? 1 : 0,
             'limit_to_one' => $request->limit_to_one ? 1 : 0,
             'sort_randomly' => $request->sort_randomly ? 1 : 0,
+            'with_attach' => $request->with_attach ? 1 : 0,
             'mails' => $request->mails,
             'note' => $request->form_type == "Evaluación" && $request->rating_type == "Automática" && $request->value_type == "Promedio" ? $request->note : $note,
         ]);
@@ -264,6 +265,7 @@ class formController extends Controller
             'from_to_mail' => $request->from_to_mail ? 1 : 0,
             'limit_to_one' => $request->limit_to_one ? 1 : 0,
             'sort_randomly' => $request->sort_randomly ? 1 : 0,
+            'with_attach' => $request->with_attach ? 1 : 0,
             'mails' => $request->mails,
             'note' => $request->form_type == "Evaluación" && $request->rating_type == "Automática" && $request->value_type == "Promedio" ? $request->note : $note,
         ]);

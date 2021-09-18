@@ -759,7 +759,7 @@
                   auth()->user()->hasPermissionTo('Eliminar formato de reporte de novedades de nómina y horas extras') ||
                   auth()->user()->hasPermissionTo('Consultar reporte de novedades de nómina y horas extras')
                 )
-                    <li class="treeview {{ activeMenu('human_management/proceeding*') }}{{ activeMenu('human_management/work_permit*') }}{{ activeMenu('human_management/fall_protection_equipment_inspection*') }}{{ activeMenu('human_management/delivery_staffing*') }}{{ activeMenu('human_management/work_permits_notifications_medical_incapacity*') }}{{ activeMenu('human_management/payroll_overtime_news_report*') }}{{ activeMenu('human_management/settlement*') }}{{activeMenu('human_management/improvement_action*')}}">
+                    <li class="treeview {{ activeMenu('human_management/proceeding*') }}{{ activeMenu('human_management/work_permit*') }}{{ activeMenu('human_management/fall_protection_equipment_inspection*') }}{{ activeMenu('human_management/delivery_staffing*') }}{{ activeMenu('human_management/work_permits_notifications_medical_incapacity*') }}{{ activeMenu('human_management/payroll_overtime_news_report*') }}{{ activeMenu('human_management/settlement*') }}{{activeMenu('human_management/improvement_action*')}}{{ activeMenu('human_management/premium*') }}">
                       <a href="#"><i class="fa fa-file-alt"></i> FORMATOS<span class="pull-right-container">
                           <i class="fa fa-angle-left pull-right"></i>
                         </span>
@@ -851,7 +851,7 @@
                         )
                           <li class="{{ activeMenu('human_management/improvement_action*') }}"><a class="btn-send" href="{{route('improvement_action')}}"><i class="far fa-star"></i> ACCIONES DE MEJORA</a></li>
                           @endif
-                        <li class="{{ activeMenu('human_management/premium*') }}"><a class="btn-send" href="{{route('premium')}}"><i class="far fa-star"></i> PRIMA DE SERVICIOS</a></li>
+                        <li class="{{ activeMenu('human_management/premium*') }}"><a class="btn-send" href="{{route('premium')}}"><i class="far fa-file-invoice"></i> PRIMA DE SERVICIOS</a></li>
                       </ul>
                     </li>
                 @endif
@@ -974,7 +974,7 @@
                   auth()->user()->hasPermissionTo('Eliminar asistencia') ||
                   auth()->user()->hasPermissionTo('Editar asistencia')
                 )  
-                  <li class="{{ activeMenu('human_management/assistance*') }}"><a class="btn-send" href="{{route('assistance')}}"><i class="fa fa-file-invoice-dollar"></i> ASISTENCIA</a></li>
+                  <li class="{{ activeMenu('human_management/assistance*') }}"><a class="btn-send" href="{{route('assistance')}}"><i class="fa fa-user-check"></i> ASISTENCIA</a></li>
                 @endif
               </ul>
             </li>

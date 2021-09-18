@@ -1,6 +1,19 @@
+@php
+     function showMonth($month,$start,$end)
+    {
+        $x = intval(explode('-',$start)[1]);
+        $y = intval(explode('-',$end)[1]);
+        $m = intval($month);
+        if ($m >= $x && $m <= $y) {
+            return false;
+        }
+        return true;
+    }
+@endphp
 @extends('lte.layouts')
-
 @section('content')
+
+
 <section class="content-header">
     <h1>
         Prima de servicios
