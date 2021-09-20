@@ -22,13 +22,13 @@ class premiumController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('verified');
-        // $this->middleware('permission:Digitar reporte de novedades de nómina y horas extras|Aprobar reporte de novedades de nómina y horas extras|Descargar lista de pago de reporte de novedades de nómina y horas extras|Eliminar formato de reporte de novedades de nómina y horas extras|Consultar reporte de novedades de nómina y horas extras',['only' => ['index']]);
-        // $this->middleware('permission:Consultar reporte de novedades de nómina y horas extras',['only' => ['show']]);
-        // $this->middleware('permission:Descargar lista de pago de reporte de novedades de nómina y horas extras',['only' => ['download']]);
-        // $this->middleware('permission:Digitar reporte de novedades de nómina y horas extras',['only' => ['create','store']]);
-        // $this->middleware('permission:Editar reporte de novedades de nómina y horas extras',['only' => ['edit','update']]);
-        // $this->middleware('permission:Eliminar formato de reporte de novedades de nómina y horas extras',['only' => ['destroy']]);
-        // $this->middleware('permission:Aprobar reporte de novedades de nómina y horas extras',['only' => ['approve']]);
+        $this->middleware('permission:Digitar prima de servicios|Aprobar prima de servicios|Descargar lista de pago de prima de servicios|Eliminar formato de prima de servicios|Consultar prima de servicios',['only' => ['index']]);
+        $this->middleware('permission:Consultar prima de servicios',['only' => ['show']]);
+        $this->middleware('permission:Descargar lista de pago de prima de servicios',['only' => ['download']]);
+        $this->middleware('permission:Digitar prima de servicios',['only' => ['create','store']]);
+        $this->middleware('permission:Editar prima de servicios',['only' => ['edit','update']]);
+        $this->middleware('permission:Eliminar formato de prima de servicios',['only' => ['destroy']]);
+        $this->middleware('permission:Aprobar prima de servicios',['only' => ['approve']]);
         $this->message = SystemMessages::where('state',1)->where('name','Envio de formatos')->first();
     }
     /**

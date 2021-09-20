@@ -850,8 +850,10 @@
                           auth()->user()->hasPermissionTo('Eliminar acciones de mejora')
                         )
                           <li class="{{ activeMenu('human_management/improvement_action*') }}"><a class="btn-send" href="{{route('improvement_action')}}"><i class="far fa-star"></i> ACCIONES DE MEJORA</a></li>
-                          @endif
-                        <li class="{{ activeMenu('human_management/premium*') }}"><a class="btn-send" href="{{route('premium')}}"><i class="far fa-file-invoice"></i> PRIMA DE SERVICIOS</a></li>
+                        @endif
+                        @if (auth()->user()->hasAnyPermission(['Digitar prima de servicios','Aprobar prima de servicios','Descargar lista de pago de prima de servicios','Eliminar formato de prima de servicios','Consultar prima de servicios','Editar prima de servicios']))
+                          <li class="{{ activeMenu('human_management/premium*') }}"><a class="btn-send" href="{{route('premium')}}"><i class="far fa-file-invoice"></i> PRIMA DE SERVICIOS</a></li>
+                        @endif
                       </ul>
                     </li>
                 @endif
@@ -1173,6 +1175,16 @@
                 @can('Configuraciones generales')
                   <li><a class="btn-send" href="{{route('settings')}}"><i class="fa fa-cog"></i> DATOS GENERALES</a></li>
                 @endcan
+                <li class="treeview {{activeMenu('learned_lesson*')}}">
+                  <a href="#"><i class="fas fa-user-injured"></i> Modales de entrada<span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+                <ul class="treeview-menu">
+                  <li class="{{ activeMenu('setting/modals*') }}"><a class="btn-send" href="{{route('setting_modals')}}"><i class="fa fa-spell-check"></i> AJUSTES</a></li>
+                  <li class="{{ activeMenu('setting/empleyee_month*') }}"><a class="btn-send" href="{{route('setting_empleyee_month')}}"><i class="fa fa-spell-check"></i> EMPLEADO DEL MES</a></li>
+                </ul>
+                </li>
               </ul>
             </li>
         @endif

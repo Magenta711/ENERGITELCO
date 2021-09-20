@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EmployeeMonth;
 use App\Models\general_setting;
 use App\Models\system_setting;
 use App\Models\SystemMessages;
 use App\Models\Positions;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class SettingsController extends Controller
 {
@@ -276,5 +280,78 @@ class SettingsController extends Controller
     public function upload()
     {
         return response()->json([ 'success' => 'Good' ]);
+    }
+
+    public function modals()
+    {
+        return view('settings.modals.index');
+    }
+    public function modals_update(Request $request)
+    {
+        return $request;
+    }
+    public function empleyee_month()
+    {
+        $employees = EmployeeMonth::get();
+        $users = User::where('state',1)->get();
+        return view('settings.empleyee_month.index',compact('employees','users'));
+    }
+
+    public function empleyee_month_store(Request $request)
+    {
+        $id = EmployeeMonth::create([
+            'user_id' => $request->user_id,
+            'responsable_id' => auth()->id(),
+            'month' => $request->month
+        ]);
+
+        if ($request->hasFile('file')){
+            $file = $request->file('file');
+            $name = time().Str::random(5).'.'.$file->getClientOriginalExtension();
+            $size = $file->getClientSize() / 1000;
+            $path = Storage::putFileAs('public/avatars', $file, $name);
+            $id->file()->create([
+                'name' => $name,
+                'description' => 'Empleado del mes',
+                'size' => $size.' KB',
+                'url' => $path,
+                'type' => $file->getClientOriginalExtension(),
+                'state' => 1
+            ]);
+        }else {
+
+        }
+
+        return redirect()->route('setting_empleyee_month')->with('success','Se guardo y publico el empleado del mes corectamente');
+    }
+    public function empleyee_month_update(Request $request,EmployeeMonth $id)
+    {
+        $id->update([
+            'user_id' => $request->user_id,
+            'responsable_id' => auth()->id(),
+            'month' => $request->month
+        ]);
+
+        if ($request->hasFile('file')){
+            if ($id->file) {
+                Storage::delete('public/avatars'.$id->file->name);
+                $id->file()->delete();
+            }
+
+            $file = $request->file('file');
+            $name = time().Str::random(5).'.'.$file->getClientOriginalExtension();
+            $size = $file->getClientSize() / 1000;
+            $path = Storage::putFileAs('public/avatars', $file, $name);
+            $id->file()->create([
+                'name' => $name,
+                'description' => 'Empleado del mes',
+                'size' => $size.' KB',
+                'url' => $path,
+                'type' => $file->getClientOriginalExtension(),
+                'state' => 1
+            ]);
+        }
+
+        return redirect()->route('setting_empleyee_month')->with('success','Se actualizo y publico el empleado del mes corectamente');
     }
 }

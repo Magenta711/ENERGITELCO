@@ -17,9 +17,9 @@
             <div class="box-header">
                 <h3 class="box-title">Prima de servicios</h3>
                 <div class="box-tools">
-                    {{-- @can('Crear prima de servicios') --}}
+                    @can('Digitar prima de servicios')
                         <a href="{{route('premium_create')}}" class="btn btn-sm btn-success">Crear</a>
-                    {{-- @endcan --}}
+                    @endcan
                 </div>
             </div>
             <div class="box-body">
@@ -46,20 +46,20 @@
                                     <td>{{$item->created_at}}</td>
                                     <td>{{$item->estado}}</td>
                                     <td>
-                                        {{-- @can('Ver prima de servicios') --}}
+                                        @can('Consultar prima de servicios')
                                             <a href="{{route('premium_show',$item->id)}}" class="btn btn-sm btn-success">Ver</a>
-                                        {{-- @endcan --}}
+                                        @endcan
                                         @if ($item->estado == "Sin aprobar")
-                                            {{-- @can('Editar prima de servicios') --}}
+                                            @can('Editar prima de servicios')
                                                 <a href="{{route('premium_edit',$item->id)}}" class="btn btn-sm btn-primary">Editar</a>
-                                            {{-- @endcan --}}
+                                            @endcan
                                         @endif
                                         @if ($item->estado == "Aprobado")
-                                            {{-- @can('Descargar prima de servicios') --}}
+                                            @can('Descargar lista de pago de prima de servicios')
                                                 <a href="{{route('premium_download',$item->id)}}" class="btn btn-warning btn-sm">Descargar</a>
-                                            {{-- @endcan --}}
+                                            @endcan
                                         @endif
-                                        {{-- @can('Eliminar prima de servicios') --}}
+                                        @can('Eliminar formato de prima de servicios')
                                             <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete_{{$item->id}}">Eliminar</button>
                                             <div class="modal fade" id="delete_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-md">
@@ -84,7 +84,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        {{-- @endcan --}}
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

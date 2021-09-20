@@ -15,6 +15,7 @@ use App\Models\billboard\billboard_type;
 use App\Models\bonus24;
 use App\Models\project\planing\Project;
 use App\Models\Customer;
+use App\Models\EmployeeMonth;
 use App\Models\LearnedLeassonsTest;
 use App\Models\LearnedLeassonsTestOption;
 use App\Models\LearnedLeassonsTestUsers;
@@ -103,7 +104,10 @@ class HomeController extends Controller
         {
             return $query->where('id',auth()->id());
         })->get();
-        return view('home',compact('usuarios','total_sin_aprobar','trabajos1','bill_types','start_mesage','proyectos','customers','providers','job_application','interviews','proof_payment','taskings','question'));
+
+        $employee_months = EmployeeMonth::where('month','LIKE',now()->format('Y')."%")->get();
+        
+        return view('home',compact('usuarios','total_sin_aprobar','trabajos1','bill_types','start_mesage','proyectos','customers','providers','job_application','interviews','proof_payment','taskings','question','employee_months'));
     }
 
     public function notification()
