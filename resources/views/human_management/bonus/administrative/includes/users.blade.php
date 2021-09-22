@@ -164,7 +164,6 @@
                                                         <tr>
                                                             <td>
                                                                 <input type="checkbox" class="discount_check discount_user_{{$user->id}}" name="pay_credit[{{$user->id}}][{{$item->id}}]" id="pay_credit_{{$item->id}}_{{$user->id}}" value="{{$item->id}}">
-                                                                {{$user->id}} {{$item->id}}
                                                             </td>
                                                             <td>
                                                                 ${{ number_format($item->total_pay,2) }}

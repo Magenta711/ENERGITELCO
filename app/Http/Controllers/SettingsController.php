@@ -284,15 +284,24 @@ class SettingsController extends Controller
 
     public function modals()
     {
-        return view('settings.modals.index');
+        $value = system_setting::where('state',1)->orderBy('id','DESC')->take(1)->first();
+        return view('settings.modals.index',compact('value'));
     }
     public function modals_update(Request $request)
     {
-        return $request;
+        $id = system_setting::find($request->current);
+        $id->update([
+            'messege_intro' => $request->messege_intro ? $request->messege_intro : 0,
+            'employee_month' => $request->employee_month ? $request->employee_month : 0,
+            'birthday' => $request->birthday ? $request->birthday : 0,
+            'active_24_7' => $request->active_24_7 ? $request->active_24_7 : 0,
+            'test_intro' => $request->test_intro ? $request->test_intro : 0
+        ]);
+        return redirect()->back()->with('success' ,'Se guardaron los cambios correctamente');
     }
     public function empleyee_month()
     {
-        $employees = EmployeeMonth::get();
+        $employees = EmployeeMonth::orderBy('month','DESC')->get();
         $users = User::where('state',1)->get();
         return view('settings.empleyee_month.index',compact('employees','users'));
     }
@@ -353,5 +362,11 @@ class SettingsController extends Controller
         }
 
         return redirect()->route('setting_empleyee_month')->with('success','Se actualizo y publico el empleado del mes corectamente');
+    }
+
+    public function empleyee_month_delete(EmployeeMonth $id)
+    {
+        $id->delete();
+        return redirect()->route('setting_empleyee_month')->with('success','Se eliminado el empleado del mes corectamente');
     }
 }

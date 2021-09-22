@@ -4,6 +4,7 @@ namespace App\Http\Controllers\projects\inventory;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\project\Mintic\inventory\EquimentDetail;
 use App\Models\project\Mintic\inventory\invMinticEquipment;
 
 class EquipmentController extends Controller
@@ -36,7 +37,8 @@ class EquipmentController extends Controller
      */
     public function create()
     {
-        return view('projects.inventory.equipment.create');
+        $equipment_deatils = EquimentDetail::get();
+        return view('projects.inventory.equipment.create',compact('equipment_deatils'));
     }
 
     /**

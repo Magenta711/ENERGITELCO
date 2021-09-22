@@ -78,7 +78,7 @@
       <div class="box-body">
           <div class="row" id="exit">
             @foreach ($employees as $item)
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <span class="mailbox-attachment-icon has-img" id="icon">
                         <div id="type">
                             @if ($item->file)
@@ -91,7 +91,7 @@
                     <div class="mailbox-attachment-info">
                         <p class="mailbox-attachment-name"><i class="fa fa-paperclip"></i><span id="name">{{$item->user->name}} {{$item->month}}</span></p>
                         <span class="mailbox-attachment-size">
-                            <span id="size">{{$item->file->size}}</span>
+                            <span id="size">{{$item->file ? $item->file->size : ''}}</span>
                             <button class="btn btn-default btn-xs pull-right dropdown-toggle" type="button" id="optionsForm_{{$item->id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button>
                             <div class="dropdown-menu option-form-menu" aria-labelledby="optionsForm_{{$item->id}}">
                                 <ul class="menu">
@@ -164,7 +164,7 @@
                 <div class="modal fade" id="modal_delete_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
-                            <form action="{{route('setting_empleyee_month_store')}}" method="POST">
+                            <form action="{{route('setting_empleyee_month_delete',$item->id)}}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <div class="modal-header">

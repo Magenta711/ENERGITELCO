@@ -33,6 +33,17 @@
                         </div>
                         <div class="col-md-4 col-xs-6">
                             <div class="form-group">
+                                <label for="serial">Referencia</label>
+                                <select name="" id="" class="form-control select2">
+                                    <option disabled selected></option>
+                                    @foreach ($equipment_deatils as $item)
+                                        <option value="">{{$item->sap}} - {{$item->name}} - {{$item->model_id}} {{$item->part_id}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-xs-6">
+                            <div class="form-group">
                                 <label for="item">Item</label>
                                 <input type="text" class="form-control" name="item" id="item" value="{{old('item')}}">
                             </div>

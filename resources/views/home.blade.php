@@ -626,6 +626,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+        
         $(document).ready(function() {
             // var calendar = $('#calendar').fullCalendar({
             //     editable: true,
@@ -642,6 +643,7 @@
             //     selectHelper: true,
             // });
         });
+        @if ($system->messege_intro)
         let text_message = $('#menssage_user').text();
         Swal.fire({
             title: 'Bienvenido, {{ auth()->user()->name }}',
@@ -649,9 +651,11 @@
             width: 600,
             icon: 'info',
         }).then((value) => {
+        @endif
+            @if ($system->employee_month)
             Swal.fire({
                 
-                html: '<h1 style="font-size: 16pt;color:#0080ff;">RECONOCIMIENTO AL EMPLEADO DEL MES</h1><p style="font-size: 14pt;color:#252525">"No es lo que sabes, es lo que haces con lo que sabes"</p><div style="display: flex;">    <div style="width:40%">        @php            $i = 3;            $j = 1;        @endphp        @foreach($months as $key => $month)            @if($i % 3 == 0)                <div style="display: flex;width:100%">            @endif                <div style="border: 1px solid #000000;width: 33.3%">                    <p>{{$month}}</p>                    @foreach($employee_months as $employee )                        @if (intval(explode("-",$employee->month)[1]) == ($key + 1))                            @if ($employee->file)                                <img src="storage/avatars/{{$employee->file->name}}" width="100%">                            @else                                <img src="img/{{$employee->user->foto}}" width="100%">                            @endif                            <p class="text-center">{{$employee->user->name}}</p>                        @else                            <img src="img/anonimus.png" width="100%">                        @endif                    @endforeach                </div>            @if($j % 3 == 0)                </div>            @endif            @php                $i++;                $j++;            @endphp        @endforeach    </div>    <div  style="width:60%"><p style="font-size: 12pt">Comenzaremos de nuevo este año, con el programa y la motivación para que seas el empleado del mes.</p><p style="font-size: 12pt">Te invitamos a que leas y te enteres de nuestros valores corporativos que encuentran y lo apliques en tu vida laboral diaria.</p><p style="font-size: 12pt">Los valores son.</p>        <ul style="font-size: 12pt;text-align:left">            <li>Honestidad</li>            <li>Saber seguir instrucciones</li>            <li>Estar de lado de la empresa (Lealtad)</li>            <li>Compromiso</li>            <li>Desarrollo humano</li>            <li>Respeto</li>        </ul>        <p style="font-size: 14pt;color:#252525">¡Anímate a ser el mejor compañero y colaborador del mes!</p>    </div></div><p><small style="font-size: 9pt">ENERGITELCO S.A.S.</small></p>',
+                html: '<h1 style="font-size: 16pt;color:#0080ff;">RECONOCIMIENTO AL EMPLEADO DEL MES</h1><p style="font-size: 14pt;color:#252525">"No es lo que sabes, es lo que haces con lo que sabes"</p><div style="display: flex;">    <div style="width:40%">        @php            $i = 3;            $j = 1;        @endphp        @foreach($months as $key => $month)            @php                $good = false;            @endphp            @if($i % 3 == 0)                <div style="display: flex;width:100%">            @endif                <div style="border: 1px solid #000000;width: 33.3%">                    <p>{{$month}}</p>                    @foreach($employee_months as $employee )                        @if (intval(explode("-",$employee->month)[1]) == ($key + 1))                            @if ($employee->file)                                <img src="storage/avatars/{{$employee->file->name}}" width="100%">                            @else                                <img src="img/{{$employee->user->foto}}" width="100%">                            @endif                            <p class="text-center">{{$employee->user->name}}</p>                            @php                                $good = true;                            @endphp                        @endif                    @endforeach            @if (!$good)                <img src="img/anonimus.png" width="100%">            @endif                </div>            @if($j % 3 == 0)                </div>            @endif            @php                $i++;                $j++;            @endphp        @endforeach    </div>    <div  style="width:60%"><p style="font-size: 12pt">Comenzaremos de nuevo este año, con el programa y la motivación para que seas el empleado del mes.</p><p style="font-size: 12pt">Te invitamos a que leas y te enteres de nuestros valores corporativos que encuentran y lo apliques en tu vida laboral diaria.</p><p style="font-size: 12pt">Los valores son.</p>        <ul style="font-size: 12pt;text-align:left">            <li>Honestidad</li>            <li>Saber seguir instrucciones</li>            <li>Estar de lado de la empresa (Lealtad)</li>            <li>Compromiso</li>            <li>Desarrollo humano</li>            <li>Respeto</li>        </ul>        <p style="font-size: 14pt;color:#252525">¡Anímate a ser el mejor compañero y colaborador del mes!</p>    </div></div><p><small style="font-size: 9pt">ENERGITELCO S.A.S.</small></p>',
                 width: 1000,
                 showConfirmButton: false,
                 timer: 3000,
@@ -661,9 +665,20 @@
                     toast.addEventListener('mouseup', Swal.resumeTimer)
                 }
             }).then((val) => {
+            @endif
+                readyBirthDay = false;
+                @if ($system->birthday && $user_births && count($user_births) > 0)
+                    readyBirthDay = true;
+                    Swal.fire({
+                        html: '<div style="background-color: #323c41;width: 700px; height: 400px; position: absolute; top: 50%; left: 50%; margin: -200px 0 0 -350px; overflow: hidden; border-radius: 10px; box-shadow: 3px 3px 20px rgba(0, 0, 0, .5); text-align: center; background: url(https://energitelco.com/assets/img/as.jpg) no-repeat; background-size: 100% 100%" class="blog-card spring-fever"><div class="title-content" style="text-align: center;margin: 70px 0 0 0;position: absolute;z-index: 20;width: 100%;top: 0;left: 0;">  <h3 style="font-size: 20px;font-weight: 500;letter-spacing: 2px;color: #9CC9E3;font-family: "Roboto", sans-serif;margin-bottom: 0;">FELIZ CUMPLEAÑOS</h3>  <hr style="width: 50px;height: 3px;margin: 20px auto;border: 0;background: #D0BB57" />  <div class="intro" style="width: 170px;margin: 0 auto;color: #DCE3E7;font-family: "Droid Serif", serif;font-size: 13px;font-style: italic;line-height: 18px;">Los mejores deseos para esté día tan especial.</div></div><!-- /.title-content --><div class="card-info" style="width: 100%;position: absolute;bottom: 45px;left: 0;margin: 0 auto;padding: 0 50px;color: #DCE3E7;z-index: 20;"><div style="display: flex;justify-content: center;"> @foreach($user_births as $user_birth) <div style="width:20%;margin:0px 5px;max-height: 150px;height:auto"><img src="/img/{{$user_birth->foto}}" style="width:100%;border-radius: 8px;max-height: 88%;height: auto;"> <p>{{$user_birth->name}}</p></div> @endforeach </div> </div><!-- /.card-info --><div class="utility-info" style=" position: absolute;bottom: 0px;left: 0;z-index: 20;">  <ul class="utility-list" style="list-style-type: none;margin: 0 0 15px 20px;padding: 0;width: 100%;">    <li class="comments" style="margin: 0 15px 0 0;padding: 0 0 0 22px;  display: inline-block;  color: #DCE3E7;  font-family: "Roboto", sans-serif;">ENERGITELCO S.A.S.</li>    <li class="date" style="margin: 0 15px 0 0;padding: 0 0 0 22px;display: inline-block;color: #DCE3E7;  font-family: "Roboto", sans-serif;">{{now()->format("d.m.Y")}}</li>  </ul></div><!-- /.utility-info --><!-- overlays --><div class="gradient-overlay" style="background-image: -webkit-linear-gradient(rgba(0,0,0,0.00) 0%, rgba(0,0,0,.6) 21%);background-image: -moz-linear-gradient(rgba(0,0,0,0.00) 0%, rgba(0,0,0,.6) 21%);background-image: -o-linear-gradient(rgba(0,0,0,0.00) 0%, rgba(0,0,0,.6) 21%);background-image: linear-gradient(rgba(0,0,0,0.00) 0%, rgba(0,0,0,.6) 21%);width: 700px;height: 400px;position: absolute;top: 700px;left: 0;z-index: 15;"></div><div class="color-overlay" style="background: rgba(84,104,110,0.4);width: 700px; height: 400px;position: absolute;z-index: 10;top: 0;left: 0;transition: background .3s cubic-bezier(.33,.66,.66,1);"></div></div>',
+                        width: 600,
+                        showConfirmButton: false,
+                        // timer: 2500
+                    })
+                @endif
                 readyQuestion = false;
-                @if ($question)
-                    if (!{{$question->status}}){
+                @if ($question && $system->test_intro)
+                    if (!{{$question->status}} && !readyBirthDay){
                         readyQuestion = true;
                         const inputOptions = new Promise((resolve) => {
                             @php
@@ -695,7 +710,8 @@
                         });
                     }
                 @endif
-                if (!{{ auth()->user()->b24_7 }} && !readyQuestion) {
+                @if ($system->active_24_7)
+                if (!{{ auth()->user()->b24_7 }} && !readyQuestion && !readyBirthDay) {
                     const swalWithBootstrapButtons = Swal.mixin({
                         customClass: {
                             confirmButton: 'btn btn-primary',
@@ -728,8 +744,13 @@
                         }
                     })
                 }
+                @endif
+            @if ($system->employee_month)
             })
+            @endif
+        @if ($system->messege_intro)
         });
+        @endif
 
         // allowOutsideClick: false,
         $('#swal2-content').css('font-size', 14);

@@ -64,6 +64,10 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <p class="text-muted">Total de bonificaciones técnicas: <span id="total_bonus_technical_{{$item->id}}">{{number_format($item->total_bonus_technical)}}</span> con <span id="total_permit_work_{{$item->id}}">{{$item->total_work_permit}}</span> permisos de trabajo</p>
+                                                                <div class="form-group">
+                                                                    <label for="working_days">Días trabajados</label>
+                                                                    <p>{{$item->working_days}}</p>
+                                                                </div>
                                                                 <ul class="list-group">
                                                                     @if ($item->admin_bonus_check)
                                                                         <li class="list-group-item">

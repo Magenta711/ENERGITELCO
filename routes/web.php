@@ -330,8 +330,10 @@ Route::post('setting/system','SettingsController@system_store')->name('system_st
 Route::get('setting/messages','SettingsController@messages')->name('messages');
 Route::post('setting/messages','SettingsController@messages_store')->name('messages_store');
 Route::post('setting/upload','SettingsController@upload')->name('setting_files');
+
 Route::get('setting/modals','SettingsController@modals')->name('setting_modals');
 Route::post('setting/modals','SettingsController@modals_update')->name('setting_modals_update');
+
 Route::get('setting/empleyee_month','SettingsController@empleyee_month')->name('setting_empleyee_month');
 Route::post('setting/empleyee_month','SettingsController@empleyee_month_store')->name('setting_empleyee_month_store');
 Route::put('setting/empleyee_month/{id}','SettingsController@empleyee_month_update')->name('setting_empleyee_month_update');

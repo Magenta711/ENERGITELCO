@@ -5,6 +5,7 @@ namespace App\Http\Controllers\projects;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\InvUser;
+use App\Models\project\Mintic\inventory\EquimentDetail;
 use App\Models\project\Mintic\inventory\invMinticConsumable;
 use App\Models\project\Mintic\inventory\invMinticEquipment;
 use App\Models\project\Mintic\MinticConsumableImplement;

@@ -97,7 +97,7 @@
 @auth
         </div>
             <div class="box-footer">
-                @if ($form->with_attach)
+                @if ($id->with_attach)
                     <input type="hidden" name="name_require" value="{{auth()->user()->name}}">
                     <input type="hidden" name="cc_require" value="{{auth()->user()->cedula}}">
                     <input type="hidden" name="role_require" value="{{auth()->user()->position->name}}"> 
