@@ -146,6 +146,8 @@ Route::get('human_management/work_permits_notifications_medical_incapacity/show/
 Route::get('human_management/work_permits_notifications_medical_incapacity/download/{id}','human_management\workPermitNotificationsMedicalIncapacityController@download')->name('work_permits_notifications_medical_incapacity_download');
 Route::put('human_management/work_permits_notifications_medical_incapacity/{id}','human_management\workPermitNotificationsMedicalIncapacityController@approve')->name('work_permits_notifications_medical_incapacity_approve');
 Route::delete('human_management/work_permits_notifications_medical_incapacity/delete/{id}','human_management\workPermitNotificationsMedicalIncapacityController@delete')->name('work_permits_notifications_medical_incapacity_delete');
+Route::post('human_management/work_permits_notifications_medical_incapacity/plus/{id}','human_management\workPermitNotificationsMedicalIncapacityController@plus')->name('work_permits_notifications_medical_incapacity_plus');
+Route::post('human_management/work_permits_notifications_medical_incapacity/rest/{id}','human_management\workPermitNotificationsMedicalIncapacityController@rest')->name('work_permits_notifications_medical_incapacity_rest');
 
 //Payroll and overtime news report 
 Route::get('human_management/payroll_overtime_news_report','human_management\payrollOvertimeNewsReportController@index')->name('payroll_overtime_news_report');

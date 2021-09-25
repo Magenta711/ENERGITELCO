@@ -10,7 +10,7 @@
 </div>
 <div class="form-group input_form">
     <label for="from">Aquien dirige</label>
-    <input type="text" value="{{old('from') ?? 'A QUIEN INTERECE'}}" name="from" class="form-control" id="from">
+    <input type="text" value="{{old('from') ?? 'PENSIONES Y CESANTÍAS PROTECCION' }}" name="from" class="form-control" id="from">
 </div>
 <div class="form-group input_value">
     <label for="value">Valor</label>

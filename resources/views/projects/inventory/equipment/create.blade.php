@@ -33,22 +33,22 @@
                         </div>
                         <div class="col-md-4 col-xs-6">
                             <div class="form-group">
-                                <label for="serial">Referencia</label>
-                                <select name="" id="" class="form-control select2">
-                                    <option disabled selected></option>
+                                <label for="equip_id">Referencia</label>
+                                <select name="equip_id" id="equip_id" class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona el departamento" style="width: 100%;" data-select2-id="2" tabindex="-1" aria-hidden="true">
+                                    <option value="0">Otra</option>
                                     @foreach ($equipment_deatils as $item)
-                                        <option value="">{{$item->sap}} - {{$item->name}} - {{$item->model_id}} {{$item->part_id}}</option>
+                                        <option {{old('equip_id') == $item->id ? 'seleted' : ''}} value="{{$item->id}}">{{$item->sap}} - {{$item->name}} - {{$item->model_id}} - {{$item->part_id}} - {{$item->brand}}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-4 col-xs-6">
+                        <div class="col-md-4 col-xs-6 other_reference" {{old('equip_id') != 0 ? 'setyle=display:none' : '' }}>
                             <div class="form-group">
                                 <label for="item">Item</label>
                                 <input type="text" class="form-control" name="item" id="item" value="{{old('item')}}">
                             </div>
                         </div>
-                        <div class="col-md-4 col-xs-6">
+                        <div class="col-md-4 col-xs-6 other_reference" {{old('equip_id') != 0 ? 'setyle=display:none' : '' }}>
                             <div class="form-group">
                                 <label for="brand">Marca</label>
                                 <input type="text" class="form-control" name="brand" id="brand" value="{{old('brand')}}">
@@ -66,4 +66,22 @@
             </form>
         </div>
     </section>
+@endsection
+
+@section('css')
+    <link rel="stylesheet" href="{{asset("assets/$theme/bower_components/select2/dist/css/select2.min.css")}}">
+@endsection
+
+@section('js')
+    <script src="{{asset("assets/$theme/bower_components/select2/dist/js/select2.full.min.js")}}"></script>
+    <script>
+        $(".select2").select2();
+        $('#equip_id').change(function () {
+            if(this.value == 0){
+                $('.other_reference').show();
+            }else {
+                $('.other_reference').hide();
+            }
+        });
+    </script>
 @endsection

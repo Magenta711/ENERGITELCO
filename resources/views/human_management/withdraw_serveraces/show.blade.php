@@ -25,6 +25,10 @@
                 </div>
                     <div class="box-body">
                         <div class="form-group">
+                            <label for="user_id">Funcionario</label>
+                            <p>{{$id->responsableAcargo->name}}</p>
+                        </div>
+                        <div class="form-group">
                             <label for="reason">Motivo</label>
                             <p>
                                 @switch($id->reason)
@@ -46,11 +50,19 @@
                             </p>
                         </div>
                         <div class="form-group">
-                            <label for="value">Valor</label>
+                            <label for="from">Aquien dirige</label>
                             @if ($id->estado == 'Sin aprobar' && auth()->user()->hasPermissionTo('Aprobar retiro de cesantías'))
                                 <form id="approval_work" action="{{ route('request_withdraw_severance_approve',$id->id) }}" method="POST">
                                     @csrf
                                     @method('PUT')
+                                <input type="text" value="{{$id->from}}" name="from" class="form-control" id="from">
+                            @else
+                                <p>{{$id->form}}</p>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label for="value">Valor</label>
+                            @if ($id->estado == 'Sin aprobar' && auth()->user()->hasPermissionTo('Aprobar retiro de cesantías'))
                                     <input type="hidden" name="status" value="Aprobado">
                                     @if ($id->reason == 'carta laboral')
                                         <input type="number" value="{{$id->responsableAcargo->register && $id->responsableAcargo->register->hasContract() ? $id->responsableAcargo->register->hasContract()->salary : ''}}" name="layoffs" class="form-control" id="value">

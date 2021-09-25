@@ -209,7 +209,7 @@ class requestWithdrawSeveranceController extends Controller
             $date = ['day' => $day,'month' => $meses[($month -1)],'year' => $year];
             if ($id->reason == 'carta laboral') {
                 $salary_text = $this->numberToText($request->layoffs);
-                $document = 'work_10/'.$time.'_CARTA_CARTA_LABORAL.pdf';
+                $document = $time.'_CARTA_CARTA_LABORAL.pdf';
                 $pdf4 = PDF::loadView('pdf.working',compact('request','date','id','salary_text','document'));
                 $pdf4->save(storage_path('app/public/files/work_10/') .$time.'_CARTA_CARTA_LABORAL.pdf');
             }else {
@@ -230,7 +230,7 @@ class requestWithdrawSeveranceController extends Controller
                 'name' => $id->reason == 'carta laboral' ? $time.'_CARTA_CARTA_LABORAL.pdf' : $time.'_CARTA_RETIRO_CESANTÍAS.pdf',
                 'description' => 'Carta laboral de '.$id->responsableAcargo->name,
                 'size' => '44 KB',
-                'url' => 'public/files/work_10/'.$time.'_CARTA_CARTA_LABORAL.pdf',
+                'url' => 'storage/files/work_10/'.$time.'_CARTA_CARTA_LABORAL.pdf',
                 'type' => 'pdf',
                 'state' => 1
             ]);
@@ -239,7 +239,7 @@ class requestWithdrawSeveranceController extends Controller
                 'name' => $id->reason == 'carta laboral' ? $time.'_CARTA_CARTA_LABORAL.pdf' : $time.'_CARTA_RETIRO_CESANTÍAS.pdf',
                 'description' => 'Carta laboral de '.$id->responsableAcargo->name,
                 'size' => '44 KB',
-                'url' => 'public/files/work_10/'.$time.'_CARTA_CARTA_LABORAL.pdf',
+                'url' => 'storage/files/work_10/'.$time.'_CARTA_CARTA_LABORAL.pdf',
                 'type' => 'pdf',
                 'state' => 1
             ]);

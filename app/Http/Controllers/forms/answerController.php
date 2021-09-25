@@ -28,7 +28,6 @@ class answerController extends Controller
 
     public function create($form,string $email = null)
     {
-        return $email;
         $id = form::where('token',$form)->first();
         if ($id) {
             if ($id->from_to_auth) {

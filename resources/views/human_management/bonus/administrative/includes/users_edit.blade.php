@@ -159,7 +159,7 @@
                                                 @endphp
                                                 <tr>
                                                     <td>
-                                                        <input type="checkbox" class="discount_check discount_user_{{$item->user_id}}" name="pay_credit[{{$item->user_id}}][{{$item->user_id}}]" id="pay_credit_{{$credit->credit_id}}_{{$item->user_id}}" value="{{$credit->credit_id}}" {{$credit->status == 1 ? 'checked' : ''}}>
+                                                        <input type="checkbox" class="discount_check discount_user_{{$item->user_id}}" name="pay_credit[{{$item->user_id}}][{{$credit->credit_id}}]" id="pay_credit_{{$credit->credit_id}}_{{$item->user_id}}" value="{{$credit->credit_id}}" {{$credit->status == 1 ? 'checked' : ''}}>
                                                     </td>
                                                     <td>
                                                         ${{ number_format($credit->value,2) }}
@@ -198,7 +198,7 @@
                                             <div class="col-md-4 block_bonus_discount_{{$item->user_id}}" {{$item->total_discount == 0 ? 'style="display: none"' : ''}}>
                                                 <h4>Total de descuentos</h4>
                                                 <input type="hidden" name="total_discount[{{$item->user_id}}]" value="{{$item->total_discount}}" id="total_discount_{{$item->user_id}}" class="total_discount">
-                                                <span id="total_discount_text_{{ $item->user_id }}">${{number_format($item->total_discount)}}</span>
+                                                <span id="total_discount_text_{{ $item->user_id }}">${{number_format($item->total_discount,2,',','.')}}</span>
                                             </div>
                                             <div class="col-md-4 block_bonus_administrative_{{$item->user_id}}" {!! !$item->admin_bonus_check ? 'style="display: none"' : ''!!}>
                                                 <h4>Total bonificación administrativa</h4>

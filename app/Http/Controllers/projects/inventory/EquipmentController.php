@@ -50,10 +50,20 @@ class EquipmentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'serial' => ['required','unique:inv_mintic_equipment,serial'],
-            'item' => ['required'],
-            'brand' => ['required'],
+            'serial' => ['required']
         ]);
+        if ($request->equip_id != 0) {
+            $equip = EquimentDetail::find($request->equip_id);
+            $equip->update([
+                'tickets' => $equip->tickets + 1,
+                'stock' => $equip->stock + 1,
+            ]);
+            $request['item'] = $equip->name;
+            $request['brand'] = $equip->brand;
+        }else {
+            $request['equip_id'] = null;
+        }
+        
         $request['status'] = 1;
         invMinticEquipment::create($request->all());
         return redirect()->route('mintic_inventory_equipment')->with('success','Se ha creado el equipo correctamente');

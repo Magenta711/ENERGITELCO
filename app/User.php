@@ -20,6 +20,7 @@ use App\Models\attention_call\AttentionCall;
 use App\Models\bonus24;
 use App\Models\bonus\MinorBoxUser;
 use App\Models\ccjl\ccjl_rents;
+use App\Models\hasPermissionWork;
 use App\Models\project\route\Routes;
 use App\Models\Work8Users;
 use App\Models\InvUser;
@@ -171,5 +172,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function signature_curriculum_num()
     {
         return signature::where('signatures_type','App\Models\document')->where('user_id',$this->id)->count();
+    }
+
+    public function hasPermisisonWork()
+    {
+        return $this->hasOne(hasPermissionWork::class,'user_id','id');
     }
 }
