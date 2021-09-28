@@ -907,6 +907,15 @@ Route::put('logistics_infrastructure/drivers/{id}','logistics_infrastructure\dri
 Route::get('logistics_infrastructure/drivers/download/{id}','logistics_infrastructure\driversController@download')->name('drivers_download');
 Route::delete('logistics_infrastructure/drivers/{id}','logistics_infrastructure\driversController@destroy')->name('drivers_delete');
 
+Route::get('logistics_infrastructure/traffic_accident','logistics_infrastructure\traffic_accidentController@index')->name('traffic_accident');
+Route::get('logistics_infrastructure/traffic_accident/create','logistics_infrastructure\traffic_accidentController@create')->name('traffic_accident_create');
+Route::post('logistics_infrastructure/traffic_accident','logistics_infrastructure\traffic_accidentController@store')->name('traffic_accident_store');
+Route::get('logistics_infrastructure/traffic_accident/show/{id}','logistics_infrastructure\traffic_accidentController@show')->name('traffic_accident_show');
+Route::get('logistics_infrastructure/traffic_accident/{id}/edit','logistics_infrastructure\traffic_accidentController@edit')->name('traffic_accident_edit');
+Route::put('logistics_infrastructure/traffic_accident/{id}','logistics_infrastructure\traffic_accidentController@update')->name('traffic_accident_update');
+Route::get('logistics_infrastructure/traffic_accident/download/{id}','logistics_infrastructure\traffic_accidentController@download')->name('traffic_accident_download');
+Route::delete('logistics_infrastructure/traffic_accident/{id}','logistics_infrastructure\traffic_accidentController@destroy')->name('traffic_accident_delete');
+
 Route::get('human_management/premium','human_management\premiumController@index')->name('premium');
 Route::get('human_management/premium/create','human_management\premiumController@create')->name('premium_create');
 Route::post('human_management/premium','human_management\premiumController@store')->name('premium_store');

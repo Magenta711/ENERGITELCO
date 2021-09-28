@@ -54,7 +54,6 @@
                                     )
                                         <a href="{{route('request_withdraw_severance_show',$withdraw_serverace->id)}}" class="btn btn-sm btn-success">Ver</a>
                                     @endif
-                                   
                                     @can('Eliminar solicitud de retiro de cesantías')
                                         <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete_{{$withdraw_serverace->id}}">Eliminar</button>
                                         <div class="modal fade" id="delete_{{$withdraw_serverace->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">

@@ -620,6 +620,7 @@
                     <li class="{{ activeMenu('logistics_infrastructure/checklist_computer_maintenance*') }}"><a class="btn-send" href="{{route('checklist_computer_maintenance')}}"><i class="fa fa-laptop-medical"></i> LISTA DE VERIFICACIÓN DE COMPUTADORES</a></li>
                 @endif
                 <li class="{{ activeMenu('logistics_infrastructure/drivers*') }}"><a class="btn-send" href="{{ route('drivers') }}"><i class="fa fa-car"></i> DOCUMENTACIÓN DE CONDUCTORES</a></li>
+                <li class="{{ activeMenu('logistics_infrastructure/traffic_accident*') }}"><a class="btn-send" href="{{ route('traffic_accident') }}"><i class="fa fa-car"></i> ACCIDENTES DE TRANCITO</a></li>
                 @if (
                   auth()->user()->hasPermissionTo('Lista de computadores del inventario') ||
                   auth()->user()->hasPermissionTo('Crear computadores al inventario') ||

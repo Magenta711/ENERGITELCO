@@ -327,8 +327,6 @@ class SettingsController extends Controller
                 'type' => $file->getClientOriginalExtension(),
                 'state' => 1
             ]);
-        }else {
-
         }
 
         return redirect()->route('setting_empleyee_month')->with('success','Se guardo y publico el empleado del mes corectamente');
@@ -341,12 +339,11 @@ class SettingsController extends Controller
             'month' => $request->month
         ]);
 
+        if ($id->file) {
+            Storage::delete('public/avatars'.$id->file->name);
+            $id->file()->delete();
+        }
         if ($request->hasFile('file')){
-            if ($id->file) {
-                Storage::delete('public/avatars'.$id->file->name);
-                $id->file()->delete();
-            }
-
             $file = $request->file('file');
             $name = time().Str::random(5).'.'.$file->getClientOriginalExtension();
             $size = $file->getClientSize() / 1000;

@@ -19,56 +19,7 @@
       <h3 class="box-title">Empleado del mes</h3>
         <div class="box-tools">
             <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal_create">Crear</button>
-            <div class="modal fade" id="modal_create" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <form action="{{route('setting_empleyee_month_store')}}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="modal-title" id="exampleModalLongTitle">Crear empleado del mes</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="month">Mes</label>
-                                            <input type="month" name="month" id="month" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="user_id">Secciona el funcionario</label>
-                                            <select name="user_id" id="user_id" class="form-control user_select">
-                                                <option disabled selected></option>
-                                                @foreach ($users as $item)
-                                                    <option value="{{$item->id}}" file_data="{{$item->foto}}">{{$item->cedula}} {{$item->name}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="file_create">Avatar</label><br>
-                                            <div class="text-center mb-3" style="padding: 10px; width: 100%">
-                                                <img src="" alt="" width="40%" id="preimg_create">
-                                            </div>
-                                            <label for="file_create" class="form-control text-center"><i class="fa fa-upload"></i></label>
-                                            <input type="file" name="file" id="file_create" class="hide">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-sm btn-secondary pull-left" data-dismiss="modal">Cancelar</button>
-                                <button type="submit" class="btn btn-sm btn-primary">Crear</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+            @include('settings.empleyee_month.include.modals.create')
         </div>
     </div>
     <!-- /.box-header -->
@@ -106,61 +57,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="modal fade" id="modal_edit_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <form action="{{route('setting_empleyee_month_update',$item->id)}}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                @method('PUT')
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    <h4 class="modal-title" id="exampleModalLongTitle">Editar empleado del mes</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="month">Mes</label>
-                                                <input type="month" name="month" id="month" class="form-control" value="{{$item->month}}">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="user_id">Secciona el funcionario</label>
-                                                <select name="user_id" id="user_id" class="form-control user_select">
-                                                    <option disabled selected></option>
-                                                    @foreach ($users as $user)
-                                                        <option value="{{$user->id}}" {{ $item->user_id == $user->id ? 'selected' : '' }} file_data="{{$user->foto}}">{{$user->cedula}} {{$user->name}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="file_create">Avatar</label><br>
-                                                <div class="text-center mb-3" style="padding: 10px; width: 100%">
-                                                    @if ($item->file)
-                                                        <img src="/storage/avatars/{{$item->file->name}}" width="40%" alt="Attachment">
-                                                    @else
-                                                        <img src="/img/{{$item->user->foto}}" width="40%" alt="Attachment">
-                                                    @endif
-                                                </div>
-                                                <label for="file_create" class="form-control text-center"><i class="fa fa-upload"></i></label>
-                                                <input type="file" name="file" id="file_create" class="hide">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-sm btn-secondary pull-left" data-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn btn-sm btn-primary">Guardar</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                @include('settings.empleyee_month.include.modals.edit')
                 <div class="modal fade" id="modal_delete_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
@@ -204,18 +101,38 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    $('.user_select').change(function () {
-        // readImage(this);
-        // $($('#'+this.id).parent().children('label')).addClass('text-aqua');
-        let ele = $(this).children('option[value="' + this.value + '"]');
-        $('#preimg_create').attr('src', '/img/'+ $(ele[0]).attr('file_data') );
+    $(document).ready(function() {
+        $('.user_select').change(function () {
+            let ele = $(this).children('option[value="' + this.value + '"]');
+            $('#preimg_create').attr('src', '/img/'+ $(ele[0]).attr('file_data') );
+        });
+        $('.user_select_edit').change(function () {
+            let id = this.id.split('_')[this.id.split('_').length - 1];
+            let ele = $(this).children('option[value="' + this.value + '"]');
+            $('#preimg_edit_'+id).attr('src', '/img/'+ $(ele[0]).attr('file_data') );
+        });
+
+        $('#file_create').change(function () {
+            $($('#'+this.id).parent().children('label')).addClass('text-aqua');
+            readImage(this);
+        });
+        $('.file-edit').change(function () {
+            let id = this.id.split('_')[this.id.split('_').length - 1];
+            $($('#'+this.id).parent().children('label')).addClass('text-aqua');
+            readImageEdit(this,id);
+        });
     });
 
-    $('#file_create').change(function () {
-        $($('#'+this.id).parent().children('label')).addClass('text-aqua');
-        readImage(this);
-    });
-
+    function readImageEdit (input,id) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function (e) {
+                $('#preimg_edit_'+id).attr('src', e.target.result); // Renderizamos la imagen
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
     function readImage (input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();

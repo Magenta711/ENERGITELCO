@@ -65,6 +65,10 @@
                                     <th>Placa</th>
                                     <th>Marca</th>
                                     <th>Tipo</th>
+                                    <th>FV Soat</th>
+                                    <th>FV Técnico mecánica</th>
+                                    <th>FV Botiquin</th>
+                                    <th>FV Extintor</th>
                                     <th>Estado</th>
                                     <th>Acciones</th>
                                 </tr>
@@ -76,6 +80,10 @@
                                     <td>{{$item->plate}}</td>
                                     <td>{{$item->brand}}</td>
                                     <td>{{$item->type}}</td>
+                                    <td>{{$item->soat_date}}</td>
+                                    <td>{{$item->technomechanical_date}}</td>
+                                    <td>{{$item->first_aid_kit_date}}</td>
+                                    <td>{{$item->date_extinguisher}}</td>
                                     <td>
                                         {{ ($item->status == '1') ? 'Bueno' : '' }}
                                         {{ ($item->status == '2') ? 'Pendientes' : '' }}

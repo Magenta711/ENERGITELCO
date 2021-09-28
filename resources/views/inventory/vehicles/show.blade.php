@@ -249,7 +249,7 @@
                                     @endif
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="technomechanicals">Tecno mecánica</label>
+                                    <label for="technomechanicals">Técnico mecánica</label>
                                     @if ($id->technomechanical)
                                             <p>Fecha vencimiento <small class="label {{ $id->technomechanical_date < now() ? 'bg-red' : 'bg-blue' }}">{{ $id->technomechanical_date ?? 'xxxx-xx-xx' }}</small></p>
                                         <div class="row">

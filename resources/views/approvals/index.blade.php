@@ -385,7 +385,7 @@
                                                 <td>{{ $trabajo->created_at }}</td>
                                                 <td>
                                                     @can('Consultar solicitud de permisos laborales o notificaciones de incapacidad médica')
-                                                        <a href="{{route('request_withdraw_severance_show',$trabajo->id)}}" class="btn btn-sm btn-success">Ver</a>
+                                                        <a href="{{route('work_permits_notifications_medical_incapacity_show',$trabajo->id)}}" class="btn btn-sm btn-success">Ver</a>
                                                     @endcan
                                                 </td>
                                             </tr>
@@ -453,7 +453,7 @@
                                                 <td>{{ $trabajo->created_at }}</td>
                                                 <td>
                                                     @can('Consultar retiro de cesantías')
-                                                        <a href="{{route('work_permits_notifications_medical_incapacity_show',$trabajo->id)}}" class="btn btn-sm btn-success">Ver</a>
+                                                        <a href="{{route('request_withdraw_severance_show',$trabajo->id)}}" class="btn btn-sm btn-success">Ver</a>
                                                     @endcan
                                                 </td>
                                             </tr>
