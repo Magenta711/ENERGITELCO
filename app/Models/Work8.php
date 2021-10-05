@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Work8 extends Model
 {
     protected $table = "work8";
-    protected $fillable = ['responsable','coordinador','value_assistance','start_date','end_date','date','total_devengado','total_assistance','total_health','total_pension','total_discount','total_pay','total_employees','commentary','estado'];
+    protected $fillable = ['responsable','coordinador','value_assistance','start_date','end_date','date','total_devengado','total_assistance','total_health','total_pension','total_discount','total_pay','total_employees','commentary','status'];
     protected $guarder = ['id'];
 
     public function coordinadorAcargo()

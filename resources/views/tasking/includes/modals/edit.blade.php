@@ -80,6 +80,10 @@
                                 <input type="text" value="{{$item->long}}" name="long" id="long-edit-{{$item->id}}" class="form-control">
                             </div>
                             <div class="col-md-4">
+                                <label for="id-beneficiario-edit-{{$item->id}}">Id beneficiario</label>
+                                <input type="text" value="{{$item->id_beneficiario}}" name="id_beneficiario" id="id-beneficiario-edit-{{$item->id}}" class="form-control">
+                            </div>
+                            <div class="col-md-4">
                                 <label for="vehicles-edit-{{$item->id}}">Vehículos</label>
                                 @php
                                     $valuesVehicles = array();

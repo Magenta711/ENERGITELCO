@@ -96,11 +96,13 @@ $(document).ready(function() {
             $('#station_name').val('');
             $('#lat').val('');
             $('#long').val('');
+            $('#id-beneficiario').val('');
         }else {
             $('.station-other').hide();
             $('#station_name').val('');
             $('#lat').val('');
             $('#long').val('');
+            $('#id-beneficiario').val('');
         }
     });
 
@@ -345,6 +347,8 @@ function selectLocation(value,response) {
             $('#station_name').val(element.nombre_sede);
             $('#lat').val(element.latitud);
             $('#long').val(element.longitud);
+            $('#id-beneficiario').parent().show();
+            $('#id-beneficiario').val(element.id_beneficiario);
         }
     });
     response.EB.forEach(element => {
@@ -352,6 +356,7 @@ function selectLocation(value,response) {
             $('#station_name').val(element.sitio);
             $('#lat').val(element.latitud);
             $('#long').val(element.longitud);
+            $('#id-beneficiario').parent().hide();
         }
     });
 }
@@ -362,6 +367,8 @@ function selectEditLocation(id,value,response) {
             $('#station_name-edit-'+id).val(element.nombre_sede);
             $('#lat-edit-'+id).val(element.latitud);
             $('#long-edit-'+id).val(element.longitud);
+            $('#id-beneficiario-edit-'+id).parent().show();
+            $('#id-beneficiario-edit-'+id).val(element.id_beneficiario);
         }
     });
     response.EB.forEach(element => {
@@ -369,6 +376,7 @@ function selectEditLocation(id,value,response) {
             $('#station_name-edit-'+id).val(element.sitio);
             $('#lat-edit-'+id).val(element.latitud);
             $('#long-edit-'+id).val(element.longitud);
+            $('#id-beneficiario-edit-'+id).parent().hide();
         }
     });
 }

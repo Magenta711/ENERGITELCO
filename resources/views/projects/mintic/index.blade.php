@@ -27,6 +27,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>Id beneficiario</th>
                                 <th>Nombre del proyecto</th>
                                 <th>Lugar</th>
                                 <th>Fecha modificación</th>
@@ -37,6 +38,7 @@
                             @foreach ($mintics as $item)
                                 <tr>
                                     <td>{{ $item->id }}</td>
+                                    <td>{{ $item->code }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->dep . ' - ' . $item->mun }}</td>
                                     <td>{{ $item->updated_at }}</td>
