@@ -847,6 +847,7 @@ Route::get('answers/guest/ready','forms\answerController@ready')->name("answers_
 Route::delete('answers/{id}','forms\answerController@delete')->name("answers_delete");
 Route::get('answers/login/{form}','forms\answerController@register_email')->name("answers_email");
 Route::post('answers/login/{form}','forms\answerController@register_email_store')->name("answers_email_store");
+Route::put('answers/calification/{id}','forms\answerController@calification')->name("answers_calification");
 
 Route::get('human_management/assistance','human_management\assistanceController@index')->name('assistance');
 Route::get('human_management/assistance/create','human_management\assistanceController@create')->name('assistance_create');
@@ -916,6 +917,15 @@ Route::put('logistics_infrastructure/traffic_accident/{id}','logistics_infrastru
 Route::get('logistics_infrastructure/traffic_accident/download/{id}','logistics_infrastructure\traffic_accidentController@download')->name('traffic_accident_download');
 Route::delete('logistics_infrastructure/traffic_accident/{id}','logistics_infrastructure\traffic_accidentController@destroy')->name('traffic_accident_delete');
 
+Route::get('logistics_infrastructure/vehicle_documentation','logistics_infrastructure\vehicleDocumentationController@index')->name('vehicle_documentation');
+Route::get('logistics_infrastructure/vehicle_documentation/create','logistics_infrastructure\vehicleDocumentationController@create')->name('vehicle_documentation_create');
+Route::post('logistics_infrastructure/vehicle_documentation','logistics_infrastructure\vehicleDocumentationController@store')->name('vehicle_documentation_store');
+Route::get('logistics_infrastructure/vehicle_documentation/show/{id}','logistics_infrastructure\vehicleDocumentationController@show')->name('vehicle_documentation_show');
+Route::get('logistics_infrastructure/vehicle_documentation/{id}/edit','logistics_infrastructure\vehicleDocumentationController@edit')->name('vehicle_documentation_edit');
+Route::put('logistics_infrastructure/vehicle_documentation/{id}','logistics_infrastructure\vehicleDocumentationController@update')->name('vehicle_documentation_update');
+Route::get('logistics_infrastructure/vehicle_documentation/download/{id}','logistics_infrastructure\vehicleDocumentationController@download')->name('vehicle_documentation_download');
+Route::delete('logistics_infrastructure/vehicle_documentation/{id}','logistics_infrastructure\vehicleDocumentationController@destroy')->name('vehicle_documentation_delete');
+
 Route::get('human_management/premium','human_management\premiumController@index')->name('premium');
 Route::get('human_management/premium/create','human_management\premiumController@create')->name('premium_create');
 Route::post('human_management/premium','human_management\premiumController@store')->name('premium_store');
@@ -926,3 +936,5 @@ Route::get('human_management/premium/download/{id}','human_management\premiumCon
 Route::get('human_management/premium/export/{id}','human_management\premiumController@export')->name('premium_export');
 Route::post('human_management/premium/{id}','human_management\premiumController@approve')->name('premium_approve');
 Route::delete('human_management/premium/{id}','human_management\premiumController@destroy')->name('premium_delete');
+
+Route::get('get_data_json_eb','homeController@data_json')->name('data_json_eb');

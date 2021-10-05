@@ -282,4 +282,16 @@ class answerController extends Controller
     {
         return redirect()->route('answers_create',['form' => $form,'email' => $email]);
     }
+    public function calification(Request $request,Order $id)
+    {
+        $id->update([
+            'qualification' => $request->qualification
+        ]);
+        foreach ($id->answers as $answer){
+            Answer::find($answer->id)->update([
+                'calification' => isset($request->qualification_answer[$answer->question_id]) ? $request->qualification_answer[$answer->question_id] : 0
+            ]);
+        }
+        return redirect()->back()->with('success','Se ha calificado la respuesta correctamente');
+    }
 }

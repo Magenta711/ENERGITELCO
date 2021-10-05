@@ -272,13 +272,13 @@ class taskingController extends Controller
                     $detail = taskDetailConsumable::where('inventaryble_type','App\Models\project\Mintic\inventory\invMinticConsumable')->where('inventaryble_id', $value)->where('task_id',$id->id)->first();
                     if ($detail) {
                         $detail->update([
-                            'preamount' => $request->amount[$value] + $detail->preamount
+                            'preamount' => $request->amount[$key] + $detail->preamount
                         ]);
                     }else {
                         $id->consumables()->create([
                             'inventaryble_type' => 'App\Models\project\Mintic\inventory\invMinticConsumable',
                             'inventaryble_id' => $value,
-                            'preamount' => $request->amount[$value],
+                            'preamount' => $request->amount[$key],
                             'amount' => 0,
                             'status' => 0
                         ]);

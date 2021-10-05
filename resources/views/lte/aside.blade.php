@@ -621,6 +621,7 @@
                 @endif
                 <li class="{{ activeMenu('logistics_infrastructure/drivers*') }}"><a class="btn-send" href="{{ route('drivers') }}"><i class="fa fa-car"></i> DOCUMENTACIÓN DE CONDUCTORES</a></li>
                 <li class="{{ activeMenu('logistics_infrastructure/traffic_accident*') }}"><a class="btn-send" href="{{ route('traffic_accident') }}"><i class="fa fa-car"></i> ACCIDENTES DE TRANCITO</a></li>
+                <li class="{{ activeMenu('logistics_infrastructure/vehicle_documentation*') }}"><a class="btn-send" href="{{ route('vehicle_documentation') }}"><i class="fa fa-car"></i> REGISTRO DE DOCUMENTACIÓN Y MANTENIMIENTO DE VEHÍCULOS</a></li>
                 @if (
                   auth()->user()->hasPermissionTo('Lista de computadores del inventario') ||
                   auth()->user()->hasPermissionTo('Crear computadores al inventario') ||

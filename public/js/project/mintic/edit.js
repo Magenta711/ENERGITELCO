@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    const cd = '/json/ec01wxyb1-4adc2.json';
+    const cd = '/get_data_json_eb';
 
     const request = new XMLHttpRequest();
 
@@ -39,10 +39,10 @@ function selectEditDep(response) {
     let value = $("#department").attr('value');
     data = [];
     response.CD.forEach(element => {
-        selected = element.DEPARTAMENTO.toUpperCase() == value ? true : false;
+        selected = element.departamento.toUpperCase() == value ? true : false;
         data.push({
-            id: element.DEPARTAMENTO.toUpperCase(),
-            text: element.DEPARTAMENTO.toUpperCase(),
+            id: element.departamento.toUpperCase(),
+            text: element.departamento.toUpperCase(),
             selected: selected
         });
     });
@@ -64,11 +64,11 @@ function selectEditMun(value,response) {
     value2 =  $("#municipality").attr('value');
     data = [];
     response.CD.forEach(element => {
-        if (element.DEPARTAMENTO.toUpperCase() == value) {
-            selected = element.MUNICIPIOANM.toUpperCase() == value2 ? true : false;
+        if (element.departamento.toUpperCase() == value) {
+            selected = element.municipio.toUpperCase() == value2 ? true : false;
             data.push({
-                id: element.MUNICIPIOANM.toUpperCase(),
-                text: element.MUNICIPIOANM.toUpperCase(),
+                id: element.municipio.toUpperCase(),
+                text: element.municipio.toUpperCase(),
                 selected: selected
             });
         }
@@ -97,11 +97,11 @@ function selectEditEB(value,response) {
     value2 =  $("#eb").attr('value');
     data = [];
     response.CD.forEach(element => {
-        if (element.MUNICIPIOANM.toUpperCase() == value) {
+        if (element.municipio.toUpperCase() == value) {
             selected = element.Consecutivo_Sede == value2 ? true : false;
             data.push({
                 id: element.Consecutivo_Sede,
-                text: (element.INSTITUCIÓN_EDUCATIVA+' '+element.NOMBRE_SEDE).toUpperCase(),
+                text: (element.institucion_educativa+' - '+element.nombre_sede).toUpperCase(),
                 selected: selected
             });
         }
@@ -140,11 +140,11 @@ function selectEditEB(value,response) {
 function selectEditLocation(value,response) {
     response.CD.forEach(element => {
         if (element.Consecutivo_Sede == value) {
-            $('#station_name').val(element.NOMBRE_SEDE);
-            $('#lat').val(element.Latitud);
-            $('#long').val(element.LONGITUD);
-            $('#code').val(element.ID_BENEFICIARIO);
-            $('#population').val(element.CENTRO_POBLADO);
+            $('#station_name').val(element.nombre_sede);
+            $('#lat').val(element.latitud);
+            $('#long').val(element.longitud);
+            $('#code').val(element.id_beneficiario);
+            $('#population').val(element.centro_poblado);
         }
     });
 }

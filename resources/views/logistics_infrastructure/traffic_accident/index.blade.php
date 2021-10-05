@@ -2,19 +2,19 @@
 @section('content')
 <section class="content-header">
     <h1>
-        L-FR-18 CONTROL DE DOCUMENTACIÓN DE CONDUCTORES
+        CARACTERIZACIÓN DE ACCIDENTES DE TRÁNCITO
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
         <li><a href="#"> Logistica e infraestrutura</a></li>
-        <li class="active">Documentación de conductores</li>
+        <li class="active">Caracterización de accidentes de tráncito</li>
     </ol>
 </section>
 <section class="content">
     @include('includes.alerts')
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Lista de controles de documentos de conductores</h3>
+                <h3 class="box-title">Lista de caracterizaciones</h3>
                 <div class="box-tools">
                     <a href="{{route('traffic_accident_create')}}" class="btn btn-sm btn-success">Crear</a>
                 </div>

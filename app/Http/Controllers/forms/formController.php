@@ -55,6 +55,7 @@ class formController extends Controller
                             $acc_question++;
                         }
                     }
+                    $note = $request->note / $acc_question;
                 }else {
                     for ($i=0; $i < count($request->type); $i++) {
                         if ($request->type[$i] == 3) {
@@ -63,7 +64,6 @@ class formController extends Controller
                     }
                 }
             }
-            $note = $request->note / $acc_question;
         }
         $form = form::create([
             'name' => $request->name,
@@ -243,6 +243,7 @@ class formController extends Controller
                             $acc_question++;
                         }
                     }
+                    $note = $request->note / $acc_question;
                 }else {
                     for ($i=0; $i < count($request->type); $i++) {
                         if ($request->type[$i] == 3) {
@@ -251,7 +252,6 @@ class formController extends Controller
                     }
                 }
             }
-            $note = $request->note / $acc_question;
         }
         $id->update([
             'name' => $request->name,

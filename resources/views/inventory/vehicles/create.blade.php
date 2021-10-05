@@ -31,6 +31,7 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div class="form-group">
+                            <h4>Datos generales del vehículo</h4>
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="plate">Placa</label>
@@ -100,6 +101,14 @@
                                 <div class="col-md-6">
                                     <label for="spare_tire">¿Tiene llanta de repuesto?</label>
                                     <input type="text" class="form-control" id="spare_tire" name="spare_tire" value="{{ old('spare_tire') }}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="">Propietario</label>
+                                    <input type="text" name="" id="" class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="">Número de motor</label>
+                                    <input type="text" name="" id="" class="form-control">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="date_extinguisher">Fecha vencimiento de extintor</label>

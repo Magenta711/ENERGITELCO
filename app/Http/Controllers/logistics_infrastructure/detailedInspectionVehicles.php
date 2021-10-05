@@ -23,7 +23,7 @@ class detailedInspectionVehicles extends Controller
         $this->middleware('auth');
         $this->middleware('verified');
         $this->middleware('permission:Aprobar solicitud de Inspección detallada de vehículos|Consultar inspecciones detalladas de vehículos|Descargar PDF de inspecciones detalladas de vehículos|Digitar formulario de inspección detallada de vehículos|Eliminar formato de inspecciones detalladas de vehículos',['only' => ['index']]);
-        $this->middleware('permission:Consultar inspecciones detalladas de vehículos',['only' => ['show']]);
+        $this->middleware('permission:Consultar inspecciones detalladas de vehículos|Aprobar solicitud de Inspección detallada de vehículos',['only' => ['show']]);
         $this->middleware('permission:Descargar PDF de inspecciones detalladas de vehículos',['only' => ['download']]);
         $this->middleware('permission:Digitar formulario de inspección detallada de vehículos',['only' => ['create','store']]);
         $this->middleware('permission:Eliminar formato de inspecciones detalladas de vehículos',['only' => ['destroy']]);

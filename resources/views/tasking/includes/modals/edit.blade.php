@@ -20,7 +20,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="users-edit-{{$item->id}}">Funcionarios</label>
-                                <select name="users[]" id="users-edit-{{$item->id}}" class="select2 form-control custom-select" style="width: 100%; height:36px;">
+                                <select name="users[]" id="users-edit-{{$item->id}}" class="select2 form-control custom-select" style="width: 100%; height:36px;" multiple=""  data-placeholder="Selecciona un funcionario" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                     @foreach ($users as $user)
                                         <option id="option_user-edit-{{$item->id}}-{{$user->id}}" {{ selected($item->users,$user->id) ? 'selected' : '' }} data-select2-id="{{$user->id}}" value="{{$user->id}}">{{$user->name}}</option>
                                     @endforeach

@@ -20,6 +20,8 @@ use App\Models\LearnedLeassonsTest;
 use App\Models\LearnedLeassonsTestOption;
 use App\Models\LearnedLeassonsTestUsers;
 use App\Models\Provider;
+use App\Models\resource\cd;
+use App\Models\resource\eb;
 use App\Models\SuggestionsMailbox;
 use App\Models\system_setting;
 use App\Models\SystemMessages;
@@ -83,7 +85,7 @@ class HomeController extends Controller
         $trabajos1 = Work1::where('estado','!=','Sin aprobar')->where('estado','!=','No aprobado')->count();
         $sin_aprovar1 = Work1::where('estado','Sin aprobar')->where('coordinador',auth()->id())->count();
         $proyectos = Project::count();
-        $user_births = User::whereHas('register',function ($query)
+        $user_births = User::where('state',1)->whereHas('register',function ($query)
         {
             $query->where('date_birth','LIKE','%'.now()->format('m-d'));
         })->get();
@@ -311,5 +313,14 @@ class HomeController extends Controller
         $data = array();
         
         return response()->json($data);
+    }
+
+    public function data_json()
+    {
+        $cd = cd::get();
+
+        $eb = eb::get();
+        
+        return response()->json([ 'EB' => $eb, 'CD' => $cd ]);
     }
 }

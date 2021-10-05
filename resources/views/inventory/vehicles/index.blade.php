@@ -62,6 +62,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>Código</th>
                                     <th>Placa</th>
                                     <th>Marca</th>
                                     <th>Tipo</th>
@@ -77,6 +78,7 @@
                                 @foreach ($vehicles as $item)
                                 <tr {!! expirateDate($item->enrollment_date,$item->soat_date,$item->gases_date,$item->technomechanical_date,$item->first_aid_kit_date,$item->date_extinguisher,$item->liability_insurance_date)  ? 'class="bg-red" data-toggle="tooltip" data-placement="top" title="Tiene documentos vencidos"' : '' !!}}}>
                                     <td>{{$item->id}}</td>
+                                    <td>L-FR-07</td>
                                     <td>{{$item->plate}}</td>
                                     <td>{{$item->brand}}</td>
                                     <td>{{$item->type}}</td>
