@@ -12,6 +12,9 @@ use App\Models\project\Mintic\mintic_maintenance;
 use Image;
 use App\User;
 use App\Exports\minticMaintenanceExport;
+use App\Models\project\Mintic\miniticMaintenanceActivityDetail;
+use App\Models\project\Mintic\miniticMaintenanceEquipment;
+use App\Models\project\Mintic\MinticMaintenanceActivity;
 use App\Models\project\Mintic\MinticVisit;
 use App\Models\system_setting;
 
@@ -676,30 +679,65 @@ class MinticController extends Controller
 
     public function create_maintenance(Mintic_School $id)
     {
-        $equiments = EquimentDetail::get();
-        return view('projects.mintic.maintenance.create',compact('id','equiments'));
+        $equipments = EquimentDetail::get();
+        $activities = MinticMaintenanceActivity::get();
+        return view('projects.mintic.maintenance.create',compact('id','equipments','activities'));
     }
 
     public function store_maintenance(Request $request,$id)
     {
         $request['project_id'] = $id;
         $request['status'] = 1;
-        mintic_maintenance::create($request->all());
+        $main = mintic_maintenance::create($request->all());
+
+        if (isset($request->detail_retired)) {
+            foreach ($request->detail_retired as $key => $value) {
+                miniticMaintenanceEquipment::create([
+                    'serial' => $request->serial_retired[$key],
+                    'detail_id' => $request->detail_retired[$key],
+                    'maintenance_id' => $main->id,
+                    'type' => 'retired'
+                ]);
+            }
+        }
+        if (isset($request->detail_install)) {
+            foreach ($request->detail_install as $key => $value) {
+                miniticMaintenanceEquipment::create([
+                    'serial' => $request->serial_install[$key],
+                    'detail_id' => $request->detail_install[$key],
+                    'maintenance_id' => $main->id,
+                    'type' => 'install'
+                ]);
+            }
+        }
+        if (isset($request->activity_status)) {
+            foreach ($request->activity_status as $key => $value) {
+                miniticMaintenanceActivityDetail::create([
+                    'activity_id' => $key,
+                    'maintenance_id' => $main->id,
+                    'status' => $value,
+                ]);
+            }
+        }
 
         return redirect()->route('mintic_maintenance',$id)->with('success','Se ha creado el mantenimiento correctamente');
     }
     public function show_maintenance($id,mintic_maintenance $item)
     {
-        return view('projects.mintic.maintenance.show',compact('id','item'));
+        $equipments = EquimentDetail::get();
+        $activities = MinticMaintenanceActivity::get();
+        return view('projects.mintic.maintenance.show',compact('id','item','equipments','activities'));
     }
     public function photos_maintenance($id,mintic_maintenance $item)
     {
         return view('projects.mintic.maintenance.photos',compact('id','item'));
     }
+
     public function edit_maintenance($id,mintic_maintenance $item)
     {
-        $equiments = EquimentDetail::get();
-        return view('projects.mintic.maintenance.edit',compact('id','item','equiments'));
+        $equipments = EquimentDetail::get();
+        $activities = MinticMaintenanceActivity::get();
+        return view('projects.mintic.maintenance.edit',compact('id','item','equipments','activities'));
     }
 
     public function update_maintenance(Request $request,$id,mintic_maintenance $item)
@@ -713,7 +751,8 @@ class MinticController extends Controller
     {
         $system = system_setting::where('state',1)->orderBy('id','DESC')->take(1)->first();
 
-        $equiments = EquimentDetail::get();
+        $equipments = EquimentDetail::get();
+        $activities = MinticMaintenanceActivity::get();
 
         $files = array();
         $files['logo_mintic']['name'] = 'Logo_mintic';
@@ -744,7 +783,7 @@ class MinticController extends Controller
             }
         }
 
-        return (new minticMaintenanceExport($item,$equiments,$files))->download($id.'_mintic_maintenance.xlsx');
+        return (new minticMaintenanceExport($item,$equipments,$files,$activities))->download($id.'_mintic_maintenance.xlsx');
     }
 
     public function upload_maintenance(Request $request)

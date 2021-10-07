@@ -14,14 +14,14 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 class minticMaintenanceExportFirst implements FromView, WithTitle, WithDrawings, ShouldAutoSize, WithStyles
 {
     protected $id;
-    protected $equiments;
+    protected $equipments;
     protected $files;
     
-    public function __construct(object $id,object $equiments,$files)
+    public function __construct(object $id,object $equipments,$files)
     {
         $this->id = $id;
         $this->files = $files;
-        $this->equiments = $equiments;
+        $this->equipments = $equipments;
     }
 
     public function drawings()
@@ -61,7 +61,7 @@ class minticMaintenanceExportFirst implements FromView, WithTitle, WithDrawings,
             82    => ['font' => ['bold' => true, 'size' => 11]],
             83    => ['font' => ['bold' => true, 'size' => 11]],
             84    => ['font' => ['bold' => true, 'size' => 11]],
-            85    => ['font' => ['bold' => true, 'size' => 11]],
+            85    => ['font' => ['bold' => true, 'size' => 11]]
         ];
     }
 
@@ -69,7 +69,7 @@ class minticMaintenanceExportFirst implements FromView, WithTitle, WithDrawings,
     {
         return view('projects.mintic.maintenance.export.first',[
             'id' => $this->id,
-            'equiments' => $this->equiments
+            'equipments' => $this->equipments
         ]);
     }
 

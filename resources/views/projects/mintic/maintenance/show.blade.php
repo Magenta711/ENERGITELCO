@@ -24,6 +24,12 @@
         </div>
         <div class="box-body">
            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="type_format">Tipo de formato</label>
+                        {{$item->type_format}}
+                    </div>
+                </div>
                <div class="col-md-4">
                    <div class="form-group">
                        <label for="num">N° de caso</label>
@@ -114,33 +120,86 @@
                        </tr>
                    </thead>
                    <tbody>
-                       {{-- @foreach ($equiments as $equiment)
+                       @foreach ($equipments as $equipment)
                             <tr>
-                                <td>{{$equiment->sap}}</td>
-                                <td>{{$equiment->name}}</td>
-                                <td>0</td>
-                                <td>0</td>
+                                <td>{{$equipment->sap}}</td>
+                                <td>{{$equipment->name}}</td>
+                                <td>
+                                    @php
+                                        $amount = 0;
+                                        foreach ($item->equipments as $key => $value) {
+                                            if ($value->type == 'retired' && $value->detail_id == $equipment->id) {
+                                                $amount++;
+                                            }
+                                        }
+                                        echo $amount;
+                                        $amount = 0;
+                                    @endphp
+                                </td>
+                                <td>
+                                    @php
+                                        $amount = 0;
+                                        foreach ($item->equipments as $key => $value) {
+                                            if ($value->type == 'install' && $value->detail_id == $equipment->id) {
+                                                $amount++;
+                                            }
+                                        }
+                                        echo $amount;
+                                        $amount = 0;
+                                    @endphp
+                                </td>
                             </tr>
-                       @endforeach --}}
+                       @endforeach
                    </tbody>
                </table>
            </div>
            <hr>
            <h3>Serial equipo/s retirados e instalados</h3>
            <div class="row">
-               <div class="col-md-6">
-                   <div class="form-group">
-                       <label for="">Serial equipo/s retirados</label>
-                       <p></p>
-                   </div>
-               </div>
-               <div class="col-md-6">
-                   <div class="form-group">
-                       <label for="">Serial equipo/s instalados</label>
-                       <p></p>
-                   </div>
+                <div class="col-md-6">
+                    <div class="table-responsive">
+                        <table class="table table-border">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" colspan="2">Serial equipo/s retirados</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($item->equipments as $equipment_item)
+                                    @if ($equipment_item->type == 'retired')
+                                        <tr>
+                                            <td>{{$equipment_item->serial}}</td>
+                                            <td>{{$equipment_item->detail->name}}</td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="table-responsive">
+                        <table class="table table-border">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" colspan="2">Serial equipo/s retirados</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($item->equipments as $equipment_item)
+                                        @if ($equipment_item->type == 'install')
+                                            <tr>
+                                                <td>{{$equipment_item->serial}}</td>
+                                                <td>{{$equipment_item->detail->name}}</td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                </div>
            </div>
+           
            <hr>
            <h3>3. Descripción de la falla</h3>
            <div class="form-group">

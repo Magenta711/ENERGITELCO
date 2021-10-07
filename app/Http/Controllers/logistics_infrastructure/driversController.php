@@ -9,6 +9,7 @@ use App\DriversExam;
 use App\DriversReport;
 use App\DriversTest;
 use App\DriversTraining;
+use App\Exports\DriverDocument;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\invVehicle;
@@ -258,5 +259,10 @@ class driversController extends Controller
     {
         $id->update(['update' => 0]);
         return redirect()->route('drivers')->with('success','Se ha eliminado la documentación del conductor correctamente');
+    }
+
+    public function download (Drivers $id)
+    {
+        return (new DriverDocument($id))->download('L-FR--18-'.$id->id.'_learned_leassons.xlsx');
     }
 }

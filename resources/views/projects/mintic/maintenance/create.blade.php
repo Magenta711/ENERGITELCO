@@ -29,6 +29,16 @@
            <div class="row">
                <div class="col-md-4">
                    <div class="form-group">
+                       <label for="type_format">Tipo de formato</label>
+                       <select name="type_format" id="type_format" class="form-control">
+                           <option selected disabled></option>
+                           <option value="Mantenimiento correctivo">Mantenimiento correctivo</option>
+                           <option value="Mantenimiento preventivo">Mantenimiento preventivo</option>
+                       </select>
+                   </div>
+               </div>
+               <div class="col-md-4">
+                   <div class="form-group">
                        <label for="num">N° de caso</label>
                        <input type="text" value="{{old('num')}}" name="num" id="num" class="form-control">
                    </div>
@@ -99,51 +109,86 @@
                </div>
            </div>
            <hr>
-           <h3>2. Equipos instalados / retirados</h3>
-           <div class="table-responsable">
-               <table class="table table-hover">
-                   <thead>
-                       <tr>
-                           <td>SAP</td>
-                           <td>Descripción</td>
-                           <td>Cantidad retirado</td>
-                           <td>Cantidad instalado</td>
-                       </tr>
-                   </thead>
-                   <tbody>
-                       @foreach ($equiments as $equiment)
-                            <tr>
-                                <td>{{$equiment->sap}}</td>
-                                <td>{{$equiment->name}}</td>
-                                <td><input type="number" readonly name="amount_retired[{{$equiment->id}}]" value="0" class="form-control"></td>
-                                <td><input type="number" readonly name="amount_install[{{$equiment->id}}]" value="0" class="form-control"></td>
-                            </tr>
-                       @endforeach
-                   </tbody>
-               </table>
+           <div class="prevent_block" style="display: none">
+               <h3>Actividades de mantenimiento preventivo</h3>
+               <div class="table-responsable">
+                   <table class="table table-hover">
+                       <thead>
+                           <tr>
+                               <td>SAP</td>
+                               <td>Descripción</td>
+                               <td>SI</td>
+                               <td>NO</td>
+                               <td>N/A</td>
+                           </tr>
+                       </thead>
+                       <tbody>
+                           @foreach ($activities as $activity)
+                                <tr>
+                                    <td>{!! $activity->type == 1 ? '<b>' : '' !!}{{$activity->sap}}{!! $activity->type == 1 ? '</b>' : '' !!}</td>
+                                    <td>{!! $activity->type == 1 ? '<b>' : '' !!}{{$activity->description}}{!! $activity->type == 1 ? '</b>' : '' !!}</td>
+                                    <td><input type="radio" name="activity_status[{{$activity->id}}]" value="SI"></td>
+                                    <td><input type="radio" checked name="activity_status[{{$activity->id}}]" value="NO"></td>
+                                    <td><input type="radio" name="activity_status[{{$activity->id}}]" value="N/A"></td>
+                                </tr>
+                           @endforeach
+                       </tbody>
+                   </table>
+               </div>
+               <hr>
            </div>
-           <hr>
            <h3>Serial equipo/s retirados e instalados</h3>
-           <div class="row">
-               <div class="col-md-6">
-                   <div class="form-group">
-                       <label for="">Serial equipo/s retirados</label>
-                       <input readonly type="text" name="serial_retired[]" class="form-control">
+           <div id="destino_retired">
+               <div class="row" id="origen_retired">
+                   <div class="col-md-6">
+                       <div class="form-group">
+                           <label for="serial_retired">Serial equipo/s retirados</label>
+                           <input type="text" name="serial_retired[]" id="serial_retired" class="form-control">
+                       </div>
                    </div>
-               </div>
-               <div class="col-md-6">
-                   <div class="form-group">
-                       <label for="">Serial equipo/s instalados</label>
-                       <input readonly type="text" name="serial_install[]" class="form-control">
+                   <div class="col-md-6">
+                       <div class="form-group">
+                           <label for="detail_retired">Detalle</label>
+                           <select name="detail_retired[]" id="detail_retired" class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona la referencia del equipo" style="width: 100%;" data-select2-id="2" tabindex="-1" aria-hidden="true">
+                                <option disabled selected></option>
+                                @foreach ($equipments as $equipment)
+                                    <option {{old('detail_retired') == $equipment->id ? 'seleted' : ''}} value="{{$equipment->id}}">{{$equipment->sap}} - {{$equipment->name}} - {{$equipment->model_id}} - {{$equipment->part_id}} - {{$equipment->brand}}</option>
+                                @endforeach
+                            </select>
+                       </div>
                    </div>
                </div>
            </div>
+           <button class="btn btn-sm btn-link btn-add" id="btn_add_retired"><i class="fa fa-plus"></i> Agregar equipo</button>
            <hr>
-           <h3>3. Descripción de la falla</h3>
+           <div id="destino_install">
+                <div class="row" id="origen_install">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="serial_install">Serial equipo/s instalados</label>
+                            <input type="text" name="serial_install[]" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="detail_install">Detalle</label>
+                            <select name="detail_install[]" id="detail_install" class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona la referencia del equipo" style="width: 100%;" data-select2-id="2" tabindex="-1" aria-hidden="true">
+                                <option disabled selected></option>
+                                @foreach ($equipments as $equipment)
+                                    <option {{old('detail_install') == $equipment->id ? 'seleted' : ''}} value="{{$equipment->id}}">{{$equipment->sap}} - {{$equipment->name}} - {{$equipment->model_id}} - {{$equipment->part_id}} - {{$equipment->brand}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           <button class="btn btn-sm btn-link btn-add" id="btn_add_install"><i class="fa fa-plus"></i> Agregar equipo</button>
+           <hr>
+           <h3>Descripción de la falla / Hallazgos</h3>
            <div class="form-group">
                <textarea value="{{old('fault_description')}}" name="fault_description" id="fault_description" cols="30" rows="3" class="form-control"></textarea>
            </div>
-           <h3>4. Declaración</h3>
+           <h3>Declaración</h3>
            <hr>
            <h4>Datos de quien recibe el centro digital (rector, docente, autoridad competente)</h4>
            <div class="row">
@@ -161,7 +206,7 @@
                </div>
                <div class="col-md-3">
                    <div class="form-group">
-                       <label for="receives_cc">Número de cedula</label>
+                       <label for="receives_cc">Número de cédula</label>
                        <input type="text" value="{{old('receives_cc')}}" name="receives_cc" id="receives_cc" class="form-control">
                    </div>
                </div>
@@ -194,7 +239,7 @@
                </div>
                <div class="col-md-3">
                    <div class="form-group">
-                       <label for="repair_cc">Número de cedula</label>
+                       <label for="repair_cc">Número de cédula</label>
                        <input type="text" value="{{old('repair_cc')}}" name="repair_cc" id="repair_cc" class="form-control">
                    </div>
                </div>
@@ -220,6 +265,11 @@
 </section>
 @endsection
 
+@section('css')
+    <link rel="stylesheet" href="{{asset("assets/$theme/bower_components/select2/dist/css/select2.min.css")}}">
+@endsection
+
 @section('js')
-    <script src="{{asset('js/project/mintic/water_marker/tss.js')}}"></script>
+    <script src="{{asset("assets/$theme/bower_components/select2/dist/js/select2.full.min.js")}}"></script>
+    <script src="{{asset('js/project/mintic/maintence/create.js')}}"></script>
 @endsection

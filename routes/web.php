@@ -937,4 +937,4 @@ Route::get('human_management/premium/export/{id}','human_management\premiumContr
 Route::post('human_management/premium/{id}','human_management\premiumController@approve')->name('premium_approve');
 Route::delete('human_management/premium/{id}','human_management\premiumController@destroy')->name('premium_delete');
 
-Route::get('get_data_json_eb','homeController@data_json')->name('data_json_eb');
+Route::get('get_data_json_eb','HomeController@data_json')->name('data_json_eb');

@@ -28,6 +28,7 @@
                         <tr>
                             <td>/</td>
                             <td>N° de caso</td>
+                            <td>Tipo</td>
                             <td>Fecha</td>
                             <td>Estado</td>
                             <td>Acciones</td>
@@ -38,6 +39,7 @@
                             <tr>
                                 <td>{{$item->id}}</td>
                                 <td>{{$item->num}}</td>
+                                <td>{{$item->type_format}}</td>
                                 <td>{{$item->date}}</td>
                                 <td>{{$item->status == 1 ? 'Aprobado' : (($item->status == 0) ? 'Sin aprobar' : 'No aprobado')}}</td>
                                 <td>

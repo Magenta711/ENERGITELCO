@@ -124,7 +124,7 @@ class workPermitNotificationsMedicalIncapacityController extends Controller
                 $menssage->subject("Energitelco S.A.S H-FR-24 SOLICITUD DE PERMISO LABORAL O NOTIFICACIÓN DE INCAPACIDAD MÉDICA");
             });
 
-            $has = hasPermissionWork::where('user_id',$request->cedula_trabajador);
+            $has = hasPermissionWork::where('user_id',$request->cedula_trabajador)->first();
             if ($has) {
                 $has->update([
                     'amount' => $has->amount - 1,

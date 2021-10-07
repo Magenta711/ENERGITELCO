@@ -34,7 +34,7 @@
                         <div class="col-md-4 col-xs-6">
                             <div class="form-group">
                                 <label for="equip_id">Referencia</label>
-                                <select name="equip_id" id="equip_id" class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona el departamento" style="width: 100%;" data-select2-id="2" tabindex="-1" aria-hidden="true">
+                                <select name="equip_id" id="equip_id" class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona el equipo" style="width: 100%;" data-select2-id="2" tabindex="-1" aria-hidden="true">
                                     <option value="0">Otra</option>
                                     @foreach ($equipment_deatils as $item)
                                         <option {{old('equip_id') == $item->id ? 'seleted' : ''}} value="{{$item->id}}">{{$item->sap}} - {{$item->name}} - {{$item->model_id}} - {{$item->part_id}} - {{$item->brand}}</option>

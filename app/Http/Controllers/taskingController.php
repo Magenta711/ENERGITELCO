@@ -114,7 +114,7 @@ class taskingController extends Controller
                     'status' => 0
                 ]);
             }else {
-                $mintic = Mintic_School::cretae([
+                $mintic = Mintic_School::create([
                     'responsable_id' => auth()->id(),
                     'con_sede' => $request->eb,
                     'code' => $request->id_beneficiario,
