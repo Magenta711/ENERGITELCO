@@ -1,3 +1,16 @@
+@php
+    function checkedActivity($idActivity, $activities)
+    {
+        foreach ($activities as $key => $value) {
+            if ($value->activity_id == $idActivity ) {
+                return $value->status;
+            }
+        }
+        return 'NO';
+    }
+
+@endphp
+
 @extends('lte.layouts')
 
 @section('content')
@@ -63,34 +76,34 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="department">Departamento</label>
-                                <input type="text" readonly name="department" id="department" value="{{ $item->department }}"
+                                <input type="text" name="department" id="department" value="{{ $item->department }}"
                                     class="form-control">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="municpality">Municipio</label>
-                                <input type="text" readonly name="municpality" id="municpality" value="{{ $item->municpality }}"
+                                <input type="text" name="municpality" id="municpality" value="{{ $item->municpality }}"
                                     class="form-control">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="population">Centro poblado</label>
-                                <input type="text" readonly name="population" id="population" value="{{ $item->population }}"
+                                <input type="text" name="population" id="population" value="{{ $item->population }}"
                                     class="form-control">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="name">Sede institución o caso especial</label>
-                                <input type="text" readonly name="name" id="name" value="{{ $item->name }}" class="form-control">
+                                <input type="text" name="name" id="name" value="{{ $item->name }}" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="code">Id de beneficiario</label>
-                                <input type="text" readonly name="code" id="code" value="{{ $item->code }}" class="form-control">
+                                <input type="text" name="code" id="code" value="{{ $item->code }}" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -136,12 +149,15 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($activities as $activity)
+                                        @php
+                                            $checkedActivity = checkedActivity($activity->id,$item->activities);
+                                        @endphp
                                          <tr>
                                              <td>{!! $activity->type == 1 ? '<b>' : '' !!}{{$activity->sap}}{!! $activity->type == 1 ? '</b>' : '' !!}</td>
                                              <td>{!! $activity->type == 1 ? '<b>' : '' !!}{{$activity->description}}{!! $activity->type == 1 ? '</b>' : '' !!}</td>
-                                             <td><input type="radio" name="activity_status[{{$activity->id}}]" value="SI"></td>
-                                             <td><input type="radio" name="activity_status[{{$activity->id}}]" value="NO"></td>
-                                             <td><input type="radio" name="activity_status[{{$activity->id}}]" value="N/A"></td>
+                                             <td><input type="radio" name="activity_status[{{$activity->id}}]" {{$checkedActivity == "SI" ? 'checked' : '' }} value="SI"></td>
+                                             <td><input type="radio" name="activity_status[{{$activity->id}}]" {{$checkedActivity == "NO" ? 'checked' : '' }} value="NO"></td>
+                                             <td><input type="radio" name="activity_status[{{$activity->id}}]" {{$checkedActivity == "N/A" ? 'checked' : '' }} value="N/A"></td>
                                          </tr>
                                     @endforeach
                                 </tbody>
@@ -192,11 +208,11 @@
                                     <div class="form-group">
                                         <label for="detail_retired">Detalle</label>
                                         <select name="detail_retired[]" id="detail_retired" class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona la referencia del equipo" style="width: 100%;" data-select2-id="2" tabindex="-1" aria-hidden="true">
-                                                <option disabled selected></option>
-                                                @foreach ($equipments as $equipment)
-                                                    <option {{old('detail_retired')  == $equipment->id ? 'selected' : ''}} value="{{$equipment->id}}">{{$equipment->sap}} - {{$equipment->name}} - {{$equipment->model_id}} - {{$equipment->part_id}} - {{$equipment->brand}}</option>
-                                                @endforeach
-                                            </select>
+                                            <option disabled selected></option>
+                                            @foreach ($equipments as $equipment)
+                                                <option {{old('detail_retired')  == $equipment->id ? 'selected' : ''}} value="{{$equipment->id}}">{{$equipment->sap}} - {{$equipment->name}} - {{$equipment->model_id}} - {{$equipment->part_id}} - {{$equipment->brand}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -321,6 +337,13 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
+                                <label for="ticket">Ticket, Si aplica</label>
+                                <input type="text" value="{{ $item->ticket }}" name="ticket"
+                                    id="ticket" class="form-control">
+                            </div>
+                        </div>
+                        {{-- <div class="col-md-3">
+                            <div class="form-group">
                                 <label for="repair_cc">Número de cedula</label>
                                 <input type="text" value="{{ $item->repair_cc }}" name="repair_cc" id="repair_cc"
                                     class="form-control">
@@ -339,7 +362,7 @@
                                 <input type="text" value="{{ $item->repair_mail }}" name="repair_mail" id="repair_mail"
                                     class="form-control">
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="box-footer">

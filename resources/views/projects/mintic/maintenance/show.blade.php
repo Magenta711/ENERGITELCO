@@ -1,3 +1,16 @@
+@php
+    function checkedActivity($idActivity, $activities)
+    {
+        foreach ($activities as $key => $value) {
+            if ($value->activity_id == $idActivity ) {
+                return $value->status;
+            }
+        }
+        return 'NO';
+    }
+
+@endphp
+
 @extends('lte.layouts')
  
 @section('content')
@@ -108,52 +121,84 @@
                </div>
            </div>
            <hr>
-           <h3>2. Equipos instalados / retirados</h3>
+           @if ($item->type_format == 'Mantenimiento preventivo')
+           <h3>Actividades de mantenimiento preventivo</h3>
            <div class="table-responsable">
                <table class="table table-hover">
                    <thead>
                        <tr>
                            <td>SAP</td>
                            <td>Descripción</td>
-                           <td>Cantidad retirado</td>
-                           <td>Cantidad instalado</td>
+                           <td>SI</td>
+                           <td>NO</td>
+                           <td>N/A</td>
                        </tr>
                    </thead>
                    <tbody>
-                       @foreach ($equipments as $equipment)
+                       @foreach ($activities as $activity)
+                           @php
+                               $checkedActivity = checkedActivity($activity->id,$item->activities);
+                           @endphp
                             <tr>
-                                <td>{{$equipment->sap}}</td>
-                                <td>{{$equipment->name}}</td>
-                                <td>
-                                    @php
-                                        $amount = 0;
-                                        foreach ($item->equipments as $key => $value) {
-                                            if ($value->type == 'retired' && $value->detail_id == $equipment->id) {
-                                                $amount++;
-                                            }
-                                        }
-                                        echo $amount;
-                                        $amount = 0;
-                                    @endphp
-                                </td>
-                                <td>
-                                    @php
-                                        $amount = 0;
-                                        foreach ($item->equipments as $key => $value) {
-                                            if ($value->type == 'install' && $value->detail_id == $equipment->id) {
-                                                $amount++;
-                                            }
-                                        }
-                                        echo $amount;
-                                        $amount = 0;
-                                    @endphp
-                                </td>
+                                <td>{!! $activity->type == 1 ? '<b>' : '' !!}{{$activity->sap}}{!! $activity->type == 1 ? '</b>' : '' !!}</td>
+                                <td>{!! $activity->type == 1 ? '<b>' : '' !!}{{$activity->description}}{!! $activity->type == 1 ? '</b>' : '' !!}</td>
+                                <td>{{$checkedActivity == "SI" ? 'X' : '' }}</td>
+                                <td>{{$checkedActivity == "NO" ? 'X' : '' }}</td>
+                                <td>{{$checkedActivity == "N/A" ? 'X' : '' }}</td>
                             </tr>
                        @endforeach
                    </tbody>
                </table>
            </div>
            <hr>
+            @else
+            <h3>Equipos instalados / retirados</h3>
+                <div class="table-responsable">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <td>SAP</td>
+                                <td>Descripción</td>
+                                <td>Cantidad retirado</td>
+                                <td>Cantidad instalado</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($equipments as $equipment)
+                                    <tr>
+                                        <td>{{$equipment->sap}}</td>
+                                        <td>{{$equipment->name}}</td>
+                                        <td>
+                                            @php
+                                                $amount = 0;
+                                                foreach ($item->equipments as $key => $value) {
+                                                    if ($value->type == 'retired' && $value->detail_id == $equipment->id) {
+                                                        $amount++;
+                                                    }
+                                                }
+                                                echo $amount;
+                                                $amount = 0;
+                                            @endphp
+                                        </td>
+                                        <td>
+                                            @php
+                                                $amount = 0;
+                                                foreach ($item->equipments as $key => $value) {
+                                                    if ($value->type == 'install' && $value->detail_id == $equipment->id) {
+                                                        $amount++;
+                                                    }
+                                                }
+                                                echo $amount;
+                                                $amount = 0;
+                                            @endphp
+                                        </td>
+                                    </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+           @endif
            <h3>Serial equipo/s retirados e instalados</h3>
            <div class="row">
                 <div class="col-md-6">
@@ -201,13 +246,13 @@
            </div>
            
            <hr>
-           <h3>3. Descripción de la falla</h3>
+           <h3>Descripción de la falla / Hallazgos</h3>
            <div class="form-group">
                <p>{{$item->fault_description}}</p>
            </div>
-           <h3>4. Declaración</h3>
+           <h3>Declaración</h3>
            <hr>
-           <h4>Datos de quien recibe el centro digital (rector, docente, autoridad competente)</h4>
+           <h4>Datos de quien repara el servicio en el centro digital</h4>
            <div class="row">
                <div class="col-md-3">
                    <div class="form-group">
@@ -240,7 +285,7 @@
                    </div>
                </div>
            </div>
-           <h4>Datos de quien repara el servicio en el centro digital</h4>
+           <h4>Datos de ingeniero de soporte NOC</h4>
            <div class="row">
                <div class="col-md-3">
                    <div class="form-group">
@@ -255,6 +300,12 @@
                    </div>
                </div>
                <div class="col-md-3">
+                   <div class="form-group">
+                       <label for="repair_position">Ticket, Si aplica</label>
+                       <p>{{$item->ticket}}</p>
+                   </div>
+               </div>
+               {{-- <div class="col-md-3">
                    <div class="form-group">
                        <label for="repair_cc">Número de cedula</label>
                        <p>{{$item->repair_cc}}</p>
@@ -271,7 +322,7 @@
                        <label for="repair_mail">Correo electrónico</label>
                        <p>{{$item->repair_mail}}</p>
                    </div>
-               </div>
+               </div> --}}
            </div>
         </div>
     </div>

@@ -7,7 +7,7 @@ use App\Models\file;
 
 class mintic_maintenance extends Model
 {
-    protected $fillable = ['project_id','type_format','num','date','collaborating_company','department','municpality','population','name','code','responsable_name','responsable_number','responsable_email','fault_description','receives_name','receives_position','receives_cc','receives_tel','receives_mail','repair_name','repair_position','repair_cc','repair_tel','repair_mail','status'];
+    protected $fillable = ['project_id','type_format','num','date','collaborating_company','department','municpality','population','name','code','responsable_name','responsable_number','responsable_email','fault_description','receives_name','receives_position','receives_cc','receives_tel','receives_mail','repair_name','repair_position','repair_cc','repair_tel','repair_mail','status','ticket'];
 
     public function files()
     {
@@ -25,6 +25,6 @@ class mintic_maintenance extends Model
     }
     public function activities()
     {
-        return $this->hasMany(miniticMaintenanceEquipment::class,'maintenance_id','id');
+        return $this->hasMany(miniticMaintenanceActivityDetail::class,'maintenance_id','id');
     }
 }

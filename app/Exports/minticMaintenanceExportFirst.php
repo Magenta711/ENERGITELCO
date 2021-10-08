@@ -15,13 +15,15 @@ class minticMaintenanceExportFirst implements FromView, WithTitle, WithDrawings,
 {
     protected $id;
     protected $equipments;
+    protected $activities;
     protected $files;
     
-    public function __construct(object $id,object $equipments,$files)
+    public function __construct(object $id,object $equipments,$files,$activities)
     {
         $this->id = $id;
         $this->files = $files;
         $this->equipments = $equipments;
+        $this->activities = $activities;
     }
 
     public function drawings()
@@ -51,17 +53,6 @@ class minticMaintenanceExportFirst implements FromView, WithTitle, WithDrawings,
             13    => ['font' => ['bold' => true, 'size' => 11]],
             19    => ['font' => ['bold' => true, 'size' => 14]],
             20    => ['font' => ['bold' => true, 'size' => 14]],
-            59    => ['font' => ['bold' => true, 'size' => 14]],
-            60    => ['font' => ['bold' => true, 'size' => 11]],
-            68    => ['font' => ['bold' => true, 'size' => 11]],
-            70    => ['font' => ['bold' => true, 'size' => 11]],
-            79    => ['font' => ['bold' => true, 'size' => 11]],
-            80    => ['font' => ['bold' => true, 'size' => 11]],
-            81    => ['font' => ['bold' => true, 'size' => 11]],
-            82    => ['font' => ['bold' => true, 'size' => 11]],
-            83    => ['font' => ['bold' => true, 'size' => 11]],
-            84    => ['font' => ['bold' => true, 'size' => 11]],
-            85    => ['font' => ['bold' => true, 'size' => 11]]
         ];
     }
 
@@ -69,7 +60,8 @@ class minticMaintenanceExportFirst implements FromView, WithTitle, WithDrawings,
     {
         return view('projects.mintic.maintenance.export.first',[
             'id' => $this->id,
-            'equipments' => $this->equipments
+            'equipments' => $this->equipments,
+            'activities' => $this->activities
         ]);
     }
 

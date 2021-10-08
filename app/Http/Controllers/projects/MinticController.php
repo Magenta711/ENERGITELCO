@@ -742,7 +742,38 @@ class MinticController extends Controller
 
     public function update_maintenance(Request $request,$id,mintic_maintenance $item)
     {
-        $id->update($request->all());
+        $item->update($request->all());
+        miniticMaintenanceEquipment::where('maintenance_id',$item->id)->delete();
+        if (isset($request->detail_retired)) {
+            foreach ($request->detail_retired as $key => $value) {
+                miniticMaintenanceEquipment::create([
+                    'serial' => $request->serial_retired[$key],
+                    'detail_id' => $request->detail_retired[$key],
+                    'maintenance_id' => $item->id,
+                    'type' => 'retired'
+                ]);
+            }
+        }
+        if (isset($request->detail_install)) {
+            foreach ($request->detail_install as $key => $value) {
+                miniticMaintenanceEquipment::create([
+                    'serial' => $request->serial_install[$key],
+                    'detail_id' => $request->detail_install[$key],
+                    'maintenance_id' => $item->id,
+                    'type' => 'install'
+                ]);
+            }
+        }
+        miniticMaintenanceActivityDetail::where('maintenance_id',$item->id)->delete();
+        if (isset($request->activity_status)) {
+            foreach ($request->activity_status as $key => $value) {
+                miniticMaintenanceActivityDetail::create([
+                    'activity_id' => $key,
+                    'maintenance_id' => $item->id,
+                    'status' => $value,
+                ]);
+            }
+        }
 
         return redirect()->route('mintic_maintenance',$id)->with('success','Se ha actualizado el mantenimiento correctamente');
     }

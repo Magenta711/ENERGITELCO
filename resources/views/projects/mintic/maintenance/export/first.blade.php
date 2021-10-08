@@ -1,3 +1,16 @@
+@php
+    function checkedActivity($idActivity, $activities)
+    {
+        foreach ($activities as $key => $value) {
+            if ($value->activity_id == $idActivity ) {
+                return $value->status;
+            }
+        }
+        return 'NO';
+    }
+
+@endphp
+
 <table>
     <tr>
         <td></td>
@@ -9,10 +22,10 @@
         <td rowspan="7" colspan="4" style="border: 1px solid #000000;"></td>
         <td rowspan="7" colspan="8" style="border: 1px solid #000000;">
             @if ($id->type_format == 'Mantenimiento correctivo')
-                FORMATO NOTIFICACIÓN DEMANTENIMIENTO DE CENTROS DIGITALES
+                FORMATO NOTIFICACIÓN DE MANTENIMIENTO CORRECTIVO CENTROS DIGITALES
             @endif
             @if ($id->type_format == 'Mantenimiento preventivo')
-                FORMATO NOTIFICACIÓN DEMANTENIMIENTO DE CENTROS DIGITALES
+                FORMATO NOTIFICACIÓN DE MANTENIMIENTO PREVENTIVO CENTROS DIGITALES
             @endif
         </td>
         <td rowspan="7" colspan="3" style="border: 1px solid #000000;"></td>
@@ -55,8 +68,8 @@
     </tr>
     <tr>
         <td></td>
-        <td colspan="4" style="border: 1px solid #000000;">1042 de 2020</td>
-        <td colspan="11" style="border: 1px solid #000000;">COMCEL SAS</td>
+        <td colspan="4" style="text-align: center;border: 1px solid #000000;">1042 de 2020</td>
+        <td colspan="11" style="text-align: center;border: 1px solid #000000;">COMCEL SAS</td>
     </tr>
     <tr>
         <td></td>
@@ -67,10 +80,10 @@
     </tr>
     <tr>
         <td></td>
-        <td colspan="4" style="border: 1px solid #000000;">{{$id->department}}</td>
-        <td colspan="5" style="border: 1px solid #000000;">{{$id->municpality}}</td>
-        <td colspan="3" style="border: 1px solid #000000;">{{$id->population}}</td>
-        <td colspan="3" style="border: 1px solid #000000;">{{$id->name}}</td>
+        <td colspan="4" style="text-align: center;border: 1px solid #000000;">{{$id->department}}</td>
+        <td colspan="5" style="text-align: center;border: 1px solid #000000;">{{$id->municpality}}</td>
+        <td colspan="3" style="text-align: center;border: 1px solid #000000;">{{$id->population}}</td>
+        <td colspan="3" style="text-align: center;border: 1px solid #000000;">{{$id->name}}</td>
     </tr>
     <tr>
         <td></td>
@@ -81,10 +94,10 @@
     </tr>
     <tr>
         <td></td>
-        <td colspan="4" style="border: 1px solid #000000;">{{$id->code}}</td>
-        <td colspan="5" style="border: 1px solid #000000;">{{$id->responsable_name}}</td>
-        <td colspan="3" style="border: 1px solid #000000;">{{$id->responsable_cc}}</td>
-        <td colspan="3" style="border: 1px solid #000000;">{{$id->responsable_number}}</td>
+        <td colspan="4" style="text-align: center;border: 1px solid #000000;">{{$id->code}}</td>
+        <td colspan="5" style="text-align: center;border: 1px solid #000000;">{{$id->responsable_name}}</td>
+        <td colspan="3" style="text-align: center;border: 1px solid #000000;">{{$id->responsable_cc}}</td>
+        <td colspan="3" style="text-align: center;border: 1px solid #000000;">{{$id->responsable_number}}</td>
     </tr>
     <tr>
         <td></td>
@@ -92,7 +105,7 @@
     </tr>
     <tr>
         <td></td>
-        <td colspan="15" style="border: 1px solid #000000;">
+        <td colspan="15" style="text-align: center;border: 1px solid #000000;">
             {{$id->responsable_email}}
         </td>
     </tr>
@@ -151,24 +164,27 @@
         <tr>
             <td></td>
             <td style="text-align: center;background: #D0CECE;border: 1px solid #000000;">SAP</td>
-            <td colspan="7" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">Descripción</td>
+            <td colspan="8" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">Descripción</td>
             <td colspan="2" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">SI</td>
             <td colspan="2" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">NO</td>
             <td colspan="2" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">N/A</td>
         </tr>
         @foreach ($activities as $activity)
+            @php
+                $checkedActivity = checkedActivity($activity->id,$id->activities);
+            @endphp
             <tr>
                 <td></td>
-                <td style="border: 1px solid #000000;">{{$activity->sap}}</td>
-                <td colspan="7" style="border: 1px solid #000000;">{{$activity->name}}</td>
-                <td colspan="2" style="border: 1px solid #000000;">
-                    
+                <td style="text-align: center;border: 1px solid #000000;">{!! $activity->type == 1 ? '<b>' : '' !!}{{$activity->sap}}{!! $activity->type == 1 ? '</b>' : '' !!}</td>
+                <td colspan="8" style="border: 1px solid #000000;">{!! $activity->type == 1 ? '<b>' : '' !!}{{$activity->description}}{!! $activity->type == 1 ? '</b>' : '' !!}</td>
+                <td colspan="2" style="text-align: center;border: 1px solid #000000;">
+                    {{$checkedActivity == "SI" ? 'X' : '' }}
                 </td>
-                <td colspan="2" style="border: 1px solid #000000;">
-                    
+                <td colspan="2" style="text-align: center;border: 1px solid #000000;">
+                    {{$checkedActivity == "NO" ? 'X' : '' }}
                 </td>
-                <td colspan="2" style="border: 1px solid #000000;">
-                    
+                <td colspan="2" style="text-align: center;border: 1px solid #000000;">
+                    {{$checkedActivity == "N/A" ? 'X' : '' }}
                 </td>
             </tr>
         @endforeach
@@ -213,43 +229,43 @@
     </tr>
     <tr>
         <td></td>
-        <td colspan="15" style="border: 1px solid #000000;"></td>
+        <td colspan="15" style="border: 1px solid #000000;">{{$id->fault_description}}</td>
     </tr>
     <tr>
         <td></td>
-        <td colspan="8" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">DATOS DE QUIEN RECIBE EL CENTRO DIGITAL (RECTOR, DOCENTE, AUTORIDAD COMPETENTE)</td>
+        <td colspan="8" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">DATOS DE QUIEN REPARA EL SERVICIO EN EL CENTRO DIGITAL</td>
         <td colspan="7" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">DATOS DE INGENIERO DE SOPORTE NOC</td>
     </tr>
     <tr>
         <td></td>
         <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">NOMBRES Y APELLIDOS:</td>
-        <td colspan="5" style="border: 1px solid #000000;"></td>
+        <td colspan="5" style="border: 1px solid #000000;">{{$id->receives_name}}</td>
         <td colspan="3" rowspan="2" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">NOMBRES Y APELLIDOS:</td>
-        <td colspan="4" rowspan="2" style="border: 1px solid #000000;"></td>
+        <td colspan="4" rowspan="2" style="border: 1px solid #000000;">{{$id->repair_name}}</td>
     </tr>
     <tr>
         <td></td>
         <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">CARGO:</td>
-        <td colspan="5" style="border: 1px solid #000000;"></td>
+        <td colspan="5" style="border: 1px solid #000000;">{{$id->receives_position}}</td>
     </tr>
     <tr>
         <td></td>
         <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">NÚMERO DE CEDULA:</td>
-        <td colspan="5" style="border: 1px solid #000000;"></td>
+        <td colspan="5" style="border: 1px solid #000000;">{{$id->receives_cc}}</td>
         <td colspan="3" rowspan="2" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">CARGO:</td>
         <td colspan="4" rowspan="2" style="border: 1px solid #000000;"></td>
     </tr>
     <tr>
         <td></td>
-        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">NÚMERO DE TELEFONO O CEDULAR:</td>
-        <td colspan="5" style="border: 1px solid #000000;"></td>
+        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">NÚMERO DE TELÉFONO O CEDULAR:</td>
+        <td colspan="5" style="border: 1px solid #000000;">{{$id->receives_tel}}</td>
     </tr>
     <tr>
         <td></td>
         <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">CORREO ELECTRÓNICO:</td>
-        <td colspan="5" style="border: 1px solid #000000;"></td>
+        <td colspan="5" style="border: 1px solid #000000;">{{$id->receives_mail}}</td>
         <td colspan="3" rowspan="4" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">TICKET, SI APLICA</td>
-        <td colspan="4" rowspan="4" style="border: 1px solid #000000;"></td>
+        <td colspan="4" rowspan="4" style="border: 1px solid #000000;">{{$id->ticket}}</td>
     </tr>
     <tr>
         <td></td>

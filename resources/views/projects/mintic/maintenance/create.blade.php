@@ -237,7 +237,13 @@
                        <input type="text" value="{{old('repair_position')}}" name="repair_position" id="repair_position" class="form-control">
                    </div>
                </div>
-               <div class="col-md-3">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="ticket">Ticket, Si aplica</label>
+                        <input type="text" value="{{ old('ticket') }}" name="ticket" id="ticket" class="form-control">
+                    </div>
+                </div>
+               {{-- <div class="col-md-3">
                    <div class="form-group">
                        <label for="repair_cc">Número de cédula</label>
                        <input type="text" value="{{old('repair_cc')}}" name="repair_cc" id="repair_cc" class="form-control">
@@ -254,7 +260,7 @@
                        <label for="repair_mail">Correo electrónico</label>
                        <input type="text" value="{{old('repair_mail')}}" name="repair_mail" id="repair_mail" class="form-control">
                    </div>
-               </div>
+               </div> --}}
            </div>
         </div>
         <div class="box-footer">
