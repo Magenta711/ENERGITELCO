@@ -1,5 +1,16 @@
 @php
-    function expirateDate($enrollment_date,$soat_date,$gases_date,$technomechanical_date,$first_aid_kit_date,$date_extinguisher,$liability_insurance_date)
+    function expirateDate(
+        $enrollment_date,
+        $soat_date,
+        $gases_date,
+        $technomechanical_date,
+        $first_aid_kit_date,
+        $date_extinguisher,
+        $liability_insurance_date,
+        $date_cross_piece,
+        $date_tacos,
+        $policy_date
+    )
     {
         if ($enrollment_date && $enrollment_date < now()) {
             return true;
@@ -22,6 +33,15 @@
         if ($liability_insurance_date && $liability_insurance_date < now()) {
             return true;
         }
+        if ($date_cross_piece && $date_cross_piece < now()) {
+            return true;
+        }
+        if ($date_tacos && $date_tacos < now()) {
+            return true;
+        }
+        if ($policy_date && $policy_date < now()) {
+            return true;
+        }
         return false;
     }
 @endphp 
@@ -32,7 +52,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        vehículos <small></small>
+        Registro documentación y mantenimiento de vehículos <small></small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
@@ -76,9 +96,9 @@
                             </thead>
                             <tbody>
                                 @foreach ($vehicles as $item)
-                                <tr {!! expirateDate($item->enrollment_date,$item->soat_date,$item->gases_date,$item->technomechanical_date,$item->first_aid_kit_date,$item->date_extinguisher,$item->liability_insurance_date)  ? 'class="bg-red" data-toggle="tooltip" data-placement="top" title="Tiene documentos vencidos"' : '' !!}}}>
+                                <tr {!! expirateDate($item->enrollment_date,$item->soat_date,$item->gases_date,$item->technomechanical_date,$item->first_aid_kit_date,$item->date_extinguisher,$item->liability_insurance_date,$item->date_cross_piece,$item->date_tacos,$item->policy_date)  ? 'class="bg-red" data-toggle="tooltip" data-placement="top" title="Tiene documentos vencidos"' : '' !!}}}>
                                     <td>{{$item->id}}</td>
-                                    <td>L-FR-07</td>
+                                    <td>L-FR-07-{{$item->id}}</td>
                                     <td>{{$item->plate}}</td>
                                     <td>{{$item->brand}}</td>
                                     <td>{{$item->type}}</td>
