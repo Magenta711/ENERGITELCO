@@ -227,7 +227,7 @@
             @endif
             <div class="col-sm-2 col-xs-3">
                 <div class="box box-danger">
-                    <a href="route('request_withdraw_severance')" class="btn-send">
+                    <a href="{{route('request_withdraw_severance')}}" class="btn-send">
                         <div class="description-block border-right">
                             <span class="description-percentage text-green"><i class="fa fa-money-bill"></i></span>
                             <h5 class="description-header">Solicitud</h5>

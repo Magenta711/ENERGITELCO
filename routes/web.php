@@ -917,6 +917,15 @@ Route::put('logistics_infrastructure/traffic_accident/{id}','logistics_infrastru
 Route::get('logistics_infrastructure/traffic_accident/download/{id}','logistics_infrastructure\traffic_accidentController@download')->name('traffic_accident_download');
 Route::delete('logistics_infrastructure/traffic_accident/{id}','logistics_infrastructure\traffic_accidentController@destroy')->name('traffic_accident_delete');
 
+Route::get('logistics_infrastructure/transit_taxes','logistics_infrastructure\transitTaxesController@index')->name('transit_taxes');
+Route::get('logistics_infrastructure/transit_taxes/create','logistics_infrastructure\transitTaxesController@create')->name('transit_taxes_create');
+Route::post('logistics_infrastructure/transit_taxes','logistics_infrastructure\transitTaxesController@store')->name('transit_taxes_store');
+Route::get('logistics_infrastructure/transit_taxes/show/{id}','logistics_infrastructure\transitTaxesController@show')->name('transit_taxes_show');
+Route::get('logistics_infrastructure/transit_taxes/{id}/edit','logistics_infrastructure\transitTaxesController@edit')->name('transit_taxes_edit');
+Route::put('logistics_infrastructure/transit_taxes/{id}','logistics_infrastructure\transitTaxesController@update')->name('transit_taxes_update');
+Route::get('logistics_infrastructure/transit_taxes/download/{id}','logistics_infrastructure\transitTaxesController@download')->name('transit_taxes_download');
+Route::delete('logistics_infrastructure/transit_taxes/{id}','logistics_infrastructure\transitTaxesController@destroy')->name('transit_taxes_delete');
+
 Route::get('logistics_infrastructure/vehicle_documentation','logistics_infrastructure\vehicleDocumentationController@index')->name('vehicle_documentation');
 Route::get('logistics_infrastructure/vehicle_documentation/create','logistics_infrastructure\vehicleDocumentationController@create')->name('vehicle_documentation_create');
 Route::post('logistics_infrastructure/vehicle_documentation','logistics_infrastructure\vehicleDocumentationController@store')->name('vehicle_documentation_store');

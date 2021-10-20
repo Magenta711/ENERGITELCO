@@ -41,6 +41,18 @@
                             <p>{{$id->brand}}</p>
                         </div>
                     </div>
+                    <div class="col-md-4 col-xs-6">
+                        <div class="form-group">
+                            <label for="brand">Tipo</label>
+                            <p>{{$id->type}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xs-6">
+                        <div class="form-group">
+                            <label for="brand">Estado</label>
+                            <p>{{$id->status == 1 ? 'En bodega' : ($id->status == 2 ? 'En comisión' : ( $id->status == 3 ? 'Instalado' : ($id->status == 4 ? 'En inversa' : 'En garantía'))) }}</p>
+                        </div>
+                    </div>
                     <div class="col-md-12">
                         <label for="commentary">Comentarios</label>
                         <p>{{$id->commentary}}</p>
@@ -48,16 +60,25 @@
                 </div>
                 <p>
                     @if($id->inventarybles)
-                        <p>Id programación de frente de trabajo {{$id->inventarybles->tasking->id}}</p>
-                        <p>Nombre de EB o CD {{$id->inventarybles->tasking->station_name}}</p>
-                        <p>Departamento {{$id->inventarybles->tasking->department}}</p>
-                        <p>Municipio {{$id->inventarybles->tasking->municipality}}</p>
+                        <hr>
+                        <p>Id programación de frente de trabajo: {{$id->inventarybles->tasking->id}}</p>
+                        <p>Nombre de EB o CD: {{$id->inventarybles->tasking->station_name}}</p>
+                        <p>Departamento: {{$id->inventarybles->tasking->department}}</p>
+                        <p>Municipio: {{$id->inventarybles->tasking->municipality}}</p>
+                        <p>Fecha: {{$id->inventarybles->tasking->date_start}}</p>
                     @endif
                     @if ($id->productables)
-                        <p>Proyecto MinTIC id {{$id->productables->implement->project->id}}</p>
-                        <p>Nombre de centro digital {{$id->productables->implement->project->name}}</p>
-                        <p>Departamento {{$id->productables->implement->project->dep}}</p>
-                        <p>Municipio de centro digital {{$id->productables->implement->project->mun}}</p>
+                        <hr>
+                        <p>Proyecto MinTIC id: {{$id->productables->implement->project->id}}</p>
+                        <p>Nombre de centro digital: {{$id->productables->implement->project->name}}</p>
+                        <p>Departamento: {{$id->productables->implement->project->dep}}</p>
+                        <p>Municipio de centro digital: {{$id->productables->implement->project->mun}}</p>
+                    @endif
+                    @if ($id->technical)
+                        <hr>
+                        <p>Técnico: {{ $id->technical->user->name }}</p>
+                        <p>Cédula: {{$id->technical->user->cedula}}</p>
+                        <p>Teléfono: {{$id->technical->user->telefono}}</p>
                     @endif
                 </p>
             </div>

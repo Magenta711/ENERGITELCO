@@ -4,8 +4,13 @@ namespace App\Http\Controllers\projects\inventory;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\InvUser;
 use App\Models\project\Mintic\inventory\EquimentDetail;
 use App\Models\project\Mintic\inventory\invMinticEquipment;
+use App\Models\project\Mintic\Mintic_School;
+use App\Models\project\Mintic\MinticConsumableImplement;
+use App\Models\project\Mintic\MinticConsumableImplementDetail;
+use App\User;
 
 class EquipmentController extends Controller
 {
@@ -88,7 +93,10 @@ class EquipmentController extends Controller
      */
     public function edit(invMinticEquipment $id)
     {
-        return view('projects.inventory.equipment.edit',compact('id'));
+        $equipment_deatils = EquimentDetail::get();
+        $projects = Mintic_School::get();
+        $users = User::where('state',1)->get();
+        return view('projects.inventory.equipment.edit',compact('id','equipment_deatils','projects','users'));
     }
 
     /**
@@ -101,10 +109,44 @@ class EquipmentController extends Controller
     public function update(Request $request,invMinticEquipment $id)
     {
         $request->validate([
-            'serial' => ['required','unique:inv_mintic_equipment,serial,'.$id->id],
+            'serial' => ['required'],
             'item' => ['required'],
             'brand' => ['required'],
         ]);
+        if ($request->status == 3) {
+            if ($request->proyect_id && $request->tehcnical_id) {
+                $imple = MinticConsumableImplement::where('project_id',$request->proyect_id)->where('user_id',$request->tehcnical_id)->first();
+                if ($imple) {
+                    
+                }else {
+                    $imple = MinticConsumableImplement::create([
+                        'project_id' => $request->proyect_id,
+                        'user_id' => $request->tehcnical_id,
+                        'responsable_id' => auth()->id(),
+                        'status' => 3,
+                        'commentary' => 'Auto'
+                    ]);
+                }
+                MinticConsumableImplementDetail::create([
+                    'productable_type' => 'App\Models\project\Mintic\inventory\invMinticEquipment',
+                    'productable_id' => $id->id,
+                    'implement_id' => $imple->id,
+                    'amount' => 1,
+                    'delivered' => 0,
+                    'spent' => 0,
+                    'margin' => 0,
+                ]);
+                InvUser::create([
+                    'user_id' => $request->tehcnical_id,
+                    'inventaryble_id' => $imple->id,
+                    'inventaryble_type' => 'App\Models\project\Mintic\inventory\invMinticEquipment',
+                    'tickets' => 1,
+                    'departures' => 0,
+                    'stock' => 1,
+
+                ]);
+            }
+        }
         $id->update($request->all());
         return redirect()->route('mintic_inventory_equipment')->with('success','Se ha actualizado el equipo correctamente');
     }

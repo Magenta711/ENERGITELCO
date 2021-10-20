@@ -9,7 +9,7 @@ use App\Models\taskDetailConsumable;
 
 class invMinticEquipment extends Model
 {
-    protected $fillable = ['serial','item','brand','status','commentary','equip_id'];
+    protected $fillable = ['serial','item','brand','status','commentary','equip_id','type'];
 
     public function productables()
     {
@@ -24,5 +24,10 @@ class invMinticEquipment extends Model
     public function equip()
     {
         return $this->hasOne(EquimentDetail::class,'id','equip_id');
+    }
+    
+    public function technical()
+    {
+        return $this->morphOne(InvUser::class,'inventaryble');
     }
 }

@@ -37,7 +37,7 @@
                                 <select name="equip_id" id="equip_id" class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona el equipo" style="width: 100%;" data-select2-id="2" tabindex="-1" aria-hidden="true">
                                     <option value="0">Otra</option>
                                     @foreach ($equipment_deatils as $item)
-                                        <option {{old('equip_id') == $item->id ? 'seleted' : ''}} value="{{$item->id}}">{{$item->sap}} - {{$item->name}} - {{$item->model_id}} - {{$item->part_id}} - {{$item->brand}}</option>
+                                        <option {{old('equip_id') == $item->id ? 'selected' : ''}} value="{{$item->id}}">{{$item->sap}} - {{$item->name}} - {{$item->model_id}} - {{$item->part_id}} - {{$item->brand}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -52,6 +52,16 @@
                             <div class="form-group">
                                 <label for="brand">Marca</label>
                                 <input type="text" class="form-control" name="brand" id="brand" value="{{old('brand')}}">
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-xs-6 other_reference">
+                            <div class="form-group">
+                                <label for="type">Tipo</label>
+                                <select name="type" id="type" class="form-control">
+                                    <option selected disabled></option>
+                                    <option value="Instalación">Instalación</option>
+                                    <option value="Mantenimiento">Mantenimiento</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-12">
