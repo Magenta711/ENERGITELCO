@@ -21,6 +21,11 @@ class driversController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('verified');
+        $this->middleware('permission:Lista de controles de documentos de conductores|Crear controles de documentos de conductores|Editar controles de documentos de conductores|Ver controles de documentos de conductores|Eliminar controles de documentos de conductores',['only'=> ['index']]);
+        $this->middleware('permission:Crear controles de documentos de conductores',['only'=> ['create','store']]);
+        $this->middleware('permission:Editar controles de documentos de conductores',['only'=> ['edit','update']]);
+        $this->middleware('permission:Ver controles de documentos de conductores',['only'=> ['show']]);
+        $this->middleware('permission:Eliminar controles de documentos de conductores',['only'=> ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -41,7 +46,7 @@ class driversController extends Controller
     public function create()
     {
         $users = User::where('state',1)->get();
-        $vehicles = invVehicle::where('status','!=',0)->get();
+        $vehicles = invVehicle::where('status|!=',0)->get();
         return view('logistics_infrastructure.drivers.create',compact('users','vehicles'));
     }
 

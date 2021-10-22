@@ -918,22 +918,9 @@ Route::get('logistics_infrastructure/traffic_accident/download/{id}','logistics_
 Route::delete('logistics_infrastructure/traffic_accident/{id}','logistics_infrastructure\traffic_accidentController@destroy')->name('traffic_accident_delete');
 
 Route::get('logistics_infrastructure/transit_taxes','logistics_infrastructure\transitTaxesController@index')->name('transit_taxes');
-Route::get('logistics_infrastructure/transit_taxes/create','logistics_infrastructure\transitTaxesController@create')->name('transit_taxes_create');
-Route::post('logistics_infrastructure/transit_taxes','logistics_infrastructure\transitTaxesController@store')->name('transit_taxes_store');
 Route::get('logistics_infrastructure/transit_taxes/show/{id}','logistics_infrastructure\transitTaxesController@show')->name('transit_taxes_show');
 Route::get('logistics_infrastructure/transit_taxes/{id}/edit','logistics_infrastructure\transitTaxesController@edit')->name('transit_taxes_edit');
 Route::put('logistics_infrastructure/transit_taxes/{id}','logistics_infrastructure\transitTaxesController@update')->name('transit_taxes_update');
-Route::get('logistics_infrastructure/transit_taxes/download/{id}','logistics_infrastructure\transitTaxesController@download')->name('transit_taxes_download');
-Route::delete('logistics_infrastructure/transit_taxes/{id}','logistics_infrastructure\transitTaxesController@destroy')->name('transit_taxes_delete');
-
-Route::get('logistics_infrastructure/vehicle_documentation','logistics_infrastructure\vehicleDocumentationController@index')->name('vehicle_documentation');
-Route::get('logistics_infrastructure/vehicle_documentation/create','logistics_infrastructure\vehicleDocumentationController@create')->name('vehicle_documentation_create');
-Route::post('logistics_infrastructure/vehicle_documentation','logistics_infrastructure\vehicleDocumentationController@store')->name('vehicle_documentation_store');
-Route::get('logistics_infrastructure/vehicle_documentation/show/{id}','logistics_infrastructure\vehicleDocumentationController@show')->name('vehicle_documentation_show');
-Route::get('logistics_infrastructure/vehicle_documentation/{id}/edit','logistics_infrastructure\vehicleDocumentationController@edit')->name('vehicle_documentation_edit');
-Route::put('logistics_infrastructure/vehicle_documentation/{id}','logistics_infrastructure\vehicleDocumentationController@update')->name('vehicle_documentation_update');
-Route::get('logistics_infrastructure/vehicle_documentation/download/{id}','logistics_infrastructure\vehicleDocumentationController@download')->name('vehicle_documentation_download');
-Route::delete('logistics_infrastructure/vehicle_documentation/{id}','logistics_infrastructure\vehicleDocumentationController@destroy')->name('vehicle_documentation_delete');
 
 Route::get('human_management/premium','human_management\premiumController@index')->name('premium');
 Route::get('human_management/premium/create','human_management\premiumController@create')->name('premium_create');

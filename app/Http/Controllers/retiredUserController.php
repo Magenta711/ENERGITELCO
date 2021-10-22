@@ -11,6 +11,7 @@ class retiredUserController extends Controller
     public function __construct() {
         $this->middleware('auth');
         $this->middleware('verified');
+        $this->middleware('permission:Ver usuarios eliminados',['only'=>['index']]);
     }
     /**
      * Display a listing of the resource.

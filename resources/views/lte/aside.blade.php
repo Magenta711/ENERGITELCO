@@ -625,7 +625,9 @@
                 @if (auth()->user()->hasAnyPermission(['Lista de caracterización de accidentes de tráncito','Crear caracterización de accidentes de tráncito','Editar caracterización de accidentes de tráncito','Ver caracterización de accidentes de tráncito','Eliminar caracterización de accidentes de tráncito']))  
                   <li class="{{ activeMenu('logistics_infrastructure/traffic_accident*') }}"><a class="btn-send" href="{{ route('traffic_accident') }}"><i class="fa fa-car-crash"></i> ACCIDENTES DE TRÁNSITO</a></li>
                 @endif
-                <li class="{{ activeMenu('logistics_infrastructure/transit_taxes*') }}"><a class="btn-send" href="{{ route('transit_taxes') }}"><i class="fa fa-print"></i> MULTAS DE TRÁNSITO</a></li>
+                @if (auth()->user()->hasAnyPermission(['Lista de cortes de multas','Editar cortes de multas','Ver cortes de multas'])) 
+                  <li class="{{ activeMenu('logistics_infrastructure/transit_taxes*') }}"><a class="btn-send" href="{{ route('transit_taxes') }}"><i class="fa fa-print"></i> MULTAS DE TRÁNSITO</a></li>
+                @endif
                 {{-- <li class="{{ activeMenu('logistics_infrastructure/vehicle_documentation*') }}"><a class="btn-send" href="{{ route('vehicle_documentation') }}"><i class="fa fa-car"></i> REGISTRO DE DOCUMENTACIÓN Y MANTENIMIENTO DE VEHÍCULOS</a></li> --}}
                 @if (
                   auth()->user()->hasPermissionTo('Lista de computadores del inventario') ||

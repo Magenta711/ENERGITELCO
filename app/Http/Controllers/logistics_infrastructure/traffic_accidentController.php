@@ -13,6 +13,11 @@ class traffic_accidentController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('verified');
+        $this->middleware('permission:Lista de caracterización de accidentes de tráncito|Crear caracterización de accidentes de tráncito|Editar caracterización de accidentes de tráncito|Ver caracterización de accidentes de tráncito|Eliminar caracterización de accidentes de tráncito',['only' => ['index']]);
+        $this->middleware('permission:Crear caracterización de accidentes de tráncito',['only' => ['create','store']]);
+        $this->middleware('permission:Editar caracterización de accidentes de tráncito',['only' => ['update','edit']]);
+        $this->middleware('permission:Ver caracterización de accidentes de tráncito',['only' => ['show']]);
+        $this->middleware('permission:Eliminar caracterización de accidentes de tráncito',['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.

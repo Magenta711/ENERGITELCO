@@ -17,6 +17,9 @@ class transitTaxesController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('verified');
+        $this->middleware('permission:Lista de cortes de multas|Editar cortes de multas|Ver cortes de multas',['only' => ['index']]);
+        $this->middleware('permission:Editar cortes de multas',['only' => ['edit','update']]);
+        $this->middleware('permission:Ver cortes de multas',['only' => ['show']]);
     }
     /**
      * Display a listing of the resource.
