@@ -33,9 +33,9 @@
     </tr>
     <tr>
         <td></td>
+        <td colspan="5" style="text-align: center;background: #D0CECE">COORDENADAS GEOGRÁFICAS</td>
         <td colspan="5" style="text-align: center;background: #D0CECE">EQUIPOS WIFI INTERIOR</td>
         <td colspan="5" style="text-align: center;background: #D0CECE">EQUIPOS WIFI EXTERIOR 1 (AP 1)</td>
-        <td colspan="5" style="text-align: center;background: #D0CECE">EQUIPOS WIFI EXTERIOR 2 (AP 2)</td>
     </tr>
     <tr>
         <td></td>
@@ -60,9 +60,9 @@
     <tr><td></td></tr>
     <tr>
         <td></td>
-        <td colspan="5" style="text-align: center;background: #D0CECE">RACK METALICO SI APLICA</td>
-        <td colspan="5" style="text-align: center;background: #D0CECE">UPS SI APLICA</td>
-        <td colspan="5" style="text-align: center;background: #D0CECE">BATERIA SI APLICA</td>
+        <td colspan="5" style="text-align: center;background: #D0CECE">EQUIPOS WIFI EXTERIOR 2 (AP 2) SI APLICA</td>
+        <td colspan="5" style="text-align: center;background: #D0CECE">EQUIPOS DE COMPUTO DE LA SEDE CONECTADOS A INTERNET</td>
+        <td colspan="5" style="text-align: center;background: #D0CECE">DISPOSITIVO MÓVIL CONECTADO AL PUNTO DE ACCESO</td>
     </tr>
     <tr>
         <td></td>
@@ -87,63 +87,9 @@
     <tr><td></td></tr>
     <tr>
         <td></td>
-        <td colspan="5" style="text-align: center;background: #D0CECE">KIT PANEL SOLARX4 FOTOVOLTAICO SI APLICA</td>
-        <td colspan="5" style="text-align: center;background: #D0CECE">CONTROLADOR SI APLICA</td>
-        <td colspan="5" style="text-align: center;background: #D0CECE">INVERSOR PST-600-48 MODULO SOLAR SAMLX SI APLICA</td>
-    </tr>
-    <tr>
-        <td></td>
-        <td rowspan="16" colspan="5"></td>
-        <td rowspan="16" colspan="5"></td>
-        <td rowspan="16" colspan="5"></td>
-    </tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr>
-        <td></td>
-        <td colspan="5" style="text-align: center;background: #D0CECE">POSTE 3MTS SOPORTE PANEL SOLAR SI PLICA</td>
-        <td colspan="5" style="text-align: center;background: #D0CECE">RADIO SUSCRIPTOR SI APLICA</td>
-        <td colspan="5" style="text-align: center;background: #D0CECE">SEÑALÉTICA INTERIOR</td>
-    </tr>
-    <tr>
-        <td></td>
-        <td rowspan="16" colspan="5"></td>
-        <td rowspan="16" colspan="5"></td>
-        <td rowspan="16" colspan="5"></td>
-    </tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr>
-        <td></td>
-        <td colspan="5" style="text-align: center;background: #D0CECE">SEÑALÉTICA EXTERIOR</td>
-        <td colspan="5" style="text-align: center;background: #D0CECE">MEDICIÓN ELÉCTRICA 1</td>
-        <td colspan="5" style="text-align: center;background: #D0CECE">MEDICIÓN ELÉCTRICA 2</td>
+        <td colspan="5" style="text-align: center;background: #D0CECE">SEÑALETICA EXTERIOR</td>
+        <td colspan="5" style="text-align: center;background: #D0CECE">SOLUCIÓN DE RESPALDO (4 HORAS SI APLICA)</td>
+        <td colspan="5" style="text-align: center;background: #D0CECE">SEÑALETICA INTERIOR</td>
     </tr>
     <tr>
         <td></td>
@@ -169,62 +115,62 @@
     <tr>
         <td></td>
         <td colspan="5" style="text-align: center;background: #D0CECE">PRINT DE SERVIDOR TRIARA CON EVENTO CREADO A UPS</td>
+        <td colspan="5" style="text-align: center;background: #D0CECE">MEDICIÓN ELÉCTIRCA 1</td>
+        <td colspan="5" style="text-align: center;background: #D0CECE">MEDICIÓN ELÉCTIRCA 2</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td rowspan="16" colspan="5"></td>
+        <td rowspan="16" colspan="5"></td>
+        <td rowspan="16" colspan="5"></td>
+    </tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr>
+        <td></td>
         <td colspan="5" style="text-align: center;background: #D0CECE">NAVEGACIÓN AP INDOOR</td>
         <td colspan="5" style="text-align: center;background: #D0CECE">NAVEGACIÓN AP OUTDOOR</td>
-    </tr>
-    <tr>
-        <td></td>
-        <td rowspan="16" colspan="5"></td>
-        <td rowspan="16" colspan="5"></td>
-        <td rowspan="16" colspan="5"></td>
-    </tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr>
-        <td></td>
         <td colspan="5" style="text-align: center;background: #D0CECE">PRUEBA DE VELOCIDAD</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td rowspan="16" colspan="5"></td>
+        <td rowspan="16" colspan="5"></td>
+        <td rowspan="16" colspan="5"></td>
+    </tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr>
+        <td></td>
         <td colspan="5" style="text-align: center;background: #D0CECE">CONECTIVIDAD PORTAL CAUTIVO</td>
         <td colspan="5" style="text-align: center;background: #D0CECE">BLOQUEO DE PÁGINAS</td>
-    </tr>
-    <tr>
-        <td></td>
-        <td rowspan="16" colspan="5"></td>
-        <td rowspan="16" colspan="5"></td>
-        <td rowspan="16" colspan="5"></td>
-    </tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr><td></td></tr>
-    <tr>
-        <td></td>
         <td colspan="5" style="text-align: center;background: #D0CECE">BLOQUEO DE PÁGINAS</td>
-        <td colspan="5" style="text-align: center;background: #D0CECE">KIT SATELITAL SI APLICA</td>
-        <td colspan="5" style="text-align: center;background: #D0CECE"></td>
     </tr>
     <tr>
         <td></td>

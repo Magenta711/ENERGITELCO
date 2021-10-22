@@ -24,10 +24,13 @@ class minticMaintenanceExport implements WithMultipleSheets
     
     public function sheets(): array
     {
-        return [
-            'ACTA DE INSTALACIÓN_20032021' => new minticMaintenanceExportFirst($this->id,$this->equipments,$this->files,$this->activities),
-            'REGISTRO FOTOGRÁFICO ANTES' => new minticMaintenanceExportSecund($this->id,$this->files),
-            'REGISTRO FOTOGRÁFICO DESPÚES' => new minticMaintenanceExportThird($this->id,$this->files)
-        ];
+        $arr['ACTA DE INSTALACIÓN_20032021'] = new minticMaintenanceExportFirst($this->id,$this->equipments,$this->files,$this->activities);
+        if ($this->id->type_format == 'Mantenimiento preventivo') {
+            $arr['REGISTRO FOTOGRÁFICO'] = new minticMaintenanceExportSecundPrevent($this->id,$this->files);
+        }else {
+            $arr['REGISTRO FOTOGRÁFICO ANTES'] = new minticMaintenanceExportSecund($this->id,$this->files);
+            $arr['REGISTRO FOTOGRÁFICO DESPÚES'] = new minticMaintenanceExportThird($this->id,$this->files);
+        }
+        return $arr;
     }
 }

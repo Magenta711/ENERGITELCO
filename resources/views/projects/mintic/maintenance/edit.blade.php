@@ -43,11 +43,15 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="type_format">Tipo de formato</label>
-                                <select name="type_format" id="type_format" class="form-control">
-                                    <option selected disabled></option>
-                                    <option {{ $item->type_format == 'Mantenimiento correctivo' ? 'selected' : '' }} value="Mantenimiento correctivo">Mantenimiento correctivo</option>
-                                    <option {{ $item->type_format == 'Mantenimiento preventivo' ? 'selected' : '' }} value="Mantenimiento preventivo">Mantenimiento preventivo</option>
-                                </select>
+                                @if (count($item->files) > 0)
+                                    <input type="text" name="type_format" id="type_format" class="form-control" readonly value="{{$item->type_format}}">
+                                @else
+                                    <select name="type_format" id="type_format" class="form-control">
+                                        <option selected disabled></option>
+                                        <option {{ $item->type_format == 'Mantenimiento correctivo' ? 'selected' : '' }} value="Mantenimiento correctivo">Mantenimiento correctivo</option>
+                                        <option {{ $item->type_format == 'Mantenimiento preventivo' ? 'selected' : '' }} value="Mantenimiento preventivo">Mantenimiento preventivo</option>
+                                    </select>
+                                @endif
                             </div>
                         </div>
                         <div class="col-md-4">
