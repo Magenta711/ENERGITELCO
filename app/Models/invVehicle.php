@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\DriversReport;
 use Illuminate\Database\Eloquent\Model;
 
 class invVehicle extends Model
@@ -19,5 +20,10 @@ class invVehicle extends Model
     public function reports()
     {
         return $this->hasMany(invVehicleReport::class,'vehicle_id','id');
+    }
+
+    public function reports_drivers()
+    {
+        return $this->hasMany(DriversReport::class,'vehicle_id','id');
     }
 }

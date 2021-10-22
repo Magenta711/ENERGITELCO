@@ -15,6 +15,9 @@ class CreateTransitTaxesTable extends Migration
     {
         Schema::create('transit_taxes', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->boolean('status');
             $table->timestamps();
         });
     }

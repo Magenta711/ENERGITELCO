@@ -2,12 +2,12 @@
 @section('content')
 <section class="content-header">
     <h1>
-        CARACTERIZACIÓN DE ACCIDENTES DE TRÁNCITO
+        CARACTERIZACIÓN DE ACCIDENTES DE TRÁNSITO
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
         <li><a href="#"> Logistica e infraestrutura</a></li>
-        <li class="active">Caracterización de accidentes de tráncito</li>
+        <li class="active">Caracterización de accidentes de tránsito</li>
     </ol>
 </section>
 <section class="content">
