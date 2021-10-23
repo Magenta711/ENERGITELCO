@@ -257,7 +257,7 @@
             <hr>
             @if ($item->type_format == 'Mantenimiento preventivo')
                 @include('projects.mintic.includes.upload',[
-                    'ltt' => '2',
+                    'ltt' => '1',
                     'id' => $item,
                     'num' => $i++,
                     'it'=>'6',
@@ -267,7 +267,7 @@
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload',[
-                    'ltt' => '2',
+                    'ltt' => '1',
                     'id' => $item,
                     'num' => $i++,
                     'it'=>'6',
@@ -277,7 +277,7 @@
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload',[
-                    'ltt' => '2',
+                    'ltt' => '1',
                     'id' => $item,
                     'num' => $i++,
                     'it'=>'6',
@@ -287,7 +287,7 @@
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload',[
-                    'ltt' => '2',
+                    'ltt' => '1',
                     'id' => $item,
                     'num' => $i++,
                     'it'=>'6',
@@ -297,7 +297,7 @@
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload',[
-                    'ltt' => '2',
+                    'ltt' => '1',
                     'id' => $item,
                     'num' => $i++,
                     'it'=>'6',
@@ -307,7 +307,7 @@
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload',[
-                    'ltt' => '2',
+                    'ltt' => '1',
                     'id' => $item,
                     'num' => $i++,
                     'it'=>'6',
@@ -317,7 +317,7 @@
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload',[
-                    'ltt' => '2',
+                    'ltt' => '1',
                     'id' => $item,
                     'num' => $i++,
                     'it'=>'6',
@@ -326,7 +326,7 @@
                     'accept' => 'image/*'
                 ])
                 @include('projects.mintic.includes.upload',[
-                    'ltt' => '2',
+                    'ltt' => '1',
                     'id' => $item,
                     'num' => $i++,
                     'it'=>'6',
@@ -336,7 +336,7 @@
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload',[
-                    'ltt' => '2',
+                    'ltt' => '1',
                     'id' => $item,
                     'num' => $i++,
                     'it'=>'6',

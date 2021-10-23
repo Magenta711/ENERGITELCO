@@ -11,7 +11,7 @@ use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class minticMaintenanceExportSecund implements FromView, WithTitle, WithDrawings, ShouldAutoSize, WithStyles
+class minticMaintenanceExportSecundPrevent implements FromView, WithTitle, WithDrawings, ShouldAutoSize, WithStyles
 {
     protected $id;
     protected $files;
@@ -47,11 +47,13 @@ class minticMaintenanceExportSecund implements FromView, WithTitle, WithDrawings
 
     public function view(): View
     {
-        return view('projects.mintic.maintenance.export.prevent_secund');
+        return view('projects.mintic.maintenance.export.prevent_secund',[
+            'id' => $this->id
+        ]);
     }
 
     public function title(): string
     {
-        return 'REGISTRO FOTOGRÁFICO ANTES';
+        return 'REGISTRO FOTOGRÁFICO';
     }
 }

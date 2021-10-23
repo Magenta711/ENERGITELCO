@@ -46,7 +46,9 @@ class minticMaintenanceExportThird implements FromView, WithTitle, WithDrawings,
 
     public function view(): View
     {
-        return view('projects.mintic.maintenance.export.third');
+        return view('projects.mintic.maintenance.export.third',[
+            'id' => $this->id
+        ]);
     }
 
     public function title(): string

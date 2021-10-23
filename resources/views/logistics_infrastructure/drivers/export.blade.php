@@ -112,7 +112,7 @@ function getAge($birthDate)
         <td style="border: 1px solid #000000;"></td>
         <td colspan="2" style="border: 1px solid #000000;">Otro:</td>
         <td style="border: 1px solid #000000;"></td>
-        <td colspan="4" style="border: 1px solid #000000;"></td>
+        <td colspan="3" style="border: 1px solid #000000;"></td>
     </tr>
     <tr>
         <td></td>
