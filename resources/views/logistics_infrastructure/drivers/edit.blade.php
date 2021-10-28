@@ -148,6 +148,16 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
+                                    <label for="report_status">Estado</label>
+                                    <select name="report_status[{{$vehicle->id}}][]" id="report_status_{{$vehicle->id}}" class="form-control">
+                                        <option selected disabled></option>
+                                        <option value="0">Pendiente de pago</option>
+                                        <option value="1">Pago</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
                                     <label for="report_suject">Motivo</label>
                                     <textarea name="report_suject[]" id="report_suject" cols="30" rows="3" class="form-control"></textarea>
                                 </div>

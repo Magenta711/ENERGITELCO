@@ -35,6 +35,7 @@ class endWorkController extends Controller
      */
     public function create(User $id)
     {
+        // return $id->signatures;//*
         $meses = array('',"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
         $day = 0;
         $month = 0;

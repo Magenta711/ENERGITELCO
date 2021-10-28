@@ -44,6 +44,7 @@ class userController extends Controller
     
     public function index()
     {
+
         $users = User::with(['position','register'])->where('state',1)->get();
         return view('users.index',compact('users'));
     }
@@ -301,7 +302,8 @@ class userController extends Controller
     public function destroy(User $id)
     {
         $id->update(['state'=>0]);
-        return redirect()->route('users')->with('success','Usuario eliminado correctamente');
+        // return redirect()->route('users')->with('success','Usuario eliminado correctamente');
+        return response()->json( $id );
     }
 
     //Restauar
@@ -316,5 +318,11 @@ class userController extends Controller
     {
         $id = User::where('state',1)->get();
         return (new UsersExport)->actives($id)->download(time().'_users.xlsx');
+    }
+
+    public function list()
+    {
+        $users = User::where('state',1)->with(['position','register'])->get();
+        return response()->json(['data' => $users]);
     }
 }

@@ -1632,7 +1632,7 @@
                                                 <label for="place_accident_report">Lugar</label>
                                                 <input type="text" name="place_accident_report[]" id="place_accident_report" class="form-control" value="{{$item->place}}">
                                             </div>
-                                        </div value="{{$item->last_ws}}">
+                                        </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="area_accident_report">Area rural/urbana</label>
@@ -1655,7 +1655,7 @@
                                                 <label for="place_accident_report">Lugar</label>
                                                 <input type="text" class="form-control" name="place_accident_report[]" id="place_accident_report">
                                             </div>
-                                        </div value="{{$item->last_ws}}">
+                                        </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="area_accident_report">Area rural/urbana</label>

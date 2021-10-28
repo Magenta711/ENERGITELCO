@@ -54,7 +54,7 @@
                                 <input type="text" class="form-control" name="brand" id="brand" value="{{old('brand')}}">
                             </div>
                         </div>
-                        <div class="col-md-4 col-xs-6 other_reference">
+                        <div class="col-md-4 col-xs-6">
                             <div class="form-group">
                                 <label for="type">Tipo</label>
                                 <select name="type" id="type" class="form-control">

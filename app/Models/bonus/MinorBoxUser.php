@@ -2,6 +2,7 @@
 
 namespace App\Models\bonus;
 
+use App\Models\work1_cut_bonus;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 

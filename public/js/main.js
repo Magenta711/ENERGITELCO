@@ -12,36 +12,6 @@ $(document).ready(function() {
         document.getElementById('text_average').innerHTML = result;
         document.getElementById('average').value = result;
     });
-    if ($('#table_index').length > 0) {
-        $('#table_index').DataTable( {
-            order: [[ 0, 'desc' ]],
-            select: true,
-            lengthMenu: [ [15, 30, 50, -1], [15, 30, 50, "Todos"] ],
-            pagingType: 'full_numbers',
-            language: {
-                lengthMenu:       "Mostrar _MENU_ entradas",
-                zeroRecords:      "No se encontro registros",
-                search:           "Buscar",
-                paginate: {
-                    first:    '«',
-                    previous: '‹',
-                    next:     '›',
-                    last:     '»'
-                },
-                aria: {
-                    paginate: {
-                        first:    'First',
-                        previous: 'Previous',
-                        next:     'Next',
-                        last:     'Last'
-                    }
-                },
-                info:             "Mostrando _START_ a _END_ de _TOTAL_ entradas",
-                infoFiltered:     "(filtrado de _MAX_ registros totales)",
-                infoEmpty:        "Mostrando 0 a 0 de 0 entradas"
-            },
-        });
-    }
 
     $('.btn-send').click(function () {
         $('.loader').show();
@@ -60,4 +30,44 @@ function markerNotificationAsRead(notification,link) {
     setTimeout( function() {
         window.location.href= '/'+link;
     special }, 500);
+}
+
+function dataTableCrete(url,columns) {
+    let table = $('#table_index').DataTable({
+        // processing: true,
+        ajax: {
+            url: url,
+            dataSrc: 'data'
+        },
+        columns: columns,
+        order: [[ 0, 'desc' ]],
+        select: true,
+        lengthMenu: [ [15, 30, 50, -1], [15, 30, 50, "Todos"] ],
+        pagingType: 'full_numbers',
+        language: {
+            lengthMenu:       "Mostrar _MENU_ entradas",
+            zeroRecords:      "No se encontro registros",
+            search:           "Buscar",
+            paginate: {
+                first:    '«',
+                previous: '‹',
+                next:     '›',
+                last:     '»'
+            },
+            aria: {
+                paginate: {
+                    first:    'First',
+                    previous: 'Previous',
+                    next:     'Next',
+                    last:     'Last'
+                }
+            },
+            info:             "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+            infoFiltered:     "(filtrado de _MAX_ registros totales)",
+            infoEmpty:        "Mostrando 0 a 0 de 0 entradas"
+        },
+        
+    }).on('draw.dt',function () {
+        initFnTable(table);
+    });
 }

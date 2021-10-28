@@ -146,6 +146,7 @@ class transitTaxesController extends Controller
                         'suject' => $request->report_suject[$key][$i],
                         'observation' => $request->report_observation[$key][$i],
                         'driver_id' => $request->report_driver_id[$key][$i],
+                        'status' => $request->report_status[$key][$i]
                     ]);
                 }
             }

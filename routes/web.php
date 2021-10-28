@@ -204,7 +204,7 @@ Route::get('execution_works/review_assignment_tools/edit/{id}','execution_works\
 Route::put('execution_works/review_assignment_tools/{id}','execution_works\reviewAssignmentTools@update')->name('review_assignment_tools_update');
 Route::get('execution_works/review_assignment_tools/download/{id}','execution_works\reviewAssignmentTools@download')->name('review_assignment_tools_download');
 Route::patch('execution_works/review_assignment_tools/{id}','execution_works\reviewAssignmentTools@approve')->name('review_assignment_tools_approve');
-Route::delete('execution_works/review_assignment_tools/delete/{id}','execution_works\reviewAssignmentTools@delete')->name('review_assignment_tools_delete');
+Route::delete('execution_works/review_assignment_tools/delete/{id}','execution_works\reviewAssignmentTools@destroy')->name('review_assignment_tools_delete');
 
 // end contract
 Route::get('user/end_work/presend/{id}','endWorkController@create')->name('user_end_work')->middleware('auth')->middleware('verified');
@@ -226,6 +226,7 @@ Route::post('users','userController@store')->name("user_store");
 Route::delete('users/{id}','userController@destroy')->name("user_destroy");
 Route::get('users/restore/{id}','userController@restore')->name("restore");
 Route::get('users/export','userController@export')->name('user_export');
+Route::get('users/list','userController@list')->name('user_list');
 
 //retired users
 Route::get('retireds','retiredUserController@index')->name('retired_users');

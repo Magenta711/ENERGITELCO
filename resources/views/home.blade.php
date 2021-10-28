@@ -1,5 +1,7 @@
 @extends('lte.layouts')
 @section('content')
+{{-- 1633535962Imbnk.jpg --}}
+{{-- 1633536739t8Mqj.jpeg --}}
 @php
         $months = ['ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOBIEMBRE','DICIEMBRE'];
     @endphp

@@ -142,6 +142,16 @@
                                                                 </div>
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
+                                                                        <label for="report_status">Estado</label>
+                                                                        <select name="report_status[{{$vehicle->id}}][]" id="report_status_{{$vehicle->id}}" class="form-control">
+                                                                            <option selected disabled></option>
+                                                                            <option value="0">Pendiente de pago</option>
+                                                                            <option value="1">Pago</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
                                                                         <label for="report_driver_id">Conductor</label>
                                                                         <select name="report_driver_id[{{$vehicle->id}}][]" id="report_driver_id_{{$vehicle->id}}" class="form-control">
                                                                             <option selected disabled></option>

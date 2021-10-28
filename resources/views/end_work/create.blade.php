@@ -13,29 +13,120 @@
 </section>
 <section class="content">
     @include('includes.alerts')
-    @if ($id->minor_box && ($id->minor_box->charges > 0 || $id->minor_box->discharges > 0 || $id->minor_box->pending > 0 || ($id->register->hasContract() && $id->register->hasContract()->signatured_at == '') || !$id->register->hasContract()))
+    @php
+        $submit = true;
+    @endphp
+    {{-- @if ($id->minor_box && ($id->minor_box->charges > 0 || $id->minor_box->discharges > 0 || $id->minor_box->pending > 0 || ($id->register->hasContract() && $id->register->hasContract()->signatured_at == '') || !$id->register->hasContract())) --}}
     <div class="alert alert-danger alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
         <h4><i class="icon fa fa-ban"></i> Alerta!</h4>
         <ul>
             @if ($id->minor_box && $id->minor_box->charges > 0)
-            <li>El usuario cuenta con {{number_format($id->minor_box->charges,2,',','.')}} de caja menor por descargar</li>
+                @php
+                    $submit = false;
+                @endphp
+                <li>El usuario cuenta con {{number_format($id->minor_box->charges,2,',','.')}} de caja menor por descargar</li>
             @endif
             @if ($id->minor_box && ($id->minor_box->discharges > 0 || $id->minor_box->pending > 0))
+                @php
+                    $submit = false;
+                @endphp
                 <li>El usuario cuenta con ${{number_format(($id->minor_box->discharges + $id->minor_box->pending),2,",",".")}} pendientes por pagarle</li>
             @endif
             @if (!$id->register->hasContract())
+                @php
+                    $submit = false;
+                @endphp
                 <li>El usuario no tiene contrato activo</li>
             @endif
             @if ($id->register->hasContract() && $id->register->hasContract()->signatured_at == '')
+                @php
+                    $submit = false;
+                @endphp
                 <li>El usuario no ha firmado el contrato</li>
             @endif
-            @if ($id->register->car || $id->register->moto)
-                <li>El usuario es conductor, favor verificar multas</li>
+            @if(count($id->tools) > 0)
+                @php
+                    $submit = false;
+                @endphp
+                <li>El usuario cuenta con {{count($id->tools)}} herramientas asignadas</li>
+            @endif
+            @if(count($id->computers) > 0)
+                @php
+                    $submit = false;
+                @endphp
+                <li>El usuario cuenta con {{count($id->computers)}} computadores asignados</li>
+            @endif
+            @if(count($id->unapprovedCurriculum()) > 0)
+                @php
+                    $submit = false;
+                @endphp
+                <li>El usuario cuenta con {{count($id->unapprovedCurriculum())}} hoja(s) de vida sin aprobar</li>
+            @endif
+            @if(count($id->unpaymentTransitTaxes()) > 0)
+                @php
+                    $submit = false;
+                @endphp
+                <li>El usuario cuenta con {{count($id->unpaymentTransitTaxes())}} multas sin pagar</li>
             @endif
         </ul>
     </div>
-    @endif
+    <div class="alert alert-warning alert-dismissible">
+        <h4><i class="icon fas fa-exclamation"></i> Alvertencia!</h4>
+        <ul>
+            @if(count($id->unapprovedEvaluation()) > 0)
+                <li>El usuario cuenta con {{count($id->unapprovedEvaluation())}} evaluación de desempeño por cerrar</li>
+            @endif
+            @if(count($id->unapprovedCallAttetion()) > 0)
+                <li>El usuario cuenta con {{count($id->unapprovedCallAttetion())}} llamados de atención por cerrar</li>
+            @endif
+            @if(count($id->unapprovedSeverance()) > 0)
+                <li>El usuario cuenta con {{count($id->unapprovedSeverance())}} solicitud de retiro de cesantia o carta laboral por cerrar</li>
+            @endif
+            @if(count($id->unconfirmedMemoradums()) > 0)
+                <li>El usuario cuenta con {{count($id->unconfirmedMemoradums())}} memorandos sin firmar</li>
+            @endif
+            @if(count($id->unapprovedInterview()) > 0)
+                <li>El usuario cuenta con {{count($id->unapprovedInterview())}} entrevista(s) sin aprobar</li>
+            @endif
+            @if(count($id->unapprovedBonuUser()) > 0)
+                <li>El usuario cuenta con {{count($id->unapprovedBonuUser())}} reporte de bonificación administrativa sin cerrar</li>
+            @endif
+            @if(count($id->unapprovedBonuses()) > 0)
+                <li>El usuario cuenta con {{count($id->unapprovedBonuses())}} reporte de bonificación administrativa sin aprobar</li>
+            @endif
+            @if(count($id->unapprovedBoxes()) > 0)
+                <li>El usuario cuenta con {{count($id->unapprovedBoxes())}} reporte de bonificación ténicas o caja menor sin aprobar</li>
+            @endif
+            @if(count($id->unconfirmedAcction()) > 0)
+                <li>El usuario cuenta con {{count($id->unconfirmedAcction())}} acciones de mejora sin cerrar</li>
+            @endif
+            @if(count($id->unapprovedProceedings()) > 0)
+                <li>El usuario cuenta con {{count($id->unapprovedProceedings())}} actas por cerrar</li>
+            @endif
+            @if(count($id->unapprovedPayrollOverTime()) > 0)
+                <li>El usuario cuenta con {{count($id->unapprovedPayrollOverTime())}} reporte de pago de nomina sin aprobar</li>
+            @endif
+            @if(count($id->unapprovedCheckListComputer()) > 0)
+                <li>El usuario cuenta con {{count($id->unapprovedCheckListComputer())}} listas de verificación de computadores sin aprobar</li>
+            @endif
+            @if(count($id->unapprovedDeliveryStaffing()) > 0)
+                <li>El usuario cuenta con {{count($id->unapprovedDeliveryStaffing())}} entregas de dotación personal sin aprobar</li>
+            @endif
+            @if(count($id->unapproveDreviewTool()) > 0)
+                <li>El usuario cuenta con {{count($id->unapproveDreviewTool())}} revición y asignación de herramientas sin aprobar</li>
+            @endif
+            @if(count($id->unapprovedFallProtection()) > 0)
+                <li>El usuario cuenta con {{count($id->unapprovedFallProtection())}} equipos de protección contra caidas sin aprobar</li>
+            @endif
+            @if(count($id->unapprovedWorkPermit()) > 0)
+                <li>El usuario cuenta con {{count($id->unapprovedWorkPermit())}} permisos de trabajo sin aprobar</li>
+            @endif
+            @if(count($id->unapprovedDateilVehicles()) > 0)
+                <li>El usuario cuenta con {{count($id->unapprovedDateilVehicles())}} inspección detallada de vehiculos sin aprobar</li>
+            @endif
+        </ul>
+    </div>
+    {{-- @endif --}}
     {{-- Content main --}}
     <div class="box">
         <div class="box-header">
@@ -123,7 +214,7 @@
             </div>
         </div>
         <div class="box-footer">
-            <button class="btn btn-sm btn-primary btn-send">Enviar</button>
+            <button class="btn btn-sm btn-primary btn-send" {{$submit ? '' : 'disabled'}}>Enviar</button>
         </div>
         </form>
     </div>

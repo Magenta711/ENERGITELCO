@@ -70,6 +70,7 @@ class driversController extends Controller
                     'date' => $value,
                     'city' => $request->report_city[$key],
                     'suject' => $request->report_suject[$key],
+                    'status' => $request->report_status[$key],
                     'observation' => $request->report_observation[$key],
                     'driver_id' => $driver->id
                 ]);

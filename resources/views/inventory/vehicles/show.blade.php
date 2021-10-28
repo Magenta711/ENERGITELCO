@@ -11,7 +11,7 @@
         <li><a href="#">Logística</a></li>
         <li><a href="#">Inventario</a></li>
         <li><a href="#">Vehículos</a></li>
-        <li class="active">Editar vehículos</li>
+        <li class="active">Ver vehículos</li>
     </ol>
 </section>
 {{-- Content main --}}
@@ -448,7 +448,6 @@
                                 @endif
                             @endforeach
                         </div>
-                        <button id="add_oil" class="btn btn-sm btn-link btn-add"><i class="fa fa-plus"></i> Agregar fecha</button>
                         <hr>
                         <div id="destino_tires">
                             @php
@@ -482,7 +481,6 @@
                                 @endif
                             @endforeach
                         </div>
-                        <button id="add_tires" class="btn btn-sm btn-link btn-add"><i class="fa fa-plus"></i> Agregar fecha</button>
                         <hr>
                         <div id="destino_lubrication">
                             @php
@@ -516,7 +514,6 @@
                                 @endif
                             @endforeach
                         </div>
-                        <button id="add_lubrication" class="btn btn-sm btn-link btn-add"><i class="fa fa-plus"></i> Agregar fecha</button>
                         <hr>
                         <div id="destino_address">
                             @php
@@ -550,7 +547,6 @@
                                 @endif
                             @endforeach
                         </div>
-                        <button id="add_address" class="btn btn-sm btn-link btn-add"><i class="fa fa-plus"></i> Agregar fecha</button>
                         <hr>
                         <div id="destino_motor">
                             @php
@@ -584,7 +580,6 @@
                                 @endif
                             @endforeach
                         </div>
-                        <button id="add_motor" class="btn btn-sm btn-link btn-add"><i class="fa fa-plus"></i> Agregar fecha</button>
                         <hr>
                         <div id="destino_clutch">
                             @php
@@ -618,7 +613,6 @@
                             @endif
                         @endforeach
                         </div>
-                        <button id="add_clutch" class="btn btn-sm btn-link btn-add"><i class="fa fa-plus"></i> Agregar fecha</button>
                         <hr>
                         <div id="destino_suspension">
                             @php
@@ -652,7 +646,6 @@
                                 @endif
                             @endforeach
                         </div>
-                        <button id="add_suspension" class="btn btn-sm btn-link btn-add"><i class="fa fa-plus"></i> Agregar fecha</button>
                         <hr>
                         <div id="destino_brakes_bands">
                             @php
@@ -686,7 +679,6 @@
                                 @endif
                             @endforeach
                         </div>
-                        <button id="add_brakes_bands" class="btn btn-sm btn-link btn-add"><i class="fa fa-plus"></i> Agregar fecha</button>
                         <hr>
                         <div id="destino_brakes_pastes">
                             @php
@@ -720,7 +712,6 @@
                                 @endif
                             @endforeach
                         </div>
-                        <button id="add_brakes_pastes" class="btn btn-sm btn-link btn-add"><i class="fa fa-plus"></i> Agregar fecha</button>
                         <hr>
                         <div id="destino_brake_pump">
                             @php
@@ -754,7 +745,6 @@
                                 @endif
                             @endforeach
                         </div>
-                        <button id="add_brake_pump" class="btn btn-sm btn-link btn-add"><i class="fa fa-plus"></i> Agregar fecha</button>
                         <hr>
                         <div id="destino_box_transmission">
                             @php
@@ -788,7 +778,6 @@
                                 @endif
                             @endforeach
                         </div>
-                        <button id="add_box_transmission" class="btn btn-sm btn-link btn-add"><i class="fa fa-plus"></i> Agregar fecha</button>
                         <hr>
                         <div id="destino_brassiness">
                             @php
@@ -822,7 +811,6 @@
                                 @endif
                             @endforeach
                         </div>
-                        <button id="add_brassiness" class="btn btn-sm btn-link btn-add"><i class="fa fa-plus"></i> Agregar fecha</button>
                         <hr>
                         <div id="destino_lights">
                             @php
@@ -856,7 +844,6 @@
                                 @endif
                             @endforeach
                         </div>
-                        <button id="add_lights" class="btn btn-sm btn-link btn-add"><i class="fa fa-plus"></i> Agregar fecha</button>
                         <hr>
                         <div id="destino_gases">
                             @php
@@ -890,7 +877,6 @@
                                 @endif
                             @endforeach
                         </div>
-                        <button id="add_gases" class="btn btn-sm btn-link btn-add"><i class="fa fa-plus"></i> Agregar fecha</button>
                         <hr>
                         <div id="destino_wistle">
                             @php
@@ -924,7 +910,6 @@
                                 @endif
                             @endforeach
                         </div>
-                        <button id="add_wistle" class="btn btn-sm btn-link btn-add"><i class="fa fa-plus"></i> Agregar fecha</button>
                         <hr>
                         <div id="destino_timing_belt">
                             @php
@@ -958,7 +943,6 @@
                                 @endif
                             @endforeach
                         </div>
-                        <button id="add_timing_belt" class="btn btn-sm btn-link btn-add"><i class="fa fa-plus"></i> Agregar fecha</button>
                         <hr>
                         <div id="destino_alignment_balancing">
                             @php
@@ -992,7 +976,6 @@
                                 @endif
                             @endforeach
                         </div>
-                        <button id="add_alignment_balancing" class="btn btn-sm btn-link btn-add"><i class="fa fa-plus"></i> Agregar fecha</button>
                         <hr>
                         <div id="destino_batteries">
                             @php
@@ -1026,7 +1009,6 @@
                                 @endif
                             @endforeach
                         </div>
-                        <button id="add_batteries" class="btn btn-sm btn-link btn-add"><i class="fa fa-plus"></i> Agregar fecha</button>
                         <hr>
                         <h3>Reporte de comparendos</h3>
                         <div id="destino_summons_report">
@@ -1061,7 +1043,6 @@
                                 @endif
                             @endforeach
                         </div>
-                        <button id="add_summons_report" class="btn btn-sm btn-link btn-add"><i class="fa fa-plus"></i> Agregar reporte</button>
                         <hr>
                         <h3>Reporte de incidentes</h3>
                         <div id="destino_incident_report">
@@ -1096,7 +1077,6 @@
                                 @endif
                             @endforeach
                         </div>
-                        <button id="add_incident_report" class="btn btn-sm btn-link btn-add"><i class="fa fa-plus"></i> Agregar reporte</button>
                         <hr>
                         <h3>Reporte de accidentes</h3>
                         <div id="destino_accident_report">
@@ -1131,7 +1111,6 @@
                                 @endif
                             @endforeach
                         </div>
-                        <button id="add_accident_report" class="btn btn-sm btn-link btn-add"><i class="fa fa-plus"></i> Agregar reporte</button>
                         <hr>
                         {{-- <h3>Plan de mantenimiento preventivo – fechas</h3> --}}
                         <div class="row">

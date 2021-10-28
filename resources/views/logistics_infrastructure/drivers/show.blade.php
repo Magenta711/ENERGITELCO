@@ -126,6 +126,7 @@
                     </div>
                     <hr>
                 @endforeach
+                <hr>
                 <h4>Control de ingreso de conductores con deudas de comparendos y fotomultas</h4>
                 @foreach ($id->controls as $item)
                     <div class="row" id="control_origen">
@@ -162,6 +163,7 @@
                     </div>
                     <hr>
                 @endforeach
+                <hr>
                 <h4>Reporte de accidentes</h4>
                 @foreach ($id->accidents as $item)
                     <div class="row" id="accident_origen">
@@ -198,6 +200,7 @@
                     </div>
                     <hr>
                 @endforeach
+                <hr>
                 <h3>Acciones realizadas en seguridad vial</h3>
                 <hr>
                 <h4>Exámenes físicos, de alcohol y drogas psicoactiva</h4>
@@ -230,6 +233,7 @@
                     </div>
                     <hr>
                 @endforeach
+                <hr>
                 <h4>Pruebas teóricas y prácticas realizadas</h4>
                 @foreach ($id->tests as $item)
                     <div class="row" id="test_origen">
@@ -260,6 +264,7 @@
                     </div>
                     <hr>
                 @endforeach
+                <hr>
                 <h4>Capacitaciones recibidas</h4>
                 <div id="training_destino">
                 @foreach ($id->trainings as $item)
