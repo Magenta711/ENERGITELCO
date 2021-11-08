@@ -249,8 +249,7 @@ Route::resource('roles','RoleController');
 //billboard
 Route::get('billboards','billboard@index')->name('billboard');
 Route::post('billboards','billboard@store')->name('billboard_store');
-Route::put('billboards/update/{id}','billboard@update')->name('billboard_update');
-Route::delete('billboards/{id}','billboard@destroy')->name('billboard_destroy');
+Route::put('billboards/{id}','billboard@update')->name('billboard_update');
 Route::delete('billboards/{id}','billboard@destroy')->name('billboard_destroy');
 
 //billboard type

@@ -3,13 +3,13 @@
 @section('content')
 <section class="content-header">
     <h1>
-        TSS v3 proyecto mintic <small>MINTIC</small>
+        Mantenimiento proyecto mintic <small>MINTIC</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
         <li><a href="#">Proyectos</a></li>
         <li><a href="#">Mintic</a></li>
-        <li class="active">TSS v3</li>
+        <li class="active">Mantenimiento</li>
     </ol>
 </section>
 <section class="content">
@@ -35,7 +35,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($maintenances as $item)
+                        @foreach ($id->maintenances as $item)
                             <tr>
                                 <td>{{$item->id}}</td>
                                 <td>{{$item->num}}</td>

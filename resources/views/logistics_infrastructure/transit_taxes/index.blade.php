@@ -41,12 +41,14 @@
                                     @if ($transit_taxe->start_date < now()->format('Y-m-d') && $transit_taxe->end_date > now()->format('Y-m-d'))
                                         {{ $transit_taxe->status == 1 ? 'Gestionando' : 'Sin gestionar' }}
                                     @else
-                                        {{ $transit_taxe->status == 0 ? 'Cerrado' : 'Sin gestión' }}
+                                        {{ $transit_taxe->status == 1 ? 'Cerrado' : 'Sin gestión' }}
                                     @endif
                                 </td>
                                 <td>
                                     <a href="{{route('transit_taxes_show',$transit_taxe->id)}}" class="btn btn-sm btn-success">Ver</a>
-                                    <a href="{{route('transit_taxes_edit',$transit_taxe->id)}}" class="btn btn-sm btn-primary">Editar</a>
+                                    @if ($transit_taxe->start_date < now()->format('Y-m-d') && $transit_taxe->end_date > now()->format('Y-m-d'))
+                                        <a href="{{route('transit_taxes_edit',$transit_taxe->id)}}" class="btn btn-sm btn-primary">Editar</a>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach

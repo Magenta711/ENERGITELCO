@@ -673,8 +673,7 @@ class MinticController extends Controller
 
     public function maintenance(Mintic_School $id)
     {
-        $maintenances = mintic_maintenance::get();
-        return view('projects.mintic.maintenance.index',compact('id','maintenances'));
+        return view('projects.mintic.maintenance.index',compact('id'));
     }
 
     public function create_maintenance(Mintic_School $id)
