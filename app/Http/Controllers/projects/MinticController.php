@@ -69,6 +69,9 @@ class MinticController extends Controller
         ]);
         $request['responsable_id'] = auth()->id();
         $request['status'] = 4;
+        if (empty($request->con_sede)) {
+            $request['con_sede'] = 0;
+        }
         $id = Mintic_School::create($request->all());
 
         $users = User::where('state',1)->get();
@@ -168,6 +171,9 @@ class MinticController extends Controller
      */
     public function update(Request $request, Mintic_School $id)
     {
+        if (empty($request->con_sede)) {
+            $request['con_sede'] = 0;
+        }
         $id->update($request->all());
         MinticVisit::where('project_id',$id->id)->delete();
         foreach ($request->date_ec as $key => $value) {

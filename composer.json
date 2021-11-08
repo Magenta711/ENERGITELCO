@@ -16,6 +16,7 @@
         "laravel/tinker": "^1.0",
         "laraveles/spanish": "^1.2",
         "maatwebsite/excel": "^3.1",
+        "paragonie/random_compat": "^9.99",
         "spatie/laravel-permission": "^3.4"
     },
     "require-dev": {

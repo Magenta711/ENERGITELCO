@@ -98,10 +98,10 @@ function selectEditEB(value,response) {
     data = [];
     response.CD.forEach(element => {
         if (element.municipio.toUpperCase() == value) {
-            selected = element.Consecutivo_Sede == value2 ? true : false;
+            selected = element.consecutivo_sede == value2 ? true : false;
             data.push({
-                id: element.Consecutivo_Sede,
-                text: (element.institucion_educativa+' - '+element.nombre_sede).toUpperCase(),
+                id: element.consecutivo_sede,
+                text: (element.consecutivo_sede+' - '+element.institucion_educativa+' - '+element.nombre_sede).toUpperCase(),
                 selected: selected
             });
         }
@@ -112,7 +112,7 @@ function selectEditEB(value,response) {
     dataMapArr = new Map(dataMap)
     unicos = [...dataMapArr.values()];
     unicos.sort(GetSortOrder("text"));
-    selected = 0 == value2 ? true : false;
+    selected = value2 == 0 || value2 == null ? true : false;
     unicos.unshift({
         id: 0,
         text: "OTRA",
@@ -139,7 +139,7 @@ function selectEditEB(value,response) {
 }
 function selectEditLocation(value,response) {
     response.CD.forEach(element => {
-        if (element.Consecutivo_Sede == value) {
+        if (element.consecutivo_sede == value) {
             $('#station_name').val(element.nombre_sede);
             $('#lat').val(element.latitud);
             $('#long').val(element.longitud);

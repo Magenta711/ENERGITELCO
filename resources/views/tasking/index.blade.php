@@ -1,22 +1,6 @@
 @extends('lte.layouts')
 
 @php
-    function selected($array,$id){
-        foreach ($array as $key => $value) {
-            if ($id == $value->id) {
-                return true;
-            }
-        }
-        return false;
-    }
-    function selectedVehicles($array,$id){
-        foreach ($array as $key => $value) {
-            if ($id == $value->vehicle->id) {
-                return true;
-            }
-        }
-        return false;
-    }
     function hasConsumable($consumables,$id,$type)
     {
         foreach ($consumables as $key => $item) {
@@ -47,13 +31,13 @@
 <div class="hide">
     {{-- Permisos de trabajo --}}
     @foreach ($permissions as $permission)
-        <input type="hidden" value="{{$permission->cedula_trabajador}}" class="permission-idUser">
-        <input type="hidden" value="{{$permission->fecha_inicio}}" class="permission-dateStart">
-        <input type="hidden" value="{{$permission->hora_inicio}}" class="permission-timeStart">
-        <input type="hidden" value="{{$permission->fecha_finalizacion}}" class="permission-dateEnd">
-        <input type="hidden" value="{{$permission->hora_finalizacion}}" class="permission-timeEnd">
-        <input type="hidden" value="{{$permission->tipo_solicitud}}" class="permission-type">
-        <input type="hidden" value="{{$permission->estado}}" class="permission-status">
+        <input type="hidden" value="{{$permission->cedula_trabajador}}" class="permission-idUser permission-idUser-{{$permission->cedula_trabajador}}">
+        <input type="hidden" value="{{$permission->fecha_inicio}}" class="permission-dateStart permission-dateStart-{{$permission->cedula_trabajador}}">
+        <input type="hidden" value="{{$permission->hora_inicio}}" class="permission-timeStart permission-timeStart-{{$permission->cedula_trabajador}}">
+        <input type="hidden" value="{{$permission->fecha_finalizacion}}" class="permission-dateEnd permission-dateEnd-{{$permission->cedula_trabajador}}">
+        <input type="hidden" value="{{$permission->hora_finalizacion}}" class="permission-timeEnd permission-timeEnd-{{$permission->cedula_trabajador}}">
+        <input type="hidden" value="{{$permission->tipo_solicitud}}" class="permission-type permission-type-{{$permission->cedula_trabajador}}">
+        <input type="hidden" value="{{$permission->estado}}" class="permission-status permission-status-{{$permission->cedula_trabajador}}">
     @endforeach
     {{-- Vehiculos --}}
     @foreach ($vehicles as $vehicle)
@@ -64,6 +48,11 @@
         <input type="hidden" value="{{$vehicle->soat_date}}" class="data-vehicles-soat-date">
         <input type="hidden" value="{{$vehicle->gases_date}}" class="data-vehicles-gases-date">
         <input type="hidden" value="{{$vehicle->technomechanical_date}}" class="data-vehicles-technomechanical-date">
+    @endforeach
+    {{-- Usuarios --}}
+    @foreach ($users as $user)
+        <input type="hidden" value="{{$user->id}}" class="data-user-id">
+        <input type="hidden" value="{{$user->name}}" class="data-user-name">
     @endforeach
 </div>
 <section class="content">

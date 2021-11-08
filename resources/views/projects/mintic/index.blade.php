@@ -39,7 +39,7 @@
                                 <tr>
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->code }}</td>
-                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->con_sede == 0 || $item->con_sede == null ? '' : $item->con_sede}} {{ $item->name }}</td>
                                     <td>{{ $item->dep . ' - ' . $item->mun }}</td>
                                     <td>{{ $item->updated_at }}</td>
                                     <td>

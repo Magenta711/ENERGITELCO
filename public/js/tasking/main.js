@@ -12,8 +12,6 @@ $(function () {
 
     request.onload = function() {
         selectDep(request.response);
-
-        //edit Select2
         llenarSelect2Edit(request.response);
     }
     
@@ -125,40 +123,34 @@ $(document).ready(function() {
 });
 
 function usersDisable(date) {
-    resetUsers();
-    newDate = moment(date);
-    dates = $('.date-starts');
-    for (let i = 0; i < dates.length; i++) {
-        let newDates = moment(dates[i].innerText);
-        if (newDate.format('YYYY-MM-DD') == newDates.format('YYYY-MM-DD')) {
-            let eleUsers = $(dates[i]).parent().parent().children('.list-user').children();
-            for (let j = 0; j < eleUsers.length; j++) {
-                let id = eleUsers[j].id.split('-')[(eleUsers[j].id.split('-').length - 1)];
-                $('#option_user_'+id).prop('disabled',true).text(eleUsers[j].innerText+' (no disponible)');
-            }
-        }
+    let idUsers = $('.data-user-id');
+    let names = $('.data-user-name');
+
+    let newDate = moment(date);
+    data = [];
+    for (let i = 0; i < idUsers.length; i++) {
+        let disabled = dateUserDisable(newDate,idUsers[i].value);
+        let disableArr = dateUserPermit(newDate,idUsers[i].value);
+        console.log(disableArr);
+        let textDisabled = disabled ? '(No disponible)' : '';
+        // if (statusD) {
+        //     disabled = statusD
+        // }
+        data.push({
+            id: idUsers[i].value,
+            text: names[i].value+' '+textDisabled,
+            selected: false,
+            disabled: disabled
+        });
     }
 
-    // Usuarios de permisos
-    let datesStart = $('.permission-dateStart');
-    let datesEnd = $('.permission-dateEnd');
-    let timeStart = $('.permission-timeStart');
-    let timeEnd = $('.permission-timeEnd');
-    let idUser = $('.permission-idUser');
-    let type = $('.permission-type');
-    let status = $('.permission-status');
-    for (let i = 0; i < datesStart.length; i++) {
-        let newDatesStart = moment(datesStart[i].value);
-        let newDatesEnd = moment(datesEnd[i].value);
-        if (newDate.format('YYYY-MM-DD') >= newDatesStart.format('YYYY-MM-DD') && newDate.format('YYYY-MM-DD') <= newDatesEnd.format('YYYY-MM-DD')) {
-            if (status[i].value != 'No aprobado' && $('#option_user_'+idUser[i].value).text().indexOf(' (') == -1) {
-                let state = status[i].value == 'Aprobado' ? true : false;
-                let textState = status[i].value == 'Sin aprobar' ? ' sin aprobar' : '';
-                $('#option_user_'+idUser[i].value).prop('disabled',state).text($('#option_user_'+idUser[i].value).text()+' ('+type[i].value+textState+')');
-            }
-        }
-    }
+    $('#users').empty();
+    $('#users').select2({
+        data: data
+    });
+    
 }
+
 function vehiclesDisable(date)
 {
     let id = $('.data-vehicles-id');
@@ -193,40 +185,6 @@ function vehiclesDisable(date)
     $('#vehicles').select2({
         data: data
     });
-}
-
-function dateVehicleDisable(date,id) {
-    dates = $('.date-starts');
-    for (let i = 0; i < dates.length; i++) {
-        let newDates = moment(dates[i].innerText);
-        if (newDates.format('YYYY-MM-DD') == date.format('YYYY-MM-DD')) {
-            let eleVehicles = $(dates[i]).parent().parent().children('.list-vehicles').children();
-            for (let j = 0; j < eleVehicles.length; j++) {
-                let idVehicle = eleVehicles[j].id.split('-')[(eleVehicles[j].id.split('-').length - 1)];
-                if (idVehicle == id) {
-                    return true;
-                }
-            }
-        }
-    }
-    return false;
-}
-
-function resetUsers() {
-    let usersOption =  $('#users').children();
-    for (let i = 0; i < usersOption.length; i++) {
-        if (usersOption[i].innerText.indexOf('(') != -1) {
-            $('#option_user_'+usersOption[i].value).prop('disabled',false).text(usersOption[i].innerText.split(' (')[0]);
-        }
-    }
-}
-function resetEditUsers(id) {
-    let usersOption =  $('#users-edit-'+id).children();
-    for (let i = 0; i < usersOption.length; i++) {
-        if (usersOption[i].innerText.indexOf('(') != -1) {
-            $('#option_user-edit-'+id+'-'+usersOption[i].value).prop('disabled',false).text(usersOption[i].innerText.split(' (')[0]);
-        }
-    }
 }
 
 function selectDep(response) {
@@ -303,7 +261,7 @@ function selectEB(value,response) {
         if (element.municipio.toUpperCase() == value) {
             data.push({
                 id: element.consecutivo_sede,
-                text: (element.institucion_educativa+' - '+element.nombre_sede).toUpperCase()
+                text: (element.consecutivo_sede+' - '+element.institucion_educativa+' - '+element.nombre_sede).toUpperCase(),
             });
         }
     });
@@ -498,14 +456,14 @@ function selectEditEB(id,value,response) {
             selected = element.consecutivo_sede.toUpperCase() == value2 ? true : false;
             data.push({
                 id: element.consecutivo_sede,
-                text: (element.institucion_educativa+' - '+element.nombre_sede).toUpperCase(),
+                text: (element.consecutivo_sede+' - '+element.institucion_educativa+' - '+element.nombre_sede).toUpperCase(),
                 selected: selected
             });
         }
     });
     response.EB.forEach(element => {
         if (element.municipio.toUpperCase() == value) {
-            selected = element.id.toUpperCase() == value2 ? true : false;
+            selected = element.id == value2 ? true : false;
             data.push({
                 id: element.id,
                 text: element.sitio.toUpperCase(),
@@ -576,7 +534,7 @@ function selectEditVehicle(id,date) {
     values = $("#vehicles-edit-"+id).attr('value');
     arrValues = values.split('-').filter(function(el) { return el; });
     for (let i = 0; i < idVehicle.length; i++) {
-        selected = arrValues.indexOf(idVehicle[i].value) != -1 ? true : false;
+        let selected = arrValues.indexOf(idVehicle[i].value) != -1 ? true : false;
         let newEnrollmentDate = moment(enrollmentDate[i].value);
         let newSoatDate = moment(soatDate[i].value);
         let newGasesDate = moment(gasesDate[i].value);
@@ -603,19 +561,27 @@ function selectEditVehicle(id,date) {
 }
 
 function selectEditUsers(id,date) {
-    resetEditUsers(id);
-    newDate = moment(date);
-    dates = $('.date-starts');
-    for (let i = 0; i < dates.length; i++) {
-        let newDates = moment(dates[i].innerText);
-        if (newDate.format('YYYY-MM-DD') == newDates.format('YYYY-MM-DD')) {
-            let eleUsers = $(dates[i]).parent().parent().children('.list-user').children();
-            for (let j = 0; j < eleUsers.length; j++) {
-                let idUser = eleUsers[j].id.split('-')[(eleUsers[j].id.split('-').length - 1)];
-                $('#option_user-edit-'+id+'-'+idUser).prop('disabled',true).text(eleUsers[j].innerText+' (no disponible)');
-            }
-        }
+    let idUsers = $('.data-user-id');
+    let names = $('.data-user-name');
+
+    let newDate = moment(date);
+    data = [];
+    values = $("#users-edit-"+id).attr('value');
+    arrValues = values.split('-').filter(function(el) { return el; });
+    for (let i = 0; i < idUsers.length; i++) {
+        let selected = arrValues.indexOf(idUsers[i].value) != -1 ? true : false;
+
+        data.push({
+            id: idUsers[i].value,
+            text: names[i].value,
+            selected: selected,
+            // disabled: disabled
+        });
     }
+    $("#users-edit-"+id).empty();
+    $('#users-edit-'+id).select2({
+        data: data
+    });
 
     let datesStart = $('.permission-dateStart');
     let datesEnd = $('.permission-dateEnd');
@@ -635,4 +601,64 @@ function selectEditUsers(id,date) {
             }
         }
     }
+}
+
+function dateUserDisable(date,id) {
+    let dates = $('.date-starts');
+    for (let i = 0; i < dates.length; i++) {
+        let newDates = moment(dates[i].innerText);
+        if (newDates.format('YYYY-MM-DD') == date.format('YYYY-MM-DD')) {
+            let eleUser = $(dates[i]).parent().parent().children('.list-user').children();
+            for (let j = 0; j < eleUser.length; j++) {
+                let idUser = eleUser[j].id.split('-')[(eleUser[j].id.split('-').length - 1)];
+                if (idUser == id) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+function dateUserPermit(date,id){
+    let datesStart = $('.permission-dateStart-'+id);
+    let datesEnd = $('.permission-dateEnd-'+id);
+    let timeStart = $('.permission-timeStart-'+id);
+    let timeEnd = $('.permission-timeEnd-'+id);
+    let idUser = $('.permission-idUser-'+id);
+    let type = $('.permission-type-'+id);
+    let status = $('.permission-status-'+id);
+
+    let state = false;
+    let textState = '';
+    for (let i = 0; i < datesStart.length; i++) {
+        let newDatesStart = moment(datesStart[i].value);
+        let newDatesEnd = moment(datesEnd[i].value);
+        if (date.format('YYYY-MM-DD') >= newDatesStart.format('YYYY-MM-DD') && date.format('YYYY-MM-DD') <= newDatesEnd.format('YYYY-MM-DD')) {
+            if (status[i].value != 'No aprobado' && $('#option_user_'+idUser[i].value).text().indexOf(' (') == -1) {
+                state = status[i].value == 'Aprobado' ? true : false;
+                textState = status[i].value == 'Sin aprobar' ? ' sin aprobar' : '';
+                return [ state, '('+type[i].value+') '+textState ];
+            }
+        }
+    }
+    
+    return [ state, textState ];
+}
+
+function dateVehicleDisable(date,id) {
+    dates = $('.date-starts');
+    for (let i = 0; i < dates.length; i++) {
+        let newDates = moment(dates[i].innerText);
+        if (newDates.format('YYYY-MM-DD') == date.format('YYYY-MM-DD')) {
+            let eleVehicles = $(dates[i]).parent().parent().children('.list-vehicles').children();
+            for (let j = 0; j < eleVehicles.length; j++) {
+                let idVehicle = eleVehicles[j].id.split('-')[(eleVehicles[j].id.split('-').length - 1)];
+                if (idVehicle == id) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
 }

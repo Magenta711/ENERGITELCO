@@ -223,6 +223,7 @@ class taskingController extends Controller
      */
     public function update(Request $request,Tasking $id)
     {
+        return $request;
         if (isset($request->add_inv_user)) {
             return $this->addConsumablesUser($request,$id);
         }

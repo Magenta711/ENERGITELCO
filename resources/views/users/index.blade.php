@@ -34,7 +34,7 @@
                 </div>
                 <div class="box-body">
                     <div class="table-responsive table-hover">
-                        <table id="table_index" class="table table-striped table-bordered" data-page-length='15'>
+                        <table id="table_user" class="table table-striped table-bordered" data-page-length='15'>
                             <thead>
                                 <tr>
                                     <th scope="col"></th>
@@ -88,6 +88,7 @@
             });
 
             url = 'users/list';
+            table_id = '#table_user';
 
             columns = [
                 {data : "id"},
@@ -113,7 +114,7 @@
                 }
             ];
 
-            dataTableCrete(url,columns);
+            dataTableCrete(url,columns,table_id);
         })
         
         function initFnTable(table) {

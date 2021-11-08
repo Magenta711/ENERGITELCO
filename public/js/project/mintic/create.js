@@ -96,7 +96,7 @@ function selectEB(value,response) {
         if (element.municipio.toUpperCase() == value) {
             data.push({
                 id: element.consecutivo_sede,
-                text: (element.institucion_educativa+' - '+element.nombre_sede).toUpperCase()
+                text: (element.consecutivo_sede+' - '+element.institucion_educativa+' - '+element.nombre_sede).toUpperCase(),
             });
         }
     });
