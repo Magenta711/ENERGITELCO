@@ -13,7 +13,7 @@
     </ol>
 </section>
 <section class="content">
-    @include('includes.alerts')
+     
     <div class="box box-solid">
         <div class="box-header with-border">
             <h3 class="box-title">Lista de cortes de pago de bonificaciones y viáticos</h3>

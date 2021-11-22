@@ -126,7 +126,7 @@ function hasDeliveryFeedback($id,$item){
             @endforeach
         @endforeach
     </div>
-    @include('includes.alerts')
+     
     <div class="box">
         <div class="box-header">
             <div class="box-title">Editar proyecto</div>

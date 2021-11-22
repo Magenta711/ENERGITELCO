@@ -63,7 +63,7 @@
 </section>
 {{-- Content main --}}
 <section class="content">
-    @include('includes.alerts')
+     
     <div class="row">
         <div class="col-xs-12">
             <div class="box">

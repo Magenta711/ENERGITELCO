@@ -35,7 +35,7 @@ class payrollOvertimeNewsReportController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function index()
     {
         $payrolls = Work8::with(['coordinadorAcargo','responsableAcargo'])->get();
@@ -340,3 +340,4 @@ class payrollOvertimeNewsReportController extends Controller
         }
     }
 }
+// 126  -  7  -  78 -  50000.00  -  0  -  0  -  0  -  0  -  0  -  0  -  0  -  0  -  0  -  0  -  0  -  0  -  0  -  0  -  0  -  0  -  0  -  0  -  0  -  0  -  0.00   -  0   -  0.00    -  1    -  2021-09-07 15:57:55  -  {"m":4,"d":142,"h":21,"i":42}  -  0.00   -  0.00    -  0.00 -  0.00  -  0  -  0.00   -  0.00    -  NULL -  2021-09-07 16:49:42   -  2021-09-17 23:13:19

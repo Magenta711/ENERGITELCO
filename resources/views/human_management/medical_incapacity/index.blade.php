@@ -12,7 +12,7 @@
     </ol>
 </section>
 <section class="content">
-    @include('includes.alerts')
+     
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Lista de solicitudes de permiso laboral o notificaciones de incapacidades médicas</h3>

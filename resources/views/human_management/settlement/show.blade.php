@@ -13,7 +13,7 @@
 </section>
 
 <section class="content">
-    @include('includes.alerts')
+     
     @php
         $months = ['0',"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];                             
     @endphp

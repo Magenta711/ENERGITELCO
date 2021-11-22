@@ -11,7 +11,7 @@
     </ol>
 </section>
 <section class="content">
-    @include('includes.alerts')
+     
     <div class="box">
         <div class="box-header">
             <div class="box-title">Lista de solicitudes de empleo</div>

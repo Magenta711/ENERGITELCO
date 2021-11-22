@@ -30,7 +30,7 @@
             $months = ['0',"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];                             
         @endphp
     </div>
-    @include('includes.alerts')
+     
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="box">

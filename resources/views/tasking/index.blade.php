@@ -56,7 +56,7 @@
     @endforeach
 </div>
 <section class="content">
-    @include('includes.alerts')
+     
     {{-- Tables --}}
     <div class="row">
         <div class="col-md-4">

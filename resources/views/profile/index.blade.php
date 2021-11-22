@@ -13,7 +13,7 @@
 </section>
 <!-- Main content -->
 <section class="content">
-    @include('includes.alerts')
+     
     <div class="row">
         <div class="col-md-4">
 

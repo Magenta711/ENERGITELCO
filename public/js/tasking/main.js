@@ -131,11 +131,11 @@ function usersDisable(date) {
     for (let i = 0; i < idUsers.length; i++) {
         let disabled = dateUserDisable(newDate,idUsers[i].value);
         let disableArr = dateUserPermit(newDate,idUsers[i].value);
-        console.log(disableArr);
         let textDisabled = disabled ? '(No disponible)' : '';
-        // if (statusD) {
-        //     disabled = statusD
-        // }
+        if (disableArr[0] == true) {
+            disabled = disableArr[0],
+            textDisabled = textDisabled+' '+disableArr[1]
+        }
         data.push({
             id: idUsers[i].value,
             text: names[i].value+' '+textDisabled,
@@ -148,7 +148,6 @@ function usersDisable(date) {
     $('#users').select2({
         data: data
     });
-    
 }
 
 function vehiclesDisable(date)
@@ -570,37 +569,24 @@ function selectEditUsers(id,date) {
     arrValues = values.split('-').filter(function(el) { return el; });
     for (let i = 0; i < idUsers.length; i++) {
         let selected = arrValues.indexOf(idUsers[i].value) != -1 ? true : false;
-
+        let disabled = !selected ? dateUserDisable(newDate,idUsers[i].value) : false;
+        let disableArr = dateUserPermit(newDate,idUsers[i].value);
+        let textDisabled = disabled && !selected ? '(No disponible)' : '';
+        if (disableArr[0] == true && !selected) {
+            disabled = disableArr[0],
+            textDisabled = textDisabled+' '+disableArr[1]
+        }
         data.push({
             id: idUsers[i].value,
-            text: names[i].value,
+            text: names[i].value+' '+textDisabled,
             selected: selected,
-            // disabled: disabled
+            disabled: disabled
         });
     }
     $("#users-edit-"+id).empty();
     $('#users-edit-'+id).select2({
         data: data
     });
-
-    let datesStart = $('.permission-dateStart');
-    let datesEnd = $('.permission-dateEnd');
-    let timeStart = $('.permission-timeStart');
-    let timeEnd = $('.permission-timeEnd');
-    let idUser = $('.permission-idUser');
-    let type = $('.permission-type');
-    let status = $('.permission-status');
-    for (let i = 0; i < datesStart.length; i++) {
-        let newDatesStart = moment(datesStart[i].value);
-        let newDatesEnd = moment(datesEnd[i].value);
-        if (newDate.format('YYYY-MM-DD') >= newDatesStart.format('YYYY-MM-DD') && newDate.format('YYYY-MM-DD') <= newDatesEnd.format('YYYY-MM-DD')) {
-            if (status[i].value != 'No aprobado' && $('#option_user_'+idUser[i].value).text().indexOf(' (') == -1) {
-                let state = status[i].value == 'Aprobado' ? true : false;
-                let textState = status[i].value == 'Sin aprobar' ? ' sin aprobar' : '';
-                $('#option_user-edit-'+id+'-'+idUser[i].value).prop('disabled',state).text($('#option_user_'+idUser[i].value).text()+' ('+type[i].value+textState+')');
-            }
-        }
-    }
 }
 
 function dateUserDisable(date,id) {

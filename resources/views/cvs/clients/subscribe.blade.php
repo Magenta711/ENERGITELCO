@@ -10,7 +10,7 @@
                     @csrf
                     @method('PUT')
                     <div class="card-body">
-                        @include('includes.alerts')
+                         
                         <P>
                             Apartir de ahora no prodras recibir nuestras anuncios importantes, grandes ofertas o ventajas exclusivas para los clientes de Claro – Energitelco.
                         </P>

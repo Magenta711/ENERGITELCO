@@ -124,26 +124,26 @@ function getdays_linked() {
         if (years) {
             allYears[0] = new Object();
             allYears[0].year = date1[0];
-            allYears[0].days = getdiffDates(date_start,date1[0]+'-12-31') + 1;
+            allYears[0].days = getdiffDates(date_start,date1[0]+'-12-31');
             allYears[0].leave = getdays_leave(date1[0]);
             allYears[0].settle = 0;
             for (let i = 1; i < years; i++) {
                 let year = (parseInt(date1[0]) + i);
                 allYears[i] = new Object();
                 allYears[i].year = year;
-                allYears[i].days = getdiffDates(year+'-01-01',year+'-12-31') + 1;
+                allYears[i].days = getdiffDates(year+'-01-01',year+'-12-31');
                 allYears[i].leave = getdays_leave(year);
                 allYears[i].settle = 0;
             }
             allYears[years] = new Object();
             allYears[years].year = date2[0];
-            allYears[years].days = getdiffDates(date2[0]+'-01-01',date_end) + 1;
+            allYears[years].days = getdiffDates(date2[0]+'-01-01',date_end);
             allYears[years].leave = getdays_leave(date2[0]);
             allYears[years].settle = 0;
         }else {
             allYears[years] = new Object();
             allYears[years].year = date2[0];
-            allYears[years].days = getdiffDates(date_start,date_end) + 1;
+            allYears[years].days = getdiffDates(date_start,date_end);
             allYears[years].leave = getdays_leave(date2[0]);
             allYears[years].settle = 0;
         }
@@ -164,7 +164,6 @@ function getdays_linked() {
                     'type' : 'hidden',
                     'name' : 'years[]',
                     'class' : 'form-control',
-                    
                     'id' : 'years_'+data.year,
                     'value' : data.year,
                     'placeholder' : 'Días',
@@ -178,10 +177,18 @@ function getdays_linked() {
                     'type' : 'number',
                     'name' : 'days_linked[]',
                     'class' : 'form-control text-right',
-                    'readonly': 'readonly',
                     'id' : 'days_linked_'+data.year,
                     'value' : data.days,
                     'placeholder' : 'Días',
+                }).blur(function () {
+                    getchangeLinked(this);
+                    getpremium_payment_days();
+                    getvacation_days_to_pay();
+                    gettotal_vacation_days_to_pay();
+                    getsalary_month();
+                    getextras_month();
+                    getassistance_month();
+                    gettotallinked();
                 }),
             ).appendTo("#trDaysLinked");
             $('<td>',{
@@ -192,14 +199,18 @@ function getdays_linked() {
                     'type' : 'number',
                     'name' : 'days_leave[]',
                     'class' : 'form-control text-right',
-                    'readonly': 'readonly',
                     'id' : 'days_leave_'+data.year,
                     'value' : data.leave,
                     'placeholder' : 'Días',
                 }).blur(function (e) {
                     getchangeLeave(this);
+                    getpremium_payment_days();
                     getvacation_days_to_pay();
                     gettotal_vacation_days_to_pay();
+                    getsalary_month();
+                    getextras_month();
+                    getassistance_month();
+                    gettotallinked();
                 }),
             ).appendTo("#trDaysLeave");
             $('<td>',{
@@ -322,14 +333,15 @@ function getpremium_payment_days() {
             days = getdiffDates((date[0] - 1)+'-12-31', date_end);
         }
     }
-    $('#premium_payment_days').val(days + 1);
+    $('#premium_payment_days').val(days);
 }
 
 function getdiffDates(start, end)
 {
-    var date_start = moment(start);
-    var date_end = moment(end);
-    return date_end.diff(date_start, 'days');
+    let date_start = moment(start);
+    let date_end = moment(end);
+    let res = date_end.diff(date_start, 'days');
+    return res;
 }
 
 function getsalaryThisMonth() {
@@ -365,6 +377,19 @@ function getsalariesUser() {
             $('#extrasMonth_'+i).val(0);
         }
     }
+}
+
+function getchangeLinked(elem) {
+    id = elem.id.split('_')[elem.id.split('_').length - 1];
+    value = elem.value;
+    days = $('#days_leave_'+id).val();
+    settle = $('#days_to_settle_'+id).val();
+    affter = parseFloat(settle) - parseFloat(days);
+    total = parseFloat(value) - parseFloat(days);
+    vacation = $('#days_linked_vacation').val();
+    totalVacation = parseFloat(vacation) + (parseFloat(value) - affter);
+    $('#days_to_settle_'+id).val(total.toFixed(2));
+    $('#days_linked_vacation').val(totalVacation.toFixed(2));
 }
 
 function getchangeLeave(elem) {

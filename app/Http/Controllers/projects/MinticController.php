@@ -240,8 +240,9 @@ class MinticController extends Controller
      */
     public function destroy(Mintic_School $id)
     {
-        $id->delete();
-        return redirect()->route('mintic')->with('success','Se ha eliminado el proyecto correctamente');
+        // $id->delete();
+        // return redirect()->route('mintic')->with('success','Se ha eliminado el proyecto correctamente');
+        return response()->json( $id );
     }
 
     public function upload(Request $request)
@@ -961,5 +962,11 @@ class MinticController extends Controller
         }else {
             return response()->json(['success'=>'No se examino un archivo']);
         }
+    }
+
+    public function list()
+    {
+        $mintics = Mintic_School::get();
+        return response()->json(['data' => $mintics]);
     }
 }

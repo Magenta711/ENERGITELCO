@@ -15,7 +15,7 @@
         </ol>
     </section>
     <section class="content">
-        @include('includes.alerts')
+         
         {{-- Content main --}}
 
         {{-- Reports --}}

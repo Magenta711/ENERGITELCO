@@ -694,6 +694,7 @@ Route::get('project/clearings/export/{id}','projects\clearingController@export')
 
 //Water Mark Image
 Route::get('project/mintic/ec','projects\MinticController@index')->name('mintic');
+Route::get('project/mintic/ec/list','projects\MinticController@list')->name('mintic_list');
 Route::get('project/mintic/ec/show/{id}','projects\MinticController@show')->name('mintic_show');
 Route::get('project/mintic/ec/create','projects\MinticController@create')->name('mintic_create');
 // Route::get('project/mintic/ec/create2/{id}','projects\MinticController@create2')->name('mintic_create2');

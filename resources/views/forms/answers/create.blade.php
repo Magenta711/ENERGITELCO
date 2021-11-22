@@ -29,7 +29,7 @@
         </ol>
     </section>
     <section class="content">
-        @include('includes.alerts')
+         
         <form action="{{route('answers_store')}}" id="target" autocomplete="off" method="post" enctype="multipart/form-data">
         @csrf
         <div class="box">

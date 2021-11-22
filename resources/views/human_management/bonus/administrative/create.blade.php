@@ -14,7 +14,7 @@
 </section>
 
 <section class="content">
-    @include('includes.alerts')
+     
     <div class="hide">
         @foreach ($bonusTechnical as $key => $bonu)
             @foreach ($bonu as $key => $item)

@@ -12,7 +12,7 @@
     </ol>
 </section>
 <section class="content">
-    @include('includes.alerts')
+     
     <div class="box">
         <form action="{{ route('fall_protection_equipment_inspection_store') }}" method="post" enctype="multipart/form-data" autocomplete="off">
         @csrf

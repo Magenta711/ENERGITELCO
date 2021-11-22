@@ -62,9 +62,15 @@ class workPermitController extends Controller
         $projects = Project::get();
         $vehicles = invVehicle::where('status','!=',0)->get();
         $bonus_techinicals = commission_technical::get();
-        $taskings = Tasking::whereYear('created_at',now())->whereMonth('created_at',now())->whereDay('created_at',now())->get();
+        $taskings = Tasking::whereYear('date_start',now())->whereMonth('date_start',now())->whereDay('date_start',now())->get();
+        $myTasking = Tasking::whereYear('date_start',now())->whereMonth('date_start',now())->whereDay('date_start',now())->whereHas('users',function ($query)
+        {
+            return $query->where('id',auth()->id());
+        })->get();
         $works = Work1::whereYear('created_at',now())->whereMonth('created_at',now())->whereDay('created_at',now())->get();
         $message = $this->message;
+        // return $myTasking;
+        // return $taskings;
         return view('human_management.work_permit.create',compact('users','message','projects','vehicles','bonus_techinicals','taskings','works'));
     }
 

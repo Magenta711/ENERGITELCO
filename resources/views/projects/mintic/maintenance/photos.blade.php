@@ -17,7 +17,7 @@
     <input type="hidden" value="{{$item->id}}" id="data_item">
 </div>
 <section class="content">
-    @include('includes.alerts')
+     
     <div class="box">
         <div class="box-header">
             <div class="box-title"> proyecto MINTIC</div>
