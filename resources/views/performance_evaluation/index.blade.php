@@ -50,6 +50,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>Código</th>
                             <th>Nombre del evaluado</th>
                             <th>Responsable</th>
                             <th>Fecha</th>
@@ -61,6 +62,7 @@
                         @foreach ($performances as $item)
                             <tr>
                                 <td>{{$item->id}}</td>
+                                <td>{{($item->type_evaluation_id == 1) ? 'H-FR-04' : (($item->type_evaluation_id == 2) ? 'H-FR-05' : 'H-FR-05')}} {{$item->id}}</td>
                                 <td><a href="{{route('user_show',$item->evaluado->id)}}">{{$item->evaluado->name}}</a></td>
                                 <td><a href="{{route('user_show',$item->responsable->id)}}">{{$item->responsable->name}}</a></td>
                                 <td>{{$item->created_at}}</td>
@@ -79,6 +81,11 @@
                                     @if (($item->responsable->id == auth()->id() || Auth::user()->hasRole('Administrador')) && $item->state == "Sin calificar")
                                         @can('Calificar evaluaciones de desempeño')
                                             <a href="{{route('performance_evaluation_responder',$item->id)}}" class="btn btn-sm btn-warning">Calificar</a>
+                                        @endcan
+                                    @endif
+                                    @if (($item->responsable->id == auth()->id() || Auth::user()->hasRole('Administrador')) && $item->state == "Sin calificar")
+                                        @can('Descargar evaluaciones de desempeño')
+                                            <a href="{{route('performance_evaluation_download',$item->id)}}" class="btn btn-sm btn-warning">Descargar</a>
                                         @endcan
                                     @endif
                                 </td>

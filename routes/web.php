@@ -352,6 +352,7 @@ Route::delete('job_application/{id}','JobApplicationController@destroy')->name('
 
 //performance evaluation
 Route::get('performance_evaluation','PerformanceEvaluationController@index')->name('performance_evaluation');
+Route::get('performance_evaluation/download/{id}','PerformanceEvaluationController@download')->name('performance_evaluation_download');
 Route::post('performance_evaluation','PerformanceEvaluationController@create')->name('performance_evaluation_create');
 Route::PUT('performance_evaluation/store/{id}','PerformanceEvaluationController@store')->name('performance_evaluation_store');
 Route::put('performance_evaluation/{id}','PerformanceEvaluationController@update')->name('self_assessment_store');

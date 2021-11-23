@@ -12,3 +12,7 @@
 .swal2-popup.swal2-toast .swal2-title {
     font-size: 2em!important;
 }
+
+.swal2-content {
+    font-size: 15px !important;
+}
