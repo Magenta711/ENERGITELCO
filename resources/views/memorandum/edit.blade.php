@@ -59,7 +59,7 @@
             </div>
         </div>
         <div class="box-footer">
-            <button class="btn btn-sm btn-primary">Guardar</button>
+            <button class="btn btn-sm btn-primary btn-send">Guardar</button>
         </div>
         </form>
     </div>

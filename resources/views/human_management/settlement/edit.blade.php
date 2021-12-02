@@ -46,7 +46,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="box">
-                <form action="{{ route('settlement_update',$id->id) }}" method="post" enctype="multipart/form-data" autocomplete="off">
+                <form action="{{ route('settlement_update',$id->id) }}" method="post" enctype="multipart/form-data" autocomplete="off" id="form-settlement">
                     <div class="box-body">
                     @csrf
                     @method('PUT')
@@ -93,7 +93,7 @@
         $(document).ready(function() {
             $('#send').click(function (){
                 bPreguntar = false;
-                return d.submit();
+                return $('#form-settlement').submit();
             });
         });
         function preguntarAntesDeSalir()

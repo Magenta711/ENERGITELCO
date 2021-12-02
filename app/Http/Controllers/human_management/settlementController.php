@@ -100,7 +100,7 @@ class settlementController extends Controller
      */
     public function edit(settlement $id)
     {
-        $users= User::where('state',1)->get();
+        $users= User::get();
         return view('human_management.settlement.edit',compact('users','id'));
     }
 

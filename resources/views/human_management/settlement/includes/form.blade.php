@@ -17,11 +17,11 @@
                     </div>
                     <div class="col-md-3">
                         <label for="salary">Salario base mes actual</label>
-                        <input type="number" name="salary" value="{{ old('salary') }}" class="form-control controlSalary" id="salary" placeholder="Salario" >
+                        <input type="text" name="salary" value="{{ old('salary') }}" class="form-control controlSalary" id="salary" placeholder="Salario" >
                     </div>
                     <div class="col-md-3">
                         <label for="assistance">Auxilio de transporte</label>
-                        <input type="number" name="assistance" value="{{ old('assistance') ?? 106454 }}" class="form-control controlAssistance" id="assistance" placeholder="Auxilio de transporte" >
+                        <input type="text" name="assistance" value="{{ old('assistance') ?? 106454 }}" class="form-control controlAssistance" id="assistance" placeholder="Auxilio de transporte" >
                     </div>
                     <div class="col-md-3">
                         <label for="date_start">Fecha de ingreso</label>
@@ -59,31 +59,31 @@
                 <div class="col-md-2">
                     <div class="form-group">
                         <label for="days_linked_vacation">Total días por vacaciones</label>
-                        <input type="number" name="days_linked_vacation" value="0" id="days_linked_vacation" class="form-control text-right">
+                        <input type="text" name="days_linked_vacation" value="0" id="days_linked_vacation" class="form-control text-right">
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
                         <label for="vacation_days_to_pay">Días de vacaciones</label>
-                        <input type="number" name="vacation_days_to_pay" value="0" id="vacation_days_to_pay" class="form-control text-right">
+                        <input type="text" name="vacation_days_to_pay" value="0" id="vacation_days_to_pay" class="form-control text-right">
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
                         <label for="vacation">Días disfrutados en vacaciones</label>
-                        <input type="number" name="vacation" value="0" id="vacation" class="form-control text-right">
+                        <input type="text" name="vacation" value="0" id="vacation" class="form-control text-right">
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="total_vacation_days_to_pay">Total de días de vacaciones a pagar</label>
-                        <input type="number" name="total_vacation_days_to_pay" value="0" id="total_vacation_days_to_pay" class="form-control text-right">
+                        <input type="text" name="total_vacation_days_to_pay" value="0" id="total_vacation_days_to_pay" class="form-control text-right">
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="premium_payment_days">Días que faltan de pago prima</label>
-                        <input type="number" name="premium_payment_days" value="0" id="premium_payment_days" class="form-control text-right">
+                        <input type="text" name="premium_payment_days" value="0" id="premium_payment_days" class="form-control text-right">
                     </div>
                 </div>
             </div>
@@ -101,57 +101,57 @@
                         @for ($i = 1; $i < count($months); $i++)
                             <tr>
                                 <th>{{$months[$i]}}</th>
-                                <td><input type="number" name="salary_month[]" id="salaryMonth_{{$i}}" class="form-control text-right salary_month" value="0"></td>
-                                <td><input type="number" name="extras_month[]" id="extrasMonth_{{$i}}" class="form-control text-right extras_month" value="0"></td>
-                                <td><input type="number" name="assistance_month[]" id="assistanceMonth_{{$i}}" class="form-control text-right assistance_month" value="0"></td>
+                                <td><input type="text" name="salary_month[]" id="salaryMonth_{{$i}}" class="form-control text-right salary_month" value="0"></td>
+                                <td><input type="text" name="extras_month[]" id="extrasMonth_{{$i}}" class="form-control text-right extras_month" value="0"></td>
+                                <td><input type="text" name="assistance_month[]" id="assistanceMonth_{{$i}}" class="form-control text-right assistance_month" value="0"></td>
                             </tr>
                         @endfor
                         <tr>
                             <th>Total devengado</th>
                             <td>
-                                <input type="number" name="total_devengado_salary" value="{{old('total_devengado_salary') ?? 0}}" id="total_devengado_salary" readonly class="form-control text-right">
+                                <input type="text" name="total_devengado_salary" value="{{old('total_devengado_salary') ?? 0}}" id="total_devengado_salary" readonly class="form-control text-right">
                             </td>
                             <td>
-                                <input type="number" name="total_devengado_extras" value="{{old('total_devengado_extras') ?? 0}}" id="total_devengado_extras" readonly class="form-control text-right">
+                                <input type="text" name="total_devengado_extras" value="{{old('total_devengado_extras') ?? 0}}" id="total_devengado_extras" readonly class="form-control text-right">
                             </td>
                             <td>
-                                <input type="number" name="total_devengado_assistance" value="{{old('total_devengado_assistance') ?? 0}}" id="total_devengado_assistance" readonly class="form-control text-right">
+                                <input type="text" name="total_devengado_assistance" value="{{old('total_devengado_assistance') ?? 0}}" id="total_devengado_assistance" readonly class="form-control text-right">
                             </td>
                         </tr>
                         <tr>
                             <th>Promedio</th>
                             <td>
-                                <input type="number" name="average_salary" value="{{old('average_salary') ?? 0}}" id="average_salary" readonly class="form-control text-right">
+                                <input type="text" name="average_salary" value="{{old('average_salary') ?? 0}}" id="average_salary" readonly class="form-control text-right">
                             </td>
                             <td>
-                                <input type="number" name="average_extras" value="{{old('average_extras') ?? 0}}" id="average_extras" readonly class="form-control text-right">
+                                <input type="text" name="average_extras" value="{{old('average_extras') ?? 0}}" id="average_extras" readonly class="form-control text-right">
                             </td>
                             <td>
-                                <input type="number" name="average_assistance" value="{{old('average_assistance') ?? 0}}" id="average_assistance" readonly class="form-control text-right">
+                                <input type="text" name="average_assistance" value="{{old('average_assistance') ?? 0}}" id="average_assistance" readonly class="form-control text-right">
                             </td>
                         </tr>
                         <tr>
                             <th>Promedio últimos 6 meses</th>
                             <td>
-                                <input type="number" name="average_last_month_salary" value="{{old('average_last_month_salary') ?? 0}}" id="average_last_month_salary" readonly class="form-control text-right">
+                                <input type="text" name="average_last_month_salary" value="{{old('average_last_month_salary') ?? 0}}" id="average_last_month_salary" readonly class="form-control text-right">
                             </td>
                             <td>
-                                <input type="number" name="average_last_month_extras" value="{{old('average_last_month_extras') ?? 0}}" id="average_last_month_extras" readonly class="form-control text-right">
+                                <input type="text" name="average_last_month_extras" value="{{old('average_last_month_extras') ?? 0}}" id="average_last_month_extras" readonly class="form-control text-right">
                             </td>
                             <td>
-                                <input type="number" name="average_last_month_assistance" value="{{old('average_last_month_assistance') ?? 0}}" id="average_last_month_assistance" readonly class="form-control text-right">
+                                <input type="text" name="average_last_month_assistance" value="{{old('average_last_month_assistance') ?? 0}}" id="average_last_month_assistance" readonly class="form-control text-right">
                             </td>
                         </tr>
                         <tr>
                             <th>Promedio prima</th>
                             <td>
-                                <input type="number" name="average_premium_salary" value="{{old('average_premium_salary') ?? 0}}" id="average_premium_salary" readonly class="form-control text-right">
+                                <input type="text" name="average_premium_salary" value="{{old('average_premium_salary') ?? 0}}" id="average_premium_salary" readonly class="form-control text-right">
                             </td>
                             <td>
-                                <input type="number" name="average_premium_extras" value="{{old('average_premium_extras') ?? 0}}" id="average_premium_extras" readonly class="form-control text-right">
+                                <input type="text" name="average_premium_extras" value="{{old('average_premium_extras') ?? 0}}" id="average_premium_extras" readonly class="form-control text-right">
                             </td>
                             <td>
-                                <input type="number" name="average_premium_assistance" value="{{old('average_premium_assistance') ?? 0}}" id="average_premium_assistance" readonly class="form-control text-right">
+                                <input type="text" name="average_premium_assistance" value="{{old('average_premium_assistance') ?? 0}}" id="average_premium_assistance" readonly class="form-control text-right">
                             </td>
                         </tr>
                     </tbody>
@@ -168,35 +168,35 @@
                     <tbody>
                         <tr>
                             <th>Liquidación de cesantías</th>
-                            <td><input type="number" name="total_linkend" id="total_linkend" value="{{old('total_linkend') ?? 0}}" readonly class="form-control text-right"></td>
+                            <td><input type="text" name="total_linkend" id="total_linkend" value="{{old('total_linkend') ?? 0}}" readonly class="form-control text-right"></td>
                         </tr>
                         <tr>
                             <th>Pago de intereses de cesantías</th>
-                            <td><input type="number" name="intereses" id="intereses" value="{{old('intereses') ?? 0}}" readonly class="form-control text-right"></td>
+                            <td><input type="text" name="intereses" id="intereses" value="{{old('intereses') ?? 0}}" readonly class="form-control text-right"></td>
                         </tr>
                         <tr>
                             <th>Liquidación por prima</th>
-                            <td><input type="number" name="total_premium" id="total_premium" value="{{old('total_premium') ?? 0}}" readonly class="form-control text-right"></td>
+                            <td><input type="text" name="total_premium" id="total_premium" value="{{old('total_premium') ?? 0}}" readonly class="form-control text-right"></td>
                         </tr>
                         <tr>
                             <th>Pago de vacaciones</th>
-                            <td><input type="number" name="total_vacation" id="total_vacation" value="{{old('total_vacation') ?? 0}}" readonly class="form-control text-right"></td>
+                            <td><input type="text" name="total_vacation" id="total_vacation" value="{{old('total_vacation') ?? 0}}" readonly class="form-control text-right"></td>
                         <tr>
                             <th>Salario pendiente</th>
-                            <td><input type="number" name="this_salary" id="this_salary" value="{{old('this_salary') ?? 0}}" readonly class="form-control text-right"></td>
+                            <td><input type="text" name="this_salary" id="this_salary" value="{{old('this_salary') ?? 0}}" readonly class="form-control text-right"></td>
                         </tr>
                         <tr>
                             <th>Pago de indemnización</th>
-                            <td><input type="number" class="form-control text-right" id="compensation" name="compensation" value="{{old('compensation') ?? 0}}"></td>
+                            <td><input type="text" class="form-control text-right" id="compensation" name="compensation" value="{{old('compensation') ?? 0}}"></td>
                         </tr>
                         <tr>
                             <th>Deudas con la compañía</th>
-                            <td><input type="number" class="form-control text-right" id="debt" name="debt" value="{{old('debt') ?? 0}}"></td>
+                            <td><input type="text" class="form-control text-right" id="debt" name="debt" value="{{old('debt') ?? 0}}"></td>
                         </tr>
                         <tr>
                             <th>Total a pagar por liquidación</th>
                             <td>
-                                <input type="number" name="total_settlement" id="total_settlement" value="{{old('total_settlement') ?? 0}}" readonly class="form-control text-right">
+                                <input type="text" name="total_settlement" id="total_settlement" value="{{old('total_settlement') ?? 0}}" readonly class="form-control text-right">
                             </td>
                         </tr>
                     </tbody>
@@ -204,5 +204,5 @@
             </div>
             <div class="form-group">
                 <label for="serveraces">Valor a reclamar cesantías en fondo por valor</label>
-                <input type="number" name="serveraces" id="serveraces" class="form-control text-right" value="{{ old('serveraces') ?? 0 }}">
+                <input type="text" name="serveraces" id="serveraces" class="form-control text-right" value="{{ old('serveraces') ?? 0 }}">
             </div>

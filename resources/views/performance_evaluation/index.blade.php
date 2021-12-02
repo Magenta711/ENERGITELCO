@@ -83,8 +83,8 @@
                                             <a href="{{route('performance_evaluation_responder',$item->id)}}" class="btn btn-sm btn-warning">Calificar</a>
                                         @endcan
                                     @endif
-                                    @if (($item->responsable->id == auth()->id() || Auth::user()->hasRole('Administrador')) && $item->state == "Sin calificar")
-                                        @can('Descargar evaluaciones de desempeño')
+                                    @if ($item->state == "Aprobado")
+                                        @can('Descargar evaluación de desempeño')
                                             <a href="{{route('performance_evaluation_download',$item->id)}}" class="btn btn-sm btn-warning">Descargar</a>
                                         @endcan
                                     @endif

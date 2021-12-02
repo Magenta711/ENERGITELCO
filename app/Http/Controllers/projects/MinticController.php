@@ -39,8 +39,7 @@ class MinticController extends Controller
      */
     public function index()
     {
-        $mintics = Mintic_School::with('technical')->get();
-        return view('projects.mintic.index',compact('mintics'));
+        return view('projects.mintic.index');
     }
 
     /**

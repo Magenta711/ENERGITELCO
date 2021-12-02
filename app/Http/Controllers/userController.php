@@ -44,9 +44,7 @@ class userController extends Controller
     
     public function index()
     {
-
-        $users = User::with(['position','register'])->where('state',1)->get();
-        return view('users.index',compact('users'));
+        return view('users.index');
     }
 
     /**

@@ -42,17 +42,17 @@
                                         <ul class="list-group">
                                             <li class="list-group-item">
                                                 <label for="admin_bonus_checked_{{ $user->id }}">
-                                                    <input type="checkbox" id="admin_bonus_checked_{{ $user->id }}" class="check_concept admin_bonus_checked" name="admin_bonus_check[{{ $user->id }}]" value="1" {{old('admin_bonus_check')[$user->id] ? 'checked' : ''}}> Bonificación a administrativos
+                                                    <input type="checkbox" id="admin_bonus_checked_{{ $user->id }}" class="check_concept admin_bonus_checked" name="admin_bonus_check[{{ $user->id }}]" value="1" {{old('admin_bonus_check') && old('admin_bonus_check')[$user->id] ? 'checked' : ''}}> Bonificación a administrativos
                                                 </label>
                                             </li>
                                             <li class="list-group-item">
                                                 <label for="drive_bonus_checked_{{ $user->id }}">
-                                                    <input type="checkbox" id="drive_bonus_checked_{{ $user->id }}" class="check_concept drive_bonus_checked" name="drive_bonus_check[{{ $user->id }}]" value="1" {{old('drive_bonus_check')[$user->id] ? 'checked' : (($user->register && ($user->register->car || $user->register->moto)) ? 'checked' : '')}}> Bonificación a conductores
+                                                    <input type="checkbox" id="drive_bonus_checked_{{ $user->id }}" class="check_concept drive_bonus_checked" name="drive_bonus_check[{{ $user->id }}]" value="1" {{old('drive_bonus_check') && old('drive_bonus_check')[$user->id] ? 'checked' : (($user->register && ($user->register->car || $user->register->moto)) ? 'checked' : '')}}> Bonificación a conductores
                                                 </label>
                                             </li>
                                             <li class="list-group-item">
                                                 <label for="24_7_bonus_checked_{{ $user->id }}">
-                                                    <input type="checkbox" id="24_7_bonus_checked_{{ $user->id }}" class="check_concept 24_7_bonus_checked" name="b24_7_check[{{ $user->id }}]" value="1" {{ (old('b24_7_check')[$user->id]) ? 'checked' : (($user->b24_7) ? 'checked' : '') }}> Bonificación 24/7
+                                                    <input type="checkbox" id="24_7_bonus_checked_{{ $user->id }}" class="check_concept 24_7_bonus_checked" name="b24_7_check[{{ $user->id }}]" value="1" {{ (old('b24_7_check') && old('b24_7_check')[$user->id]) ? 'checked' : (($user->b24_7) ? 'checked' : '') }}> Bonificación 24/7
                                                 </label>
                                             </li>
                                             <li class="list-group-item hide">
@@ -65,7 +65,7 @@
                                         <div class="block_bonus_administrative_{{$user->id}}" style="display: none">
                                             <div class="form-group">
                                                 <label for="value_bonus_{{$user->id}}">Bonificación segun su cargo</label>
-                                                <input type="text" name="value_bonus[{{$user->id}}]" id="value_bonus_{{$user->id}}" value="{{ old('value_bonus')[$user->id] ? old('value_bonus')[$user->id] : $user->position->bonus }}" class="form-control">
+                                                <input type="text" name="value_bonus[{{$user->id}}]" id="value_bonus_{{$user->id}}" value="{{ old('value_bonus') ? old('value_bonus')[$user->id] : $user->position->bonus }}" class="form-control">
                                             </div>
                                             <h4>Admistrativo</h4>
                                             <hr>
@@ -125,7 +125,7 @@
                                                 <input type="number" name="admin_12[{{$user->id}}]" id="admin_{{$user->id}}_12" class="form-control question_{{$user->id}} admin_input" value="0" max="10" min="0">
                                             </div>
                                         </div>
-                                        <div class="block_bonus_driver_{{$user->id}}" {!! old('drive_bonus_check')[$user->id] ? 'style="display: none"' : (($user->register && ($user->register->car || $user->register->moto)) ? '' : 'style="display: none"') !!}>
+                                        <div class="block_bonus_driver_{{$user->id}}" {!! old('drive_bonus_check') && old('drive_bonus_check')[$user->id] ? 'style="display: none"' : (($user->register && ($user->register->car || $user->register->moto)) ? '' : 'style="display: none"') !!}>
                                             <h4>Conductor</h4>
                                             <div class="row">
                                                 <div class="col-md-6 form-group">
@@ -138,7 +138,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="block_bonus_24_7_{{$user->id}}" {!!old('24_7_bonus_check')[$user->id] || $user->b24_7 ? '' : 'style="display:none"'!!}>
+                                        <div class="block_bonus_24_7_{{$user->id}}" {!! (old('24_7_bonus_check') && old('24_7_bonus_check')[$user->id]) || $user->b24_7 ? '' : 'style="display:none"'!!}>
                                             <div class="form-group">
                                                 <label for="bonus_24_7_{{$user->id}}">Bonificación 24/7 (valor $)</label>
                                                 <input type="number" name="bonus_24_7[{{$user->id}}]" id="bonus_24_7_{{$user->id}}" class="form-control total_24_7" value="{{old('bonus_24_7')[$user->id] ?? 0 }}">
@@ -211,7 +211,7 @@
                                                 <input type="hidden" name="total_admin[{{$user->id}}]" value="0" id="total_admin_{{$user->id}}" class="total_admin">
                                                 <span id="total_pay_admin_{{ $user->id }}">$0,00</span>
                                             </div>
-                                            <div class="col-md-4 block_bonus_driver_{{$user->id}}" {!! old('drive_bonus_check')[$user->id] ? 'style="display: none"' : (($user->register && ($user->register->car || $user->register->moto)) ? '' : 'style="display: none"') !!}>
+                                            <div class="col-md-4 block_bonus_driver_{{$user->id}}" {!! old('drive_bonus_check') && old('drive_bonus_check')[$user->id] ? 'style="display: none"' : (($user->register && ($user->register->car || $user->register->moto)) ? '' : 'style="display: none"') !!}>
                                                 <h4>Total bonificación conductor</h4>
                                                 <input type="hidden" name="total_dirver[{{$user->id}}]" value="0" id="total_driver_{{$user->id}}" class="total_driver">
                                                 <span id="total_pay_driver_{{ $user->id }}">$0,00</span>
