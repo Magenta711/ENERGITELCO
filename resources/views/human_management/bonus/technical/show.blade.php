@@ -3,13 +3,23 @@
 @section('content')
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <h1>
-        Bonificaciones y víaticos <small></small>
-    </h1>
+    @if ($id->created_at > '2021-12-02 24:00:00')
+        <h1>
+            Víaticos <small></small>
+        </h1>
+    @else
+        <h1>
+            Bonificaciones y víaticos <small></small>
+        </h1>
+    @endif
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
         <li><a href="#">Formatos de gestión</a></li>
-        <li class="active"><a href="#">Bonificaciones y víaticos</a></li>
+        @if ($id->created_at > '2021-12-02 24:00:00')
+            <li class="active"><a href="#">Víaticos</a></li>
+        @else
+            <li class="active"><a href="#">Bonificaciones y víaticos</a></li>
+        @endif
     </ol>
 </section>
 <section class="content">
@@ -20,7 +30,7 @@
             <h4><i class="icon fa fa-ban"></i> Advertencia!</h4>
             <ul>
                 @if ($id->status == 3 && !$id->has_bonus)
-                    <li>Se requiere consolidar bonificaciones</li>
+                    <li>Se requiere consolidar víaticos</li>
                 @endif
                 @if ($id->status == 3 && !$id->has_box)
                     <li>Se requiere consolidar la caja menor</li>
@@ -30,7 +40,11 @@
     @endif
     <div class="box box-solid">
         <div class="box-header with-border">
-            <h3 class="box-title">Bonificaciones y víaticos</h3>
+            @if ($id->created_at > '2021-12-02 24:00:00')
+                <h3 class="box-title">Víaticos</h3>
+            @else
+                <h3 class="box-title">Bonificaciones y víaticos</h3>
+            @endif
             <div class="box-tools">
                 <a href="{{route('work_permit_bonuses')}}" class="btn btn-sm btn-primary">Volver</a>
             </div>
@@ -43,7 +57,9 @@
                             <th>Documento</th>
                             <th>Funcionario</th>
                             <th># Cuenta</th>
-                            <th>Bonificaciones</th>
+                            @if ($id->created_at <= '2021-12-02 24:00:00')
+                                <th>Bonificaciones</th>
+                            @endif
                             <th>Viáticos</th>
                             <th>Ajustes</th>
                             <th>Pendientes</th>
@@ -52,7 +68,9 @@
                     </thead>
                     <tbody>
                     @php
-                        $bonus = 0;
+                        if ($id->created_at <= '2021-12-02 24:00:00'){
+                            $bonus = 0;
+                        }
                         $vistics = 0;
                         $ajustes = 0;
                         $pending = 0;
@@ -63,13 +81,19 @@
                             <td>{{ $item['cedula'] }}</td>
                             <td>{{ $item['name'] }}</td>
                             <td>{{ $item['cuenta'] }}</td>
-                            <td>${{ number_format($item['bonification'],2,',','.') }}</td>
+                            @if ($id->created_at <= '2021-12-02 24:00:00')
+                                <td>${{ number_format($item['bonification'],2,',','.') }}</td>
+                            @endif
                             <td>${{ number_format($item['viatic'],2,',','.') }}</td>
                             <td>${{ number_format($item['ajustes'],2,',','.') }}</td>
                             <td>${{ number_format($item['pending'],2,',','.') }}</td>
                             @php
-                                $totalPagar = $item['bonification']+$item['viatic']-$item['ajustes']+$item['pending'];
-                                $bonus += $item['bonification'];
+                                if ($id->created_at <= '2021-12-02 24:00:00'){
+                                    $bonus += $item['bonification'];
+                                    $totalPagar = $item['bonification']+$item['viatic']-$item['ajustes']+$item['pending'];
+                                }else {
+                                    $totalPagar = $item['viatic']-$item['ajustes']+$item['pending'];
+                                }
                                 $vistics += $item['viatic'];
                                 $ajustes += $item['ajustes'];
                                 $pending += $item['pending'];
@@ -80,7 +104,9 @@
                     @endforeach
                     <tr>
                         <th colspan="3">Total</th>
-                        <th>${{ number_format($bonus,2,',','.') }}</th>
+                        @if ($id->created_at <= '2021-12-02 24:00:00')
+                            <th>${{ number_format($bonus,2,',','.') }}</th>
+                        @endif
                         <th>${{ number_format($vistics,2,',','.') }}</th>
                         <th>${{ number_format($ajustes,2,',','.') }}</th>
                         <th>${{ number_format($pending,2,',','.') }}</th>
@@ -110,12 +136,10 @@
 <form id="form_approval" action="{{ route('work_permit_bonuses_approve',$id->id) }}" method="POST" style="form_dis;">
     @csrf
     <input type="hidden" name="status" value="Aprobado">
-    {{-- <textarea name="observaciones_jefe" id="observaciones_jefe_2" class="hide" cols="30" rows="3">{{old('observaciones_jefe')}}</textarea> --}}
 </form>
 <form id="form_no_approval" action="{{ route('work_permit_bonuses_approve',$id->id) }}" method="POST" style="display: none;">
     @csrf
     <input type="hidden" name="status" value="No aprobado">
-    {{-- <textarea name="observaciones_jefe" id="observaciones_jefe_2" class="hide" cols="30" rows="3">{{old('observaciones_jefe')}}</textarea> --}}
 </form>
 
 @endsection

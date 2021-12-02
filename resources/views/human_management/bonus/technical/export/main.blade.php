@@ -14,8 +14,9 @@
             <th>Funcionario</th>
             <th># Cuenta</th>
             <th>Cantidad </th>
-
-            <th>Bonificación</th>
+            @if($id->created_at <= '2021-12-02 24:00:00')
+                <th>Bonificación</th>
+            @endif
             <th>Viáticos</th>
             <th>Pendientes</th>
             <th>Ajustes</th>
@@ -28,7 +29,9 @@
     </thead>
     <tbody>     
             @php
-                $t1 = 0;
+                if($id->created_at <= '2021-12-02 24:00:00'){
+                    $t1 = 0;
+                }
                 $t2 = 0;
                 $t3 = 0;
                 $pen = 0;
@@ -46,8 +49,9 @@
                         <td>{{ $item['cuenta'] }}</td>
 
                         <td>{{ $item['count'] }}</td>
-
-                        <td>${{ number_format($item['bonificacion'],2,',','.') }}</td>
+                        @if($id->created_at <= '2021-12-02 24:00:00')
+                            <td>${{ number_format($item['bonificacion'],2,',','.') }}</td>
+                        @endif
                         <td>${{ number_format($item['viaticos'],2,',','.') }}</td>
                         <td>${{ number_format($item['pending'],2,',','.') }}</td>
                         <td>{{$item['ajustes'] > 0 ? '-' : ''}}${{ number_format($item['ajustes'],2,',','.') }}</td>
@@ -56,7 +60,9 @@
                         <td>${{ number_format($item['discharges'],2,',','.') }}</td>
                         @php
                             $count += $item['count'];
-                            $t1 += $item['bonificacion'];
+                            if($id->created_at <= '2021-12-02 24:00:00'){
+                                $t1 += $item['bonificacion'];
+                            }
                             $t2 += $item['viaticos'];
                             $pen += $item['pending'];
                             $aju += $item['ajustes'];
@@ -73,7 +79,9 @@
         <tr>
             <th colspan="3">Total</th>
             <th>{{ $count }}</th>
-            <th>${{ number_format($t1,2,',','.') }}</th>
+            @if($id->created_at <= '2021-12-02 24:00:00')
+                <th>${{ number_format($t1,2,',','.') }}</th>
+            @endif
             <th>${{ number_format($t2,2,',','.') }}</th>
             <th>${{ number_format($pen,2,',','.') }}</th>
             <th>{{$aju > 0 ? '-' : ''}}${{ number_format($aju,2,',','.') }}</th>

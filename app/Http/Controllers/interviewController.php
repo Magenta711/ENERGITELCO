@@ -245,7 +245,7 @@ class interviewController extends Controller
 
         $id->responsable->notify(new notificationMain($id->id,'Se ha aprobado la entrevista '.$id->id,'interview/show/'));
 
-        return redirect()->route('approval')->with(['success'=>'Se ha aprobado la entrevista correctamente.','sudmenu' => 11]);
+        return redirect()->back()->with(['success'=>'Se ha aprobado la entrevista correctamente.','sudmenu' => 11]);
     }
     
     public function not_approve(interview $id)
@@ -254,7 +254,7 @@ class interviewController extends Controller
 
         $id->responsable->notify(new notificationMain($id->id,'Se ha desaprobado la entrevista '.$id->id,'interview/show/'));
 
-        return redirect()->route('approval')->with(['success'=>'Se ha desaprobado la entrevista correctamente.','sudmenu'=>11]);
+        return redirect()->back()->with(['success'=>'Se ha desaprobado la entrevista correctamente.','sudmenu'=>11]);
     }
 
     public function presend_documentation(interview $id)

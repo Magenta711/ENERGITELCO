@@ -244,7 +244,7 @@ class workPermitNotificationsMedicalIncapacityController extends Controller
                 $menssage->to($usuario->email,$usuario->name)->subject("Energitelco S.A.S H-FR-24 SOLICITUD DE PERMISO LABORAL O NOTIFICACIÓN DE INCAPACIDAD MÉDICA APROBADA");
             });
     
-            return redirect()->route('approval')->with(['success'=>'Se ha aprobado la solicitud de permiso laboral o notificación de incapacidad médica '.$id->id.' correctamente','sudmenu'=>7]);
+            return redirect()->back()->with(['success'=>'Se ha aprobado la solicitud de permiso laboral o notificación de incapacidad médica '.$id->id.' correctamente']);
         }else {
             $request->validate([
                 'observaciones_jefe'=>['required'],
@@ -273,7 +273,7 @@ class workPermitNotificationsMedicalIncapacityController extends Controller
                 }
                 $menssage->to($id->responsableAcargo->email,$id->responsableAcargo->name)->subject("Energitelco S.A.S, SOLICITUD DE PERMISO LABORAL O NOTIFICACIÓN DE INCAPACIDAD MÉDICA NO APROBADA");
             });
-            return redirect()->route('approval')->with(['success'=>'Se ha desaprobado la solicitud de permiso laboral o notificación de incapacidad médica correctamente','sudmenu'=>7]);
+            return redirect()->back()->with(['success'=>'Se ha desaprobado la solicitud de permiso laboral o notificación de incapacidad médica correctamente']);
         }
     }
     public function plus($id)

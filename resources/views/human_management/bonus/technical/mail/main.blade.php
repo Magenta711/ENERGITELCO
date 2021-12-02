@@ -81,21 +81,21 @@
                                                     <th>Documento</th>
                                                     <th>Funcionario</th>
                                                     <th># Cuenta</th>
-                                                    <th>Bonificación</th>
+                                                    {{-- <th>Bonificación</th> --}}
                                                     <th>Viáticos</th>
                                                     <th>Ajustes</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @php
+                                                {{-- @php
                                                     $plusUser = $plus / count($users);
-                                                @endphp
+                                                @endphp --}}
                                                 @foreach ($users as $key => $item)
                                                     <tr>
                                                         <td>{{ $item['cedula'] }}</td>
                                                         <td>{{ $item['name'] }}</td>
                                                         <td>{{ $item['cuenta'] }}</td>
-                                                        <td class="text-right">${{ number_format(($item['bonificacion'] + $plusUser),2,',','.') }}</td>
+                                                        {{-- <td class="text-right">${{ number_format(($item['bonificacion'] + $plusUser),2,',','.') }}</td> --}}
                                                         <td class="text-right">${{ number_format($item['viaticos'],2,',','.') }}</td>
                                                         <td class="text-right">-${{ number_format($item['ajustes'],2,',','.') }}</td>
                                                     </tr>

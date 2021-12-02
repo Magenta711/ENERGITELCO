@@ -258,7 +258,7 @@ class requestWithdrawSeveranceController extends Controller
                 $menssage->attachData($pdf4->output(), $time.'_CARTA_RETIRO_CESANTÍAS.pdf');
             });
 
-            return redirect()->route('approval')->with(['success'=>'Se ha aprobado la solicitud de carta de retiro de cesantías o laboral '.$id->id.' correctamente','sudmenu' => 9]);
+            return redirect()->back()->with(['success'=>'Se ha aprobado la solicitud de carta de retiro de cesantías o laboral '.$id->id.' correctamente','sudmenu' => 9]);
         }else {
             $id->update([
                 'estado' => "No aprobado",
@@ -268,7 +268,7 @@ class requestWithdrawSeveranceController extends Controller
 
             $id->responsableAcargo->notify(new notificationMain($id->id,'No se aprobó la solicitud de carta de retiro de cesantías o laboral '.$id->id,'human_management/request_withdraw_severance/show/'));
 
-            return redirect()->route('approval')->with(['success'=>'Se ha desaprobado la solicitud de carta de retiro de cesantías o laboral correctamente','sudmenu'=>9]);
+            return redirect()->back()->with(['success'=>'Se ha desaprobado la solicitud de carta de retiro de cesantías o laboral correctamente','sudmenu'=>9]);
         }
     }
 

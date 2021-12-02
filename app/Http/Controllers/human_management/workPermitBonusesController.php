@@ -248,7 +248,7 @@ class workPermitBonusesController extends Controller
                 switch ($i) {
                     case 1:
                         $item->work_add->update([
-                            'f9a1u1' => $request->bonus[$item->id][$user->id],
+                            // 'f9a1u1' => $request->bonus[$item->id][$user->id],
                             'f9a2u1' => $request->viatic[$item->id][$user->id],
                             'ajustes_u1' => $request->ajustes[$item->id][$user->id],
                             'pending_u1' => $pending,
@@ -256,7 +256,7 @@ class workPermitBonusesController extends Controller
                         break;
                     case 2:
                         $item->work_add->update([
-                            'f9a1u2' => $request->bonus[$item->id][$user->id],
+                            // 'f9a1u2' => $request->bonus[$item->id][$user->id],
                             'f9a2u2' => $request->viatic[$item->id][$user->id],
                             'ajustes_u2' => $request->ajustes[$item->id][$user->id],
                             'pending_u2' => $pending,
@@ -264,7 +264,7 @@ class workPermitBonusesController extends Controller
                         break;
                     case 3:
                         $item->work_add->update([
-                            'f9a1u3' => $request->bonus[$item->id][$user->id],
+                            // 'f9a1u3' => $request->bonus[$item->id][$user->id],
                             'f9a2u3' => $request->viatic[$item->id][$user->id],
                             'ajustes_u3' => $request->ajustes[$item->id][$user->id],
                             'pending_u3' => $pending,
@@ -272,7 +272,7 @@ class workPermitBonusesController extends Controller
                         break;
                     case 4:
                         $item->work_add->update([
-                            'f9a1u4' => $request->bonus[$item->id][$user->id],
+                            // 'f9a1u4' => $request->bonus[$item->id][$user->id],
                             'f9a2u4' => $request->viatic[$item->id][$user->id],
                             'ajustes_u4' => $request->ajustes[$item->id][$user->id],
                             'pending_u4' => $pending,
@@ -465,7 +465,7 @@ class workPermitBonusesController extends Controller
                     $pen = 0;
                     switch($i){
                         case(1):
-                            $bonus = $item->work_add->f9a1u1 && is_numeric($item->work_add->f9a1u1) ? $item->work_add->f9a1u1 : 0;
+                            // $bonus = $item->work_add->f9a1u1 && is_numeric($item->work_add->f9a1u1) ? $item->work_add->f9a1u1 : 0;
                             $viatic = $item->work_add->f9a2u1 && is_numeric($item->work_add->f9a2u1) ? $item->work_add->f9a2u1 : 0;
                             $aju = $item->work_add->ajustes_u1 && is_numeric($item->work_add->ajustes_u1) ? $item->work_add->ajustes_u1 : 0;
                             $pen = $item->work_add->pending_u1 && is_numeric($item->work_add->pending_u1) ? $item->work_add->pending_u1 : 0;
@@ -475,7 +475,7 @@ class workPermitBonusesController extends Controller
                             $dis = $item->work_add->discharges_u1 && is_numeric($item->work_add->discharges_u1) ? $item->work_add->discharges_u1 : 0;
                             break;
                         case(2):
-                            $bonus = $item->work_add->f9a1u2 && is_numeric($item->work_add->f9a1u2) ? $item->work_add->f9a1u2 : 0;
+                            // $bonus = $item->work_add->f9a1u2 && is_numeric($item->work_add->f9a1u2) ? $item->work_add->f9a1u2 : 0;
                             $viatic = $item->work_add->f9a2u2 && is_numeric($item->work_add->f9a2u2) ? $item->work_add->f9a2u2 : 0;
                             $aju = $item->work_add->ajustes_u2 && is_numeric($item->work_add->ajustes_u2) ? $item->work_add->ajustes_u2 : 0;
                             $pen = $item->work_add->pending_u2 && is_numeric($item->work_add->pending_u2) ? $item->work_add->pending_u2 : 0;
@@ -485,7 +485,7 @@ class workPermitBonusesController extends Controller
                             $dis = $item->work_add->discharges_u2 && is_numeric($item->work_add->discharges_u2) ? $item->work_add->discharges_u2 : 0;
                             break;
                         case(3):
-                            $bonus = $item->work_add->f9a1u3 && is_numeric($item->work_add->f9a1u3) ? $item->work_add->f9a1u3 : 0;
+                            // $bonus = $item->work_add->f9a1u3 && is_numeric($item->work_add->f9a1u3) ? $item->work_add->f9a1u3 : 0;
                             $viatic = $item->work_add->f9a2u3 && is_numeric($item->work_add->f9a2u3) ? $item->work_add->f9a2u3 : 0;
                             $aju = $item->work_add->ajustes_u3 && is_numeric($item->work_add->ajustes_u3) ? $item->work_add->ajustes_u3 : 0;
                             $pen = $item->work_add->pending_u3 && is_numeric($item->work_add->pending_u3) ? $item->work_add->pending_u3 : 0;
@@ -495,7 +495,7 @@ class workPermitBonusesController extends Controller
                             $dis = $item->work_add->discharges_u3 && is_numeric($item->work_add->discharges_u3) ? $item->work_add->discharges_u3 : 0;
                             break;
                         case(4):
-                            $bonus = $item->work_add->f9a1u4 && is_numeric($item->work_add->f9a1u4) ? $item->work_add->f9a1u4 : 0;
+                            // $bonus = $item->work_add->f9a1u4 && is_numeric($item->work_add->f9a1u4) ? $item->work_add->f9a1u4 : 0;
                             $viatic = $item->work_add->f9a2u4 && is_numeric($item->work_add->f9a2u4) ? $item->work_add->f9a2u4 : 0;
                             $aju = $item->work_add->ajustes_u4 && is_numeric($item->work_add->ajustes_u4) ? $item->work_add->ajustes_u4 : 0;
                             $pen = $item->work_add->pending_u4 && is_numeric($item->work_add->pending_u4) ? $item->work_add->pending_u4 : 0;
@@ -507,7 +507,7 @@ class workPermitBonusesController extends Controller
                         default:
                     }
                     if (array_key_exists($user->id,$array)) {
-                        $bonificacion = $array[$user->id]['bonificacion'];
+                        // $bonificacion = $array[$user->id]['bonificacion'];
                         $viaticos = $array[$user->id]['viaticos'];
                         $ajustes = $array[$user->id]['ajustes'];
                         $pending = $array[$user->id]['pending'];
@@ -517,7 +517,7 @@ class workPermitBonusesController extends Controller
                         $discharges = $array[$user->id]['discharges'];
 
                         $total_box = $array[$user->id]['total_box'] + $box + $dis;
-                        $total_bonus = $array[$user->id]['total_bonus'] + $bonus + $viatic + $pen - $aju;
+                        $total_bonus = $array[$user->id]['total_bonus'] + $viatic + $pen - $aju;
                         $count = $array[$user->id]['count'];
                         $array[$user->id] = [
                             'id' => $user->id,
@@ -526,7 +526,7 @@ class workPermitBonusesController extends Controller
                             'cedula' => $user->cedula,
                             'cuenta' => $user->register ? $user->register->bank_account : '',
 
-                            'bonificacion' => $bonificacion +  $bonus,
+                            // 'bonificacion' => $bonificacion +  $bonus,
                             'viaticos' => $viaticos + $viatic,
                             'ajustes' => $ajustes + $aju,
                             'pending' => $pending + $pen,
@@ -548,7 +548,7 @@ class workPermitBonusesController extends Controller
                             'cedula' => $user->cedula,
                             'cuenta' => $user->register ? $user->register->bank_account : '',
 
-                            'bonificacion' => $bonus,
+                            // 'bonificacion' => $bonus,
                             'viaticos' => $viatic,
                             'pending' => $pen,
                             'ajustes' => $aju,
@@ -558,8 +558,8 @@ class workPermitBonusesController extends Controller
                             'discharges' => $dis,
 
                             'total_box' => $box + $dis,
-                            'total_bonus' => $bonus + $viatic + $pen - $aju,
-                            'total' => $box + $dis + $bonus + $viatic + $pen - $aju,
+                            'total_bonus' => $viatic + $pen - $aju,
+                            'total' => $box + $dis + $viatic + $pen - $aju,
                             'count' => 1
                         ];
                     }
@@ -667,10 +667,10 @@ class workPermitBonusesController extends Controller
                 $menssage->subject("Energitelco S.A.S PAGO DE COMISIONES A TÉCNICOS APROBADO");
                 $menssage->attachData($pdf->output(), 'COMPROBANTE_EGRESOS.pdf');
             });
-            return redirect()->route('approval')->with(['success'=>'Se ha aprobado la comisión correctamente','sudmenu' => 18]);
+            return redirect()->back()->with(['success'=>'Se ha aprobado la comisión correctamente']);
         }else {
             $id->update(['status' => 0,'approver_id' => auth()->id()]);
-            return redirect()->route('approval')->with(['success'=>'Se ha desaprobado la comisión correctamente','sudmenu'=>18]);
+            return redirect()->back()->with(['success'=>'Se ha desaprobado la comisión correctamente']);
         }
     }
 }

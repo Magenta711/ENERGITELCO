@@ -384,7 +384,7 @@ class workPermitController extends Controller
                 $menssage->subject("Energitelco S.A.S aprobado el PERMISO DE TRABAJO ".$id->id);
             });
 
-            return redirect()->route('approval')->with(['success'=>'Se ha aprobado el permiso de trabajo '.$id->id.' correctamente','sudmenu' => 1]);
+            return redirect()->back()->with(['success'=>'Se ha aprobado el permiso de trabajo '.$id->id.' correctamente']);
         }else {
             $id->update([
                 'estado'=>"No aprobado",
@@ -402,7 +402,7 @@ class workPermitController extends Controller
                 Session::forget('notificaiones_aprobacion');
             }
 
-            return redirect()->route('approval')->with(['success'=>'Se ha desaprobado el permiso de trabajo correctamente','sudmenu'=>1]);
+            return redirect()->back()->with(['success'=>'Se ha desaprobado el permiso de trabajo correctamente']);
         }
     }
 }

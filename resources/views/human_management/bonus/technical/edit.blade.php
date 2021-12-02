@@ -38,7 +38,7 @@
                                 <th>Estación base</th>
                                 <th>Fecha</th>
                                 <th>Funcionario</th>
-                                <th>Bonificación</th>
+                                {{-- <th>Bonificación</th> --}}
                                 <th>Viáticos</th>
                                 <th>Ajustes</th>
                             </tr>
@@ -57,7 +57,7 @@
                                         <td>{{ $item->nombre_eb }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>{{ $user->name }}</td>
-                                        <td class="text-right">
+                                        {{-- <td class="text-right">
                                             @switch($i)
                                                 @case(1)
                                                     $ {{ is_numeric($item->work_add->f9a1u1) ? number_format(($item->work_add->f9a1u1 ?? 0),2,',','.') : 0 }}
@@ -74,7 +74,7 @@
                                                 @default
                                                     N/A
                                             @endswitch
-                                        </td>
+                                        </td> --}}
                                         <td class="text-right">
                                             @switch($i)
                                                 @case(1)

@@ -419,7 +419,7 @@ class MinticController extends Controller
                 $user->notify(new notificationMain($id->id,'Proyecto MINTIC '.$id->id.' aprobado','project/mintic/ec/show/'));
             }
         }
-        return redirect()->route('approval')->with(['success'=>'Se ha aprobado el proyecto correctamente','sudmenu'=>16]);
+        return redirect()->back()->with(['success'=>'Se ha aprobado el proyecto correctamente','sudmenu'=>16]);
     }
     
     public function not_approval(Mintic_School $id)
@@ -431,7 +431,7 @@ class MinticController extends Controller
                 $user->notify(new notificationMain($id->id,'Proyecto MINTIC '.$id->id.' desaprobado','project/mintic/ec/show/'));
             }
         }
-        return redirect()->route('approval')->with(['success'=>'Se ha desaprobado el proyecto correctamente','sudmenu'=>16]);
+        return redirect()->back()->with(['success'=>'Se ha desaprobado el proyecto correctamente','sudmenu'=>16]);
     }
 
     public function pintures($id)

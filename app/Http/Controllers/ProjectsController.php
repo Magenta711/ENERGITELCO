@@ -469,14 +469,14 @@ class ProjectsController extends Controller
     {
         $id->update(['state'=>'Aprobado']);
         $id->responsable->notify(new notificationMain($id->id,'Planeación de proyecto aprobado '.$id->id,'projects/'));
-        return redirect()->route('approval')->with(['success'=>'Proyecto aprobado correctamente','sudmenu' => 17]);
+        return redirect()->back()->with(['success'=>'Proyecto aprobado correctamente']);
     }
     
     public function not_approve(Project $id)
     {
         $id->update(['state'=>'No aprobado']);
         $id->responsable->notify(new notificationMain($id->id,'Planeación de proyecto no aprobado '.$id->id,'projects/'));
-        return redirect()->route('approval')->with(['success'=>'Proyecto no aprobado correctamente','sudmenu'=>17]);
+        return redirect()->back()->with(['success'=>'Proyecto no aprobado correctamente','sudmenu'=>17]);
     }
 
     public function download_mw(Project $id)

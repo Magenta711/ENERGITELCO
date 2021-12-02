@@ -271,7 +271,7 @@ class curriculumController extends Controller
 
         $id->responsable->notify(new notificationMain($id->id,'Se aprobo la hoja de vida '.$id->id,'curriculum/show/'));
 
-        return redirect()->route('approval')->with(['success'=>'Se ha aprobado la hoja de vida correctamente','sudmenu' => 13]);
+        return redirect()->back()->with(['success'=>'Se ha aprobado la hoja de vida correctamente','sudmenu' => 13]);
     }
     
     public function not_approve(curriculum $id)
@@ -280,7 +280,7 @@ class curriculumController extends Controller
         
         $id->responsable->notify(new notificationMain($id->id,'No se aprobo la hoja de vida '.$id->id,'curriculum/show/'));
 
-        return redirect()->route('approval')->with(['success'=>'Se ha desaprobado la hoja de vida correctamente','sudmenu'=>13]);
+        return redirect()->back()->with(['success'=>'Se ha desaprobado la hoja de vida correctamente','sudmenu'=>13]);
     }
 
     public function upload_file(Request $request)

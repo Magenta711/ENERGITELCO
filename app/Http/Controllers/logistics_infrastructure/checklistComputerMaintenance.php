@@ -222,7 +222,7 @@ class checklistComputerMaintenance extends Controller
                 $menssage->to($usuario->email,$usuario->name)->subject("Energitelco S.A.S L-FR-06 LISTA DE VERIFICACIÓN PARA EL MANTENIMIENTO DE LOS COMPUTADORES EXITOSA ".$id->id);
             });
 
-            return redirect()->route('approval')->with(['success'=>'Se ha aprobado la solicitud '.$id->id.' correctamente','sudmenu' => 6]);
+            return redirect()->back()->with(['success'=>'Se ha aprobado la solicitud '.$id->id.' correctamente']);
         }else {
             $id->update([
                 'estado' => "No aprobado",
@@ -233,7 +233,7 @@ class checklistComputerMaintenance extends Controller
             $id->responsableAcargo->notify(new notificationMain($id->id,'No se aprobó la solicitud de mantenimiento de computadores '.$id->id,'logistics_infrastructure/checklist_computer/show/'));
             $id->tecnico->notify(new notificationMain($id->id,'No se aprobó la solicitud de mantenimiento de computadores '.$id->id,'logistics_infrastructure/checklist_computer/show/'));
     
-            return redirect()->route('approval')->with(['success'=>'Se ha desaprobado la solicitud correctamente','sudmenu'=>6]);
+            return redirect()->back()->with(['success'=>'Se ha desaprobado la solicitud correctamente']);
         }
     }
 }

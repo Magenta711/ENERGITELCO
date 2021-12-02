@@ -328,7 +328,7 @@ class payrollOvertimeNewsReportController extends Controller
                 $menssage->to($usuario->email,$usuario->name)->subject("Energitelco S.A.S H-FR-14 REPORTE DE NOVEDADES DE NOMINA Y HORAS EXTRAS EXITOSA ".$id->id);
             });
             
-            return redirect()->route('approval')->with(['success'=>'Se ha aprobado la solicitud '.$id->id.' correctamente','sudmenu' => 8]);
+            return redirect()->back()->with(['success'=>'Se ha aprobado la solicitud '.$id->id.' correctamente']);
         }else {
             $id->update([
                 'estado' => "No aprobado",
@@ -336,8 +336,7 @@ class payrollOvertimeNewsReportController extends Controller
                 'coordinador' => auth()->id(),
             ]);
             $id->responsableAcargo->notify(new notificationMain($id->id,'No se aprobó la solicitud de Reporte de novedades y horas extras '.$id->id,'human_management/payroll_overtime_news_report/show/'));
-            return redirect()->route('approval')->with(['success'=>'Se ha desaprobado la solicitud correctamente','sudmenu'=>8]);
+            return redirect()->back()->with(['success'=>'Se ha desaprobado la solicitud correctamente']);
         }
     }
 }
-// 126  -  7  -  78 -  50000.00  -  0  -  0  -  0  -  0  -  0  -  0  -  0  -  0  -  0  -  0  -  0  -  0  -  0  -  0  -  0  -  0  -  0  -  0  -  0  -  0  -  0.00   -  0   -  0.00    -  1    -  2021-09-07 15:57:55  -  {"m":4,"d":142,"h":21,"i":42}  -  0.00   -  0.00    -  0.00 -  0.00  -  0  -  0.00   -  0.00    -  NULL -  2021-09-07 16:49:42   -  2021-09-17 23:13:19

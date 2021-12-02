@@ -237,7 +237,7 @@ class premiumController extends Controller
                 $menssage->to($id->responsable->email,$id->responsable->name)->subject("Energitelco S.A.S PRIMA DE SERVICIOS ".$id->id);
             });
             
-            return redirect()->route('approval')->with(['success'=>'Se ha aprobado la solicitud '.$id->id.' correctamente','sudmenu' => 8]);
+            return redirect()->back()->with(['success'=>'Se ha aprobado la solicitud '.$id->id.' correctamente','sudmenu' => 8]);
         }else {
             $id->update([
                 'estado' => "No aprobado",
@@ -245,7 +245,7 @@ class premiumController extends Controller
                 'coordinador' => auth()->id(),
             ]);
             $id->responsable->notify(new notificationMain($id->id,'No se aprobó la solicitud de prima de servicio '.$id->id,'human_management/premium/show/'));
-            return redirect()->route('approval')->with(['success'=>'Se ha desaprobado la solicitud correctamente','sudmenu'=>8]);
+            return redirect()->back()->with(['success'=>'Se ha desaprobado la solicitud correctamente','sudmenu'=>8]);
         }
     }
 

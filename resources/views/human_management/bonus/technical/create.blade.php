@@ -31,7 +31,7 @@
                         <th>Estación base</th>
                         <th>Fecha</th>
                         <th>Funcionario</th>
-                        <th>Bonificación</th>
+                        {{-- <th>Bonificación</th> --}}
                         <th>Viáticos</th>
                         {{-- <th>Caja menor</th>
                         <th>- Ajustes</th> --}}
@@ -63,7 +63,7 @@
                                 $status_send = true;
                             }
                         @endphp
-                        <tr {!! $status ? 'class="bg-red" data-toggle="tooltip" data-placement="top" title="Sin aprobar"' : '' !!} >
+                        {{-- <tr {!! $status ? 'class="bg-red" data-toggle="tooltip" data-placement="top" title="Sin aprobar"' : '' !!} >
                             <td><a target="_blank" href="{{ route('work_permit_show',$item->id) }}">{{ $item->codigo_formulario }}-{{ $item->id }}</a></td>
                             <td>{{ $item->nombre_eb }}</td>
                             <td>{{ $item->created_at }}</td>
@@ -84,12 +84,12 @@
                                     @break
                                     @default
                                         N/A
-                                @endswitch
+                                @endswitch --}}
                                 {{-- @php
                                     $t1 += $r;
                                     $t += $r;
                                 @endphp --}}
-                            </td>
+                            {{-- </td> --}}
                             <td>
                                 @switch($i)
                                     @case(1)

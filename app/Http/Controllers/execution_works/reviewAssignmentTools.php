@@ -338,7 +338,7 @@ class reviewAssignmentTools extends Controller
                 $menssage->to($id->responsableAcargo->email,$id->responsableAcargo->name)->to($id->revisado->email,$id->revisado->name)->subject("Energitelco S.A.S. O-FR-06 REVISIÓN Y ASIGNACIÓN DE ACTIVOS EXITOSA");
             });
             
-            return redirect()->route('approval')->with(['success'=>'Se ha aprobado la solicitud '.$id->id.' correctamente','sudmenu' => 4]);
+            return redirect()->back()->with(['success'=>'Se ha aprobado la solicitud '.$id->id.' correctamente']);
         }else {
             $id->update([
                 'estado'=>"No aprobado",
@@ -349,7 +349,7 @@ class reviewAssignmentTools extends Controller
             $id->revisor->notify(new notificationMain($id->id,'No se aprobó la solicitud de revición de herramientas '.$id->id,'execution_works/review_assignment_tools/show/'));
             $id->revisado->notify(new notificationMain($id->id,'No se aprobó la solicitud de revición de herramientas '.$id->id,'execution_works/review_assignment_tools/show/'));
             
-            return redirect()->route('approval')->with(['success'=>'Se ha desaprobado la solicitud correctamente','sudmenu'=>4]);
+            return redirect()->back()->with(['success'=>'Se ha desaprobado la solicitud correctamente']);
         }
     }
 }

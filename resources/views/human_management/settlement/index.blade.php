@@ -41,6 +41,7 @@
                                 <tr>
                                     <td>{{$item->id}}</td>
                                     <td>H-FR-32-{{$item->id}}</td>
+                                    <td>{{$item->user->name}}</td>
                                     <td>{{$item->responsable->name}}</td>
                                     <td>{{$item->approve ? $item->approve->name:''}}</td>
                                     <td>{{$item->created_at}}</td>

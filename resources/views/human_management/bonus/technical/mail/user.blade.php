@@ -56,9 +56,9 @@
                                             </div>
                                        </div>
                                         <div style="display: flex; width: 100%">
-                                            <div style="width: 25%; text-align: center">
+                                            {{-- <div style="width: 25%; text-align: center">
                                                 <p>Bonificaciones <br>${{ number_format($item['bonificacion'],2,',','.') }}</p>
-                                            </div>
+                                            </div> --}}
                                             <div style="width: 25%; text-align: center">
                                                 <p>Viáticos <br>${{number_format($item['viaticos'],2,',','.')}}</p>
                                             </div>
