@@ -242,12 +242,19 @@ class workPermitController extends Controller
         }
 
         foreach ($request->cedula as $user) {
+            $tasking[$user] = Tasking::whereBetween('created_at',[now()->format('Y-m-d 00:00:00'),now()->format('Y-m-d 23:59:59')])->whereHas('users',function ($query)
+            {
+                $query->where('id',48);
+            })->first();
+
             Responsable::create([
                 'user_id' => $user,
                 'responsibles_id' => $id->id,
                 'responsibles_type' => 'App\Models\Work1',
             ]);
         }
+
+        return $tasking;
 
         $id->coordinadorAcargo->notify(new notificationMain($id->id,'Solicitud de permiso de trabajo '.$id->id,'human_management/work_permit/show/'));
         Mail::send('human_management.work_permit.emails.main', ['format' => $id,], function ($menssage) use ($id)
@@ -262,6 +269,7 @@ class workPermitController extends Controller
             }
             $menssage->to($id->responsableAcargo->email,$id->responsableAcargo->name)->to($id->coordinadorAcargo->email,$id->coordinadorAcargo->name)->subject("Energitelco S.A.S sin aprobar ".$id->id);
         });
+
         return redirect()->route('work_permit')->with('success','Se ha enviado el formulario correctamente para su aprobación por parte de un coordinador.');
 
     }

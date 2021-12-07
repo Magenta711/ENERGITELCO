@@ -9,7 +9,8 @@
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
         <li><a href="#">Formatos de gestión</a></li>
-        <li class="active"><a href="#">Permiso de trabajo</a></li>
+        <li><a href="#">Caja menor, víaticos y bonificaciones</a></li>
+        <li class="active"><a href="#">Caja menor, víaticos y bonificaciones</a></li>
     </ol>
 </section>
 <section class="content">
@@ -131,7 +132,7 @@
                             <th>Estación base</th>
                             <th>Fecha</th>
                             <th>Funcionario</th>
-                            <th>Bonificación</th>
+                            {{-- <th>Bonificación</th> --}}
                             <th>Viáticos</th>
                             <th>- Ajustes</th>
                             {{-- <th>Total</th> --}}
@@ -169,7 +170,7 @@
                                 <td>{{ $item->nombre_eb }}</td>
                                 <td>{{ $item->created_at }}</td>
                                 <td>{{ $user->name }}</td>
-                                <td>
+                                {{-- <td>
                                     @switch($i)
                                         @case(1)
                                             <input type="number" name="bonus[{{ $item->id }}][{{ $user->id }}]" {{ $status ? 'disabled' : '' }} id="bonus_{{ $item->id }}_{{ $user->id }}" value="{{ $item->work_add->f9a1u1 ?? 0 }}" class="form-control text-right">
@@ -185,12 +186,12 @@
                                         @break
                                         @default
                                             N/A
-                                    @endswitch
+                                    @endswitch --}}
                                     {{-- @php
                                         $t1 += $r;
                                         $t += $r;
                                     @endphp --}}
-                                </td>
+                                {{-- </td> --}}
                                 <td>
                                     @switch($i)
                                         @case(1)
@@ -246,9 +247,9 @@
                         <td>{{ $now }}</td>
                     </tr> --}}
                     <tr>
-                        <td colspan="6"></td>
+                        <td colspan="5" class="text-right"><small class="text-muted">Plus</small></td>
                         <td>
-                            <input type="text" name="plus" id="plus" placeholder="" class="form-control" value="{{old('plus') ?? 0}}">
+                            <input type="hid" name="plus" id="plus" placeholder="" class="form-control" value="{{old('plus') ?? 0}}">
                         </td>
                     </tr>
                     </tbody>

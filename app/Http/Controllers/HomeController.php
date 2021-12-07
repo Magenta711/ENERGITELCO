@@ -87,7 +87,7 @@ class HomeController extends Controller
         $proyectos = Project::count();
         $user_births = User::where('state',1)->whereHas('register',function ($query)
         {
-            $query->where('date_birth','LIKE','%'.now()->format('m-d'));
+            return $query->where('date_birth','LIKE','%'.now()->format('m-d'));
         })->get();
         session(['notificaiones_aprobacion'=>$sin_aprovar1]);
         $total_sin_aprobar = $aprobar1+$aprobar2+$aprobar3+$aprobar4+$aprobar5+$aprobar6+$aprobar7;

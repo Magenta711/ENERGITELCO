@@ -917,23 +917,25 @@
                                                     <th>Funcionario 3</th>
                                                     <th>Funcionario 4</th>
                                                 </tr>
-                                                <tr>
-                                                    <td>
-                                                        Valor que considera de bonificaciones
-                                                    </td>
-                                                    <td class="text-right">
-                                                        {{($format->work_add) ? '$'.number_format($format->work_add->f9a1u1,2,',','.') : ''}}
-                                                    </td>
-                                                    <td class="text-right">
-                                                        {{($format->work_add) ? '$'.number_format($format->work_add->f9a1u2,2,',','.') : ''}}
-                                                    </td>
-                                                    <td class="text-right">
-                                                        {{($format->work_add) ? '$'.number_format($format->work_add->f9a1u3,2,',','.') : ''}}
-                                                    </td>
-                                                    <td class="text-right">
-                                                        {{($format->work_add) ? '$'.number_format($format->work_add->f9a1u4,2,',','.') : ''}}
-                                                    </td>
-                                                </tr>
+                                                @if ($id->created_at <= '2021-12-02 24:00:00')
+                                                    <tr>
+                                                        <td>
+                                                            Valor que considera de bonificaciones
+                                                        </td>
+                                                        <td class="text-right">
+                                                            {{($format->work_add) ? '$'.number_format($format->work_add->f9a1u1,2,',','.') : ''}}
+                                                        </td>
+                                                        <td class="text-right">
+                                                            {{($format->work_add) ? '$'.number_format($format->work_add->f9a1u2,2,',','.') : ''}}
+                                                        </td>
+                                                        <td class="text-right">
+                                                            {{($format->work_add) ? '$'.number_format($format->work_add->f9a1u3,2,',','.') : ''}}
+                                                        </td>
+                                                        <td class="text-right">
+                                                            {{($format->work_add) ? '$'.number_format($format->work_add->f9a1u4,2,',','.') : ''}}
+                                                        </td>
+                                                    </tr>
+                                                @endif
                                                 <tr>
                                                     <td>
                                                         Valor que considera de viáticos

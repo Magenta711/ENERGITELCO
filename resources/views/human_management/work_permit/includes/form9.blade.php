@@ -9,6 +9,7 @@
     <div id="collapseNine" class="panel-collapse collapse">
         <div class="box-body">
             <div class="form-gruop">
+            @if (now()->format('Y-m-d H:i:s') <= '2021-12-02 24:00:00')
                 <label for="observaciones">Seleccione el valor que considera de bonificaciones</label>
                 <div class="row">
                     <div class="col-md-3 col-sm-3">
@@ -78,6 +79,7 @@
                 </div>
             </div>
             <hr>
+            @endif
             <div class="form-gruop">
                 <label for="observaciones">Seleccione el valor que considera de viáticos</label>
                 <div class="row">

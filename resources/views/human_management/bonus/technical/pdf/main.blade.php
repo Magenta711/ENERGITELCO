@@ -109,15 +109,25 @@
                         $plusUser = $plus / count($array);
                     @endphp
                     @foreach ($array as $item)
-                        @if (($item['bonificacion']+$plusUser+$item['viaticos']-$item['ajustes']) > 0)
-                            <tr>
-                                <td class="text-right">{{ $i++ }}</td>
-                                <td>{{ $item['cedula'] }} {{ $item['name'] }}</td>
-                                <td class="text-right">${{ number_format(($item['bonificacion']+$plusUser+$item['viaticos']-$item['ajustes']),2) }}</td>
-                            </tr>
-                        @php
-                            $total += ($item['bonificacion']+$item['viaticos']-$item['ajustes']+$plusUser);
-                        @endphp
+                        @if ($id->created_at <= '2021-12-02 24:00:00')
+                            @if (($item['bonificacion']+$plusUser+$item['viaticos']-$item['ajustes']) > 0)
+                                <tr>
+                                    <td class="text-right">{{ $i++ }}</td>
+                                    <td>{{ $item['cedula'] }} {{ $item['name'] }}</td>
+                                    <td class="text-right">${{ number_format(($item['bonificacion']+$plusUser+$item['viaticos']-$item['ajustes']),2) }}</td>
+                                </tr>
+                                @php
+                                    $total += ($item['bonificacion']+$item['viaticos']-$item['ajustes']+$plusUser);
+                                @endphp
+                            @endif
+                        @else
+                            @if (($plusUser+$item['viaticos']-$item['ajustes']) > 0)
+                                <tr>
+                                    <td class="text-right">{{ $i++ }}</td>
+                                    <td>{{ $item['cedula'] }} {{ $item['name'] }}</td>
+                                    <td class="text-right">${{ number_format(($plusUser+$item['viaticos']-$item['ajustes']),2) }}</td>
+                                </tr>
+                            @endif
                         @endif
                     @endforeach
                     <tr class="active">

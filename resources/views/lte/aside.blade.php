@@ -897,9 +897,9 @@
                               auth()->user()->hasPermissionTo('Aprobar bonificaciones de permisos de trabajo')
                             )
                               <li class="{{ activeMenu('human_management/bonus/minor_box*') }}"><a class="btn-send" href="{{route('bonus_minor_box')}}"><i class="fa fa-box"></i> CAJA MENOR</a></li>
-                              <li class="{{ activeMenu('human_management/bonus/technicals*') }}"><a class="btn-send" href="{{route('work_permit_bonuses')}}"><i class="fa fa-gift"></i> BONIFICACIONES TÉCNICOS</a></li>
+                              <li class="{{ activeMenu('human_management/bonus/technicals*') }}"><a class="btn-send" href="{{route('work_permit_bonuses')}}"><i class="fa fa-gift"></i> VÍATICOS</a></li>
                             @endif
-                            {{-- <li class="{{ activeMenu('human_management/bonus/drivers*') }}"><a class="btn-send" href="{{route('performance_evaluation')}}"><i class="fa fa-theater-masks"></i> BONIFICACIONES CONDUTORES</a></li> --}}
+                            <li class="{{ activeMenu('human_management/bonus/technicals*') }}"><a class="btn-send" href="{{route('work_permit_bonuses')}}"><i class="fa fa-gift"></i> BONIFICACIONES TÉCNICAS</a></li>
                             @if (
                               auth()->user()->hasPermissionTo('Lista de bonificaciones a administrativos y conductores') ||
                               auth()->user()->hasPermissionTo('Crear bonificaciones a administrativos y conductores') ||

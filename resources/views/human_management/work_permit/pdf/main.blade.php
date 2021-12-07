@@ -962,23 +962,25 @@
                         {{($trabajo->work_add) ? $trabajo->work_add->f9a2u4 : ''}}
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        Valor que considera de caja menor
-                    </td>
-                    <td>
-                        {{($trabajo->work_add) ? $trabajo->work_add->f9a3u1 : ''}}
-                    </td>
-                    <td>
-                        {{($trabajo->work_add) ? $trabajo->work_add->f9a3u2 : ''}}
-                    </td>
-                    <td>
-                        {{($trabajo->work_add) ? $trabajo->work_add->f9a3u3 : ''}}
-                    </td>
-                    <td>
-                        {{($trabajo->work_add) ? $trabajo->work_add->f9a3u4 : ''}}
-                    </td>
-                </tr>
+                @if ($id->created_at <= '2021-12-02 24:00:00')
+                    <tr>
+                        <td>
+                            Valor que considera de caja menor
+                        </td>
+                        <td>
+                            {{($trabajo->work_add) ? $trabajo->work_add->f9a3u1 : ''}}
+                        </td>
+                        <td>
+                            {{($trabajo->work_add) ? $trabajo->work_add->f9a3u2 : ''}}
+                        </td>
+                        <td>
+                            {{($trabajo->work_add) ? $trabajo->work_add->f9a3u3 : ''}}
+                        </td>
+                        <td>
+                            {{($trabajo->work_add) ? $trabajo->work_add->f9a3u4 : ''}}
+                        </td>
+                    </tr>
+                @endif
                 @endif
             </tbody>
         </table>

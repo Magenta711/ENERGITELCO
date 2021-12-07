@@ -867,20 +867,22 @@
                 <th>Funcionario 2</th>
                 <th>Funcionario 3</th>
             </tr>
-            <tr>
-                <td>
-                    Valor que considera de bonificaciones
-                </td>
-                <td>
-                    {{($format->work_add) ? $format->work_add->f9a1u1 : ''}}
-                </td>
-                <td>
-                    {{($format->work_add) ? $format->work_add->f9a1u2 : ''}}
-                </td>
-                <td>
-                    {{($format->work_add) ? $format->work_add->f9a1u3 : ''}}
-                </td>
-            </tr>
+            @if ($id->created_at <= '2021-12-02 24:00:00')
+                <tr>
+                    <td>
+                        Valor que considera de bonificaciones
+                    </td>
+                    <td>
+                        {{($format->work_add) ? $format->work_add->f9a1u1 : ''}}
+                    </td>
+                    <td>
+                        {{($format->work_add) ? $format->work_add->f9a1u2 : ''}}
+                    </td>
+                    <td>
+                        {{($format->work_add) ? $format->work_add->f9a1u3 : ''}}
+                    </td>
+                </tr>
+            @endif
             <tr>
                 <td>
                     Valor que considera de viáticos

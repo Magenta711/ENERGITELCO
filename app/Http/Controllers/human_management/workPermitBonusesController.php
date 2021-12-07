@@ -374,7 +374,9 @@ class workPermitBonusesController extends Controller
                     }
                     
                     if (array_key_exists($user->id,$array)) {
-                        $bonificacion = $array[$user->id]['bonificacion'];
+                        if ($cut->created_at <= '2021-12-02 24:00:00') {
+                            $bonificacion = $array[$user->id]['bonificacion'];
+                        }
                         $viaticos = $array[$user->id]['viaticos'];
                         $ajustes = $array[$user->id]['ajustes'];
                         $pending = $array[$user->id]['pending'];
@@ -384,56 +386,104 @@ class workPermitBonusesController extends Controller
                         $discharges = $array[$user->id]['discharges'];
     
                         $total_box = $array[$user->id]['total_box'] + $box + $dis;
-                        $total_bonus = $array[$user->id]['total_bonus'] + $bonus + $viatic + $pen - $aju;
                         $count = $array[$user->id]['count'];
-                        $array[$user->id] = [
-                            'id' => $user->id,
-                            'name' => $user->name,
-                            'email' => $user->email,
-                            'cedula' => $user->cedula,
-                            'cuenta' => $user->register ? $user->register->bank_account : '',
-    
-                            'bonificacion' => $bonificacion +  $bonus,
-                            'viaticos' => $viaticos + $viatic,
-                            'ajustes' => $ajustes + $aju,
-                            'pending' => $pending + $pen,
-                            
-                            'caja' => $caja + $box,
-                            'deliverable' => $deliverable + $deli,
-                            'discharges' => $discharges + $dis,
-    
-                            'total_box' => $total_box,
-                            'total_bonus' => $total_bonus,
-                            'total' => $total_bonus + $total_box,
-                            'count' => $count + 1
-                        ];
+                        if ($cut->created_at <= '2021-12-02 24:00:00') {
+                            $total_bonus = $array[$user->id]['total_bonus'] + $bonus + $viatic + $pen - $aju;
+                            $array[$user->id] = [
+                                'id' => $user->id,
+                                'name' => $user->name,
+                                'email' => $user->email,
+                                'cedula' => $user->cedula,
+                                'cuenta' => $user->register ? $user->register->bank_account : '',
+        
+                                'bonificacion' => $bonificacion +  $bonus,
+                                'viaticos' => $viaticos + $viatic,
+                                'ajustes' => $ajustes + $aju,
+                                'pending' => $pending + $pen,
+                                
+                                'caja' => $caja + $box,
+                                'deliverable' => $deliverable + $deli,
+                                'discharges' => $discharges + $dis,
+        
+                                'total_box' => $total_box,
+                                'total_bonus' => $total_bonus,
+                                'total' => $total_bonus + $total_box,
+                                'count' => $count + 1
+                            ];
+                        }else {
+                            $total_bonus = $array[$user->id]['total_bonus'] + $viatic + $pen - $aju;
+                            $array[$user->id] = [
+                                'id' => $user->id,
+                                'name' => $user->name,
+                                'email' => $user->email,
+                                'cedula' => $user->cedula,
+                                'cuenta' => $user->register ? $user->register->bank_account : '',
+        
+                                // 'bonificacion' => $bonificacion +  $bonus,
+                                'viaticos' => $viaticos + $viatic,
+                                'ajustes' => $ajustes + $aju,
+                                'pending' => $pending + $pen,
+                                
+                                'caja' => $caja + $box,
+                                'deliverable' => $deliverable + $deli,
+                                'discharges' => $discharges + $dis,
+        
+                                'total_box' => $total_box,
+                                'total_bonus' => $total_bonus,
+                                'total' => $total_bonus + $total_box,
+                                'count' => $count + 1
+                            ];
+                        }
                     }else {
-                        $array[$user->id] = [
-                            'id' => $user->id,
-                            'name' => $user->name,
-                            'email' => $user->email,
-                            'cedula' => $user->cedula,
-                            'cuenta' => $user->register ? $user->register->bank_account : '',
-    
-                            'bonificacion' => $bonus,
-                            'viaticos' => $viatic,
-                            'pending' => $pen,
-                            'ajustes' => $aju,
-    
-                            'caja' => $box,
-                            'deliverable' => $deli,
-                            'discharges' => $dis,
-    
-                            'total_box' => $box + $dis,
-                            'total_bonus' => $bonus + $viatic + $pen - $aju,
-                            'total' => $box + $dis + $bonus + $viatic + $pen - $aju,
-                            'count' => 1
-                        ];
+                        if ($cut->created_at <= '2021-12-02 24:00:00') {
+                            $array[$user->id] = [
+                                'id' => $user->id,
+                                'name' => $user->name,
+                                'email' => $user->email,
+                                'cedula' => $user->cedula,
+                                'cuenta' => $user->register ? $user->register->bank_account : '',
+        
+                                'bonificacion' => $bonus,
+                                'viaticos' => $viatic,
+                                'pending' => $pen,
+                                'ajustes' => $aju,
+        
+                                'caja' => $box,
+                                'deliverable' => $deli,
+                                'discharges' => $dis,
+        
+                                'total_box' => $box + $dis,
+                                'total_bonus' => $bonus + $viatic + $pen - $aju,
+                                'total' => $box + $dis + $bonus + $viatic + $pen - $aju,
+                                'count' => 1
+                            ];
+                        }else {
+                            $array[$user->id] = [
+                                'id' => $user->id,
+                                'name' => $user->name,
+                                'email' => $user->email,
+                                'cedula' => $user->cedula,
+                                'cuenta' => $user->register ? $user->register->bank_account : '',
+        
+                                'viaticos' => $viatic,
+                                'pending' => $pen,
+                                'ajustes' => $aju,
+        
+                                'caja' => $box,
+                                'deliverable' => $deli,
+                                'discharges' => $dis,
+        
+                                'total_box' => $box + $dis,
+                                'total_bonus' => $viatic + $pen - $aju,
+                                'total' => $box + $dis + $viatic + $pen - $aju,
+                                'count' => 1
+                            ];
+                        }
                     }
                     $i++;
                 }
             }
-        return (new Work1Export)->bonus($array,$cut)->download('CVB.xlsx');
+        return (new Work1Export)->bonus($array,$cut)->download('Lista_Pagos_Corte_'.$id.'.xlsx');
     }
 
     public function approve(Request $request,work1_cut_bonus $id)
@@ -596,7 +646,7 @@ class workPermitBonusesController extends Controller
                         ]);
                     }
                 }else{
-                    $mensaje = now()->format('d/m/Y H:i:s').': Pago el corte '.$id->id.': $'.number_format($item['total'],0,',','.').' (Caja menor: $'.number_format($item['caja'],0,',','.').' Bonificaciones: $'.number_format($item['bonificacion'],0,',','.').', viáticos: $'.number_format($item['viaticos'],0,',','.').', Otros: $'.number_format(($item['discharges'] + $item['pending'] - $item['ajustes']),0,',','.').') Por: '.auth()->user()->name."\n";
+                    $mensaje = now()->format('d/m/Y H:i:s').': Pago el corte '.$id->id.': $'.number_format($item['total'],0,',','.').' (Caja menor: $'.number_format($item['caja'],0,',','.').', viáticos: $'.number_format($item['viaticos'],0,',','.').', Otros: $'.number_format(($item['discharges'] + $item['pending'] - $item['ajustes']),0,',','.').') Por: '.auth()->user()->name."\n";
 
                     $minorUser = MinorBoxUser::where('user_id' ,$item['id'])->first();
                     if ($minorUser) {
