@@ -35,6 +35,14 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="row">
+                                            <div class="col-md-6">
+                                                <input type="date" readonly name="" id="date_start_u_{{$user->id}}" class="form-control">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="date" readonly name="" id="date_end_u_{{$user->id}}" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <label for="linked_days_{{$user->id}}">Días vinculados</label>

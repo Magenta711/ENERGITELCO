@@ -72,7 +72,7 @@ class interviewController extends Controller
         //Validate
         $request->validate([
             'name' => ['required'],
-            'email' => ['required','email','unique:registers,email'],
+            'email' => ['required','email'],
             'document' => ['required','unique:registers,document'],
             'address' => ['required'],
             'age' => ['required'],

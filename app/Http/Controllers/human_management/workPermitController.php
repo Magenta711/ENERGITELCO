@@ -82,6 +82,7 @@ class workPermitController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request;
         $request->validate([
             'coordinador'=>['required'],
             'cedula'=>['required'],
@@ -242,9 +243,9 @@ class workPermitController extends Controller
         }
 
         foreach ($request->cedula as $user) {
-            $tasking[$user] = Tasking::whereBetween('created_at',[now()->format('Y-m-d 00:00:00'),now()->format('Y-m-d 23:59:59')])->whereHas('users',function ($query)
+            $tasking[$user] = Tasking::whereBetween('date_start',[now()->format('Y-m-d 00:00:00'),now()->format('Y-m-d 23:59:59')])->whereHas('users',function ($query) use ($user)
             {
-                $query->where('id',48);
+                $query->where('id',$user);
             })->first();
 
             Responsable::create([
@@ -254,10 +255,114 @@ class workPermitController extends Controller
             ]);
         }
 
-        return $tasking;
+        $arrayId = array();
+        $unData = array();
+        foreach ($tasking as $key => $value) {
+            if ($value) {
+                if (array_key_exists($value->id,$arrayId)) {
+                    array_push( $arrayId[$value->id] , [ $key => true, 'data' => $value ] );
+                }else {
+                    $arrayId[$value->id] = [ $key => true ];
+                }
+            }else {
+                $unData[$key] = false;
+            }
+        }
 
+        if ($unData) {
+            // return "Hay funcionarios sin frente de trabajo ";
+            // if (count($unData) == count($request->cedula)) {
+                
+            // }else {
+                if ($arrayId) {
+                    if (count($arrayId) == 1) {
+                        // return "Hay un frente de trabajo, pero no con todos los funcionarios";
+                        foreach ($arrayId as $key => $value) {
+                            $tasking = Tasking::find($key);
+                            foreach ($unData as $ke => $value) {
+                                Responsable::create([
+                                    'user_id' => $ke,
+                                    'responsibles_type' => 'App\Models\Tasking',
+                                    'responsibles_id' => $key,
+                                ]);
+                            }
+                            $vehicleVerify = false;
+                            foreach ($tasking->vehicles as $key => $value) {
+                                if ($value->vehicle->id == $request->vehicle_id) {
+                                    $vehicleVerify = true;
+                                }
+                            }
+                            if (!$vehicleVerify) {
+                                $tasking->vehicles()->create([
+                                    'vehicle_id' => $request->vehicle_id
+                                ]);
+                            }
+                        }
+                    }else{
+                        // return "Hay varios frentes de trabajo, pero faltan funcionarios";
+                        $ready = false;
+                        foreach ($arrayId as $key => $value) {
+                            if (!$ready) {
+                                $tasking = Tasking::find($key);
+                                foreach ($unData as $ke => $value) {
+                                    Responsable::create([
+                                        'user_id' => $ke,
+                                        'responsibles_type' => 'App\Models\Tasking',
+                                        'responsibles_id' => $key,
+                                    ]);
+                                }
+                                $vehicleVerify = false;
+                                foreach ($tasking->vehicles as $key => $value) {
+                                    if ($value->vehicle->id == $request->vehicle_id) {
+                                        $vehicleVerify = true;
+                                    }
+                                }
+                                if (!$vehicleVerify) {
+                                    $tasking->vehicles()->create([
+                                        'vehicle_id' => $request->vehicle_id
+                                    ]);
+                                }
+                                $ready = true;
+                            }
+                        }
+                    }
+                }else {
+                    // return "No hay frente de trabajo";
+                    $tasking = Tasking::create([
+                        'responsable_id' => auth()->id(),
+                        'date_start' => now(),
+                        'department' => $request->department,
+                        'municipality' => $request->municipality,
+                        'project' => 'Otro',
+                        'user_inv' => null,
+                        'am' => 1,
+                        'pm' => 1,
+                        'description' => null,
+                        'commentaries' => 'Auto del permiso de trabajo '.$id->id,
+                        'eb_id' => $request->eb,
+                        'station_name' => $request->nombre_eb,
+                        'id_beneficiario' => $request->id_beneficiario ? $request->id_beneficiario : null,
+                        'lat' => $request->lat,
+                        'long' => $request->long,
+                        'status' => 2,
+                    ]);
+
+                    foreach ($unData as $ke => $value) {
+                        Responsable::create([
+                            'user_id' => $ke,
+                            'responsibles_type' => 'App\Models\Tasking',
+                            'responsibles_id' => $key,
+                        ]);
+                    }
+                    $tasking->vehicles()->create([
+                        'vehicle_id' => $request->vehicle_id
+                    ]);
+                }
+            // }
+        }
+        
         $id->coordinadorAcargo->notify(new notificationMain($id->id,'Solicitud de permiso de trabajo '.$id->id,'human_management/work_permit/show/'));
-        Mail::send('human_management.work_permit.emails.main', ['format' => $id,], function ($menssage) use ($id)
+        Mail::send('human_management.work_permit.emails.main', ['format' => $id], function ($menssage) use ($id)
         {
             $emails = system_setting::where('state',1)->pluck('emails_before_approval')->first();
             $company = general_setting::where('state',1)->pluck('company')->first();

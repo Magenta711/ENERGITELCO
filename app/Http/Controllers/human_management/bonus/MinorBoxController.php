@@ -260,7 +260,6 @@ class MinorBoxController extends Controller
         ]);
         $minor_box = MinorBoxUser::where('user_id',$request->user_id)->first();
         if ($minor_box) {
-            $status = 0;
             $val = $request->value ? $request->value : 0;
             $dis = $request->discharges ? $request->discharges : 0;
 
@@ -269,20 +268,20 @@ class MinorBoxController extends Controller
             if ($value > $discharges) {
                 $total_value = $value - $discharges;
                 $total_discharges = 0;
-                $smAcc = "tiene un total de ".$total_value;
+                $smAcc = "tiene un total de $".number_format($total_value,0,',','.');
             }else {
                 $total_discharges = $discharges - $value;
                 $total_value = 0;
-                $smAcc = "se le debe un total de ".$total_discharges;
+                $smAcc = "se le debe un total de $".number_format($total_discharges,0,',','.');
             }
 
             $msValue = '';
             if ($request->value > 0) {
-                $msValue = 'cargo: '.$request->value.' ';
+                $msValue = 'cargo: $'.number_format($request->value,0,',','.').' ';
             }
             $msDischarges = '';
             if ($request->discharges > 0) {
-                $msDischarges = 'descargo: '.$request->discharges.' ';
+                $msDischarges = 'descargo: $'.number_format($request->discharges,0,',','.').' ';
             }
 
             $history = now()->format('d/m/Y H:i:s').': Manual '.$msValue.$msDischarges.'y '.$smAcc.' Por: '.auth()->user()->name.' Comentario:'.$request->commentary."\n";

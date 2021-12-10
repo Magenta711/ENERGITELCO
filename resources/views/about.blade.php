@@ -35,7 +35,7 @@
                                 <h4 class='box-title'>Sistema de gestión integrado <br> Energitelco S.A.S</h4>
                                 <h5>Versión: </h5><h5>1.5.14</h5>
                                 <h5>Fecha de creación: 29/10/2019</h5>
-                                <h5>Última modificación: 03/06/2021</h5>
+                                <h5>Última modificación: 25/09/2021</h5>
                                 <h5>© {{now()->format('Y')}} Todos los derechos reservados</h5>
                                 <h5>Hecho por:</h5>
                                 Juan Esteban Leal Usuga.

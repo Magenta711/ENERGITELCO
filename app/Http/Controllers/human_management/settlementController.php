@@ -168,7 +168,7 @@ class settlementController extends Controller
             ]);
             Mail::send('human_management.settlement.email.main', ['id' => $id], function ($menssage) use ($id,$pdf)
             {
-                $menssage->to($id->responsable->email,$id->responsable->name)->to($id->user->email,$id->user->name)->subject("Energitelco S.A.S PAGO DE COMISIONES A TÉCNICOS APROBADO");
+                $menssage->to($id->responsable->email,$id->responsable->name)->to($id->user->email,$id->user->name)->subject("Energitelco S.A.S PAGO DE LIQUIDACIÓN DE PRESTACIÓN DE SERVICIO APROBADA");
                 $menssage->attachData($pdf->output(), 'LIQUIDACION.pdf');
             });
             return redirect()->back()->with('success','Se ha aprobado la liquidación correctamente');

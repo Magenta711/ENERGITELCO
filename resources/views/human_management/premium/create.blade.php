@@ -47,7 +47,7 @@
             @endif
         @endforeach
         @foreach ($user->Work8Users as $pay)
-            @if ($pay->work->estado == 'Aprobado')
+            @if ($pay->work && $pay->work->estado == 'Aprobado')
                 <input type="hidden" disabled class="salary_{{ $user->id }}" value="{{ $pay->total_devengado_tx - $pay->extras_sc_tx - $pay->surcharge_n_tx - $pay->extras_d_tx - $pay->extras_dc_tx - $pay->extras_n_tx - $pay->extras_s_tx - $pay->holyday_n_tx - $pay->extras_hn_tx - $pay->unpaid_leave_tx - $pay->disabilities_1_tx - $pay->disabilities_2_tx }}">
                 <input type="hidden" disabled class="assistance_{{ $user->id }}" value="{{ $pay->assistance_tx }}">
                 <input type="hidden" disabled class="extras_{{ $user->id }}" value="{{ $pay->extras_sc_tx+$pay->surcharge_n_tx + $pay->extras_d_tx + $pay->extras_dc_tx + $pay->extras_n_tx + $pay->extras_s_tx + $pay->holyday_n_tx + $pay->extras_hn_tx + $pay->unpaid_leave_tx + $pay->disabilities_1_tx + $pay->disabilities_2_tx }}">

@@ -84,11 +84,15 @@ function updateValuesNomial() {
 
 function getDaysLinked(user_id) {
     start_user = $('#date_start_user_'+user_id).val();
+    
     start = $('#start_date').val();
+    $('#date_start_u_'+user_id).val(start_user);
     if (start < start_user) {
         start = start_user;
     }
     end = $('#end_date').val();
+    $('#date_end_u_'+user_id).val(end);
+    
     $('#linked_days_'+user_id).val(getDiffDates(start,end));
 }
 
