@@ -45,9 +45,13 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{route('transit_taxes_show',$transit_taxe->id)}}" class="btn btn-sm btn-success">Ver</a>
-                                    @if ($transit_taxe->start_date < now()->format('Y-m-d') && $transit_taxe->end_date > now()->format('Y-m-d'))
-                                        <a href="{{route('transit_taxes_edit',$transit_taxe->id)}}" class="btn btn-sm btn-primary">Editar</a>
+                                    @can('Ver cortes de multas')
+                                        <a href="{{route('transit_taxes_show',$transit_taxe->id)}}" class="btn btn-sm btn-success">Ver</a>
+                                    @endcan
+                                    @if ($transit_taxe->start_date <= now()->format('Y-m-d') && $transit_taxe->end_date >= now()->format('Y-m-d'))
+                                        @can('Ver cortes de multas')
+                                            <a href="{{route('transit_taxes_edit',$transit_taxe->id)}}" class="btn btn-sm btn-primary">Editar</a>
+                                        @endcan
                                     @endif
                                 </td>
                             </tr>

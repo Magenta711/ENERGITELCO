@@ -14,7 +14,7 @@
             <th>Funcionario</th>
             <th># Cuenta</th>
             <th>Cantidad </th>
-            @if($id->created_at <= '2021-12-02 24:00:00')
+            @if($id->created_at <= '2021-12-10 24:00:00')
                 <th>Bonificación</th>
             @endif
             <th>Viáticos</th>
@@ -29,7 +29,7 @@
     </thead>
     <tbody>     
             @php
-                if($id->created_at <= '2021-12-02 24:00:00'){
+                if($id->created_at <= '2021-12-10 24:00:00'){
                     $t1 = 0;
                 }
                 $t2 = 0;
@@ -49,7 +49,7 @@
                         <td>{{ $item['cuenta'] }}</td>
 
                         <td>{{ $item['count'] }}</td>
-                        @if($id->created_at <= '2021-12-02 24:00:00')
+                        @if($id->created_at <= '2021-12-10 24:00:00')
                             <td>${{ number_format($item['bonificacion'],2,',','.') }}</td>
                         @endif
                         <td>${{ number_format($item['viaticos'],2,',','.') }}</td>
@@ -60,7 +60,7 @@
                         <td>${{ number_format($item['discharges'],2,',','.') }}</td>
                         @php
                             $count += $item['count'];
-                            if($id->created_at <= '2021-12-02 24:00:00'){
+                            if($id->created_at <= '2021-12-10 24:00:00'){
                                 $t1 += $item['bonificacion'];
                             }
                             $t2 += $item['viaticos'];
@@ -79,7 +79,7 @@
         <tr>
             <th colspan="3">Total</th>
             <th>{{ $count }}</th>
-            @if($id->created_at <= '2021-12-02 24:00:00')
+            @if($id->created_at <= '2021-12-10 24:00:00')
                 <th>${{ number_format($t1,2,',','.') }}</th>
             @endif
             <th>${{ number_format($t2,2,',','.') }}</th>

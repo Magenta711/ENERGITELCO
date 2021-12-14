@@ -374,7 +374,7 @@ class workPermitBonusesController extends Controller
                     }
                     
                     if (array_key_exists($user->id,$array)) {
-                        if ($cut->created_at <= '2021-12-02 24:00:00') {
+                        if ($cut->created_at <= '2021-12-10 24:00:00') {
                             $bonificacion = $array[$user->id]['bonificacion'];
                         }
                         $viaticos = $array[$user->id]['viaticos'];
@@ -387,7 +387,7 @@ class workPermitBonusesController extends Controller
     
                         $total_box = $array[$user->id]['total_box'] + $box + $dis;
                         $count = $array[$user->id]['count'];
-                        if ($cut->created_at <= '2021-12-02 24:00:00') {
+                        if ($cut->created_at <= '2021-12-10 24:00:00') {
                             $total_bonus = $array[$user->id]['total_bonus'] + $bonus + $viatic + $pen - $aju;
                             $array[$user->id] = [
                                 'id' => $user->id,
@@ -435,7 +435,7 @@ class workPermitBonusesController extends Controller
                             ];
                         }
                     }else {
-                        if ($cut->created_at <= '2021-12-02 24:00:00') {
+                        if ($cut->created_at <= '2021-12-10 24:00:00') {
                             $array[$user->id] = [
                                 'id' => $user->id,
                                 'name' => $user->name,

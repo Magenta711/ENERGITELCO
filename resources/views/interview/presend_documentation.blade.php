@@ -143,7 +143,7 @@
             </div>
         </div>
         <div class="box-footer">
-            <button class="btn btn-sm btn-primary">Enviar</button>
+            <button class="btn btn-sm btn-primary btn-send">Enviar</button>
         </div>
         </form>
     </div>

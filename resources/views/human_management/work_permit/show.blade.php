@@ -1163,7 +1163,7 @@
                                 {{($id->work_add) ? '$ '.number_format($id->work_add->f9a2u4 , 2, ',', '.') : '0'}}
                             </div>
                         </div>
-                        @if ($id->created_at <= '2021-12-02 24:00:00')
+                        @if ($id->created_at <= '2021-12-10 24:00:00')
                             <hr width="40%">
                             <div class="row">
                                 <div class="col-sm-4 col-xs-12">

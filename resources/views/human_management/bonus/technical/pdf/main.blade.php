@@ -109,7 +109,7 @@
                         $plusUser = $plus / count($array);
                     @endphp
                     @foreach ($array as $item)
-                        @if ($id->created_at <= '2021-12-02 24:00:00')
+                        @if ($id->created_at <= '2021-12-10 24:00:00')
                             @if (($item['bonificacion']+$plusUser+$item['viaticos']-$item['ajustes']) > 0)
                                 <tr>
                                     <td class="text-right">{{ $i++ }}</td>

@@ -68,7 +68,7 @@ class interviewController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    { 
         //Validate
         $request->validate([
             'name' => ['required'],
@@ -270,8 +270,8 @@ class interviewController extends Controller
     {
         $request->validate([
             'name' => ['required'],
-            'email' => ['required','email','unique:registers,email,'.$id->register->id],
-            'document' => ['required','unique:registers,document,'.$id->register->id],
+            'email' => ['required','email'],
+            'document' => ['required'],
             'address' => ['required'],
             'age' => ['required'],
             'marital_status' => ['required'],

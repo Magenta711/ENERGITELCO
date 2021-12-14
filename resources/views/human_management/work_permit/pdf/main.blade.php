@@ -962,7 +962,7 @@
                         {{($trabajo->work_add) ? $trabajo->work_add->f9a2u4 : ''}}
                     </td>
                 </tr>
-                @if ($id->created_at <= '2021-12-02 24:00:00')
+                @if ($id->created_at <= '2021-12-10 24:00:00')
                     <tr>
                         <td>
                             Valor que considera de caja menor

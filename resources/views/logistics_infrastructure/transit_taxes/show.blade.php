@@ -101,20 +101,19 @@
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
                                                                         <label for="report_suject">Motivo</label>
-                                                                        <textarea name="report_suject[{{$vehicle->id}}]" id="report_suject_{{$vehicle->id}}" cols="30" rows="3" class="form-control" value="{{$item->suject}}"></textarea>
+                                                                        <p>{{$item->suject}}</p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
                                                                         <label for="report_observation">Observaciones</label>
-                                                                        <textarea name="report_observation[{{$vehicle->id}}]" id="report_observation_{{$vehicle->id}}" cols="30" rows="3" class="form-control" value="{{$item->observation}}"></textarea>
+                                                                        <p>{{$item->observation}}</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <hr>
                                                     @endforeach
                                                     </div>
-                                                    <button type="button" class="btn btn-sm btn-link btn-add-block" id="report_add_{{$vehicle->id}}"><i class="fa fa-plus"></i> Agregar reporte</button>
                                                 </div>
                                                 <div class="modal-footer">
                                                     {{-- <button type="button" class="btn btn-sm btn-secondary pull-left" data-dismiss="modal">Cancelar</button> --}}

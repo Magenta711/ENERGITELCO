@@ -867,7 +867,7 @@
                 <th>Funcionario 2</th>
                 <th>Funcionario 3</th>
             </tr>
-            @if ($id->created_at <= '2021-12-02 24:00:00')
+            @if ($id->created_at <= '2021-12-10 24:00:00')
                 <tr>
                     <td>
                         Valor que considera de bonificaciones

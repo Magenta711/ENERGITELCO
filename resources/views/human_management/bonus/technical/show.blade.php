@@ -3,7 +3,7 @@
 @section('content')
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    @if ($id->created_at > '2021-12-02 24:00:00')
+    @if ($id->created_at > '2021-12-10 24:00:00')
         <h1>
             Víaticos <small></small>
         </h1>
@@ -15,7 +15,7 @@
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
         <li><a href="#">Formatos de gestión</a></li>
-        @if ($id->created_at > '2021-12-02 24:00:00')
+        @if ($id->created_at > '2021-12-10 24:00:00')
             <li class="active"><a href="#">Víaticos</a></li>
         @else
             <li class="active"><a href="#">Bonificaciones y víaticos</a></li>
@@ -40,7 +40,7 @@
     @endif
     <div class="box box-solid">
         <div class="box-header with-border">
-            @if ($id->created_at > '2021-12-02 24:00:00')
+            @if ($id->created_at > '2021-12-10 24:00:00')
                 <h3 class="box-title">Víaticos</h3>
             @else
                 <h3 class="box-title">Bonificaciones y víaticos</h3>
@@ -57,7 +57,7 @@
                             <th>Documento</th>
                             <th>Funcionario</th>
                             <th># Cuenta</th>
-                            @if ($id->created_at <= '2021-12-02 24:00:00')
+                            @if ($id->created_at <= '2021-12-10 24:00:00')
                                 <th>Bonificaciones</th>
                             @endif
                             <th>Viáticos</th>
@@ -68,7 +68,7 @@
                     </thead>
                     <tbody>
                     @php
-                        if ($id->created_at <= '2021-12-02 24:00:00'){
+                        if ($id->created_at <= '2021-12-10 24:00:00'){
                             $bonus = 0;
                         }
                         $vistics = 0;
@@ -81,14 +81,14 @@
                             <td>{{ $item['cedula'] }}</td>
                             <td>{{ $item['name'] }}</td>
                             <td>{{ $item['cuenta'] }}</td>
-                            @if ($id->created_at <= '2021-12-02 24:00:00')
+                            @if ($id->created_at <= '2021-12-10 24:00:00')
                                 <td>${{ number_format($item['bonification'],2,',','.') }}</td>
                             @endif
                             <td>${{ number_format($item['viatic'],2,',','.') }}</td>
                             <td>${{ number_format($item['ajustes'],2,',','.') }}</td>
                             <td>${{ number_format($item['pending'],2,',','.') }}</td>
                             @php
-                                if ($id->created_at <= '2021-12-02 24:00:00'){
+                                if ($id->created_at <= '2021-12-10 24:00:00'){
                                     $bonus += $item['bonification'];
                                     $totalPagar = $item['bonification']+$item['viatic']-$item['ajustes']+$item['pending'];
                                 }else {
@@ -104,7 +104,7 @@
                     @endforeach
                     <tr>
                         <th colspan="3">Total</th>
-                        @if ($id->created_at <= '2021-12-02 24:00:00')
+                        @if ($id->created_at <= '2021-12-10 24:00:00')
                             <th>${{ number_format($bonus,2,',','.') }}</th>
                         @endif
                         <th>${{ number_format($vistics,2,',','.') }}</th>

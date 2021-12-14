@@ -69,8 +69,6 @@ class workPermitController extends Controller
         })->get();
         $works = Work1::whereYear('created_at',now())->whereMonth('created_at',now())->whereDay('created_at',now())->get();
         $message = $this->message;
-        // return $myTasking;
-        // return $taskings;
         return view('human_management.work_permit.create',compact('users','message','projects','vehicles','bonus_techinicals','taskings','works'));
     }
 
@@ -82,7 +80,6 @@ class workPermitController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
         $request->validate([
             'coordinador'=>['required'],
             'cedula'=>['required'],
@@ -270,13 +267,11 @@ class workPermitController extends Controller
         }
 
         if ($unData) {
-            // return "Hay funcionarios sin frente de trabajo ";
             // if (count($unData) == count($request->cedula)) {
                 
             // }else {
                 if ($arrayId) {
                     if (count($arrayId) == 1) {
-                        // return "Hay un frente de trabajo, pero no con todos los funcionarios";
                         foreach ($arrayId as $key => $value) {
                             $tasking = Tasking::find($key);
                             foreach ($unData as $ke => $value) {
@@ -286,31 +281,7 @@ class workPermitController extends Controller
                                     'responsibles_id' => $key,
                                 ]);
                             }
-                            $vehicleVerify = false;
-                            foreach ($tasking->vehicles as $key => $value) {
-                                if ($value->vehicle->id == $request->vehicle_id) {
-                                    $vehicleVerify = true;
-                                }
-                            }
-                            if (!$vehicleVerify) {
-                                $tasking->vehicles()->create([
-                                    'vehicle_id' => $request->vehicle_id
-                                ]);
-                            }
-                        }
-                    }else{
-                        // return "Hay varios frentes de trabajo, pero faltan funcionarios";
-                        $ready = false;
-                        foreach ($arrayId as $key => $value) {
-                            if (!$ready) {
-                                $tasking = Tasking::find($key);
-                                foreach ($unData as $ke => $value) {
-                                    Responsable::create([
-                                        'user_id' => $ke,
-                                        'responsibles_type' => 'App\Models\Tasking',
-                                        'responsibles_id' => $key,
-                                    ]);
-                                }
+                            if ($request->vehicle_id) {
                                 $vehicleVerify = false;
                                 foreach ($tasking->vehicles as $key => $value) {
                                     if ($value->vehicle->id == $request->vehicle_id) {
@@ -322,15 +293,41 @@ class workPermitController extends Controller
                                         'vehicle_id' => $request->vehicle_id
                                     ]);
                                 }
+                            }
+                        }
+                    }else{
+                        $ready = false;
+                        foreach ($arrayId as $key => $value) {
+                            if (!$ready) {
+                                $tasking = Tasking::find($key);
+                                foreach ($unData as $ke => $value) {
+                                    Responsable::create([
+                                        'user_id' => $ke,
+                                        'responsibles_type' => 'App\Models\Tasking',
+                                        'responsibles_id' => $key,
+                                    ]);
+                                }
+                                if ($request->vehicle_id) {
+                                    $vehicleVerify = false;
+                                    foreach ($tasking->vehicles as $key => $value) {
+                                        if ($value->vehicle->id == $request->vehicle_id) {
+                                            $vehicleVerify = true;
+                                        }
+                                    }
+                                    if (!$vehicleVerify) {
+                                        $tasking->vehicles()->create([
+                                            'vehicle_id' => $request->vehicle_id
+                                        ]);
+                                    }
+                                }
                                 $ready = true;
                             }
                         }
                     }
                 }else {
-                    // return "No hay frente de trabajo";
                     $tasking = Tasking::create([
                         'responsable_id' => auth()->id(),
-                        'date_start' => now(),
+                        'date_start' => now()->format('Y-m-d H:i:s'),
                         'department' => $request->department,
                         'municipality' => $request->municipality,
                         'project' => 'Otro',
@@ -351,12 +348,14 @@ class workPermitController extends Controller
                         Responsable::create([
                             'user_id' => $ke,
                             'responsibles_type' => 'App\Models\Tasking',
-                            'responsibles_id' => $key,
+                            'responsibles_id' => $tasking,
                         ]);
                     }
-                    $tasking->vehicles()->create([
-                        'vehicle_id' => $request->vehicle_id
-                    ]);
+                    if ($request->vehicle_id) {
+                        $tasking->vehicles()->create([
+                            'vehicle_id' => $request->vehicle_id
+                        ]);
+                    }
                 }
             // }
         }

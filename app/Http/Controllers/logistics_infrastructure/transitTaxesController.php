@@ -77,9 +77,9 @@ class transitTaxesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(transitTaxes $id)
     {
-        //
+        return view('logistics_infrastructure.transit_taxes.show',compact('id'));
     }
 
     /**

@@ -69,6 +69,17 @@ class userController extends Controller
     {
         $update_user = user::where('email',$request->email)->where('state',0)->first();
         if ($update_user){
+            $request->validate([
+                'name' => ['required', 'string', 'max:100'],
+                'email' => ['required', 'string', 'email'],
+                'password' => ['required', 'string', 'min:8'],
+                'direccion' => ['required'],
+                'roles' => ['required'],
+                'telefono' => ['required'],
+                'position_id' => ['required'],
+                'area' => ['required'],
+                'cedula' => ['required'],
+            ]);
             $update_user->update($request->all());
             $update_user->update([
                 'state' => 1,
