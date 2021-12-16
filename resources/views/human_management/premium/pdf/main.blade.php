@@ -169,13 +169,9 @@
         <tr>
             <th colspan="2" style="text-align: center">Calculos</th>
         </tr>
-        {{-- <tr> --}}
-            {{-- <td>Liquidacion por prima</td> --}}
-            {{-- <td>$ {{ number_format($data->premium->total_pay,2,',','.') }}</td> --}}
-        {{-- </tr> --}}
         <tr>
             <td>TOTAL A PAGAR POR ESTA LIQUIDACIÓN</td>
-            <td>$ {{ number_format($data->premium->total_pay,2,',','.') }}</td>
+            <td>$ {{ number_format($data->total_pay_user,2,',','.') }}</td>
         </tr>
     </table>
 </main>

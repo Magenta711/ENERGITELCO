@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAsistanceUsersTable extends Migration
+class CutBonu extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,17 @@ class CreateAsistanceUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('asistance_users', function (Blueprint $table) {
+        Schema::create('cut_bonu', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('assistance_id');
-            $table->boolean('assistance_check')->nullable();
-            $table->string('where',10)->nullable();
-            $table->time('start_time')->nullable();
-            $table->time('end_time')->nullable();
-            $table->string('comentary')->nullable();
+            $table->unsignedBigInteger('approver_id');
+            $table->double('total',10,2);
+            $table->boolean('status');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->integer('formats');
+            $table->double('value',10,2);
+            $table->double('plus',10,2);
             $table->timestamps();
         });
     }
@@ -33,6 +35,6 @@ class CreateAsistanceUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('asistance_users');
+        Schema::dropIfExists('cut_bonu');
     }
 }

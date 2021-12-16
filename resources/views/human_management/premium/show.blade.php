@@ -255,7 +255,7 @@
                         @endif
                         @if ($id->estado == 'Aprobado')
                             @can('Descargar PDF de solicitud de permisos laborales o notificaciones de incapacidad médica')
-                                <a href="{{route('payroll_overtime_news_report_download',$id->id)}}" class="btn btn-danger btn-sm">Descargar</a>
+                                <a href="{{route('premium_download',$id->id)}}" class="btn btn-danger btn-sm">Descargar</a>
                             @endcan
                         @endif
                     </div>

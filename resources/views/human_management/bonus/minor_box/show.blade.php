@@ -96,19 +96,19 @@
             @endif
             @if ($id->status == 1)
                 @can('Exportar bonificaciones de permisos de trabajo')
-                    <a href="{{ route('work_permit_bonuses_export',$id->id) }}" class="btn btn-sm btn-warning">Exportar</a>
+                    <a href="{{ route('work_permit_viatics_export',$id->id) }}" class="btn btn-sm btn-warning">Exportar</a>
                 @endcan
             @endif
         </div>
     </div>
 </section>
 
-<form id="form_approval" action="{{ route('work_permit_bonuses_approve',$id->id) }}" method="POST" style="form_dis;">
+<form id="form_approval" action="{{ route('work_permit_viatics_approve',$id->id) }}" method="POST" style="form_dis;">
     @csrf
     <input type="hidden" name="status" value="Aprobado">
     {{-- <textarea name="observaciones_jefe" id="observaciones_jefe_2" class="hide" cols="30" rows="3">{{old('observaciones_jefe')}}</textarea> --}}
 </form>
-<form id="form_no_approval" action="{{ route('work_permit_bonuses_approve',$id->id) }}" method="POST" style="display: none;">
+<form id="form_no_approval" action="{{ route('work_permit_viatics_approve',$id->id) }}" method="POST" style="display: none;">
     @csrf
     <input type="hidden" name="status" value="No aprobado">
     {{-- <textarea name="observaciones_jefe" id="observaciones_jefe_2" class="hide" cols="30" rows="3">{{old('observaciones_jefe')}}</textarea> --}}

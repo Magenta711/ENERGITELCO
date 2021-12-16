@@ -79,7 +79,8 @@ class transitTaxesController extends Controller
      */
     public function show(transitTaxes $id)
     {
-        return view('logistics_infrastructure.transit_taxes.show',compact('id'));
+        $vehicles = invVehicle::get();
+        return view('logistics_infrastructure.transit_taxes.show',compact('id','vehicles'));
     }
 
     /**

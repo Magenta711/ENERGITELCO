@@ -18,10 +18,10 @@
         <div class="box-header with-border">
             <h3 class="box-title">Bonificaciones permisos de trabajo</h3>
             <div class="box-tools">
-                <a href="{{route('work_permit_bonuses')}}" class="btn btn-sm btn-primary">Volver</a>
+                <a href="{{route('work_permit_viatics')}}" class="btn btn-sm btn-primary">Volver</a>
             </div>
         </div>
-        <form action="{{ route('work_permit_bonuses_store') }}" method="post" enctype="multipart/form-data" autocomplete="off">
+        <form action="{{ route('work_permit_viatics_store') }}" method="post" enctype="multipart/form-data" autocomplete="off">
             @csrf
         <div class="box-body">
             <table class="table table-hover">

@@ -103,15 +103,26 @@ Route::get('human_management/work_permit/download/{id}','human_management\workPe
 Route::put('human_management/work_permit/{id}','human_management\workPermitController@approve')->name('work_permit_approve');
 Route::delete('human_management/work_permit/delete/{id}','human_management\workPermitController@destroy')->name('work_permit_delete');
 
+//viatics
+Route::get('human_management/viatics/technicals','human_management\workPermitViaticsesController@index')->name('work_permit_viatics');
+Route::get('human_management/viatics/technicals/create','human_management\workPermitViaticsesController@create')->name('work_permit_viatics_create');
+Route::post('human_management/viatics/technicals','human_management\workPermitViaticsesController@store')->name('work_permit_viatics_store');
+Route::get('human_management/viatics/technicals/{id}','human_management\workPermitViaticsesController@show')->name('work_permit_viatics_show');
+Route::get('human_management/viatics/technicals/{id}/edit','human_management\workPermitViaticsesController@edit')->name('work_permit_viatics_edit');
+Route::put('human_management/viatics/technicals/{id}','human_management\workPermitViaticsesController@update')->name('work_permit_viatics_update');
+Route::get('human_management/viatics/technicals/download/{id}','human_management\workPermitViaticsesController@export')->name('work_permit_viatics_export');
+Route::post('human_management/viatics/technicals/{id}','human_management\workPermitViaticsesController@approve')->name('work_permit_viaticses_approve');
+// Route::delete('human_management/fall_protection_equipment_inspection/delete/{id}','human_management\fallProtectionEquipmentInspectionController@destroy')->name('fall_protection_equipment_inspection_delete');
+
 //bonus
-Route::get('human_management/bonus/technicals','human_management\workPermitBonusesController@index')->name('work_permit_bonuses');
-Route::get('human_management/bonus/technicals/create','human_management\workPermitBonusesController@create')->name('work_permit_bonuses_create');
-Route::post('human_management/bonus/technicals','human_management\workPermitBonusesController@store')->name('work_permit_bonuses_store');
-Route::get('human_management/bonus/technicals/{id}','human_management\workPermitBonusesController@show')->name('work_permit_bonuses_show');
-Route::get('human_management/bonus/technicals/{id}/edit','human_management\workPermitBonusesController@edit')->name('work_permit_bonuses_edit');
-Route::put('human_management/bonus/technicals/{id}','human_management\workPermitBonusesController@update')->name('work_permit_bonuses_update');
-Route::get('human_management/bonus/technicals/download/{id}','human_management\workPermitBonusesController@export')->name('work_permit_bonuses_export');
-Route::post('human_management/bonus/technicals/{id}','human_management\workPermitBonusesController@approve')->name('work_permit_bonuses_approve');
+Route::get('human_management/bonus/technicals','human_management\workPermitBonusesController@index')->name('bonuses_technical');
+Route::get('human_management/bonus/technicals/create','human_management\workPermitBonusesController@create')->name('bonuses_technical_create');
+Route::post('human_management/bonus/technicals','human_management\workPermitBonusesController@store')->name('bonuses_technical_store');
+Route::get('human_management/bonus/technicals/{id}','human_management\workPermitBonusesController@show')->name('bonuses_technical_show');
+Route::get('human_management/bonus/technicals/{id}/edit','human_management\workPermitBonusesController@edit')->name('bonuses_technical_edit');
+Route::put('human_management/bonus/technicals/{id}','human_management\workPermitBonusesController@update')->name('bonuses_technical_update');
+Route::get('human_management/bonus/technicals/download/{id}','human_management\workPermitBonusesController@export')->name('bonuses_technical_export');
+Route::post('human_management/bonus/technicals/{id}','human_management\workPermitBonusesController@approve')->name('bonuses_technical_approve');
 // Route::delete('human_management/fall_protection_equipment_inspection/delete/{id}','human_management\fallProtectionEquipmentInspectionController@destroy')->name('fall_protection_equipment_inspection_delete');
 
 //fall protection equipment inspection

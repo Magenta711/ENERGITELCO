@@ -77,7 +77,7 @@
                                                             $report = true;
                                                         @endphp
                                                             <div class="row" id="report_origen_{{$vehicle->id}}">
-                                                                <div class="col-md-5">
+                                                                <div class="col-md-6">
                                                                     <div class="form-group">
                                                                         <label for="report_date">Fecha</label>
                                                                         <p>{{$item->date}}</p>
@@ -89,13 +89,10 @@
                                                                         <p>{{$item->city}}</p>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-1 text-right">
-                                                                    <i class="fa fa-trash remove_block"></i>
-                                                                </div>
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
                                                                         <label for="report_driver_id">Conductor</label>
-                                                                        {{$item->user->name}}
+                                                                        {{$item->user->name ?? '' }}
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-12">

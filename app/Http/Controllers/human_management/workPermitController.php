@@ -262,7 +262,7 @@ class workPermitController extends Controller
                     $arrayId[$value->id] = [ $key => true ];
                 }
             }else {
-                $unData[$key] = false;
+                $unData[$key] = $key;
             }
         }
 
@@ -325,36 +325,38 @@ class workPermitController extends Controller
                         }
                     }
                 }else {
-                    $tasking = Tasking::create([
-                        'responsable_id' => auth()->id(),
-                        'date_start' => now()->format('Y-m-d H:i:s'),
-                        'department' => $request->department,
-                        'municipality' => $request->municipality,
-                        'project' => 'Otro',
-                        'user_inv' => null,
-                        'am' => 1,
-                        'pm' => 1,
-                        'description' => null,
-                        'commentaries' => 'Auto del permiso de trabajo '.$id->id,
-                        'eb_id' => $request->eb,
-                        'station_name' => $request->nombre_eb,
-                        'id_beneficiario' => $request->id_beneficiario ? $request->id_beneficiario : null,
-                        'lat' => $request->lat,
-                        'long' => $request->long,
-                        'status' => 2,
-                    ]);
-
-                    foreach ($unData as $ke => $value) {
-                        Responsable::create([
-                            'user_id' => $ke,
-                            'responsibles_type' => 'App\Models\Tasking',
-                            'responsibles_id' => $tasking,
+                    if ($request->department && $request->municipality) {
+                        $tasking = Tasking::create([
+                            'responsable_id' => auth()->id(),
+                            'date_start' => now()->format('Y-m-d H:i:s'),
+                            'department' => $request->department,
+                            'municipality' => $request->municipality,
+                            'project' => 'Otro',
+                            'user_inv' => null,
+                            'am' => 1,
+                            'pm' => 1,
+                            'description' => null,
+                            'commentaries' => 'Auto del permiso de trabajo '.$id->id,
+                            'eb_id' => $request->eb,
+                            'station_name' => $request->nombre_eb,
+                            'id_beneficiario' => $request->id_beneficiario ? $request->id_beneficiario : null,
+                            'lat' => $request->lat,
+                            'long' => $request->long,
+                            'status' => 2,
                         ]);
-                    }
-                    if ($request->vehicle_id) {
-                        $tasking->vehicles()->create([
-                            'vehicle_id' => $request->vehicle_id
-                        ]);
+    
+                        foreach ($unData as $ke => $value) {
+                            Responsable::create([
+                                'user_id' => $ke,
+                                'responsibles_type' => 'App\Models\Tasking',
+                                'responsibles_id' => $tasking->id,
+                            ]);
+                        }
+                        if ($request->vehicle_id) {
+                            $tasking->vehicles()->create([
+                                'vehicle_id' => $request->vehicle_id
+                            ]);
+                        }
                     }
                 }
             // }

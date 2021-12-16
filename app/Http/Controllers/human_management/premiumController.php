@@ -252,7 +252,7 @@ class premiumController extends Controller
     public function export(Premium $id)
     {
         foreach ($id->users as $key => $data) {
-            if ($data->user_id == 27) {
+            if ($data->user_id == auth()->id()) {
                 $pdf = PDF::loadView('human_management.premium.pdf.main',compact('data'));
                 $pdf->setPaper('A4', 'landscape');
                 return $pdf->download($id->id.'-'.$data->id.'_COMPROBANTE_PAGO.pdf');

@@ -67,7 +67,7 @@
                                     @endcan
                                     @if ($item->status == 1)
                                         @can('Exportar bonificaciones de permisos de trabajo')
-                                            <a href="{{ route('work_permit_bonuses_export',$item->id) }}" class="btn btn-sm btn-warning">Exportar</a>
+                                            <a href="{{ route('work_permit_viatics_export',$item->id) }}" class="btn btn-sm btn-warning">Exportar</a>
                                         @endcan
                                     @endif
                                 </td>
