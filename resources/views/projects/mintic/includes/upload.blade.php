@@ -62,11 +62,33 @@
             @endif
                 <div id="file_new_{{$num}}" style="{{ ($hasFile) ? 'display: none;' : ''}}">
                     <div class="row">
-                        <div class="form-group col-sm-6">
-                            <label for="color">Color letra</label>
+                        <div class="form-group col-sm-{{ isset($size_letter) ? 4 : 6 }}">
+                            <label for="color_{{$num}}">Color letra</label>
                             <input type="color" name="color" value="#FFFFFF" id="color_{{$num}}" class="form-control">
                         </div>
-                        <div class="form-group col-sm-6">
+                        @if (isset($size_letter))
+                            <div class="form-group col-sm-4">
+                                <label for="size_letter_{{$num}}">Tamaño de letra</label>
+                                <select name="size_letter" id="size_letter_{{$num}}" class="form-control">
+                                    <option value="9" {{$size_letter && $size_letter == 9  ? 'selected' : ''}}>9 pt</option>
+                                    <option value="10" {{$size_letter && $size_letter == 10 ? 'selected' : '' }}>10 pt</option>
+                                    <option value="11" {{$size_letter && $size_letter == 11 ? 'selected' : '' }}>11 pt</option>
+                                    <option value="12" {{$size_letter && $size_letter == 12 ? 'selected' : '' }}>12 pt</option>
+                                    <option value="13" {{$size_letter && $size_letter == 13 ? 'selected' : '' }}>13 pt</option>
+                                    <option value="14" {{$size_letter && $size_letter == 14 ? 'selected' : '' }}>14 pt</option>
+                                    <option value="15" {{$size_letter && $size_letter == 15 ? 'selected' : '' }}>15 pt</option>
+                                    <option value="16" {{$size_letter && $size_letter == 16 ? 'selected' : '' }}>16 pt</option>
+                                    <option value="17" {{$size_letter && $size_letter == 17 ? 'selected' : '' }}>17 pt</option>
+                                    <option value="18" {{$size_letter && $size_letter == 18 ? 'selected' : '' }}>18 pt</option>
+                                    <option value="19" {{$size_letter && $size_letter == 19 ? 'selected' : '' }}>19 pt</option>
+                                    <option value="20" {{$size_letter && $size_letter == 20 ? 'selected' : '' }}>20 pt</option>
+                                    <option value="21" {{$size_letter && $size_letter == 21 ? 'selected' : '' }}>21 pt</option>
+                                    <option value="22" {{$size_letter && $size_letter == 22 ? 'selected' : '' }}>22 pt</option>
+                                    <option value="23" {{$size_letter && $size_letter == 23 ? 'selected' : '' }}>23 pt</option>
+                                </select>
+                            </div>
+                        @endif
+                        <div class="form-group col-sm-{{ isset($size_letter) ? 4 : 6 }}">
                             <label for="commentary">Comentario</label>
                             <input type="text" name="commentary" id="commentary_{{$num}}" class="form-control">
                         </div>

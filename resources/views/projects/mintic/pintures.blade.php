@@ -28,6 +28,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '1',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'1',
             'label'=>'Foto posible ubicación de equipos tecnología de acceso',
             'description' => 'Fibra óptica, microondas, terrestre, red 4G, satelital, entre otros',
@@ -37,6 +38,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '1',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'2',
             'label'=>'Foto de dos terminales encendidos',
             'accept' => 'image/*'
@@ -45,6 +47,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '1',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'3',
             'label'=>'Foto factura de energía',
             'description'=>'Si cuenta con energía eléctrica',
@@ -54,6 +57,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '1',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'3',
             'label'=>'Foto contador donde se evidencie el serial del mismo y sellos del contador de operador de red',
             'description'=>'Si cuenta con energía eléctrica',
@@ -63,6 +67,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '1',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'3',
             'label'=>'Foto acometidas eléctricas del sitio',
             'description'=>'Si cuenta con energía eléctrica',
@@ -72,6 +77,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '1',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'4',
             'label'=>'Foto 1 aula de computo',
             'accept' => 'image/*'
@@ -80,6 +86,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '1',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'4',
             'label'=>'Foto 2 aula de computo',
             'accept' => 'image/*'
@@ -88,6 +95,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '1',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'5',
             'label'=>'Foto de la fachada de la institución con GPS',
             'description'=>'Coordenadas decimales legibles',
@@ -97,6 +105,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '1',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'6',
             'label'=>'Foto Rack de comunicaciones tapas abiertas',
             'description'=>'Si existe',
@@ -106,6 +115,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '1',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'7',
             'label'=>'Foto de TDG existente abierto o cuchilla existente',
             'description'=>'Si existe',
@@ -115,6 +125,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '1',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'8',
             'label'=>'Foto TDG existente abierto',
             'description'=>'Si existe',
@@ -124,6 +135,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '1',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'9',
             'label'=>'Foto de medición eléctrica en TDG FASE - NEUTRO',
             'energy_measurement' => 'FASE - NEUTRO',
@@ -133,6 +145,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '1',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'9',
             'label'=>'Foto de medición eléctrica en TDG FASE - TIERRA',
             'energy_measurement' => 'FASE - TIERRA',
@@ -142,6 +155,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '1',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'9',
             'label'=>'Foto de medición eléctrica en TDG NEUTRO - TIERRA',
             'energy_measurement' => 'NEUTRO - TIERRA',
@@ -151,6 +165,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '1',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'10',
             'label'=>'Foto de posible ubicación donde se instalará AP Wifi Interior',
             'accept' => 'image/*'
@@ -159,6 +174,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '1',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'11',
             'label'=>'Foto de posible ubicación donde se instalará AP Wifi Exterior',
             'accept' => 'image/*'
@@ -167,6 +183,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '1',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'12',
             'label'=>'Foto de posible sitio de instalación de mastil para AP Wifi Exterior',
             'accept' => 'image/*'
@@ -175,6 +192,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '1',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'12',
             'label'=>'Foto de posible sitio de antena para conectividad satelital o terrestres',
             'accept' => 'image/*'
@@ -183,6 +201,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '1',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'13',
             'label'=>'Foto del área de cobertura wifi exterior',
             'description' => 'Panorámica 360°',
@@ -192,6 +211,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '2',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'13',
             'label'=>'Foto del área de cobertura wifi exterior',
             'description' => 'Foto 0°',
@@ -201,6 +221,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '3',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'13',
             'label'=>'Foto del área de cobertura wifi exterior',
             'description' => 'Foto 90°',
@@ -210,6 +231,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '4',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'13',
             'label'=>'Foto del área de cobertura wifi exterior',
             'description' => 'Foto 180°',
@@ -219,6 +241,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '5',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'13',
             'label'=>'Foto del área de cobertura wifi exterior',
             'description' => 'Foto 270°',
@@ -228,6 +251,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '1',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'14',
             'label'=>'Foto de la infraestructura existente en el área de cobertura',
             'description' => 'Postes, torres, mastiles, etc',
@@ -237,6 +261,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '1',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'15',
             'label'=>'Foto de la posible ubicación del aviso de identificación exterior',
             'accept' => 'image/*'
@@ -245,6 +270,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '1',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'16',
             'label'=>'Video omnidireccional (360 grados) punto de acceso inalámbrico wifi interior',
             'description'=>'duración mínima de 30 segundos.',
@@ -254,6 +280,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '1',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'17',
             'label'=>'video omnidireccional (360 grados) punto de acceso inalámbrico wifi exterior',
             'description'=>'duración mínima de 30 segundos.',
@@ -263,6 +290,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '1',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'18',
             'label'=>'Foto posibles obstáculos cercanos a la zona de cobertura del wifi exterior',
             'description'=>'Obstáculos por ejemplo de edificios, etc.',
@@ -275,6 +303,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '2',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'1',
             'label'=>'Foto panorámica del sitio',
             'accept' => 'image/*'
@@ -283,6 +312,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '2',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'2',
             'label'=>'Ubicación sugerida del radio',
             'accept' => 'image/*'
@@ -291,6 +321,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '2',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'3',
             'label'=>'Recorrido cable de alimentación radio',
             'accept' => 'image/*'
@@ -299,6 +330,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '2',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'4',
             'label'=>'Recorrido cable IF',
             'accept' => 'image/*'
@@ -307,6 +339,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '2',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'5',
             'label'=>'Recorrido cable de servicio',
             'accept' => 'image/*'
@@ -315,6 +348,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '2',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'6',
             'label'=>'Aterrizaje de radio',
             'accept' => 'image/*'
@@ -324,6 +358,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '2',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'1',
             'label'=>'Ubicación propuesta de la antena',
             'accept' => 'image/*'
@@ -332,6 +367,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '2',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'2',
             'label'=>'Recorrido cable IF Radio',
             'accept' => 'image/*'
@@ -340,6 +376,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '2',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'3',
             'label'=>'Recorrido cable IF al Radio',
             'accept' => 'image/*'
@@ -357,6 +394,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '2',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'5',
             'label'=>'Aterrizaje cable IF',
             'accept' => 'image/*'
@@ -365,6 +403,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '2',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'6',
             'label'=>'Foto mastil existente',
             'accept' => 'image/*'
@@ -373,6 +412,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '2',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'6',
             'label'=>'Foto pararrayos existente',
             'accept' => 'image/*'
@@ -382,6 +422,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '2',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'1',
             'label'=>'Cuarto de equipos',
             'description' => 'Si aplica',
@@ -391,6 +432,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '2',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'2',
             'label'=>'Foto rack o gabinete existente',
             'description' => 'Si aplica',
@@ -400,6 +442,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '2',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'3',
             'label'=>'Foto aire acondicionado',
             'description' => 'Si aplica',
@@ -409,6 +452,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '2',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'4',
             'label'=>'Rectificador',
             'description' => 'Si aplica',
@@ -418,6 +462,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '2',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'5',
             'label'=>'UPS',
             'description' => 'Si aplica',
@@ -427,6 +472,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '2',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'6',
             'label'=>'Planta eléctrica',
             'description' => 'Si aplica',
@@ -438,6 +484,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '3',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'1',
             'label'=>'Plano arquitectónico',
             'description'=>'mano alzada o foto',
@@ -447,6 +494,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '3',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'3',
             'label'=>'Escaneo de formato de estudio de campo información',
             'accept' => 'application/pdf'
@@ -455,6 +503,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '3',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'4',
             'label'=>'Escaneo de diagrama de influencia',
             'accept' => 'application/pdf'
@@ -463,6 +512,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '3',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'5',
             'label'=>'Escaneo de esquema de instalación',
             'accept' => 'application/pdf'
@@ -471,6 +521,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '3',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'6',
             'label'=>'Escaneo de acta de compromiso',
             'accept' => 'application/pdf'
@@ -479,6 +530,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '3',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'7',
             'label'=>'Escaneo de acta de fuerza mayor',
             'accept' => 'application/pdf'
@@ -487,6 +539,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '3',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'8',
             'label'=>'Escaneo de carta de autorización',
             'accept' => 'application/pdf'
@@ -495,6 +548,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '3',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'9',
             'label'=>'Formato digital del Estudio de Campo',
             'description' => 'Excel',
@@ -506,6 +560,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '3',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'1',
             'label'=>'Pantallazo 1 app Wifi Analizer',
             'description' => 'Vista Calificación del canal 2.4 GHz',
@@ -514,6 +569,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '3',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'1',
             'label'=>'Pantallazo 2 app Wifi Analizer',
             'description' => 'Vista Gráfico de Canal 2.4 GHz',
@@ -522,6 +578,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '3',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'1',
             'label'=>'Pantallazo 3 app Wifi Analizer',
             'description' => 'Vista Gráfico de Tiempo 2.4 GHz',
@@ -530,6 +587,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '3',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'1',
             'label'=>'Pantallazo 4 app Wifi Analizer',
             'description' => 'Vista Calificación de Canal 5 GHz',
@@ -538,6 +596,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '3',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'1',
             'label'=>'Pantallazo 5 app Wifi Analizer',
             'description' => 'Vista Gráfico de Canal 5 GHz',
@@ -546,6 +605,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '3',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'1',
             'label'=>'Pantallazo 6 app Wifi Analizer',
             'description' => 'Vista Gráfico de Tiempo 5 GHz',
@@ -554,6 +614,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '3',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'2',
             'label'=>'Pantallazo recorrido Google Maps',
             'description'=>'Desde la cabecera municipal hasta el sitio con las coordenadas',
@@ -563,6 +624,7 @@
             @include('projects.mintic.includes.upload',[
             'ltt' => '4',
             'num' => $i++,
+            'size_letter' => 11,
             'it'=>'3',
             'label'=>'Foto del técnico en la institución educativa',
             'description' => 'Con overol, chaqueta y gorra de claro',
@@ -623,6 +685,7 @@
             @include('projects.mintic.includes.upload',[
                 'ltt' => '1',
                 'num' => $i++,
+                'size_letter' => 11,
                 'it'=>'2',
                 'label' => 'Lugar donde se instalará la antena, foto con brújula donde se vea el azimut a la escuela',
                 'accept' => 'image/*'
@@ -631,6 +694,7 @@
             @include('projects.mintic.includes.upload',[
                 'ltt' => '1',
                 'num' => $i++,
+                'size_letter' => 11,
                 'it'=>'3',
                 'label' => 'Objetos que puedan estar bloqueando  la línea de vista como árboles y edificios, especificar la altura.',
                 'accept' => 'image/*'
@@ -641,6 +705,7 @@
             @include('projects.mintic.includes.upload',[
                 'ltt' => '1',
                 'num' => $i++,
+                'size_letter' => 11,
                 'it'=>'1',
                 'label' => 'Fotos de la entrada a la escuela y foto de la entrada de la EB',
                 'accept' => 'image/*'
@@ -650,6 +715,7 @@
             @include('projects.mintic.includes.upload',[
                 'ltt' => '1',
                 'num' => $i++,
+                'size_letter' => 11,
                 'it'=>'2',
                 'label' => 'Foto desde la torre a una altura baja donde se aprecie el cerramiento de la EB',
                 'accept' => 'image/*'
@@ -659,6 +725,7 @@
             @include('projects.mintic.includes.upload',[
                 'ltt' => '1',
                 'num' => $i++,
+                'size_letter' => 11,
                 'it'=>'3',
                 'label' => 'Fotos del PDB',
                 'accept' => 'image/*'
@@ -668,6 +735,7 @@
             @include('projects.mintic.includes.upload',[
                 'ltt' => '1',
                 'num' => $i++,
+                'size_letter' => 11,
                 'it'=>'4',
                 'label' => 'Foto del TDG DE LA EB Y FOTO MEDIDA AC EN TOMA',
                 'accept' => 'image/*'
@@ -676,6 +744,7 @@
             @include('projects.mintic.includes.upload',[
                 'ltt' => '1',
                 'num' => $i++,
+                'size_letter' => 11,
                 'it'=>'5',
                 'label' => 'Fotos general de la estación base',
                 'description' => 'Varias fotos de los equipos y las zonas en la EB',
@@ -685,6 +754,7 @@
             @include('projects.mintic.includes.upload',[
                 'ltt' => '1',
                 'num' => $i++,
+                'size_letter' => 11,
                 'it'=>'6',
                 'label' => 'Fotos patas de la torre',
                 'description' => 'Fotos de todas las patas de la torre',
@@ -694,6 +764,7 @@
             @include('projects.mintic.includes.upload',[
                 'ltt' => '1',
                 'num' => $i++,
+                'size_letter' => 11,
                 'it'=>'7',
                 'label' => 'Caras de la torre desde piso',
                 'description' => 'Fotos de todas las caras de la torre desde piso',
@@ -703,6 +774,7 @@
             @include('projects.mintic.includes.upload',[
                 'ltt' => '1',
                 'num' => $i++,
+                'size_letter' => 11,
                 'it'=>'8',
                 'label' => 'Ubicación sugerida instalación del radio',
                 'description' => 'Fotos del gabinete de microondas donde se encuentra el radio o el alcatel donde se conectara el servicio',
@@ -712,6 +784,7 @@
             @include('projects.mintic.includes.upload',[
                 'ltt' => '1',
                 'num' => $i++,
+                'size_letter' => 11,
                 'it'=>'9',
                 'label' => 'Recorrido cable de alimentación radio',
                 'description' => 'Foto del recorrido del TDG o toma AC hasta el radio',
@@ -721,6 +794,7 @@
             @include('projects.mintic.includes.upload',[
                 'ltt' => '1',
                 'num' => $i++,
+                'size_letter' => 11,
                 'it'=>'10',
                 'label' => 'Recorrido cable de IF (PISO)',
                 'description' => 'Fotos del recorrido del cable que va del radio hasta la antena MW, pero solo a nivel de piso',
@@ -730,6 +804,7 @@
             @include('projects.mintic.includes.upload',[
                 'ltt' => '1',
                 'num' => $i++,
+                'size_letter' => 11,
                 'it'=>'11',
                 'label' => 'Fotos de baterías existentes',
                 'description' => 'Fotos del power entero, foto de las baterías, foto de los rectificadores…',
@@ -739,6 +814,7 @@
             @include('projects.mintic.includes.upload',[
                 'ltt' => '1',
                 'num' => $i++,
+                'size_letter' => 11,
                 'it'=>'12',
                 'label' => 'Fotos de planta (si aplica)',
                 'description' => 'Si la EB tiene planta, tomar varias fotos',
@@ -748,6 +824,7 @@
             @include('projects.mintic.includes.upload',[
                 'ltt' => '1',
                 'num' => $i++,
+                'size_letter' => 11,
                 'it'=>'13',
                 'label' => 'Fotos barraje de tierra radio',
                 'description' => 'Foto del aterrizaje del radio',
@@ -757,6 +834,7 @@
             @include('projects.mintic.includes.upload',[
                 'ltt' => '1',
                 'num' => $i++,
+                'size_letter' => 11,
                 'it'=>'14',
                 'label' => 'Recorrido tierra radio (si aplica)',
                 'description' => 'Fotos del recorrido del aterrizaje del radio',
@@ -766,6 +844,7 @@
             @include('projects.mintic.includes.upload',[
                 'ltt' => '1',
                 'num' => $i++,
+                'size_letter' => 11,
                 'it'=>'15',
                 'label' => 'Posible ubicación de antena microondas hacia centro digital',
                 'description' => 'Foto del lugar donde se instalará la antena MW',

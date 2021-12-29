@@ -239,7 +239,7 @@ class MinticController extends Controller
      */
     public function destroy(Mintic_School $id)
     {
-        // $id->delete();
+        $id->delete();
         // return redirect()->route('mintic')->with('success','Se ha eliminado el proyecto correctamente');
         return response()->json( $id );
     }
@@ -269,44 +269,48 @@ class MinticController extends Controller
                     $image->resize(null, 500, function ($constraint) {
                         $constraint->aspectRatio();
                     });
+                    $height = 25 + ($request->size_letter * 4);
                     if ($request->vol && $request->vol != '') {
-                        $image->text($request->vol, $image->width() - 10, $image->height() - 62, function($font) use($request) {
+                        $image->text($request->vol, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                             $font->file(public_path('fonts/Calibri/Calibri-Bold.TTF'));
-                            $font->size(11);
+                            $font->size($request->size_letter);
                             $font->color($request->color);
                             $font->align('right');
                             $font->valign('top');
                             $font->angle(0);
                         });
                     }
-    
-                    $image->text('COD '.$mintic->code, $image->width() - 10, $image->height() - 49, function($font) use($request) {
+                    $height = $height - $request->size_letter - 2;
+                    $image->text('COD '.$mintic->code, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Calibri/Calibri-Bold.TTF'));
-                        $font->size(11);
+                        $font->size($request->size_letter);
                         $font->color($request->color);
                         $font->align('right');
                         $font->valign('top');
                         $font->angle(0);
                     });
-                    $image->text($text, $image->width() - 10, $image->height() - 36, function($font) use($request) {
+                    $height = $height - $request->size_letter - 2;
+                    $image->text($text, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Calibri/Calibri-Bold.TTF'));
-                        $font->size(11);
+                        $font->size($request->size_letter);
                         $font->color($request->color);
                         $font->align('right');
                         $font->valign('top');
                         $font->angle(0);
                     });
-                    $image->text($text2, $image->width() - 10, $image->height() - 23, function($font) use($request) {
+                    $height = $height - $request->size_letter - 2;
+                    $image->text($text2, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Calibri/Calibri-Bold.TTF'));
-                        $font->size(11);
+                        $font->size($request->size_letter);
                         $font->color($request->color);
                         $font->align('right');
                         $font->valign('top');
                         $font->angle(0);
                     });
-                    $image->text($text3, $image->width() - 10, $image->height() - 10, function($font) use($request) {
+                    $height = $height - $request->size_letter - 2;
+                    $image->text($text3, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Calibri/Calibri-Bold.TTF'));
-                        $font->size(11);
+                        $font->size($request->size_letter);
                         $font->color($request->color);
                         $font->align('right');
                         $font->valign('top');
@@ -315,9 +319,9 @@ class MinticController extends Controller
                     $size = '650';
                 }else {
                     $size = $file->getClientSize() / 1000;
-                    $const = 0.03 * $size;
-                    $height = ($const / 4);
-                    $image->text($text3, $image->width() - 10, $image->height() - $height, function($font) use($request,$const) {
+                    $const = (10 * $size) / 100;
+                    $height = 25 + ($const / 4);
+                    $image->text($text3, $image->width() - 5, $image->height() - $height, function($font) use($request,$const) {
                         $font->file(public_path('fonts/Calibri/Calibri-Bold.TTF'));
                         $font->size($const);
                         $font->color($request->color);
@@ -326,7 +330,7 @@ class MinticController extends Controller
                         $font->angle(0);
                     });
                     $height += (5+$const);
-                    $image->text($text2, $image->width() - 10, $image->height() - $height, function($font) use($request,$const) {
+                    $image->text($text2, $image->width() - 5, $image->height() - $height, function($font) use($request,$const) {
                         $font->file(public_path('fonts/Calibri/Calibri-Bold.TTF'));
                         $font->size($const);
                         $font->color($request->color);
@@ -335,7 +339,7 @@ class MinticController extends Controller
                         $font->angle(0);
                     });
                     $height += (5+$const);
-                    $image->text($text.' ('.$const.')', $image->width() - 10, $image->height() - $height, function($font) use($request,$const) {
+                    $image->text($text, $image->width() - 5, $image->height() - $height, function($font) use($request,$const) {
                         $font->file(public_path('fonts/Calibri/Calibri-Bold.TTF'));
                         $font->size($const);
                         $font->color($request->color);
@@ -344,7 +348,7 @@ class MinticController extends Controller
                         $font->angle(0);
                     });
                     $height += (5+$const);
-                    $image->text('COD '.$mintic->code, $image->width() - 10, $image->height() - $height, function($font) use($request,$const) {
+                    $image->text('COD '.$mintic->code, $image->width() - 5, $image->height() - $height, function($font) use($request,$const) {
                         $font->file(public_path('fonts/Calibri/Calibri-Bold.TTF'));
                         $font->size($const);
                         $font->color($request->color);
@@ -352,11 +356,10 @@ class MinticController extends Controller
                         $font->valign('top');
                         $font->angle(0);
                     });
-                    
                     
                     if ($request->vol && $request->vol != '') {
                         $height += (5+$const);
-                        $image->text($request->vol, $image->width() - 10, $image->height() - $height, function($font) use($request,$const) {
+                        $image->text($request->vol, $image->width() - 5, $image->height() - $height, function($font) use($request,$const) {
                             $font->file(public_path('fonts/Calibri/Calibri-Bold.TTF'));
                             $font->size($const);
                             $font->color($request->color);
@@ -367,7 +370,7 @@ class MinticController extends Controller
                     }
                 }
 
-                $image->save(public_path('storage/upload/mintic/'.$name));
+                $image->save(public_path('storage/upload/mintic/'.$name),72);
             }else {
                 $size = $file->getClientSize() / 1000;
                 $path = Storage::putFileAs('public/upload/mintic', $file, $name);
@@ -477,44 +480,46 @@ class MinticController extends Controller
                             $constraint->aspectRatio();
                         });
                     }
-                    
-                    $image->text('CLARO MINTIC 7K', $image->width() - 10, $image->height() - 86, function($font) use($request) {
+                    $height = 25 + ($request->size_letter * 4);
+                    $image->text('CLARO MINTIC 7K', $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
-                        $font->size(20);
+                        $font->size($request->size_letter);
                         $font->color($request->color);
                         $font->align('right');
                         $font->valign('top');
                         $font->angle(0);
                     });
-
-                    $image->text('COD '.$mintic->code.' '.$mintic->name, $image->width() - 10, $image->height() - 68, function($font) use($request) {
+                    $height = $height - $request->size_letter - 2;
+                    $image->text('COD '.$mintic->code.' '.$mintic->name, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
-                        $font->size(20);
+                        $font->size($request->size_letter);
                         $font->color($request->color);
                         $font->align('right');
                         $font->valign('top');
                         $font->angle(0);
                     });
-
-                    $image->text($text, $image->width() - 10, $image->height() - 50, function($font) use($request) {
+                    $height = $height - $request->size_letter - 2;
+                    $image->text($text, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
-                        $font->size(20);
+                        $font->size($request->size_letter);
                         $font->color($request->color);
                         $font->align('right');
                         $font->valign('top');
                         $font->angle(0);
                     });
-                    $image->text($text2, $image->width() - 10, $image->height() - 32, function($font) use($request) {
+                    $height = $height - $request->size_letter - 2;
+                    $image->text($text2, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
-                        $font->size(20);
+                        $font->size($request->size_letter);
                         $font->color($request->color);
                         $font->align('right');
                         $font->valign('top');
                         $font->angle(0);
                     });
-                    $image->text($text3, $image->width() - 10, $image->height() - 14, function($font) use($request) {
+                    $height = $height - $request->size_letter - 2;
+                    $image->text($text3, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
-                        $font->size(20);
+                        $font->size($request->size_letter);
                         $font->color($request->color);
                         $font->align('right');
                         $font->valign('top');
@@ -533,35 +538,37 @@ class MinticController extends Controller
                             $constraint->aspectRatio();
                         });
                     }
-
-                    $image->text('COD '.$mintic->code, $image->width() - 10, $image->height() - 68, function($font) use($request) {
+                    $height = 25 + ($request->size_letter * 3);
+                    $image->text('COD '.$mintic->code, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
-                        $font->size(20);
+                        $font->size($request->size_letter);
                         $font->color($request->color);
                         $font->align('right');
                         $font->valign('top');
                         $font->angle(0);
                     });
-
-                    $image->text($text, $image->width() - 10, $image->height() - 50, function($font) use($request) {
+                    $height = $height - $request->size_letter - 2;
+                    $image->text($text, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
-                        $font->size(20);
+                        $font->size($request->size_letter);
                         $font->color($request->color);
                         $font->align('right');
                         $font->valign('top');
                         $font->angle(0);
                     });
-                    $image->text($text2, $image->width() - 10, $image->height() - 32, function($font) use($request) {
+                    $height = $height - $request->size_letter - 2;
+                    $image->text($text2, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
-                        $font->size(20);
+                        $font->size($request->size_letter);
                         $font->color($request->color);
                         $font->align('right');
                         $font->valign('top');
                         $font->angle(0);
                     });
-                    $image->text($text3, $image->width() - 10, $image->height() - 14, function($font) use($request) {
+                    $height = $height - $request->size_letter - 2;
+                    $image->text($text3, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
-                        $font->size(20);
+                        $font->size($request->size_letter);
                         $font->color($request->color);
                         $font->align('right');
                         $font->valign('top');
@@ -844,35 +851,37 @@ class MinticController extends Controller
                     $image->resize(null, 500, function ($constraint) {
                         $constraint->aspectRatio();
                     });
-                    $image->text('ID '.$mintic->code, $image->width() - 10, $image->height() - 81, function($font) use($request) {
+                    $height = 25 + ($request->size_letter * 3);
+                    $image->text('ID '.$mintic->code, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
-                        $font->size(20);
+                        $font->size($request->size_letter);
                         $font->color($request->color);
                         $font->align('right');
                         $font->valign('top');
                         $font->angle(0);
                     });
-    
-                    $image->text($mintic->name, $image->width() - 10, $image->height() - 59, function($font) use($request) {
+                    $height = $height - $request->size_letter - 2;
+                    $image->text($mintic->name, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
-                        $font->size(20);
+                        $font->size($request->size_letter);
                         $font->color($request->color);
                         $font->align('right');
                         $font->valign('top');
                         $font->angle(0);
                     });
-    
-                    $image->text($text2, $image->width() - 10, $image->height() - 37, function($font) use($request) {
+                    $height = $height - $request->size_letter - 2;
+                    $image->text($text2, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
-                        $font->size(20);
+                        $font->size($request->size_letter);
                         $font->color($request->color);
                         $font->align('right');
                         $font->valign('top');
                         $font->angle(0);
                     });
-                    $image->text($text3, $image->width() - 10, $image->height() - 15, function($font) use($request) {
+                    $height = $height - $request->size_letter - 2;
+                    $image->text($text3, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
-                        $font->size(20);
+                        $font->size($request->size_letter);
                         $font->color($request->color);
                         $font->align('right');
                         $font->valign('top');
@@ -883,7 +892,7 @@ class MinticController extends Controller
                     $size = $file->getClientSize() / 1000;
                     $const = 0.3 * $size;
                     $height = $const;
-                    $image->text($text3, $image->width() - 10, $image->height() - $height, function($font) use($request,$const) {
+                    $image->text($text3, $image->width() - 5, $image->height() - $height, function($font) use($request,$const) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size($const);
                         $font->color($request->color);
@@ -892,7 +901,7 @@ class MinticController extends Controller
                         $font->angle(0);
                     });
                     $height += (5+$const);
-                    $image->text($text2, $image->width() - 10, $image->height() - $height, function($font) use($request,$const) {
+                    $image->text($text2, $image->width() - 5, $image->height() - $height, function($font) use($request,$const) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size($const);
                         $font->color($request->color);
@@ -901,7 +910,7 @@ class MinticController extends Controller
                         $font->angle(0);
                     });
                     $height += (5+$const);
-                    $image->text($mintic->name, $image->width() - 10, $image->height() - $height, function($font) use($request,$const) {
+                    $image->text($mintic->name, $image->width() - 5, $image->height() - $height, function($font) use($request,$const) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size($const);
                         $font->color($request->color);
@@ -910,7 +919,7 @@ class MinticController extends Controller
                         $font->angle(0);
                     });
                     $height += (5+$const);
-                    $image->text('ID '.$mintic->code, $image->width() - 10, $image->height() - $height, function($font) use($request,$const) {
+                    $image->text('ID '.$mintic->code, $image->width() - 5, $image->height() - $height, function($font) use($request,$const) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size($const);
                         $font->color($request->color);

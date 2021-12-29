@@ -1123,27 +1123,29 @@
                             <div class="col-sm-2 col-xs-3">Funcionario 3</div>
                             <div class="col-sm-2 col-xs-3">Funcionario 4</div>
                         </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-4 col-xs-12">
-                                <strong>
-                                    Valor que considera de bonificaciones
-                                </strong>
+                        @if ($id->created_at <= '2021-12-10 24:00:00')
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-4 col-xs-12">
+                                    <strong>
+                                        Valor que considera de bonificaciones
+                                    </strong>
+                                </div>
+                                <div class="col-sm-2 col-xs-3">
+                                    {{($id->work_add) ? '$ '.number_format($id->work_add->f9a1u1 , 2, ',', '.') : '0'}}
+                                </div>
+                                <div class="col-sm-2 col-xs-3">
+                                    {{($id->work_add) ? '$ '.number_format($id->work_add->f9a1u2 , 2, ',', '.') : '0'}}
+                                </div>
+                                <div class="col-sm-2 col-xs-3">
+                                    {{($id->work_add) ? '$ '.number_format($id->work_add->f9a1u3 , 2, ',', '.') : '0'}}
+                                </div>
+                                <div class="col-sm-2 col-xs-3">
+                                    {{($id->work_add) ? '$ '.number_format($id->work_add->f9a1u4 , 2, ',', '.') : '0'}}
+                                </div>
                             </div>
-                            <div class="col-sm-2 col-xs-3">
-                                {{($id->work_add) ? '$ '.number_format($id->work_add->f9a1u1 , 2, ',', '.') : '0'}}
-                            </div>
-                            <div class="col-sm-2 col-xs-3">
-                                {{($id->work_add) ? '$ '.number_format($id->work_add->f9a1u2 , 2, ',', '.') : '0'}}
-                            </div>
-                            <div class="col-sm-2 col-xs-3">
-                                {{($id->work_add) ? '$ '.number_format($id->work_add->f9a1u3 , 2, ',', '.') : '0'}}
-                            </div>
-                            <div class="col-sm-2 col-xs-3">
-                                {{($id->work_add) ? '$ '.number_format($id->work_add->f9a1u4 , 2, ',', '.') : '0'}}
-                            </div>
-                        </div>
-                        <hr width="40%">
+                            <hr width="40%">
+                        @endif
                         <div class="row">
                             <div class="col-sm-4 col-xs-12">
                                 <strong>
@@ -1163,7 +1165,7 @@
                                 {{($id->work_add) ? '$ '.number_format($id->work_add->f9a2u4 , 2, ',', '.') : '0'}}
                             </div>
                         </div>
-                        @if ($id->created_at <= '2021-12-10 24:00:00')
+                        
                             <hr width="40%">
                             <div class="row">
                                 <div class="col-sm-4 col-xs-12">
@@ -1184,7 +1186,7 @@
                                     {{($id->work_add) ? '$ '.number_format($id->work_add->f9a3u4 , 2, ',', '.') : '0'}}
                                 </div>
                             </div>
-                        @endif
+                        
                     @endif
                     <hr>
                     @if ($id->commentary)

@@ -138,7 +138,7 @@
                         </div>
                     </div>
                     <hr>
-                    <div class="prevent_block" {{ $item->type_format == 'Mantenimiento preventivo' ? 'style="display: none"' : ''}}>
+                    <div class="prevent_block" style="{{ $item->type_format == 'Mantenimiento correctivo' ? "display: none" : ''}}">
                         <h3>Actividades de mantenimiento preventivo</h3>
                         <div class="table-responsable">
                             <table class="table table-hover">

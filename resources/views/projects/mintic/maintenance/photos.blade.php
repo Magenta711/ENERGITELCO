@@ -36,6 +36,7 @@
                     'ltt' => '1',
                     'id' => $item,
                     'num' => $i++,
+                    'size_letter' => 20,
                     'it'=>'1',
                     'label' => 'Coordenadas geográficas',
                     'description' => 'Captura de las coordenadas geográficas arrjadas por GPS con mínimo 5 cifras decimales',
@@ -48,6 +49,7 @@
                 'ltt' => '1',
                 'id' => $item,
                 'num' => $i++,
+                'size_letter' => 20,
                 'it'=>'1',
                 'label' => 'Equipos wifi interior',
                 'description' => 'Registro fotográfico de Access Point Interior',
@@ -59,6 +61,7 @@
                 'ltt' => '1',
                 'id' => $item,
                 'num' => $i++,
+                'size_letter' => 20,
                 'it'=>'1',
                 'label' => 'Equipos de wifi exterior 1 (AP 1)',
                 'description' => 'Registro fotográfico del Access Point Externo 1',
@@ -70,6 +73,7 @@
                 'ltt' => '1',
                 'id' => $item,
                 'num' => $i++,
+                'size_letter' => 20,
                 'it'=>'1',
                 'label' => 'Equipos de wifi exterior 2 (AP 2)',
                 'description' => 'Registro fotográfico del Access Point Externo 2',
@@ -82,9 +86,10 @@
                     'ltt' => '1',
                     'id' => $item,
                     'num' => $i++,
+                    'size_letter' => 20,
                     'it'=>'1',
                     'label' => 'Equipos de computo de la sede conectados a internet',
-                    'description' => 'Registro fotográfico de los equipos de computo de la sede conectados al punto de acceso inalámbrico WIFI interior del centro digital, con acceso a internet (ejemplo ping a una pagina o servidor, navegación en paginas como las de un diario digital nacional, donde se evidencie la fechas, entre otras); sugerencia evidenciar que se esta conectado a la señal wifi del Centro Digital.',
+                    'description' => 'Registro fotográfico de los equipos de computo de la sede conectados al punto de acceso inalámbrico WIFI interior del centro digital (MINTIC), con acceso a internet (ejemplo ping a una pagina o servidor, navegación en paginas como las de un diario digital nacional, donde se evidencie la fechas, entre otras); sugerencia evidenciar que se esta conectado a la señal wifi del Centro Digital.',
                     'place' => 'G29',
                     'accept' => 'image/*'
                 ])
@@ -93,9 +98,10 @@
                     'ltt' => '1',
                     'id' => $item,
                     'num' => $i++,
+                    'size_letter' => 20,
                     'it'=>'1',
                     'label' => 'Dipositivo móvil conectado al punto de acceso inalámbrico exterior del centro digital',
-                    'description' => 'Registro fotográfico o captura de pantalla de un equipo móvil conectado a la red wifi exterior del centro digital, collage de imágenes donde se evidencie contexto y la segunda evidencie la navegación',
+                    'description' => 'Registro fotográfico o captura de pantalla de un equipo móvil conectado a la red wifi exterior del centro digital (<b>MINTIC_CONECTA</b>), collage de imágenes donde se evidencie contexto y la segunda evidencie la navegación',
                     'place' => 'L29',
                     'accept' => 'image/*'
                 ])
@@ -105,6 +111,7 @@
                 'ltt' => '1',
                 'id' => $item,
                 'num' => $i++,
+                'size_letter' => 20,
                 'it'=>'1',
                 'label' => 'Señaletica exterior',
                 'description' => 'Registro fotográfico de la señaletica exterior',
@@ -117,9 +124,10 @@
                     'ltt' => '1',
                     'id' => $item,
                     'num' => $i++,
+                    'size_letter' => 20,
                     'it'=>'1',
                     'label' => 'Solución de respaldo (4 horas) Si aplica',
-                    'description' => 'Registro fotográfico de la solución de respaldo, Aplica siempre y cuendo no se instale una solución alternativa',
+                    'description' => 'Registro fotográfico de la solución de respaldo, Aplica siempre y cuendo no se instale una solución alternativa <b>Gabinete abierto</b>',
                     'place' => 'G46',
                     'accept' => 'image/*'
                     ])
@@ -129,6 +137,7 @@
                 'ltt' => '1',
                 'id' => $item,
                 'num' => $i++,
+                'size_letter' => 20,
                 'it'=>'1',
                 'label' => 'Señaletica interior',
                 'description' => 'Registro fotográfico de la señaletica interior',
@@ -140,9 +149,10 @@
                 'ltt' => '1',
                 'id' => $item,
                 'num' => $i++,
+                'size_letter' => 20,
                 'it'=>'1',
                 'label' => 'PRINT de sercidor trirada con evento creado a UPS',
-                'description' => 'Se debe crear un evento en la UPS entrar al servidor TRIARA y tomar el print de pantalla (<a target="_blank" href="https://mintictsps.triara.co:9090/">https://mintictsps.triara.co:9090/</a>)',
+                'description' => 'Se debe crear un evento en la UPS entrar al servidor TRIARA y tomar el print de pantalla buscando IP de la UPS  (Servidor de prueba <a target="_blank" href="https://mintictsps.triara.co:9090/#/monitoring/events">https://mintictsps.triara.co:9090/#/monitoring/events</a> Usuario: <b>implementa_mintic</b> Contraseña: <b>Impl3m3nt@2o2!</b>)',
                 'place' => $item->type_format == 'Mantenimiento correctivo' ? 'B63' : 'B97',
                 'accept' => 'image/*'
             ])
@@ -151,9 +161,10 @@
                 'ltt' => '1',
                 'id' => $item,
                 'num' => $i++,
+                'size_letter' => 20,
                 'it'=>'1',
                 'label' => 'Medición eléctrica 1',
-                'description' => 'Si existen variaciones o irregularidades en el suministro eléctrico se debe describir en el campo #3 3. DESCRIIPCIÓN DE LA FALLA',
+                'description' => 'Fase - Neutro',
                 'place' => $item->type_format == 'Mantenimiento correctivo' ? 'G63' : 'G80',
                 'accept' => 'image/*'
             ])
@@ -162,9 +173,32 @@
                 'ltt' => '1',
                 'id' => $item,
                 'num' => $i++,
+                'size_letter' => 20,
+                'it'=>'1',
+                'label' => 'Medición eléctrica 1',
+                'description' => 'Fase Tierra',
+                'accept' => 'image/*'
+            ])
+            <hr>
+            @include('projects.mintic.includes.upload',[
+                'ltt' => '1',
+                'id' => $item,
+                'num' => $i++,
+                'size_letter' => 20,
+                'it'=>'1',
+                'label' => 'Medición eléctrica 1',
+                'description' => 'Neutro Tierra',
+                'accept' => 'image/*'
+            ])
+            <hr>
+            @include('projects.mintic.includes.upload',[
+                'ltt' => '1',
+                'id' => $item,
+                'num' => $i++,
+                'size_letter' => 20,
                 'it'=>'1',
                 'label' => 'Medición eléctrica 2',
-                'description' => 'Si existen variaciones o irregularidades en el suministro eléctrico se debe describir en el campo #3 3. DESCRIIPCIÓN DE LA FALLA',
+                'description' => 'Bacteria',
                 'place' => $item->type_format == 'Mantenimiento correctivo' ? 'L63' : 'L80',
                 'accept' => 'image/*'
             ])
@@ -173,9 +207,10 @@
                 'ltt' => '1',
                 'id' => $item,
                 'num' => $i++,
+                'size_letter' => 20,
                 'it'=>'1',
                 'label' => 'Navegación AP INDOOR',
-                'description' => 'Navegación equipos de computo conectados al AP Indoor
+                'description' => 'Navegación equipos de computo conectados al AP Indoor (<b>MINTIC</b>)
                 <ul>
                     <li>ping www.google.com /n 100</li>
                     <li><a target="_blank" href="https://www.whatismyip.com/my-ip-information/?iref=homegb">https://www.whatismyip.com/my-ip-information/?iref=homegb</a></li>
@@ -189,9 +224,10 @@
                 'ltt' => '1',
                 'id' => $item,
                 'num' => $i++,
+                'size_letter' => 20,
                 'it'=>'1',
                 'label' => 'Navegación AP OUTDOOR',
-                'description' => 'Navegación equipos de computo conectados al AP Outdoor
+                'description' => 'Navegación equipos de computo conectados al AP Outdoor (<b>MINTIC_CONECTA</b>)
                 <ul>
                     <li>ping <a target="_blank" href="https://www.faceboock.com">www.faceboock.com</a> /n 100</li>
                     <li><a target="_blank" href="https://www.whatismyip.com/my-ip-information/?iref=homegb">https://www.whatismyip.com/my-ip-information/?iref=homegb</a></li>
@@ -205,11 +241,13 @@
                 'ltt' => '1',
                 'id' => $item,
                 'num' => $i++,
+                'size_letter' => 20,
                 'it'=>'1',
                 'label' => 'Prueba de velocidad',
                 'description' => 'Navegación equipos de computo velocidad.
                 <ul>
-                    <li>Realizar test de velocidad en la página: <a target="_blank" href="https://www.claro.com.co/personas/servicios/servicios-moviles/internet-movil/test-de-velocidad">https://www.claro.com.co/personas/servicios/servicios-moviles/internet-movil/test-de-velocidad</a>/</li>
+                    <li>Realizar test de velocidad en la página: <a target="_blank" href="https://www.nperf.com/es/">https://www.nperf.com/es/</a>/</li>
+                    <li>Realizar test de velocidad en la página: <a target="_blank" href="https://testmy.net/">https://testmy.net/</a>/</li>
                 </ul>',
                 'place' => $item->type_format == 'Mantenimiento correctivo' ? 'L80' : 'B114',
                 'accept' => 'image/*'
@@ -219,6 +257,7 @@
                 'ltt' => '1',
                 'id' => $item,
                 'num' => $i++,
+                'size_letter' => 20,
                 'it'=>'1',
                 'label' => 'Conectividad portal cautivo',
                 'place' => $item->type_format == 'Mantenimiento correctivo' ? 'B97' : 'G114',
@@ -229,6 +268,7 @@
                 'ltt' => '1',
                 'id' => $item,
                 'num' => $i++,
+                'size_letter' => 20,
                 'it'=>'1',
                 'label' => 'Bloqueo de páginas',
                 'description' => 'Bloqueo de paginas pornografía: tomar  2 URL de la lista, ejemplo
@@ -238,12 +278,13 @@
                 </ul>',
                 'place' => $item->type_format == 'Mantenimiento correctivo' ? 'G97' : 'L114',
                 'accept' => 'image/*'
-            ])
+                ])
             <hr>
             @include('projects.mintic.includes.upload',[
                 'ltt' => '1',
                 'id' => $item,
                 'num' => $i++,
+                'size_letter' => 20,
                 'it'=>'1',
                 'label' => 'Bloquedo de páginas',
                 'description' => 'Bloqueo de paginas pornografía: tomar  2 URL de la lista, ejemplo
@@ -251,7 +292,18 @@
                     <li><a target="_blank" href="http://furl.telmexla.net.co/dignidad.php">http://furl.telmexla.net.co/dignidad.php</a></li>
                     <li><a target="_blank" href="http://furl.telmexla.net.co/dignidad.php">http://furl.telmexla.net.co/dignidad.php</a></li>
                 </ul>',
-                'place' => $item->type_format == 'Mantenimiento correctivo' ? 'L97' : 'B131',
+            'place' => $item->type_format == 'Mantenimiento correctivo' ? 'L97' : 'B131',
+            'accept' => 'image/*'
+            ])
+            <hr>
+            @include('projects.mintic.includes.upload',[
+                'ltt' => '1',
+                'id' => $item,
+                'num' => $i++,
+                'size_letter' => 20,
+                'it'=>'1',
+                'label' => 'Medida de la tierra',
+                'place' => $item->type_format == 'Mantenimiento correctivo' ? 'B97' : 'G114',
                 'accept' => 'image/*'
             ])
             <hr>
@@ -260,6 +312,7 @@
                     'ltt' => '1',
                     'id' => $item,
                     'num' => $i++,
+                    'size_letter' => 20,
                     'it'=>'6',
                     'label' => 'RACK METALICO SI APLICA',
                     'place' => 'B29',
@@ -270,6 +323,7 @@
                     'ltt' => '1',
                     'id' => $item,
                     'num' => $i++,
+                    'size_letter' => 20,
                     'it'=>'6',
                     'label' => 'UPS SI APLICA',
                     'place' => 'G29',
@@ -280,6 +334,7 @@
                     'ltt' => '1',
                     'id' => $item,
                     'num' => $i++,
+                    'size_letter' => 20,
                     'it'=>'6',
                     'label' => 'BATERIA SI APLICA',
                     'place' => 'L29',
@@ -290,6 +345,7 @@
                     'ltt' => '1',
                     'id' => $item,
                     'num' => $i++,
+                    'size_letter' => 20,
                     'it'=>'6',
                     'label' => 'KIT PANEL SOLARX4 FOTOVOLTAICO SI APLICA',
                     'place' => 'B46',
@@ -300,6 +356,7 @@
                     'ltt' => '1',
                     'id' => $item,
                     'num' => $i++,
+                    'size_letter' => 20,
                     'it'=>'6',
                     'label' => 'CONTROLADOR SI APLICA',
                     'place' => 'G46',
@@ -310,8 +367,9 @@
                     'ltt' => '1',
                     'id' => $item,
                     'num' => $i++,
+                    'size_letter' => 20,
                     'it'=>'6',
-                    'label' => 'INVERSOR PST-600-48 MODULO SOLAR SAMLX SI APLICA',
+                    'label' => 'INVERSOR PST-600-48 MODULO SOLAR SAMLX SI APLICA',
                     'place' => 'L46',
                     'accept' => 'image/*'
                 ])
@@ -320,6 +378,7 @@
                     'ltt' => '1',
                     'id' => $item,
                     'num' => $i++,
+                    'size_letter' => 20,
                     'it'=>'6',
                     'label' => 'POSTE 3MTS SOPORTE PANEL SOLAR SI PLICA',
                     'place' => 'B63',
@@ -329,6 +388,7 @@
                     'ltt' => '1',
                     'id' => $item,
                     'num' => $i++,
+                    'size_letter' => 20,
                     'it'=>'6',
                     'label' => 'RADIO SUSCRIPTOR SI APLICA',
                     'place' => 'G63',
@@ -339,6 +399,7 @@
                     'ltt' => '1',
                     'id' => $item,
                     'num' => $i++,
+                    'size_letter' => 20,
                     'it'=>'6',
                     'label' => 'KIT SATELITAL SI APLICA',
                     'place' => 'G131',
@@ -358,6 +419,7 @@
                     'ltt' => '2',
                     'id' => $item,
                     'num' => $i++,
+                    'size_letter' => 20,
                     'it'=>'1',
                     'label' => 'Coordenadas geográficas',
                     'description' => 'Captura de las coordenadas geográficas arrjadas por GPS con mínimo 5 cifras decimales',
@@ -369,6 +431,7 @@
                     'ltt' => '2',
                     'id' => $item,
                     'num' => $i++,
+                    'size_letter' => 20,
                     'it'=>'1',
                     'label' => 'Equipos wifi interior',
                     'description' => 'Registro fotográfico de Access Point Interior',
@@ -380,6 +443,7 @@
                     'ltt' => '2',
                     'id' => $item,
                     'num' => $i++,
+                    'size_letter' => 20,
                     'it'=>'1',
                     'label' => 'Equipos de wifi exterior 1 (AP 1)',
                     'description' => 'Registro fotográfico del Access Point Externo 1',
@@ -391,6 +455,7 @@
                     'ltt' => '2',
                     'id' => $item,
                     'num' => $i++,
+                    'size_letter' => 20,
                     'it'=>'2',
                     'label' => 'Equipos de wifi exterior 2 (AP 2)',
                     'description' => 'Registro fotográfico del Access Point Externo 2',
@@ -402,9 +467,10 @@
                     'ltt' => '2',
                     'id' => $item,
                     'num' => $i++,
+                    'size_letter' => 20,
                     'it'=>'2',
                     'label' => 'Equipos de computo de la sede conectados a internet',
-                    'description' => 'Registro fotográfico de los equipos de computo de la sede conectados al punto de acceso inalámbrico WIFI interior del centro digital, con acceso a internet (ejemplo ping a una pagina o servidor, navegación en paginas como las de un diario digital nacional, donde se evidencie la fechas, entre otras); sugerencia evidenciar que se esta conectado a la señal wifi del Centro Digital.',
+                    'description' => 'Registro fotográfico de los equipos de computo de la sede conectados al punto de acceso inalámbrico WIFI interior del centro digital (<b>MINTIC</b>), con acceso a internet (ejemplo ping a una pagina o servidor, navegación en paginas como las de un diario digital nacional, donde se evidencie la fechas, entre otras); sugerencia evidenciar que se esta conectado a la señal wifi del Centro Digital.',
                     'place' => 'G29',
                     'accept' => 'image/*'
                 ])
@@ -413,9 +479,10 @@
                     'ltt' => '2',
                     'id' => $item,
                     'num' => $i++,
+                    'size_letter' => 20,
                     'it'=>'2',
                     'label' => 'Dipositivo móvil conectado al punto de acceso inalámbrico exterior del centro digital',
-                    'description' => 'Registro fotográfico o captura de pantalla de un equipo móvil conectado a la red wifi exterior del centro digital, collage de imágenes donde se evidencie contexto y la segunda evidencie la navegación',
+                    'description' => 'Registro fotográfico o captura de pantalla de un equipo móvil conectado a la red wifi exterior del centro digital (<b>MINTIC_CONECTA</b>), collage de imágenes donde se evidencie contexto y la segunda evidencie la navegación',
                     'place' => 'L29',
                     'accept' => 'image/*'
                 ])
@@ -424,6 +491,7 @@
                     'ltt' => '2',
                     'id' => $item,
                     'num' => $i++,
+                    'size_letter' => 20,
                     'it'=>'3',
                     'label' => 'Señaletica exterior',
                     'description' => 'Registro fotográfico de la señaletica exterior',
@@ -435,9 +503,10 @@
                     'ltt' => '2',
                     'id' => $item,
                     'num' => $i++,
+                    'size_letter' => 20,
                     'it'=>'3',
                     'label' => 'Solución de respaldo (4 horas) Si aplica',
-                    'description' => 'Registro fotográfico de la solución de respaldo, Aplica siempre y cuendo no se instale una solución alternativa',
+                    'description' => 'Registro fotográfico de la solución de respaldo, Aplica siempre y cuendo no se instale una solución alternativa <b>Gabinete abierto</b>',
                     'place' => 'G46',
                     'accept' => 'image/*'
                     ])
@@ -446,6 +515,7 @@
                     'ltt' => '2',
                     'id' => $item,
                     'num' => $i++,
+                    'size_letter' => 20,
                     'it'=>'3',
                     'label' => 'Señaletica interior',
                     'description' => 'Registro fotográfico de la señaletica interior',
@@ -457,9 +527,10 @@
                     'ltt' => '2',
                     'id' => $item,
                     'num' => $i++,
+                    'size_letter' => 20,
                     'it'=>'4',
                     'label' => 'PRINT de sercidor trirada con evento creado a UPS',
-                    'description' => 'Se debe crear un evento en la UPS entrar al servidor TRIARA y tomar el print de pantalla (<a target="_blank" href="https://mintictsps.triara.co:9090/">https://mintictsps.triara.co:9090/</a>)',
+                    'description' => 'Se debe crear un evento en la UPS entrar al servidor TRIARA y tomar el print de pantalla buscando IP de la UPS (Servidor de prueba <a target="_blank" href="https://mintictsps.triara.co:9090/#/monitoring/events">https://mintictsps.triara.co:9090/#/monitoring/events</a> Usuario: <b>implementa_mintic</b> Contraseña: <b>Impl3m3nt@2o2!</b>)',
                     'place' => 'B63',
                     'accept' => 'image/*'
                 ])
@@ -468,9 +539,10 @@
                     'ltt' => '2',
                     'id' => $item,
                     'num' => $i++,
+                    'size_letter' => 20,
                     'it'=>'4',
                     'label' => 'Medición eléctrica 1',
-                    'description' => 'Si existen variaciones o irregularidades en el suministro eléctrico se debe describir en el campo #3 3. DESCRIIPCIÓN DE LA FALLA',
+                    'description' => 'Neutro Fase',
                     'place' => 'G63',
                     'accept' => 'image/*'
                 ])
@@ -479,9 +551,34 @@
                     'ltt' => '2',
                     'id' => $item,
                     'num' => $i++,
+                    'size_letter' => 20,
+                    'it'=>'4',
+                    'label' => 'Medición eléctrica 1',
+                    'description' => 'Fase Tierra',
+                    'place' => 'G63',
+                    'accept' => 'image/*'
+                ])
+                <hr>
+                @include('projects.mintic.includes.upload',[
+                    'ltt' => '2',
+                    'id' => $item,
+                    'num' => $i++,
+                    'size_letter' => 20,
+                    'it'=>'4',
+                    'label' => 'Medición eléctrica 1',
+                    'description' => 'Neutro Tierra',
+                    'place' => 'G63',
+                    'accept' => 'image/*'
+                ])
+                <hr>
+                @include('projects.mintic.includes.upload',[
+                    'ltt' => '2',
+                    'id' => $item,
+                    'num' => $i++,
+                    'size_letter' => 20,
                     'it'=>'4',
                     'label' => 'Medición eléctrica 2',
-                    'description' => 'Si existen variaciones o irregularidades en el suministro eléctrico se debe describir en el campo #3 3. DESCRIIPCIÓN DE LA FALLA',
+                    'description' => 'Bacteria',
                     'place' => 'L63',
                     'accept' => 'image/*'
                 ])
@@ -490,9 +587,10 @@
                     'ltt' => '2',
                     'id' => $item,
                     'num' => $i++,
+                    'size_letter' => 20,
                     'it'=>'5',
                     'label' => 'Navegación AP INDOOR',
-                    'description' => 'Navegación equipos de computo conectados al AP Indoor
+                    'description' => 'Navegación equipos de computo conectados al AP Indoor (<b>MINTIC</b>)
                     <ul>
                         <li>ping www.google.com /n 100</li>
                         <li><a target="_blank" href="https://www.whatismyip.com/my-ip-information/?iref=homegb">https://www.whatismyip.com/my-ip-information/?iref=homegb</a></li>
@@ -506,9 +604,10 @@
                     'ltt' => '2',
                     'id' => $item,
                     'num' => $i++,
+                    'size_letter' => 20,
                     'it'=>'5',
                     'label' => 'Navegación AP OUTDOOR',
-                    'description' => 'Navegación equipos de computo conectados al AP Outdoor
+                    'description' => 'Navegación equipos de computo conectados al AP Outdoor (<b>MINTIC_CONECTA</b>)
                     <ul>
                         <li>ping <a target="_blank" href="https://www.faceboock.com">www.faceboock.com</a> /n 100</li>
                         <li><a target="_blank" href="https://www.whatismyip.com/my-ip-information/?iref=homegb">https://www.whatismyip.com/my-ip-information/?iref=homegb</a></li>
@@ -522,11 +621,13 @@
                     'ltt' => '2',
                     'id' => $item,
                     'num' => $i++,
+                    'size_letter' => 20,
                     'it'=>'5',
                     'label' => 'Pruba de velocidad',
                     'description' => 'Navegación equipos de computo velocidad.
                     <ul>
-                        <li>Realizar test de velocidad en la página: <a target="_blank" href="https://www.claro.com.co/personas/servicios/servicios-moviles/internet-movil/test-de-velocidad">https://www.claro.com.co/personas/servicios/servicios-moviles/internet-movil/test-de-velocidad</a>/</li>
+                        <li>Realizar test de velocidad en la página: <a target="_blank" href="https://www.nperf.com/es/">https://www.nperf.com/es/</a>/</li>
+                        <li>Realizar test de velocidad en la página: <a target="_blank" href="https://testmy.net/">https://testmy.net/</a>/</li>
                     </ul>',
                     'place' => 'L80',
                     'accept' => 'image/*'
@@ -536,6 +637,7 @@
                     'ltt' => '2',
                     'id' => $item,
                     'num' => $i++,
+                    'size_letter' => 20,
                     'it'=>'6',
                     'label' => 'Conectividad portal cautivo',
                     'place' => 'B97',
@@ -546,6 +648,7 @@
                     'ltt' => '2',
                     'id' => $item,
                     'num' => $i++,
+                    'size_letter' => 20,
                     'it'=>'6',
                     'label' => 'Bloqueo de páginas',
                     'description' => 'Bloqueo de paginas pornografía: tomar  2 URL de la lista, ejemplo
@@ -561,6 +664,7 @@
                     'ltt' => '2',
                     'id' => $item,
                     'num' => $i++,
+                    'size_letter' => 20,
                     'it'=>'6',
                     'label' => 'Bloquedo de páginas',
                     'description' => 'Bloqueo de paginas pornografía: tomar  2 URL de la lista, ejemplo
@@ -568,14 +672,125 @@
                         <li><a target="_blank" href="http://furl.telmexla.net.co/dignidad.php">http://furl.telmexla.net.co/dignidad.php</a></li>
                         <li><a target="_blank" href="http://furl.telmexla.net.co/dignidad.php">http://furl.telmexla.net.co/dignidad.php</a></li>
                     </ul>',
-                    'place' => 'L97',
-                    'accept' => 'image/*'
+                'place' => 'L97',
+                'accept' => 'image/*'
                 ])
                 <div class="form-group">
+                    @include('projects.mintic.includes.upload',[
+                    'ltt' => '2',
+                    'id' => $item,
+                    'num' => $i++,
+                    'size_letter' => 20,
+                    'it'=>'6',
+                    'label' => 'Medida de la tierra',
+                    'place' => 'B97',
+                    'accept' => 'image/*'
+                ])
+                <hr>
                     <label for="">Observaciones</label>
                     <textarea name="" id="" cols="30" rows="3" class="form-control"></textarea>
                 </div>
             @endif
+            <h3>AUTOGESTIÓN</h3>
+            @include('projects.mintic.includes.upload',[
+                'ltt' => '2',
+                'id' => $item,
+                'num' => $i++,
+                'size_letter' => 20,
+                'it'=>'1',
+                'label' => 'Troncalizar servicio',
+                'description' => 'Troncalizar el servicio conectando el PC directamente al radio en el CD (Vlan e IP de servicio)<br>export en winbox encuentra la IP y el ID-VLan',
+                'accept' => 'image/*'
+            ])
+            <hr>
+            @include('projects.mintic.includes.upload',[
+                'ltt' => '2',
+                'id' => $item,
+                'num' => $i++,
+                'size_letter' => 20,
+                'it'=>'2',
+                'label' => 'Performance radio',
+                'description' => 'Conectado en el radio, ejecutar prueba de performance contra  radio de la BTS, Recuerten que el valor es aprox. 75 - 25<br>Tools -> Wireless Link Test',
+                'accept' => 'image/*'
+            ])
+            <hr>
+            @include('projects.mintic.includes.upload',[
+                'ltt' => '2',
+                'id' => $item,
+                'num' => $i++,
+                'size_letter' => 20,
+                'it'=>'2',
+                'label' => 'Prueba de velocidad en la AP indoor',
+                'description' => 'La prueba corre en la Indoor y debe entregar valor igual o superior al contrato (hay valores minimos), comprobar que las 3APs esten operativos
+                    <b>system ssh 172.28.10.100 user=admin</b><br> 
+                    <b>admin</b><br><br>
+                    AP interior se identifica (20667-ZGYO167-AP-INT)
+                    Servidores:<br>
+                    <b>speedtest etsi http://172.25.133.10 40 10 1</b><br>
+                    <b>speedtest etsi http://172.28.103.2 40 10 1</b><br>
+                    <b>speedtest etsi http://172.28.103.6 40 10 1</b><br>
+
+                    Para los servicios que están instalados por terceros o satelitales se debe correr los siguientes comandos:<br>
+                    <b>speedtest etsi http://181.49.90.144 40 10 1</b><br>
+                    <b>speedtest etsi http://181.49.90.145 40 10 1</b><br>
+                    <b>speedtest etsi http://181.49.90.146 40 10 1</b>',
+                'accept' => 'image/*'
+            ])
+            <hr>
+            @include('projects.mintic.includes.upload',[
+                'ltt' => '2',
+                'id' => $item,
+                'num' => $i++,
+                'size_letter' => 20,
+                'it'=>'2',
+                'label' => 'Modos de TX en radio CD',
+                'description' => 'Configuration -> Network',
+                'accept' => 'image/*'
+            ])
+            <hr>
+            @include('projects.mintic.includes.upload',[
+                'ltt' => '2',
+                'id' => $item,
+                'num' => $i++,
+                'size_letter' => 20,
+                'it'=>'2',
+                'label' => 'Modos de TX en mikrotik',
+                'description' => 'Interfaces -> WAN -> Ethernet',
+                'accept' => 'image/*'
+            ])
+            <hr>
+            @include('projects.mintic.includes.upload',[
+                'ltt' => '2',
+                'id' => $item,
+                'num' => $i++,
+                'size_letter' => 20,
+                'it'=>'2',
+                'label' => 'Validación de errores en mikrotic',
+                'description' => 'Verificacion de errores entre el Mikrotik y los AP, si el valor es mayor a 0 y continua incrementando se debe validar modos de TX o el cableado entre los dispositivos<br>Interfaces -> WAN -> Rx Stats',
+                'accept' => 'image/*'
+            ])
+            <hr>
+            @include('projects.mintic.includes.upload',[
+                'ltt' => '2',
+                'id' => $item,
+                'num' => $i++,
+                'size_letter' => 20,
+                'it'=>'2',
+                'label' => 'Validación de errores en mikrotic',
+                'accept' => 'image/*'
+            ])
+            <hr>
+            <h3>OTRAS</h3>
+            @include('projects.mintic.includes.upload',[
+                'ltt' => '2',
+                'id' => $item,
+                'num' => $i++,
+                'size_letter' => 20,
+                'it'=>'1',
+                'label' => 'Fachada de la escuela',
+                'accept' => 'image/*'
+            ])
+            <hr>
         </div>
     </div>
 </section>
