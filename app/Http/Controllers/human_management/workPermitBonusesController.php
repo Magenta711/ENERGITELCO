@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\human_management\cut_bonus;
 use App\Models\Work1;
+use App\Models\work1_add;
+use App\Notifications\notificationMain;
+use App\User;
 use Carbon\Carbon;
 
 class workPermitBonusesController extends Controller
@@ -92,78 +95,90 @@ class workPermitBonusesController extends Controller
      */
     public function show(cut_bonus $id)
     {
-        $items = Work1::whereBetween('created_at',[$id->start_date, $id->end_date])->where('estado','!=','No aprobado')->get();
-
-        $array = array();
-        $m = 0;
-        foreach ($items as $item) {
+        if ($id->status == 1 || $id->status == 0) {
+            return redirect()->route('home')->withErrors(['Acción no valida']);
+        }
+        $items = Work1::with(['work_add','users' => function ($query)
+        {
+            $query->with('minor_box');
+        }])->whereBetween('created_at',[$id->start_date,$id->end_date])->where('estado','!=','No aprobado')->get();
+        $data = array();
+        foreach ($items as $key => $value) {
             $i = 1;
-            foreach ($item->users as $user) {
-                switch($i){
-                    case(1):
-                        $bonification = $item->work_add->f9a1u1 && is_numeric($item->work_add->f9a1u1) ? $item->work_add->f9a1u1 : 0;
-                        $viatic = $item->work_add->f9a2u1 && is_numeric($item->work_add->f9a2u1) ? $item->work_add->f9a2u1 : 0;
-                        $ajustes = $item->work_add->ajustes_u1 && is_numeric($item->work_add->ajustes_u1) ? $item->work_add->ajustes_u1 : 0;
-                        $pending = $item->work_add->pending_u1 && is_numeric($item->work_add->pending_u1) ? $item->work_add->pending_u1 : 0;
+            foreach ($value->users as $ke => $user) {
+                $data[$key][$i]['nombre_eb'] = $value->nombre_eb;
+                $data[$key][$i]['id'] = $value->work_add->id;
+                $data[$key][$i]['position'] = $i;
+                $data[$key][$i]['user_id'] = $user->id;
+                $data[$key][$i]['name'] = $user->name;
+                $data[$key][$i]['created_at'] = $value->created_at;
+                $data[$key][$i]['ended_at'] = $value->fecha_valido_hasta.' '.$value->hora_final;
+
+                switch ($i) {
+                    case 1:
+                        $data[$key][$i]['bonus'] = $value->work_add->f9a1u1;
                         break;
-                    case(2):
-                        $bonification = $item->work_add->f9a1u2 && is_numeric($item->work_add->f9a1u2) ? $item->work_add->f9a1u2 : 0;
-                        $viatic = $item->work_add->f9a2u2 && is_numeric($item->work_add->f9a2u2) ? $item->work_add->f9a2u2 : 0;
-                        $ajustes = $item->work_add->ajustes_u2 && is_numeric($item->work_add->ajustes_u2) ? $item->work_add->ajustes_u2 : 0;
-                        $pending = $item->work_add->pending_u2 && is_numeric($item->work_add->pending_u2) ? $item->work_add->pending_u2 : 0;
+                    case 2:
+                        $data[$key][$i]['bonus'] = $value->work_add->f9a1u2;
                         break;
-                    case(3):
-                        $bonification = $item->work_add->f9a1u3 && is_numeric($item->work_add->f9a1u3) ? $item->work_add->f9a1u3 : 0;
-                        $viatic = $item->work_add->f9a2u3 && is_numeric($item->work_add->f9a2u3) ? $item->work_add->f9a2u3 : 0;
-                        $ajustes = $item->work_add->ajustes_u3 && is_numeric($item->work_add->ajustes_u3) ? $item->work_add->ajustes_u3 : 0;
-                        $pending = $item->work_add->pending_u3 && is_numeric($item->work_add->pending_u3) ? $item->work_add->pending_u3 : 0;
+                    case 3:
+                        $data[$key][$i]['bonus'] = $value->work_add->f9a1u3;
                         break;
-                    case(4):
-                        $bonification = $item->work_add->f9a1u4 && is_numeric($item->work_add->f9a1u4) ? $item->work_add->f9a1u4 : 0;
-                        $viatic = $item->work_add->f9a2u4 && is_numeric($item->work_add->f9a2u4) ? $item->work_add->f9a2u4 : 0;
-                        $ajustes = $item->work_add->ajustes_u4 && is_numeric($item->work_add->ajustes_u4) ? $item->work_add->ajustes_u4 : 0;
-                        $pending = $item->work_add->pending_u4 && is_numeric($item->work_add->pending_u4) ? $item->work_add->pending_u4 : 0;
+                    case 4:
+                        $data[$key][$i]['bonus'] = $value->work_add->f9a1u4;
                         break;
+                    
                     default:
+                        
+                        break;
                 }
-                
-                if (array_key_exists($user->id,$array)) {
-                    $bonus = $array[$user->id]['bonification'];
-                    $viat = $array[$user->id]['viatic'];
-                    $ajus = $array[$user->id]['ajustes'];
-                    $pen = $array[$user->id]['pending'];
-                    $count = $array[$user->id]['count'];
-                    $array[$user->id] = [
-                        'id' => $user->id,
-                        'name' => $user->name,
-                        'email' => $user->email,
-                        'cedula' => $user->cedula,
-                        'cuenta' => $user->register ? $user->register->bank_account : '',
-                        'bonification' => $bonification + $bonus,
-                        'viatic' => $viatic + $viat,
-                        'ajustes' => $ajustes + $ajus,
-                        'pending' => $pending + $pen,
-                        'count' => $count + 1
-                    ];
-                }else {
-                    $array[$user->id] = [
-                        'id' => $user->id,
-                        'name' => $user->name,
-                        'email' => $user->email,
-                        'cedula' => $user->cedula,
-                        'cuenta' => $user->register ? $user->register->bank_account : '',
-                        'bonification' => $bonification,
-                        'viatic' => $viatic,
-                        'ajustes' => $ajustes,
-                        'pending' => $pending,
-                        'count' => 1
-                    ];
-                }
+
                 $i++;
             }
         }
+        // return $data;
+        $byStation = array();
+        foreach ($data as $key => $value) {
+            for ($i=1; $i <= count($value); $i++) {
+                if ($byStation) {
+                    $ready = false;
+                    $position = null;
+                    for ($k = 0; $k < count($byStation); $k++) {
+                        if ($value[$i]['nombre_eb'] == $byStation[$k]['nombre_eb'] && !$ready) {
+                            $position = $k;
+                            if ($value[$i]['user_id'] == $byStation[$k]['user_id']) {
+                                $byStation[$k]['bonus'] = $byStation[$k]['bonus'] + $value[$i]['bonus'];
+                                $byStation[$k]['amount'] = $byStation[$k]['amount'] + 1;
+                                $byStation[$k]['ended_at'] = $value[$i]['ended_at'];
+                                $ready = true;
+                            }
+                        }
+                    }
+                    if (!$ready) {
+                        if ($position != null) {
+                            $arr = $value[$i];
+                            $arr['amount'] = 1;
+                            $arrSlice = array_slice($byStation,0,$position);
+                            $arrSlice2 = array_slice($byStation,$position);
+                            $arrSlice[] = $arr;
+                            $byStation = array_merge($arrSlice, $arrSlice2);
+                        }else {
+                            $arr = $value[$i];
+                            $arr['amount'] = 1;
+                            $byStation[] = $arr;
+                        }
+                    }
+                }else {
+                    $arr = $value[$i];
+                    $arr['amount'] = 1;
+                    $byStation[] = $arr;
+                    
+                }
+            }
+        }
+        $items = $byStation;
         
-        return view('human_management.bonus.viatic.show',compact('items','id','array'));
+        return view('human_management.bonus.technical.show',compact('items','id'));
     }
 
     /**
@@ -181,7 +196,82 @@ class workPermitBonusesController extends Controller
         {
             $query->with('minor_box');
         }])->whereBetween('created_at',[$id->start_date,$id->end_date])->where('estado','!=','No aprobado')->get();
-        return view('human_management.bonus.viatic.edit',compact('items','id'));
+        $data = array();
+        foreach ($items as $key => $value) {
+            $i = 1;
+            foreach ($value->users as $ke => $user) {
+                $data[$key][$i]['nombre_eb'] = $value->nombre_eb;
+                $data[$key][$i]['id'] = $value->work_add->id;
+                $data[$key][$i]['position'] = $i;
+                $data[$key][$i]['user_id'] = $user->id;
+                $data[$key][$i]['name'] = $user->name;
+                $data[$key][$i]['created_at'] = $value->created_at;
+                $data[$key][$i]['ended_at'] = $value->fecha_valido_hasta.' '.$value->hora_final;
+
+                switch ($i) {
+                    case 1:
+                        $data[$key][$i]['bonus'] = $value->work_add->f9a1u1;
+                        break;
+                    case 2:
+                        $data[$key][$i]['bonus'] = $value->work_add->f9a1u2;
+                        break;
+                    case 3:
+                        $data[$key][$i]['bonus'] = $value->work_add->f9a1u3;
+                        break;
+                    case 4:
+                        $data[$key][$i]['bonus'] = $value->work_add->f9a1u4;
+                        break;
+                    
+                    default:
+                        
+                        break;
+                }
+
+                $i++;
+            }
+        }
+        // return $data;
+        $byStation = array();
+        foreach ($data as $key => $value) {
+            for ($i=1; $i <= count($value); $i++) {
+                if ($byStation) {
+                    $ready = false;
+                    $position = null;
+                    for ($k = 0; $k < count($byStation); $k++) {
+                        if ($value[$i]['nombre_eb'] == $byStation[$k]['nombre_eb'] && !$ready) {
+                            $position = $k;
+                            if ($value[$i]['user_id'] == $byStation[$k]['user_id']) {
+                                $byStation[$k]['bonus'] = $byStation[$k]['bonus'] + $value[$i]['bonus'];
+                                $byStation[$k]['amount'] = $byStation[$k]['amount'] + 1;
+                                $byStation[$k]['ended_at'] = $value[$i]['ended_at'];
+                                $ready = true;
+                            }
+                        }
+                    }
+                    if (!$ready) {
+                        if ($position != null) {
+                            $arr = $value[$i];
+                            $arr['amount'] = 1;
+                            $arrSlice = array_slice($byStation,0,$position);
+                            $arrSlice2 = array_slice($byStation,$position);
+                            $arrSlice[] = $arr;
+                            $byStation = array_merge($arrSlice, $arrSlice2);
+                        }else {
+                            $arr = $value[$i];
+                            $arr['amount'] = 1;
+                            $byStation[] = $arr;
+                        }
+                    }
+                }else {
+                    $arr = $value[$i];
+                    $arr['amount'] = 1;
+                    $byStation[] = $arr;
+                    
+                }
+            }
+        }
+        $items = $byStation;
+        return view('human_management.bonus.technical.edit',compact('items','id'));
     }
 
     /**
@@ -191,9 +281,65 @@ class workPermitBonusesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,cut_bonus $id)
     {
-        //
+        if ($id->status == 1 || $id->status == 0) {
+            return redirect()->route('home')->withErrors(['Acción no valida']);
+        }
+        $items = work1_add::whereBetween('created_at',[$id->start_date,$id->end_date])->update([
+            'f9a1u1' => 0,
+            'f9a1u2' => 0,
+            'f9a1u3' => 0,
+            'f9a1u4' => 0
+        ]);
+
+        $total = 0;
+        
+        for ($i=0; $i < count($request->bonus); $i++) {
+            
+            switch ($request->position[$i]) {
+                case 1:
+                    work1_add::find($request->work_id[$i])->update([
+                        'f9a1u1' => $request->bonus[$i],
+                    ]);
+                    $total += $request->bonus[$i];
+                    break;
+                case 2:
+                    work1_add::find($request->work_id[$i])->update([
+                        'f9a1u2' => $request->bonus[$i],
+                    ]);
+                    $total += $request->bonus[$i];
+                    break;
+                case 3:
+                    work1_add::find($request->work_id[$i])->update([
+                        'f9a1u3' => $request->bonus[$i],
+                    ]);
+                    $total += $request->bonus[$i];
+                    break;
+                case 4:
+                    work1_add::find($request->work_id[$i])->update([
+                        'f9a1u4' => $request->bonus[$i],
+                    ]);
+                    $total += $request->bonus[$i];
+                    break;
+                default:
+                    
+                break;
+            }
+        }
+
+        $id->update([
+            'total' => $total,
+            'status' => 2,
+        ]);
+        $users = User::where('state',1)->get();
+        foreach ($users as $user) {
+            if ($user->hasPermissionTo('Lista de bonificaciones de permisos de trabajo')){
+                $user->notify(new notificationMain($id->id,'Pago de comisiones a técnicos editado '.$id->id,'human_management/bonus/viatics/'));
+            }
+        }
+
+        return redirect()->route('bonuses_technical')->with('success','Se ha actualizado el pago de comisiones correctamente');
     }
 
     /**
@@ -204,6 +350,6 @@ class workPermitBonusesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
 }

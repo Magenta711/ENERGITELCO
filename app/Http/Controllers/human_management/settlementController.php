@@ -8,6 +8,7 @@ use App\Models\human_magement\settlement;
 use App\Models\human_magement\settlementSalaryMonth;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Models\human_magement\settlementYear;
+use App\Models\SystemMessages;
 use App\User;
 use Illuminate\Support\Facades\Mail;
 
@@ -23,6 +24,7 @@ class settlementController extends Controller
         $this->middleware('permission:Descargar liquidación de prestaciones sociales',['only' => ['download']]);
         $this->middleware('permission:Eliminar liquidación de prestaciones sociales',['only' => ['destroy']]);
         $this->middleware('permission:Aprobar liquidación de prestaciones sociales',['only' => ['approve']]);
+        $this->message = SystemMessages::where('state',1)->where('name','Envio de formatos')->first();
     }
 
     /**
@@ -44,7 +46,8 @@ class settlementController extends Controller
     public function create()
     {
         $users= User::get();
-        return view('human_management.settlement.create',compact('users'));
+        $message = $this->message;
+        return view('human_management.settlement.create',compact('users','message'));
     }
 
     /**

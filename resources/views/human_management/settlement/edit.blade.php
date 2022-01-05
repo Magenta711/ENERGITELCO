@@ -67,7 +67,7 @@
                                     <h4 class="modal-title">Confirmar</h4>
                                 </div>
                                 <div class="modal-body">
-                                    {{-- <p>{!! ($message) ? str_replace("\n", '</br>', addslashes($message->description)) : '' !!}</p> --}}
+                                    <p>{!! ($message) ? str_replace("\n", '</br>', addslashes($message->description)) : '' !!}</p>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-sm btn-danger pull-left" data-dismiss="modal">Cancelar</button>
@@ -85,7 +85,7 @@
 @endsection
 @section('js')
     <script src="{{ asset('js/moment/moment.js') }}" defer></script>
-    <script src="{{ asset('js/forms/form9.js') }}" defer></script>
+    <script src="{{ asset('js/forms/settement.js') }}" defer></script>
     <script>
         var bPreguntar = true;
     

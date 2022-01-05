@@ -18,7 +18,7 @@
     @foreach ($users as $user)
         <input type="hidden" disabled value="{{$user->name}}" id="name_{{$user->id}}">
         <input type="hidden" disabled value="{{$user->register && $user->register->date ? $user->register->date : $user->created_at }}" id="date_start_{{$user->id}}">
-        <input type="hidden" disabled value="{{ ($user->register && $user->register->date_end != '') ? $user->register->date_end : ($user->state == 0) ? $user->updated_at : '' }}" id="date_end_{{$user->id}}">
+        <input type="hidden" disabled value="{{ ($user->register && $user->register->date_end != '') ? $user->register->date_end : (($user->state == 0) ? $user->updated_at : '') }}" id="date_end_{{$user->id}}">
         <input type="hidden" disabled value="{{ ($user->register && $user->register->hasContract()) ? $user->register->hasContract()->salary : 0 }}" id="salary_{{$user->id}}">
         {{-- <input type="hidden" disabled value="{{ ($user->register && $user->register->date_end != '') ? $user->register->date_end : (($user->state == 0) ? $user->updated_at : now()->format('Y-m-d')) }}" id="date_end_r_{{$user->id}}"> --}}
         @foreach ($user->workPermssion7 as $permission)
@@ -86,7 +86,7 @@
 @endsection
 @section('js')
     <script src="{{ asset('js/moment/moment.js') }}" defer></script>
-    <script src="{{ asset('js/forms/form9.js') }}" defer></script>
+    <script src="{{ asset('js/forms/settement.js') }}" defer></script>
     <script>
         var bPreguntar = true;
     

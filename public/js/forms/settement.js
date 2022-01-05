@@ -121,17 +121,17 @@ function getdays_linked() {
     if (date_start && date_end) {
         years = date2[0] - date1[0];
         allYears = new Array();
-        if (years) {
+        if (years > 0) {
             allYears[0] = new Object();
             allYears[0].year = date1[0];
-            allYears[0].days = getdiffDates(date_start,date1[0]+'-12-31');
+            allYears[0].days = getdiffDates(date_start,date1[0]+'-12-30');
             allYears[0].leave = getdays_leave(date1[0]);
             allYears[0].settle = 0;
             for (let i = 1; i < years; i++) {
                 let year = (parseInt(date1[0]) + i);
                 allYears[i] = new Object();
                 allYears[i].year = year;
-                allYears[i].days = getdiffDates(year+'-01-01',year+'-12-31');
+                allYears[i].days = getdiffDates(year+'-01-01',year+'-12-30');
                 allYears[i].leave = getdays_leave(year);
                 allYears[i].settle = 0;
             }
@@ -330,7 +330,7 @@ function getpremium_payment_days() {
         if (date[1] > 6) {
             days = getdiffDates(date[0]+'-06-30',date_end);
         }else {
-            days = getdiffDates((date[0] - 1)+'-12-31', date_end);
+            days = getdiffDates((date[0] - 1)+'-12-30', date_end);
         }
     }
     $('#premium_payment_days').val(days);
@@ -338,25 +338,51 @@ function getpremium_payment_days() {
 
 function getdiffDates(start, end)
 {
-    let date_start = moment(start);
-    let date_end = moment(end);
-    let res = date_end.diff(date_start, 'days');
+    let monthStart = parseInt(start.split('-')[1]);
+    let monthEnd = parseInt(end.split('-')[1]);
+
+    let dayStart = parseInt(start.split('-')[2]);
+    let dayEnd = parseInt(end.split('-')[2]);
+
+    let diffMonth = monthEnd - monthStart - 1;
+    let days = diffMonth * 30;
+    
+    let diffDay1 = 30 - dayStart + 1;
+    
+    let diffDay2 = dayEnd > 30 ? 30 : dayEnd;
+    
+    let res = days + diffDay1 + diffDay2;
+
     return res;
 }
 
 function getsalaryThisMonth() {
-    thisDate = $('#date_end').val().split('-');
+    let dateStart = $('#date_start').val();
+    let dateEnd = $('#date_end').val();
+    let diff = getdiffDates(dateStart,dateEnd);
+    if (diff < 30 && dateEnd.split('-')[1] == dateStart.split('-')[1]){
+        days = diff;
+        month = parseInt(dateEnd.split('-')[1]);
+    }else {
+        days = parseInt(dateEnd.split('-')[2]);
+        month = parseInt(dateEnd.split('-')[1]);
+    }
     salary = $('#salary').val();
     assistance = $('#assistance').val();
-    assistanceTotal = ((assistance * parseInt(thisDate[2]) ) / 30).toFixed(2);
-    total = ((salary * parseInt(thisDate[2]) ) / 30).toFixed(2);
-    $('#assistanceMonth_'+parseInt(thisDate[1])).val(assistanceTotal);
-    $('#salaryMonth_'+parseInt(thisDate[1])).val(total);
+    assistanceTotal = ((assistance * parseInt(days) ) / 30).toFixed(2);
+    total = ((salary * parseInt(days) ) / 30).toFixed(2);
+    $('#assistanceMonth_'+parseInt(month)).val(assistanceTotal);
+    $('#salaryMonth_'+parseInt(month)).val(total);
     this_salary = (parseFloat(total) + parseFloat(assistanceTotal)) - ((parseFloat(total)) * 0.08);
     $('#this_salary').val(this_salary.toFixed(2));
 }
 
 function getsalariesUser() {
+    for (let i = 1; i <= 12; i++) {
+        $('#assistanceMonth_'+i).val(0);
+        $('#salaryMonth_'+i).val(0);
+        $('#extrasMonth_'+i).val(0);
+    }
     let id =  $(".selectCedula").val();
     let salaries = $('.salary_'+id);
     let assistance = $('.assistance_'+id);
@@ -393,7 +419,7 @@ function getchangeLinked(elem) {
 }
 
 function getchangeLeave(elem) {
-    id = elem.id.split('_')[elem.id.split('_').length - 1];
+    let id = elem.id.split('_')[elem.id.split('_').length - 1];
     value = elem.value;
     days = $('#days_linked_'+id).val();
     settle = $('#days_to_settle_'+id).val();

@@ -12,7 +12,6 @@
     </ol>
 </section>
 <section class="content">
-     
     {{-- Content main --}}
     <div class="box">
         <div class="box-header">
@@ -24,7 +23,7 @@
             @method('PUT')
         <div class="box-body">
             <div class="form-group">
-                <p>{{auth()->user()->name}} firme si esta descuerdo con los adjuntos para finalizar el proceso de terminación contrato con fecha de {{ auth()->user()->register ? auth()->user()->register->date_end : '' }}, cuyos adjuntos fueron compartidos mediante correo previo y consultar "carta de recomendación en <a href="{{config('app.url')}}">{{config('app.url')}}</a></p>
+                <p><b>{{auth()->user()->name}}</b> firme si esta descuerdo con los adjuntos para finalizar el proceso de terminación contrato con fecha de <b>{{ auth()->user()->register ? auth()->user()->register->date_end : '' }}</b>, cuyos adjuntos fueron compartidos mediante correo previo y consultar "carta de recomendación en <a href="{{route('letter_recommendation')}}">{{route('letter_recommendation')}}</a></p>
                 <h3>Adjuntos</h3>
                 <div class="row">
                     {{-- Letters --}}

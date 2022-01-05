@@ -700,7 +700,9 @@
                 'it'=>'1',
                 'label' => 'Troncalizar servicio',
                 'description' => 'Troncalizar el servicio conectando el PC directamente al radio en el CD (Vlan e IP de servicio)<br>export en winbox encuentra la IP y el ID-VLan',
-                'accept' => 'image/*'
+                'accept' => 'image/*',
+                'place' => 'XXX',
+                'write' => 'No'
             ])
             <hr>
             @include('projects.mintic.includes.upload',[
@@ -711,6 +713,8 @@
                 'it'=>'2',
                 'label' => 'Performance radio',
                 'description' => 'Conectado en el radio, ejecutar prueba de performance contra  radio de la BTS, Recuerten que el valor es aprox. 75 - 25<br>Tools -> Wireless Link Test',
+                'place' => 'XXX',
+                'write' => 'No',
                 'accept' => 'image/*'
             ])
             <hr>
@@ -719,7 +723,7 @@
                 'id' => $item,
                 'num' => $i++,
                 'size_letter' => 20,
-                'it'=>'2',
+                'it'=>'3',
                 'label' => 'Prueba de velocidad en la AP indoor',
                 'description' => 'La prueba corre en la Indoor y debe entregar valor igual o superior al contrato (hay valores minimos), comprobar que las 3APs esten operativos
                     <b>system ssh 172.28.10.100 user=admin</b><br> 
@@ -734,6 +738,8 @@
                     <b>speedtest etsi http://181.49.90.144 40 10 1</b><br>
                     <b>speedtest etsi http://181.49.90.145 40 10 1</b><br>
                     <b>speedtest etsi http://181.49.90.146 40 10 1</b>',
+                'place' => 'XXX',
+                'write' => 'No',
                 'accept' => 'image/*'
             ])
             <hr>
@@ -742,7 +748,9 @@
                 'id' => $item,
                 'num' => $i++,
                 'size_letter' => 20,
-                'it'=>'2',
+                'it'=>'4',
+                'place' => 'XXX',
+                'write' => 'No',
                 'label' => 'Modos de TX en radio CD',
                 'description' => 'Configuration -> Network',
                 'accept' => 'image/*'
@@ -753,7 +761,9 @@
                 'id' => $item,
                 'num' => $i++,
                 'size_letter' => 20,
-                'it'=>'2',
+                'it'=>'5',
+                'place' => 'XXX',
+                'write' => 'No',
                 'label' => 'Modos de TX en mikrotik',
                 'description' => 'Interfaces -> WAN -> Ethernet',
                 'accept' => 'image/*'
@@ -764,7 +774,9 @@
                 'id' => $item,
                 'num' => $i++,
                 'size_letter' => 20,
-                'it'=>'2',
+                'it'=>'6',
+                'place' => 'XXX',
+                'write' => 'No',
                 'label' => 'Validación de errores en mikrotic',
                 'description' => 'Verificacion de errores entre el Mikrotik y los AP, si el valor es mayor a 0 y continua incrementando se debe validar modos de TX o el cableado entre los dispositivos<br>Interfaces -> WAN -> Rx Stats',
                 'accept' => 'image/*'
@@ -775,8 +787,51 @@
                 'id' => $item,
                 'num' => $i++,
                 'size_letter' => 20,
+                'it'=>'7',
+                'place' => 'XXX',
+                'write' => 'No',
+                'label' => 'Validación de errores en mikrotic 2',
+                'accept' => 'image/*'
+            ])
+            <hr>
+            <h3>EVIDENCIAS PARADA DE RELOJ</h3>
+            @include('projects.mintic.includes.upload',[
+                'ltt' => '2',
+                'id' => $item,
+                'num' => $i++,
+                'size_letter' => 20,
+                'it'=>'1',
+                'label' => '1ra parada',
+                'accept' => 'image/*'
+            ])
+            <hr>
+            @include('projects.mintic.includes.upload',[
+                'ltt' => '2',
+                'id' => $item,
+                'num' => $i++,
+                'size_letter' => 20,
                 'it'=>'2',
-                'label' => 'Validación de errores en mikrotic',
+                'label' => '2da parada',
+                'accept' => 'image/*'
+            ])
+            <hr>
+            @include('projects.mintic.includes.upload',[
+                'ltt' => '2',
+                'id' => $item,
+                'num' => $i++,
+                'size_letter' => 20,
+                'it'=>'3',
+                'label' => '3ra parada',
+                'accept' => 'image/*'
+            ])
+            <hr>
+            @include('projects.mintic.includes.upload',[
+                'ltt' => '2',
+                'id' => $item,
+                'num' => $i++,
+                'size_letter' => 20,
+                'it'=>'4',
+                'label' => '4ta parada',
                 'accept' => 'image/*'
             ])
             <hr>
