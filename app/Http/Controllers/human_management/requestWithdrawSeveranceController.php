@@ -201,62 +201,63 @@ class requestWithdrawSeveranceController extends Controller
                 'letter'=>$request->letter4,
                 'coordinator_id' => auth()->id(),
             ]);
-            $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
-            $day = now()->format('d');
-            $month = now()->format('m');
-            $year = now()->format('Y');
-            $time = time();
-            $date = ['day' => $day,'month' => $meses[($month -1)],'year' => $year];
-            if ($id->reason == 'carta laboral') {
-                $salary_text = $this->numberToText($request->layoffs);
-                $document = $time.'_CARTA_CARTA_LABORAL.pdf';
-                $pdf4 = PDF::loadView('pdf.working',compact('request','date','id','salary_text','document'));
-                $pdf4->save(storage_path('app/public/files/work_10/') .$time.'_CARTA_CARTA_LABORAL.pdf');
-            }else {
-                $id->responsableAcargo->notify(new notificationMain($id->id,'Se ha aprobado el retiro de cesantías '.$id->id,'human_management/request_withdraw_severance/show/'));
-                $document = $time.'_CARTA_RETIRO_CESANTÍAS.pdf';
-                $pdf4 = PDF::loadView('end_work/pdf/letter_4',['data'=>$request,'id' => $id,'date' => $date,'document' => $document]);
-                $pdf4->save(storage_path('app/public/files/work_10/') .$time.'_CARTA_RETIRO_CESANTÍAS.pdf');
-            }
-            // Crear carta y almacenarla
-            $file = $id->responsableAcargo->register->letters()->create([
-                'responsable_id' => auth()->id(),
-                'type' => $id->reason == 'carta laboral' ? 'CARTA_LABORAL' : 'CARTA_RETIRO_CESANTÍAS',
-                'data' => $request->layoffs.' -,- '.$request->letter4,
-                'date' => now(),
-                'status' => 1,
-            ]);
-            $file->file()->create([
-                'name' => $id->reason == 'carta laboral' ? $time.'_CARTA_CARTA_LABORAL.pdf' : $time.'_CARTA_RETIRO_CESANTÍAS.pdf',
-                'description' => 'Carta laboral de '.$id->responsableAcargo->name,
-                'size' => '44 KB',
-                'url' => 'storage/files/work_10/'.$time.'_CARTA_CARTA_LABORAL.pdf',
-                'type' => 'pdf',
-                'state' => 1
-            ]);
-
-            $id->files()->create([
-                'name' => $id->reason == 'carta laboral' ? $time.'_CARTA_CARTA_LABORAL.pdf' : $time.'_CARTA_RETIRO_CESANTÍAS.pdf',
-                'description' => 'Carta laboral de '.$id->responsableAcargo->name,
-                'size' => '44 KB',
-                'url' => 'storage/files/work_10/'.$time.'_CARTA_CARTA_LABORAL.pdf',
-                'type' => 'pdf',
-                'state' => 1
-            ]);
-            
-            Mail::send('human_management.withdraw_serveraces.mail.main', ['format' => $id], function ($menssage) use ($id,$pdf4,$time)
-            {
-                $emails = system_setting::where('state',1)->pluck('approval_emails')->first();
-                $company = general_setting::where('state',1)->pluck('company')->first();
-                $email = explode(';',$emails);
-                for ($i=0; $i < count($email); $i++) {
-                    if($email[$i] != ''){
-                        $menssage->to(trim($email[$i]),$company);
-                    }
+            if ($id->reason != 'pago de vacaciones') {
+                $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+                $day = now()->format('d');
+                $month = now()->format('m');
+                $year = now()->format('Y');
+                $time = time();
+                $date = ['day' => $day,'month' => $meses[($month -1)],'year' => $year];
+                if ($id->reason == 'carta laboral') {
+                    $salary_text = $this->numberToText($request->layoffs);
+                    $document = $time.'_CARTA_CARTA_LABORAL.pdf';
+                    $pdf4 = PDF::loadView('pdf.working',compact('request','date','id','salary_text','document'));
+                    $pdf4->save(storage_path('app/public/files/work_10/') .$time.'_CARTA_CARTA_LABORAL.pdf');
+                }else {
+                    $id->responsableAcargo->notify(new notificationMain($id->id,'Se ha aprobado el retiro de cesantías '.$id->id,'human_management/request_withdraw_severance/show/'));
+                    $document = $time.'_CARTA_RETIRO_CESANTÍAS.pdf';
+                    $pdf4 = PDF::loadView('end_work/pdf/letter_4',['data'=>$request,'id' => $id,'date' => $date,'document' => $document]);
+                    $pdf4->save(storage_path('app/public/files/work_10/') .$time.'_CARTA_RETIRO_CESANTÍAS.pdf');
                 }
-                $menssage->to($id->responsableAcargo->email,$id->responsableAcargo->name)->subject("Energitelco S.A.S. Solicitud de carta de retiro de cesantías o laboral aprobado ".$id->id);
-                $menssage->attachData($pdf4->output(), $time.'_CARTA_RETIRO_CESANTÍAS.pdf');
-            });
+                $file = $id->responsableAcargo->register->letters()->create([
+                    'responsable_id' => auth()->id(),
+                    'type' => $id->reason == 'carta laboral' ? 'CARTA_LABORAL' : 'CARTA_RETIRO_CESANTÍAS',
+                    'data' => $request->layoffs.' -,- '.$request->letter4,
+                    'date' => now(),
+                    'status' => 1,
+                ]);
+                $file->file()->create([
+                    'name' => $id->reason == 'carta laboral' ? $time.'_CARTA_CARTA_LABORAL.pdf' : $time.'_CARTA_RETIRO_CESANTÍAS.pdf',
+                    'description' => 'Carta laboral de '.$id->responsableAcargo->name,
+                    'size' => '44 KB',
+                    'url' => 'storage/files/work_10/'.$time.'_CARTA_CARTA_LABORAL.pdf',
+                    'type' => 'pdf',
+                    'state' => 1
+                ]);
+    
+                $id->files()->create([
+                    'name' => $id->reason == 'carta laboral' ? $time.'_CARTA_CARTA_LABORAL.pdf' : $time.'_CARTA_RETIRO_CESANTÍAS.pdf',
+                    'description' => 'Carta laboral de '.$id->responsableAcargo->name,
+                    'size' => '44 KB',
+                    'url' => 'storage/files/work_10/'.$time.'_CARTA_CARTA_LABORAL.pdf',
+                    'type' => 'pdf',
+                    'state' => 1
+                ]);
+                
+                Mail::send('human_management.withdraw_serveraces.mail.main', ['format' => $id], function ($menssage) use ($id,$pdf4,$time)
+                {
+                    $emails = system_setting::where('state',1)->pluck('approval_emails')->first();
+                    $company = general_setting::where('state',1)->pluck('company')->first();
+                    $email = explode(';',$emails);
+                    for ($i=0; $i < count($email); $i++) {
+                        if($email[$i] != ''){
+                            $menssage->to(trim($email[$i]),$company);
+                        }
+                    }
+                    $menssage->to($id->responsableAcargo->email,$id->responsableAcargo->name)->subject("Energitelco S.A.S. Solicitud de carta de retiro de cesantías o laboral aprobado ".$id->id);
+                    $menssage->attachData($pdf4->output(), $time.'_CARTA_RETIRO_CESANTÍAS.pdf');
+                });
+            }
 
             return redirect()->back()->with(['success'=>'Se ha aprobado la solicitud de carta de retiro de cesantías o laboral '.$id->id.' correctamente','sudmenu' => 9]);
         }else {
