@@ -4,12 +4,16 @@ namespace App\Http\Controllers\human_management;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\general_setting;
 use App\Models\human_management\cut_bonus;
+use App\Models\system_setting;
 use App\Models\Work1;
 use App\Models\work1_add;
 use App\Notifications\notificationMain;
 use App\User;
+use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 
 class workPermitBonusesController extends Controller
 {
@@ -95,9 +99,9 @@ class workPermitBonusesController extends Controller
      */
     public function show(cut_bonus $id)
     {
-        if ($id->status == 1 || $id->status == 0) {
-            return redirect()->route('home')->withErrors(['Acción no valida']);
-        }
+        // if ($id->status == 1 || $id->status == 0) {
+        //     return redirect()->route('home')->withErrors(['Acción no valida']);
+        // }
         $items = Work1::with(['work_add','users' => function ($query)
         {
             $query->with('minor_box');
@@ -351,5 +355,110 @@ class workPermitBonusesController extends Controller
     public function destroy($id)
     {
         
+    }
+
+    public function approve(Request $request, cut_bonus $id)
+    {
+        if ($request->status == 'Aprobado') {
+            $now = now();
+            $id->responsable->notify(new notificationMain($id->id,'Pago de bonificaciones a técnicos aprobado','human_management/bonus/viatics/'));
+            $items = Work1::whereBetween('created_at',[$id->start_date, $id->end_date])->where('estado','!=','No aprobado')->get();
+            $array = array();
+            $AccTotalPagar = 0;
+            foreach ($items as $item) {
+                $i = 1;
+                foreach ($item->users as $user) {
+                    $bonus = 0;
+                    switch($i){
+                        case(1):
+                            $bonus = $item->work_add->f9a1u1 && is_numeric($item->work_add->f9a1u1) ? $item->work_add->f9a1u1 : 0;
+                            break;
+                        case(2):
+                            $bonus = $item->work_add->f9a1u2 && is_numeric($item->work_add->f9a1u2) ? $item->work_add->f9a1u2 : 0;
+                            break;
+                        case(3):
+                            $bonus = $item->work_add->f9a1u3 && is_numeric($item->work_add->f9a1u3) ? $item->work_add->f9a1u3 : 0;
+                            break;
+                        case(4):
+                            $bonus = $item->work_add->f9a1u4 && is_numeric($item->work_add->f9a1u4) ? $item->work_add->f9a1u4 : 0;
+                            break;
+                        default:
+                    }
+                    if (array_key_exists($user->id,$array)) {
+                        $bonificacion = $array[$user->id]['bonificacion'];
+                        $total = $array[$user->id]['total'];
+                        $count = $array[$user->id]['count'];
+                        $array[$user->id] = [
+                            'id' => $user->id,
+                            'name' => $user->name,
+                            'email' => $user->email,
+                            'cedula' => $user->cedula,
+                            'cuenta' => $user->register ? $user->register->bank_account : '',
+
+                            'bonificacion' => $bonificacion +  $bonus,
+                            'total' => $total + $bonus,
+                            'count' => $count + 1
+                        ];
+                    }else {
+                        $array[$user->id] = [
+                            'id' => $user->id,
+                            'name' => $user->name,
+                            'email' => $user->email,
+                            'cedula' => $user->cedula,
+                            'cuenta' => $user->register ? $user->register->bank_account : '',
+
+                            'bonificacion' => $bonus,
+                            'total' => $bonus,
+                            'count' => 1
+                        ];
+                    }
+                    $i++;
+                }
+            }
+            $i = 0;
+            foreach ($array as $item) {
+                if ($i < 2) {
+                    Mail::send('human_management.bonus.technical.mail.user', ['bonus' => $id,'item' => $item], function ($menssage) use ($item)
+                    {
+                        $menssage->to($item['email'],$item['name'])->subject("Energitelco S.A.S PAGO DE BONIFICACIONES A TÉCNICOS APROBADO");
+                    });
+                }
+                $i++;
+            }
+            $id->update([
+                'status' => 1,
+                'approver_id' => auth()->id(),
+            ]);
+            $plus = 0;
+            $system = system_setting::where('state',1)->orderBy('id','DESC')->take(1)->first();
+            $pdf = PDF::loadView('human_management.bonus.technical.pdf.main',compact('id','array','plus','system'));
+            Mail::send('human_management.bonus.technical.mail.main', ['bonus' => $id, 'users' => $array,'plus' => 0], function ($menssage) use ($id,$pdf)
+            {
+                $emails = system_setting::where('state',1)->pluck('emails_before_approval')->first();
+                $company = general_setting::where('state',1)->pluck('company')->first();
+                $email = explode(';',$emails);
+                for ($i=0; $i < count($email); $i++) { 
+                    if($email[$i] != ''){
+                        $menssage->to(trim($email[$i]),$company);
+                    }
+                }
+                $menssage->to($id->responsable->email,$id->responsable->name);
+                $menssage->to('energitelco.011@gmail.com','ENERGITELCO SAS');
+                $menssage->subject("Energitelco S.A.S PAGO DE BONIFICACIONES A TÉCNICOS APROBADO");
+                $menssage->attachData($pdf->output(), 'COMPROBANTE_EGRESOS.pdf');
+            });
+            $plus = $id->plus;
+            $pdf = PDF::loadView('human_management.bonus.technical.pdf.main',compact('id','array','plus','system'));
+            Mail::send('human_management.bonus.technical.mail.main', ['bonus' => $id, 'users' => $array,'plus' => $id->plus], function ($menssage) use ($id,$pdf)
+            {
+                $menssage->to('energitelco.011@gmail.com','ENERGITELCO SAS');
+                $menssage->subject("Energitelco S.A.S PAGO DE BONIFICACIONES A TÉCNICOS APROBADO");
+                $menssage->attachData($pdf->output(), 'COMPROBANTE_EGRESOS.pdf');
+            });
+            return redirect()->back()->with(['success'=>'Se ha aprobado la bonificación correctamente']);
+        }else {
+            $id->update(['status' => 0,'approver_id' => auth()->id()]);
+            return redirect()->back()->with(['success'=>'Se ha desaprobado la bonificación correctamente']);
+        }
     }
 }

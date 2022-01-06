@@ -672,7 +672,7 @@ class workPermitViaticsesController extends Controller
                     $AccTotalPagaViatic += $item['total_bonus'];
                     $AccTotalPagarBox += $item['total_box'];
                 }
-                Mail::send('human_management.bonus.viatic.mail.user', ['bonus' => $id,'item' => $item], function ($menssage) use ($item)
+                Mail::send('human_management.bonus.tecnical.mail.user', ['bonus' => $id,'item' => $item], function ($menssage) use ($item)
                 {
                     $menssage->to($item['email'],$item['name'])->subject("Energitelco S.A.S PAGO DE COMISIONES A TÉCNICOS APROBADO");
                 });

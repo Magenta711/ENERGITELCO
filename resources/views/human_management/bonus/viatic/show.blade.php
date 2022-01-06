@@ -133,11 +133,11 @@
     </div>
 </section>
 
-<form id="form_approval" action="{{ route('work_permit_viatics_approve',$id->id) }}" method="POST" style="form_dis;">
+<form id="form_approval" action="{{ route('work_permit_viaticses_approve',$id->id) }}" method="POST" style="form_dis;">
     @csrf
     <input type="hidden" name="status" value="Aprobado">
 </form>
-<form id="form_no_approval" action="{{ route('work_permit_viatics_approve',$id->id) }}" method="POST" style="display: none;">
+<form id="form_no_approval" action="{{ route('work_permit_viaticses_approve',$id->id) }}" method="POST" style="display: none;">
     @csrf
     <input type="hidden" name="status" value="No aprobado">
 </form>
