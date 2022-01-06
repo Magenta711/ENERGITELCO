@@ -79,7 +79,7 @@
     <footer class="position-relative fixed-bottom">
         <!--<div class="container">-->
             <p class="text-muted text-center credit">
-                © Copyright 2019 - 2021 Todos los derechos reservados | Hecho por Juan Esteban Leal Usuga.
+                © Copyright 2019 - 2022 Todos los derechos reservados | Hecho por Juan Esteban Leal Usuga.
             </p>
         <!--</div>-->
     </footer>

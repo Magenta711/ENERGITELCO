@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\human_management;
 
+use App\Exports\CutBonusExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\general_setting;
@@ -355,6 +356,65 @@ class workPermitBonusesController extends Controller
     public function destroy($id)
     {
         
+    }
+
+    public function export($id)
+    {
+        $cut = cut_bonus::find($id);
+        $array = array();
+        $items = Work1::whereBetween('created_at',[$cut->start_date,$cut->end_date])->where('estado','!=','No aprobado')->get();
+        foreach ($items as $item) {
+            $i = 1;
+            foreach ($item->users as $user) {
+                $bonus = 0;
+                switch($i){
+                    case(1):
+                        $bonus = $item->work_add->f9a1u1 && is_numeric($item->work_add->f9a1u1) ? $item->work_add->f9a1u1 : 0;
+                        break;
+                    case(2):
+                        $bonus = $item->work_add->f9a1u2 && is_numeric($item->work_add->f9a1u2) ? $item->work_add->f9a1u2 : 0;
+                        break;
+                    case(3):
+                        $bonus = $item->work_add->f9a1u3 && is_numeric($item->work_add->f9a1u3) ? $item->work_add->f9a1u3 : 0;
+                        break;
+                    case(4):
+                        $bonus = $item->work_add->f9a1u4 && is_numeric($item->work_add->f9a1u4) ? $item->work_add->f9a1u4 : 0;
+                        break;
+                    default:
+                }
+                
+                if (array_key_exists($user->id,$array)) {
+                    $bonificacion = $array[$user->id]['bonificacion'];
+                    $total_box = $array[$user->id]['total'] + $bonus;
+                    $count = $array[$user->id]['count'] + 1;
+                    $array[$user->id] = [
+                        'id' => $user->id,
+                        'name' => $user->name,
+                        'email' => $user->email,
+                        'cedula' => $user->cedula,
+                        'cuenta' => $user->register ? $user->register->bank_account : '',
+
+                        'bonificacion' => $bonificacion +  $bonus,
+                        'total' => $total_box,
+                        'count' => $count + 1
+                    ];
+                }else {
+                    $array[$user->id] = [
+                        'id' => $user->id,
+                        'name' => $user->name,
+                        'email' => $user->email,
+                        'cedula' => $user->cedula,
+                        'cuenta' => $user->register ? $user->register->bank_account : '',
+
+                        'bonificacion' => $bonus,
+                        'total' => $bonus,
+                        'count' => 1
+                    ];
+                }
+                $i++;
+            }
+        }
+        return (new CutBonusExport)->bonus($array,$cut)->download('Lista_Pagos_Corte_'.$id.'.xlsx');
     }
 
     public function approve(Request $request, cut_bonus $id)

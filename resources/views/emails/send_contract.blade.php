@@ -145,7 +145,7 @@
                                         style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; box-sizing: border-box; padding: 35px;">
                                         <p
                                             style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; box-sizing: border-box; line-height: 1.5em; margin-top: 0; color: #aeaeae; font-size: 12px; text-align: center;">
-                                            © 2021 {{ config('app.name') }}. Todos los derechos reservados.</p>
+                                            © 2022 {{ config('app.name') }}. Todos los derechos reservados.</p>
                                     </td>
                                 </tr>
                             </table>
