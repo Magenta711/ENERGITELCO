@@ -121,6 +121,7 @@
                </div>
            </div>
            <hr>
+           {{-- <div class="prevent_block" style="{{ $item->type_format == 'Mantenimiento correctivo' ? "display: none" : ''}}"> --}}
            @if ($item->type_format == 'Mantenimiento preventivo')
            <h3>Actividades de mantenimiento preventivo</h3>
            <div class="table-responsable">
@@ -227,7 +228,7 @@
                         <table class="table table-border">
                             <thead>
                                 <tr>
-                                    <th class="text-center" colspan="2">Serial equipo/s retirados</th>
+                                    <th class="text-center" colspan="2">Serial equipo/s instalados</th>
                                 </tr>
                             </thead>
                             <tbody>

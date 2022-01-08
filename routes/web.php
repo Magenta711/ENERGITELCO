@@ -23,10 +23,12 @@ Route::get('/',function () {
     return view('welcome');
 });
 
-// Route::get('example',function ()
-// {
-//     return view('example');
-// });
+Route::get('example',function ()
+{
+    return view('example');
+});
+
+Route::post('example_post','homeController@example')->name('example_post');
 
 //Clear Cache facade value:
 Route::get('/clear-cache', function() {
@@ -947,3 +949,12 @@ Route::post('human_management/premium/{id}','human_management\premiumController@
 Route::delete('human_management/premium/{id}','human_management\premiumController@destroy')->name('premium_delete');
 
 Route::get('get_data_json_eb','HomeController@data_json')->name('data_json_eb');
+
+Route::get('chargeaccount','human_management\chargeaccountController@index')->name("chargeaccount");
+Route::get('chargeaccount/create/{token?}','human_management\chargeaccountController@create')->name("chargeaccount_create");
+Route::post('chargeaccount','human_management\chargeaccountController@store')->name("chargeaccount_store");
+Route::post('chargeaccount/signature','human_management\chargeaccountController@signature')->name("chargeaccount_signature");
+Route::get('chargeaccount/show/{id}','human_management\chargeaccountController@show')->name("chargeaccount_show");
+Route::get('chargeaccount/download/{id}','human_management\chargeaccountController@download')->name("chargeaccount_donwload");
+Route::patch('chargeaccount/approve/{id}','human_management\chargeaccountController@approve')->name("chargeaccount_approve");
+Route::delete('chargeaccount/{id}','human_management\chargeaccountController@delete')->name("chargeaccount_delete");

@@ -204,7 +204,7 @@
                             <div class="row" id="origen_retired">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="serial_retired">Serial equipo/s retirados</label>
+                                        <label for="serial_retired">Serial equipo/s instalados</label>
                                         <input type="text" name="serial_retired[]" id="serial_retired" class="form-control">
                                     </div>
                                 </div>

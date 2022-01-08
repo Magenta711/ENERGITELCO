@@ -31,10 +31,8 @@ use App\Models\WorkWithUs;
 use App\Models\Tasking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Notification;
 use Barryvdh\DomPDF\Facade as PDF;
-use DB;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -322,5 +320,15 @@ class HomeController extends Controller
         $eb = eb::get();
         
         return response()->json([ 'EB' => $eb, 'CD' => $cd ]);
+    }
+
+    public function example(Request $request)
+    {
+        // return response()->json([ 'data' => $request->all()]);
+        
+        $image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $request->imagen));
+        $safeName = 'mi_imagen_'.date('d_m_Y_H_i_s').'.png';
+        Storage::put('private/signature/'.$safeName, $image, 'private');
+        return response()->json([ 'data' => true ]);
     }
 }
