@@ -190,6 +190,10 @@
                             <td><input type="text" class="form-control text-right" id="compensation" name="compensation" value="{{old('compensation') ?? 0}}"></td>
                         </tr>
                         <tr>
+                            <th>Pendientes por la plataforma</th>
+                            <td><input type="text" class="form-control text-right" id="pendientes" name="pendientes" value="{{old('pendientes') ?? 0}}"></td>
+                        </tr>
+                        <tr>
                             <th>Deudas con la compañía</th>
                             <td><input type="text" class="form-control text-right" id="debt" name="debt" value="{{old('debt') ?? 0}}"></td>
                         </tr>

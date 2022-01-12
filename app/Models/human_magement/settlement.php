@@ -14,7 +14,7 @@ class settlement extends Model
         'average_salary','average_extras','average_assistance','average_last_month_salary',
         'average_last_month_extras','average_last_month_assistance','average_premium_salary',
         'average_premium_extras','average_premium_assistance','total_linkend',
-        'intereses','total_premium','total_vacation','this_salary','compensation','debt','total_settlement','status','commentary','serveraces'
+        'intereses','total_premium','total_vacation','this_salary','compensation','pendientes','debt','total_settlement','status','commentary','serveraces'
     ];
     protected $guarder = ['id'];
 

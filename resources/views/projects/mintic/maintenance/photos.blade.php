@@ -175,8 +175,8 @@
                 'num' => $i++,
                 'size_letter' => 20,
                 'it'=>'1',
-                'label' => 'Medición eléctrica 1',
-                'description' => 'Fase Tierra',
+                'label' => 'Medición eléctrica 1.2',
+                'description' => 'Fase - Tierra',
                 'accept' => 'image/*'
             ])
             <hr>
@@ -186,8 +186,8 @@
                 'num' => $i++,
                 'size_letter' => 20,
                 'it'=>'1',
-                'label' => 'Medición eléctrica 1',
-                'description' => 'Neutro Tierra',
+                'label' => 'Medición eléctrica 1.3',
+                'description' => 'Neutro - Tierra',
                 'accept' => 'image/*'
             ])
             <hr>
@@ -553,8 +553,8 @@
                     'num' => $i++,
                     'size_letter' => 20,
                     'it'=>'4',
-                    'label' => 'Medición eléctrica 1',
-                    'description' => 'Fase Tierra',
+                    'label' => 'Medición eléctrica 1.2',
+                    'description' => 'Fase - Tierra',
                     'place' => 'G63',
                     'accept' => 'image/*'
                 ])
@@ -565,8 +565,8 @@
                     'num' => $i++,
                     'size_letter' => 20,
                     'it'=>'4',
-                    'label' => 'Medición eléctrica 1',
-                    'description' => 'Neutro Tierra',
+                    'label' => 'Medición eléctrica 1.3',
+                    'description' => 'Neutro - Tierra',
                     'place' => 'G63',
                     'accept' => 'image/*'
                 ])

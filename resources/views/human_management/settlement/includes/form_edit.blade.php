@@ -211,6 +211,10 @@
                             <td><input type="text" class="form-control text-right" id="compensation" name="compensation" value="{{$id->compensation ?? 0}}"></td>
                         </tr>
                         <tr>
+                            <th>Pendientes por la plataforma</th>
+                            <td><input type="text" class="form-control text-right" id="pendientes" name="pendientes" value="{{$id->pendientes ?? 0}}"></td>
+                        </tr>
+                        <tr>
                             <th>Deudas con la compañía</th>
                             <td><input type="text" class="form-control text-right" id="debt" name="debt" value="{{$id->debt ?? 0}}"></td>
                         </tr>

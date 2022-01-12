@@ -57,6 +57,7 @@ $(document).ready(function() {
     $('#date_end').blur(function () {
         getdays_linked();
         getpremium_payment_days();
+        getsalariesUser();
         getsalaryThisMonth();
         getvacation_days_to_pay();
         gettotal_vacation_days_to_pay();
@@ -81,7 +82,6 @@ $(document).ready(function() {
     });
 
     $('.salary_month').blur(function () {
-        getsalaryThisMonth();
         getsalary_month();
         gettotallinked();
     });
@@ -91,7 +91,6 @@ $(document).ready(function() {
         gettotallinked();
     });
     $('.assistance_month').blur(function () {
-        getsalaryThisMonth();
         getassistance_month();
         gettotallinked();
     });
@@ -321,16 +320,16 @@ function getpremium_payment_days() {
     let date_start = $('#date_start').val();
     let date_end = $('#date_end').val();
     
-    let date = date_end.split('-');
+    let end = date_end.split('-');
     let start = date_start.split('-');
 
-    if (start[0] == date[0] && ((date[1] <= 6 && start[1] <= 6) || date[1] > 6 && start[1] > 6)) {
+    if (start[0] == end[0] && ((end[1] <= 6 && start[1] <= 6) || (end[1] > 6 && start[1] > 6))) {
         days = getdiffDates(date_start,date_end);
     }else {
-        if (date[1] > 6) {
-            days = getdiffDates(date[0]+'-06-30',date_end);
+        if (end[1] > 6) {
+            days = getdiffDates(end[0]+'-07-01',date_end);
         }else {
-            days = getdiffDates((date[0] - 1)+'-12-30', date_end);
+            days = getdiffDates(end[0]+'-01-01', date_end);
         }
     }
     $('#premium_payment_days').val(days);
@@ -378,6 +377,8 @@ function getsalaryThisMonth() {
 }
 
 function getsalariesUser() {
+    let date = $('#date_end').val().split('-');
+    let thisYear = parseInt(date[0]);
     for (let i = 1; i <= 12; i++) {
         $('#assistanceMonth_'+i).val(0);
         $('#salaryMonth_'+i).val(0);
@@ -388,12 +389,15 @@ function getsalariesUser() {
     let assistance = $('.assistance_'+id);
     let extras = $('.extras_'+id);
     let month = $('.month_'+id);
+    let year = $('.year_'+id);
     let arrMonth = new Array();
     for (let i = 0; i < salaries.length; i++) {
-        $('#assistanceMonth_'+month[i].value).val(assistance[i].value);
-        $('#salaryMonth_'+month[i].value).val(salaries[i].value);
-        $('#extrasMonth_'+month[i].value).val(extras[i].value);
-        arrMonth[i+1] = parseInt(month[i].value);
+        if (year[i].value == thisYear) {
+            $('#assistanceMonth_'+month[i].value).val(assistance[i].value);
+            $('#salaryMonth_'+month[i].value).val(salaries[i].value);
+            $('#extrasMonth_'+month[i].value).val(extras[i].value);
+            arrMonth[i+1] = parseInt(month[i].value);
+        }
     }
     
     for (let i = 1; i <= 12; i++) {
@@ -447,7 +451,7 @@ function gettotal_vacation_days_to_pay() {
 function getsalary_month() {
     let month = $('.salary_month');
     let date = $('#date_end').val().split('-');
-    let months = parseInt(date[1])
+    let months = parseInt(date[1]);
     let year = parseInt(date[0]);
     total = 0;
     totalPremium = 0;
@@ -543,14 +547,13 @@ function gettotallinked() {
     let average_premium_assistance = parseFloat($('#average_premium_assistance').val());
     let debt = parseFloat($('#debt').val());
     let compensation = parseFloat($('#compensation').val());
+    let pendientes = parseFloat($('#pendientes').val());
 
     let date = $('#date_end').val().split('-');
     let year = parseInt(date[0]);
     let days = parseFloat($('#days_to_settle_'+year).val());
     let daysVacation = parseFloat($('#total_vacation_days_to_pay').val());
-    console.log(days);
     total_linked = ( (average_salary+average_extras+average_assistance) * days) / 360;
-    console.log(total_linked);
     $('#total_linkend').val(total_linked.toFixed(2));
     intereses = (total_linked * (days) * 0.12 ) / 360;
     $('#intereses').val(intereses.toFixed(2));
@@ -561,6 +564,6 @@ function gettotallinked() {
     $('#total_vacation').val(total_vacation.toFixed(2));
     salary = parseFloat($('#this_salary').val());
     
-    total = total_linked+intereses+total_premium+total_vacation + salary + compensation - debt;
+    total = total_linked+intereses+total_premium+total_vacation + salary + compensation + pendientes - debt;
     $('#total_settlement').val(total.toFixed(2));
 }

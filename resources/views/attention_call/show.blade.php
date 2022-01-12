@@ -17,7 +17,7 @@
     <div class="box">
         <div class="box-header">
             <div class="box-tools">
-                <a href="{{route('attention_call')}}" class="btn btn-sm btn-primary">Volver</a>
+                <a href="{{route('attention_call')}}" class="btn btn-sm btn-primary btn-send">Volver</a>
             </div>
         </div>
         <div class="box-body">
@@ -26,12 +26,12 @@
         <div class="box-footer">
             @if ($id->state == 'Sin aprobar'  || $id->state == 'Sin argumentos' && $id->created_at < now()->subMonths(1)->format('Y-m-d H:i:s'))
                 @can('Aprobar llamados de atención')
-                    <a class="btn btn-sm btn-primary" href="{{ route('approve_call',$id->id) }}"
+                    <a class="btn btn-sm btn-primary btn-send" href="{{ route('approve_call',$id->id) }}"
                         onclick="event.preventDefault();
                                         document.getElementById('approve_call').submit();">
                         Aprobar y firmar
                     </a>
-                    <a class="btn btn-sm btn-danger" href="{{ route('not_approve_call',$id->id) }}"
+                    <a class="btn btn-sm btn-danger btn-send" href="{{ route('not_approve_call',$id->id) }}"
                             onclick="event.preventDefault();
                                         document.getElementById('not_approve_call').submit();">
                         No aprobar

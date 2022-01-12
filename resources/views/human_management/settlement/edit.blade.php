@@ -36,6 +36,7 @@
                 <input type="hidden" class="assistance_{{ $user->id }}" value="{{ $pay->assistance_tx }}">
                 <input type="hidden" class="extras_{{ $user->id }}" value="{{ $pay->extras_sc_tx+$pay->surcharge_n_tx + $pay->extras_d_tx + $pay->extras_dc_tx + $pay->extras_n_tx + $pay->extras_s_tx + $pay->holyday_n_tx + $pay->extras_hn_tx + $pay->unpaid_leave_tx + $pay->disabilities_1_tx + $pay->disabilities_2_tx }}">
                 <input type="hidden" class="month_{{ $user->id }}" value="{{ intval(explode('-',$pay->work->start_date)[1]) }}">
+                <input type="hidden" class="year_{{ $user->id }}" value="{{ intval(explode('-',$pay->work->start_date)[0]) }}">
             @endif
         @endforeach
     @endforeach
