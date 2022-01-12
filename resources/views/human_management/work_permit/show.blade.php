@@ -1062,7 +1062,7 @@
                                     <span class="mailbox-attachment-icon has-img">
                                         <div>
                                             @if ($file->extencion == 'pdf')
-                                                <i class="fa fa-file-pdf-o"></i>
+                                                <i class="fa fa-file-pdf"></i>
                                             @endif
                                             @if ($file->extencion == 'docx' || $file->extencion == 'doc')
                                                 <i class="fa fa-file-word-o"></i>

@@ -29,6 +29,7 @@
                             <tr>
                                 <th scope="col"></th>
                                 <th scope="col">Código</th>
+                                <th scope="col">Funcionario</th>
                                 <th scope="col">Responsable</th>
                                 <th scope="col">Aprobador</th>
                                 <th scope="col">Fecha</th>

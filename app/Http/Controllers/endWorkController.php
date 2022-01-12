@@ -266,7 +266,7 @@ class endWorkController extends Controller
                 'status' => 0,
             ]);
         }else {
-            $contract = Contract::where('register_id',auth()->id())->where('status', 2)->update([
+            $contract = Contract::where('register_id',auth()->user()->register->id)->where('status', 2)->update([
                 'signature_end' => now(),
                 'status' => 0,
             ]);

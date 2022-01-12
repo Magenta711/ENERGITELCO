@@ -422,7 +422,7 @@ class MinticController extends Controller
                 $user->notify(new notificationMain($id->id,'Proyecto MINTIC '.$id->id.' aprobado','project/mintic/ec/show/'));
             }
         }
-        return redirect()->back()->with(['success'=>'Se ha aprobado el proyecto correctamente','sudmenu'=>16]);
+        return redirect()->back()->with(['success'=>'Se ha aprobado el proyecto correctamente']);
     }
     
     public function not_approval(Mintic_School $id)
@@ -434,7 +434,7 @@ class MinticController extends Controller
                 $user->notify(new notificationMain($id->id,'Proyecto MINTIC '.$id->id.' desaprobado','project/mintic/ec/show/'));
             }
         }
-        return redirect()->back()->with(['success'=>'Se ha desaprobado el proyecto correctamente','sudmenu'=>16]);
+        return redirect()->back()->with(['success'=>'Se ha desaprobado el proyecto correctamente']);
     }
 
     public function pintures($id)
@@ -815,14 +815,16 @@ class MinticController extends Controller
         if ($item->files)
         {
             foreach ($item->files as $key => $value) {
-                $place = explode('.',$value->description,2);
-                $str = str_random();
-                $files[$str]['name'] = $value->name;
-                $files[$str]['description'] = $value->description;
-                $files[$str]['path'] = public_path('/storage/upload/mintic/'.$value->name);
-                $files[$str]['height'] = 200;
-                $files[$str]['coordinates'] = $value->place;
-                $files[$str]['place'] = $place[0];
+                if ($value->place != 'XXX') {
+                    $place = explode('.',$value->description,2);
+                    $str = str_random();
+                    $files[$str]['name'] = $value->name;
+                    $files[$str]['description'] = $value->description;
+                    $files[$str]['path'] = public_path('/storage/upload/mintic/'.$value->name);
+                    $files[$str]['height'] = 200;
+                    $files[$str]['coordinates'] = $value->place;
+                    $files[$str]['place'] = $place[0];
+                }
             }
         }
 

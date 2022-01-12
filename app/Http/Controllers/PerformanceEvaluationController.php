@@ -245,7 +245,7 @@ class PerformanceEvaluationController extends Controller
 
         $id->evaluado->notify(new notificationMain($id->id,'Evaluación de desempeño aprobada '.$id->id,'performance_evaluation/show/'));
         //Mail
-        return redirect()->back()->with(['success'=>'Se ha aprobado la evaluación de desempeño correctamente','sudmenu' => 12]);
+        return redirect()->back()->with(['success'=>'Se ha aprobado la evaluación de desempeño correctamente']);
     }
     
     public function not_approve_performance(PerformanceEvaluation $id)
@@ -254,7 +254,7 @@ class PerformanceEvaluationController extends Controller
         //Mail
         $id->evaluado->notify(new notificationMain($id->id,'Evaluación de desempeño desaprobada '.$id->id,'performance_evaluation/show/'));
 
-        return redirect()->back()->with(['success'=>'Se ha desaprobado la evaluación de desempeño correctamente','sudmenu'=>12]);
+        return redirect()->back()->with(['success'=>'Se ha desaprobado la evaluación de desempeño correctamente']);
     }
 
     public function download($id)

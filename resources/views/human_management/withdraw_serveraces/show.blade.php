@@ -43,6 +43,7 @@
                                         @break
                                     @case('carta laboral')
                                         Carta laboral
+                                        @break
                                     @case('pago de vacaciones')
                                         Pago de vacaciones
                                         @break
@@ -66,7 +67,6 @@
                             <div class="form-group">
                                 <label for="value">Valor</label>
                                 @if ($id->estado == 'Sin aprobar' && auth()->user()->hasPermissionTo('Aprobar retiro de cesantías'))
-                                        <input type="hidden" name="status" value="Aprobado">
                                         @if ($id->reason == 'carta laboral')
                                             <input type="number" value="{{$id->responsableAcargo->register && $id->responsableAcargo->register->hasContract() ? $id->responsableAcargo->register->hasContract()->salary : ''}}" name="layoffs" class="form-control" id="value">
                                         @else
@@ -146,7 +146,6 @@
                             </div>
                         </div>
                     </div>
-                    <p>SEÑOR FUNCIONARIO EMISOR DEL PRESENTE PERMISO DE TRABAJO, TENGA PRESENTE QUE ES OBLIGATORIO ANTES DE INICIAR ACTIVIDADES GARANTIZAR EL CONOCIMIENTO Y LAS RESTRICCIONES DEL PRESENTE PERMISO A LOS DEMÁS COMPAÑEROS INVOLUCRADOS EN LA PRESENTE ACTIVIDAD DE FORMA DIGITAL MEDIANTE EL MAIL ENVIADO A CADA UNO DE LOS FUNCIONARIOS INVOLUCRADOS EN LA PRESENTE ACTIVIDAD Y EN CASO DE QUE EL TRABAJO SE REALICE EN SITIOS DONDE INTERVIENEN TERCEROS AJENOS A ENERGITELCO SAS, TENGA PRESENTE QUE ANTES DE INICIAR LABORES OBLIGATORIAMENTE DEBE PROCEDER A IMPRIMIR FÍSICAMENTE EL PRESENTE DOCUMENTO Y PUBLICARLO EN LOS LÍMITES DE LA ZONA DE TRABAJO O DE LA DEMARCACIÓN Y CERRAMIENTO QUE HIZO DE SU ZONA DE TRABAJO.</p>
                     @else
                         @if ($id->estado == "Sin aprobar")
                             @can('Aprobar retiro de cesantías')
@@ -173,6 +172,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="pre_commentary">Comentarios quien aprueba</label>
+                                    <input type="hidden" name="status" value="Aprobado">
                                     <textarea name="commentary" id="pre_commentary" cols="30" rows="3" class="form-control">{{old('commentary')}}</textarea>
                                 </div>
                                 @endcan    

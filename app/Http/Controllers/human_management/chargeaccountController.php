@@ -5,9 +5,12 @@ namespace App\Http\Controllers\human_management;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\chargeAccount;
+use App\Models\general_setting;
+use App\Models\system_setting;
 use App\SignatureChargeAccount;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\Mail;
 
 class chargeaccountController extends Controller
 {
@@ -30,7 +33,11 @@ class chargeaccountController extends Controller
     public function create(string $token = null)
     {
         if ($token && !auth()->check()) {
-            return view('human_management/chargeaccount/create',compact('token'));
+            $signature = chargeAccount::where('token',$token)->where('status',3)->first();
+            if ($signature) {
+                return view('human_management/chargeaccount/create',compact('token','signature'));
+            }
+            return redirect('/home');
         }else if(auth()->check() && !$token) {
             return view('human_management/chargeaccount/create',compact('token'));
         }
@@ -58,18 +65,19 @@ class chargeaccountController extends Controller
             if ($signature) {
                 if ($request->token) {
                     $chargeAccount = chargeAccount::where('token',$request->token)->where('status',3)->first();
+                    $request['status'] = 0;
                     $chargeAccount->update($request->all());
                     $signature->update([
-                        'signatures_type' => 'Models/chargeAccount',
-                        'signatures_id' => $chargeAccount->id,
+                        'signaturable_type' => 'App\Models\chargeAccount',
+                        'signaturable_id' => $chargeAccount->id,
                         'status' => 1
                     ]);
                 }else {
                     $request['user_id'] = auth()->id();
                     $chargeAccount = chargeAccount::create($request->all());
                     $signature->update([
-                        'signatures_type' => 'Models/chargeAccount',
-                        'signatures_id' => $chargeAccount->id,
+                        'signaturable_type' => 'App\Models\chargeAccount',
+                        'signaturable_id' => $chargeAccount->id,
                         'status' => 1
                     ]);
                 }
@@ -81,9 +89,9 @@ class chargeaccountController extends Controller
                             Image::make($file->getRealPath())
                                 ->resize(null, 500, function ($constraint) {
                                     $constraint->aspectRatio();
-                                })->save(public_path('storage/chargeAccount/'.$name));
+                                })->save(public_path('storage/upload/chargeAccount/'.$name));
                         }else{
-                            $path = Storage::putFileAs('public/chargeAccount/', $file, $name);
+                            $path = Storage::putFileAs('public/upload/chargeAccount/', $file, $name);
                         }
                         $chargeAccount->files()->create([
                             'nombre'=>$name,
@@ -138,14 +146,21 @@ class chargeaccountController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(chargeAccount $id)
     {
-        //
+        $id->delete();
+        return redirect()->back()->with(['success'=>'Se ha eliminado la cuenta de cobro correctamente']);
     }
-
-    public function approve($id = null)
+    
+    public function generate()
     {
-        
+        chargeAccount::create([
+            'token' => time().str_random(),
+            'user_id' => auth()->id(),
+            'date' => now(),
+            'status' => 3
+        ]);
+        return redirect()->back()->with(['success'=>'Se ha generado una cuenta de cobro correctamente']);
     }
 
     public function signature(Request $request)
@@ -160,5 +175,38 @@ class chargeaccountController extends Controller
             'status' => 0
         ]);
         return response()->json( $name );
+    }
+
+    public function approve(Request $request, chargeAccount $id)
+    {
+        if ($request->status == 'Aprobado') {
+            $id->update([
+                'status' => 1,
+                'approve_id' => auth()->id()
+            ]);
+            // correo
+            Mail::send('human_management.chargeaccount.email.main', ['data' => $id], function ($menssage) use ($id)
+            {
+                $emails = system_setting::where('state',1)->pluck('emails_contable')->first();
+                $company = general_setting::where('state',1)->pluck('company')->first();
+                $email = explode(';',$emails);
+                for ($i=0; $i < count($email); $i++)
+                {
+                    if($email[$i] != ''){
+                        $menssage->to(trim($email[$i]),$company);
+                    }
+                }
+                if ($id->user_id) {
+                    $menssage->to($id->user->email,$id->user->name)->subject("Energitelco S.A.S CUENTA DE COBRO APROBADA ".$id->id);
+                }
+            });
+            return redirect()->back()->with(['success'=>'Se ha aprobado la cuenta de cobro correctamente']);
+        }else {
+            $id->update([
+                'status' => 2,
+                'approve_id' => auth()->id()
+            ]);
+            return redirect()->back()->with(['success'=>'Se ha desaprobado la cuenta de cobro correctamente']);
+        }
     }
 }

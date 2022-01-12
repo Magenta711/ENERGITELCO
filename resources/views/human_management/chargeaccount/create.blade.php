@@ -29,13 +29,13 @@
 @section('content')
 <section class="signup-section" id="signup" style="padding: 10rem 0 0 0">
     <div class="container" style="background-color: rgb(0,0,0,0.4); padding: 1rem; border-radius: 10px">
-        <small class="text-hidden">Todos los campos con <span class="text-red">*</span> son obligarios</small>
         <div class="row">
             <div class="col-md-10 col-lg-8 mx-auto text-white">
                 {{-- <i class="far fa-paper-plane fa-2x mb-2 text-white"></i> --}}
                 <div class="text-center">
                     <i class="fab fa-wpforms fa-2x mb-2"></i>
                     <h2 class="mb-5">Cuenta de cobro</h2>
+                    <small class="text-hidden">Todos los campos con <span class="text-danger">*</span> son obligarios</small>
                 </div>
 
 @endguest
@@ -45,37 +45,37 @@
         <input type="hidden" name="token" value="{{$token}}">
         <div class="col-md-6">
             <div class="form-group">
-                <label for="city">Cuidad <span class="text-red">*</span></label>
+                <label for="city">Cuidad <span class="text-red text-danger">*</span></label>
                 <input type="text" class="form-control" id="city" name="city" value="{{old('city') ?? 'Medellín'}}">
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label for="date">Fecha <span class="text-red">*</span></label>
-                <input type="date" class="form-control" name="date" readonly value="{{old('date') ?? now()->format('Y-m-d')}}">
+                <label for="date">Fecha <span class="text-red text-danger">*</span></label>
+                <input type="date" class="form-control" name="date" readonly value="{{$signature->date ?? now()->format('Y-m-d')}}">
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label for="name">Nombre completo <span class="text-red">*</span></label>
+                <label for="name">Nombre completo <span class="text-red text-danger">*</span></label>
                 <input type="text" class="form-control" name="name" id="name" value="{{old('name')}}" placeholder="Aquien se le debe">
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label for="document">Número de identificación <span class="text-red">*</span></label>
+                <label for="document">Número de identificación <span class="text-red text-danger">*</span></label>
                 <input type="number" class="form-control" name="document" id="document" value="{{old('document')}}" placeholder="NIT o Cédula">
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label for="concept">Concepto <span class="text-red">*</span></label>
+                <label for="concept">Concepto <span class="text-red text-danger">*</span></label>
                 <input type="text" class="form-control" name="concept" id="concept" value="{{old('concept')}}" class="Concepto claro">
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label for="value">Valor <span class="text-red">*</span></label>
+                <label for="value">Valor <span class="text-red text-danger">*</span></label>
                 <input type="text" class="form-control" name="value" id="value" value="{{old('value')}}" placeholder="Total a pagar">
             </div>
         </div>
@@ -101,12 +101,12 @@
             <div class="form-group">
                 <label for="file">Adjuntos</label>
                 <label id="label_file" for="file" class="form-control text-center "><i class="fa fa-upload"></i></label>
-                <input value="{{old('files')}}" class="hide file_input" type="file" multiple="true" name="files[]" id="file">
+                <input value="{{old('files')}}" class="d-none hide file_input" type="file" multiple="true" name="files[]" id="file">
             </div>
         </div>
         <div class="col-md-12">
             <div class="form-group">
-                <label for="">Firma <span class="text-red">*</span></label><br>
+                <label for="">Firma <span class="text-red text-danger">*</span></label><br>
                 <canvas id="pizarra" @guest style="border-radius: 0.25rem;" @endguest></canvas>
                 <br>
                 <button type="button" class="btn btn-sm btn-danger" id="btnLimpiar">Limpiar</button>
@@ -279,6 +279,17 @@
                 },
                 success:function(data){
                     $('#signature_id').val(data);
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 6000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
                     Toast.fire({
                         icon: 'success',
                         title: 'Se firmo correctamente'
@@ -287,23 +298,12 @@
                     $("#btnAceptar").hide();
                 },
                 error: function (error) {
-                    Swal.fire('Error');
                     console.error('ERROR: ',error);
+                    Swal.fire('Error');
                     $('#btnLimpiar').hide("disabled", false);
                     $("#btnAceptar").hide("disabled", false);
                 }
             });
         };
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 6000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
     </script>
 @endsection

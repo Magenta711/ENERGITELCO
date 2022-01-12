@@ -253,7 +253,7 @@ function getdays_leave(year) {
         
         let time_start = permission_time_start[i].value.split(':');
         let time_end = permission_time_end[i].value.split(':');
-        if (permission_type[i].value == 'Vacaciones' || permission_type[i].value == 'Permiso no remunerado') {
+        if (permission_type[i].value == 'Vacaciones' || permission_type[i].value == 'Permiso no remunerado' || permission_type[i].value == 'Vacaciones pagadas') {
             if (date_start[0] == year) {
                 // permiso para el mismo mes
                 if (date_start[1] == date_end[1]) {
@@ -303,7 +303,7 @@ function getdays_leave(year) {
 }
 
 function getifVacation(type,horas) {
-    if (type == 'Vacaciones') {
+    if (type == 'Vacaciones' || type == 'Vacaciones pagadas') {
         return horas;
     }else {
         return 0;
@@ -546,10 +546,11 @@ function gettotallinked() {
 
     let date = $('#date_end').val().split('-');
     let year = parseInt(date[0]);
-    days = parseFloat($('#days_to_settle_'+year).val());
+    let days = parseFloat($('#days_to_settle_'+year).val());
     let daysVacation = parseFloat($('#total_vacation_days_to_pay').val());
-
+    console.log(days);
     total_linked = ( (average_salary+average_extras+average_assistance) * days) / 360;
+    console.log(total_linked);
     $('#total_linkend').val(total_linked.toFixed(2));
     intereses = (total_linked * (days) * 0.12 ) / 360;
     $('#intereses').val(intereses.toFixed(2));

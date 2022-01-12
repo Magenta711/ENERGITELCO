@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class SignatureChargeAccount extends Model
 {
     protected $fillable = [
-        'name','file','status','signatures_type','signatures_id'
+        'name','file','status','signaturable_type','signaturable_id'
     ];
     protected $guarder = ['id'];
 

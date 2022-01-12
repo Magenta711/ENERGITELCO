@@ -6,6 +6,8 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>ENERGITELCO</title>
+        <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <link rel="icon" type="image/x-icon" href="{{asset('img/logo_sm.png')}}" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
@@ -61,6 +63,8 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Third party plugin JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        {{-- SWEET ALERT --}}
+        <script src="{{asset("js/datatables/sweetalert2.js")}}"></script>
         <!-- Core theme JS-->
         <script src="{{asset('js/guest.js')}}"></script>
         @yield('js')

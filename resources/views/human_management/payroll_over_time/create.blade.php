@@ -34,7 +34,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="value_assistance">Valor de auxilio transporte mes</label>
-                            <input type="text" name="value_assistance" value="{{ old('value_assistance') ?? 106454 }}" id="value_assistance" class="inputs_general form-control">
+                            <input type="text" name="value_assistance" value="{{ old('value_assistance') ?? 117172 }}" id="value_assistance" class="inputs_general form-control">
                         </div>
                     </div>
                     <hr>

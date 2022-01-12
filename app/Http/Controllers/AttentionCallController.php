@@ -195,7 +195,7 @@ class AttentionCallController extends Controller
 
         $id->receiverCall->notify(new notificationMain($id->id,'descargo no aprobado '.$id->id,'show_called/'));
 
-        return redirect()->back()->with(['success'=>'El descargo fue desaprobado correctamente','sudmenu' => 10]);
+        return redirect()->back()->with(['success'=>'El descargo fue desaprobado correctamente']);
     }
 
     public function approve_call(Request $request,AttentionCall $id)

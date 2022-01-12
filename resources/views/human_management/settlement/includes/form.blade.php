@@ -21,7 +21,7 @@
                     </div>
                     <div class="col-md-3">
                         <label for="assistance">Auxilio de transporte</label>
-                        <input type="text" name="assistance" value="{{ old('assistance') ?? 106454 }}" class="form-control controlAssistance" id="assistance" placeholder="Auxilio de transporte" >
+                        <input type="text" name="assistance" value="{{ old('assistance') ?? 117172 }}" class="form-control controlAssistance" id="assistance" placeholder="Auxilio de transporte" >
                     </div>
                     <div class="col-md-3">
                         <label for="date_start">Fecha de ingreso</label>
