@@ -957,10 +957,10 @@ Route::post('chargeaccount/signature','human_management\chargeaccountController@
 Route::get('chargeaccount/show/{id}','human_management\chargeaccountController@show')->name("chargeaccount_show")->middleware('auth')->middleware('verified');;
 Route::get('chargeaccount/download/{id}','human_management\chargeaccountController@download')->name("chargeaccount_donwload")->middleware('auth')->middleware('verified');;
 Route::put('chargeaccount/approve/{id}','human_management\chargeaccountController@approve')->name("chargeaccount_approve")->middleware('auth')->middleware('verified');;
-Route::delete('chargeaccount/{id}','human_management\chargeaccountController@delete')->name("chargeaccount_delete")->middleware('auth')->middleware('verified');
+Route::delete('chargeaccount/{id}','human_management\chargeaccountController@destroy')->name("chargeaccount_delete")->middleware('auth')->middleware('verified');
 Route::get('chargeaccount/generate','human_management\chargeaccountController@generate')->name("chargeaccount_generate")->middleware('auth')->middleware('verified');
 
 Route::get('stora/{file}', function ($file) {
-    $path = storage_path('app' . DIRECTORY_SEPARATOR . 'private/signature' . DIRECTORY_SEPARATOR . $file);
+    $path = storage_path('app/private/signature/'. $file);
     return response()->file($path);
-})->name('uploads')->middleware('auth')->middleware('verified');;
+})->name('uploads')->middleware('auth')->middleware('verified');

@@ -94,7 +94,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="email">Correo electronico</label>
-                <input type="text" class="form-control" name="email" id="email" value="{{old('email')}}" placeholder="Número de cuenta bancaria">
+                <input type="text" class="form-control" name="email" id="email" value="{{old('email')}}" placeholder="example@mail.com">
             </div>
         </div>
         <div class="col-md-6">

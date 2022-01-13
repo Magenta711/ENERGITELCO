@@ -4,6 +4,7 @@ namespace App\Http\Controllers\human_management;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\bonus\MinorBoxUser;
 use App\Models\chargeAccount;
 use App\Models\general_setting;
 use App\Models\system_setting;
@@ -14,6 +15,14 @@ use Illuminate\Support\Facades\Mail;
 
 class chargeaccountController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:Lista de cuentas de cobro|Lista de cuentas de cobro propias|Generar cuenta de cobro abierta|Crear cuenta de cobro|Ver cuenta de cobro|Aprobar cuenta de cobro|Eliminar cuenta de cobro',['only' => ['index']]);
+        $this->middleware('permission:Generar cuenta de cobro abierta',['only' => ['generate']]);
+        $this->middleware('permission:Ver cuenta de cobro',['only' => ['show']]);
+        $this->middleware('permission:Aprobar cuenta de cobro',['only' => ['approve']]);
+        $this->middleware('permission:Eliminar cuenta de cobro',['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -39,6 +48,9 @@ class chargeaccountController extends Controller
             }
             return redirect('/home');
         }else if(auth()->check() && !$token) {
+            if (auth()->hasPermisisonTo('Crear cuenta de cobro')) {
+                # code...
+            }
             return view('human_management/chargeaccount/create',compact('token'));
         }
         return redirect('/home');
@@ -184,6 +196,46 @@ class chargeaccountController extends Controller
                 'status' => 1,
                 'approve_id' => auth()->id()
             ]);
+            if (!$id->token) {
+                $minor_box = MinorBoxUser::where('user_id',$id->user_id)->first();
+                $total_value = 0;
+                $total_discharges = 0;
+
+                if ($minor_box) {
+                    $value = $minor_box->charges - $id->value;
+                    if ($value < 0) {
+                        $total_value = $id->value - $minor_box->charges;
+                        $smAcc = "tiene un total de $".number_format($total_value,0,',','.');
+                    }else {
+                        $total_discharges = $value;
+                        $smAcc = "se le debe un total de $".number_format($total_discharges,0,',','.');
+                    }
+                    $history = now()->format('d/m/Y H:i:s').': SCC descargo $'.$id->value.' y '.$smAcc.' Por: '.auth()->user()->name.' Comentario:'.$request->commentary." \n";
+                    $minor_box->update([
+                        'responsable_id' => auth()->id(),
+                        'charges' => $total_value,
+                        'discharges' => $total_discharges,
+                        'last_date' => now(),
+                        'status' => 1,
+                        'commentary' => $request->commentary,
+                        'history' => $minor_box->history.' '.$history
+                    ]);
+                }else {
+                    $minor_box = MinorBoxUser::Create(
+                        [
+                            'user_id' => $request->user_id,
+                            'responsable_id' => auth()->id(),
+                            'charges' => 0,
+                            'discharges' => $id->value,
+                            'last_date' => now(),
+                            'pending' => 0,
+                            'status' =>  1,
+                            'commentary' => $request->commentary,
+                            'history' => now()->format('d/m/Y H:i:s').': SCC descargo $'.$id->value.' y se le debe un total de '.$id->value.' Por: '.auth()->user()->name.' Comentario:'.$request->commentary." \n",
+                        ]
+                    );
+                }
+            }
             // correo
             Mail::send('human_management.chargeaccount.email.main', ['data' => $id], function ($menssage) use ($id)
             {

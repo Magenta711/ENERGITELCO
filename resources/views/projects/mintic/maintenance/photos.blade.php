@@ -555,7 +555,6 @@
                     'it'=>'4',
                     'label' => 'Medición eléctrica 1.2',
                     'description' => 'Fase - Tierra',
-                    'place' => 'G63',
                     'accept' => 'image/*'
                 ])
                 <hr>
@@ -567,7 +566,6 @@
                     'it'=>'4',
                     'label' => 'Medición eléctrica 1.3',
                     'description' => 'Neutro - Tierra',
-                    'place' => 'G63',
                     'accept' => 'image/*'
                 ])
                 <hr>

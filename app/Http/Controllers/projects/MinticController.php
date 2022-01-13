@@ -815,7 +815,7 @@ class MinticController extends Controller
         if ($item->files)
         {
             foreach ($item->files as $key => $value) {
-                if ($value->place != 'XXX') {
+                if ($value->place && $value->place != 'XXX') {
                     $place = explode('.',$value->description,2);
                     $str = str_random();
                     $files[$str]['name'] = $value->name;
