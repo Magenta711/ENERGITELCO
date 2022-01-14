@@ -204,7 +204,7 @@
                             <td><input type="text" name="total_vacation" id="total_vacation" value="{{$id->total_vacation ?? 0}}" readonly class="form-control text-right"></td>
                         <tr>
                             <th>Salario pendiente</th>
-                            <td><input type="text" name="this_salary" id="this_salary" value="{{$id->this_salary ?? 0}}" readonly class="form-control text-right"></td>
+                            <td><input type="text" name="this_salary" id="this_salary" value="{{$id->this_salary ?? 0}}" class="form-control text-right"></td>
                         </tr>
                         <tr>
                             <th>Pago de indemnización</th>

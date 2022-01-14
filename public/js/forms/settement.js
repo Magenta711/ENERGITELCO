@@ -82,6 +82,7 @@ $(document).ready(function() {
     });
 
     $('.salary_month').blur(function () {
+        getsalaryThisMonth();
         getsalary_month();
         gettotallinked();
     });
@@ -91,6 +92,7 @@ $(document).ready(function() {
         gettotallinked();
     });
     $('.assistance_month').blur(function () {
+        getsalaryThisMonth();
         getassistance_month();
         gettotallinked();
     });
@@ -98,6 +100,12 @@ $(document).ready(function() {
         gettotallinked();
     });
     $('#compensation').blur(function () {
+        gettotallinked();
+    });
+    $('#this_salary').blur(function () {
+        gettotallinked();
+    });
+    $('#pendientes').blur(function () {
         gettotallinked();
     });
 });
@@ -365,6 +373,9 @@ function getsalaryThisMonth() {
     }else {
         days = parseInt(dateEnd.split('-')[2]);
         month = parseInt(dateEnd.split('-')[1]);
+    }
+    if (days >= 31) {
+        days = 30;
     }
     salary = $('#salary').val();
     assistance = $('#assistance').val();

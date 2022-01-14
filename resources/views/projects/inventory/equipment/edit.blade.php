@@ -78,13 +78,13 @@
                                 </select>
                             </div>
                         </div>
-                        @php
+                        {{-- @php
                             $relation = true;
                             if($id->inventarybles || $id->productables) {
                                 $relation = false;
                             }
-                        @endphp
-                        @if (!$relation)
+                        @endphp --}}
+                        {{-- @if (!$relation) --}}
                             <div class="col-md-4 col-xs-6">
                                 <div class="form-group">
                                     <label for="">Proyecto</label>
@@ -107,7 +107,7 @@
                                     </select>
                                 </div>
                             </div>
-                        @endif
+                        {{-- @endif --}}
                         <div class="col-md-12">
                             <label for="commentary">Comentarios</label>
                             <textarea name="commentary" id="commentary" cols="30" rows="3" class="form-control">{{$id->commentary}}</textarea>

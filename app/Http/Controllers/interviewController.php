@@ -112,7 +112,7 @@ class interviewController extends Controller
 
         foreach ($users as $user) {
             if ($user->hasPermissionTo('Aprobar entrevistas')){
-                $user->notify(new notificationMain($interview->id,'Nueva entrevista '.$interview->id,'interview/show/'));
+                $user->notify(new notificationMain($interview->id,'Nueva entrevista '.$interview->id,'human_management/interview/show/'));
             }
         }
         
@@ -206,7 +206,7 @@ class interviewController extends Controller
 
         foreach ($users as $user) {
             if ($user->hasPermissionTo('Editar entrevistas')){
-                $user->notify(new notificationMain($id->id,'Entrevista editada '.$id->id,'interview/show/'));
+                $user->notify(new notificationMain($id->id,'Entrevista editada '.$id->id,'human_management/interview/show/'));
             }
         }
         
@@ -243,7 +243,7 @@ class interviewController extends Controller
     {
         $id->update(['state' => 1,'approver_id'=>auth()->id()]);
 
-        $id->responsable->notify(new notificationMain($id->id,'Se ha aprobado la entrevista '.$id->id,'interview/show/'));
+        $id->responsable->notify(new notificationMain($id->id,'Se ha aprobado la entrevista '.$id->id,'human_management/interview/show/'));
 
         return redirect()->back()->with(['success'=>'Se ha aprobado la entrevista correctamente.']);
     }
@@ -252,7 +252,7 @@ class interviewController extends Controller
     {
         $id->update(['state' => 2,'approver_id'=>auth()->id()]);
 
-        $id->responsable->notify(new notificationMain($id->id,'Se ha desaprobado la entrevista '.$id->id,'interview/show/'));
+        $id->responsable->notify(new notificationMain($id->id,'Se ha desaprobado la entrevista '.$id->id,'human_management/interview/show/'));
 
         return redirect()->back()->with(['success'=>'Se ha desaprobado la entrevista correctamente.']);
     }

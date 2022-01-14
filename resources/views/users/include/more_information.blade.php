@@ -9,6 +9,7 @@
                 <li><a href="#settlement" data-toggle="tab">Liquidación</a></li>
             @endif
             <li><a href="#forms" data-toggle="tab">Formatos</a></li>
+            <li><a href="#historyMinorBox" data-toggle="tab">Historial caja menor</a></li>
         </ul>
         <div class="tab-content">
             <div class="active tab-pane" id="information">
@@ -584,6 +585,10 @@
                     </div>
                 </div>
             @endif
+            <div class="tab-pane" id="historyMinorBox">
+                <h3>Historial de caja menor</h3>
+                <p>{!! str_replace("\n", '</br>', addslashes($id->minor_box->history)) !!}</p>
+            </div>
             <!-- /.tab-pane -->
         </div>
         <!-- /.tab-content -->

@@ -292,7 +292,7 @@ class adminBonusesController extends Controller
                     $menssage->to($data->user->email,$data->user->name)->subject("Energitelco S.A.S, Notificación de pago de bonificaciones");
                 });
             }
-            $id->responsable->notify(new notificationMain($id->id,'Se ha aprobado las el pago de las bonificaciones a administradores y conductores'.$id->id,'human_management/bonus/administratives/show/'));
+            $id->responsable->notify(new notificationMain($id->id,'Se ha aprobado las el pago de las bonificaciones a administradores y conductores'.$id->id,'finances/bonus/administratives/show/'));
             return redirect()->route('admin_bonuses')->with('success','Se ha aprobado el pago de las bonificaciones administradores y conductores correctamente');
         }else {
             $id->update([
@@ -300,7 +300,7 @@ class adminBonusesController extends Controller
                 'commentary'=>$request->commentary,
                 'approve_id' => auth()->id(),
             ]);
-            $id->responsable->notify(new notificationMain($id->id,'No se aprobó las el pago de bonificaciones a administradores y conductores'.$id->id,'human_management/bonus/administratives/show/'));
+            $id->responsable->notify(new notificationMain($id->id,'No se aprobó las el pago de bonificaciones a administradores y conductores'.$id->id,'finances/bonus/administratives/show/'));
             return redirect()->route('admin_bonuses')->with('success','Se ha reprobado el pago de las bonificaciones administradores y conductores correctamente');
         }
     }

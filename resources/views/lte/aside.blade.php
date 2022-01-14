@@ -206,7 +206,7 @@
         @endif
         {{-- LOGISTICAS E INFRAESTRUCTURA --}}
         @if (auth()->user()->hasAnyPermission(['Aprobar solicitud de Inspección detallada de vehículos','Consultar inspecciones detalladas de vehículos','Descargar PDF de inspecciones detalladas de vehículos','Digitar formulario de inspección detallada de vehículos','Eliminar formato de inspecciones detalladas de vehículos','Aprobar solicitud de lista de verificación para el mantenimiento de computadores','Consultar listas de verificación para el mantenimiento de los computadores','Descargar PDF de listas de verificación para el mantenimiento de los computadores','Digitar formulario de lista de verificación para el mantenimiento de computadores','Eliminar formato de listas de verificación para el mantenimiento de los computadores','Lista de computadores del inventario','Crear computadores al inventario','Ver computadores del inventario','Editar computadores del inventario','Eliminar computadores del inventario','Lista de vehículos del inventario','Crear vehículos al inventario','Ver vehículos del inventario','Editar vehículos del inventario','Eliminar vehículos del inventario']))
-            <li class="treeview {{ activeMenu('logistics_infrastructure*') }}{{ activeMenu('invetory/computer*') }}{{ activeMenu('invetory/vehicle*') }}">
+            <li class="treeview {{ activeMenu('logistics_infrastructure*') }}">
               <a href="#">
                 <i class="fa fa-warehouse"></i>
                 <span>LOGÍSTICA E INFRAESTRUCTURA</span><span class="pull-right-container">
@@ -231,17 +231,17 @@
                 @endif
                 {{-- <li class="{{ activeMenu('logistics_infrastructure/vehicle_documentation*') }}"><a class="btn-send" href="{{ route('vehicle_documentation') }}"><i class="fa fa-car"></i> REGISTRO DE DOCUMENTACIÓN Y MANTENIMIENTO DE VEHÍCULOS</a></li> --}}
                 @if (auth()->user()->hasAnyPermission(['Lista de computadores del inventario','Crear computadores al inventario','Ver computadores del inventario','Editar computadores del inventario','Eliminar computadores del inventario','Lista de vehículos del inventario','Crear vehículos al inventario','Ver vehículos del inventario','Editar vehículos del inventario','Eliminar vehículos del inventario']))
-                    <li class="treeview {{ activeMenu('invetory/computer*') }} {{ activeMenu('invetory/vehicle*') }}">
+                    <li class="treeview {{ activeMenu('logistics_infrastructure/invetory/computer*') }} {{ activeMenu('logistics_infrastructure/invetory/vehicle*') }}">
                       <a href="#"><i class="fa fa-border-all"></i> INVENTARIOS<span class="pull-right-container">
                           <i class="fa fa-angle-left pull-right"></i>
                         </span>
                       </a>
                       <ul class="treeview-menu">
                         @if (auth()->user()->hasAnyPermission(['Lista de computadores del inventario','Crear computadores al inventario','Ver computadores del inventario','Editar computadores del inventario','Eliminar computadores del inventario']))
-                            <li class="{{ activeMenu('invetory/computer*') }}"><a class="btn-send" href="{{ route('inv_computer') }}"><i class="fa fa-desktop"></i> COMPUTADORES</a></li>
+                            <li class="{{ activeMenu('logistics_infrastructure/invetory/computer*') }}"><a class="btn-send" href="{{ route('inv_computer') }}"><i class="fa fa-desktop"></i> COMPUTADORES</a></li>
                         @endif
                         @if (auth()->user()->hasAnyPermission(['Lista de vehículos del inventario','Crear vehículos al inventario','Ver vehículos del inventario','Editar vehículos del inventario','Eliminar vehículos del inventario']))
-                          <li class="{{ activeMenu('invetory/vehicle*') }}"><a class="btn-send" href="{{ route('inv_vehicle') }}"><i class="fa fa-car"></i> VEHÍCULOS</a></li>
+                          <li class="{{ activeMenu('logistics_infrastructure/invetory/vehicle*') }}"><a class="btn-send" href="{{ route('inv_vehicle') }}"><i class="fa fa-car"></i> VEHÍCULOS</a></li>
                         @endif
                       </ul>
                     </li>
@@ -249,23 +249,68 @@
               </ul>
             </li>
         @endif
+        {{-- FINANCIERA --}}
+        @if (auth()->user()->hasAnyPermission('Digitar reporte de novedades de nómina y horas extras','Aprobar reporte de novedades de nómina y horas extras','Descargar lista de pago de reporte de novedades de nómina y horas extras','Eliminar formato de reporte de novedades de nómina y horas extras','Consultar reporte de novedades de nómina y horas extras','Lista de liquidación de prestaciones sociales','Crear liquidación de prestaciones sociales','Ver liquidación de prestaciones sociales','Editar liquidación de prestaciones sociales','Descargar liquidación de prestaciones sociales','Eliminar liquidación de prestaciones sociales','Digitar prima de servicios','Aprobar prima de servicios','Descargar lista de pago de prima de servicios','Eliminar formato de prima de servicios','Consultar prima de servicios','Editar prima de servicios','Entregar caja menor manual','Crear corte bonificaciones de permisos de trabajo','Ver bonificaciones de permisos de trabajo','Editar bonificaciones de permisos de trabajo','Exportar bonificaciones de permisos de trabajo','Aprobar bonificaciones de permisos de trabajo','Lista de bonificaciones a administrativos y conductores','Crear bonificaciones a administrativos y conductores','Ver bonificaciones a administrativos y conductores','Editar bonificaciones a administrativos y conductores','Descargar bonificaciones a administrativos y conductores','Eliminar bonificaciones a administrativos y conductores','Lista de cuentas de cobro','Lista de cuentas de cobro propias','Generar cuenta de cobro abierta','Crear cuenta de cobro','Ver cuenta de cobro'))
+            
+          <li class="treeview {{ activeMenu('finances*') }}{{ activeMenu('chargeaccount*') }}">
+            <a href="#">
+              <i class="fa fa-stamp"></i> <span>FINANCIERA</span><span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              @if (auth()->user()->hasAnyPermission(['Digitar reporte de novedades de nómina y horas extras','Aprobar reporte de novedades de nómina y horas extras','Descargar lista de pago de reporte de novedades de nómina y horas extras','Eliminar formato de reporte de novedades de nómina y horas extras','Consultar reporte de novedades de nómina y horas extras']))
+                <li class="{{ activeMenu('finances/payroll_overtime_news_report*') }}">
+                  <a class="btn-send" href="{{route('payroll_overtime_news_report')}}"><i class="fa fa-user-clock"></i> REPORTE DE NOVEDADES DE  NOMINA Y HORAS EXTRAS</a>
+                </li>
+              @endif
+              @if (auth()->user()->hasAnyPermission(['Lista de liquidación de prestaciones sociales','Crear liquidación de prestaciones sociales','Ver liquidación de prestaciones sociales','Editar liquidación de prestaciones sociales','Descargar liquidación de prestaciones sociales','Eliminar liquidación de prestaciones sociales']))
+                <li class="{{ activeMenu('finances/settlement*') }}"><a class="btn-send" href="{{route('settlement')}}"><i class="fa fa-money-check-alt"></i> LIQUIDACIÓN PRESTACIONES SOCIALES</a></li>
+              @endif
+              @if (auth()->user()->hasAnyPermission(['Digitar prima de servicios','Aprobar prima de servicios','Descargar lista de pago de prima de servicios','Eliminar formato de prima de servicios','Consultar prima de servicios','Editar prima de servicios']))
+                <li class="{{ activeMenu('finances/premium*') }}"><a class="btn-send" href="{{route('premium')}}"><i class="fa fa-file-invoice"></i> PRIMA DE SERVICIOS</a></li>
+              @endif
+                @if (auth()->user()->hasAnyPermission(['Entregar caja menor manual','Crear corte bonificaciones de permisos de trabajo','Ver bonificaciones de permisos de trabajo','Editar bonificaciones de permisos de trabajo','Exportar bonificaciones de permisos de trabajo','Aprobar bonificaciones de permisos de trabajo','Lista de bonificaciones a administrativos y conductores','Crear bonificaciones a administrativos y conductores','Ver bonificaciones a administrativos y conductores','Editar bonificaciones a administrativos y conductores','Descargar bonificaciones a administrativos y conductores','Eliminar bonificaciones a administrativos y conductores','Lista de cuentas de cobro','Lista de cuentas de cobro propias','Generar cuenta de cobro abierta','Crear cuenta de cobro','Ver cuenta de cobro']))
+                <li class="treeview {{ activeMenu('finances/bonus*') }}{{ activeMenu('finances/viatics*') }}{{ activeMenu('chargeaccount*') }}">
+                      <a href="#"><i class="fa fa-donate"></i> CAJA MENOR Y BONIFICACIONES<span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                      </a>
+                      <ul class="treeview-menu">
+                        @if (auth()->user()->hasAnyPermission(['Entregar caja menor manual','Crear corte bonificaciones de permisos de trabajo','Ver bonificaciones de permisos de trabajo','Editar bonificaciones de permisos de trabajo','Exportar bonificaciones de permisos de trabajo','Aprobar bonificaciones de permisos de trabajo']))
+                          <li class="{{ activeMenu('finances/bonus/minor_box*') }}"><a class="btn-send" href="{{route('bonus_minor_box')}}"><i class="fa fa-box"></i> CAJA MENOR</a></li>
+                          <li class="{{ activeMenu('finances/viatics/technicals*') }}"><a class="btn-send" href="{{route('work_permit_viatics')}}"><i class="fas fa-plane"></i> VÍATICOS</a></li>
+                          <li class="{{ activeMenu('finances/bonus/technicals*') }}"><a class="btn-send" href="{{route('bonuses_technical')}}"><i class="fa fa-gift"></i> BONIFICACIONES TÉCNICAS</a></li>
+                        @endif
+                        @if (auth()->user()->hasAnyPermission(['Lista de bonificaciones a administrativos y conductores','Crear bonificaciones a administrativos y conductores','Ver bonificaciones a administrativos y conductores','Editar bonificaciones a administrativos y conductores','Descargar bonificaciones a administrativos y conductores','Eliminar bonificaciones a administrativos y conductores']))
+                          <li class="{{ activeMenu('finances/bonus/administratives*') }}"><a class="btn-send" href="{{route('admin_bonuses')}}"><i class="fa fa-user-shield"></i> BONIFICACIONES ADMINISTRATIVOS Y CONDUCTORES</a></li>
+                        @endif
+                        @if (auth()->user()->hasAnyPermission(['Lista de cuentas de cobro','Lista de cuentas de cobro propias','Generar cuenta de cobro abierta','Crear cuenta de cobro','Ver cuenta de cobro','Aprobar cuenta de cobro','Eliminar cuenta de cobro']))
+                          <li class="{{ activeMenu('chargeaccount*') }}"><a class="btn-send" href="{{route('chargeaccount')}}"><i class="fa fa-cash-register"></i> CUENTAS DE COBRO</a></li>
+                        @endif
+                      </ul>
+                </li>
+            @endif
+            </ul>
+          </li>
+        @endif
         {{-- GESTION HUMANA --}}
-        @if (auth()->user()->hasAnyPermission(['Aprobar solicitud de permiso laboral o notificación de incapacidad','Consultar permisos de trabajo','Descargar PDF de permisos de trabajo','Digitar formulario de Permisos de trabajo','Eliminar formato de permisos de trabajo','Aprobar solicitud de Inspección y protección contra caídas','Consultar inspecciones de equipos de protección contra caídas','Descargar PDF de inspecciones de equipos de protección contra caídas','Digitar formulario de Inspección de equipos de protección contra caídas','Eliminar formato de inspecciones de equipos de protección contra caídas','Aprobar solicitud de entrega de dotación personal','Consultar entrega de dotación personal','Descargar PDF de entrega de dotación personal','Digitar formulario de entrega de dotación personal','Eliminar formato de entrega de dotación personal','Aprobar solicitud de Permisos de trabajo','Consultar solicitud de permisos laborales o notificaciones de incapacidad médica','Descargar PDF de solicitud de permisos laborales o notificaciones de incapacidad médica','Digitar formulario de solicitud de permiso laboral o notificación de incapacidad','Eliminar formato de solicitud de permisos laborales o notificaciones de incapacidad médica','Aprobar evaluación de desempeño','Calificar evaluaciones de desempeño','Disparar evaluación de desempeño','Evaluar evaluaciones de desempeño','Lista de evaluaciones de desempeño','Ver evaluaciones de desempeño','Aprobar llamados de atención','Editar llamados de atención','Eliminar llamados de atención','Lista de llamados de atención','Realizar llamados de atención a trabajadores','Responder llamados de atención','Ver llamados de atención','Crear memorandos','Editar memorandos','Eliminar memorandos','Lista de memorandos','Ver memorandos','Aprobar entrevistas','Crear entrevistas','Editar entrevistas','Eliminar entrevistas','Lista de entrevista','Ver entrevistas','Aprobar hojas de vida','Crear hojas de vida','Editar hojas de vida','Eliminar hojas de vida','Lista de hojas de vida','Ver hojas de vida','Eliminar solicitudes de empleo','Lista de solicitudes de empleo','Exportar bonificaciones de permisos de trabajo','Ver solicitudes de empleo','Digitar reporte de novedades de nómina y horas extras','Aprobar reporte de novedades de nómina y horas extras','Descargar lista de pago de reporte de novedades de nómina y horas extras','Eliminar formato de reporte de novedades de nómina y horas extras','Consultar reporte de novedades de nómina y horas extras']))
-            <li class="treeview {{ activeMenu('human_management*') }}{{ activeMenu('show_called*') }}{{ activeMenu('attention_call*') }}{{ activeMenu('job_application*') }}{{ activeMenu('interview*') }}{{ activeMenu('performance_evaluation*') }}{{ activeMenu('human_management/viatics*') }}{{ activeMenu('memorandum*') }}{{ activeMenu('curriculum*') }}{{ activeMenu('chargeaccount*') }}">
+        @if (auth()->user()->hasAnyPermission(['Aprobar solicitud de permiso laboral o notificación de incapacidad','Consultar permisos de trabajo','Descargar PDF de permisos de trabajo','Digitar formulario de Permisos de trabajo','Eliminar formato de permisos de trabajo','Aprobar solicitud de Inspección y protección contra caídas','Consultar inspecciones de equipos de protección contra caídas','Descargar PDF de inspecciones de equipos de protección contra caídas','Digitar formulario de Inspección de equipos de protección contra caídas','Eliminar formato de inspecciones de equipos de protección contra caídas','Aprobar solicitud de entrega de dotación personal','Consultar entrega de dotación personal','Descargar PDF de entrega de dotación personal','Digitar formulario de entrega de dotación personal','Eliminar formato de entrega de dotación personal','Aprobar solicitud de Permisos de trabajo','Consultar solicitud de permisos laborales o notificaciones de incapacidad médica','Descargar PDF de solicitud de permisos laborales o notificaciones de incapacidad médica','Digitar formulario de solicitud de permiso laboral o notificación de incapacidad','Eliminar formato de solicitud de permisos laborales o notificaciones de incapacidad médica','Aprobar evaluación de desempeño','Calificar evaluaciones de desempeño','Disparar evaluación de desempeño','Evaluar evaluaciones de desempeño','Lista de evaluaciones de desempeño','Ver evaluaciones de desempeño','Aprobar llamados de atención','Editar llamados de atención','Eliminar llamados de atención','Lista de llamados de atención','Realizar llamados de atención a trabajadores','Responder llamados de atención','Ver llamados de atención','Crear memorandos','Editar memorandos','Eliminar memorandos','Lista de memorandos','Ver memorandos','Aprobar entrevistas','Crear entrevistas','Editar entrevistas','Eliminar entrevistas','Lista de entrevista','Ver entrevistas','Aprobar hojas de vida','Crear hojas de vida','Editar hojas de vida','Eliminar hojas de vida','Lista de hojas de vida','Ver hojas de vida','Eliminar solicitudes de empleo','Lista de solicitudes de empleo','Ver solicitudes de empleo']))
+            <li class="treeview {{ activeMenu('human_management*') }}{{ activeMenu('show_called*') }}{{ activeMenu('attention_call*') }}{{ activeMenu('job_application*') }}{{ activeMenu('performance_evaluation*') }}{{ activeMenu('curriculum*') }}">
               <a href="#">
                 <i class="fa fa-house-user"></i> <span>GESTIÓN HUMANA</span><span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
               </a>
               <ul class="treeview-menu">
-                @if (auth()->user()->hasAnyPermission(['Aprobar solicitud de permiso laboral o notificación de incapacidad','Consultar permisos de trabajo','Descargar PDF de permisos de trabajo','Digitar formulario de Permisos de trabajo','Eliminar formato de permisos de trabajo','Aprobar solicitud de Inspección y protección contra caídas','Consultar inspecciones de equipos de protección contra caídas','Descargar PDF de inspecciones de equipos de protección contra caídas','Digitar formulario de Inspección de equipos de protección contra caídas','Eliminar formato de inspecciones de equipos de protección contra caídas','Aprobar solicitud de entrega de dotación personal','Consultar entrega de dotación personal','Descargar PDF de entrega de dotación personal','Digitar formulario de entrega de dotación personal','Eliminar formato de entrega de dotación personal','Aprobar solicitud de Permisos de trabajo','Consultar solicitud de permisos laborales o notificaciones de incapacidad médica','Descargar PDF de solicitud de permisos laborales o notificaciones de incapacidad médica','Digitar formulario de solicitud de permiso laboral o notificación de incapacidad','Exportar bonificaciones de permisos de trabajo','Eliminar formato de solicitud de permisos laborales o notificaciones de incapacidad médica','Digitar reporte de novedades de nómina y horas extras','Aprobar reporte de novedades de nómina y horas extras','Descargar lista de pago de reporte de novedades de nómina y horas extras','Eliminar formato de reporte de novedades de nómina y horas extras','Consultar reporte de novedades de nómina y horas extras','Lista de cuentas de cobro','Lista de cuentas de cobro propias','Generar cuenta de cobro abierta','Crear cuenta de cobro','Ver cuenta de cobro']))
-                    <li class="treeview {{ activeMenu('human_management/proceeding*') }}{{ activeMenu('human_management/work_permit*') }}{{ activeMenu('human_management/fall_protection_equipment_inspection*') }}{{ activeMenu('human_management/delivery_staffing*') }}{{ activeMenu('human_management/work_permits_notifications_medical_incapacity*') }}{{ activeMenu('human_management/payroll_overtime_news_report*') }}{{ activeMenu('human_management/settlement*') }}{{activeMenu('human_management/improvement_action*')}}{{ activeMenu('human_management/premium*') }}">
+                @if (auth()->user()->hasAnyPermission(['Aprobar solicitud de permiso laboral o notificación de incapacidad','Consultar permisos de trabajo','Descargar PDF de permisos de trabajo','Digitar formulario de Permisos de trabajo','Eliminar formato de permisos de trabajo','Aprobar solicitud de Inspección y protección contra caídas','Consultar inspecciones de equipos de protección contra caídas','Descargar PDF de inspecciones de equipos de protección contra caídas','Digitar formulario de Inspección de equipos de protección contra caídas','Eliminar formato de inspecciones de equipos de protección contra caídas','Aprobar solicitud de entrega de dotación personal','Consultar entrega de dotación personal','Descargar PDF de entrega de dotación personal','Digitar formulario de entrega de dotación personal','Eliminar formato de entrega de dotación personal','Aprobar solicitud de Permisos de trabajo','Consultar solicitud de permisos laborales o notificaciones de incapacidad médica','Descargar PDF de solicitud de permisos laborales o notificaciones de incapacidad médica','Digitar formulario de solicitud de permiso laboral o notificación de incapacidad','Eliminar formato de solicitud de permisos laborales o notificaciones de incapacidad médica']))
+                    <li class="treeview {{ activeMenu('human_management/proceeding*') }}{{ activeMenu('human_management/work_permit*') }}{{ activeMenu('human_management/fall_protection_equipment_inspection*') }}{{ activeMenu('human_management/delivery_staffing*') }}{{ activeMenu('human_management/work_permits_notifications_medical_incapacity*') }}{{activeMenu('human_management/improvement_action*')}}">
                       <a href="#"><i class="fa fa-file-alt"></i> FORMATOS<span class="pull-right-container">
                           <i class="fa fa-angle-left pull-right"></i>
                         </span>
                       </a>
                       <ul class="treeview-menu">
-                        @if (auth()->user()->hasAnyPermission(['Aprobar solicitud de Permisos de trabajo','Consultar permisos de trabajo','Descargar PDF de permisos de trabajo','Digitar formulario de Permisos de trabajo','Exportar bonificaciones de permisos de trabajo','Eliminar formato de permisos de trabajo']))
+                        @if (auth()->user()->hasAnyPermission(['Aprobar solicitud de Permisos de trabajo','Consultar permisos de trabajo','Descargar PDF de permisos de trabajo','Digitar formulario de Permisos de trabajo','Eliminar formato de permisos de trabajo']))
                             <li class="{{ activeMenu('human_management/work_permit*') }}">
                               <a class="btn-send" href="{{route('work_permit')}}"><i class="fa fa-running"></i> PERMISOS DE TRABAJO</a>
                             </li>
@@ -285,46 +330,13 @@
                               <a class="btn-send" href="{{route('work_permits_notifications_medical_incapacity')}}"><i class="fa fa-head-side-cough"></i> SOLICITUD DE PERMISOS LABORALES</a>
                             </li>
                         @endif
-                        @if (auth()->user()->hasAnyPermission(['Digitar reporte de novedades de nómina y horas extras','Aprobar reporte de novedades de nómina y horas extras','Descargar lista de pago de reporte de novedades de nómina y horas extras','Eliminar formato de reporte de novedades de nómina y horas extras','Consultar reporte de novedades de nómina y horas extras']))
-                          <li class="{{ activeMenu('human_management/payroll_overtime_news_report*') }}">
-                            <a class="btn-send" href="{{route('payroll_overtime_news_report')}}"><i class="fa fa-user-clock"></i> REPORTE DE NOVEDADES DE  NOMINA Y HORAS EXTRAS</a>
-                          </li>
-                        @endif
                         @if (auth()->user()->hasAnyPermission(['Lista de actas','Ver actas','Editar actas','Eliminar actas','Descargar actas','Crear actas']))
                             <li class="{{ activeMenu('human_management/proceeding*') }}"><a class="btn-send" href="{{route('proceeding')}}"><i class="fa fa-people-arrows"></i> ACTAS</a></li>
-                        @endif
-                        @if (auth()->user()->hasAnyPermission(['Lista de liquidación de prestaciones sociales','Crear liquidación de prestaciones sociales','Ver liquidación de prestaciones sociales','Editar liquidación de prestaciones sociales','Descargar liquidación de prestaciones sociales','Eliminar liquidación de prestaciones sociales']))
-                          <li class="{{ activeMenu('human_management/settlement*') }}"><a class="btn-send" href="{{route('settlement')}}"><i class="fa fa-money-check-alt"></i> LIQUIDACIÓN PRESTACIONES SOCIALES</a></li>
                         @endif
                         @if (auth()->user()->hasAnyPermission(['Lista de acciones de mejora','Crear acciones de mejora','Ver acciones de mejora','Editar acciones de mejora','Descargar acciones de mejora','Eliminar acciones de mejora']))
                           <li class="{{ activeMenu('human_management/improvement_action*') }}"><a class="btn-send" href="{{route('improvement_action')}}"><i class="far fa-star"></i> ACCIONES DE MEJORA</a></li>
                         @endif
-                        @if (auth()->user()->hasAnyPermission(['Digitar prima de servicios','Aprobar prima de servicios','Descargar lista de pago de prima de servicios','Eliminar formato de prima de servicios','Consultar prima de servicios','Editar prima de servicios']))
-                          <li class="{{ activeMenu('human_management/premium*') }}"><a class="btn-send" href="{{route('premium')}}"><i class="fa fa-file-invoice"></i> PRIMA DE SERVICIOS</a></li>
-                        @endif
                       </ul>
-                    </li>
-                @endif
-                @if (auth()->user()->hasAnyPermission(['Entregar caja menor manual','Crear corte bonificaciones de permisos de trabajo','Ver bonificaciones de permisos de trabajo','Editar bonificaciones de permisos de trabajo','Exportar bonificaciones de permisos de trabajo','Aprobar bonificaciones de permisos de trabajo','Lista de bonificaciones a administrativos y conductores','Crear bonificaciones a administrativos y conductores','Ver bonificaciones a administrativos y conductores','Editar bonificaciones a administrativos y conductores','Descargar bonificaciones a administrativos y conductores','Eliminar bonificaciones a administrativos y conductores','Lista de cuentas de cobro','Lista de cuentas de cobro propias','Generar cuenta de cobro abierta','Crear cuenta de cobro','Ver cuenta de cobro']))
-                    <li class="treeview {{ activeMenu('human_management/bonus*') }}{{ activeMenu('human_management/viatics*') }}{{ activeMenu('chargeaccount*') }}">
-                          <a href="#"><i class="fa fa-donate"></i> CAJA MENOR Y BONIFICACIONES<span class="pull-right-container">
-                              <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                          </a>
-                          <ul class="treeview-menu">
-                            {{-- <li class="{{ activeMenu('human_management/bonus/general*') }}"><a class="btn-send" href="{{route('work_permit_bonuses')}}"><i class="fa fa-theater-masks"></i> GENERAL</a></li> --}}
-                            @if (auth()->user()->hasAnyPermission(['Entregar caja menor manual','Crear corte bonificaciones de permisos de trabajo','Ver bonificaciones de permisos de trabajo','Editar bonificaciones de permisos de trabajo','Exportar bonificaciones de permisos de trabajo','Aprobar bonificaciones de permisos de trabajo']))
-                              <li class="{{ activeMenu('human_management/bonus/minor_box*') }}"><a class="btn-send" href="{{route('bonus_minor_box')}}"><i class="fa fa-box"></i> CAJA MENOR</a></li>
-                              <li class="{{ activeMenu('human_management/viatics/technicals*') }}"><a class="btn-send" href="{{route('work_permit_viatics')}}"><i class="fas fa-plane"></i> VÍATICOS</a></li>
-                              <li class="{{ activeMenu('human_management/bonus/technicals*') }}"><a class="btn-send" href="{{route('bonuses_technical')}}"><i class="fa fa-gift"></i> BONIFICACIONES TÉCNICAS</a></li>
-                            @endif
-                            @if (auth()->user()->hasAnyPermission(['Lista de bonificaciones a administrativos y conductores','Crear bonificaciones a administrativos y conductores','Ver bonificaciones a administrativos y conductores','Editar bonificaciones a administrativos y conductores','Descargar bonificaciones a administrativos y conductores','Eliminar bonificaciones a administrativos y conductores']))
-                              <li class="{{ activeMenu('human_management/bonus/administratives*') }}"><a class="btn-send" href="{{route('admin_bonuses')}}"><i class="fa fa-user-shield"></i> BONIFICACIONES ADMINISTRATIVOS Y CONDUCTORES</a></li>
-                            @endif
-                            @if (auth()->user()->hasAnyPermission(['Lista de cuentas de cobro','Lista de cuentas de cobro propias','Generar cuenta de cobro abierta','Crear cuenta de cobro','Ver cuenta de cobro','Aprobar cuenta de cobro','Eliminar cuenta de cobro']))
-                              <li class="{{ activeMenu('chargeaccount*') }}"><a class="btn-send" href="{{route('chargeaccount')}}"><i class="fa fa-cash-register"></i> CUENTAS DE COBRO</a></li>
-                            @endif
-                          </ul>
                     </li>
                 @endif
                 @if (auth()->user()->hasAnyPermission(['Aprobar evaluación de desempeño','Calificar evaluaciones de desempeño','Disparar evaluación de desempeño','Evaluar evaluaciones de desempeño','Lista de evaluaciones de desempeño','Ver evaluaciones de desempeño']))
@@ -334,10 +346,10 @@
                   <li class="{{ activeMenu('attention_call*')}} {{ activeMenu('show_called*') }}"> <a  class="btn-send"href="{{route('attention_call')}}"><i class="fa fa-gavel"></i> DESCARGOS</a></li>
                 @endif
                 @if (auth()->user()->hasAnyPermission(['Crear memorandos','Editar memorandos','Eliminar memorandos','Lista de memorandos','Ver memorandos']))
-                    <li class="{{ activeMenu('memorandum*')}}"> <a  class="btn-send"href="{{route('memorandum')}}"><i class="fa fa-book-reader"></i> MEMORANDOS</a></li>
+                    <li class="{{ activeMenu('human_management/memorandum*')}}"> <a  class="btn-send"href="{{route('memorandum')}}"><i class="fa fa-book-reader"></i> MEMORANDOS</a></li>
                 @endif
                 @if (auth()->user()->hasAnyPermission(['Aprobar entrevistas','Crear entrevistas','Editar entrevistas','Eliminar entrevistas','Lista de entrevista','Ver entrevistas']))
-                    <li class="{{ activeMenu('interview*') }}"><a class="btn-send" href="{{ route('interview') }}"><i class="fa fa-file-alt"></i> ENTREVISTAS</a></li>
+                    <li class="{{ activeMenu('human_management/interview*') }}"><a class="btn-send" href="{{ route('interview') }}"><i class="fa fa-file-alt"></i> ENTREVISTAS</a></li>
                 @endif
                 @if (auth()->user()->hasAnyPermission(['Aprobar hojas de vida','Crear hojas de vida','Editar hojas de vida','Eliminar hojas de vida','Lista de hojas de vida','Ver hojas de vida']))
                     <li class="{{ activeMenu('curriculum*') }}"><a class="btn-send" href="{{ route('curriculums') }}"><i class="fa fa-file-signature"></i> HOJAS DE VIDA</a></li>
@@ -405,7 +417,7 @@
         @endif
         {{-- ADMINISTRACION DEL SISTEMA --}}
         @if (auth()->user()->hasAnyPermission(['Configurar cargos','Configurar mensajes en el sistema','Crear documentos para la cartelera','Editar documentos de la cartelera','Eliminar documentos de la cartelera']))
-            <li class="treeview {{ activeMenu('position_settings*') }}{{activeMenu('learned_lesson*')}}{{ activeMenu('billboard*') }}{{ activeMenu('setting/messages*') }}">
+            <li class="treeview {{ activeMenu('setting/position*') }}{{activeMenu('learned_lesson*')}}{{ activeMenu('billboard*') }}{{ activeMenu('setting/messages*') }}">
               <a href="#">
                 <i class="fa fa-tachometer-alt"></i> <span>ADMINISTRACIÓN DEL SISTEMA</span><span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
@@ -413,7 +425,7 @@
               </a>
               <ul class="treeview-menu">
                 <li class="hide"><a href="#"><i class="fa fa-map-marker-alt"></i> SEDES</a></li>
-                <li class="hide"><a href="#"><i class="fa fa-wave-square"></i> AREAS</a>,@if ('Configurar cargos')])<li class="{{ activeMenu('position_settings*') }}"><a class="btn-send" href="{{route('position_setting')}}"><i class="fa fa-user-plus"></i> CARGOS</a></li>
+                <li class="hide"><a href="#"><i class="fa fa-wave-square"></i> AREAS</a>,@if ('Configurar cargos')])<li class="{{ activeMenu('setting/position*') }}"><a class="btn-send" href="{{route('position_setting')}}"><i class="fa fa-user-plus"></i> CARGOS</a></li>
                 @endif
                 @if (auth()->user()->hasAnyPermission(['Crear documentos para la cartelera','Editar documentos de la cartelera','Eliminar documentos de la cartelera','Lista de tipos de cartelera','Crear tipos de cartelera','Ver tipos de cartelera','Editar tipos de cartelera','Eliminar tipos de cartelera']))
                     <li class="treeview {{ activeMenu('billboard*') }}">

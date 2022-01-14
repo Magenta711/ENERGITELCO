@@ -207,7 +207,7 @@ class premiumController extends Controller
                 'commentary'=>$request->commentary,
                 'approver_id' => auth()->id(),
             ]);
-            $id->responsable->notify(new notificationMain($id->id,'Se ha aprobado la prima de servicios '.$id->id,'human_management/premium/show/'));
+            $id->responsable->notify(new notificationMain($id->id,'Se ha aprobado la prima de servicios '.$id->id,'finances/premium/show/'));
             // $i = 0;
             foreach ($id->users as $key => $data) {
                 // PDF
@@ -244,7 +244,7 @@ class premiumController extends Controller
                 'commentary'=>$request->commentary,
                 'coordinador' => auth()->id(),
             ]);
-            $id->responsable->notify(new notificationMain($id->id,'No se aprobó la solicitud de prima de servicio '.$id->id,'human_management/premium/show/'));
+            $id->responsable->notify(new notificationMain($id->id,'No se aprobó la solicitud de prima de servicio '.$id->id,'finances/premium/show/'));
             return redirect()->back()->with(['success'=>'Se ha desaprobado la solicitud correctamente']);
         }
     }

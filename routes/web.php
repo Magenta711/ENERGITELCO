@@ -61,6 +61,11 @@ Route::get('/view-clear', function() {
 });
 
 
+Route::get('stora/{file}', function ($file) {
+    $path = storage_path('app/private/signature/'. $file);
+    return response()->file($path);
+})->name('uploads')->middleware('auth')->middleware('verified');
+
 Route::post('guest/message','guestController@send')->name('guest_message_send');
 
 Auth::routes(['verify' => true]);
@@ -106,25 +111,25 @@ Route::put('human_management/work_permit/{id}','human_management\workPermitContr
 Route::delete('human_management/work_permit/delete/{id}','human_management\workPermitController@destroy')->name('work_permit_delete');
 
 //viatics
-Route::get('human_management/viatics/technicals','human_management\workPermitViaticsesController@index')->name('work_permit_viatics');
-Route::get('human_management/viatics/technicals/create','human_management\workPermitViaticsesController@create')->name('work_permit_viatics_create');
-Route::post('human_management/viatics/technicals','human_management\workPermitViaticsesController@store')->name('work_permit_viatics_store');
-Route::get('human_management/viatics/technicals/{id}','human_management\workPermitViaticsesController@show')->name('work_permit_viatics_show');
-Route::get('human_management/viatics/technicals/{id}/edit','human_management\workPermitViaticsesController@edit')->name('work_permit_viatics_edit');
-Route::put('human_management/viatics/technicals/{id}','human_management\workPermitViaticsesController@update')->name('work_permit_viatics_update');
-Route::get('human_management/viatics/technicals/download/{id}','human_management\workPermitViaticsesController@export')->name('work_permit_viatics_export');
-Route::post('human_management/viatics/technicals/{id}','human_management\workPermitViaticsesController@approve')->name('work_permit_viaticses_approve');
+Route::get('finances/viatics/technicals','human_management\workPermitViaticsesController@index')->name('work_permit_viatics');
+Route::get('finances/viatics/technicals/create','human_management\workPermitViaticsesController@create')->name('work_permit_viatics_create');
+Route::post('finances/viatics/technicals','human_management\workPermitViaticsesController@store')->name('work_permit_viatics_store');
+Route::get('finances/viatics/technicals/{id}','human_management\workPermitViaticsesController@show')->name('work_permit_viatics_show');
+Route::get('finances/viatics/technicals/{id}/edit','human_management\workPermitViaticsesController@edit')->name('work_permit_viatics_edit');
+Route::put('finances/viatics/technicals/{id}','human_management\workPermitViaticsesController@update')->name('work_permit_viatics_update');
+Route::get('finances/viatics/technicals/download/{id}','human_management\workPermitViaticsesController@export')->name('work_permit_viatics_export');
+Route::post('finances/viatics/technicals/{id}','human_management\workPermitViaticsesController@approve')->name('work_permit_viaticses_approve');
 // Route::delete('human_management/fall_protection_equipment_inspection/delete/{id}','human_management\fallProtectionEquipmentInspectionController@destroy')->name('fall_protection_equipment_inspection_delete');
 
 //bonus
-Route::get('human_management/bonus/technicals','human_management\workPermitBonusesController@index')->name('bonuses_technical');
-Route::get('human_management/bonus/technicals/create','human_management\workPermitBonusesController@create')->name('bonuses_technical_create');
-Route::post('human_management/bonus/technicals','human_management\workPermitBonusesController@store')->name('bonuses_technical_store');
-Route::get('human_management/bonus/technicals/{id}','human_management\workPermitBonusesController@show')->name('bonuses_technical_show');
-Route::get('human_management/bonus/technicals/{id}/edit','human_management\workPermitBonusesController@edit')->name('bonuses_technical_edit');
-Route::put('human_management/bonus/technicals/{id}','human_management\workPermitBonusesController@update')->name('bonuses_technical_update');
-Route::get('human_management/bonus/technicals/download/{id}','human_management\workPermitBonusesController@export')->name('bonuses_technical_export');
-Route::post('human_management/bonus/technicals/{id}','human_management\workPermitBonusesController@approve')->name('bonuses_technical_approve');
+Route::get('finances/bonus/technicals','human_management\workPermitBonusesController@index')->name('bonuses_technical');
+Route::get('finances/bonus/technicals/create','human_management\workPermitBonusesController@create')->name('bonuses_technical_create');
+Route::post('finances/bonus/technicals','human_management\workPermitBonusesController@store')->name('bonuses_technical_store');
+Route::get('finances/bonus/technicals/{id}','human_management\workPermitBonusesController@show')->name('bonuses_technical_show');
+Route::get('finances/bonus/technicals/{id}/edit','human_management\workPermitBonusesController@edit')->name('bonuses_technical_edit');
+Route::put('finances/bonus/technicals/{id}','human_management\workPermitBonusesController@update')->name('bonuses_technical_update');
+Route::get('finances/bonus/technicals/download/{id}','human_management\workPermitBonusesController@export')->name('bonuses_technical_export');
+Route::post('finances/bonus/technicals/{id}','human_management\workPermitBonusesController@approve')->name('bonuses_technical_approve');
 // Route::delete('human_management/fall_protection_equipment_inspection/delete/{id}','human_management\fallProtectionEquipmentInspectionController@destroy')->name('fall_protection_equipment_inspection_delete');
 
 //fall protection equipment inspection
@@ -163,17 +168,17 @@ Route::post('human_management/work_permits_notifications_medical_incapacity/plus
 Route::post('human_management/work_permits_notifications_medical_incapacity/rest/{id}','human_management\workPermitNotificationsMedicalIncapacityController@rest')->name('work_permits_notifications_medical_incapacity_rest');
 
 //Payroll and overtime news report 
-Route::get('human_management/payroll_overtime_news_report','human_management\payrollOvertimeNewsReportController@index')->name('payroll_overtime_news_report');
-Route::get('human_management/payroll_overtime_news_report/create','human_management\payrollOvertimeNewsReportController@create')->name('payroll_overtime_news_report_create');
-Route::post('human_management/payroll_overtime_news_report','human_management\payrollOvertimeNewsReportController@store')->name('payroll_overtime_news_report_store');
-Route::get('human_management/payroll_overtime_news_report/show/{id}','human_management\payrollOvertimeNewsReportController@show')->name('payroll_overtime_news_report_show');
-Route::get('human_management/payroll_overtime_news_report/edit/{id}','human_management\payrollOvertimeNewsReportController@edit')->name('payroll_overtime_news_report_edit');
-Route::put('human_management/payroll_overtime_news_report/{id}','human_management\payrollOvertimeNewsReportController@update')->name('payroll_overtime_news_report_update');
-Route::get('human_management/payroll_overtime_news_report/download/{id}','human_management\payrollOvertimeNewsReportController@download')->name('payroll_overtime_news_report_download');
-Route::get('human_management/payroll_overtime_news_report/export/{id}','human_management\payrollOvertimeNewsReportController@export')->name('payroll_overtime_news_report_export');
-Route::get('human_management/payroll_overtime_news_report/export2/{id}','human_management\payrollOvertimeNewsReportController@export2')->name('payroll_overtime_news_report_export2');
-Route::post('human_management/payroll_overtime_news_report/{id}','human_management\payrollOvertimeNewsReportController@approve')->name('payroll_overtime_news_report_approve');
-Route::delete('human_management/payroll_overtime_news_report/delete/{id}','human_management\payrollOvertimeNewsReportController@delete')->name('payroll_overtime_news_report_delete');
+Route::get('finances/payroll_overtime_news_report','human_management\payrollOvertimeNewsReportController@index')->name('payroll_overtime_news_report');
+Route::get('finances/payroll_overtime_news_report/create','human_management\payrollOvertimeNewsReportController@create')->name('payroll_overtime_news_report_create');
+Route::post('finances/payroll_overtime_news_report','human_management\payrollOvertimeNewsReportController@store')->name('payroll_overtime_news_report_store');
+Route::get('finances/payroll_overtime_news_report/show/{id}','human_management\payrollOvertimeNewsReportController@show')->name('payroll_overtime_news_report_show');
+Route::get('finances/payroll_overtime_news_report/edit/{id}','human_management\payrollOvertimeNewsReportController@edit')->name('payroll_overtime_news_report_edit');
+Route::put('finances/payroll_overtime_news_report/{id}','human_management\payrollOvertimeNewsReportController@update')->name('payroll_overtime_news_report_update');
+Route::get('finances/payroll_overtime_news_report/download/{id}','human_management\payrollOvertimeNewsReportController@download')->name('payroll_overtime_news_report_download');
+Route::get('finances/payroll_overtime_news_report/export/{id}','human_management\payrollOvertimeNewsReportController@export')->name('payroll_overtime_news_report_export');
+Route::get('finances/payroll_overtime_news_report/export2/{id}','human_management\payrollOvertimeNewsReportController@export2')->name('payroll_overtime_news_report_export2');
+Route::post('finances/payroll_overtime_news_report/{id}','human_management\payrollOvertimeNewsReportController@approve')->name('payroll_overtime_news_report_approve');
+Route::delete('finances/payroll_overtime_news_report/delete/{id}','human_management\payrollOvertimeNewsReportController@delete')->name('payroll_overtime_news_report_delete');
 
 //Request to withdraw severance
 Route::get('human_management/request_withdraw_severance','human_management\requestWithdrawSeveranceController@index')->name('request_withdraw_severance');
@@ -421,14 +426,14 @@ Route::get('notifications/markerAllAsRead','HomeController@notification_all_read
 Route::get('notifications/DeleteRead','HomeController@notification_delete')->name('notification_delete');
 
 //Memorandum
-Route::get('memorandum','MemorandumController@index')->name('memorandum');
-Route::get('memorandum/show/{id}','MemorandumController@show')->name('memorandum_show');
-Route::get('memorandum/create','MemorandumController@create')->name('memorandum_create');
-Route::post('memorandum','MemorandumController@store')->name('memorandum_store');
-Route::get('memorandum/{id}/edit','MemorandumController@edit')->name('memorandum_edit');
-Route::put('memorandum/{id}','MemorandumController@update')->name('memorandum_update');
-Route::put('memorandum/update/{id}','MemorandumController@update1')->name('memorandum_update1');
-Route::delete('memorandum/{id}','MemorandumController@destroy')->name('memorandum_destroy');
+Route::get('human_management/memorandum','MemorandumController@index')->name('memorandum');
+Route::get('human_management/memorandum/show/{id}','MemorandumController@show')->name('memorandum_show');
+Route::get('human_management/memorandum/create','MemorandumController@create')->name('memorandum_create');
+Route::post('human_management/memorandum','MemorandumController@store')->name('memorandum_store');
+Route::get('human_management/memorandum/{id}/edit','MemorandumController@edit')->name('memorandum_edit');
+Route::put('human_management/memorandum/{id}','MemorandumController@update')->name('memorandum_update');
+Route::put('human_management/memorandum/update/{id}','MemorandumController@update1')->name('memorandum_update1');
+Route::delete('human_management/memorandum/{id}','MemorandumController@destroy')->name('memorandum_destroy');
 
 //curriculum
 Route::get('curriculums','curriculumController@index')->name('curriculums')->middleware('auth')->middleware('verified');
@@ -458,33 +463,33 @@ Route::post('signature_contract','curriculumController@signature_contract')->nam
 Route::post('upload_file','curriculumController@upload_file')->name('upload_file');
 
 //interview
-Route::get('interviews','interviewController@index')->name('interview');
-Route::get('interview/show/{id}','interviewController@show')->name('interview_show');
-Route::get('interview/create','interviewController@create')->name('interview_create');
-Route::get('interview/{id}/create','interviewController@create_application')->name('interview_create_application');
-Route::post('interview','interviewController@store')->name('interview_store');
-Route::get('interview/{id}/edit','interviewController@edit')->name('interview_edit');
-Route::put('interview/{id}','interviewController@update')->name('interview_update');
-Route::put('interview/approval/{id}','interviewController@approve')->name('interview_approve');
-Route::put('interview/not_approval/{id}','interviewController@not_approve')->name('interview_not_approve');
-Route::delete('interview/{id}','interviewController@destroy')->name("interview_delete");
-Route::get('interview/{id}','interviewController@presend_documentation')->name("interview_presend_documentation");
-Route::post('interview/{id}','interviewController@send_documentation')->name("interview_send_documentation");
+Route::get('human_management/interview','interviewController@index')->name('interview');
+Route::get('human_management/interview/show/{id}','interviewController@show')->name('interview_show');
+Route::get('human_management/interview/create','interviewController@create')->name('interview_create');
+Route::get('human_management/interview/{id}/create','interviewController@create_application')->name('interview_create_application');
+Route::post('human_management/interview','interviewController@store')->name('interview_store');
+Route::get('human_management/interview/{id}/edit','interviewController@edit')->name('interview_edit');
+Route::put('human_management/interview/{id}','interviewController@update')->name('interview_update');
+Route::put('human_management/interview/approval/{id}','interviewController@approve')->name('interview_approve');
+Route::put('human_management/interview/not_approval/{id}','interviewController@not_approve')->name('interview_not_approve');
+Route::delete('human_management/interview/{id}','interviewController@destroy')->name("interview_delete");
+Route::get('human_management/interview/{id}','interviewController@presend_documentation')->name("interview_presend_documentation");
+Route::post('human_management/interview/{id}','interviewController@send_documentation')->name("interview_send_documentation");
 
-// Route::get('interview/{id}/export','interviewController@export')->name("export_contract");
+// Route::get('human_management/interview/{id}/export','interviewController@export')->name("export_contract");
 
 // position setting
-Route::get('position_settings','SettingsController@position_setting')->name('position_setting');
-Route::get('position_setting/show/{id}','SettingsController@position_setting_show')->name('position_setting_show');
-Route::get('position_setting/create','SettingsController@position_setting_create')->name('position_setting_create');
-Route::post('position_setting','SettingsController@position_setting_store')->name('position_setting_store');
-Route::get('position_setting/{id}/edit','SettingsController@position_setting_edit')->name('position_setting_edit');
-Route::put('position_setting/{id}','SettingsController@position_setting_update')->name('position_setting_update');
+Route::get('setting/position','SettingsController@position_setting')->name('position_setting');
+Route::get('setting/position/show/{id}','SettingsController@position_setting_show')->name('position_setting_show');
+Route::get('setting/position/create','SettingsController@position_setting_create')->name('position_setting_create');
+Route::post('setting/position','SettingsController@position_setting_store')->name('position_setting_store');
+Route::get('setting/position/{id}/edit','SettingsController@position_setting_edit')->name('position_setting_edit');
+Route::put('setting/position/{id}','SettingsController@position_setting_update')->name('position_setting_update');
 
 //documents
 Route::get('documents','DocumentsController@index')->name('documents');
-Route::get('documents/{id}','DocumentsController@show')->name('documents_show');
-Route::get('document/create','DocumentsController@create')->name('documents_create');
+Route::get('documents/show/{id}','DocumentsController@show')->name('documents_show');
+Route::get('documents/create','DocumentsController@create')->name('documents_create');
 Route::post('documents','DocumentsController@store')->name('documents_store');
 Route::get('documents/{id}/edit','DocumentsController@edit')->name('documents_edit');
 Route::put('documents/{id}','DocumentsController@update')->name('documents_update');
@@ -672,22 +677,22 @@ Route::put('ccjl/administration/{id}','ccjl\products\ccjlAdministrationControlle
 
 // Inventario
 // computers
-Route::get('invetory/computer','inventory\computerController@index')->name('inv_computer');
-Route::get('invetory/computer/create','inventory\computerController@create')->name('inv_computer_create');
-Route::post('invetory/computer','inventory\computerController@store')->name('inv_computer_store');
-Route::get('invetory/computer/show/{id}','inventory\computerController@show')->name('inv_computer_show');
-Route::get('invetory/computer/{id}/edit','inventory\computerController@edit')->name('inv_computer_edit');
-Route::put('invetory/computer/{id}','inventory\computerController@update')->name('inv_computer_update');
-Route::delete('invetory/computer/{id}','inventory\computerController@destroy')->name('inv_computer_delete');
+Route::get('logistics_infrastructure/invetory/computer','inventory\computerController@index')->name('inv_computer');
+Route::get('logistics_infrastructure/invetory/computer/create','inventory\computerController@create')->name('inv_computer_create');
+Route::post('logistics_infrastructure/invetory/computer','inventory\computerController@store')->name('inv_computer_store');
+Route::get('logistics_infrastructure/invetory/computer/show/{id}','inventory\computerController@show')->name('inv_computer_show');
+Route::get('logistics_infrastructure/invetory/computer/{id}/edit','inventory\computerController@edit')->name('inv_computer_edit');
+Route::put('logistics_infrastructure/invetory/computer/{id}','inventory\computerController@update')->name('inv_computer_update');
+Route::delete('logistics_infrastructure/invetory/computer/{id}','inventory\computerController@destroy')->name('inv_computer_delete');
 
 //vehicles
-Route::get('invetory/vehicle','inventory\vehicleController@index')->name('inv_vehicle');
-Route::get('invetory/vehicle/create','inventory\vehicleController@create')->name('inv_vehicle_create');
-Route::post('invetory/vehicle','inventory\vehicleController@store')->name('inv_vehicle_store');
-Route::get('invetory/vehicle/show/{id}','inventory\vehicleController@show')->name('inv_vehicle_show');
-Route::get('invetory/vehicle/{id}/edit','inventory\vehicleController@edit')->name('inv_vehicle_edit');
-Route::put('invetory/vehicle/{id}','inventory\vehicleController@update')->name('inv_vehicle_update');
-Route::delete('invetory/vehicle/{id}','inventory\vehicleController@destroy')->name('inv_vehicle_delete');
+Route::get('logistics_infrastructure/invetory/vehicle','inventory\vehicleController@index')->name('inv_vehicle');
+Route::get('logistics_infrastructure/invetory/vehicle/create','inventory\vehicleController@create')->name('inv_vehicle_create');
+Route::post('logistics_infrastructure/invetory/vehicle','inventory\vehicleController@store')->name('inv_vehicle_store');
+Route::get('logistics_infrastructure/invetory/vehicle/show/{id}','inventory\vehicleController@show')->name('inv_vehicle_show');
+Route::get('logistics_infrastructure/invetory/vehicle/{id}/edit','inventory\vehicleController@edit')->name('inv_vehicle_edit');
+Route::put('logistics_infrastructure/invetory/vehicle/{id}','inventory\vehicleController@update')->name('inv_vehicle_update');
+Route::delete('logistics_infrastructure/invetory/vehicle/{id}','inventory\vehicleController@destroy')->name('inv_vehicle_delete');
 
 // clearings
 Route::get('project/clearing','projects\clearingController@index')->name('clearings');
@@ -760,15 +765,15 @@ Route::put('project/routes/not_approval/{id}','projects\RoutesProjectController@
 Route::delete('project/routes/{id}','projects\RoutesProjectController@destroy')->name('routes_delete');
 
 //minor box
-Route::get('human_management/bonus/minor_box','human_management\bonus\MinorBoxController@index')->name('bonus_minor_box');
-Route::get('human_management/bonus/minor_box/create','human_management\bonus\MinorBoxController@create')->name('bonus_minor_box_create');
-Route::post('human_management/bonus/minor_box','human_management\bonus\MinorBoxController@store')->name('bonus_minor_box_store');
-Route::get('human_management/bonus/minor_box/{id}','human_management\bonus\MinorBoxController@show')->name('bonus_minor_box_show');
-Route::get('human_management/bonus/minor_box/{id}/edit','human_management\bonus\MinorBoxController@edit')->name('bonus_minor_box_edit');
-Route::put('human_management/bonus/minor_box/{id}','human_management\bonus\MinorBoxController@update')->name('bonus_minor_box_update');
-Route::get('human_management/bonus/minor_box/{id}/export','human_management\bonus\MinorBoxController@export')->name('bonus_minor_box_export');
-Route::post('human_management/bonus/minor_box/add_user','human_management\bonus\MinorBoxController@add_user')->name('bonus_minor_box_add_user');
-Route::patch('human_management/bonus/minor_box/{id}/cleaner','human_management\bonus\MinorBoxController@cleaner')->name('bonus_minor_box_cleaner_user');
+Route::get('finances/bonus/minor_box','human_management\bonus\MinorBoxController@index')->name('bonus_minor_box');
+Route::get('finances/bonus/minor_box/create','human_management\bonus\MinorBoxController@create')->name('bonus_minor_box_create');
+Route::post('finances/bonus/minor_box','human_management\bonus\MinorBoxController@store')->name('bonus_minor_box_store');
+Route::get('finances/bonus/minor_box/{id}','human_management\bonus\MinorBoxController@show')->name('bonus_minor_box_show');
+Route::get('finances/bonus/minor_box/{id}/edit','human_management\bonus\MinorBoxController@edit')->name('bonus_minor_box_edit');
+Route::put('finances/bonus/minor_box/{id}','human_management\bonus\MinorBoxController@update')->name('bonus_minor_box_update');
+Route::get('finances/bonus/minor_box/{id}/export','human_management\bonus\MinorBoxController@export')->name('bonus_minor_box_export');
+Route::post('finances/bonus/minor_box/add_user','human_management\bonus\MinorBoxController@add_user')->name('bonus_minor_box_add_user');
+Route::patch('finances/bonus/minor_box/{id}/cleaner','human_management\bonus\MinorBoxController@cleaner')->name('bonus_minor_box_cleaner_user');
 
 // inventarios de equipos
 Route::get('execution_works/inventory/equipment','projects\inventory\EquipmentController@index')->name('mintic_inventory_equipment');
@@ -809,26 +814,26 @@ Route::get('human_management/proceeding/download/{id}','human_management\proceed
 Route::delete('human_management/proceeding/{id}','human_management\proceedingController@destroy')->name('proceeding_delete');
 
 //Liquidacion
-Route::get('human_management/settlement','human_management\settlementController@index')->name('settlement');
-Route::get('human_management/settlement/create','human_management\settlementController@create')->name('settlement_create');
-Route::post('human_management/settlement','human_management\settlementController@store')->name('settlement_store');
-Route::get('human_management/settlement/show/{id}','human_management\settlementController@show')->name('settlement_show');
-Route::patch('human_management/settlement/{id}','human_management\settlementController@approve')->name('settlement_approve');
-Route::get('human_management/settlement/{id}/edit','human_management\settlementController@edit')->name('settlement_edit');
-Route::put('human_management/settlement/{id}','human_management\settlementController@update')->name('settlement_update');
-Route::get('human_management/settlement/download/{id}','human_management\settlementController@download')->name('settlement_download');
-Route::delete('human_management/settlement/{id}','human_management\settlementController@destroy')->name('settlement_delete');
+Route::get('finances/settlement','human_management\settlementController@index')->name('settlement');
+Route::get('finances/settlement/create','human_management\settlementController@create')->name('settlement_create');
+Route::post('finances/settlement','human_management\settlementController@store')->name('settlement_store');
+Route::get('finances/settlement/show/{id}','human_management\settlementController@show')->name('settlement_show');
+Route::patch('finances/settlement/{id}','human_management\settlementController@approve')->name('settlement_approve');
+Route::get('finances/settlement/{id}/edit','human_management\settlementController@edit')->name('settlement_edit');
+Route::put('finances/settlement/{id}','human_management\settlementController@update')->name('settlement_update');
+Route::get('finances/settlement/download/{id}','human_management\settlementController@download')->name('settlement_download');
+Route::delete('finances/settlement/{id}','human_management\settlementController@destroy')->name('settlement_delete');
 
 //Bonificaciones a administrativos y conductores
-Route::get('human_management/bonus/administratives','human_management\adminBonusesController@index')->name('admin_bonuses');
-Route::get('human_management/bonus/administratives/create','human_management\adminBonusesController@create')->name('admin_bonuses_create');
-Route::post('human_management/bonus/administratives','human_management\adminBonusesController@store')->name('admin_bonuses_store');
-Route::get('human_management/bonus/administratives/show/{id}','human_management\adminBonusesController@show')->name('admin_bonuses_show');
-Route::patch('human_management/bonus/administratives/{id}','human_management\adminBonusesController@approve')->name('admin_bonuses_approve');
-Route::get('human_management/bonus/administratives/{id}/edit','human_management\adminBonusesController@edit')->name('admin_bonuses_edit');
-Route::put('human_management/bonus/administratives/{id}','human_management\adminBonusesController@update')->name('admin_bonuses_update');
-Route::get('human_management/bonus/administratives/download/{id}','human_management\adminBonusesController@download')->name('admin_bonuses_download');
-Route::delete('human_management/bonus/administratives/{id}','human_management\adminBonusesController@destroy')->name('admin_bonuses_delete');
+Route::get('finances/bonus/administratives','human_management\adminBonusesController@index')->name('admin_bonuses');
+Route::get('finances/bonus/administratives/create','human_management\adminBonusesController@create')->name('admin_bonuses_create');
+Route::post('finances/bonus/administratives','human_management\adminBonusesController@store')->name('admin_bonuses_store');
+Route::get('finances/bonus/administratives/show/{id}','human_management\adminBonusesController@show')->name('admin_bonuses_show');
+Route::patch('finances/bonus/administratives/{id}','human_management\adminBonusesController@approve')->name('admin_bonuses_approve');
+Route::get('finances/bonus/administratives/{id}/edit','human_management\adminBonusesController@edit')->name('admin_bonuses_edit');
+Route::put('finances/bonus/administratives/{id}','human_management\adminBonusesController@update')->name('admin_bonuses_update');
+Route::get('finances/bonus/administratives/download/{id}','human_management\adminBonusesController@download')->name('admin_bonuses_download');
+Route::delete('finances/bonus/administratives/{id}','human_management\adminBonusesController@destroy')->name('admin_bonuses_delete');
 
 // Acciones de mejora
 Route::get('human_management/improvement_action','human_management\improvementActionController@index')->name('improvement_action');
@@ -937,16 +942,16 @@ Route::get('logistics_infrastructure/transit_taxes/show/{id}','logistics_infrast
 Route::get('logistics_infrastructure/transit_taxes/{id}/edit','logistics_infrastructure\transitTaxesController@edit')->name('transit_taxes_edit');
 Route::put('logistics_infrastructure/transit_taxes/{id}','logistics_infrastructure\transitTaxesController@update')->name('transit_taxes_update');
 
-Route::get('human_management/premium','human_management\premiumController@index')->name('premium');
-Route::get('human_management/premium/create','human_management\premiumController@create')->name('premium_create');
-Route::post('human_management/premium','human_management\premiumController@store')->name('premium_store');
-Route::get('human_management/premium/show/{id}','human_management\premiumController@show')->name('premium_show');
-Route::get('human_management/premium/{id}/edit','human_management\premiumController@edit')->name('premium_edit');
-Route::put('human_management/premium/{id}','human_management\premiumController@update')->name('premium_update');
-Route::get('human_management/premium/download/{id}','human_management\premiumController@download')->name('premium_download');
-Route::get('human_management/premium/export/{id}','human_management\premiumController@export')->name('premium_export');
-Route::post('human_management/premium/{id}','human_management\premiumController@approve')->name('premium_approve');
-Route::delete('human_management/premium/{id}','human_management\premiumController@destroy')->name('premium_delete');
+Route::get('finances/premium','human_management\premiumController@index')->name('premium');
+Route::get('finances/premium/create','human_management\premiumController@create')->name('premium_create');
+Route::post('finances/premium','human_management\premiumController@store')->name('premium_store');
+Route::get('finances/premium/show/{id}','human_management\premiumController@show')->name('premium_show');
+Route::get('finances/premium/{id}/edit','human_management\premiumController@edit')->name('premium_edit');
+Route::put('finances/premium/{id}','human_management\premiumController@update')->name('premium_update');
+Route::get('finances/premium/download/{id}','human_management\premiumController@download')->name('premium_download');
+Route::get('finances/premium/export/{id}','human_management\premiumController@export')->name('premium_export');
+Route::post('finances/premium/{id}','human_management\premiumController@approve')->name('premium_approve');
+Route::delete('finances/premium/{id}','human_management\premiumController@destroy')->name('premium_delete');
 
 Route::get('get_data_json_eb','HomeController@data_json')->name('data_json_eb');
 
@@ -959,8 +964,3 @@ Route::get('chargeaccount/download/{id}','human_management\chargeaccountControll
 Route::put('chargeaccount/approve/{id}','human_management\chargeaccountController@approve')->name("chargeaccount_approve")->middleware('auth')->middleware('verified');;
 Route::delete('chargeaccount/{id}','human_management\chargeaccountController@destroy')->name("chargeaccount_delete")->middleware('auth')->middleware('verified');
 Route::get('chargeaccount/generate','human_management\chargeaccountController@generate')->name("chargeaccount_generate")->middleware('auth')->middleware('verified');
-
-Route::get('stora/{file}', function ($file) {
-    $path = storage_path('app/private/signature/'. $file);
-    return response()->file($path);
-})->name('uploads')->middleware('auth')->middleware('verified');

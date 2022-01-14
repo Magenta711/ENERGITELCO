@@ -173,7 +173,7 @@ class vehicleController extends Controller
 
         foreach ($users as $user) {
             if ($user->hasPermissionTo('Lista de vehículos del inventario')) {
-                $user->notify(new notificationMain($vehicle->id,'Nuevo vehículo registrado '.$vehicle->id,'invetory/vehicle/show/'));
+                $user->notify(new notificationMain($vehicle->id,'Nuevo vehículo registrado '.$vehicle->id,'logistics_infrastructure/invetory/vehicle/show/'));
             }
         }
         return redirect()->route('inv_vehicle')->with('success','Se ha creado el vehículo correctamente');
@@ -343,7 +343,7 @@ class vehicleController extends Controller
         $users = User::where('state',1)->get();
         foreach ($users as $user) {
             if ($user->hasPermissionTo('Lista de vehículos del inventario')) {
-                $user->notify(new notificationMain($id->id,'Un vehículo del inventario fue editado '.$id->id,'invetory/vehicle/show/'));
+                $user->notify(new notificationMain($id->id,'Un vehículo del inventario fue editado '.$id->id,'logistics_infrastructure/invetory/vehicle/show/'));
             }
         }
         

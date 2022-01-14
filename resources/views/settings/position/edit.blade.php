@@ -17,7 +17,7 @@
                 <div class="box-header with-border">
                     <i class="fa fa-cubes"></i>
                     <h3 class="box-title">{{$id->name}}</h3>
-                    <div class="box-tools"><a href="{{route('position_setting')}}" class="btn nbtn-sm btn-success">Volver</a></div>
+                    <div class="box-tools"><a href="{{route('position_setting')}}" class="btn btn-sm btn-primary">Volver</a></div>
                 </div>
                     <!-- /.box-header -->
                 <form action="{{route('position_setting_update',$id->id)}}" method="POST">
