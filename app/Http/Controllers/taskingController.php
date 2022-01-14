@@ -338,16 +338,7 @@ class taskingController extends Controller
     {
         if ($equipments = $request->equipment) {
             foreach ($equipments as $key => $value) {
-                $inv = InvUser::where('user_id',auth()->id())->where('inventaryble_type','App\Models\project\Mintic\inventory\invMinticEquipment')->where('inventaryble_id',$key)->first();
-                taskDetailConsumable::find($value)->update([
-                    'amount' => 1,
-                    'status' => 1
-                ]);
-                $inv->update([
-                    'tickets' => 0,
-                    'departures' => 1,
-                    'stock' => 0
-                ]);
+                 
                 invMinticEquipment::find($key)->update([
                     'status' => 3
                 ]);

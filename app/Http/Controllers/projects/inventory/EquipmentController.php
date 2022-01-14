@@ -55,7 +55,9 @@ class EquipmentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'serial' => ['required']
+            'serial' => ['required'],
+            'item' => ['required'],
+            'brand' => ['required']
         ]);
         if ($request->equip_id != 0) {
             $equip = EquimentDetail::find($request->equip_id);
@@ -113,7 +115,7 @@ class EquipmentController extends Controller
             'item' => ['required'],
             'brand' => ['required'],
         ]);
-        if ($request->status == 3) {
+        // if ($request->status == 3) {
             if ($request->proyect_id && $request->tehcnical_id) {
                 $imple = MinticConsumableImplement::where('project_id',$request->proyect_id)->where('user_id',$request->tehcnical_id)->first();
                 if ($imple) {
@@ -136,17 +138,22 @@ class EquipmentController extends Controller
                     'spent' => 0,
                     'margin' => 0,
                 ]);
-                InvUser::create([
-                    'user_id' => $request->tehcnical_id,
-                    'inventaryble_id' => $imple->id,
-                    'inventaryble_type' => 'App\Models\project\Mintic\inventory\invMinticEquipment',
-                    'tickets' => 1,
-                    'departures' => 0,
-                    'stock' => 1,
-
-                ]);
+            }else if (!$request->proyect_id && $request->tehcnical_id) {
+                $inv = InvUser::where('user_id',$request->tehcnical_id)->where('inventaryble_type','App\Models\project\Mintic\inventory\invMinticEquipment')->where('inventaryble_id',$id->id)->first();
+                if ($inv) {
+                    $inv->entrar(1);
+                }else {
+                    InvUser::create([
+                        'user_id' => $request->tehcnical_id,
+                        'inventaryble_id' => $id->id,
+                        'inventaryble_type' => 'App\Models\project\Mintic\inventory\invMinticEquipment',
+                        'tickets' => 1,
+                        'departures' => 0,
+                        'stock' => 1
+                    ]);
+                }
             }
-        }
+        // }
         $id->update($request->all());
         return redirect()->route('mintic_inventory_equipment')->with('success','Se ha actualizado el equipo correctamente');
     }

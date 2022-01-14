@@ -88,7 +88,7 @@
                             <div class="col-md-4 col-xs-6">
                                 <div class="form-group">
                                     <label for="">Proyecto</label>
-                                    <select name="proyect_id" id="proyect_id" class="form-control">
+                                    <select name="proyect_id" id="proyect_id" class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona el proyecto" style="width: 100%;" data-select2-id="2" tabindex="-1" aria-hidden="true">
                                         <option selected disabled></option>
                                         @foreach ($projects as $project)
                                             <option value="{{$project->id}}">{{$project->code}} {{$project->name}}</option>
@@ -99,7 +99,7 @@
                             <div class="col-md-4 col-xs-6">
                                 <div class="form-group">
                                     <label for="">Técnico</label>
-                                    <select name="tehcnical_id" id="tehcnical_id" class="form-control">
+                                    <select name="tehcnical_id" id="tehcnical_id" class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona el funcionario" style="width: 100%;" data-select2-id="2" tabindex="-1" aria-hidden="true">
                                         <option selected disabled></option>
                                         @foreach ($users as $user)
                                             <option value="{{$user->id}}">{{$user->name}}</option>
