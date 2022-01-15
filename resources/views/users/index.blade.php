@@ -104,6 +104,9 @@
                 },
                 {
                     render: function ( data, type, row, meta ) {
+                        if (row.register.state == 2) {
+                            return 'Proceso de terminación'
+                        }
                         return row.state == 1 ? 'Activo' : 'Inactivo';
                     }
                 },

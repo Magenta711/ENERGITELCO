@@ -93,7 +93,7 @@ class transitTaxesController extends Controller
     {
         Carbon::getWeekStartsAt(Carbon::MONDAY);
         Carbon::setWeekEndsAt(Carbon::SUNDAY);
-
+   
         $time = Carbon::now();
         $start_date = $time->startOfWeek()->format('Y-m-d');
         $end_date = $time->endOfWeek()->format('Y-m-d');
@@ -132,8 +132,8 @@ class transitTaxesController extends Controller
 
         foreach ($request->report_date as $key => $value) {
             for ($i=0; $i < count($value); $i++) {
-                if ($value[$i] && $request->report_driver_id[$key][$i]) {
-                    $report = invVehicleReport::create([
+                if (isset($value[$i]) && $value[$i] && isset($request->report_driver_id[$key][$i]) && $request->report_driver_id[$key][$i]) {
+                    invVehicleReport::create([
                         'vehicle_id' => $key,
                         'date' => $value[$i],
                         'place' => $request->report_city[$key][$i],

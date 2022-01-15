@@ -84,7 +84,10 @@ class interviewController extends Controller
         //save
         $interview = interview::create($request->all());
 
-        $register = Register::create($request->all());
+        $register = Register::where('document',$request->document)->first();
+        if (!$register) {
+            $register = Register::create($request->all());
+        }
         
         $interview->update(['responsable_id' => auth()->id(),'register_id' => $register->id]);
         
@@ -305,7 +308,7 @@ class interviewController extends Controller
 
 
         $id->register->update($request->all());
-
+        $id->register->update(['state'=>1]);
         $contract = Contract::create([
             'register_id' => $id->register->id,
             'type_contract' => $request->type_contract,

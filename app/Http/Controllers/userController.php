@@ -185,6 +185,11 @@ class userController extends Controller
         if($request->email !== $id->email){
             $id->update([ 'email_verified_at' => null ]);
         }
+        if ($request->password) {
+            $request['password'] = bcrypt($request->password);
+        }else {
+            $request['password'] = $id->password;
+        }
         $id->update($request->all());
         DB::table('model_has_roles')->where('model_id',$id->id)->delete();
         
@@ -318,8 +323,12 @@ class userController extends Controller
     //Restauar
     public function restore(User $id)
     {
-        
         $id->update(['state'=>1,]);
+        if ($id->register) {
+            $id->register->update([
+                'state' => 1
+            ]);
+        }
         return redirect()->route('users')->with('success','Usuario restaurado correctamente');
     }
 

@@ -184,7 +184,8 @@ class driversController extends Controller
                     'vehicle_id' => $request->report_vehicle[$key],
                     'suject' => $request->report_suject[$key],
                     'observation' => $request->report_observation[$key],
-                    'driver_id' => $id->id
+                    'driver_id' => $id->id,
+                    'status' => $request->status[$key]
                 ]);
             }
         }

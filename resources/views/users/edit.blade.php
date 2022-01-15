@@ -119,6 +119,14 @@
                     </div>
                     {{-- HasRegister --}}
                     <hr>
+                    @can('Actualizar contraseñas de usuarios')
+                    <h3>Restablecer contraseña</h3>
+                        <div class="form-group">
+                            <label class="label-control" for="password">Nueva contraseña</label>
+                            <input type="password" name="password" value="" class="form-control" placeholder="Nueva contraseña">
+                        </div>
+                        <hr>
+                    @endcan
                     {{-- @if ($id->register) --}}
                     <h3>Información adicional</h3>
                     <div class="row">

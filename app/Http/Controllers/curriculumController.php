@@ -110,13 +110,21 @@ class curriculumController extends Controller
                 'marital_status' => ['required'],
                 'position_id' => ['required'],
             ]);
-            
-            $register = Register::create($request->all());
-            $request->register_id = $register->id;
+            $register = Register::where('document',$request->document)->first();
+            if (!$register) {
+                $register = Register::create($request->all());
+            }
+            $request['register_id'] = $register->id;
             if ($request->user_id !== 0) {
                 User::find($request->user_id)->update(['register_id' => $register->id]);
             }
             $id = $register->id;
+        }else {
+            $register = Register::find($id);
+            $register->update(['state'=>1]);
+            if ($register->user) {
+                $register->user->update([ 'state' => 1 ]);
+            }
         }
 
         $curriculum = curriculum::create($request->all());
@@ -186,6 +194,7 @@ class curriculumController extends Controller
     
     public function register(Register $id)
     {
+        $id->update(['state'=>1]);
         $roles = Role::get();
         $positions = Positions::where('state',1)->orderBy('name')->get();
         return view('curriculum.register',compact('id','roles','positions'));

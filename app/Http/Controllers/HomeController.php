@@ -25,7 +25,6 @@ use App\Models\resource\eb;
 use App\Models\SuggestionsMailbox;
 use App\Models\system_setting;
 use App\Models\SystemMessages;
-use App\Models\Work8;
 use App\Models\Work8Users;
 use App\Models\WorkWithUs;
 use App\Models\Tasking;
@@ -313,7 +312,7 @@ class HomeController extends Controller
         return response()->json($data);
     }
 
-    public function data_json()
+      public function data_json()
     {
         $cd = cd::get();
 

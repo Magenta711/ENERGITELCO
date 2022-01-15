@@ -54,7 +54,9 @@
                                     @php
                                         $count = 0;
                                         foreach ($vehicle->reports_drivers as $item){
-                                            $count++;
+                                            if ($item->date >= $id->start_date && $item->date < $id->end_date && $item->type == 'summons') {
+                                                $count++;
+                                            }
                                         }
                                         echo $count;
                                     @endphp
@@ -75,7 +77,7 @@
                                                         $report = false;
                                                     @endphp
                                                     <div id="report_destino_{{$vehicle->id}}">
-                                                    @foreach ($vehicle->reports_drivers as $item)
+                                                    @foreach ($vehicle->reports as $item)
                                                         @if ($id->start_date <= $item->date && $id->end_date >= $item->date)
                                                             @php
                                                                 $report = true;
@@ -83,13 +85,13 @@
                                                             <div class="row" id="report_origen_{{$vehicle->id}}">
                                                                 <div class="col-md-5">
                                                                     <div class="form-group">
-                                                                        <label for="report_date">Fecha</label>
+                                                                        <label for="report_date_{{$vehicle->id}}">Fecha</label>
                                                                         <input type="date" name="report_date[{{$vehicle->id}}][]" value="{{$item->date}}" id="report_date_{{$vehicle->id}}" class="form-control report_date">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">
-                                                                        <label for="report_city">Ciudad</label>
+                                                                        <label for="report_city_{{$vehicle->id}}">Ciudad</label>
                                                                         <input type="text" name="report_city[{{$vehicle->id}}][]" value="{{$item->city}}" id="report_city_{{$vehicle->id}}" class="form-control">
                                                                     </div>
                                                                 </div>
@@ -98,7 +100,17 @@
                                                                 </div>
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
-                                                                        <label for="report_driver_id">Conductor</label>
+                                                                        <label for="report_status_{{$vehicle->id}}">Estado</label>
+                                                                        <select name="report_status[{{$vehicle->id}}][]" id="report_status_{{$vehicle->id}}" class="form-control">
+                                                                            <option selected disabled></option>
+                                                                            <option {{$item->status == 0 ? 'selected' : ''}} value="0">Pendiente de pago</option>
+                                                                            <option {{$item->status == 1 ? 'selected' : ''}} value="1">Pago</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label for="report_driver_id_{{$vehicle->id}}">Conductor</label>
                                                                         <select name="report_driver_id[{{$vehicle->id}}][]" id="report_driver_id_{{$vehicle->id}}" class="form-control">
                                                                             <option selected disabled></option>
                                                                             @foreach ($users as $user)
@@ -109,13 +121,13 @@
                                                                 </div>
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
-                                                                        <label for="report_suject">Motivo</label>
+                                                                        <label for="report_suject_{{$vehicle->id}}">Motivo</label>
                                                                         <textarea name="report_suject[{{$vehicle->id}}][]" id="report_suject_{{$vehicle->id}}" cols="30" rows="3" class="form-control">{{$item->suject}}</textarea>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
-                                                                        <label for="report_observation">Observaciones</label>
+                                                                        <label for="report_observation_{{$vehicle->id}}">Observaciones</label>
                                                                         <textarea name="report_observation[{{$vehicle->id}}][]" id="report_observation_{{$vehicle->id}}" cols="30" rows="3" class="form-control">{{$item->observation}}</textarea>
                                                                     </div>
                                                                 </div>
@@ -127,13 +139,13 @@
                                                             <div class="row" id="report_origen_{{$vehicle->id}}">
                                                                 <div class="col-md-5">
                                                                     <div class="form-group">
-                                                                        <label for="report_date">Fecha</label>
+                                                                        <label for="report_date_{{$vehicle->id}}">Fecha</label>
                                                                         <input type="date" name="report_date[{{$vehicle->id}}][]" id="report_date_{{$vehicle->id}}" class="form-control report_date">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">
-                                                                        <label for="report_city">Ciudad</label>
+                                                                        <label for="report_city_{{$vehicle->id}}">Ciudad</label>
                                                                         <input type="text" name="report_city[{{$vehicle->id}}][]" id="report_city_{{$vehicle->id}}" class="form-control">
                                                                     </div>
                                                                 </div>
@@ -142,7 +154,7 @@
                                                                 </div>
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
-                                                                        <label for="report_status">Estado</label>
+                                                                        <label for="report_status_{{$vehicle->id}}">Estado</label>
                                                                         <select name="report_status[{{$vehicle->id}}][]" id="report_status_{{$vehicle->id}}" class="form-control">
                                                                             <option selected disabled></option>
                                                                             <option value="0">Pendiente de pago</option>
@@ -152,7 +164,7 @@
                                                                 </div>
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
-                                                                        <label for="report_driver_id">Conductor</label>
+                                                                        <label for="report_driver_id_{{$vehicle->id}}">Conductor</label>
                                                                         <select name="report_driver_id[{{$vehicle->id}}][]" id="report_driver_id_{{$vehicle->id}}" class="form-control">
                                                                             <option selected disabled></option>
                                                                             @foreach ($users as $user)
@@ -163,13 +175,13 @@
                                                                 </div>
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
-                                                                        <label for="report_suject">Motivo</label>
+                                                                        <label for="report_suject_{{$vehicle->id}}">Motivo</label>
                                                                         <textarea name="report_suject[{{$vehicle->id}}][]" id="report_suject_{{$vehicle->id}}" cols="30" rows="3" class="form-control"></textarea>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
-                                                                        <label for="report_observation">Observaciones</label>
+                                                                        <label for="report_observation_{{$vehicle->id}}">Observaciones</label>
                                                                         <textarea name="report_observation[{{$vehicle->id}}][]" id="report_observation_{{$vehicle->id}}" cols="30" rows="3" class="form-control"></textarea>
                                                                     </div>
                                                                 </div>

@@ -510,11 +510,15 @@
                                                 <input type="text" name="last_ws_oil[]" id="last_ws_oil" class="form-control" value="{{$item->last_ws}}">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_oil">Valor</label>
                                                 <input type="number" name="last_val_oil[]" id="last_val_oil" class="form-control" value="{{$item->last_val}}">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                     @endif
@@ -533,11 +537,15 @@
                                                 <input type="text" name="last_ws_oil[]" id="last_ws_oil" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_oil">Valor</label>
                                                 <input type="number" name="last_val_oil[]" id="last_val_oil" class="form-control">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                 @endif
@@ -566,11 +574,15 @@
                                                 <input type="text" name="last_ws_tires[]" id="last_ws_tires" class="form-control" value="{{$item->last_ws}}">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_tires">Valor</label>
                                                 <input type="number" name="last_val_tires[]" id="last_val_tires" class="form-control" value="{{$item->last_val}}">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                     @endif
@@ -589,11 +601,15 @@
                                                 <input type="text" name="last_ws_tires[]" id="last_ws_tires" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_tires">Valor</label>
                                                 <input type="number" name="last_val_tires[]" id="last_val_tires" class="form-control">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                 @endif
@@ -622,11 +638,15 @@
                                                 <input type="text" name="last_ws_lubrication[]" id="last_ws_lubrication" class="form-control" value="{{$item->last_ws}}">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_lubrication">Valor</label>
                                                 <input type="number" name="last_val_lubrication[]" id="last_val_lubrication" class="form-control" value="{{$item->last_val}}">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                     @endif
@@ -645,11 +665,15 @@
                                                 <input type="text" name="last_ws_lubrication[]" id="last_ws_lubrication" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_lubrication">Valor</label>
                                                 <input type="number" name="last_val_lubrication[]" id="last_val_lubrication" class="form-control">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                 @endif
@@ -678,11 +702,15 @@
                                                 <input type="text" name="last_ws_address[]" id="last_ws_address" class="form-control" value="{{$item->last_ws}}">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_address">Valor</label>
                                                 <input type="number" name="last_val_address[]" id="last_val_address" class="form-control" value="{{$item->last_val}}">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                     @endif
@@ -701,11 +729,15 @@
                                                 <input type="text" name="last_ws_address[]" id="last_ws_address" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_address">Valor</label>
                                                 <input type="number" name="last_val_address[]" id="last_val_address" class="form-control">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                 @endif
@@ -734,11 +766,15 @@
                                                 <input type="text" name="last_ws_motor[]" id="last_ws_motor" class="form-control" value="{{$item->last_ws}}">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_motor">Valor</label>
                                                 <input type="number" name="last_val_motor[]" id="last_val_motor" class="form-control" value="{{$item->last_val}}">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                     @endif
@@ -757,11 +793,15 @@
                                                 <input type="text" name="last_ws_motor[]" id="last_ws_motor" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_motor">Valor</label>
                                                 <input type="number" name="last_val_motor[]" id="last_val_motor" class="form-control">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                 @endif
@@ -790,11 +830,15 @@
                                                 <input type="text" name="last_ws_clutch[]" id="last_ws_clutch" class="form-control" value="{{$item->last_ws}}">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_clutch">Valor</label>
                                                 <input type="number" name="last_val_clutch[]" id="last_val_clutch" class="form-control" value="{{$item->last_val}}">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                 @endif
@@ -813,11 +857,15 @@
                                                 <input type="text" name="last_ws_clutch[]" id="last_ws_clutch" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_clutch">Valor</label>
                                                 <input type="number" name="last_val_clutch[]" id="last_val_clutch" class="form-control">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                 @endif
@@ -846,11 +894,15 @@
                                                 <input type="text" name="last_ws_suspension[]" id="last_ws_suspension" class="form-control" value="{{$item->last_ws}}">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_suspension">Valor</label>
                                                 <input type="number" name="last_val_suspension[]" id="last_val_suspension" class="form-control" value="{{$item->last_val}}">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                     @endif
@@ -869,11 +921,15 @@
                                                 <input type="text" name="last_ws_suspension[]" id="last_ws_suspension" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_suspension">Valor</label>
                                                 <input type="number" name="last_val_suspension[]" id="last_val_suspension" class="form-control">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                 @endif
@@ -902,11 +958,15 @@
                                                 <input type="text" name="last_ws_brakes_bands[]" id="last_ws_brakes_bands" class="form-control" value="{{$item->last_ws}}">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_brakes_bands">Valor</label>
                                                 <input type="number" name="last_val_brakes_bands[]" id="last_val_brakes_bands" class="form-control" value="{{$item->last_val}}">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                     @endif
@@ -925,11 +985,15 @@
                                                 <input type="text" name="last_ws_brakes_bands[]" id="last_ws_brakes_bands" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_brakes_bands">Valor</label>
                                                 <input type="number" name="last_val_brakes_bands[]" id="last_val_brakes_bands" class="form-control">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                 @endif
@@ -958,11 +1022,15 @@
                                                 <input type="text" name="last_ws_brakes_pastes[]" id="last_ws_brakes_pastes" class="form-control" value="{{$item->last_ws}}">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_brakes_pastes">Valor</label>
                                                 <input type="number" name="last_val_brakes_pastes[]" id="last_val_brakes_pastes" class="form-control" value="{{$item->last_val}}">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                     @endif
@@ -981,11 +1049,15 @@
                                                 <input type="text" name="last_ws_brakes_pastes[]" id="last_ws_brakes_pastes" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_brakes_pastes">Valor</label>
                                                 <input type="number" name="last_val_brakes_pastes[]" id="last_val_brakes_pastes" class="form-control">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                 @endif
@@ -1014,11 +1086,15 @@
                                                 <input type="text" name="last_ws_brake_pump[]" id="last_ws_brake_pump" class="form-control" value="{{$item->last_ws}}">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_brake_pump">Valor</label>
                                                 <input type="number" name="last_val_brake_pump[]" id="last_val_brake_pump" class="form-control" value="{{$item->last_val}}">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                     @endif
@@ -1037,11 +1113,15 @@
                                                 <input type="text" name="last_ws_brake_pump[]" id="last_ws_brake_pump" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_brake_pump">Valor</label>
                                                 <input type="number" name="last_val_brake_pump[]" id="last_val_brake_pump" class="form-control">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                 @endif
@@ -1070,11 +1150,15 @@
                                                 <input type="text" name="last_ws_box_transmission[]" id="last_ws_box_transmission" class="form-control" value="{{$item->last_ws}}">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="la value="{{$item->last_val}}"st_val_box_transmission">Valor</label>
                                                 <input type="number" name="last_val_box_transmission[]" id="last_val_box_transmission" class="form-control" value="{{$item->last_val}}">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                     @endif
@@ -1093,11 +1177,15 @@
                                                 <input type="text" name="last_ws_box_transmission[]" id="last_ws_box_transmission" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_box_transmission">Valor</label>
                                                 <input type="number" name="last_val_box_transmission[]" id="last_val_box_transmission" class="form-control">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                 @endif
@@ -1126,11 +1214,15 @@
                                                 <input type="text" name="last_ws_brassiness[]" id="last_ws_brassiness" class="form-control" value="{{$item->last_ws}}">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_brassiness">Valor</label>
                                                 <input type="number" name="last_val_brassiness[]" id="last_val_brassiness" class="form-control" value="{{$item->last_val}}">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                     @endif
@@ -1149,11 +1241,15 @@
                                                 <input type="text" name="last_ws_brassiness[]" id="last_ws_brassiness" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_brassiness">Valor</label>
                                                 <input type="number" name="last_val_brassiness[]" id="last_val_brassiness" class="form-control">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                 @endif
@@ -1182,11 +1278,15 @@
                                                 <input type="text" name="last_ws_lights[]" id="last_ws_lights" class="form-control" value="{{$item->last_ws}}">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_lights">Valor</label>
                                                 <input type="number" name="last_val_lights[]" id="last_val_lights" class="form-control" value="{{$item->last_val}}">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                     @endif
@@ -1205,11 +1305,15 @@
                                                 <input type="text" name="last_ws_lights[]" id="last_ws_lights" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_lights">Valor</label>
                                                 <input type="number" name="last_val_lights[]" id="last_val_lights" class="form-control">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                 @endif
@@ -1238,11 +1342,15 @@
                                                 <input type="text" name="last_ws_gases[]" id="last_ws_gases" class="form-control" value="{{$item->last_ws}}">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_gases">Valor</label>
                                                 <input type="number" name="last_val_gases[]" id="last_val_gases" class="form-control" value="{{$item->last_val}}">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                     @endif
@@ -1261,11 +1369,15 @@
                                                 <input type="text" name="last_ws_gases[]" id="last_ws_gases" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_gases">Valor</label>
                                                 <input type="number" name="last_val_gases[]" id="last_val_gases" class="form-control">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                 @endif
@@ -1294,11 +1406,15 @@
                                                 <input type="text" name="last_ws_wistle[]" id="last_ws_wistle" class="form-control" value="{{$item->last_ws}}">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_wistle">Valor</label>
                                                 <input type="number" name="last_val_wistle[]" id="last_val_wistle" class="form-control" value="{{$item->last_val}}">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                     @endif
@@ -1317,11 +1433,15 @@
                                                 <input type="text" name="last_ws_wistle[]" id="last_ws_wistle" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_wistle">Valor</label>
                                                 <input type="number" name="last_val_wistle[]" id="last_val_wistle" class="form-control">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                 @endif
@@ -1350,11 +1470,15 @@
                                                 <input type="text" name="last_ws_timing_belt[]" id="last_ws_timing_belt" class="form-control" value="{{$item->last_ws}}">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_timing_belt">Valor</label>
                                                 <input type="number" name="last_val_timing_belt[]" id="last_val_timing_belt" class="form-control" value="{{$item->last_val}}">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                     @endif
@@ -1373,11 +1497,15 @@
                                                 <input type="text" name="last_ws_timing_belt[]" id="last_ws_timing_belt" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_timing_belt">Valor</label>
                                                 <input type="number" name="last_val_timing_belt[]" id="last_val_timing_belt" class="form-control">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                 @endif
@@ -1406,11 +1534,15 @@
                                                 <input type="text" name="last_ws_alignment_balancing[]" id="last_ws_alignment_balancing" class="form-control" value="{{$item->last_ws}}">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_alignment_balancing">Valor</label>
                                                 <input type="number" name="last_val_alignment_balancing[]" id="last_val_alignment_balancing" class="form-control" value="{{$item->last_val}}">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                     @endif
@@ -1429,11 +1561,15 @@
                                                 <input type="text" name="last_ws_alignment_balancing[]" id="last_ws_alignment_balancing" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_alignment_balancing">Valor</label>
                                                 <input type="number" name="last_val_alignment_balancing[]" id="last_val_alignment_balancing" class="form-control">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                 @endif
@@ -1462,11 +1598,15 @@
                                                 <input type="text" name="last_ws_batteries[]" id="last_ws_batteries" class="form-control" value="{{$item->last_ws}}">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_batteries">Valor</label>
                                                 <input type="number" name="last_val_batteries[]" id="last_val_batteries" class="form-control" value="{{$item->last_val}}">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                     @endif
@@ -1485,11 +1625,15 @@
                                                 <input type="text" name="last_ws_batteries[]" id="last_ws_batteries" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="last_val_batteries">Valor</label>
                                                 <input type="number" name="last_val_batteries[]" id="last_val_batteries" class="form-control">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                 @endif
@@ -1519,11 +1663,15 @@
                                                 <input type="text" name="place_summons_report[]" id="place_summons_report" class="form-control" value="{{$item->place}}">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="area_summons_report">Area rural/urbana</label>
                                                 <input type="text" name="area_summons_report[]" id="area_summons_report" class="form-control" value="{{$item->area}}">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                     @endif
@@ -1542,11 +1690,15 @@
                                                 <input type="text" name="place_summons_report[]" id="place_summons_report" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="area_summons_report">Area rural/urbana</label>
                                                 <input type="text" name="area_summons_report[]" id="area_summons_report" class="form-control">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                 @endif
@@ -1576,11 +1728,15 @@
                                                 <input type="text" name="place_incident_report[]" id="place_incident_report" class="form-control" value="{{$item->place}}">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="area_incident_report">Area rural/urbana</label>
                                                 <input type="text" name="area_incident_report[]" id="area_incident_report" class="form-control" value="{{$item->area}}">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                     @endif
@@ -1599,11 +1755,15 @@
                                                 <input type="text" class="form-control" name="place_incident_report[]" id="place_incident_report">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="area_incident_report">Area rural/urbana</label>
                                                 <input type="text" class="form-control" name="area_incident_report[]" id="area_incident_report">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                 @endif
@@ -1633,11 +1793,15 @@
                                                 <input type="text" name="place_accident_report[]" id="place_accident_report" class="form-control" value="{{$item->place}}">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="area_accident_report">Area rural/urbana</label>
                                                 <input type="text" name="area_accident_report[]" id="area_accident_report" class="form-control" value="{{$item->area}}">
                                             </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <br>
+                                            <i style="cursor: pointer" class="fa fa-trash"></i>
                                         </div>
                                     </div>
                                     @endif
@@ -1656,12 +1820,16 @@
                                                 <input type="text" class="form-control" name="place_accident_report[]" id="place_accident_report">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="area_accident_report">Area rural/urbana</label>
                                                 <input type="text" class="form-control" name="area_accident_report[]" id="area_accident_report">
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <br>
+                                        <i style="cursor: pointer" class="fa fa-trash"></i>
                                     </div>
                                 @endif
                         </div>
@@ -1758,8 +1926,18 @@
                 let arr = this.id.split('_');
                 let arr2 = arr.shift();
                 let id = arr.join('_');
-                newELement = $("#origen_"+id).clone().appendTo("#destino_"+id).attr('id','origen_'+id).find('input').val('');
+                newELement = $("#origen_"+id).clone().appendTo("#destino_"+id).attr('id','origen_'+id).find('input').val('').closest('.row').find('.fa-trash').click(function () {
+                    deleteElement(this);
+                });
             });
+            $('.fa-trash').click(function () {
+                deleteElement(this);
+            });
+            function deleteElement(element){
+                if ( $(element).closest('.row').siblings('.row').length ) {
+                    $(element).closest('.row').remove();
+                }
+            }
         });
     </script>
 @endsection
