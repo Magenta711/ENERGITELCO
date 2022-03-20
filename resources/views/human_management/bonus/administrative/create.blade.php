@@ -33,10 +33,10 @@
                         <label for="month">Periodo de pago</label>
                         <div class="row">
                             <div class="col-md-6">
-                                <input type="date" name="start_date" value="{{ now()->subMonth()->format('Y-m-01') }}" id="start_date" class="form-control">
+                                <input type="date" name="start_date" value="{{ old('start_date') ?? now()->subMonth()->format('Y-m-01') }}" id="start_date" class="form-control">
                             </div>
                             <div class="col-sm-6">
-                                <input type="date" name="end_date" value="{{ now()->subMonth()->format('Y-m-30') }}" id="end_date" class="form-control">
+                                <input type="date" name="end_date" value="{{ old('end_date') ?? now()->subMonth()->format('Y-m-30') }}" id="end_date" class="form-control">
                             </div>
                         </div>
                     </div>

@@ -376,6 +376,7 @@ Route::PUT('performance_evaluation/store/{id}','PerformanceEvaluationController@
 Route::put('performance_evaluation/{id}','PerformanceEvaluationController@update')->name('self_assessment_store');
 Route::get('performance_evaluation/{id}','PerformanceEvaluationController@autoevaluation')->name('autoevaluation');
 Route::get('performance_evaluation/show/{id}','PerformanceEvaluationController@show')->name('performance_evaluation_show');
+Route::delete('performance_evaluation/{id}','PerformanceEvaluationController@destroy')->name('performance_evaluation_delete');
 Route::get('performance_evaluation/respoder/{id}','PerformanceEvaluationController@responder')->name('performance_evaluation_responder');
 Route::put('performance_evaluation/{id}/approve_performance','PerformanceEvaluationController@approve_performance')->name('approve_performance');
 Route::put('performance_evaluation/{id}/not_approve_performance','PerformanceEvaluationController@not_approve_performance')->name('not_approve_performance');

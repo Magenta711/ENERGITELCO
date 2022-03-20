@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class chargeAccount extends Model
 {
-    protected $fillable = ['token','user_id','approve_id','city','date','name','document','concept','value','bank_account','type_bank_account','email','signature_id','status'];
+    protected $fillable = ['token','user_id','approve_id','city','date','name','document','concept','value','bank_account','type_bank_account','email','signature_id','expense_type','status'];
     protected $guarder = ['id'];
 
     public function user()

@@ -846,7 +846,7 @@ class MinticController extends Controller
             $name = time().str_random().'.'.$file->getClientOriginalExtension();
             if (!(isset($request->write) && $request->write == 'No' ) && ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg')) {
                 $text2 = $mintic->project->long.' / '.$mintic->project->lat;
-                $text3 = $visit ? $visit->date.' '.$visit->time : now()->format('Y-m-d H:i:s');
+                $text3 = now()->format('Y-m-d H:i:s');
 
                 $image = Image::make($request->file);
                 if ($request->size != 'org') {

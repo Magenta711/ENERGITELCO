@@ -48,10 +48,9 @@ class chargeaccountController extends Controller
             }
             return redirect('/home');
         }else if(auth()->check() && !$token) {
-            if (auth()->hasPermisisonTo('Crear cuenta de cobro')) {
-                # code...
+            if (auth()->user()->hasPermissionTo('Crear cuenta de cobro')) {
+                return view('human_management/chargeaccount/create',compact('token'));
             }
-            return view('human_management/chargeaccount/create',compact('token'));
         }
         return redirect('/home');
     }
@@ -64,14 +63,29 @@ class chargeaccountController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'city' => ['required'],
-            'date' => ['required'],
-            'name' => ['required'],
-            'document' => ['required'],
-            'concept' => ['required'],
-            'value' => ['required'],
-        ]);
+        if (auth()->check()) {
+            $request->validate([
+                'city' => ['required'],
+                'date' => ['required'],
+                'name' => ['required'],
+                'document' => ['required'],
+                'concept' => ['required'],
+                'value' => ['required'],
+                'expense_type' => ['required'],
+            ]);
+        }else {
+            $request->validate([
+                'city' => ['required'],
+                'date' => ['required'],
+                'name' => ['required'],
+                'document' => ['required'],
+                'concept' => ['required'],
+                'value' => ['required'],
+                'bank_account' => ['required'],
+                'type_bank_account' => ['required'],
+            ]);
+        }
+        
         if ($request->signature_id) {
             $signature = SignatureChargeAccount::where('name',$request->signature_id)->where('status',0)->first();
             if ($signature) {
@@ -196,21 +210,21 @@ class chargeaccountController extends Controller
                 'status' => 1,
                 'approve_id' => auth()->id()
             ]);
-            if (!$id->token) {
+            if (!$id->token && $id->expense_type == 'Caja menor') {
                 $minor_box = MinorBoxUser::where('user_id',$id->user_id)->first();
                 $total_value = 0;
                 $total_discharges = 0;
 
                 if ($minor_box) {
                     $value = $minor_box->charges - $id->value;
-                    if ($value < 0) {
-                        $total_value = $id->value - $minor_box->charges;
+                    if ($value >= 0) {
+                        $total_value = $value;
                         $smAcc = "tiene un total de $".number_format($total_value,0,',','.');
                     }else {
-                        $total_discharges = $value;
+                        $total_discharges = $id->value - $minor_box->charges;
                         $smAcc = "se le debe un total de $".number_format($total_discharges,0,',','.');
                     }
-                    $history = now()->format('d/m/Y H:i:s').': SCC descargo $'.$id->value.' y '.$smAcc.' Por: '.auth()->user()->name.' Comentario:'.$request->commentary." \n";
+                    $history = now()->format('d/m/Y H:i:s').': Cuenta de cobro '.$id->id.' descargo $'.$id->value.' y '.$smAcc.' Por: '.auth()->user()->name.' Comentario:'.$request->commentary." \n";
                     $minor_box->update([
                         'responsable_id' => auth()->id(),
                         'charges' => $total_value,
@@ -223,7 +237,7 @@ class chargeaccountController extends Controller
                 }else {
                     $minor_box = MinorBoxUser::Create(
                         [
-                            'user_id' => $request->user_id,
+                            'user_id' => $id->user_id,
                             'responsable_id' => auth()->id(),
                             'charges' => 0,
                             'discharges' => $id->value,

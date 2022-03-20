@@ -25,28 +25,29 @@
             <form method="post" action="{{ route('mintic_store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
+                    <p><small>Todo campo con <span class="text-danger">*</span> es <b>obligatorio.</b></small></p>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label for="department">Departamentos</label>
+                            <label for="department">Departamentos *</label>
                             <select name="dep" id="department" class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona el departamento" style="width: 100%;" data-select2-id="2" tabindex="-1" aria-hidden="true">
                                 <option disabled selected></option>
                             </select>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="municipality">Municipio</label>
+                            <label for="municipality">Municipio *</label>
                             <select name="mun" id="municipality" disabled class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona el municipio" style="width: 100%;" data-select2-id="3" tabindex="-1" aria-hidden="true">
                                 <option disabled selected></option>
                             </select>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="eb">Sede educativa</label>
+                            <label for="eb">Sede educativa *</label>
                             <input type="hidden" name="type_eb" id="type_eb">
                             <select name="con_sede" id="eb" class="form-control select2 select2-hidden-accessible" disabled style="width: 100%;" data-placeholder="Selecciona una sede educativa" data-select2-id="5" tabindex="-1" aria-hidden="true">
                                 <option disabled selected></option>
                             </select>
                         </div>
                         <div class="form-group col-md-6" style="display: none">
-                            <label for="station_name">Nombre de la sede educativa</label>
+                            <label for="station_name">Nombre de la sede educativa *</label>
                             <input type="text" value="{{old('name')}}" name="name" id="station_name" class="form-control">
                         </div>
                         <div class="form-group col-md-6">

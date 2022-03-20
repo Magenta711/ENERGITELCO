@@ -76,6 +76,12 @@
                             <p>{{$id->email}}</p>
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>De donde saldrán los recursos para el gasto</label>
+                            <p>{{$id->expense_type}}</p>
+                        </div>
+                    </div>
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="file">Adjuntos</label>
@@ -109,12 +115,14 @@
                             @endif
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="">Firma</label><br>
-                            <img src="{{route('uploads',$id->signature->file)}}" alt="">
+                    @if ($id->signature)
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="">Firma</label><br>
+                                <img src="{{route('uploads',$id->signature->file)}}" alt="">
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
                 @if ($id->status == 0)
                     <div class="form-group">

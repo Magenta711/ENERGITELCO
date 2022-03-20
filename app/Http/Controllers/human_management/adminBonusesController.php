@@ -71,6 +71,10 @@ class adminBonusesController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'start_date' => ['required'],
+            'end_date' => ['required']
+        ]);
         $request['status'] = 2;
         $request['total_employees'] = count($request->user_add);
         $request['responsable_id'] = auth()->id();

@@ -13,7 +13,7 @@
         <tbody>
             @foreach ($users as $user)
                 <tr>
-                    <th><input type="checkbox" name="user_add[{{ $user->id }}]" id="user_add_{{ $user->id }}" value="{{ $user->id }}" class="check_user"></th>
+                    <th><input type="checkbox" name="user_add[{{ $user->id }}]" id="user_add_{{ $user->id }}" value="{{ $user->id }}" class="check_user" {{old('user_add') && old('user_add')[$user->id] == {{ $user->id }} ? 'checked' : ''}}></th>
                     <th>{{$user->cedula}}</th>
                     <td>{{$user->name}}</td>
                     <td>{{$user->position->name}}</td>
@@ -33,11 +33,11 @@
                                     </div>
                                     <div class="modal-body">
                                         <p class="text-muted">Total de bonificaciones técnicas: <span id="total_bonus_technical_{{$user->id}}">$0,00</span> con <span id="total_permit_work_{{$user->id}}">0</span> permisos de trabajo</p>
-                                        <input type="hidden" name="total_bonus_technical[{{$user->id}}]" id="total_bonus_technical_val_{{$user->id}}" value="0">
+                                        <input type="hidden" name="total_bonus_technical[{{$user->id}}]" id="total_bonus_technical_val_{{$user->id}}" value="{{old('total_bonus_technical')[$user->id] ?? 0 }}">
                                         <input type="hidden" name="total_permit_work[{{$user->id}}]" id="total_permit_work_val_{{$user->id}}" value="0">
                                         <div class="form-group">
                                             <label for="working_days">Días trabajados</label>
-                                            <input type="number" name="working_days[{{$user->id}}]" id="working_days_{{$user->id}}" class="form-control" value="30"> 
+                                            <input type="number" name="working_days[{{$user->id}}]" id="working_days_{{$user->id}}" class="form-control" value="{{ old('working_days')[$user->id] ?? 30}}"> 
                                         </div>
                                         <ul class="list-group">
                                             <li class="list-group-item">
@@ -57,7 +57,7 @@
                                             </li>
                                             <li class="list-group-item hide">
                                                 <label for="na_{{ $user->id }}">
-                                                    <input type="checkbox" id="na_checked_{{ $user->id }}" class="check_concept na_checked" name="na_check[{{ $user->id }}]" value="1"> Está en incapacidad o en vacaciones
+                                                    <input type="checkbox" id="na_checked_{{ $user->id }}" class="check_concept na_checked" name="na_check[{{ $user->id }}]" value="1" {{ (old('na_check') && old('na_check')[$user->id]) ? 'checked' : (($user->b24_7) ? 'checked' : '') }}> Está en incapacidad o en vacaciones
                                                 </label>
                                             </li>
                                         </ul>
@@ -71,58 +71,58 @@
                                             <hr>
                                             <div class="form-group">
                                                 <label for="admin_{{$user->id}}_1"><h5>ALCANCE</h5> MANEJO DEL ALCANCE DE LOS PROYECTOS DE LA COMPAÑÍA</label>
-                                                <input type="number" name="admin_1[{{$user->id}}]" id="admin_{{$user->id}}_1" class="form-control question_{{$user->id}} admin_input" value="0" max="10" min="0">
+                                                <input type="number" name="admin_1[{{$user->id}}]" id="admin_{{$user->id}}_1" class="form-control question_{{$user->id}} admin_input" value="{{ old('admin_1')[$user->id]  ?? 0}}" max="10" min="0">
                                             </div>
                                             <div class="form-group">
                                                 <label for="admin_{{$user->id}}_2"><h5>TIEMPO</h5> MANEJO CORRECTO DE TIEMPOS Y CUMPLIMIENTO DE CRONOGRAMAS</label>
-                                                <input type="number" name="admin_2[{{$user->id}}]" id="admin_{{$user->id}}_2" class="form-control question_{{$user->id}} admin_input" value="0" max="10" min="0">
+                                                <input type="number" name="admin_2[{{$user->id}}]" id="admin_{{$user->id}}_2" class="form-control question_{{$user->id}} admin_input" value="{{ old('admin_2')[$user->id]  ?? 0}}" max="10" min="0">
                                             </div>
                                             <div class="form-group">
                                                 <label for="admin_{{$user->id}}_3"><h5>COSTO</h5> MANEJO CORRECTO DE LOS COSTOS DE LOS PROYECTOS</label>
-                                                <input type="number" name="admin_3[{{$user->id}}]" id="admin_{{$user->id}}_3" class="form-control question_{{$user->id}} admin_input" value="0" max="10" min="0">
+                                                <input type="number" name="admin_3[{{$user->id}}]" id="admin_{{$user->id}}_3" class="form-control question_{{$user->id}} admin_input" value="{{ old('admin_3')[$user->id]  ?? 0}}" max="10" min="0">
                                             </div>
                                             <div class="form-group">
                                                 <label for="admin_{{$user->id}}_4">MANEJO DE LA CALIDAD Y DE POLÍTICA CERO PENDIENTES</label>
-                                                <input type="number" name="admin_4[{{$user->id}}]" id="admin_{{$user->id}}_4" class="form-control question_{{$user->id}} admin_input" value="0" max="10" min="0">
+                                                <input type="number" name="admin_4[{{$user->id}}]" id="admin_{{$user->id}}_4" class="form-control question_{{$user->id}} admin_input" value="{{ old('admin_4')[$user->id]  ?? 0}}" max="10" min="0">
                                             </div>
                                             <h5>RECURSO HUMANO (INTEGRACIÓN Y BUENA COORDINACIÓN DEL RECURSO HUMANO)</h5>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="admin_{{$user->id}}_5">PUNTUALIDAD</label>
-                                                        <input type="number" name="admin_5[{{$user->id}}]" id="admin_{{$user->id}}_5" class="form-control question_{{$user->id}} admin_input" value="0" max="10" min="0">
+                                                        <input type="number" name="admin_5[{{$user->id}}]" id="admin_{{$user->id}}_5" class="form-control question_{{$user->id}} admin_input" value="{{ old('admin_4')[$user->id]  ?? 0}}" max="10" min="0">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="admin_{{$user->id}}_6">INTERACCIÓN CON LOS DEMÁS COMPAÑEROS Y ÁREAS DE LA COMPAÑÍA</label>
-                                                        <input type="number" name="admin_6[{{$user->id}}]" id="admin_{{$user->id}}_6" class="form-control question_{{$user->id}} admin_input" value="0" max="10" min="0">
+                                                        <input type="number" name="admin_6[{{$user->id}}]" id="admin_{{$user->id}}_6" class="form-control question_{{$user->id}} admin_input" value="{{ old('admin_6')[$user->id]  ?? 0}}" max="10" min="0">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="admin_{{$user->id}}_7">COMUNICACIONES: MANEJO DE LAS COMUNICACIÓNES SEGÚN POLÍTICAS DE LA COMPAÑÍA, ENTERANDO DE TODO AL DIRECTOR DEL PROYECTO</label>
-                                                <input type="number" name="admin_7[{{$user->id}}]" id="admin_{{$user->id}}_7" class="form-control question_{{$user->id}} admin_input" value="0" max="10" min="0">
+                                                <input type="number" name="admin_7[{{$user->id}}]" id="admin_{{$user->id}}_7" class="form-control question_{{$user->id}} admin_input" value="{{ old('admin_7')[$user->id]  ?? 0}}" max="10" min="0">
                                             </div>
                                             <div class="form-group">
                                                 <label for="admin_{{$user->id}}_8">MANEJO Y NEGOCIACIÓN DE LAS ADQUISICIONES, DE ACUERDO A LAS POLÍTICAS DE COMPRAS Y APROBACIONES DEL DIRECTOR DE PROYECTOS</label>
-                                                <input type="number" name="admin_8[{{$user->id}}]" id="admin_{{$user->id}}_8" class="form-control question_{{$user->id}} admin_input" value="0" max="10" min="0">
+                                                <input type="number" name="admin_8[{{$user->id}}]" id="admin_{{$user->id}}_8" class="form-control question_{{$user->id}} admin_input" value="{{ old('admin_8')[$user->id]  ?? 0}}" max="10" min="0">
                                             </div>
                                             <div class="form-group">
                                                 <label for="admin_{{$user->id}}_9">GESTIÓN DE TODOS LOS INTERESADOS DE LOS PROYECTOS, INCLUYE INTERESADOS INTERNOS, EXTERNOS Y PATROCINADOR</label>
-                                                <input type="number" name="admin_9[{{$user->id}}]" id="admin_{{$user->id}}_9" class="form-control question_{{$user->id}} admin_input" value="0" max="10" min="0">
+                                                <input type="number" name="admin_9[{{$user->id}}]" id="admin_{{$user->id}}_9" class="form-control question_{{$user->id}} admin_input" value="{{ old('admin_9')[$user->id]  ?? 0}}" max="10" min="0">
                                             </div>
                                             <div class="form-group">
                                                 <label for="admin_{{$user->id}}_10">MANEJO DE LA PROPIEDAD DEL CLIENTE O PATROCINADOR.</label>
-                                                <input type="number" name="admin_10[{{$user->id}}]" id="admin_{{$user->id}}_10" class="form-control question_{{$user->id}} admin_input" value="0" max="10" min="0">
+                                                <input type="number" name="admin_10[{{$user->id}}]" id="admin_{{$user->id}}_10" class="form-control question_{{$user->id}} admin_input" value="{{ old('admin_10')[$user->id]  ?? 0}}" max="10" min="0">
                                             </div>
                                             <div class="form-group">
                                                 <label for="admin_{{$user->id}}_11">CUMPLIMIENTO DE POLÍTICAS Y ESTÁNDARES DEL PATROCINADOR (REG NOC, SITIO LIMPIO, ETC.)</label>
-                                                <input type="number" name="admin_11[{{$user->id}}]" id="admin_{{$user->id}}_11" class="form-control question_{{$user->id}} admin_input" value="0" max="10" min="0">
+                                                <input type="number" name="admin_11[{{$user->id}}]" id="admin_{{$user->id}}_11" class="form-control question_{{$user->id}} admin_input" value="{{ old('admin_11')[$user->id]  ?? 0}}" max="10" min="0">
                                             </div>
                                             <div class="form-group">
                                                 <label for="admin_{{$user->id}}_12">MANEJO DE LA INFORMACIÓN Y DE LA APP ENERGITELCO</label>
-                                                <input type="number" name="admin_12[{{$user->id}}]" id="admin_{{$user->id}}_12" class="form-control question_{{$user->id}} admin_input" value="0" max="10" min="0">
+                                                <input type="number" name="admin_12[{{$user->id}}]" id="admin_{{$user->id}}_12" class="form-control question_{{$user->id}} admin_input" value="{{ old('admin_12')[$user->id]  ?? 0}}" max="10" min="0">
                                             </div>
                                         </div>
                                         <div class="block_bonus_driver_{{$user->id}}" {!! old('drive_bonus_check') && old('drive_bonus_check')[$user->id] ? 'style="display: none"' : (($user->register && ($user->register->car || $user->register->moto)) ? '' : 'style="display: none"') !!}>
@@ -130,11 +130,11 @@
                                             <div class="row">
                                                 <div class="col-md-6 form-group">
                                                     <label for="driver_{{$user->id}}_1"><input type="checkbox" name="carro[{{$user->id}}]" value="1" {{($user->register && $user->register->car) ? 'checked' : '' }}> BONIFICACIÓN POR CONDUCIR CARRO</label>
-                                                    <input type="number" name="driver_1[{{$user->id}}]" id="driver_{{$user->id}}_1" class="form-control question2_{{$user->id}} driver_input" value="0" max="10" min="0">
+                                                    <input type="number" name="driver_1[{{$user->id}}]" id="driver_{{$user->id}}_1" class="form-control question2_{{$user->id}} driver_input" value="{{ old('driver_1')[$user->id]  ?? 0}}" max="10" min="0">
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label for="driver_{{$user->id}}_2"><input type="checkbox" name="moto[{{$user->id}}]" value="1" {{($user->register && $user->register->moto) ? 'checked' : '' }}> BONIFICACIÓN POR CONDUCIR MOTO</label>
-                                                    <input type="number" name="driver_2[{{$user->id}}]" id="driver_{{$user->id}}_2" class="form-control question2_{{$user->id}} driver_input" value="0" max="10" min="0">
+                                                    <input type="number" name="driver_2[{{$user->id}}]" id="driver_{{$user->id}}_2" class="form-control question2_{{$user->id}} driver_input" value="{{ old('driver_2')[$user->id]  ?? 0}}" max="10" min="0">
                                                 </div>
                                             </div>
                                         </div>
@@ -163,7 +163,7 @@
                                                         @endphp
                                                         <tr>
                                                             <td>
-                                                                <input type="checkbox" class="discount_check discount_user_{{$user->id}}" name="pay_credit[{{$user->id}}][{{$item->id}}]" id="pay_credit_{{$item->id}}_{{$user->id}}" value="{{$item->id}}">
+                                                                <input type="checkbox" class="discount_check discount_user_{{$user->id}}" name="pay_credit[{{$user->id}}][{{$item->id}}]" id="pay_credit_{{$item->id}}_{{$user->id}}" value="{{$item->id}}" {{ (old('pay_credit') && old('pay_credit')[$user->id] && old('pay_credit')[$user->id][$item->id] == {{$item->id}}) ? 'checked' : (($user->b24_7) ? 'checked' : '') }}>
                                                             </td>
                                                             <td>
                                                                 ${{ number_format($item->total_pay,2) }}
@@ -191,19 +191,19 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="commentary_{{$user->id}}">Comentarios</label>
-                                            <textarea name="commentary[{{$user->id}}]" id="commentary_{{$user->id}}" cols="30" rows="3" class="form-control"></textarea>
+                                            <textarea name="commentary[{{$user->id}}]" id="commentary_{{$user->id}}" cols="30" rows="3" class="form-control">{{old('commentary')[$user->id] ?? ''}}</textarea>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6 block_bonus_administrative_{{$user->id}}" style="display: none">
                                                 <h4>Porcentaje bonificación administrativa</h4>
                                                 <span id="percentage_admin_text_{{ $user->id }}">0,00%</span>
-                                                <input type="hidden" name="percentage_admin[{{$user->id}}]" value="0" id="percentage_admin_{{$user->id}}" class="percentage_admin">
+                                                <input type="hidden" name="percentage_admin[{{$user->id}}]" value="{{old('percentage_admin')[$user->id] ?? 0 }}" id="percentage_admin_{{$user->id}}" class="percentage_admin">
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4 block_bonus_discount_{{$user->id}}" style="display: none">
                                                 <h4>Total de descuentos</h4>
-                                                <input type="hidden" name="total_discount[{{$user->id}}]" value="0" id="total_discount_{{$user->id}}" class="total_discount">
+                                                <input type="hidden" name="total_discount[{{$user->id}}]" value="{{old('total_discount')[$user->id] ?? 0 }}" id="total_discount_{{$user->id}}" class="total_discount">
                                                 <span id="total_discount_text_{{ $user->id }}">$0,00</span>
                                             </div>
                                             <div class="col-md-4 block_bonus_administrative_{{$user->id}}" style="display: none">

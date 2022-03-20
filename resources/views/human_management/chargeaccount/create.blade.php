@@ -76,7 +76,10 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="value">Valor <span class="text-red text-danger">*</span></label>
-                <input type="text" class="form-control" name="value" id="value" value="{{old('value')}}" placeholder="Total a pagar">
+                <input type="number" class="form-control validate-total" name="value" id="value" value="{{old('value')}}" placeholder="Total a pagar">
+                <div class="invalid-feedback d-none hide">
+                    Valor incorrecto, el campo solo permite número enteros, no permite lestras, puntos, comas o caracteres especiales.
+                  </div>
             </div>
         </div>
         <div class="col-md-6">
@@ -97,7 +100,20 @@
                 <input type="text" class="form-control" name="email" id="email" value="{{old('email')}}" placeholder="example@mail.com">
             </div>
         </div>
+    @auth
         <div class="col-md-6">
+            <div class="form-group">
+                <label for="">De donde saldrán los recursos para el gasto *</label>
+                <br><input type="radio" name="expense_type" value="Caja menor" id="caja"> <label for="caja">Caja menor del empleado</label>
+                <br><input type="radio" name="expense_type" value="Empresa" id="empresa"> <label for="empresa">Directamente por la empresa</label>
+                {{-- <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                    <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
+                  </div> --}}
+            </div>
+        </div>
+    @endauth
+        <div class="col-md-12">
             <div class="form-group">
                 <label for="file">Adjuntos</label>
                 <label id="label_file" for="file" class="form-control text-center "><i class="fa fa-upload"></i></label>
@@ -150,6 +166,19 @@
 @endsection
 @section('js')
     <script>
+        $(document).ready(function () {
+            $('.validate-total').keypress(function (event) {
+                return (event.charCode >= 47 && event.charCode <= 57)
+            });
+            $('.validate-total').blur(function () {
+                validateTotal();
+            });
+        });
+
+        function validateTotal() {
+            
+        }
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

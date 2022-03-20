@@ -175,7 +175,7 @@ class answerController extends Controller
                             for ($i=0; $i < $request->num_file[$nfp]; $i++) {
                                 if ($request->hasFile('file')){
                                     if ($file = $request->file('file')[$nf]) {
-                                        $name = time().$file->getClientOriginalName();
+                                        $name = time().str_random().'.'.$file->getClientOriginalExtension();
                                         $path = Storage::putFileAs('public/upload/files', $file, $name);
                                         Answer::create([
                                             'question_id'=>$question->id,
