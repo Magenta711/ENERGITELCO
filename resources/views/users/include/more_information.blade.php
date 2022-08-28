@@ -134,7 +134,7 @@
                             <p>{{$id->register && $id->register->hasContract() ? $id->register->hasContract()->day_breack : 'N/A'}}</p>
                         </div>
                     </div>
-                        <hr>
+                    <hr>
                     <h4>Información de contacto de emergencia</h4>
                     <div class="row">
                         <div class="col-md-3">
@@ -146,6 +146,24 @@
                             <p>{{$id->register ? $id->register->emergency_contact_number : 'N/A'}}</p>
                         </div>
                     </div>
+                    <hr>
+                    @if ($id->signature)
+                    <h4>Firma física</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="img-signature" style="cursor: pointer"
+                                    enctype="multipart/form-data">
+                                    <picture>
+                                        <img src="{{route('uploads',$id->signature)}}" class="img-fluid img-thumbnail"
+                                            id="blah" alt="{{ $id->signature }}">
+                                    </picture>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6"></div>
+                    </div>
+                    @endif
                     <hr>
                     <h4>Información bancaria</h4>
                     <div class="row">

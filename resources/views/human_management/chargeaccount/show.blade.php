@@ -82,10 +82,10 @@
                             <p>{{$id->expense_type}}</p>
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="file">Adjuntos</label>
-                            @if ($id->files)
+                    @if ($id->files)
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="file">Adjuntos</label>
                                 <div class="row">
                                     @foreach ($id->files as $file)
                                         <div class="col-md-3">
@@ -112,9 +112,9 @@
                                         </div>
                                     @endforeach
                                 </div>
-                            @endif
+                            </div>
                         </div>
-                    </div>
+                    @endif
                     @if ($id->signature)
                         <div class="col-md-12">
                             <div class="form-group">

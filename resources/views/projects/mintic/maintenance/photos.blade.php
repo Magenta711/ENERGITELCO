@@ -119,6 +119,18 @@
                 'accept' => 'image/*'
             ])
             <hr>
+            @include('projects.mintic.includes.upload',[
+                'ltt' => '1',
+                'id' => $item,
+                'num' => $i++,
+                'size_letter' => 20,
+                'it'=>'1',
+                'label' => 'Señaletica interior',
+                'description' => 'Registro fotográfico de la señaletica interior',
+                'place' => $item->type_format == 'Mantenimiento correctivo' ? 'G46' : 'L63',
+                'accept' => 'image/*'
+            ])
+            <hr>
             @if ($item->type_format == 'Mantenimiento correctivo')
                 @include('projects.mintic.includes.upload',[
                     'ltt' => '1',
@@ -133,18 +145,6 @@
                     ])
                 <hr>
             @endif
-            @include('projects.mintic.includes.upload',[
-                'ltt' => '1',
-                'id' => $item,
-                'num' => $i++,
-                'size_letter' => 20,
-                'it'=>'1',
-                'label' => 'Señaletica interior',
-                'description' => 'Registro fotográfico de la señaletica interior',
-                'place' => $item->type_format == 'Mantenimiento correctivo' ? 'L46' : 'L63',
-                'accept' => 'image/*'
-            ])
-            <hr>
             @include('projects.mintic.includes.upload',[
                 'ltt' => '1',
                 'id' => $item,
@@ -507,7 +507,7 @@
                     'it'=>'3',
                     'label' => 'Solución de respaldo (4 horas) Si aplica',
                     'description' => 'Registro fotográfico de la solución de respaldo, Aplica siempre y cuendo no se instale una solución alternativa <b>Gabinete abierto</b>',
-                    'place' => 'G46',
+                    'place' => 'L46',
                     'accept' => 'image/*'
                     ])
                 <hr>

@@ -88,8 +88,8 @@
     <tr>
         <td></td>
         <td colspan="5" style="text-align: center;background: #D0CECE">SEÑALETICA EXTERIOR</td>
-        <td colspan="5" style="text-align: center;background: #D0CECE">SOLUCIÓN DE RESPALDO (4 HORAS SI APLICA)</td>
         <td colspan="5" style="text-align: center;background: #D0CECE">SEÑALETICA INTERIOR</td>
+        <td colspan="5" style="text-align: center;background: #D0CECE">SOLUCIÓN DE RESPALDO (4 HORAS SI APLICA)</td>
     </tr>
     <tr>
         <td></td>

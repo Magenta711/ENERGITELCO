@@ -190,6 +190,14 @@ class userController extends Controller
         }else {
             $request['password'] = $id->password;
         }
+
+        if ($request->hasFile('file_signature')){
+            $fileSig = $request->file('file_signature');
+            $nameSig = time().str_random().'.'.$fileSig->getClientOriginalExtension();
+            $fileResult = Storage::put('public/signature/', $fileSig, 'public');
+            $request['signature'] = explode('/',$fileResult)[count(explode('/',$fileResult)) - 1];
+        }
+
         $id->update($request->all());
         DB::table('model_has_roles')->where('model_id',$id->id)->delete();
         

@@ -63,7 +63,7 @@
                                         @endcan
                                     @endif
                                     @if ($payroll->estado != 'Aprobado')
-                                        @can('Aprobar reporte de novedades de nómina y horas extras')
+                                        @can('Eliminar formato de reporte de novedades de nómina y horas extras')
                                             <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete_{{$payroll->id}}">Eliminar</button>
                                             <div class="modal fade" id="delete_{{$payroll->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-md">

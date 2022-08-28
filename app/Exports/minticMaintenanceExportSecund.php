@@ -41,7 +41,15 @@ class minticMaintenanceExportSecund implements FromView, WithTitle, WithDrawings
     public function styles(Worksheet $sheet)
     {
         return [
-            2    => ['font' => ['bold' => true, 'size' => 14]],
+            2    => ['font' => ['bold' => true, 'size' => 12]],
+            10    => ['font' => ['bold' => true, 'size' => 14]],
+            11    => ['font' => ['bold' => true, 'size' => 11]],
+            28    => ['font' => ['bold' => true, 'size' => 11]],
+            45    => ['font' => ['bold' => true, 'size' => 11]],
+            62    => ['font' => ['bold' => true, 'size' => 11]],
+            79    => ['font' => ['bold' => true, 'size' => 11]],
+            96    => ['font' => ['bold' => true, 'size' => 11]],
+            113    => ['font' => ['bold' => true, 'size' => 11]]
         ];
     }
 

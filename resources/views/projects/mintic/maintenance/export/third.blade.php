@@ -7,7 +7,7 @@
     <tr>
         <td></td>
         <td rowspan="7" colspan="4" style="borde: 1px solid #000000;"></td>
-        <td rowspan="7" colspan="8" style="text-align: center">
+        <td rowspan="7" colspan="8" style="text-align: center;border: 1px solid #000000;">
             @if ($id->type_format == 'Mantenimiento correctivo')
                 FORMATO NOTIFICACIÓN DE MANTENIMIENTO CORRECTIVO CENTROS DIGITALES
             @endif

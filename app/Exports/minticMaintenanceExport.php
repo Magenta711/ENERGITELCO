@@ -31,6 +31,7 @@ class minticMaintenanceExport implements WithMultipleSheets
             $arr['REGISTRO FOTOGRÁFICO ANTES'] = new minticMaintenanceExportSecund($this->id,$this->files);
             $arr['REGISTRO FOTOGRÁFICO DESPÚES'] = new minticMaintenanceExportThird($this->id,$this->files);
         }
+        $arr['ETIQUETA_RE_FOTOGRÁFICO'] = new minticMaintenanceExportFour($this->id,$this->files);
         return $arr;
     }
 }

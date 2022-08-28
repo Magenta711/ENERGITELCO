@@ -103,13 +103,9 @@
     @auth
         <div class="col-md-6">
             <div class="form-group">
-                <label for="">De donde saldrán los recursos para el gasto *</label>
+                <label for="">De donde saldrán los recursos para el gasto <span class="text-red text-danger">*</span></label>
                 <br><input type="radio" name="expense_type" value="Caja menor" id="caja"> <label for="caja">Caja menor del empleado</label>
                 <br><input type="radio" name="expense_type" value="Empresa" id="empresa"> <label for="empresa">Directamente por la empresa</label>
-                {{-- <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="customCheck1">
-                    <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
-                  </div> --}}
             </div>
         </div>
     @endauth

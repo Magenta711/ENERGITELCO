@@ -13,7 +13,7 @@
         <tbody>
             @foreach ($usuarios as $user)
                 <tr>
-                    <th><input type="checkbox" name="user_add[{{ $user->id }}]" id="user_add_{{ $user->id }}" value="{{ $user->id }}" class="check_user" checked></th>
+                    <th><input type="checkbox" name="user_add[{{ $user->id }}]" id="user_add_{{ $user->id }}" value="{{ $user->id }}" class="check_user"></th>
                     <th>{{$user->cedula}}</th>
                     <td>{{$user->name}}</td>
                     <td id="total_pay_td_{{ $user->id }}">$ 0.00</td>

@@ -178,7 +178,7 @@ Route::get('finances/payroll_overtime_news_report/download/{id}','human_manageme
 Route::get('finances/payroll_overtime_news_report/export/{id}','human_management\payrollOvertimeNewsReportController@export')->name('payroll_overtime_news_report_export');
 Route::get('finances/payroll_overtime_news_report/export2/{id}','human_management\payrollOvertimeNewsReportController@export2')->name('payroll_overtime_news_report_export2');
 Route::post('finances/payroll_overtime_news_report/{id}','human_management\payrollOvertimeNewsReportController@approve')->name('payroll_overtime_news_report_approve');
-Route::delete('finances/payroll_overtime_news_report/delete/{id}','human_management\payrollOvertimeNewsReportController@delete')->name('payroll_overtime_news_report_delete');
+Route::delete('finances/payroll_overtime_news_report/delete/{id}','human_management\payrollOvertimeNewsReportController@destroy')->name('payroll_overtime_news_report_delete');
 
 //Request to withdraw severance
 Route::get('human_management/request_withdraw_severance','human_management\requestWithdrawSeveranceController@index')->name('request_withdraw_severance');

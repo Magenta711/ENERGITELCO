@@ -693,7 +693,8 @@ class MinticController extends Controller
     {
         $equipments = EquimentDetail::get();
         $activities = MinticMaintenanceActivity::get();
-        return view('projects.mintic.maintenance.create',compact('id','equipments','activities'));
+        $users = User::where('state',1)->get();
+        return view('projects.mintic.maintenance.create',compact('id','equipments','activities','users'));
     }
 
     public function store_maintenance(Request $request,$id)
@@ -749,7 +750,8 @@ class MinticController extends Controller
     {
         $equipments = EquimentDetail::get();
         $activities = MinticMaintenanceActivity::get();
-        return view('projects.mintic.maintenance.edit',compact('id','item','equipments','activities'));
+        $users = User::where('state',1)->get();
+        return view('projects.mintic.maintenance.edit',compact('id','item','equipments','activities','users'));
     }
 
     public function update_maintenance(Request $request,$id,mintic_maintenance $item)
@@ -828,7 +830,31 @@ class MinticController extends Controller
             }
         }
 
-        return (new minticMaintenanceExport($item,$equipments,$files,$activities))->download($id.'_mintic_maintenance.xlsx');
+        $j = 1;
+        $accEquip = 1;
+        foreach ($equipments as $equipment_item) {
+            if ( $equipment_item->is_informe ){
+                $accEquip++;
+            }
+        }
+        foreach ($equipments as $equipment_item) {
+            if ($equipment_item->type == 'retired'){
+                $j++;
+            }
+        }
+
+        if ($j = 1) {
+            $j = 8;
+        }
+
+        $files['signature']['name'] = 'Signature';
+        $files['signature']['description'] = 'Firma de funcionario';
+        $files['signature']['path'] = public_path('/storage/signature/'.$item->receives->signature);
+        $files['signature']['height'] = 60;
+        $files['signature']['coordinates'] = 'F'. (($accEquip + 20) + 1 + $j + 8);
+        $files['signature']['place'] = 4;
+
+        return (new minticMaintenanceExport($item,$equipments,$files,$activities))->download('Formato Mantenimiento Correctivo.xlsx');
     }
 
     public function upload_maintenance(Request $request)
