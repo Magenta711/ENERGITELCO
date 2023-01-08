@@ -215,7 +215,7 @@
                     @if (auth()->user()->hasPermissionTo('Editar contrato'))
                     <hr>
                     {{-- Informacion de contrato --}}
-                    <h3>Información Contracto</h3>
+                    <h3>Información Contrato</h3>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -271,7 +271,7 @@
                                             </div>
                                         </span>
                                         <div class="mailbox-attachment-info">
-                                            <p class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> Contracto</p>
+                                            <p class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> Contrato</p>
                                             <span class="mailbox-attachment-size">
                                                 {{ $contract->file->size }}
                                                 <a target="_black" href="/storage/contratos/{{$contract->file->name}}" class="btn btn-default btn-xs pull-right"><i class="fa fa-download"></i></a>

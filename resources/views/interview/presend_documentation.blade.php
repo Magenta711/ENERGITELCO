@@ -92,7 +92,7 @@
                 </div>
             </div>
             <hr>
-            {{-- Contracto --}}
+            {{-- Contrato --}}
             <h4>Contrato</h4>
             <div class="row">
                 <div class="col-md-6">

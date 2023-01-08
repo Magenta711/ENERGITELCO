@@ -64,7 +64,7 @@
                                             Está en proceso de contratación en {{ config('app.name') }} SAS. Se requiere adjuntar los documentos listados en la página.</p>
                                         <p
                                             style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; box-sizing: border-box; color: #3d4852; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">
-                                            Puedes guardar y no enviar la información hasta que estés listo, favor completar la información lo más pronto posible, el contracto y los documentos anexos son firmados electrónicamente en la plataforma.
+                                            Puedes guardar y no enviar la información hasta que estés listo, favor completar la información lo más pronto posible, el contrato y los documentos anexos son firmados electrónicamente en la plataforma.
                                             </b></p>
                                         <table class="action" align="center" width="100%" cellpadding="0"
                                             cellspacing="0" role="presentation"

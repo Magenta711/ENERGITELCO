@@ -7,10 +7,10 @@
                 $message[] = "tiene documentos vencidos";
             }
             if (!$item->register->hasContract()) {
-                $message[] = "no cuenta con contracto activo";
+                $message[] = "no cuenta con contrato activo";
             }
             if ($item->register->hasContract() && $item->register->hasContract()->signatured_at == '') {
-                $message[] = "contracto sin firmar";
+                $message[] = "contrato sin firmar";
             }
             if ($item->register->user->signature_curriculum_num() < $numDocument) {
                 $message[] = "tiene documentos sin firmar";
@@ -103,7 +103,7 @@
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
-                                                    <h4 class="modal-title" id="exampleModalLongTitle">Renovar el contracto</h4>
+                                                    <h4 class="modal-title" id="exampleModalLongTitle">Renovar el contrato</h4>
                                                 </div>
                                                 <div class="modal-body">
                                                     @php

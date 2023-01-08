@@ -321,7 +321,7 @@ class interviewController extends Controller
 
         $contract->file()->create([
             'name' => $time.'contrato.pdf',
-            'description' => 'Contracto '.$id->register->name,
+            'description' => 'Contrato '.$id->register->name,
             'size' => '103 KB',
             'type' => 'pdf',
             'url' => 'public/contratos',

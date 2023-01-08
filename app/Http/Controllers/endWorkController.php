@@ -197,12 +197,12 @@ class endWorkController extends Controller
             'state' => 2,
         ]);
         
-        $id->notify(new notificationMain('','Terminación de contracto '.$id->name,'/user/end_work/signature'));
+        $id->notify(new notificationMain('','Terminación de contrato '.$id->name,'/user/end_work/signature'));
         $users = User::where('state',1)->get();
 
         foreach ($users as $user) {
             if ($user->hasPermissionTo('Terminar contratación de usuarios')) {
-                $user->notify(new notificationMain($id->id,'Terminación de contracto en proceso de '.$id->name,'users/show/'));
+                $user->notify(new notificationMain($id->id,'Terminación de contrato en proceso de '.$id->name,'users/show/'));
             }
         }
         

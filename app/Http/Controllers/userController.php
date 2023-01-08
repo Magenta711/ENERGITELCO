@@ -232,13 +232,13 @@ class userController extends Controller
         
                 $contract->file()->create([
                     'name' => $time.'contrato.pdf',
-                    'description' => 'Contracto '.$id->register->name,
+                    'description' => 'Contrato '.$id->register->name,
                     'size' => $size.' KB',
                     'type' => $file->getClientOriginalExtension(),
                     'url' => $path,
                     'state' => 1,
                 ]);
-                $mensaje = ' junto con el contracto';
+                $mensaje = ' junto con el contrato';
             }else 
             {
                 if(!$register->hasContract() || ($register->hasContract() && ($register->hasContract()->type_contract != $request->type_contract || $register->hasContract()->start_date != $request->date || $register->hasContract()->day_breack != $request->day_breack || $register->hasContract()->months != $request->months || $register->hasContract()->salary != $request->salary)))
@@ -267,13 +267,13 @@ class userController extends Controller
                         ]);
                         $contract->file()->create([
                             'name' => $time.'contrato.pdf',
-                            'description' => 'Contracto '.$id->register->name,
+                            'description' => 'Contrato '.$id->register->name,
                             'size' => '103 KB',
                             'type' => 'pdf',
                             'url' => 'public/contratos',
                             'state' => 1,
                         ]);
-                        $mensaje = ' junto con el contracto';
+                        $mensaje = ' junto con el contrato';
                     }
                 }
             }

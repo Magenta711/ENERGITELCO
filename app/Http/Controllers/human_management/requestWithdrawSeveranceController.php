@@ -131,7 +131,7 @@ class requestWithdrawSeveranceController extends Controller
                 $query->with('roles');
             }])->find($id->id);
             if (!$id->responsableAcargo->register->hasContract()) {
-                return back()->with('success','Usuario no cuenta con contracto');
+                return back()->with('success','Usuario no cuenta con contrato');
             }
             $meses = array('0',"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
             $day = 0;
