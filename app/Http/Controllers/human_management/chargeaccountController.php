@@ -218,10 +218,10 @@ class chargeaccountController extends Controller
                 if ($minor_box) {
                     $value = $minor_box->charges - $id->value;
                     if ($value >= 0) {
-                        $total_value = $value;
+                        $total_value = $value; //Error
                         $smAcc = "tiene un total de $".number_format($total_value,0,',','.');
                     }else {
-                        $total_discharges = $id->value - $minor_box->charges;
+                        $total_discharges = $id->value - $minor_box->charges; //Error
                         $smAcc = "se le debe un total de $".number_format($total_discharges,0,',','.');
                     }
                     $history = now()->format('d/m/Y H:i:s').': Cuenta de cobro '.$id->id.' descargo $'.$id->value.' y '.$smAcc.' Por: '.auth()->user()->name.' Comentario:'.$request->commentary." \n";

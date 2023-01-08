@@ -830,29 +830,31 @@ class MinticController extends Controller
             }
         }
 
-        $j = 1;
-        $accEquip = 1;
-        foreach ($equipments as $equipment_item) {
-            if ( $equipment_item->is_informe ){
-                $accEquip++;
+        if ($item->receives && $item->receives->signature) {
+            $j = 1;
+            $accEquip = 1;
+            foreach ($equipments as $equipment_item) {
+                if ( $equipment_item->is_informe ){
+                    $accEquip++;
+                }
             }
-        }
-        foreach ($equipments as $equipment_item) {
-            if ($equipment_item->type == 'retired'){
-                $j++;
+            foreach ($equipments as $equipment_item) {
+                if ($equipment_item->type == 'retired'){
+                    $j++;
+                }
             }
+    
+            if ($j = 1) {
+                $j = 8;
+            }
+            
+            $files['signature']['name'] = 'Signature';
+            $files['signature']['description'] = 'Firma de funcionario';
+            $files['signature']['path'] = public_path('/storage/signature/'.$item->receives->signature);
+            $files['signature']['height'] = 60;
+            $files['signature']['coordinates'] = 'F'. (($accEquip + 20) + 1 + $j + 8);
+            $files['signature']['place'] = 4;
         }
-
-        if ($j = 1) {
-            $j = 8;
-        }
-
-        $files['signature']['name'] = 'Signature';
-        $files['signature']['description'] = 'Firma de funcionario';
-        $files['signature']['path'] = public_path('/storage/signature/'.$item->receives->signature);
-        $files['signature']['height'] = 60;
-        $files['signature']['coordinates'] = 'F'. (($accEquip + 20) + 1 + $j + 8);
-        $files['signature']['place'] = 4;
 
         return (new minticMaintenanceExport($item,$equipments,$files,$activities))->download('Formato Mantenimiento Correctivo.xlsx');
     }

@@ -128,7 +128,7 @@ function checkedActivity($idActivity, $activities)
                     </div>
                 </div>
                 <hr>
-                {{-- <div class="prevent_block" style="{{ $item->type_format == 'Mantenimiento correctivo' ? "display: none" : ''}}"> --}}
+                {{-- <div class="prevent_block" style="{{ $item->type_format == 'Mantenimiento correctivo' ? "display: none" : ''}}"></div> --}}
                 @if ($item->type_format == 'Mantenimiento preventivo')
                     <h3>Actividades de mantenimiento preventivo</h3>
                     <div class="table-responsable">
@@ -333,6 +333,10 @@ function checkedActivity($idActivity, $activities)
                    </div>
                </div> --}}
                 </div>
+            </div>
+            <div class="box-footer">
+                <a href="{{ route('mintic_maintenance_export', [$id, $item->id]) }}"
+                    class="btn btn-sm btn-warning">Exportar</a>
             </div>
         </div>
     </section>

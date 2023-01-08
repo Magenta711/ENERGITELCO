@@ -1,0 +1,90 @@
+<table>
+    <tr>
+        <td></td>
+        <td colspan="15"></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td rowspan="7" colspan="4" style="border: 1px solid #000000;"></td>
+        <td rowspan="7" colspan="8" style="border: 1px solid #000000;">
+            FORMATO PARADAS DE RELOJ
+        </td>
+        <td rowspan="7" colspan="3" style="border: 1px solid #000000;"></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="15">3. REGISTRO FOTOGRÁFICO SI APLICA</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="15">PARADA DE RELOJ 1.</td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    
+</table>

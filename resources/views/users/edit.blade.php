@@ -168,8 +168,9 @@
                                             <label for="img-signature" style="cursor: pointer"
                                                 enctype="multipart/form-data">
                                                 <picture>
-                                                    <img src="{{route('uploads',$id->signature)}}" class="img-fluid img-thumbnail"
-                                                        id="blah" alt="{{ $id->signature }}">
+                                                    <img src="/storage/signature/{{ $id->signature }}"
+                                                        class="img-fluid img-thumbnail" id="file_signature"
+                                                        alt="{{ $id->signature }}">
                                                 </picture>
                                                 <div class="custom-file text-center">
                                                     Cambiar imagen de firma
@@ -448,6 +449,9 @@
             $('#img-signature').change(function() {
                 $('#label-signature').addClass('text-aqua');
             });
+            $('#img-signature').change(function() {
+                readImage(this);
+            });
         });
 
         function type_contract() {
@@ -459,6 +463,16 @@
                     if (ele[i].value == "Indefinido")
                         $('#div_months').addClass('hide');
                 }
+            }
+        }
+
+        function readImage(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#' + input.name).attr('src', e.target.result); // Renderizamos la imagen
+                }
+                reader.readAsDataURL(input.files[0]);
             }
         }
     </script>

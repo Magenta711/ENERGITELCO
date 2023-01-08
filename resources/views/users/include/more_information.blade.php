@@ -155,7 +155,7 @@
                                 <label for="img-signature" style="cursor: pointer"
                                     enctype="multipart/form-data">
                                     <picture>
-                                        <img src="{{route('uploads',$id->signature)}}" class="img-fluid img-thumbnail"
+                                        <img src="/storage/signature/{{$id->signature}}" class="img-fluid img-thumbnail"
                                             id="blah" alt="{{ $id->signature }}">
                                     </picture>
                                 </label>

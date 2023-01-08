@@ -39,6 +39,6 @@ class minticMaintenanceExportFour implements FromView, WithTitle, ShouldAutoSize
 
     public function title(): string
     {
-        return 'REGISTRO FOTOGRÁFICO DESPÚES';
+        return 'ETIQUETA_RE_FOTOGRÁFICO';
     }
 }

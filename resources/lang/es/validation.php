@@ -178,6 +178,18 @@ return [
         'references' => 'referencias',
         'has_familiary' => 'tiene familiares',
         'has_limitation' => 'tiene alguna limitación',
+        "f9a1u1" => "valor de bonificaciones del usuario 1",
+        "f9a1u2" => "valor de bonificaciones del usuario 2",
+        "f9a1u3" => "valor de bonificaciones del usuario 3",
+        "f9a1u4" => "valor de bonificaciones del usuario 4",
+        "f9a2u1" => "valor de viáticos del usuario 1",
+        "f9a2u2" => "valor de viáticos del usuario 2",
+        "f9a2u3" => "valor de viáticos del usuario 3",
+        "f9a2u4" => "valor de viáticos del usuario 4",
+        "f9a3u1" => "valor de caja menor del usuario 1",
+        "f9a3u2" => "valor de caja menor del usuario 2",
+        "f9a3u3" => "valor de caja menor del usuario 3",
+        "f9a3u4" => "valor de caja menor del usuario 4"
     ],
 
 ];

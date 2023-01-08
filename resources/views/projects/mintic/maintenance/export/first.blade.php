@@ -9,6 +9,24 @@ function checkedActivity($idActivity, $activities)
     return 'NO';
 }
 
+function equipments($equipments)
+{
+    $r = 0;
+    $i = 0;
+    $arr = [];
+    foreach ($equipments as $key => $value) {
+        if ($value->type == 'install') {
+            $arr[$i]['install'] = $value;
+            $i++;
+        }
+        if ($value->type == 'retired') {
+            $arr[$r]['retired'] = $value;
+            $r++;
+        }
+    }
+    return $arr;
+}
+
 @endphp
 
 <table>
@@ -232,19 +250,25 @@ function checkedActivity($idActivity, $activities)
     @php
         $j = 0;
     @endphp
-    @foreach ($id->equipments as $equipment_item)
-        @if ($equipment_item->type == 'retired')
-            @php
-                $j++;
-            @endphp
-            <tr>
-                <td></td>
-                <td colspan="4" style="border: 1px solid #000000;">{{ $equipment_item->serial }}</td>
-                <td colspan="4" style="border: 1px solid #000000;">{{ $equipment_item->detail->name }}</td>
-                <td colspan="4" style="border: 1px solid #000000;"></td>
-                <td colspan="3" style="border: 1px solid #000000;"></td>
-            </tr>
-        @endif
+    @foreach (equipments($id->equipments) as $equipment_item)
+        @php
+            $j++;
+        @endphp
+        <tr>
+            <td></td>
+            <td colspan="4" style="border: 1px solid #000000;">
+                {{ isset($equipment_item['retired']) ? $equipment_item['retired']->serial : '' }}
+            </td>
+            <td colspan="4" style="border: 1px solid #000000;">
+                {{ isset($equipment_item['retired']) ? $equipment_item['retired']->detail->name : '' }}
+            </td>
+            <td colspan="4" style="border: 1px solid #000000;">
+                {{ isset($equipment_item['install']) ? $equipment_item['install']->serial : '' }}
+            </td>
+            <td colspan="3" style="border: 1px solid #000000;">
+                {{ isset($equipment_item['install']) ? $equipment_item['install']->detail->name : '' }}
+            </td>
+        </tr>
     @endforeach
     @for ($i = $j; $i < 7; $i++)
         <tr>
