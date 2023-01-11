@@ -17,6 +17,7 @@ use App\Models\project\Mintic\miniticMaintenanceEquipment;
 use App\Models\project\Mintic\MinticMaintenanceActivity;
 use App\Models\project\Mintic\MinticVisit;
 use App\Models\system_setting;
+use Carbon\Carbon;
 
 class MinticController extends Controller
 {
@@ -262,7 +263,7 @@ class MinticController extends Controller
             if ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg') {
                 $text = $mintic->name.', '.$mintic->mun.', '.$mintic->dep;
                 $text2 = $mintic->lat.' '.$mintic->long.', '.$mintic->height.'.0 m';
-                $text3 = $visit ? $visit->date.' '.$visit->time : now()->format('Y-m-d H:i:s');
+                $text3 = isset($request->date) && $request->date ? Carbon::create($request->date)->format('Y-m-d H:i:s') : ($visit ? $visit->date.' '.$visit->time : now()->format('Y-m-d H:i:s'));
 
                 $image = Image::make($request->file);
                 if ($request->size != 'org') {
@@ -472,7 +473,7 @@ class MinticController extends Controller
                 if ($request->vol && $request->vol == 2) {
                     $text = $mintic->mun.', '.$mintic->dep.', '.$mintic->population;
                     $text2 = $mintic->long.' / '.$mintic->lat;
-                    $text3 = $visit ? $visit->date.' '.$visit->time : now()->format('Y-m-d H:i:s');
+                    $text3 = isset($request->date) && $request->date ? Carbon::create($request->date)->format('Y-m-d H:i:s') : ($visit ? $visit->date.' '.$visit->time : now()->format('Y-m-d H:i:s') );
     
                     $image = Image::make($request->file);
                     if ($request->size != 'org') {
@@ -530,7 +531,7 @@ class MinticController extends Controller
                 }else {
                     $text = $mintic->name;
                     $text2 = $mintic->long.' / '.$mintic->lat;
-                    $text3 = $visit ? $visit->date.' '.$visit->time : now()->format('Y-m-d H:i:s');
+                    $text3 = isset($request->date) && $request->date ? Carbon::create($request->date)->format('Y-m-d H:i:s') : ($visit ? $visit->date.' '.$visit->time : now()->format('Y-m-d H:i:s') );
     
                     $image = Image::make($request->file);
                     if ($request->size != 'org') {
@@ -874,7 +875,7 @@ class MinticController extends Controller
             $name = time().str_random().'.'.$file->getClientOriginalExtension();
             if (!(isset($request->write) && $request->write == 'No' ) && ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg')) {
                 $text2 = $mintic->project->long.' / '.$mintic->project->lat;
-                $text3 = now()->format('Y-m-d H:i:s');
+                $text3 = isset($request->date) && $request->date ? Carbon::create($request->date)->format('Y-m-d H:i:s') : now()->format('Y-m-d H:i:s');
 
                 $image = Image::make($request->file);
                 if ($request->size != 'org') {
