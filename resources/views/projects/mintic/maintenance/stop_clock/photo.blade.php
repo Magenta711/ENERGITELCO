@@ -3,12 +3,14 @@
 @section('content')
     <section class="content-header">
         <h1>
-            TSS v3 proyecto mintic <small>MINTIC</small>
+            Parada de reloj proyecto mintic <small>MINTIC</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
             <li><a href="#">Proyectos</a></li>
             <li><a href="#">Mintic</a></li>
+            <li><a href="#">Mantenimiento</a></li>
+            <li><a href="#">Parada de reloj</a></li>
             <li class="active">TSS v3</li>
         </ol>
     </section>
@@ -16,7 +18,8 @@
         <input type="hidden" value="{{ $id }}" id="data_id">
         <input type="hidden" value="{{ $item->id }}" id="data_item">
         <input type="hidden" id="url"
-            value="project/mintic/maintenance/{{ $id }}/stop_clock/{{ $item->id }}/approve">
+            value="project/mintic/maintenance/{{ $id }}/stop_clock/{{ $item->id }}/approve"
+            data-url="/project/mintic/maintenance/{{ $id }}/stop_clock/{{ $item->id }}/upload">
     </div>
     <section class="content">
 
@@ -40,6 +43,7 @@
                     'it' => '1',
                     'label' => '1ra parada',
                     'accept' => 'image/*',
+                    'date_edit' => true,
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -50,6 +54,7 @@
                     'it' => '2',
                     'label' => '1ra parada',
                     'accept' => 'image/*',
+                    'date_edit' => true,
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -60,6 +65,7 @@
                     'it' => '3',
                     'label' => '1ra parada',
                     'accept' => 'image/*',
+                    'date_edit' => true,
                 ])
                 <hr>
                 <h3>EVIDENCIAS PARADA DE RELOJ 2</h3>
@@ -71,6 +77,7 @@
                     'it' => '1',
                     'label' => '2da parada',
                     'accept' => 'image/*',
+                    'date_edit' => true,
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -81,6 +88,7 @@
                     'it' => '2',
                     'label' => '2da parada',
                     'accept' => 'image/*',
+                    'date_edit' => true,
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -91,6 +99,7 @@
                     'it' => '3',
                     'label' => '2da parada',
                     'accept' => 'image/*',
+                    'date_edit' => true,
                 ])
                 <hr>
                 <h3>EVIDENCIAS PARADA DE RELOJ 3</h3>
@@ -102,6 +111,7 @@
                     'it' => '1',
                     'label' => '3ra parada',
                     'accept' => 'image/*',
+                    'date_edit' => true,
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -112,6 +122,7 @@
                     'it' => '2',
                     'label' => '3ra parada',
                     'accept' => 'image/*',
+                    'date_edit' => true,
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -122,6 +133,7 @@
                     'it' => '3',
                     'label' => '3ra parada',
                     'accept' => 'image/*',
+                    'date_edit' => true,
                 ])
                 <hr>
                 <h3>EVIDENCIAS PARADA DE RELOJ 1</h3>
@@ -133,6 +145,7 @@
                     'it' => '1',
                     'label' => '4ta parada',
                     'accept' => 'image/*',
+                    'date_edit' => true,
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -143,6 +156,7 @@
                     'it' => '2',
                     'label' => '4ta parada',
                     'accept' => 'image/*',
+                    'date_edit' => true,
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -153,6 +167,7 @@
                     'it' => '3',
                     'label' => '4ta parada',
                     'accept' => 'image/*',
+                    'date_edit' => true,
                 ])
                 <hr>
             </div>

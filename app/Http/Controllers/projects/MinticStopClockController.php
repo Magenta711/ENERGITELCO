@@ -5,10 +5,13 @@ namespace App\Http\Controllers\projects;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Notifications\notificationMain;
+use App\Models\project\Mintic\MinticVisit;
 use App\Models\project\Mintic\Mintic_School;
 use App\Models\project\Mintic\minticStopClock;
 use App\Exports\minticClockStopExport;
 use App\Models\system_setting;
+use Image;
+use Carbon\Carbon;
 
 class MinticStopClockController extends Controller
 {
@@ -18,7 +21,7 @@ class MinticStopClockController extends Controller
         $this->middleware('auth');
         $this->middleware('verified');
     }
-    public function show ($id,minticStopClock $item)
+    public function show (Mintic_School $id,minticStopClock $item)
     {
         return view('projects.mintic.maintenance.stop_clock.show',compact('id','item'));
     }
@@ -30,6 +33,18 @@ class MinticStopClockController extends Controller
 
     public function store(Request $request,$id)
     {
+        // return $request;
+        $request->validate([
+            'date' => ['required', 'string', 'max:100'],
+            'num' => ['required', 'string', 'max:100'],
+            'num_contract' => ['required', 'string', 'max:100'],
+            'collaborating_company' => ['required', 'string', 'max:100'],
+            'responsable_name' => ['required', 'string', 'max:100'],
+            'responsable_position' => ['required', 'string', 'max:100'],
+            'responsable_document' => ['required', 'string', 'max:100'],
+            'responsable_number' => ['required', 'string', 'max:100'],
+            'responsable_email' => ['required', 'string', 'max:100']
+        ]);
         $request['project_id'] = $id;
         $request['status'] = 1;
         $request['responsable_id'] = auth()->id();
@@ -74,7 +89,7 @@ class MinticStopClockController extends Controller
             $name = time().str_random().'.'.$file->getClientOriginalExtension();
             if (!(isset($request->write) && $request->write == 'No' ) && ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg')) {
                 $text2 = $mintic->project->long.' / '.$mintic->project->lat;
-                $text3 = now()->format('Y-m-d H:i:s');
+                $text3 = isset($request->date) && $request->date ? Carbon::create($request->date)->format('Y-m-d H:i:s') : now()->format('Y-m-d H:i:s');
 
                 $image = Image::make($request->file);
                 if ($request->size != 'org') {

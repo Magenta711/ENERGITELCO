@@ -93,7 +93,8 @@
                             <div class="form-group">
                                 <label for="num_contract">Número de contrato</small></label>
                                 <input type="text" name="num_contract" id="num_contract"
-                                    value="{{ old() ? old() : '1042 de 2020' }}" class="form-control">
+                                    value="{{ old('num_contract') ? old('num_contract') : '1042 de 2020' }}"
+                                    class="form-control">
                             </div>
                         </div>
                     </div>

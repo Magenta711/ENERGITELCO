@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Mantenimiento proyecto mintic <small>MINTIC</small>
+            Parada de reloj proyecto mintic <small>MINTIC</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
@@ -11,7 +11,7 @@
             <li><a href="#">Mintic</a></li>
             <li><a href="#">Mantenimiento</a></li>
             <li><a href="#">Parada de reloj</a></li>
-            <li class="active">Editar</li>
+            <li class="active">Fotos</li>
         </ol>
     </section>
 
@@ -20,7 +20,7 @@
             <div class="box-header">
                 <div class="box-title">Para de reloj</div>
                 <div class="box-tools">
-                    <a href="{{ route('mintic_maintenance', $id) }}" class="btn btn-sm btn-primary">Volver</a>
+                    <a href="{{ route('mintic_maintenance', $id->id) }}" class="btn btn-sm btn-primary">Volver</a>
                 </div>
             </div>
             <div class="box-body">
@@ -50,31 +50,31 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="department">Departamento</label>
-                            <p>{{ $item->department }}</p>
+                            <p>{{ $id->dep }}</p>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="municpality">Municipio</label>
-                            <p>{{ $item->municpality }}</p>
+                            <p>{{ $id->mun }}</p>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="population">Centro poblado</label>
-                            <p>{{ $item->population }}</p>
+                            <p>{{ $id->population }}</p>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="name">Sede institución o caso especial</label>
-                            <p>{{ $item->name }}</p>
+                            <p>{{ $id->name }}</p>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="code">Id de beneficiario</label>
-                            <p>{{ $item->code }}</p>
+                            <p>{{ $id->code }}</p>
                         </div>
                     </div>
                     <div class="col-md-3">
