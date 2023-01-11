@@ -8,8 +8,9 @@
     </div>
     <div id="collapseThree" class="panel-collapse collapse">
         <div class="form-group">
-            <label for="reason3">Rason</label>
-            <input type="text" name="reason3" id="reason3" class="form-control" value="TERMINACION DE CONTRATO LABORAL CON JUSTA CAUSA">
+            <label for="reason3">Razón</label>
+            <input type="text" name="reason3" id="reason3" class="form-control"
+                value="TERMINACION DE CONTRATO LABORAL CON JUSTA CAUSA">
         </div>
         <div class="form-group">
             <label for="letter3">Detalles</label>

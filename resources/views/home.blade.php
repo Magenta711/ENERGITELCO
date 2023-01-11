@@ -3,8 +3,8 @@
 {{-- 1633535962Imbnk.jpg --}}
 {{-- 1633536739t8Mqj.jpeg --}}
 @php
-        $months = ['ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOBIEMBRE','DICIEMBRE'];
-    @endphp
+    $months = ['ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOBIEMBRE','DICIEMBRE'];
+@endphp
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
@@ -253,66 +253,185 @@
             @endcan
         </div>
         <div class="row">
-            <div class="col-md-8">
-                @if (count($taskings))
+            @if(Auth::user()->register && Auth::user()->register->state == 2)
+                <div class="col-md-12">
                     <div class="box box-danger">
                         <div class="box-header">
-                            Frente de trabajo
-                        </div>
-                        <div class="box-body">
-                            <table class="table table-striped table-hover table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Actividades</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($taskings as $tasking)
-                                        <tr>
-                                            <td>
-                                                <div class="row" style="cursor: pointer" data-toggle="modal"
-                                                    data-target="#show-modal-{{ $tasking->id }}">
-                                                    <div class="col-xs-6">
-                                                        <p>{{$tasking->eb ? $tasking->eb->projectble->name : $tasking->station_name}}</p>
-                                                    </div>
-                                                    <div class="col-xs-6 text-right">
-                                                        <p class="date-starts">{{ $tasking->date_start }}</p>
-                                                    </div>
-                                                    <div class="col-xs-6 list-user">
-                                                        @foreach ($tasking->users as $user)
-                                                            <p id="list-user-{{ $tasking->id }}-{{ $user->id }}">
-                                                                {{ $user->name }}</p>
-                                                        @endforeach
-                                                    </div>
-                                                    <div class="col-xs-6 text-right">
-                                                        {{ $tasking->am ? 'AM' . ($tasking->pm ? ' / ' : '') : '' }}
-                                                        {{ $tasking->pm ? 'PM' : '' }}
-                                                    </div>
-                                                    <div class="col-xs-6 text-right list-vehicles">
-                                                        @foreach ($tasking->vehicles as $vehicle)
-                                                            <span class="label label-default"
-                                                                id="list-vehicle-{{ $tasking->id }}-{{ $vehicle->vehicle->id }}">
-                                                                {{ $vehicle->vehicle->plate }} -
-                                                                {{ $vehicle->vehicle->brand }}
-                                                            </span>
-                                                        @endforeach
-                                                    </div>
-                                                </div>
-                                                @include('tasking.includes.modals.show',['item' => $tasking])
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                            <p class="text-center">
+                                Se encuentra en proceso de finalización de contrato en {{ config('app.name') }} SAS. Para finalizar el proceso ser requiere de firmar virtual.
+                            </p>
+                            <div class="text-center">
+                                <a href="user/end_work/signature" class="btn btn-sm my-1 btn-warning btn-send">Ir a firmar terminación</a>
+                            </div>
                         </div>
                     </div>
-                @endif
-                @can('Consultar cartelera')
-                    <div class="box box-primary">
+                </div>
+            @else
+            
+                <div class="col-md-8">
+                    @if (count($taskings))
+                        <div class="box box-danger">
+                            <div class="box-header">
+                                Frente de trabajo
+                            </div>
+                            <div class="box-body">
+                                <table class="table table-striped table-hover table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Actividades</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($taskings as $tasking)
+                                            <tr>
+                                                <td>
+                                                    <div class="row" style="cursor: pointer" data-toggle="modal"
+                                                        data-target="#show-modal-{{ $tasking->id }}">
+                                                        <div class="col-xs-6">
+                                                            <p>{{$tasking->eb ? $tasking->eb->projectble->name : $tasking->station_name}}</p>
+                                                        </div>
+                                                        <div class="col-xs-6 text-right">
+                                                            <p class="date-starts">{{ $tasking->date_start }}</p>
+                                                        </div>
+                                                        <div class="col-xs-6 list-user">
+                                                            @foreach ($tasking->users as $user)
+                                                                <p id="list-user-{{ $tasking->id }}-{{ $user->id }}">
+                                                                    {{ $user->name }}</p>
+                                                            @endforeach
+                                                        </div>
+                                                        <div class="col-xs-6 text-right">
+                                                            {{ $tasking->am ? 'AM' . ($tasking->pm ? ' / ' : '') : '' }}
+                                                            {{ $tasking->pm ? 'PM' : '' }}
+                                                        </div>
+                                                        <div class="col-xs-6 text-right list-vehicles">
+                                                            @foreach ($tasking->vehicles as $vehicle)
+                                                                <span class="label label-default"
+                                                                    id="list-vehicle-{{ $tasking->id }}-{{ $vehicle->vehicle->id }}">
+                                                                    {{ $vehicle->vehicle->plate }} -
+                                                                    {{ $vehicle->vehicle->brand }}
+                                                                </span>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                    @include('tasking.includes.modals.show',['item' => $tasking])
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    @endif
+                    @can('Consultar cartelera')
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <div class="box-title">
+                                    <i class="fa fa-th"></i> Cartelera
+                                </div>
+
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                        title="Collapse">
+                                        <i class="fa fa-minus"></i></button>
+                                </div>
+                            </div>
+                            <div class="box-body">
+
+                                <div class="nav-tabs-custom">
+                                    <ul class="nav nav-tabs">
+                                        @foreach ($bill_types as $bill_type)
+                                            <li class="{{ $bill_type->id == 1 ? 'active' : '' }}"><a
+                                                    href="#tab_{{ $bill_type->id }}"
+                                                    data-toggle="tab">{{ $bill_type->name }}</a></li>
+                                        @endforeach
+                                        <li class="pull-left header"></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        @foreach ($bill_types as $bill_type)
+                                            <div class="tab-pane {{ $bill_type->id == 1 ? 'active' : '' }}"
+                                                id="tab_{{ $bill_type->id }}">
+                                                <div class="row">
+                                                    @foreach ($bill_type->documents as $cartel)
+                                                        @php
+                                                            $type = explode('.', $cartel->document)[count(explode('.', $cartel->document)) - 1];
+                                                        @endphp
+                                                        <div class="col-md-4 col-sm-4">
+                                                            <span
+                                                                class="mailbox-attachment-icon {{ $type == 'jpg' || $type == 'png' || $type == 'jpeg' ? 'has-img' : '' }}"
+                                                                id="icon_{{ $cartel->id }}">
+                                                                <div id="type_{{ $cartel->cartel }}">
+                                                                    @if (strtolower($type) == 'pdf')
+                                                                        <i class="fa fa-file-pdf"></i>
+                                                                    @endif
+                                                                    @if (strtolower($type) == 'docx' || strtolower($type) == 'doc')
+                                                                        <i class="fa fa-file-word"></i>
+                                                                    @endif
+                                                                    @if (strtolower($type) == 'xlsx' || strtolower($type) == 'xls')
+                                                                        <i class="fa fa-file-excel"></i>
+                                                                    @endif
+                                                                    @if (strtolower($type) == 'pptx' || strtolower($type) == 'ppt')
+                                                                        <i class="fa fa-file-powerpoint"></i>
+                                                                    @endif
+                                                                    @if (strtolower($type) == 'png' || strtolower($type) == 'jpg' || strtolower($type) == 'jpeg')
+                                                                        <img src="/file/billboard/{{ $cartel->document }}" style="width: 100%;" alt="Attachment">
+                                                                    @endif
+                                                                    @if (strtolower($type) == 'mp3')
+                                                                        <i class="fa fa-file-audio"></i>
+                                                                    @endif
+                                                                    @if (strtolower($type) == 'mp4' || strtolower($type) == 'MP4')
+                                                                        <i class="fa fa-file-video"></i>
+                                                                    @endif
+                                                                </div>
+                                                            </span>
+                                                            <div class="mailbox-attachment-info">
+                                                                <p class="mailbox-attachment-name"
+                                                                    style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;"
+                                                                    data-toggle="tooltip" title="{{ $cartel->name_document }}"><i
+                                                                        class="fa fa-paperclip"></i><span
+                                                                        id="name_{{ $cartel->id }}">{{ $cartel->name_document }}</span>
+                                                                </p>
+                                                                <span class="mailbox-attachment-size">
+                                                                    .
+                                                                    <span
+                                                                        id="size_{{ $cartel->cartel }}">{{ $cartel->size }}</span>
+                                                                    <a target="_black"
+                                                                        href="/file/billboard/{{ $cartel->document }}"
+                                                                        class="btn btn-default btn-xs pull-right"><i
+                                                                            class="fa fa-download"></i></a>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                            <!-- /.tab-pane -->
+                                        @endforeach
+                                    </div>
+                                    <!-- /.tab-content -->
+                                </div>
+                            </div>
+                        </div>
+                    @endcan
+                    {{-- <div class="box box-primary">
                         <div class="box-header with-border">
                             <div class="box-title">
-                                <i class="fa fa-th"></i> Cartelera
+                                <i class="far fa-calendar-alt"></i> Calendario
                             </div>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                    title="Collapse">
+                                    <i class="fa fa-minus"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div id="calendar"></div>
+                        </div>
+                    </div> --}}
+                </div>
+                <div class="col-md-4">
+                    <div class="box box-warning">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Bienvenido, {{ Auth::user()->name }}</h3>
 
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -321,136 +440,7 @@
                             </div>
                         </div>
                         <div class="box-body">
-
-                            <div class="nav-tabs-custom">
-                                <ul class="nav nav-tabs">
-                                    @foreach ($bill_types as $bill_type)
-                                        <li class="{{ $bill_type->id == 1 ? 'active' : '' }}"><a
-                                                href="#tab_{{ $bill_type->id }}"
-                                                data-toggle="tab">{{ $bill_type->name }}</a></li>
-                                    @endforeach
-                                    <li class="pull-left header"></li>
-                                </ul>
-                                <div class="tab-content">
-                                    @foreach ($bill_types as $bill_type)
-                                        <div class="tab-pane {{ $bill_type->id == 1 ? 'active' : '' }}"
-                                            id="tab_{{ $bill_type->id }}">
-                                            <div class="row">
-                                                @foreach ($bill_type->documents as $cartel)
-                                                    @php
-                                                        $type = explode('.', $cartel->document)[count(explode('.', $cartel->document)) - 1];
-                                                    @endphp
-                                                    <div class="col-md-4 col-sm-4">
-                                                        <span
-                                                            class="mailbox-attachment-icon {{ $type == 'jpg' || $type == 'png' || $type == 'jpeg' ? 'has-img' : '' }}"
-                                                            id="icon_{{ $cartel->id }}">
-                                                            <div id="type_{{ $cartel->cartel }}">
-                                                                @if (strtolower($type) == 'pdf')
-                                                                    <i class="fa fa-file-pdf"></i>
-                                                                @endif
-                                                                @if (strtolower($type) == 'docx' || strtolower($type) == 'doc')
-                                                                    <i class="fa fa-file-word"></i>
-                                                                @endif
-                                                                @if (strtolower($type) == 'xlsx' || strtolower($type) == 'xls')
-                                                                    <i class="fa fa-file-excel"></i>
-                                                                @endif
-                                                                @if (strtolower($type) == 'pptx' || strtolower($type) == 'ppt')
-                                                                    <i class="fa fa-file-powerpoint"></i>
-                                                                @endif
-                                                                @if (strtolower($type) == 'png' || strtolower($type) == 'jpg' || strtolower($type) == 'jpeg')
-                                                                    <img src="/file/billboard/{{ $cartel->document }}" style="width: 100%;" alt="Attachment">
-                                                                @endif
-                                                                @if (strtolower($type) == 'mp3')
-                                                                    <i class="fa fa-file-audio"></i>
-                                                                @endif
-                                                                @if (strtolower($type) == 'mp4' || strtolower($type) == 'MP4')
-                                                                    <i class="fa fa-file-video"></i>
-                                                                @endif
-                                                            </div>
-                                                        </span>
-                                                        <div class="mailbox-attachment-info">
-                                                            <p class="mailbox-attachment-name"
-                                                                style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;"
-                                                                data-toggle="tooltip" title="{{ $cartel->name_document }}"><i
-                                                                    class="fa fa-paperclip"></i><span
-                                                                    id="name_{{ $cartel->id }}">{{ $cartel->name_document }}</span>
-                                                            </p>
-                                                            <span class="mailbox-attachment-size">
-                                                                .
-                                                                <span
-                                                                    id="size_{{ $cartel->cartel }}">{{ $cartel->size }}</span>
-                                                                <a target="_black"
-                                                                    href="/file/billboard/{{ $cartel->document }}"
-                                                                    class="btn btn-default btn-xs pull-right"><i
-                                                                        class="fa fa-download"></i></a>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                        <!-- /.tab-pane -->
-                                    @endforeach
-                                </div>
-                                <!-- /.tab-content -->
-                            </div>
-                        </div>
-                    </div>
-                @endcan
-                {{-- <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <div class="box-title">
-                            <i class="far fa-calendar-alt"></i> Calendario
-                        </div>
-                        <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                                title="Collapse">
-                                <i class="fa fa-minus"></i></button>
-                        </div>
-                    </div>
-                    <div class="box-body">
-                        <div id="calendar"></div>
-                    </div>
-                </div> --}}
-            </div>
-            <div class="col-md-4">
-                <div class="box box-warning">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Bienvenido, {{ Auth::user()->name }}</h3>
-
-                        <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                                title="Collapse">
-                                <i class="fa fa-minus"></i></button>
-                        </div>
-                    </div>
-                    <div class="box-body">
-                        <p id="menssage_user">{!! $start_mesage ? str_replace("\n", '</br>', addslashes($start_mesage->description)) : '' !!}</p>
-                    </div>
-                    <!-- /.box-body -->
-                    {{-- <div class="box-footer">
-                    Footer
-                </div> --}}
-                    <!-- /.box-footer-->
-                </div>
-                <!-- /.box -->
-            </div>
-            @if ($proof_payment)
-                <div class="col-md-4">
-                    <div class="box box-danger">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">
-                                <div class="col-xs-8 col-sm-10 col-md-9">
-                                    Descargar comprobante de pago {{ $proof_payment->work->start_date }} -
-                                    {{ $proof_payment->work->end_date }}
-                                </div>
-                                <div class="col-xs-4 col-sm-2 col-md-3">
-                                    <a href="{{ route('payroll_overtime_news_report_export', $proof_payment->work->id) }}"
-                                        class="btn btn-danger">
-                                        <i class="fa fa-download"></i>
-                                    </a>
-                                </div>
-                            </h3>
+                            <p id="menssage_user">{!! $start_mesage ? str_replace("\n", '</br>', addslashes($start_mesage->description)) : '' !!}</p>
                         </div>
                         <!-- /.box-body -->
                         {{-- <div class="box-footer">
@@ -458,122 +448,148 @@
                     </div> --}}
                         <!-- /.box-footer-->
                     </div>
-                </div>
-            @endif
-            {{-- <div class="col-md-4">
-            <div class="box box-success">
-                <div class="box-header with-border">
-                    <h3 class="box-title">
-                        PQRSF
-                    </h3>
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                        <i class="fa fa-minus"></i></button>
-                        <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                        <i class="fa fa-times"></i></button>
-                    </div>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <form action="{{route('suggestions_mailbox_save')}}" method="POST" autocomplete="off">
-                        @csrf
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="type">Tipo</label>
-                                    <select name="type" id="type" class="form-control">
-                                        <option selected disabled>Seleccione...</option>
-                                        <option {{old('type') == 'Peticiones' ? 'selected' : ''}} value="Peticiones">Peticiones</option>
-                                        <option {{old('type') == 'Quejas' ? 'selected' : ''}} value="Quejas">Quejas</option>
-                                        <option {{old('type') == 'Reclamos' ? 'selected' : ''}} value="Reclamos">Reclamos</option>
-                                        <option {{old('type') == 'Sugerencia' ? 'selected' : ''}} value="Sugerencia">Sugerencia</option>
-                                        <option {{old('type') == 'Felicitaciones' ? 'selected' : ''}} value="Felicitaciones">Felicitaciones</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="area">Area</label>
-                                    <select name="area" id="area" class="form-control">
-                                        <option selected disabled>Seleccione...</option>
-                                        <option {{old('area') == 'Administrava' ? 'selected' : ''}} value="Administrava">Administrava</option>
-                                        <option {{old('area') == 'Gestión' ? 'selected' : ''}} value="Gestión humana">Gestión humana</option>
-                                        <option {{old('area') == 'Técnica' ? 'selected' : ''}} value="Técnica">Técnica</option>
-                                        <option {{old('area') == 'Sistemas' ? 'selected' : ''}} value="Sistemas">Sistemas</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="affair">Motivo</label>
-                            <input type="text" name="affair" id="affair" value="{{old('affair')}}" class="form-control" placeholder="Especifique el mensaje">
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Descripción</label>
-                            <textarea name="description" id="description" cols="30" rows="3" class="form-control" placeholder="Mensaje...">{{old('description')}}</textarea>
-                        </div>
-                        <button class="btn btn-sm btn-primary">Guardar</button>
-                    </form>
-                </div>
-                <!-- /.box-body -->
-                <!-- <div class="box-footer">
-                    Footer
-                </div>-->
-                <!-- /.box-footer-->
-            </div>
-            <!-- /.box -->
-        </div> --}}
-            @if (auth()->user()->b24_7)
-                <div class="col-md-4">
-                    <div class="box box-info">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">
-                                Reporte 24/7
-                            </h3>
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                                    title="Collapse">
-                                    <i class="fa fa-minus"></i></button>
-                                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip"
-                                    title="Remove">
-                                    <i class="fa fa-times"></i></button>
-                            </div>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <form action="{{ route('bonus_24-7') }}" method="POST" autocomplete="off">
-                                @csrf
-                                <div class="form-group">
-                                    <label for="date_time_start">Fecha</label>
-                                    <input type="date" name="date_start" id="date_start" class="form-control"
-                                        value="{{ now()->format('Y-m-d') }}" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="description">Nombre de EB o CD</label>
-                                    <input type="text" name="description" id="description" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label for="plus">
-                                        <input type="checkbox" name="plus" id="plus" value="1">
-                                        Me retiro con actividad exitosa, visto bueno de coordinador y con 0 impacto
-                                        ambiental o sitio limpio
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <small class="text-muted"><b>Nota:</b> Recuerde enviar reportes en linea a <i
-                                            class="fab fa-whatsapp"></i>3113066482</small>
-                                </div>
-                                <button class="btn btn-sm btn-primary">Enviar</button>
-                            </form>
-                        </div>
-                        <!-- /.box-body -->
-                        <!-- <div class="box-footer">
-                            Footer
-                        </div>-->
-                        <!-- /.box-footer-->
-                    </div>
                     <!-- /.box -->
                 </div>
+                @if ($proof_payment)
+                    <div class="col-md-4">
+                        <div class="box box-danger">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">
+                                    <div class="col-xs-8 col-sm-10 col-md-9">
+                                        Descargar comprobante de pago {{ $proof_payment->work->start_date }} -
+                                        {{ $proof_payment->work->end_date }}
+                                    </div>
+                                    <div class="col-xs-4 col-sm-2 col-md-3">
+                                        <a href="{{ route('payroll_overtime_news_report_export', $proof_payment->work->id) }}"
+                                            class="btn btn-danger">
+                                            <i class="fa fa-download"></i>
+                                        </a>
+                                    </div>
+                                </h3>
+                            </div>
+                            <!-- /.box-body -->
+                            {{-- <div class="box-footer">
+                            Footer
+                        </div> --}}
+                            <!-- /.box-footer-->
+                        </div>
+                    </div>
+                @endif
+                {{-- <div class="col-md-4">
+                <div class="box box-success">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">
+                            PQRSF
+                        </h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fa fa-minus"></i></button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                            <i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <form action="{{route('suggestions_mailbox_save')}}" method="POST" autocomplete="off">
+                            @csrf
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="type">Tipo</label>
+                                        <select name="type" id="type" class="form-control">
+                                            <option selected disabled>Seleccione...</option>
+                                            <option {{old('type') == 'Peticiones' ? 'selected' : ''}} value="Peticiones">Peticiones</option>
+                                            <option {{old('type') == 'Quejas' ? 'selected' : ''}} value="Quejas">Quejas</option>
+                                            <option {{old('type') == 'Reclamos' ? 'selected' : ''}} value="Reclamos">Reclamos</option>
+                                            <option {{old('type') == 'Sugerencia' ? 'selected' : ''}} value="Sugerencia">Sugerencia</option>
+                                            <option {{old('type') == 'Felicitaciones' ? 'selected' : ''}} value="Felicitaciones">Felicitaciones</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="area">Area</label>
+                                        <select name="area" id="area" class="form-control">
+                                            <option selected disabled>Seleccione...</option>
+                                            <option {{old('area') == 'Administrava' ? 'selected' : ''}} value="Administrava">Administrava</option>
+                                            <option {{old('area') == 'Gestión' ? 'selected' : ''}} value="Gestión humana">Gestión humana</option>
+                                            <option {{old('area') == 'Técnica' ? 'selected' : ''}} value="Técnica">Técnica</option>
+                                            <option {{old('area') == 'Sistemas' ? 'selected' : ''}} value="Sistemas">Sistemas</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="affair">Motivo</label>
+                                <input type="text" name="affair" id="affair" value="{{old('affair')}}" class="form-control" placeholder="Especifique el mensaje">
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Descripción</label>
+                                <textarea name="description" id="description" cols="30" rows="3" class="form-control" placeholder="Mensaje...">{{old('description')}}</textarea>
+                            </div>
+                            <button class="btn btn-sm btn-primary">Guardar</button>
+                        </form>
+                    </div>
+                    <!-- /.box-body -->
+                    <!-- <div class="box-footer">
+                        Footer
+                    </div>-->
+                    <!-- /.box-footer-->
+                </div>
+                <!-- /.box -->
+            </div> --}}
+                @if (auth()->user()->b24_7)
+                    <div class="col-md-4">
+                        <div class="box box-info">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">
+                                    Reporte 24/7
+                                </h3>
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                        title="Collapse">
+                                        <i class="fa fa-minus"></i></button>
+                                    <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip"
+                                        title="Remove">
+                                        <i class="fa fa-times"></i></button>
+                                </div>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <form action="{{ route('bonus_24-7') }}" method="POST" autocomplete="off">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="date_time_start">Fecha</label>
+                                        <input type="date" name="date_start" id="date_start" class="form-control"
+                                            value="{{ now()->format('Y-m-d') }}" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="description">Nombre de EB o CD</label>
+                                        <input type="text" name="description" id="description" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="plus">
+                                            <input type="checkbox" name="plus" id="plus" value="1">
+                                            Me retiro con actividad exitosa, visto bueno de coordinador y con 0 impacto
+                                            ambiental o sitio limpio
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <small class="text-muted"><b>Nota:</b> Recuerde enviar reportes en linea a <i
+                                                class="fab fa-whatsapp"></i>3113066482</small>
+                                    </div>
+                                    <button class="btn btn-sm btn-primary">Enviar</button>
+                                </form>
+                            </div>
+                            <!-- /.box-body -->
+                            <!-- <div class="box-footer">
+                                Footer
+                            </div>-->
+                            <!-- /.box-footer-->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                @endif
             @endif
             {{-- @if (!auth()->user()->register())
         <div class="col-md-4">

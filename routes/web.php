@@ -229,6 +229,8 @@ Route::get('user/end_work/presend/{id}','endWorkController@create')->name('user_
 Route::post('user/end_work/presend/{id}','endWorkController@store')->name('user_end_work_store')->middleware('auth')->middleware('verified');
 Route::get('user/end_work/signature','endWorkController@edit')->name('user_end_work_signature')->middleware('auth')->middleware('verified');
 Route::put('user/end_work/signature','endWorkController@update')->name('user_end_work_update')->middleware('auth')->middleware('verified');
+Route::get('user/end_work/witness/{id}','endWorkController@witness')->name('user_end_work_witness')->middleware('auth')->middleware('verified');
+Route::put('user/end_work/witness/{id}','endWorkController@witness_update')->name('user_end_work_witness_update')->middleware('auth')->middleware('verified');
 
 // letters
 Route::get('guest/letters/recommendation','endWorkController@letter_recommendation')->name('letter_recommendation');

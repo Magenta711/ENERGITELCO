@@ -207,22 +207,24 @@ class endWorkController extends Controller
             }
         }
         
-        Mail::send('end_work.email.send_letter',['request' => $request, 'id' => $id] , function ($mail) use ($pdf1,$pdf2,$pdf3,$pdf4,$id,$time,$request) {
-            $mail->subject("Energitelco S.A.S. Anexos finalización de contrato");
-            $mail->to($id->email, $id->name);
-            if (isset($request->letters[0])){
-                $mail->attachData($pdf1->output(), $time.'_CARTA_DE_RECOMENDACION.pdf');
-            }
-            if (isset($request->letters[1])){
-                $mail->attachData($pdf2->output(), $time.'_CARTA_EXAMENES_MEDICOS.pdf');
-            }
-            if (isset($request->letters[2])){
-                $mail->attachData($pdf3->output(), $time.'_CARTA_TERMINACION_CONTRATO.pdf');
-            }
-            if (isset($request->letters[3])){
-                $mail->attachData($pdf4->output(), $time.'_CARTA_RETIRO_CESANTIAS.pdf');
-            }
-        });
+        if (isset($request->check_send_email)) {
+            Mail::send('end_work.email.send_letter',['request' => $request, 'id' => $id] , function ($mail) use ($pdf1,$pdf2,$pdf3,$pdf4,$id,$time,$request) {
+                $mail->subject("Energitelco S.A.S. Anexos finalización de contrato");
+                $mail->to($id->email, $id->name);
+                if (isset($request->letters[0])){
+                    $mail->attachData($pdf1->output(), $time.'_CARTA_DE_RECOMENDACION.pdf');
+                }
+                if (isset($request->letters[1])){
+                    $mail->attachData($pdf2->output(), $time.'_CARTA_EXAMENES_MEDICOS.pdf');
+                }
+                if (isset($request->letters[2])){
+                    $mail->attachData($pdf3->output(), $time.'_CARTA_TERMINACION_CONTRATO.pdf');
+                }
+                if (isset($request->letters[3])){
+                    $mail->attachData($pdf4->output(), $time.'_CARTA_RETIRO_CESANTIAS.pdf');
+                }
+            });
+        }
         
         return redirect()->route('users')->with('success','Se ha enviado los anexos de finalización de contrato correctamente');
     }
@@ -271,23 +273,20 @@ class endWorkController extends Controller
                 'status' => 0,
             ]);
         }
-        if ($contract) {
+        if (auth()->user()->register) {
             auth()->user()->register->update([
                 'state' => 0,
             ]);
-            User::where('id',auth()->id())->update([
-                'state'=>0
-            ]);
-            
-            Auth::logout();
-    
-            $request->session()->invalidate();
-    
-            $request->session()->regenerateToken();
-    
-            return redirect()->route('login');
         }
-        return redirect()->route('home');
+        User::where('id',auth()->id())->update([
+            'state'=>0
+        ]);
+        Auth::logout();
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login');
     }
 
     /**
@@ -316,5 +315,37 @@ class endWorkController extends Controller
         }
 
         return redirect()->route('letter_recommendation')->withErrors(['document' => 'Estas credenciales no coinciden con nuestros registros.']);
+    }
+
+    public function witness(User $id)
+    {
+        return view('end_work.witness',compact('id'));
+    }
+
+    public function witness_update(Request $request, User $id)
+    {
+        if ($id->register->hasContract()) {
+            $contract = Contract::where('id',$id->register->hasContract()->id)->update([
+                'has_witness' => auth()->id(),
+                'signature_end' => now(),
+                'status' => 0,
+            ]);
+        }else {
+            $contract = Contract::where('register_id',$id->register->id)->where('status', 2)->update([
+                'has_witness' => auth()->id(),
+                'signature_end' => now(),
+                'status' => 0,
+            ]);
+        }
+        if ($id->register) {
+            $id->register->update([
+                'state' => 0,
+            ]);
+        }
+        User::where('id',auth()->id())->update([
+            'state'=>0
+        ]);
+
+        return redirect()->route('users')->with('success','Se ha firmado como testigo la finalización de contrato correctamente');
     }
 }

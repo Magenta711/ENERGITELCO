@@ -19,16 +19,16 @@
                     <div class="box-title">Lista de usuarios</div>
                     <div class="box-tools">
                         @can('Disparar evaluación de desempeño')
-                            <button class="btn btn-sm btn-danger" data-toggle="modal" data-target=".performance_evaluation">Evaluación de desempeño</button>
+                            <button class="btn btn-sm my-1 btn-danger" data-toggle="modal" data-target=".performance_evaluation">Evaluación de desempeño</button>
                         @endcan
                         @can('Realizar llamados de atención a trabajadores')
-                            <a class="btn btn-sm btn-warning btn-send" href="{{ route('attention_call_create') }}">Llamado de atención</a>
+                            <a class="btn btn-sm my-1 btn-warning btn-send" href="{{ route('attention_call_create') }}">Llamado de atención</a>
                         @endcan
                         @can('Exportar usuarios a excel')
-                        <a href="{{route('user_export')}}" class="btn btn-sm btn-primary">Exportar</a>
+                        <a href="{{route('user_export')}}" class="btn btn-sm my-1 btn-primary">Exportar</a>
                         @endcan
                         @can('Crear usuarios')
-                            <a href="{{route('user_create')}}" class="btn btn-sm btn-success btn-send">Crear</a>
+                            <a href="{{route('user_create')}}" class="btn btn-sm my-1 btn-success btn-send">Crear</a>
                         @endcan
                     </div>
                 </div>
@@ -112,7 +112,29 @@
                 },
                 {
                     render: function ( data, type, row, meta ) {
-                        return '@can("Ver usuarios") <a class="btn  btn-sm btn-success btn-send" href="users/show/'+row.id+'">Ver</a> @endcan @can("Editar usuarios") <a class="btn btn-sm btn-primary btn-send" href="users/'+row.id+'/edit">Editar</a> @endcan @can('Eliminar usuarios') <button type="button" class="btn btn-sm btn-danger btn-delete">Eliminar</button> @endcan @can("Terminar contratación de usuarios") <a href="user/end_work/presend/'+row.id+'" class="btn btn-sm btn-warning btn-send">Terminar</a> @endcan';
+                        let btnTermination = row.register && row.register.state == 2;
+                        let idUser = {{Auth::user()->id}};
+
+                        return `
+                        @can("Ver usuarios")
+                            <a class="btn  btn-sm btn-success btn-send" href="users/show/${row.id}">Ver</a>
+                        @endcan
+                        @can("Editar usuarios")
+                            <a class="btn btn-sm my-1 btn-primary btn-send" href="users/${row.id}/edit">Editar</a>
+                        @endcan
+                        @can('Eliminar usuarios')
+                            <button type="button" class="btn btn-sm my-1 btn-danger btn-delete">Eliminar</button>
+                        @endcan
+                            ${
+                                (btnTermination) ? 
+                                    row.id == idUser ? 
+                                        ` <a href="user/end_work/signature" class="btn btn-sm my-1 btn-warning btn-send">Firmar de terminación</a>`
+                                    : `<a href="user/end_work/witness/${row.id}" class="btn btn-sm my-1 btn-warning btn-send">Firmar como testigo</a>`
+                                : ` @can("Terminar contratación de usuarios")
+                                        <a href="user/end_work/presend/${row.id}" class="btn btn-sm my-1 btn-warning btn-send">Terminar</a>
+                                    @endcan`
+                            }
+                        `;
                     }
                 }
             ];
