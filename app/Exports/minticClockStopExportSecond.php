@@ -14,11 +14,13 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 class minticClockStopExportSecond implements FromView, WithTitle, WithDrawings, ShouldAutoSize, WithStyles
 {
     protected $id;
+    protected $item;
     protected $files;
-    
-    public function __construct(object $id,$files)
+
+    public function __construct(object $id, $item, $files)
     {
         $this->id = $id;
+        $this->item = $item;
         $this->files = $files;
     }
 
@@ -41,14 +43,14 @@ class minticClockStopExportSecond implements FromView, WithTitle, WithDrawings, 
     public function styles(Worksheet $sheet)
     {
         return [
-            2    => ['font' => ['bold' => true, 'size' => 12 ], 'alignment' => ['horizontal' => 'center','vertical' => 'center']],
+            2    => ['font' => ['bold' => true, 'size' => 12], 'alignment' => ['horizontal' => 'center', 'vertical' => 'center']],
             'F2' => ['alignment' => ['wrapText' => true]],
         ];
     }
 
     public function view(): View
     {
-        return view('projects.mintic.maintenance.stop_clock.export.stop_secund',[ 'id' => $this->id]);
+        return view('projects.mintic.maintenance.stop_clock.export.stop_secund', ['id' => $this->id]);
     }
 
     public function title(): string

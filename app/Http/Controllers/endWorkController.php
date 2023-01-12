@@ -342,7 +342,7 @@ class endWorkController extends Controller
                 'state' => 0,
             ]);
         }
-        User::where('id',auth()->id())->update([
+        User::find($id->id)->update([
             'state'=>0
         ]);
 
