@@ -189,9 +189,7 @@ return [
         "f9a3u1" => "valor de caja menor del usuario 1",
         "f9a3u2" => "valor de caja menor del usuario 2",
         "f9a3u3" => "valor de caja menor del usuario 3",
-        "f9a3u4" => "valor de caja menor del usuario 4",
-        "date" => "fecha",
-        "date_end" => "fecha final"
+        "f9a3u4" => "valor de caja menor del usuario 4"
     ],
 
 ];
