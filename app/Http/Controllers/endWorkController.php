@@ -85,6 +85,12 @@ class endWorkController extends Controller
      */
     public function store(Request $request, User $id)
     {
+
+        $request->validate([
+            'date' => ['required'],
+            'date_end' => ['required'],
+        ]);
+
         $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
         $day = date('d', strtotime($request->date_end));
         $month = date('n', strtotime($request->date_end));
