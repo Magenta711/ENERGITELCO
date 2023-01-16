@@ -47,7 +47,7 @@
                             </div>
                         </div>
                         {!! $item->commentary != '' ? '<p>' . $item->commentary . '</p>' : '' !!}
-                        <input type="hidden" name="file_id" id="file_id" value="{{ $item->id }}" class="form-control">
+                        <input type="hidden" name="file_id" id="file_id_{{ $num }}" value="{{ $item->id }}" class="form-control">
                     @endif
                 @endforeach
                 @if (!$hasFile)
@@ -66,6 +66,7 @@
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" name="file_id" id="file_id_{{ $num }}" value="" class="form-control">
                 @endif
                 <div id="file_new_{{ $num }}" style="{{ $hasFile ? 'display: none;' : '' }}">
                     <div class="row">

@@ -981,9 +981,10 @@ class MinticController extends Controller
                     'size' => $size.' KB',
                     'name' => $name,
                     'type' => $file->getClientOriginalExtension(),
+                    'file_id' => $file_exists->id
                 ]);
             }
-            $mintic->files()->create([
+            $file_storaged = $mintic->files()->create([
                 'name' => $name,
                 'description' => $request->name_d,
                 'commentary' => $request->commentary,
@@ -998,6 +999,7 @@ class MinticController extends Controller
                 'size' => $size.' KB',
                 'name' => $name,
                 'type' => $file->getClientOriginalExtension(),
+                'file_id' => $file_storaged->id
             ]);
         }else {
             return response()->json(['success'=>'No se examino un archivo']);

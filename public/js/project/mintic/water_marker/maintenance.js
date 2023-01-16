@@ -29,7 +29,7 @@ function dlete(btn) {
 
     let form = $("#form_"+btn)[0];
     data = new FormData(form);
-    let file_id = $('#file_id').val();
+    let file_id = $('#file_id_'+btn).val();
     $.ajax({
         type:'POST',
         enctype: 'multipart/form-data',
@@ -130,6 +130,11 @@ function upload(btn) {
                 $('#type_'+btn).children().remove();
                 $('#icon_'+btn).removeClass('has-img');
                 $('#delete_'+btn).show();
+
+                if(data.file_id) {
+                    $('#file_id_'+btn).val(data.file_id);
+                }    
+
                 if(data.type.toLowerCase() == 'pdf'){
                     $('<i>',{
                         'class' : 'fa fa-file-pdf',
