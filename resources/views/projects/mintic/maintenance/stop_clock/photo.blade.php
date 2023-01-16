@@ -10,8 +10,7 @@
             <li><a href="#">Proyectos</a></li>
             <li><a href="#">Mintic</a></li>
             <li><a href="#">Mantenimiento</a></li>
-            <li><a href="#">Parada de reloj</a></li>
-            <li class="active">TSS v3</li>
+            <li class="active">Parada de reloj</li>
         </ol>
     </section>
     <div class="hide">
@@ -43,6 +42,7 @@
                     'it' => '1',
                     'label' => '1ra parada',
                     'accept' => 'image/*',
+                    'place' => 'B12',
                     'date_edit' => true,
                 ])
                 <hr>
@@ -54,6 +54,7 @@
                     'it' => '2',
                     'label' => '1ra parada',
                     'accept' => 'image/*',
+                    'place' => 'G12',
                     'date_edit' => true,
                 ])
                 <hr>
@@ -65,6 +66,7 @@
                     'it' => '3',
                     'label' => '1ra parada',
                     'accept' => 'image/*',
+                    'place' => 'L12',
                     'date_edit' => true,
                 ])
                 <hr>
@@ -77,6 +79,7 @@
                     'it' => '1',
                     'label' => '2da parada',
                     'accept' => 'image/*',
+                    'place' => 'B29',
                     'date_edit' => true,
                 ])
                 <hr>
@@ -88,6 +91,7 @@
                     'it' => '2',
                     'label' => '2da parada',
                     'accept' => 'image/*',
+                    'place' => 'G29',
                     'date_edit' => true,
                 ])
                 <hr>
@@ -99,6 +103,7 @@
                     'it' => '3',
                     'label' => '2da parada',
                     'accept' => 'image/*',
+                    'place' => 'L29',
                     'date_edit' => true,
                 ])
                 <hr>
@@ -111,6 +116,7 @@
                     'it' => '1',
                     'label' => '3ra parada',
                     'accept' => 'image/*',
+                    'place' => 'B46',
                     'date_edit' => true,
                 ])
                 <hr>
@@ -122,6 +128,7 @@
                     'it' => '2',
                     'label' => '3ra parada',
                     'accept' => 'image/*',
+                    'place' => 'G46',
                     'date_edit' => true,
                 ])
                 <hr>
@@ -133,6 +140,7 @@
                     'it' => '3',
                     'label' => '3ra parada',
                     'accept' => 'image/*',
+                    'place' => 'L46',
                     'date_edit' => true,
                 ])
                 <hr>
@@ -145,6 +153,7 @@
                     'it' => '1',
                     'label' => '4ta parada',
                     'accept' => 'image/*',
+                    'place' => 'B63',
                     'date_edit' => true,
                 ])
                 <hr>
@@ -156,6 +165,7 @@
                     'it' => '2',
                     'label' => '4ta parada',
                     'accept' => 'image/*',
+                    'place' => 'G63',
                     'date_edit' => true,
                 ])
                 <hr>
@@ -167,6 +177,7 @@
                     'it' => '3',
                     'label' => '4ta parada',
                     'accept' => 'image/*',
+                    'place' => 'L63',
                     'date_edit' => true,
                 ])
                 <hr>

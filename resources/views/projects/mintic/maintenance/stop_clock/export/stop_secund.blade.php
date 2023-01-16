@@ -40,6 +40,9 @@
     </tr>
     <tr>
         <td></td>
+        <td rowspan="16" colspan="5"></td>
+        <td rowspan="16" colspan="5"></td>
+        <td rowspan="16" colspan="5"></td>
     </tr>
     <tr>
         <td></td>
@@ -86,5 +89,169 @@
     <tr>
         <td></td>
     </tr>
-    
+    <tr>
+        <td></td>
+        <td colspan="15">PARADA DE RELOJ 2.</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td rowspan="16" colspan="5"></td>
+        <td rowspan="16" colspan="5"></td>
+        <td rowspan="16" colspan="5"></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="15">PARADA DE RELOJ 3.</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td rowspan="16" colspan="5"></td>
+        <td rowspan="16" colspan="5"></td>
+        <td rowspan="16" colspan="5"></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="15">PARADA DE RELOJ 4.</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td rowspan="16" colspan="5"></td>
+        <td rowspan="16" colspan="5"></td>
+        <td rowspan="16" colspan="5"></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
 </table>

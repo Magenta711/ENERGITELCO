@@ -77,9 +77,10 @@ class MinticStopClockController extends Controller
     public function upload(Request $request)
     {
         if ($request->hasFile('file')) {
-            $mintic = minticStopClock::find($request->id);
+            $stop_clock = minticStopClock::find($request->id);
+            $mintic = Mintic_School::find($request->id);
             $visit = MinticVisit::where('project_id', $request->id)->where('type', 'maintenance')->first();
-            $file_exists = $mintic->files->where('description', $request->name_d)->first();
+            $file_exists = $stop_clock->files->where('description', $request->name_d)->first();
 
             if ($file_exists) {
                 Storage::delete('public/upload/mintic/' . $file_exists->name);
@@ -88,7 +89,7 @@ class MinticStopClockController extends Controller
 
             $name = time() . str_random() . '.' . $file->getClientOriginalExtension();
             if (!(isset($request->write) && $request->write == 'No') && ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg')) {
-                $text2 = $mintic->project->long . ' / ' . $mintic->project->lat;
+                $text2 = $mintic->long . ' / ' . $mintic->lat;
                 $text3 = isset($request->date) && $request->date ? Carbon::create($request->date)->format('Y-m-d H:i:s') : now()->format('Y-m-d H:i:s');
 
                 $image = Image::make($request->file);
@@ -196,7 +197,7 @@ class MinticStopClockController extends Controller
                     'type' => $file->getClientOriginalExtension(),
                 ]);
             }
-            $mintic->files()->create([
+            $stop_clock->files()->create([
                 'name' => $name,
                 'description' => $request->name_d,
                 'commentary' => $request->commentary,
@@ -233,6 +234,21 @@ class MinticStopClockController extends Controller
         $files['logo_claro']['height'] = 80;
         $files['logo_claro']['coordinates'] = 'N3';
         $files['logo_claro']['place'] = 3;
+
+        if ($item->files) {
+            foreach ($item->files as $key => $value) {
+                if ($value->place && $value->place != 'XXX') {
+                    $place = explode('.', $value->description, 2);
+                    $str = str_random();
+                    $files[$str]['name'] = $value->name;
+                    $files[$str]['description'] = $value->description;
+                    $files[$str]['path'] = public_path('/storage/upload/mintic/' . $value->name);
+                    $files[$str]['height'] = 200;
+                    $files[$str]['coordinates'] = $value->place;
+                    $files[$str]['place'] = 2;
+                }
+            }
+        }
 
         return (new minticClockStopExport($id, $item, $files))->download('Formato Parada de Reloj.xlsx');
     }

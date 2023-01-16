@@ -78,10 +78,10 @@
     <tr>
         <td></td>
         <td colspan="2" style="border: 1px solid #000000;">
-            {{ $id->code }} //Change
+            {{ $id->code }}
         </td>
         <td colspan="2" style="border: 1px solid #000000;">
-            {{ $id->code }}
+            {{ $id->con_sede }}
         </td>
         <td colspan="2" style="border: 1px solid #000000;">
             {{ $id->population }}

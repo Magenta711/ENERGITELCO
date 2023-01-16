@@ -28,7 +28,7 @@ class minticClockStopExportSecond implements FromView, WithTitle, WithDrawings, 
     {
         $array = array();
         foreach ($this->files as $key => $value) {
-            if ($value['place'] == 1 || $value['place'] == 3) {
+            if ($value['place'] == 2 || $value['place'] == 3) {
                 $array[$key] = new Drawing();
                 $array[$key]->setName($value['name']);
                 $array[$key]->setDescription($value['description']);
