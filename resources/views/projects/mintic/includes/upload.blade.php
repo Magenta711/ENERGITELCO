@@ -47,6 +47,7 @@
                             </div>
                         </div>
                         {!! $item->commentary != '' ? '<p>' . $item->commentary . '</p>' : '' !!}
+                        <input type="hidden" name="file_id" id="file_id" value="{{ $item->id }}" class="form-control">
                     @endif
                 @endforeach
                 @if (!$hasFile)
@@ -156,6 +157,8 @@
             <div class="col-md-4">
                 <button id="{{ $num }}"
                     class="btn btn-sm {{ $hasFile ? 'btn-success btn-load-again' : 'btn-primary btn-upload' }}">{{ $hasFile ? 'Cargar de nuevo' : 'Subir' }}</button>
+                <button id="delete_{{ $num }}"
+                class="btn btn-sm btn-danger btn-delete" style="{{!(isset($delete) && $delete && $hasFile) ? 'display: none;' : ''}}">Eliminar</button>
             </div>
         </div>
     </div>

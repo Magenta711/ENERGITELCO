@@ -18,6 +18,7 @@ use App\Models\project\Mintic\MinticMaintenanceActivity;
 use App\Models\project\Mintic\MinticVisit;
 use App\Models\system_setting;
 use Carbon\Carbon;
+use App\Models\file;
 
 class MinticController extends Controller
 {
@@ -1007,5 +1008,10 @@ class MinticController extends Controller
     {
         $mintics = Mintic_School::get();
         return response()->json(['data' => $mintics]);
+    }
+    public function delete_file(Request $request, file $id)
+    {
+        $id->delete();
+        return response()->json(['success'=>'El archivo fue eliminado correctamente']); 
     }
 }

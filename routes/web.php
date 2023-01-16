@@ -744,6 +744,7 @@ Route::get('project/mintic/maintenance/{id}/{item}/export','projects\MinticContr
 Route::get('project/mintic/maintenance/{id}/{item}/photos','projects\MinticController@photos_maintenance')->name('mintic_maintenance_photos');
 Route::post('project/mintic/maintenance/{id}/{item}/updload','projects\MinticController@upload_maintenance')->name('mintic_marke_maintenance');
 Route::delete('project/mintic/maintenance/{id}/{item}','projects\MinticController@destroy_maintenance')->name('mintic_maintenance_delete');
+Route::post('files/delete/{id}', 'projects\MinticController@delete_file')->name('delete_file');
 
 Route::get('project/mintic/maintenance/{id}/stop_clock/show/{item}','projects\MinticStopClockController@show')->name('mintic_clock_stop');
 Route::get('project/mintic/maintenance/{id}/stop_clock/create','projects\MinticStopClockController@create')->name('mintic_clock_stop_create');
