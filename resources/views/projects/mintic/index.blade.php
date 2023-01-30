@@ -3,10 +3,12 @@
 @section('content')
     <section class="content-header">
         <h1>
-            MINTIC <small>Gestion de proyectos</small>
+            MINTIC <small>Ejecución de obras</small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
+            <li><a href="{{route('home')}}"><i class="fa fa-home"></i> Inicio</a></li>
+            <li><a href="#">Ejecución de obras</a></li>
+            <li><a href="#">Proyectos</a></li>
             <li class="active">MINTIC</li>
         </ol>
     </section>
@@ -133,7 +135,43 @@
                 {data : "updated_at"},
                 {
                     render: function ( data, type, row, meta ) {
-                        return '<div class="dropdown"><button class="btn btn-default btn-xs pull-right dropdown-toggle" type="button" id="dropdownMenuButton-'+row.id+'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></button><div class="dropdown-menu" aria-labelledby="dropdownMenuButton-'+row.id+'">    @can("Ver proyectos de MINTIC")        <a class="dropdown-item" href="/project/mintic/ec/show/'+row.id+'">Ver</a>    @endcan    @can("Editar proyectos de MINTIC")        <a class="dropdown-item" href="/project/mintic/ec/'+row.id+'/edit">Editar</a>    @endcan    @can("Adjuntar y ver fotos de proyectos mintic")        <a class="dropdown-item" href="/project/mintic/ec/'+row.id+'">Estudio de campo</a>    @endcan    @can("Adjuntar y ver fotos de proyectos mintic")        <a class="dropdown-item" href="/project/mintic/install/'+row.id+'">Intalación</a>    @endcan    @can("Adjuntar y ver fotos de proyectos mintic")        <a class="dropdown-item" href="/project/mintic/tss/'+row.id+'">TSS V3</a>    @endcan    @can("Ver implementación proyectos de MINTIC")        <a class="dropdown-item" href="/project/mintic/add/'+row.id+'">Implementaciones</a>    @endcan    {{-- @can("Adjuntar y ver fotos de proyectos mintic") --}}        <a class="dropdown-item" href="/project/mintic/maintenance/'+row.id+'">Mantenimiento</a>    {{-- @endcan --}}    @can("Eliminar proyectos de MINTIC")        <button class="dropdown-item btn-delete" data-toggle="modal" data-target="#modal_delete_'+row.id+'">Eliminar</button>    @endcan</div> </div>';
+                        return `
+                            <div class="dropdown">
+                                <button 
+                                    class="btn btn-default btn-xs pull-right dropdown-toggle" type="button" id="dropdownMenuButton-'+${row.id}+'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton-${row.id}">
+                                    @can("Ver proyectos de MINTIC")
+                                        <a class="dropdown-item" href="/project/mintic/ec/show/${row.id}">Ver</a>
+                                    @endcan
+                                    @can("Editar proyectos de MINTIC")
+                                        <a class="dropdown-item" href="/project/mintic/ec/${row.id}/edit">Editar</a>
+                                    @endcan
+                                    @can("Adjuntar y ver fotos de proyectos mintic")
+                                        <a class="dropdown-item" href="/project/mintic/ec/${row.id}">Estudio de campo</a>
+                                    @endcan
+                                    @can("Adjuntar y ver fotos de proyectos mintic")
+                                        <a class="dropdown-item" href="/project/mintic/install/${row.id}">Intalación</a>
+                                    @endcan
+                                    @can("Adjuntar y ver fotos de proyectos mintic")
+                                        <a class="dropdown-item" href="/project/mintic/tss/${row.id}">TSS V3</a>
+                                    @endcan
+                                    @can("Ver implementación proyectos de MINTIC")
+                                        <a class="dropdown-item" href="/project/mintic/add/${row.id}">Implementaciones</a>
+                                    @endcan
+                                    {{-- @can("Adjuntar y ver fotos de proyectos mintic") --}}
+                                        <a class="dropdown-item" href="/project/mintic/maintenance/${row.id}">Mantenimiento</a>
+                                    {{-- @endcan --}}
+                                    {{-- @can("Adjuntar y ver fotos de proyectos mintic") --}}
+                                        <a class="dropdown-item" href="/project/mintic/stop_clock/${row.id}">Parada de reloj</a>
+                                    {{-- @endcan --}}
+                                    @can("Eliminar proyectos de MINTIC")
+                                        <button class="dropdown-item btn-delete" data-toggle="modal" data-target="#modal_delete_${row.id}">Eliminar</button>
+                                    @endcan
+                                </div>
+                            </div>
+                        `;
                     }
                 }
             ];

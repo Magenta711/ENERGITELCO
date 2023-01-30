@@ -20,7 +20,7 @@
             <div class="box-header">
                 <div class="box-title">Para de reloj</div>
                 <div class="box-tools">
-                    <a href="{{ route('mintic_maintenance', $id->id) }}" class="btn btn-sm btn-primary">Volver</a>
+                    <a href="{{ route('mintic_clock_stop', $id->id) }}" class="btn btn-sm btn-primary">Volver</a>
                 </div>
             </div>
             <form action="{{ route('mintic_clock_stop_update', [$id->id, $item->id]) }}" method="POST">

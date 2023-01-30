@@ -22,6 +22,12 @@ class MinticStopClockController extends Controller
         $this->middleware('auth');
         $this->middleware('verified');
     }
+    
+    public function index(Mintic_School $id)
+    {
+        return view('projects.mintic.maintenance.stop_clock.index', compact('id'));
+    }
+    
     public function show(Mintic_School $id, minticStopClock $item)
     {
         return view('projects.mintic.maintenance.stop_clock.show', compact('id', 'item'));
@@ -60,6 +66,18 @@ class MinticStopClockController extends Controller
 
     public function update(Request $request, $id, minticStopClock $item)
     {
+        $request->validate([
+            'date' => ['required', 'string', 'max:100'],
+            'num' => ['required', 'string', 'max:100'],
+            'num_contract' => ['required', 'string', 'max:100'],
+            'collaborating_company' => ['required', 'string', 'max:100'],
+            'responsable_name' => ['required', 'string', 'max:100'],
+            'responsable_position' => ['required', 'string', 'max:100'],
+            'responsable_document' => ['required', 'string', 'max:100'],
+            'responsable_number' => ['required', 'string', 'max:100'],
+            'responsable_email' => ['required', 'string', 'max:100']
+        ]);
+        
         $item->update($request->all());
 
         return redirect()->route('mintic_clock_stop', [$id, $item->id])->with('success', 'Se ha actualizado el mantenimiento correctamente');
@@ -256,6 +274,6 @@ class MinticStopClockController extends Controller
     public function destroy($id, minticStopClock $item)
     {
         $item->delete();
-        return redirect()->route('mintic_maintenance', $id)->with('success', 'Se ha eliminado la parada de reloj correctamente');
+        return redirect()->route('mintic_clock_stop', $id)->with('success', 'Se ha eliminado la parada de reloj correctamente');
     }
 }

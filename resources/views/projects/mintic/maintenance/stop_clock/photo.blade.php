@@ -26,7 +26,7 @@
             <div class="box-header">
                 <div class="box-title"> proyecto MINTIC</div>
                 <div class="box-tools">
-                    <a href="{{ route('mintic_maintenance', $id) }}" class="btn btn-sm btn-primary">Volver</a>
+                    <a href="{{ route('mintic_clock_stop', $id) }}" class="btn btn-sm btn-primary">Volver</a>
                 </div>
             </div>
             <div class="box-body">
