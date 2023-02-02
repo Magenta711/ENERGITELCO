@@ -94,6 +94,7 @@ class curriculumController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request;
         $request->validate([
             'register_id' => ['required'],
         ]);
@@ -116,7 +117,10 @@ class curriculumController extends Controller
             }
             $request['register_id'] = $register->id;
             if ($request->user_id !== 0) {
-                User::find($request->user_id)->update(['register_id' => $register->id]);
+                $user = User::find($request->user_id);
+                if($user){
+                    $user->update(['register_id' => $register->id]);
+                }
             }
             $id = $register->id;
         }else {

@@ -38,6 +38,7 @@ use App\Models\signature;
 use App\Models\Work10;
 use App\Models\work1_cut_bonus;
 use App\Models\Work8;
+use App\Models\execution_work\assigment;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -133,6 +134,21 @@ class User extends Authenticatable implements MustVerifyEmail
     public function Work8Users()
     {
         return $this->hasMany(Work8Users::class, 'user_id', 'id');
+    }
+    
+    public function assigment_kits()
+    {
+        return $this->hasMany(assigment::class, 'id_asignado', 'id');
+    }
+
+    public function numAssigment()
+    {
+        return count($this->assigment_kits);
+    }
+
+    public function getLastAssigment()
+    {
+        return assigment::where('id_asignado',$this->id)->latest('created_at')->first();
     }
 
     public function approvals()

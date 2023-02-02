@@ -1,4 +1,4 @@
- <!-- =============================================== -->
+f <!-- =============================================== -->
  @php
      function activeMenu($url)
      {
@@ -160,6 +160,12 @@
               @if (auth()->user()->hasAnyPermission(['Aprobar solicitud de Revisión y asignación de herramientas','Consultar revisión y asignación de herramientas','Descargar PDF de revisión y asignación de herramientas','Digitar formulario de Revisión y asignación de herramientas','Eliminar formato de revisión y asignación de herramientas']))
                   <li class="{{ activeMenu('execution_works/review_assignment_tools*') }}"><a class="btn-send" href="{{route('review_assignment_tools')}}"><i class="fa fa-tools"></i> REVISIÓN Y ASIGNACIÓN DE  HERRAMIENTA</a></li>
               @endif
+              
+              @if (auth()->user()->hasAnyPermission(['Lista de asignación']))
+              <li class=" {{ activeMenu('execution_works/kits_assignment*') }}"><a class="btn-send" href="{{route('kits_assigment')}}"><i class="fa fa-toolbox"></i>KITS</a></li>
+              @endif
+
+
               @if (auth()->user()->hasAnyPermission(['Lista inventario de herramientas','Editar inventario de herramientas','Ver inventario de herramientas','Crear inventario de herramientas','Eliminar inventario de herramientas','Lista de inventarios de consumibles en bodega','Crear consumible del inventario','Editar consumible del inventario','Ver consumible del inventario','Eliminar consumible del inventario','Lista de inventarios de equipos Mintic','Crear equipo al inventario Mintic','Editar equipo al inventario Mintic','Ver equipo al inventario Mintic','Eliminar equipo al inventario Mintic']))
               <li class="treeview {{activeMenu('execution_works/inventory*')}}">
                 <a href="#"><i class="fa fa-border-all"></i> INVENTARIOS<span class="pull-right-container">

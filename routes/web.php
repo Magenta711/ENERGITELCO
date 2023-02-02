@@ -224,6 +224,31 @@ Route::get('execution_works/review_assignment_tools/download/{id}','execution_wo
 Route::patch('execution_works/review_assignment_tools/{id}','execution_works\reviewAssignmentTools@approve')->name('review_assignment_tools_approve');
 Route::delete('execution_works/review_assignment_tools/delete/{id}','execution_works\reviewAssignmentTools@destroy')->name('review_assignment_tools_delete');
 
+//kits
+Route::get('execution_works/kits','execution_works\kitsController@index')->name('kits');
+Route::get('execution_works/kits/create','execution_works\kitsController@create')->name('kits_create');
+Route::post('execution_works/kits','execution_works\kitsController@store')->name('kits_store');
+Route::get('execution_works/kits/show/{id}','execution_works\kitsController@show')->name('kits_show');
+Route::get('execution_works/kits/edit/{id}','execution_works\kitsController@edit')->name('kits_edit');
+Route::patch('execution_works/kits/{id}','execution_works\kitsController@update')->name('kits_update');
+Route::get('execution_works/kits/edit_all/{id}','execution_works\kitsController@edit_all')->name('kits_edit_all');
+Route::put('execution_works/kits_all/{token}','execution_works\kitsController@update_all')->name('kits_update_all');
+Route::delete('execution_works/kits/delete/{id}','execution_works\kitsController@destroy')->name('kits_delete');
+Route::delete('execution_works/kits/delete_all/{token}/','execution_works\kitsController@destroy_all')->name('kits_all_delete');
+
+// kits assignment
+Route::get('execution_works/kits_assignment','execution_works\KitsAssignmentController@index')->name('kits_assigment');
+Route::post('execution_works/kits_assignment','execution_works\kitsAssignmentController@store')->name('kits_assigment_store');
+Route::get('execution_works/kits_assignment_assginment', 'execution_works\KitsAssignmentController@assignment')->name('kits_assignment_assginment');
+Route::get('execution_works/kits_assignment_review', 'execution_works\KitsAssignmentController@review')->name('kits_assignment_review');
+Route::get('execution_works/kits_assignment_assginment/show/{id}','execution_works\KitsAssignmentController@show')->name('kits_assignment_show');
+Route::get('execution_works/kits_assignment/edit/{id}','execution_works\KitsAssignmentController@edit')->name('kits_assignment_edit');
+Route::patch('execution_works/kits_assigment/{id}','execution_works\KitsAssignmentController@update')->name('kits_assignment_update');
+
+//Kits review
+Route::get('execution_works/review_assignment','execution_works\ReviewkitsController@index')->name('kits_review');
+Route::get('execution_works/review_assignment/review/{id}','execution_works\ReviewkitsController@review')->name('review_personal');
+
 // end contract
 Route::get('user/end_work/presend/{id}','endWorkController@create')->name('user_end_work')->middleware('auth')->middleware('verified');
 Route::post('user/end_work/presend/{id}','endWorkController@store')->name('user_end_work_store')->middleware('auth')->middleware('verified');
