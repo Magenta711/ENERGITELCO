@@ -32,7 +32,7 @@ class KitsController extends Controller
     public function index()
     {
         $kits = kits::with(['responsable','estado_kit'])->get();
-       
+
         return view('execution_works.kits.index', compact('kits'));
     }
 
@@ -64,17 +64,30 @@ class KitsController extends Controller
         $request['estado_id'] = 2;
         $request['token'] = Str::random(10);//Asi se puede crear el token
         $nombre_original = $request['nombre'];
+        $arr_name = explode(' ',$nombre_original);
+        $iniciales = '';
+        for ($i=0; $i < count($arr_name); $i++) {
+            $iniciales = $iniciales.str_split($arr_name[$i])[0];
+        }
+        // return $iniciales;
+                // $iniciales = ;
+                // $separadas = explode(" ", $iniciales);
+                // $corto = "";
+                // foreach ($separadas as $primera) {
+                //     $corto .= substr($primera, 0, 1);
+                // }
+                // return $corto;
         for ($i=0; $i < $request->cantidad; $i++) {
             $request['nombre'] = $nombre_original." ".($i+1);
             $request['nombre_original'] = $nombre_original;
             $kit = kits::create($request->all());
 
-
-            $codigo = 'O-FR-7-'.$kit->id;
+            $codigo = "N-".$iniciales."-".$kit->id;
+            // return $codigo;
             $kit->update([ 'codigo' => $codigo ]);
             for ($j=1; $j <= count($request->item); $j++) {
                 $tool = tools::create([
-                    'kit_id'=>$kit->id,  
+                    'kit_id'=>$kit->id,
                     'nombre' => $request->item[$j],
                     'cantidad' => $request->amount[$j],
                     'marca' => $request->marca[$j],
@@ -82,7 +95,7 @@ class KitsController extends Controller
                 ]);
             }
         }
-        
+
         return redirect()->route('kits')->with('success','Se ha creado el kit correctamente');
     }
 
@@ -93,7 +106,7 @@ class KitsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {       
+    {
         $id = kits::find($id);
         return view('execution_works.kits.show', compact('id'));
     }
@@ -105,7 +118,7 @@ class KitsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {   
+    {
         $usuarios = User::where('state',1)->with('roles')->get();
         $id = kits::find($id);
         return view('execution_works.kits.edit', compact('id','usuarios'));
@@ -131,20 +144,20 @@ class KitsController extends Controller
             'nombre' => ['required'],
             'item'=>['required'],
         ]);
-        
-        
+
+
         Kits::find($id)->update($request->all());
         tools::where('kit_id',$id)->delete();
         for ($j=1; $j <= count($request->item); $j++) {
             $tool = tools::create([
-                'kit_id'=>$id,  
+                'kit_id'=>$id,
                 'nombre' => isset($request->item[$j]) ? $request->item[$j] : null,
                 'cantidad' => isset($request->amount[$j]) ? $request->amount[$j] : null,
                 'marca' => isset($request->marca[$j]) ? $request->marca[$j] : null,
                 'Observaciones' => isset($request->observaciones[$j]) ? $request->observaciones[$j] : null,
             ]);
         }
-        return redirect()->route('kits_show', $id)->with('success','Se ha editado el kit correctamente'); 
+        return redirect()->route('kits_show', $id)->with('success','Se ha editado el kit correctamente');
     }
 
     public function update_all(Request $request, $token)
@@ -160,12 +173,12 @@ class KitsController extends Controller
             // 'responsable_id'=> $request->responsable_id
         ]);
         $kits = Kits::where('token',$token)->get();
-        
+
         foreach ($kits as $key => $kit) {
             tools::where('kit_id',$kit->id)->delete();
             for ($j=1; $j <= count($request->item); $j++) {
                 $tool = tools::create([
-                    'kit_id'=>$kit->id,  
+                    'kit_id'=>$kit->id,
                     'nombre' => isset($request->item[$j]) ? $request->item[$j] : null,
                     'cantidad' => isset($request->amount[$j]) ? $request->amount[$j] : null,
                     'marca' => isset($request->marca[$j]) ? $request->marca[$j] : null,
@@ -174,7 +187,7 @@ class KitsController extends Controller
             }
         }
         // return $request;
-       return redirect()->route('kits')->with('success','Se ha editado los kits correctamente'); 
+       return redirect()->route('kits')->with('success','Se ha editado los kits correctamente');
     }
 
     /**
@@ -187,8 +200,8 @@ class KitsController extends Controller
     {
         //delete
         Kits::destroy($id);
-        return redirect()->route('kits')->with('success','Se ha eliminado el kit correctamente'); 
-        
+        return redirect()->route('kits')->with('success','Se ha eliminado el kit correctamente');
+
     }
 
     public function destroy_all($token)
@@ -196,7 +209,7 @@ class KitsController extends Controller
         //delete
         // return $token;
         Kits::where('token',$token)->delete();
-        return redirect()->route('kits')->with('success','Se ha eliminado todos los kits correctamente'); 
-        
+        return redirect()->route('kits')->with('success','Se ha eliminado todos los kits correctamente');
+
     }
 }

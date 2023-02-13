@@ -54,21 +54,31 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="name">Fecha de asignación</label>
-                                <p>{{$id->asignado->created_at}}</p>
+                                <p>{{ $id->created_at->format('Y-m-d') }}</p>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="user_id">Fecha de revisión</label>
-                                <p>{{$id->kit_asignado->updated_at }}</p>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="commentary">Comentarios, observaciones o descripción (Historial)</label>
                                 <p></p>
                             </div>
                         </div>
+                        <hr>
+                        @if (isset($assigments->kit_asignado->review_kits))
+                        <h4>Historial:</h4>
+                            {{-- <div class="row"> --}}
+                                <div class="md">
+                                    {{-- {{dd($assigments->kit_asignado->review_kits)}} --}}
+                                    <div class="col-md-6 col-sm-4">
+                                        @foreach ($assigments->kit_asignado->review_kits as $review_kit)
+                                            <div class="form-group row">
+                                                <p>-{{ $review_kit->comentario }}</p>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            {{-- </div> --}}
+                        @endif
                         {{-- @foreach (  as ) --}}
                         {{-- @endforeach --}}
                     </div>
@@ -76,7 +86,7 @@
                     {{-- {{dd($id->kit_asignado->tools)}} --}}
                     <h3>Implementos Obligatorios:</h3>
                     <hr>
-                    @foreach ($id->kit_asignado->tools as $tool) 
+                    @foreach ($id->kit_asignado->tools as $tool)
                     <div class="form-group row">
                         <div class="col-md-2 col-sm-4 mb-3">
                             <Strong>Implemento</Strong><br>

@@ -23,7 +23,7 @@ class kits extends Model
     {
         return $this->hasOne(User::class, 'id','responsable_id');
     }
-   
+
     public function estado_kit()
     {
         return $this->hasOne(kits_status::class, 'id','estado_id');
@@ -34,10 +34,15 @@ class kits extends Model
         return $this->hasMany(tools::class, 'kit_id', 'id');
     }
 
+    public function review_kits()
+    {
+        return $this->hasMany(review_kits::class, 'id_kit', 'id');
+    }
+
     // public function asignado()
     // {
     //     return $this->hasMany(assigment::class, 'id_asignado', 'id');
     // }
 
-    
+
 }

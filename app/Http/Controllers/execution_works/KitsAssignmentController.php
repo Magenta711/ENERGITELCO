@@ -9,6 +9,7 @@ use App\Models\execution_work\kits;
 use App\Models\execution_work\tools;
 use App\Models\execution_work\assigment;
 use App\Models\execution_work\tools_add;
+use App\Models\execution_work\review_tools;
 use App\User;
 
 class KitsAssignmentController extends Controller
@@ -50,7 +51,7 @@ class KitsAssignmentController extends Controller
 
     //Sección de asignación
     public function assignment()
-    {   
+    {
         // $id = kits::find($id);
         $kits = kits::where('estado_id',2)->where('responsable_id',auth()->id())->get();
         $usuarios = User::where('state',1)->with('roles')->get();
@@ -85,7 +86,7 @@ class KitsAssignmentController extends Controller
         if (isset($request->item) && $request->item) {
             for ($j=1; $j <= count($request->item); $j++) {
                 $tools_add = tools_add::create([
-                    'id_asignado'=>$assigment->id,  
+                    'id_asignado'=>$assigment->id,
                     'nombre' => $request->item[$j],
                     'cantidad' => $request->amount[$j],
                     'marca' => $request->marca[$j],
@@ -108,8 +109,9 @@ class KitsAssignmentController extends Controller
      */
     public function show($id)
     {
+        $review_tools = review_tools::with(['revision','revisor'])->where('id_asignado',$id)->latest()->first();
         $id = assigment::find($id);
-        return view('execution_works.kits_assignment.show', compact('id'));
+        return view('execution_works.kits_assignment.show', compact(['id','review_tools']));
     }
 
     /**
@@ -138,14 +140,14 @@ class KitsAssignmentController extends Controller
         tools_add::where('id_asignado',$id)->delete();
         for ($j=1; $j <= count($request->item); $j++) {
             $tools_add = tools_add::create([
-                'id_asignado' => $id, 
+                'id_asignado' => $id,
                 'nombre' => isset($request->item[$j]) ? $request->item[$j] : null,
                 'cantidad' => isset($request->amount[$j]) ? $request->amount[$j] : null,
                 'marca' => isset($request->marca[$j]) ? $request->marca[$j] : null,
                 'Observaciones' => isset($request->observaciones[$j]) ? $request->observaciones[$j] : null,
             ]);
         }
-        return redirect()->route('kits_assignment_show', $id)->with('success','Se ha editado la asignación correctamente'); 
+        return redirect()->route('kits_assignment_show', $id)->with('success','Se ha editado la asignación correctamente');
     }
 
     /**

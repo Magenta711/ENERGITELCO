@@ -39,6 +39,7 @@ use App\Models\Work10;
 use App\Models\work1_cut_bonus;
 use App\Models\Work8;
 use App\Models\execution_work\assigment;
+use App\Models\execution_work\review_tools;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -71,7 +72,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'password', 'remember_token',
     ];
 
-    
+
 
     /**
      * The attributes that should be cast to native types.
@@ -130,15 +131,20 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Work7::class, 'cedula_trabajador', 'id');
     }
-    
+
     public function Work8Users()
     {
         return $this->hasMany(Work8Users::class, 'user_id', 'id');
     }
-    
+
     public function assigment_kits()
     {
         return $this->hasMany(assigment::class, 'id_asignado', 'id');
+    }
+
+    public function review_tools()
+    {
+        return $this->hasMany(review_tools::class, 'id_asignado', 'id');
     }
 
     public function numAssigment()
@@ -149,6 +155,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getLastAssigment()
     {
         return assigment::where('id_asignado',$this->id)->latest('created_at')->first();
+    }
+    public function getLastReview()
+    {
+        return review_tools::where('id_asignado',$this->id)->latest('created_at')->first();
     }
 
     public function approvals()

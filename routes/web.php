@@ -37,7 +37,7 @@ Route::get('/clear-cache', function() {
 });
 
 //Reoptimized class loader:
-Route::get('/optimize', function() { 
+Route::get('/optimize', function() {
     $exitCode = Artisan::call('optimize');
     return '<h1>Reoptimized class loader</h1>';
 });
@@ -143,7 +143,7 @@ Route::get('human_management/fall_protection_equipment_inspection/download/{id}'
 Route::put('human_management/fall_protection_equipment_inspection/{id}','human_management\fallProtectionEquipmentInspectionController@approve')->name('fall_protection_equipment_inspection_approve');
 Route::delete('human_management/fall_protection_equipment_inspection/delete/{id}','human_management\fallProtectionEquipmentInspectionController@destroy')->name('fall_protection_equipment_inspection_delete');
 
-//delivery of staffing 
+//delivery of staffing
 Route::get('human_management/delivery_staffing','human_management\deliveryStaffingController@index')->name('delivery_staffing');
 Route::get('human_management/delivery_staffing/create','human_management\deliveryStaffingController@create')->name('delivery_staffing_create');
 Route::post('human_management/delivery_staffing','human_management\deliveryStaffingController@store')->name('delivery_staffing_store');
@@ -167,7 +167,7 @@ Route::delete('human_management/work_permits_notifications_medical_incapacity/de
 Route::post('human_management/work_permits_notifications_medical_incapacity/plus/{id}','human_management\workPermitNotificationsMedicalIncapacityController@plus')->name('work_permits_notifications_medical_incapacity_plus');
 Route::post('human_management/work_permits_notifications_medical_incapacity/rest/{id}','human_management\workPermitNotificationsMedicalIncapacityController@rest')->name('work_permits_notifications_medical_incapacity_rest');
 
-//Payroll and overtime news report 
+//Payroll and overtime news report
 Route::get('finances/payroll_overtime_news_report','human_management\payrollOvertimeNewsReportController@index')->name('payroll_overtime_news_report');
 Route::get('finances/payroll_overtime_news_report/create','human_management\payrollOvertimeNewsReportController@create')->name('payroll_overtime_news_report_create');
 Route::post('finances/payroll_overtime_news_report','human_management\payrollOvertimeNewsReportController@store')->name('payroll_overtime_news_report_store');
@@ -248,6 +248,8 @@ Route::patch('execution_works/kits_assigment/{id}','execution_works\KitsAssignme
 //Kits review
 Route::get('execution_works/review_assignment','execution_works\ReviewkitsController@index')->name('kits_review');
 Route::get('execution_works/review_assignment/review/{id}','execution_works\ReviewkitsController@review')->name('review_personal');
+Route::post('execution_works/review_assignment','execution_works\ReviewkitsController@store')->name('review_personal_store');
+Route::get('execution_works/review_assignment/show/{id}','execution_works\ReviewkitsController@show')->name('kits_review_show');
 
 // end contract
 Route::get('user/end_work/presend/{id}','endWorkController@create')->name('user_end_work')->middleware('auth')->middleware('verified');

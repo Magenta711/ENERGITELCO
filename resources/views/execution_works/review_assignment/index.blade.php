@@ -27,7 +27,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Asignado</th>
                             <th>Asignaciones</th>
-                            <th scope="col">Última </th>
+                            <th scope="col">Última</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
@@ -38,24 +38,15 @@
                                     <td>{{$user->id}}</td>
                                     <td>{{$user->name}}</td>
                                     <td>{{$num}}</td>
-                                    <td>{{ $user->getLastAssigment()->created_at }}
+                                    @php
+                                        $review = $user->getLastReview();
+                                    @endphp
+                                    <td>{{ $review ? $review->fecha_revision : '' }}
                                     </td>
-                                    {{-- <td>{{$assigment->responsable->name}}</td> --}}
-                                        {{-- <small class="label {{($review_tool->estado == 'Sin aprobar') ? 'bg-green' : (($review_tool->estado == 'Aprobado') ? 'bg-blue' : 'bg-red') }}">{{$review_tool->estado}}</small> --}}
                                     <td>
                                         <div class="btn-group ms-2">
-
-                                            <a href="{{ route('review_personal',$user->id) }}" class="btn btn-sm btn-success" value="Ver">Revisar</a>
-
-                                                {{-- <a  href="{{ route('kits_assignment_edit',$assigment->id) }}" class="btn btn-sm btn-success" value="Editar">Editar</a> --}} 
-
-                                                {{-- <a  href="{{ route('kits_edit',$kit->id) }}" class="btn btn-sm bg-olive" value="Editar este kit">Editar este kit</a> --}}
-
-                                                {{-- <input type="submit" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#modal_delete_{{$kit->id}}" value="Eliminar">
-                                                @include('execution_works.kits.modals.delete')
-
-                                                <input type="submit" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal_delete_all_{{$kit->id}}" value="Eliminar todos los kits">
-                                                @include('execution_works.kits.modals.delete_all') --}}
+                                            <a  href="{{ route('kits_review_show', $user->id)}}" class="btn btn-sm btn-primary" value="Ver">Ver</a>
+                                            <a href="{{ route('review_personal',$user->id) }}" class="btn btn-sm btn-success" value="Editar">Revisar</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -64,7 +55,7 @@
                     </tbody>
                 </table>
             </div>
-        </div> 
+        </div>
     </div>
 </section>
 </SECTION>

@@ -251,6 +251,17 @@
                     </div>
                 </div>
             @endcan
+            <div class="col-sm-2 col-xs-3">
+                <div class="box box-info">
+                    <a href="{{ route('forms') }}" class="btn-send">
+                        <div class="description-block border-right">
+                            <span class="description-percentage text-green"><i class="fab fa-wpforms"></i></span>
+                            <h5 class="description-header">Gestión</h5>
+                            <span class="description-text">Formularios</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
         <div class="row">
             @if(Auth::user()->register && Auth::user()->register->state == 2)
