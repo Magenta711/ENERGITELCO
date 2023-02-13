@@ -41,15 +41,40 @@ class workPermitController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($all = null)
+    public function index()
     {
-        if ($all) {
-            $work_permits = Work1::with(['responsableAcargo','users','coordinadorAcargo'])->get();
-        }else {
-            $work_permits = Work1::with(['responsableAcargo','users','coordinadorAcargo'])->whereBetween('created_at',[now()->subDays(10), now()])->get();
-        }
+        $work_permits = Work1::with(['responsableAcargo','users','coordinadorAcargo'])->whereBetween('created_at',[now()->subDays(10), now()])->get();
         return view('human_management.work_permit.index',compact('work_permits'));
     }
+    public function index2()
+    {
+        return view('human_management.work_permit.index2');
+    }
+    public function list()
+    {
+        $work_permits = Work1::select([
+            'id',
+            'codigo_formulario',
+            'estado',
+            'placa_vehiculo',
+            'nombre_eb',
+            'max_altura',
+            'created_at',
+            // 'coordinador',
+            // 'responsable'
+        ])->with([
+            // 'responsableAcargo',
+            'users' => function ($query) {
+                $query->select(['name']);
+            },
+            // 'coordinadorAcargo',
+            'vehicle',
+        ])->get();
+        return response()->json(['data' => $work_permits]);
+    }
+    //  => function ($query) {
+    //     $query->select(['name']);
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -100,7 +125,7 @@ class workPermitController extends Controller
             'f9a3u2' => 'integer',
             'f9a3u3' => 'integer',
         ]);
-        
+
         $required_energizado = '';
         $required_max_altura = '';
         $required_vehiculo = '';
@@ -146,7 +171,7 @@ class workPermitController extends Controller
         }else {
             if($request->max_altura == 'Si'){
                 if (
-                    $request->f2a1 == '' || $request->f2a2 == '' || $request->f2a3 == '' || $request->f2a4 == '' || $request->f2a5 == '' || $request->f2a6 == '' || $request->f2a7 == '' ||$request->documentacion_personal == '' || 
+                    $request->f2a1 == '' || $request->f2a2 == '' || $request->f2a3 == '' || $request->f2a4 == '' || $request->f2a5 == '' || $request->f2a6 == '' || $request->f2a7 == '' ||$request->documentacion_personal == '' ||
                     $request->f2b1u1 == '' || $request->f2b2u1 == '' || $request->f2b3u1 == '' || $request->f2b4u1 == '' || $request->f2b5u1 == '' || $request->f2b6u1 == '' ||  $request->f2c1u1 == '' || $request->f2c2u1 == '' || $request->f2c4u1 == '' || $request->f2c3u1 == '' ||
                     $request->f2d1 == '' || $request->f2d2 == '' || $request->f2d3 == '' || $request->f2d4 == '' ||
                     $request->f2e1 == '' || $request->f2e2 == '' || $request->f2e3 == '' || $request->f2e4 == '' || $request->f2e5 == '' || $request->f2e6 == '' || $request->f2e7 == ''
@@ -158,7 +183,7 @@ class workPermitController extends Controller
         if ($required_energizado || $required_max_altura || $required_vehiculo || $form2 || $form4 || $form5 || $form6) {
             return redirect()->back()->withErrors([$required_energizado,$required_max_altura,$required_vehiculo,$form2,$form4,$form5,$form6])->withInput();
         }
-        
+
         if ($request->f8a1 == '' || $request->f8a1 == 'No' || $request->f8a2 == '' || $request->f8a2 == 'No' || $request->f8a3 == '' || $request->f8a3 == 'No' || $request->f8a4 == '' || $request->f8a4 == 'No' || $request->f8a5 == '' || $request->f8a5 == 'No'){
             $form8 = "El ítem 7 de es obligatorio y/o no permite respuesta \"no\" para el envio del formato";
             return redirect()->back()->withErrors([$form8])->withInput();
@@ -220,7 +245,7 @@ class workPermitController extends Controller
         }
 
         if($request->hasFile('archivos')){
-            for ($i=0; $i < count($request->file('archivos')); $i++) { 
+            for ($i=0; $i < count($request->file('archivos')); $i++) {
                 $file = $request->file('archivos')[$i];
                 $name = time().str_random().'.'.$file->getClientOriginalExtension();
                 if ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg') {
@@ -268,7 +293,7 @@ class workPermitController extends Controller
 
         if ($unData) {
             // if (count($unData) == count($request->cedula)) {
-                
+
             // }else {
                 if ($arrayId) {
                     if (count($arrayId) == 1) {
@@ -344,7 +369,7 @@ class workPermitController extends Controller
                             'long' => $request->long,
                             'status' => 2,
                         ]);
-    
+
                         foreach ($unData as $ke => $value) {
                             Responsable::create([
                                 'user_id' => $ke,
@@ -361,14 +386,14 @@ class workPermitController extends Controller
                 }
             // }
         }
-        
+
         $id->coordinadorAcargo->notify(new notificationMain($id->id,'Solicitud de permiso de trabajo '.$id->id,'human_management/work_permit/show/'));
         Mail::send('human_management.work_permit.emails.main', ['format' => $id], function ($menssage) use ($id)
         {
             $emails = system_setting::where('state',1)->pluck('emails_before_approval')->first();
             $company = general_setting::where('state',1)->pluck('company')->first();
             $email = explode(';',$emails);
-            for ($i=0; $i < count($email); $i++) { 
+            for ($i=0; $i < count($email); $i++) {
                 if($email[$i] != ''){
                     $menssage->to(trim($email[$i]),$company);
                 }
@@ -436,7 +461,7 @@ class workPermitController extends Controller
         $id->delete();
         return redirect()->route('work_permit')->with('success','Se ha eliminado el formato correctamente');
     }
-    
+
     /**
      * Download in pdf the specified resource from storage.
      *
@@ -448,7 +473,7 @@ class workPermitController extends Controller
         $pdf = PDF::loadView('human_management/work_permit/pdf/main',['trabajo' => $id]);
         return $pdf->download($id->codigo_formulario.'-'.$id->id.'_PERMISO_DE_TRABAJO.pdf');
     }
-    
+
     /**
      * Aprove the specified resource from storage.
      *
@@ -477,7 +502,7 @@ class workPermitController extends Controller
                 'coordinador' => auth()->id(),
                 'commentary'=>$request->commentary,
             ]);
-            
+
             foreach ($id->users as $user) {
                 $user->notify(new notificationMain($id->id,'Se ha aprobado la solicitud de permiso de trabajo '.$id->id,'human_management/work_permit/show/'));
             }
@@ -505,7 +530,7 @@ class workPermitController extends Controller
                 'commentary'=>$request->commentary,
                 'coordinador' => auth()->id(),
             ]);
-    
+
             foreach ($id->users as $user) {
                 // Notification
                 $user->notify(new notificationMain($id->id,'No se aprobó la solicitud de permiso de trabajo '.$id->id,'human_management/work_permit/show/'));

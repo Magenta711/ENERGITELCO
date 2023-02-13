@@ -21,13 +21,21 @@ class MinticStopClockController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('verified');
+        $this->middleware('permission:Lista de paradas de reloj de proyecto MinTIC|Ver parada de reloj de proyecto MinTIC|Crear parada de reloj de proyecto MinTIC|Crear parada de reloj de proyecto MinTIC|Adjuntar y ver fotos a parada de reloj de proyecto MinTIC|Exportar parada de reloj de proyecto MinTIC|Eliminar parada de reloj de proyecto MinTIC',['only' => ['index']]);
+        $this->middleware('permission:Ver parada de reloj de proyecto MinTIC',['only' => ['show']]);
+        $this->middleware('permission:Crear parada de reloj de proyecto MinTIC',['only' => ['create','store']]);
+        $this->middleware('permission:Editar parada de reloj de proyecto MinTIC',['only' => ['create','store']]);
+        $this->middleware('permission:Adjuntar y ver fotos a parada de reloj de proyecto MinTIC',['only' => ['update','photos']]);
+        $this->middleware('permission:Exportar parada de reloj de proyecto MinTIC',['only' => ['create','store']]);
+        $this->middleware('permission:Eliminar parada de reloj de proyecto MinTIC',['only' => ['destroy']]);
+
     }
-    
+
     public function index(Mintic_School $id)
     {
         return view('projects.mintic.maintenance.stop_clock.index', compact('id'));
     }
-    
+
     public function show(Mintic_School $id, minticStopClock $item)
     {
         return view('projects.mintic.maintenance.stop_clock.show', compact('id', 'item'));
@@ -77,7 +85,7 @@ class MinticStopClockController extends Controller
             'responsable_number' => ['required', 'string', 'max:100'],
             'responsable_email' => ['required', 'string', 'max:100']
         ]);
-        
+
         $item->update($request->all());
 
         return redirect()->route('mintic_clock_stop', [$id, $item->id])->with('success', 'Se ha actualizado el mantenimiento correctamente');

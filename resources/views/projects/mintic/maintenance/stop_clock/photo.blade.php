@@ -16,9 +16,8 @@
     <div class="hide">
         <input type="hidden" value="{{ $id }}" id="data_id">
         <input type="hidden" value="{{ $item->id }}" id="data_item">
-        <input type="hidden" id="url"
-            value="project/mintic/maintenance/{{ $id }}/stop_clock/{{ $item->id }}/approve"
-            data-url="/project/mintic/maintenance/{{ $id }}/stop_clock/{{ $item->id }}/upload">
+        <input type="hidden" id="url" value="{{ route('mintic_clock_stop_upload', [$id, $item->id]) }}"
+            data-url="{{ route('mintic_clock_stop_upload', [$id, $item->id]) }}">
     </div>
     <section class="content">
 

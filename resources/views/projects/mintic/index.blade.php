@@ -36,7 +36,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
+
                         </tbody>
                     </table>
                 </div>
@@ -64,8 +64,8 @@
                     </form>
                 </div>
             </div>
-        </div>    
-        
+        </div>
+
     </section>
 @endsection
 
@@ -137,7 +137,7 @@
                     render: function ( data, type, row, meta ) {
                         return `
                             <div class="dropdown">
-                                <button 
+                                <button
                                     class="btn btn-default btn-xs pull-right dropdown-toggle" type="button" id="dropdownMenuButton-'+${row.id}+'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-ellipsis-v"></i>
                                 </button>
@@ -157,15 +157,39 @@
                                     @can("Adjuntar y ver fotos de proyectos mintic")
                                         <a class="dropdown-item" href="/project/mintic/tss/${row.id}">TSS V3</a>
                                     @endcan
-                                    @can("Ver implementación proyectos de MINTIC")
+                                    @if(auth()->user()->hasAnyPermission([
+                                        'Lista de implementaciones proyectos de MinTIC',
+                                        'Ver implementación proyectos de MINTIC',
+                                        'Crear asiganción de implemetación de MINTIC',
+                                        'Editar asiganción de implemetación de MINTIC',
+                                        'Ejecutar asiganción de implemetación de MINTIC',
+                                        'Ver asiganción de implemetación de MINTIC',
+                                        'Eliminar asiganción de implemetación de MINTIC'
+                                    ]))
                                         <a class="dropdown-item" href="/project/mintic/add/${row.id}">Implementaciones</a>
-                                    @endcan
-                                    {{-- @can("Adjuntar y ver fotos de proyectos mintic") --}}
+                                    @endif
+                                    @if(auth()->user()->hasAnyPermission([
+                                        'Lista de mantenimiento de proyecto MinTIC',
+                                        'Ver mantenimiento de proyecto MinTIC',
+                                        'Crear mantenimiento de proyecto MinTIC',
+                                        'Editar mantenimiento de proyecto MinTIC',
+                                        'Adjuntar y ver fotos a mantenimiento de proyecto MinTIC',
+                                        'Exportar mantenimiento de proyecto MinTIC',
+                                        'Eliminar mantenimiento de proyecto MinTIC'
+                                    ]))
                                         <a class="dropdown-item" href="/project/mintic/maintenance/${row.id}">Mantenimiento</a>
-                                    {{-- @endcan --}}
-                                    {{-- @can("Adjuntar y ver fotos de proyectos mintic") --}}
+                                    @endif
+                                    @if(auth()->user()->hasAnyPermission([
+                                        'Lista de paradas de reloj de proyecto MinTIC',
+                                        'Ver parada de reloj de proyecto MinTIC',
+                                        'Crear parada de reloj de proyecto MinTIC',
+                                        'Crear parada de reloj de proyecto MinTIC',
+                                        'Adjuntar y ver fotos a parada de reloj de proyecto MinTIC',
+                                        'Exportar parada de reloj de proyecto MinTIC',
+                                        'Eliminar parada de reloj de proyecto MinTIC'
+                                    ]))
                                         <a class="dropdown-item" href="/project/mintic/stop_clock/${row.id}">Parada de reloj</a>
-                                    {{-- @endcan --}}
+                                    @endif
                                     @can("Eliminar proyectos de MINTIC")
                                         <button class="dropdown-item btn-delete" data-toggle="modal" data-target="#modal_delete_${row.id}">Eliminar</button>
                                     @endcan
@@ -178,7 +202,7 @@
 
             dataTableCrete(url,columns,table_id);
         })
-        
+
         function initFnTable(table) {
             $('.btn-delete').click(function () {
                 let row = table.row( $(this).parent().parent().parent() );

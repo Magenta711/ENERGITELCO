@@ -37,7 +37,7 @@ Route::get('/clear-cache', function() {
 });
 
 //Reoptimized class loader:
-Route::get('/optimize', function() { 
+Route::get('/optimize', function() {
     $exitCode = Artisan::call('optimize');
     return '<h1>Reoptimized class loader</h1>';
 });
@@ -100,7 +100,9 @@ Route::get('policy_condition_24_7','infoController@b24_7')->name('policy_conditi
 Route::get('approval','approvalController@index')->name('approval');
 
 //work permit
-Route::get('human_management/work_permit/{all?}','human_management\workPermitController@index')->name('work_permit');
+Route::get('human_management/work_permit','human_management\workPermitController@index')->name('work_permit');
+Route::get('human_management/work_permit/all','human_management\workPermitController@index2')->name('work_permit_all');
+Route::get('human_management/work_permit/list','human_management\workPermitController@list')->name('work_permit_list');
 Route::get('human_management/work_permits/create','human_management\workPermitController@create')->name('work_permit_create');
 Route::post('human_management/work_permit','human_management\workPermitController@store')->name('work_permit_store');
 Route::get('human_management/work_permit/show/{id}','human_management\workPermitController@show')->name('work_permit_show');
@@ -143,7 +145,7 @@ Route::get('human_management/fall_protection_equipment_inspection/download/{id}'
 Route::put('human_management/fall_protection_equipment_inspection/{id}','human_management\fallProtectionEquipmentInspectionController@approve')->name('fall_protection_equipment_inspection_approve');
 Route::delete('human_management/fall_protection_equipment_inspection/delete/{id}','human_management\fallProtectionEquipmentInspectionController@destroy')->name('fall_protection_equipment_inspection_delete');
 
-//delivery of staffing 
+//delivery of staffing
 Route::get('human_management/delivery_staffing','human_management\deliveryStaffingController@index')->name('delivery_staffing');
 Route::get('human_management/delivery_staffing/create','human_management\deliveryStaffingController@create')->name('delivery_staffing_create');
 Route::post('human_management/delivery_staffing','human_management\deliveryStaffingController@store')->name('delivery_staffing_store');
@@ -167,7 +169,7 @@ Route::delete('human_management/work_permits_notifications_medical_incapacity/de
 Route::post('human_management/work_permits_notifications_medical_incapacity/plus/{id}','human_management\workPermitNotificationsMedicalIncapacityController@plus')->name('work_permits_notifications_medical_incapacity_plus');
 Route::post('human_management/work_permits_notifications_medical_incapacity/rest/{id}','human_management\workPermitNotificationsMedicalIncapacityController@rest')->name('work_permits_notifications_medical_incapacity_rest');
 
-//Payroll and overtime news report 
+//Payroll and overtime news report
 Route::get('finances/payroll_overtime_news_report','human_management\payrollOvertimeNewsReportController@index')->name('payroll_overtime_news_report');
 Route::get('finances/payroll_overtime_news_report/create','human_management\payrollOvertimeNewsReportController@create')->name('payroll_overtime_news_report_create');
 Route::post('finances/payroll_overtime_news_report','human_management\payrollOvertimeNewsReportController@store')->name('payroll_overtime_news_report_store');
@@ -729,8 +731,10 @@ Route::put('project/mintic/ec/not_approval/{id}','projects\MinticController@not_
 Route::post('project/mintic/ec/upload','projects\MinticController@upload')->name('mintic_marke');
 Route::delete('project/mintic/ec/{id}','projects\MinticController@destroy')->name('mintic_delete');
 Route::get('project/mintic/ec/{id}','projects\MinticController@pintures')->name('mintic_pintures');
+
 Route::get('project/mintic/install/{id}','projects\MinticController@install')->name('mintic_install');
 Route::post('project/mintic/install','projects\MinticController@upload_install')->name('mintic_marke_install');
+
 Route::get('project/mintic/tss/{id}','projects\MinticController@tss')->name('mintic_tss');
 Route::post('project/mintic/tss','projects\MinticController@upload_tss')->name('mintic_marke_tss');
 

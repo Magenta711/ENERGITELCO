@@ -191,6 +191,14 @@ return [
         "f9a3u3" => "valor de caja menor del usuario 3",
         "f9a3u4" => "valor de caja menor del usuario 4",
         "receives_id" => "funcionario",
+        "date" => "fecha",
+        "num_contract" => "número de contrato",
+        "responsable_name" => "nombre de responsable",
+        "responsable_position" => "cargo de responsable",
+        "responsable_document" => "documento de responsable",
+        "responsable_number" => "número de responsable",
+        "responsable_email" => "correo de responsable",
+        "num" => "num"
     ],
 
 ];

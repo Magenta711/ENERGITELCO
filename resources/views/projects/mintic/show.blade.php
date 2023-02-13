@@ -217,21 +217,23 @@
                 </div>
             </div>
             @if ($id->status == 0)
-                <div class="box-footer">
-                    <button class="btn btn-sm btn-primary" onclick="aprobar()">Aprobar y firmar</button>
-                    <button class="btn btn-sm btn-danger" onclick="no_aprobar()">No aprobar</button>
-                </div>
-                <form id="form_approval" action="{{ route('mintic_approval', $id->id) }}" method="POST" style="form_dis;">
-                    @csrf
-                    @method('PUT')
-                    {{-- <textarea name="observaciones_jefe" id="observaciones_jefe_2" class="hide" cols="30" rows="3">{{old('observaciones_jefe')}}</textarea> --}}
-                </form>
-                <form id="form_no_approval" action="{{ route('mintic_not_approval', $id->id) }}" method="POST"
-                    style="display: none;">
-                    @csrf
-                    @method('PUT')
-                    {{-- <textarea name="observaciones_jefe" id="observaciones_jefe_2" class="hide" cols="30" rows="3">{{old('observaciones_jefe')}}</textarea> --}}
-                </form>
+                @can('Aprobar proyectos de MINTIC')
+                    <div class="box-footer">
+                        <button class="btn btn-sm btn-primary" onclick="aprobar()">Aprobar y firmar</button>
+                        <button class="btn btn-sm btn-danger" onclick="no_aprobar()">No aprobar</button>
+                    </div>
+                    <form id="form_approval" action="{{ route('mintic_approval', $id->id) }}" method="POST" style="form_dis;">
+                        @csrf
+                        @method('PUT')
+                        {{-- <textarea name="observaciones_jefe" id="observaciones_jefe_2" class="hide" cols="30" rows="3">{{old('observaciones_jefe')}}</textarea> --}}
+                    </form>
+                    <form id="form_no_approval" action="{{ route('mintic_not_approval', $id->id) }}" method="POST"
+                        style="display: none;">
+                        @csrf
+                        @method('PUT')
+                        {{-- <textarea name="observaciones_jefe" id="observaciones_jefe_2" class="hide" cols="30" rows="3">{{old('observaciones_jefe')}}</textarea> --}}
+                    </form>
+                @endcan
             @endif
         </div>
     </section>

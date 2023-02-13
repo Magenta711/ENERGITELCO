@@ -23,8 +23,13 @@ class MinticController extends Controller
         $this->middleware('permission:Ver proyectos de MINTIC',['only' => ['show']]);
         $this->middleware('permission:Editar proyectos de MINTIC',['only' => ['edit','update']]);
         $this->middleware('permission:Crear proyectos de MINTIC',['only' => ['create','store','create2','store2','create3','store3']]);
+        $this->middleware('permission:Adjuntar y ver fotos de proyectos mintic',['only' => ['upload','pintures']]);
         $this->middleware('permission:Eliminar proyectos de MINTIC',['only' => ['destroy']]);
         $this->middleware('permission:Aprobar proyectos de MINTIC',['only' => ['approval','not_approval']]);
+
+        $this->middleware('permission:Adjuntar y ver fotos TSS',['only' => ['upload_tss','tss']]);
+        $this->middleware('permission:Adjuntar y ver fotos de instalación',['only' => ['upload_install','install']]);
+
     }
 
     /**
@@ -128,7 +133,7 @@ class MinticController extends Controller
                 $user->notify(new notificationMain($id->id,'Nuevo proyecto MINTIC '.$id->id,'project/mintic/ec/show/'));
             }
         }
-        
+
         return redirect()->route('mintic')->with('success','Se ha creado el proyecto correctamente');
     }
     /**
@@ -252,7 +257,7 @@ class MinticController extends Controller
                 Storage::delete('public/upload/mintic/'.$file_exists->name);
             }
             $file = $request->file('file');
-            
+
             $name = time().str_random().'.'.$file->getClientOriginalExtension();
             if ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg') {
                 $text = $mintic->name.', '.$mintic->mun.', '.$mintic->dep;
@@ -351,7 +356,7 @@ class MinticController extends Controller
                         $font->valign('top');
                         $font->angle(0);
                     });
-                    
+
                     if ($request->vol && $request->vol != '') {
                         $height += (5+$const);
                         $image->text($request->vol, $image->width() - 5, $image->height() - $height, function($font) use($request,$const) {
@@ -411,7 +416,7 @@ class MinticController extends Controller
     {
         $id->update(['status' => 1,'approver_id' => auth()->id()]);
         $users = User::where('state',1)->get();
-        
+
         foreach ($users as $user) {
             if ($user->hasPermissionTo('Crear proyectos de MINTIC')) {
                 $user->notify(new notificationMain($id->id,'Proyecto MINTIC '.$id->id.' aprobado','project/mintic/ec/show/'));
@@ -419,7 +424,7 @@ class MinticController extends Controller
         }
         return redirect()->back()->with(['success'=>'Se ha aprobado el proyecto correctamente']);
     }
-    
+
     public function not_approval(Mintic_School $id)
     {
         $id->update(['status' => 2,'approver_id' => auth()->id()]);
@@ -437,13 +442,13 @@ class MinticController extends Controller
         $id = Mintic_School::with(['files'])->find($id);
         return view('projects.mintic.pintures',compact('id'));
     }
-    
+
     public function install($id)
     {
         $id = Mintic_School::with(['files'])->find($id);
         return view('projects.mintic.install',compact('id'));
     }
-    
+
     public function upload_install(Request $request)
     {
         if ($request->hasFile('file')){
@@ -452,17 +457,17 @@ class MinticController extends Controller
             $file_exists = $mintic->files->where('description',$request->name_d)->first();
 
             if ($file_exists){
-                Storage::delete('public/upload/mintic/'.$file_exists->name); 
+                Storage::delete('public/upload/mintic/'.$file_exists->name);
             }
             $file = $request->file('file');
-            
+
             $name = time().str_random().'.'.$file->getClientOriginalExtension();
             if ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg') {
                 if ($request->vol && $request->vol == 2) {
                     $text = $mintic->mun.', '.$mintic->dep.', '.$mintic->population;
                     $text2 = $mintic->long.' / '.$mintic->lat;
                     $text3 = isset($request->date) && $request->date ? Carbon::create($request->date)->format('Y-m-d H:i:s') : ($visit ? $visit->date.' '.$visit->time : now()->format('Y-m-d H:i:s') );
-    
+
                     $image = Image::make($request->file);
                     if ($request->size != 'org') {
                         $image->resize(null, 500, function ($constraint) {
@@ -520,7 +525,7 @@ class MinticController extends Controller
                     $text = $mintic->name;
                     $text2 = $mintic->long.' / '.$mintic->lat;
                     $text3 = isset($request->date) && $request->date ? Carbon::create($request->date)->format('Y-m-d H:i:s') : ($visit ? $visit->date.' '.$visit->time : now()->format('Y-m-d H:i:s') );
-    
+
                     $image = Image::make($request->file);
                     if ($request->size != 'org') {
                         $image->resize(null, 500, function ($constraint) {
@@ -619,7 +624,7 @@ class MinticController extends Controller
             $mintic = Mintic_School::find($request->id);
             $file_exists = $mintic->files->where('description',$request->name_d)->first();
             if ($file_exists){
-                Storage::delete('public/upload/mintic/'.$file_exists->name); 
+                Storage::delete('public/upload/mintic/'.$file_exists->name);
             }
             $file = $request->file('file');
             $name = time().str_random().'.'.$file->getClientOriginalExtension();
