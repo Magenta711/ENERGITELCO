@@ -32,20 +32,17 @@
     </tr>
     <tr>
         <td></td>
-        <td colspan="15">3. REGISTRO FOTOGRÁFICO SI APLICA</td>
+        <td colspan="15" style="text-align: center; background: #A6A6A6;border: 1px solid #000000;">3. REGISTRO FOTOGRÁFICO SI APLICA</td>
     </tr>
     <tr>
         <td></td>
-        <td colspan="15">PARADA DE RELOJ 1.</td>
+        <td colspan="15" style="text-align: center; background: #D0CECE;border: 1px solid #000000;">PARADA DE RELOJ 1.</td>
     </tr>
     <tr>
         <td></td>
-    </tr>
-    <tr>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
+        <td rowspan="16" colspan="5" style="border: 1px solid #000000;"></td>
+        <td rowspan="16" colspan="5" style="border: 1px solid #000000;"></td>
+        <td rowspan="16" colspan="5" style="border: 1px solid #000000;"></td>
     </tr>
     <tr>
         <td></td>
@@ -86,5 +83,184 @@
     <tr>
         <td></td>
     </tr>
-    
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="15" style="text-align: center; background: #D0CECE;border: 1px solid #000000;">PARADA DE RELOJ 2.</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td rowspan="16" colspan="5" style="border: 1px solid #000000;"></td>
+        <td rowspan="16" colspan="5" style="border: 1px solid #000000;"></td>
+        <td rowspan="16" colspan="5" style="border: 1px solid #000000;"></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="15" style="text-align: center; background: #D0CECE;border: 1px solid #000000;">PARADA DE RELOJ 3.</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td rowspan="16" colspan="5" style="border: 1px solid #000000;"></td>
+        <td rowspan="16" colspan="5" style="border: 1px solid #000000;"></td>
+        <td rowspan="16" colspan="5" style="border: 1px solid #000000;"></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="15" style="text-align: center; background: #D0CECE;border: 1px solid #000000;">PARADA DE RELOJ 4.</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td rowspan="16" colspan="5" style="border: 1px solid #000000;"></td>
+        <td rowspan="16" colspan="5" style="border: 1px solid #000000;"></td>
+        <td rowspan="16" colspan="5" style="border: 1px solid #000000;"></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="15" style="text-align: center; background: #D0CECE;border: 1px solid #000000;">4. OBSERVACIONES</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td rowspan="4" colspan="15" style="border: 1px solid #000000;">
+        </td>
+    </tr>
 </table>

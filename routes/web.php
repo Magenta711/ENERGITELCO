@@ -100,7 +100,9 @@ Route::get('policy_condition_24_7','infoController@b24_7')->name('policy_conditi
 Route::get('approval','approvalController@index')->name('approval');
 
 //work permit
-Route::get('human_management/work_permit/{all?}','human_management\workPermitController@index')->name('work_permit');
+Route::get('human_management/work_permit','human_management\workPermitController@index')->name('work_permit');
+Route::get('human_management/work_permit/all','human_management\workPermitController@index2')->name('work_permit_all');
+Route::get('human_management/work_permit/list','human_management\workPermitController@list')->name('work_permit_list');
 Route::get('human_management/work_permits/create','human_management\workPermitController@create')->name('work_permit_create');
 Route::post('human_management/work_permit','human_management\workPermitController@store')->name('work_permit_store');
 Route::get('human_management/work_permit/show/{id}','human_management\workPermitController@show')->name('work_permit_show');
@@ -756,33 +758,35 @@ Route::put('project/mintic/ec/not_approval/{id}','projects\MinticController@not_
 Route::post('project/mintic/ec/upload','projects\MinticController@upload')->name('mintic_marke');
 Route::delete('project/mintic/ec/{id}','projects\MinticController@destroy')->name('mintic_delete');
 Route::get('project/mintic/ec/{id}','projects\MinticController@pintures')->name('mintic_pintures');
+
 Route::get('project/mintic/install/{id}','projects\MinticController@install')->name('mintic_install');
 Route::post('project/mintic/install','projects\MinticController@upload_install')->name('mintic_marke_install');
+
 Route::get('project/mintic/tss/{id}','projects\MinticController@tss')->name('mintic_tss');
 Route::post('project/mintic/tss','projects\MinticController@upload_tss')->name('mintic_marke_tss');
 
-Route::get('project/mintic/maintenance/{id}','projects\MinticController@maintenance')->name('mintic_maintenance');
-Route::get('project/mintic/maintenance/{id}/create','projects\MinticController@create_maintenance')->name('mintic_maintenance_create');
-Route::post('project/mintic/maintenance/{id}','projects\MinticController@store_maintenance')->name('mintic_maintenance_store');
-Route::get('project/mintic/maintenance/{id}/{item}/edit','projects\MinticController@edit_maintenance')->name('mintic_maintenance_edit');
-Route::put('project/mintic/maintenance/{id}/{item}','projects\MinticController@update_maintenance')->name('mintic_maintenance_update');
-Route::get('project/mintic/maintenance/{id}/{item}','projects\MinticController@show_maintenance')->name('mintic_maintenance_show');
-Route::get('project/mintic/maintenance/{id}/{item}/export','projects\MinticController@export_maintenance')->name('mintic_maintenance_export');
-Route::get('project/mintic/maintenance/{id}/{item}/photos','projects\MinticController@photos_maintenance')->name('mintic_maintenance_photos');
-Route::post('project/mintic/maintenance/{id}/{item}/updload','projects\MinticController@upload_maintenance')->name('mintic_marke_maintenance');
-Route::delete('project/mintic/maintenance/{id}/{item}','projects\MinticController@destroy_maintenance')->name('mintic_maintenance_delete');
-Route::post('files/delete/{id}', 'projects\MinticController@delete_file')->name('delete_file');
+Route::get('project/mintic/maintenance/{id}','projects\MaintenanceController@index')->name('mintic_maintenance');
+Route::get('project/mintic/maintenance/{id}/create','projects\MaintenanceController@create')->name('mintic_maintenance_create');
+Route::post('project/mintic/maintenance/{id}','projects\MaintenanceController@store')->name('mintic_maintenance_store');
+Route::get('project/mintic/maintenance/{id}/{item}/edit','projects\MaintenanceController@edit')->name('mintic_maintenance_edit');
+Route::put('project/mintic/maintenance/{id}/{item}','projects\MaintenanceController@update')->name('mintic_maintenance_update');
+Route::get('project/mintic/maintenance/{id}/{item}','projects\MaintenanceController@show')->name('mintic_maintenance_show');
+Route::get('project/mintic/maintenance/{id}/{item}/export','projects\MaintenanceController@export')->name('mintic_maintenance_export');
+Route::get('project/mintic/maintenance/{id}/{item}/photos','projects\MaintenanceController@photos')->name('mintic_maintenance_photos');
+Route::post('project/mintic/maintenance/{id}/{item}/updload','projects\MaintenanceController@upload')->name('mintic_marke_maintenance');
+Route::delete('project/mintic/maintenance/{id}/{item}','projects\MaintenanceController@destroy')->name('mintic_maintenance_delete');
 
-Route::get('project/mintic/maintenance/{id}/stop_clock/show/{item}','projects\MinticStopClockController@show')->name('mintic_clock_stop');
-Route::get('project/mintic/maintenance/{id}/stop_clock/create','projects\MinticStopClockController@create')->name('mintic_clock_stop_create');
-Route::post('project/mintic/maintenance/{id}/stop_clock','projects\MinticStopClockController@store')->name('mintic_clock_stop_store');
-Route::get('project/mintic/maintenance/{id}/stop_clock/{item}/edit','projects\MinticStopClockController@edit')->name('mintic_clock_stop_edit');
-Route::put('project/mintic/maintenance/{id}/stop_clock/{item}','projects\MinticStopClockController@update')->name('mintic_clock_stop_update');
-Route::delete('project/mintic/maintenance/{id}/stop_clock/{item}','projects\MinticStopClockController@destroy')->name('mintic_clock_stop_delete');
-Route::get('project/mintic/maintenance/{id}/stop_clock/{item}/photo','projects\MinticStopClockController@photos')->name('mintic_clock_stop_photos');
-Route::post('project/mintic/maintenance/{id}/stop_clock/{item}/upload','projects\MinticStopClockController@upload')->name('mintic_clock_stop_upload');
-Route::patch('project/mintic/maintenance/{id}/stop_clock/{item}/approve','projects\MinticStopClockController@approve')->name('mintic_clock_stop_approve');
-Route::get('project/mintic/maintenance/{id}/stop_clock/{item}/export','projects\MinticStopClockController@export')->name('mintic_clock_stop_export');
+Route::get('project/mintic/stop_clock/{id}','projects\MinticStopClockController@index')->name('mintic_clock_stop');
+Route::get('project/mintic/stop_clock/{id}/show/{item}','projects\MinticStopClockController@show')->name('mintic_clock_stop_show');
+Route::get('project/mintic/stop_clock/{id}/create','projects\MinticStopClockController@create')->name('mintic_clock_stop_create');
+Route::post('project/mintic/stop_clock/{id}','projects\MinticStopClockController@store')->name('mintic_clock_stop_store');
+Route::get('project/mintic/stop_clock/{id}/{item}/edit','projects\MinticStopClockController@edit')->name('mintic_clock_stop_edit');
+Route::put('project/mintic/stop_clock/{id}/{item}','projects\MinticStopClockController@update')->name('mintic_clock_stop_update');
+Route::delete('project/mintic/stop_clock/{id}/{item}','projects\MinticStopClockController@destroy')->name('mintic_clock_stop_delete');
+Route::get('project/mintic/stop_clock/{id}/{item}/photo','projects\MinticStopClockController@photos')->name('mintic_clock_stop_photos');
+Route::post('project/mintic/stop_clock/{id}/{item}/upload','projects\MinticStopClockController@upload')->name('mintic_clock_stop_upload');
+Route::patch('project/mintic/stop_clock/{id}/{item}/approve','projects\MinticStopClockController@approve')->name('mintic_clock_stop_approve');
+Route::get('project/mintic/stop_clock/{id}/{item}/export','projects\MinticStopClockController@export')->name('mintic_clock_stop_export');
 
 Route::get('project/mintic/add/{id}','projects\MinticImplementController@index')->name('mintic_add_consumables');
 Route::get('project/mintic/add/{id}/show/{item}','projects\MinticImplementController@show')->name('mintic_add_consumables_show');

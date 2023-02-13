@@ -10,16 +10,14 @@
             <li><a href="#">Proyectos</a></li>
             <li><a href="#">Mintic</a></li>
             <li><a href="#">Mantenimiento</a></li>
-            <li><a href="#">Parada de reloj</a></li>
-            <li class="active">TSS v3</li>
+            <li class="active">Parada de reloj</li>
         </ol>
     </section>
     <div class="hide">
         <input type="hidden" value="{{ $id }}" id="data_id">
         <input type="hidden" value="{{ $item->id }}" id="data_item">
-        <input type="hidden" id="url"
-            value="project/mintic/maintenance/{{ $id }}/stop_clock/{{ $item->id }}/approve"
-            data-url="/project/mintic/maintenance/{{ $id }}/stop_clock/{{ $item->id }}/upload">
+        <input type="hidden" id="url" value="{{ route('mintic_clock_stop_upload', [$id, $item->id]) }}"
+            data-url="{{ route('mintic_clock_stop_upload', [$id, $item->id]) }}">
     </div>
     <section class="content">
 
@@ -27,7 +25,7 @@
             <div class="box-header">
                 <div class="box-title"> proyecto MINTIC</div>
                 <div class="box-tools">
-                    <a href="{{ route('mintic_maintenance', $id) }}" class="btn btn-sm btn-primary">Volver</a>
+                    <a href="{{ route('mintic_clock_stop', $id) }}" class="btn btn-sm btn-primary">Volver</a>
                 </div>
             </div>
             <div class="box-body">
@@ -43,6 +41,7 @@
                     'it' => '1',
                     'label' => '1ra parada',
                     'accept' => 'image/*',
+                    'place' => 'B12',
                     'date_edit' => true,
                 ])
                 <hr>
@@ -54,6 +53,7 @@
                     'it' => '2',
                     'label' => '1ra parada',
                     'accept' => 'image/*',
+                    'place' => 'G12',
                     'date_edit' => true,
                 ])
                 <hr>
@@ -65,6 +65,7 @@
                     'it' => '3',
                     'label' => '1ra parada',
                     'accept' => 'image/*',
+                    'place' => 'L12',
                     'date_edit' => true,
                 ])
                 <hr>
@@ -77,6 +78,7 @@
                     'it' => '1',
                     'label' => '2da parada',
                     'accept' => 'image/*',
+                    'place' => 'B29',
                     'date_edit' => true,
                 ])
                 <hr>
@@ -88,6 +90,7 @@
                     'it' => '2',
                     'label' => '2da parada',
                     'accept' => 'image/*',
+                    'place' => 'G29',
                     'date_edit' => true,
                 ])
                 <hr>
@@ -99,6 +102,7 @@
                     'it' => '3',
                     'label' => '2da parada',
                     'accept' => 'image/*',
+                    'place' => 'L29',
                     'date_edit' => true,
                 ])
                 <hr>
@@ -111,6 +115,7 @@
                     'it' => '1',
                     'label' => '3ra parada',
                     'accept' => 'image/*',
+                    'place' => 'B46',
                     'date_edit' => true,
                 ])
                 <hr>
@@ -122,6 +127,7 @@
                     'it' => '2',
                     'label' => '3ra parada',
                     'accept' => 'image/*',
+                    'place' => 'G46',
                     'date_edit' => true,
                 ])
                 <hr>
@@ -133,6 +139,7 @@
                     'it' => '3',
                     'label' => '3ra parada',
                     'accept' => 'image/*',
+                    'place' => 'L46',
                     'date_edit' => true,
                 ])
                 <hr>
@@ -145,6 +152,7 @@
                     'it' => '1',
                     'label' => '4ta parada',
                     'accept' => 'image/*',
+                    'place' => 'B63',
                     'date_edit' => true,
                 ])
                 <hr>
@@ -156,6 +164,7 @@
                     'it' => '2',
                     'label' => '4ta parada',
                     'accept' => 'image/*',
+                    'place' => 'G63',
                     'date_edit' => true,
                 ])
                 <hr>
@@ -167,6 +176,7 @@
                     'it' => '3',
                     'label' => '4ta parada',
                     'accept' => 'image/*',
+                    'place' => 'L63',
                     'date_edit' => true,
                 ])
                 <hr>

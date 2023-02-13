@@ -20,31 +20,33 @@
             <div class="box-header">
                 <div class="box-title">Para de reloj</div>
                 <div class="box-tools">
-                    <a href="{{ route('mintic_maintenance', $id->id) }}" class="btn btn-sm btn-primary">Volver</a>
+                    <a href="{{ route('mintic_clock_stop', $id->id) }}" class="btn btn-sm btn-primary">Volver</a>
                 </div>
             </div>
             <form action="{{ route('mintic_clock_stop_update', [$id->id, $item->id]) }}" method="POST">
                 @method('PUT')
                 @csrf
                 <div class="box-body">
+                    <p><small>Todo campo con <span class="text-danger">*</span> es <b>obligatorio.</b></small></p>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="num">N° de caso</label>
+                                <label for="num"><span class="text-danger">*</span> N° de caso</label>
                                 <input type="text" name="num" value="{{ $item->num }}" id="num"
                                     class="form-control">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="date">Fecha</label>
+                                <label for="date"><span class="text-danger">*</span> Fecha</label>
                                 <input type="date" name="date" value="{{ $item->date }}" id="date"
                                     class="form-control">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="collaborating_company">Empresa colaboradora</label>
+                                <label for="collaborating_company"><span class="text-danger">*</span> Empresa
+                                    colaboradora</label>
                                 <input type="text" name="collaborating_company"
                                     value="{{ $item->collaborating_company }}" id="collaborating_company"
                                     class="form-control">
@@ -57,35 +59,35 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="department">Departamento</label>
-                                <input type="text" name="department" id="department" value="{{ $id->dep }}"
+                                <input type="text" readonly name="department" id="department" value="{{ $id->dep }}"
                                     class="form-control">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="municpality">Municipio</label>
-                                <input type="text" name="municpality" id="municpality" value="{{ $id->mun }}"
-                                    class="form-control">
+                                <input type="text" readonly name="municpality" id="municpality"
+                                    value="{{ $id->mun }}" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="population">Centro poblado</label>
-                                <input type="text" name="population" id="population" value="{{ $id->population }}"
-                                    class="form-control">
+                                <input type="text" readonly name="population" id="population"
+                                    value="{{ $id->population }}" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="name">Sede institución o caso especial</label>
-                                <input type="text" name="name" id="name" value="{{ $id->name }}"
+                                <input type="text" readonly name="name" id="name" value="{{ $id->name }}"
                                     class="form-control">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="code">Id de beneficiario</label>
-                                <input type="text" name="code" id="code" value="{{ $id->code }}"
+                                <input type="text" readonly name="code" id="code" value="{{ $id->code }}"
                                     class="form-control">
                             </div>
                         </div>
@@ -435,35 +437,39 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-3">
                             <div class="form-group">
-                                <label for="responsable_name">Nombre y apellidos</label>
+                                <label for="responsable_name"><span class="text-danger">*</span> Nombre y
+                                    apellidos</label>
                                 <input type="text" id="responsable_name" name="responsable_name" class="form-control"
                                     value="{{ $item->responsable_name }}">
                             </div>
                         </div>
                         <div class="col-lg-2 col-md-3">
                             <div class="form-group">
-                                <label for="responsable_position">Cargo</label>
+                                <label for="responsable_position"><span class="text-danger">*</span> Cargo</label>
                                 <input type="text" id="responsable_position" name="responsable_position"
                                     class="form-control" value="{{ $item->responsable_position }}">
                             </div>
                         </div>
                         <div class="col-lg-2 col-md-3">
                             <div class="form-group">
-                                <label for="responsable_document">Número de cedula</label>
+                                <label for="responsable_document"><span class="text-danger">*</span> Número de
+                                    cedula</label>
                                 <input type="text" id="responsable_document" name="responsable_document"
                                     class="form-control" value="{{ $item->responsable_document }}">
                             </div>
                         </div>
                         <div class="col-lg-2 col-md-3">
                             <div class="form-group">
-                                <label for="responsable_number">Número de contacto</label>
+                                <label for="responsable_number"><span class="text-danger">*</span> Número de
+                                    contacto</label>
                                 <input type="text" id="responsable_number" name="responsable_number"
                                     class="form-control" value="{{ $item->responsable_number }}">
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-3">
                             <div class="form-group">
-                                <label for="responsable_email">Correo electrónico</label>
+                                <label for="responsable_email"><span class="text-danger">*</span> Correo
+                                    electrónico</label>
                                 <input type="text" id="responsable_email" name="responsable_email"
                                     class="form-control" value="{{ $item->responsable_email }}">
                             </div>
