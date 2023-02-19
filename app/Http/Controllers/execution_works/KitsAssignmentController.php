@@ -23,7 +23,7 @@ class KitsAssignmentController extends Controller
      public function __construct() {
         $this->middleware('auth');
         $this->middleware('verified');
-        $this->middleware('permission:Lista de asignación|Ver asignación|Editar asignación',['only' => ['index']]);
+        $this->middleware('permission:Lista de asignación|Ver asignación|Editar asignación|Crear asignación|Revisar asignación',['only' => ['index']]);
         $this->middleware('permission:Ver asignación',['only' => ['show']]);
         $this->middleware('permission:Editar asignación',['only' => ['edit','update']]);
         $this->middleware('permission:Crear asignación',['only' => ['assignment','store']]);

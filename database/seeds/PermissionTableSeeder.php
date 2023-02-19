@@ -422,7 +422,7 @@ class PermissionTableSeeder extends Seeder
              */
             //EndBlock-20230203
 
-            //Block-20230204 Esteban
+            //Block-20230204 Esteban, Pablo
             // ['name' => 'Lista de paradas de reloj de proyecto MinTIC', 'category' => 'Ejecución de obras'],
             // ['name' => 'Ver parada de reloj de proyecto MinTIC', 'category' => 'Ejecución de obras'],
             // ['name' => 'Crear parada de reloj de proyecto MinTIC', 'category' => 'Ejecución de obras'],
@@ -441,6 +441,21 @@ class PermissionTableSeeder extends Seeder
             // ['name' => 'Adjuntar y ver fotos TSS', 'category' => 'Ejecución de obras'],
             // ['name' => 'Adjuntar y ver fotos de instalación', 'category' => 'Ejecución de obras'],
             //EndBlock-20230204
+
+            //Block-20230213 Pablo
+            // ['name' => 'Crear kits', 'category' => 'Ejecución de obras'],
+            // ['name' => 'Ver kits', 'category' => 'Ejecución de obras'],
+            // ['name' => 'Editar Kits', 'category' => 'Ejecución de obras'],
+            // ['name' => 'Editar todos los Kits', 'category' => 'Ejecución de obras'],
+            // ['name' => 'Eliminar Kits', 'category' => 'Ejecución de obras'],
+            // ['name' => 'Eliminar todos los Kits', 'category' => 'Ejecución de obras'],
+            // ['name' => 'Ver asignación', 'category' => 'Ejecución de obras'],
+            // ['name' => 'Editar asignación', 'category' => 'Ejecución de obras'],
+            // ['name' => 'Crear asignación', 'category' => 'Ejecución de obras'],
+            // ['name' => 'Revisar asignación', 'category' => 'Ejecución de obras'],
+            // ['name' => 'Ver revisión', 'category' => 'Ejecución de obras'],
+            // ['name' => 'Crear revisión', 'category' => 'Ejecución de obras'],
+            //Block-20230213
         ];
 
         foreach ($permissions as $permission) {

@@ -40,7 +40,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="user_id">Revisor</label>
-                            <p>{{ isset( $review_tools->revisor->name) ? $review_tools->fecha_revision : "" }}</p>
+                            <p>{{ isset( $review_tools->revisor->name) ? $review_tools->revisor->name : "" }}</p>
                         </div>
                     </div>
 

@@ -28,6 +28,9 @@ class ReviewkitsController extends Controller
      public function __construct() {
         $this->middleware('auth');
         $this->middleware('verified');
+        $this->middleware('permission:Revisar asignación|Ver revisión|Crear revisión',['only' => ['index']]);
+        $this->middleware('permission:Ver revisión',['only' => ['show']]);
+        $this->middleware('permission:Crear revisión',['only' => ['store','review']]);
     }
 
     public function index()
