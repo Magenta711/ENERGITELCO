@@ -13,7 +13,7 @@
     </ol>
 </section>
 <section class="content">
-     
+
     <div class="box box-solid">
         <div class="box-header with-border">
             <h3 class="box-title">Caja menor</h3>
@@ -151,7 +151,7 @@
                                 <th>Caja menor pendiente de liquidar</th>
                                 {{-- <th>Pendientes</th> --}}
                                 <th>Valores pendiente a pagar</th>
-                                {{-- <th>Ajustes</th> --}}
+                                <th>Tope</th>
                                 <th>/</th>
                             </tr>
                         </thead>
@@ -162,8 +162,10 @@
                                         <td>{{$item->user->name}}</td>
                                         <td>${{number_format($item->charges,2,',','.')}}</td>
                                         <td>${{number_format($item->discharges,2,',','.')}}</td>
+                                        <td>${{number_format($item->tope,2,',','.')}}</td>
                                         <td>
                                             <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#historyModal_{{$item->id}}"><i class="fa fa-plus"></i></button>
+                                            <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal_tope_{{$item->id}}">Tope</button>
                                             @can('Limpiar valores de bonificaciones y caja menor de técnicos')
                                                 <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#clenerModal_{{$item->id}}">Limpiar</button>
                                                 <div class="modal fade" id="clenerModal_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="clenerModal_{{$item->id}}Label" aria-hidden="true">
@@ -193,6 +195,37 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="modal fade" id="modal_tope_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="modal_tope_{{$item->id}}" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                      <div class="modal-content">
+                                                        <div class="modal-header">
+                                                          <h5 class="modal-title" id="exampleModalLabel">Asignar tope de caja menor</h5>
+                                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                          </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                          <form action="{{route('bonus_minor_box_tope_user',$item->id)}}" method="POST">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <div class="form-group">
+                                                              <label for="recipient-name" class="col-form-label">{{$item->user->name}}</label>
+                                                              <input type="text" name="tope" class="form-control" id="recipient-name">
+                                                            </div>
+                                                            {{-- <div class="form-group">
+                                                              <label for="message-text" class="col-form-label">Message:</label>
+                                                              <textarea class="form-control" id="message-text"></textarea>
+                                                            </div> --}}
+                                                            <div class="modal-footer">
+                                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                              <button type="button" class="btn btn-primary">Guardar</button>
+                                                              <input type="submit">
+                                                            </div>
+                                                          </form>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
                                             @endcan
                                             <div class="modal fade" id="historyModal_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="historyModal_{{$item->id}}Label" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg">

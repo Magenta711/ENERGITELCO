@@ -31,7 +31,7 @@
     </ol>
 </section>
 <section class="content">
-     
+
     @if (now()->format('H') >= 19)
         <div class="alert alert-danger alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -148,12 +148,36 @@
             $('.file_input').change(function (){
                 $($(this).parent().children('label')[1]).addClass('text-aqua');
             });
+            $('#solicitar').keyup(function (){
+                console.log('change')
+                // var tope_mensaje = parseInt(document.getElementById("tope_mensaje").value);
+                var solicitar = parseInt($("#caja_menor_pendiente").val());
+                var solicitado = parseInt(document.getElementById("solicitar").value)||0;
+                var campo = document.getElementById("total_caja");
+
+                var total = solicitado + solicitar;
+                document.getElementById("total_caja").value = "$"+total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+
+                // console.log('total',total);
+                if (total>500000){
+                    $('#total_caja').css('border-color', '#dd4b39');
+                    document.getElementById('tope_mensaje').value = "El valor pedido supera el tope permitido";
+                    console.log(total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+                }else {
+                    $('#total_caja').css('border-color', '#d2d6de');
+                }
+            })
         });
         function preguntarAntesDeSalir()
         {
             if (bPreguntar)
                 return "¿Seguro que quieres salir?";
         }
+
+
+
+
+
     </script>
 @endsection
 

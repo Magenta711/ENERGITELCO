@@ -20,7 +20,9 @@ use App\Models\Tasking;
 use App\Notifications\notificationMain;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use App\Models\bonus\MinorBoxUser;
 use Barryvdh\DomPDF\Facade as PDF;
+use App\Models\work1_cut_bonus;
 
 class workPermitController extends Controller
 {
@@ -83,6 +85,9 @@ class workPermitController extends Controller
      */
     public function create()
     {
+        $minor_boxes = MinorBoxUser::where('status',1)->where('user_id',auth()->id())->first();
+        $minor_box_unapproved = $this->getMinorBoxByUserPendingApprove();
+        // return $minor_box_unapproved;
         $users = User::where('state',1)->with('roles')->get();
         $projects = Project::get();
         $vehicles = invVehicle::where('status','!=',0)->get();
@@ -94,7 +99,50 @@ class workPermitController extends Controller
         })->get();
         $works = Work1::whereYear('created_at',now())->whereMonth('created_at',now())->whereDay('created_at',now())->get();
         $message = $this->message;
-        return view('human_management.work_permit.create',compact('users','message','projects','vehicles','bonus_techinicals','taskings','works'));
+        return view('human_management.work_permit.create',compact('users','message','projects','vehicles','bonus_techinicals','taskings','works','minor_boxes', 'minor_box_unapproved'));
+    }
+
+    //cuanto tine la persona->informes
+    //cuanto tiene pendiente->ver->caja menor->codigo generar corte
+
+
+    public function getMinorBoxByUserPendingApprove()
+    {
+        $cut = work1_cut_bonus::where('status',1)->get()->last();
+        if (!$cut) {
+            $cut = work1_cut_bonus::where('status','!=',0)->get()->last();
+        }
+
+        $now = now();
+
+        $items = Work1::whereBetween('created_at',[$cut->end_date,$now])
+                    ->where('estado','!=','No aprobado')
+                    ->where('responsable',auth()->id())
+                    ->with(['work_add'])
+                    ->select('id')
+                    ->get();
+        $array = [];
+        foreach($items as $item) {
+            $t3 = $item->work_add->f9a3u1 && is_numeric($item->work_add->f9a3u1) ? $item->work_add->f9a3u1 : 0;
+            $deli = $item->work_add->deliverable_u1 && is_numeric($item->work_add->deliverable_u1) ? $item->work_add->deliverable_u1 : 0;
+            $dis = $item->work_add->discharges_u1 && is_numeric($item->work_add->discharges_u1) ? $item->work_add->discharges_u1 : 0;
+
+            if ($array) {
+                $caja = $array['caja'];
+                $count = $array['count'];
+                $array = [
+                    'caja' => $caja + $t3,
+                    'count' => $count + 1
+                ];
+            }else {
+                $array = [
+                    'caja' => $t3,
+                    'count' => 1
+                ];
+            }
+        }
+
+        return $array;
     }
 
     /**
