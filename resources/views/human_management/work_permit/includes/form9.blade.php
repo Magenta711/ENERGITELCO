@@ -163,6 +163,7 @@
             </div>
             <hr>
             <input type="hidden" name="caja_menor_pendiente" value="{{$minor_boxes->charges}}" id="caja_menor_pendiente">
+            <input type="hidden" name="tope_caja_menor" value="{{$minor_boxes->tope}}" id="tope_caja_menor">
             <div class="form-gruop">
                 <div class="row">
                     <div class="col-md-3 col-sm-3">
@@ -185,7 +186,8 @@
                         {{-- <input type="text" name="caja_pendiente" value="${{ number_format($minor_box_unapproved['caja'], 2, ',', '.') }}"  id="caja_pendiente" class="form-control" disabled> --}}
                         {{-- <p>${{ number_format($minor_box_unapproved['caja'], 2, ',', '.') }}</p> --}}
                         <input type="text" class="form-control has-error" name="total_caja" id="total_caja" value="$0.00" disabled>
-                        <p id="tope_mensaje"></p>
+                        <p class="" id="tope_mensaje"></p>
+                        {{-- <span id="tope_mensaje"></span> --}}
                     </div>
                 </div>
             </div>

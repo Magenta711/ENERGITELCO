@@ -148,9 +148,9 @@
                         <thead>
                             <tr>
                                 <th>Funcionario</th>
-                                <th>Caja menor pendiente de liquidar</th>
+                                <th>Caja menor pendiente a liquidar</th>
                                 {{-- <th>Pendientes</th> --}}
-                                <th>Valores pendiente a pagar</th>
+                                <th>Valor pendiente a pagar</th>
                                 <th>Tope</th>
                                 <th>/</th>
                             </tr>
@@ -164,10 +164,12 @@
                                         <td>${{number_format($item->discharges,2,',','.')}}</td>
                                         <td>${{number_format($item->tope,2,',','.')}}</td>
                                         <td>
-                                            <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#historyModal_{{$item->id}}"><i class="fa fa-plus"></i></button>
-                                            <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal_tope_{{$item->id}}">Tope</button>
-                                            @can('Limpiar valores de bonificaciones y caja menor de técnicos')
+                                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                                <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#historyModal_{{$item->id}}"><i class="fa fa-plus"></i></button>
+                                                <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal_tope_{{$item->id}}">Tope</button>
                                                 <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#clenerModal_{{$item->id}}">Limpiar</button>
+                                            </div>
+                                            @can('Limpiar valores de bonificaciones y caja menor de técnicos')
                                                 <div class="modal fade" id="clenerModal_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="clenerModal_{{$item->id}}Label" aria-hidden="true">
                                                     <div class="modal-dialog modal-lg">
                                                         <div class="modal-content">
@@ -218,8 +220,8 @@
                                                             </div> --}}
                                                             <div class="modal-footer">
                                                               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                                              <button type="button" class="btn btn-primary">Guardar</button>
-                                                              <input type="submit">
+                                                              <input type="submit" class="btn btn-primary" value="Guardar">
+                                                              {{-- <button type="button" class="btn btn-primary">Guardar</button> --}}
                                                             </div>
                                                           </form>
                                                         </div>

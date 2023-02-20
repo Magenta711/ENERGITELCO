@@ -102,7 +102,7 @@
             </div>
             @if (now()->format('H') < 19)
                 <div class="box-footer">
-                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target=".new_documento">Enviar y firmar</button>
+                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target=".new_documento" id="btn_enviar">Enviar y firmar</button>
                     <!-- modal -->
                     <div class="modal fade new_documento" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-md">
@@ -152,19 +152,24 @@
                 console.log('change')
                 // var tope_mensaje = parseInt(document.getElementById("tope_mensaje").value);
                 var solicitar = parseInt($("#caja_menor_pendiente").val());
+                var tope = parseInt($("#tope_caja_menor").val());
                 var solicitado = parseInt(document.getElementById("solicitar").value)||0;
                 var campo = document.getElementById("total_caja");
+                var tope_mensaje = document.getElementById("tope_mensaje");
 
                 var total = solicitado + solicitar;
                 document.getElementById("total_caja").value = "$"+total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
 
                 // console.log('total',total);
-                if (total>500000){
+                if (total>tope){
                     $('#total_caja').css('border-color', '#dd4b39');
-                    document.getElementById('tope_mensaje').value = "El valor pedido supera el tope permitido";
-                    console.log(total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+                    $('#tope_mensaje').css('color', '#dd4b39');
+                    $('#tope_mensaje').html("El valor pedido supera el tope permitido: $" + tope.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+                    $('#btn_enviar').prop('disabled',true);
                 }else {
                     $('#total_caja').css('border-color', '#d2d6de');
+                    $('#tope_mensaje').html("");
+                    $('#btn_enviar').prop('disabled',false);
                 }
             })
         });
