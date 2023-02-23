@@ -577,6 +577,17 @@ f <!-- =============================================== -->
                                 </a>
                             </li>
                         @endif
+                        @if (auth()->user()->hasAnyPermission([
+                            'Lista de asignación'
+                        ]))
+                            <li class=" {{ activeMenu('execution_works/work_assignment*') }}">
+                                <a class="btn-send" href="{{route('work_assignment')}}">
+                                    {{-- {{-- <i class="fa fa-user-helmet-safety"></i> --}}
+                                    <i class="fa fa-helmet-safety"></i>
+                                    ASIGNACIÓN DE TRABAJO
+                                </a>
+                            </li>
+                        @endif
 
                          @if (auth()->user()->hasAnyPermission([
                                      'Lista inventario de herramientas',

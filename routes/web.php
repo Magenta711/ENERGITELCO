@@ -226,6 +226,14 @@ Route::get('execution_works/review_assignment_tools/download/{id}','execution_wo
 Route::patch('execution_works/review_assignment_tools/{id}','execution_works\reviewAssignmentTools@approve')->name('review_assignment_tools_approve');
 Route::delete('execution_works/review_assignment_tools/delete/{id}','execution_works\reviewAssignmentTools@destroy')->name('review_assignment_tools_delete');
 
+//work assignment
+Route::get('execution_works/work_assignment','execution_works\WorkAssignmentController@index')->name('work_assignment');
+Route::get('execution_works/work_assignment/create','execution_works\WorkAssignmentController@create')->name('work_assignment_create');
+// Route::post('execution_works/review_assignment_tools','execution_works\reviewAssignmentTools@store')->name('review_assignment_tools_store');
+// Route::get('execution_works/review_assignment_tools/show/{id}','execution_works\reviewAssignmentTools@show')->name('review_assignment_tools_show');
+// Route::get('execution_works/review_assignment_tools/edit/{id}','execution_works\reviewAssignmentTools@edit')->name('review_assignment_tools_edit');
+// Route::put('execution_works/review_assignment_tools/{id}','execution_works\reviewAssignmentTools@update')->name('review_assignment_tools_update');
+
 //kits
 Route::get('execution_works/kits','execution_works\kitsController@index')->name('kits');
 Route::get('execution_works/kits/create','execution_works\kitsController@create')->name('kits_create');
