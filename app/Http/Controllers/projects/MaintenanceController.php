@@ -17,7 +17,9 @@ use App\Models\project\Mintic\miniticMaintenanceEquipment;
 use App\Models\project\Mintic\MinticMaintenanceActivity;
 use App\Models\project\Mintic\MinticVisit;
 use App\Models\system_setting;
+use App\Models\InvUser;
 use Carbon\Carbon;
+use App\Models\project\Mintic\inventory\invMinticEquipment;
 
 class MaintenanceController extends Controller
 {
@@ -38,10 +40,9 @@ class MaintenanceController extends Controller
      */
     public function create(Mintic_School $id)
     {
-        $equipments = EquimentDetail::get();
         $activities = MinticMaintenanceActivity::get();
         $users = User::where('state',1)->get();
-        return view('projects.mintic.maintenance.create',compact('id','equipments','activities','users'));
+        return view('projects.mintic.maintenance.create',compact('id','activities','users'));
     }
 
     /**
@@ -60,26 +61,6 @@ class MaintenanceController extends Controller
         $request['status'] = 1;
         $main = mintic_maintenance::create($request->all());
 
-        if (isset($request->detail_retired)) {
-            foreach ($request->detail_retired as $key => $value) {
-                miniticMaintenanceEquipment::create([
-                    'serial' => $request->serial_retired[$key],
-                    'detail_id' => $request->detail_retired[$key],
-                    'maintenance_id' => $main->id,
-                    'type' => 'retired'
-                ]);
-            }
-        }
-        if (isset($request->detail_install)) {
-            foreach ($request->detail_install as $key => $value) {
-                miniticMaintenanceEquipment::create([
-                    'serial' => $request->serial_install[$key],
-                    'detail_id' => $request->detail_install[$key],
-                    'maintenance_id' => $main->id,
-                    'type' => 'install'
-                ]);
-            }
-        }
         if (isset($request->activity_status)) {
             foreach ($request->activity_status as $key => $value) {
                 miniticMaintenanceActivityDetail::create([
@@ -115,9 +96,15 @@ class MaintenanceController extends Controller
     public function edit($id,mintic_maintenance $item)
     {
         $equipments = EquimentDetail::get();
+        $user_equipments = InvUser::where('user_id', $item->receives_id)->where('inventaryble_type', 'App\\Models\\project\\Mintic\\inventory\\invMinticEquipment')->get();
+        // return $user_equipments;
+        // foreach ($user_equipments as $equipment) {
+        //     return $equipment->inventaryble;
+        // }
         $activities = MinticMaintenanceActivity::get();
         $users = User::where('state',1)->get();
-        return view('projects.mintic.maintenance.edit',compact('id','item','equipments','activities','users'));
+        // return $item->id;
+        return view('projects.mintic.maintenance.edit',compact('id','item','equipments','user_equipments','activities','users'));
     }
 
     /**
@@ -139,6 +126,41 @@ class MaintenanceController extends Controller
                     'maintenance_id' => $item->id,
                     'type' => 'retired'
                 ]);
+
+                $retired = invMinticEquipment::where('serial', $request->serial_retired[$key])->first();
+                // return $request;
+                if ($retired){
+                    $retired->update([
+                        'status' => 6
+                    ]);
+                }
+                if(!$retired) {
+                    $equiment_detail = EquimentDetail::find($request->detail_retired[$key]);
+                    $retired = invMinticEquipment::create([
+                        'serial' => $request->serial_retired[$key],
+                        'item' => $equiment_detail->name,
+                        'brand' => $equiment_detail->brand,
+                        'status' => 6,
+                        'commentary' => '',
+                        'equip_id' => $request->detail_retired[$key],
+                        'type' => 'Mantenimiento',
+                    ]);
+                }
+
+                // return $retired;
+                $inv = InvUser::where('user_id',$request->receives_id)->where('inventaryble_type','App\Models\project\Mintic\inventory\invMinticEquipment')->where('inventaryble_id',$retired->id)->first();
+                if ($inv) {
+                    $inv->entrar(1);
+                }else {
+                    InvUser::create([
+                        'user_id' => $request->receives_id,
+                        'inventaryble_id' => $retired->id,
+                        'inventaryble_type' => 'App\Models\project\Mintic\inventory\invMinticEquipment',
+                        'tickets' => 1,
+                        'departures' => 0,
+                        'stock' => 1
+                    ]);
+                }
             }
         }
         if (isset($request->detail_install)) {
@@ -150,7 +172,13 @@ class MaintenanceController extends Controller
                     'type' => 'install'
                 ]);
             }
+            if($request->detail_install){
+                invMinticEquipment::where('serial',$request->serial_install[$key])->update([
+                    'status' => 3
+                ]);
+            }
         }
+        // return $id;
         miniticMaintenanceActivityDetail::where('maintenance_id',$item->id)->delete();
         if (isset($request->activity_status)) {
             foreach ($request->activity_status as $key => $value) {
@@ -161,7 +189,7 @@ class MaintenanceController extends Controller
                 ]);
             }
         }
-
+        // return $item;
         return redirect()->route('mintic_maintenance',$id)->with('success','Se ha actualizado el mantenimiento correctamente');
     }
 
@@ -233,11 +261,11 @@ class MaintenanceController extends Controller
                     $j++;
                 }
             }
-    
+
             if ($j = 1) {
                 $j = 8;
             }
-            
+
             $files['signature']['name'] = 'Signature';
             $files['signature']['description'] = 'Firma de funcionario';
             $files['signature']['path'] = public_path('/storage/signature/'.$item->receives->signature);
@@ -260,7 +288,7 @@ class MaintenanceController extends Controller
                 Storage::delete('public/upload/mintic/'.$file_exists->name);
             }
             $file = $request->file('file');
-            
+
             $name = time().str_random().'.'.$file->getClientOriginalExtension();
             if (!(isset($request->write) && $request->write == 'No' ) && ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg')) {
                 $text2 = $mintic->project->long.' / '.$mintic->project->lat;

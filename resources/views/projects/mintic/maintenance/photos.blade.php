@@ -16,7 +16,7 @@
         <input type="hidden" value="{{ $id }}" id="data_id">
         <input type="hidden" value="{{ $item->id }}" id="data_item">
         <input type="hidden" id="url"
-            value="project/mintic/maintenance/{{ $id }}/stop_clock/{{ $item->id }}/approve"
+            value="project/mintic/maintenance/{{ $id }}/{{ $item->id }}/updload"
             data-url="/project/mintic/maintenance/{{ $id }}/{{ $item->id }}/updload">
     </div>
     <section class="content">
@@ -516,6 +516,31 @@
                     'delete' => true,
                 ])
                 <hr>
+
+
+                <h3>Serial equipo/s retirados e instalados</h3>
+                @foreach ($item->equipments as $equipment_item)
+                    @if ($equipment_item->type == 'retired') {{-- Tiene equipos retirados --}}
+                        @php
+                            $retired = true;
+                        @endphp
+                        @include('projects.mintic.includes.upload', [
+                            'ltt' => '1',
+                            'id' => $item,
+                            'num' => $i++,
+                            'size_letter' => 20,
+                            'it' => $equipment_item->id,
+                            'label' => $equipment_item->serial." ".$equipment_item->detail->name,
+                            'description' => 'Foto del equipo retirado',
+                            'place' => 'XXX',
+                            'accept' => 'image/*',
+                            'date_edit' => false,
+                            'delete' => true,
+                        ])
+                        <hr>
+                    @endif
+                @endforeach
+
                 <div class="form-group">
                     <label for="">Observaciones</label>
                     <textarea name="" id="" cols="30" rows="3" class="form-control"></textarea>
@@ -888,6 +913,28 @@
                     'delete' => true,
                 ])
                 <hr>
+                <h3>Serial equipo/s instalados</h3>
+                @foreach ($item->equipments as $equipment_item)
+                    @if ($equipment_item->type == 'install') {{-- Tiene equipos instalados --}}
+                        @php
+                            $install = true;
+                        @endphp
+                        @include('projects.mintic.includes.upload', [
+                            'ltt' => '1',
+                            'id' => $item,
+                            'num' => $i++,
+                            'size_letter' => 20,
+                            'it' => $equipment_item->id,
+                            'label' => $equipment_item->serial." ".$equipment_item->detail->name,
+                            'description' => 'Foto del equipo instalado',
+                            'place' => 'XXX',
+                            'accept' => 'image/*',
+                            'date_edit' => false,
+                            'delete' => true,
+                        ])
+                        <hr>
+                    @endif
+                @endforeach
                 {{-- @include('projects.mintic.includes.upload', [
                     'ltt' => '1', //El momento, 1 para antes y 2 para despues
                     'id' => $item, //Item es lo que estas editando en ejemplo si es el mantenimiento está variable lleva todo el mantenimiento

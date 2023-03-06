@@ -56,8 +56,8 @@ class EquipmentController extends Controller
     {
         $request->validate([
             'serial' => ['required'],
-            'item' => ['required'],
-            'brand' => ['required']
+            // 'item' => ['required'],
+            // 'brand' => ['required']
         ]);
         if ($request->equip_id != 0) {
             $equip = EquimentDetail::find($request->equip_id);
@@ -70,7 +70,7 @@ class EquipmentController extends Controller
         }else {
             $request['equip_id'] = null;
         }
-        
+
         $request['status'] = 1;
         invMinticEquipment::create($request->all());
         return redirect()->route('mintic_inventory_equipment')->with('success','Se ha creado el equipo correctamente');
@@ -119,7 +119,7 @@ class EquipmentController extends Controller
             if ($request->proyect_id && $request->tehcnical_id) {
                 $imple = MinticConsumableImplement::where('project_id',$request->proyect_id)->where('user_id',$request->tehcnical_id)->first();
                 if ($imple) {
-                    
+
                 }else {
                     $imple = MinticConsumableImplement::create([
                         'project_id' => $request->proyect_id,
@@ -140,6 +140,9 @@ class EquipmentController extends Controller
                 ]);
             }else if (!$request->proyect_id && $request->tehcnical_id) {
                 $inv = InvUser::where('user_id',$request->tehcnical_id)->where('inventaryble_type','App\Models\project\Mintic\inventory\invMinticEquipment')->where('inventaryble_id',$id->id)->first();
+                if($id->status == 1 && $request->status == 1){
+                    $request['status'] = 2;
+                }
                 if ($inv) {
                     $inv->entrar(1);
                 }else {

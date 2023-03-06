@@ -105,6 +105,7 @@ function upload(btn) {
             $("#"+btn).prop("disabled", true);
         },
         success:function(data){
+            console.log('data',data);
             $("#result_"+btn).removeClass('text-red');
             $("#result_"+btn).addClass('text-green').text(data.success);
             $("#"+btn).prop("disabled", false);
@@ -133,7 +134,7 @@ function upload(btn) {
 
                 if(data.file_id) {
                     $('#file_id_'+btn).val(data.file_id);
-                }    
+                }
 
                 if(data.type.toLowerCase() == 'pdf'){
                     $('<i>',{

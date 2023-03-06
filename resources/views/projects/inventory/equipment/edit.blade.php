@@ -1,5 +1,5 @@
 @extends('lte.layouts')
- 
+
 @section('content')
     <section class="content-header">
         <h1>
@@ -13,7 +13,7 @@
         </ol>
     </section>
     <section class="content">
-         
+
         <div class="box">
             <div class="box-header">
                 <div class="box-title">Equipos MINTIC</div>
@@ -75,6 +75,7 @@
                                     <option {{$id->status == 3 ? 'selected' : ''}} value="3">Instalado</option>
                                     <option {{$id->status == 4 ? 'selected' : ''}} value="4">En inversa</option>
                                     <option {{$id->status == 5 ? 'selected' : ''}} value="5">En garantía</option>
+                                    <option {{$id->status == 6 ? 'selected' : ''}} value="6">Retirado</option>
                                 </select>
                             </div>
                         </div>
@@ -85,7 +86,7 @@
                             }
                         @endphp --}}
                         {{-- @if (!$relation) --}}
-                            <div class="col-md-4 col-xs-6">
+                            {{-- <div class="col-md-4 col-xs-6">
                                 <div class="form-group">
                                     <label for="">Proyecto</label>
                                     <select name="proyect_id" id="proyect_id" class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona el proyecto" style="width: 100%;" data-select2-id="2" tabindex="-1" aria-hidden="true">
@@ -95,14 +96,14 @@
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-md-4 col-xs-6">
                                 <div class="form-group">
                                     <label for="">Técnico</label>
                                     <select name="tehcnical_id" id="tehcnical_id" class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona el funcionario" style="width: 100%;" data-select2-id="2" tabindex="-1" aria-hidden="true">
                                         <option selected disabled></option>
                                         @foreach ($users as $user)
-                                            <option value="{{$user->id}}">{{$user->name}}</option>
+                                            <option {{$id->technical && $id->technical->user_id == $user->id ? 'selected' : ''}} value="{{$user->id}}">{{$user->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>

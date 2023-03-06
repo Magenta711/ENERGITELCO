@@ -153,68 +153,6 @@
                         </div>
                         <hr>
                     </div>
-                    <h3>Serial equipo/s retirados e instalados</h3>
-                    <div id="destino_retired">
-                        <div class="row" id="origen_retired">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="serial_retired">Serial equipo/s retirados</label>
-                                    <input type="text" name="serial_retired[]" id="serial_retired"
-                                        class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="detail_retired">Detalle</label>
-                                    <select name="detail_retired[]" id="detail_retired"
-                                        class="form-control select2 select2-hidden-accessible"
-                                        data-placeholder="Selecciona la referencia del equipo" style="width: 100%;"
-                                        data-select2-id="2" tabindex="-1" aria-hidden="true">
-                                        <option disabled selected></option>
-                                        @foreach ($equipments as $equipment)
-                                            <option {{ old('detail_retired') == $equipment->id ? 'seleted' : '' }}
-                                                value="{{ $equipment->id }}">{{ $equipment->sap }} -
-                                                {{ $equipment->name }} - {{ $equipment->model_id }} -
-                                                {{ $equipment->part_id }} - {{ $equipment->brand }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="btn btn-sm btn-link btn-add" id="btn_add_retired"><i class="fa fa-plus"></i> Agregar
-                        equipo</button>
-                    <hr>
-                    <div id="destino_install">
-                        <div class="row" id="origen_install">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="serial_install">Serial equipo/s instalados</label>
-                                    <input type="text" name="serial_install[]" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="detail_install">Detalle</label>
-                                    <select name="detail_install[]" id="detail_install"
-                                        class="form-control select2 select2-hidden-accessible"
-                                        data-placeholder="Selecciona la referencia del equipo" style="width: 100%;"
-                                        data-select2-id="2" tabindex="-1" aria-hidden="true">
-                                        <option disabled selected></option>
-                                        @foreach ($equipments as $equipment)
-                                            <option {{ old('detail_install') == $equipment->id ? 'seleted' : '' }}
-                                                value="{{ $equipment->id }}">{{ $equipment->sap }} -
-                                                {{ $equipment->name }} - {{ $equipment->model_id }} -
-                                                {{ $equipment->part_id }} - {{ $equipment->brand }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="btn btn-sm btn-link btn-add" id="btn_add_install"><i class="fa fa-plus"></i> Agregar
-                        equipo</button>
-                    <hr>
                     <h3>Descripción de la falla / Hallazgos</h3>
                     <div class="form-group">
                         <textarea value="{{ old('fault_description') }}" name="fault_description" id="fault_description" cols="30"
@@ -332,4 +270,99 @@
 @section('js')
     <script src="{{ asset("assets/$theme/bower_components/select2/dist/js/select2.full.min.js") }}"></script>
     <script src="{{ asset('js/project/mintic/maintence/create.js') }}"></script>
+@endsection
+
+@section('js')
+    <script>
+        let num_tools = {{old('item') ? count(old('item')) : 0}}
+        let tools_values = []
+
+        // function validateForm() {
+        //     return validateTools('.tools_name') && validateTools('.tools_amount')
+        // }
+
+        // function validateTools(className) {
+        //     tools = $(className)
+        //     if (tools.length) {
+        //         for (let i = 0; i < tools.length; i++) {
+        //             if(!$(tools[i]).val())
+        //                 return false
+        //         }
+        //     }else {
+        //         return false
+        //     }
+        //     return true
+        // }
+
+        $('#amount_tools').blur(function () {
+            num_tools = $(this).val()
+            updateTool();
+        });
+
+        function infoUser(element){
+            let user_id = element.value;
+            let user_name = $( '#name' + user_id ).val()
+            let user_role = $( '#cargo' + user_id ).val()
+
+            $('#nombre1').val(user_name);
+            $('#rol1').val(user_role);
+        }
+
+        $('#btn_plus_tools').click(function () {
+            num_tools++;
+            updateTool();
+        })
+
+        $('#btn_minus_tools').click(function () {
+            if (num_tools == 0) {
+                return
+            }
+            num_tools--;
+            updateTool();
+        })
+
+        function updateTool() {
+            let html_tools = '';
+            saveValuesToolsOld();
+            for (let i = 1; i <= num_tools; i++) {
+                value = tools_values[i - 1] ? tools_values[i - 1] : defaulValue();
+                html_tools += generateItemTool(i,value);
+            }
+            $('#list_tools').html(html_tools);
+        }
+
+        function generateItemTool(item,value){
+            return `
+            `;
+        }
+
+        function saveValuesToolsOld(){
+            let names = $('.tools_name');
+            let amounts = $('.tools_amount');
+            let branchs = $('.tools_branch');
+            let observations = $('.tools_observation');
+            tools_values = []
+            for (let i = 0; i < names.length; i++) {
+
+                tools_values.push({
+                    name : names[i].value,
+                    amount : amounts[i].value,
+                    branch : branchs[i].value,
+                    observation : observations[i].value,
+                })
+            }
+
+            console.log('tools_values',tools_values);
+        }
+
+        function defaulValue() {
+            return {
+                name : '',
+                amount : '',
+                branch : '',
+                observation : '',
+            }
+        }
+
+    </script>
 @endsection

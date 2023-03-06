@@ -1,5 +1,5 @@
 @extends('lte.layouts')
- 
+
 @section('content')
     <section class="content-header">
         <h1>
@@ -13,7 +13,7 @@
         </ol>
     </section>
     <section class="content">
-         
+
         <div class="box">
             <div class="box-header">
                 <div class="box-title">Equipos MINTIC</div>
@@ -46,7 +46,7 @@
                                     <td>{{$equipment->item}}</td>
                                     <td>{{$equipment->brand }}</td>
                                     <td>{{$equipment->created_at}}</td>
-                                    <td>{{$equipment->status == 1 ? 'En bodega' : ($equipment->status == 2 ? 'En comisión' : ( $equipment->status == 3 ? 'Instalado' : ($equipment->status == 4 ? 'En inversa' : 'En garantía'))) }}</td>
+                                    <td>{{$equipment->status == 1 ? 'En bodega' : ($equipment->status == 2 ? 'En comisión' : ( $equipment->status == 3 ? 'Instalado' : ($equipment->status == 4 ? 'En inversa' : ($equipment->status == 6 ? 'Retirado' :'En garantía') ))) }}</td>
                                     <td>{{$equipment->type }}</td>
                                     <td>
                                         @can('Ver equipo al inventario Mintic')

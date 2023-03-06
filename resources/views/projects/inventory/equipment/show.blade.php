@@ -1,5 +1,5 @@
 @extends('lte.layouts')
- 
+
 @section('content')
     <section class="content-header">
         <h1>
@@ -13,7 +13,7 @@
         </ol>
     </section>
     <section class="content">
-         
+
         <div class="box">
             <div class="box-header">
                 <div class="box-title">Equipos MINTIC</div>
@@ -50,7 +50,7 @@
                     <div class="col-md-4 col-xs-6">
                         <div class="form-group">
                             <label for="brand">Estado</label>
-                            <p>{{$id->status == 1 ? 'En bodega' : ($id->status == 2 ? 'En comisión' : ( $id->status == 3 ? 'Instalado' : ($id->status == 4 ? 'En inversa' : 'En garantía'))) }}</p>
+                            <p>{{$id->status == 1 ? 'En bodega' : ($id->status == 2 ? 'En comisión' : ( $id->status == 3 ? 'Instalado' : ($id->status == 4 ? 'En inversa' : ($id->status == 6 ? 'Retirado' :'En garantía')))) }}</p>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -81,6 +81,11 @@
                         <p>Teléfono: {{$id->technical->user->telefono}}</p>
                     @endif
                 </p>
+            </div>
+            <div class="box-footer">
+                @can('Editar equipo al inventario Mintic')
+                    <a href="{{route('mintic_inventory_equipment_edit',$id->id)}}" class="btn btn-sm btn-primary">Editar</a>
+                @endcan
             </div>
         </div>
     </section>

@@ -1,6 +1,6 @@
 <form id="form_{{ $num }}">
     <div class="form-group">
-        <label for="item_{{ $num }}">{{ $it }}. {{ $label }}</label><br>
+        <label for="item_{{ $num }}">{{ $it }}. {{ $label }} {{$num}}</label><br>
         <small>{!! $description ?? '' !!}</small>
         <div class="row">
             <div class="col-md-8">
