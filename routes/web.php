@@ -780,6 +780,7 @@ Route::get('project/mintic/maintenance/{id}/{item}/edit','projects\MaintenanceCo
 Route::put('project/mintic/maintenance/{id}/{item}','projects\MaintenanceController@update')->name('mintic_maintenance_update');
 Route::get('project/mintic/maintenance/{id}/{item}','projects\MaintenanceController@show')->name('mintic_maintenance_show');
 Route::get('project/mintic/maintenance/{id}/{item}/export','projects\MaintenanceController@export')->name('mintic_maintenance_export');
+Route::get('project/mintic/maintenance/{id}/{item}/devolution','projects\MaintenanceController@devolution')->name('mintic_maintenance_export_devolution');
 Route::get('project/mintic/maintenance/{id}/{item}/photos','projects\MaintenanceController@photos')->name('mintic_maintenance_photos');
 Route::post('project/mintic/maintenance/{id}/{item}/updload','projects\MaintenanceController@upload')->name('mintic_marke_maintenance');
 Route::delete('project/mintic/maintenance/{id}/{item}','projects\MaintenanceController@destroy')->name('mintic_maintenance_delete');

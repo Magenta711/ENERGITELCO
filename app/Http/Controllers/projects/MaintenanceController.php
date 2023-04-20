@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Notifications\notificationMain;
 use Image;
 use App\User;
+use App\Exports\minticMaintenanceDevolution;
 use App\Exports\minticMaintenanceExport;
 use App\Models\project\Mintic\miniticMaintenanceActivityDetail;
 use App\Models\project\Mintic\miniticMaintenanceEquipment;
@@ -273,8 +274,53 @@ class MaintenanceController extends Controller
             $files['signature']['coordinates'] = 'F'. (($accEquip + 20) + 1 + $j + 8);
             $files['signature']['place'] = 4;
         }
-
         return (new minticMaintenanceExport($item,$equipments,$files,$activities))->download('Formato Mantenimiento Correctivo.xlsx');
+    }
+
+    public function devolution($id,mintic_maintenance $item)
+    {
+        $system = system_setting::where('state',1)->orderBy('id','DESC')->take(1)->first();
+
+        $equipments = EquimentDetail::get();
+        $activities = MinticMaintenanceActivity::get();
+
+        $files = array();
+
+
+        $files['logo_claro']['name'] = 'Logo_Claro';
+        $files['logo_claro']['description'] = 'Logo de Claro';
+        $files['logo_claro']['path'] = public_path('/img/claro.png');
+        $files['logo_claro']['height'] = 80;
+        $files['logo_claro']['coordinates'] = 'c3';
+        $files['logo_claro']['place'] = 3;
+
+        if ($item->receives && $item->receives->signature) {
+            $j = 1;
+            $accEquip = 1;
+            foreach ($equipments as $equipment_item) {
+                if ( $equipment_item->is_informe ){
+                    $accEquip++;
+                }
+            }
+            foreach ($equipments as $equipment_item) {
+                if ($equipment_item->type == 'retired'){
+                    $j++;
+                }
+            }
+
+            if ($j = 1) {
+                $j = 8;
+            }
+
+            $files['signature']['name'] = 'Signature';
+            $files['signature']['description'] = 'Firma de funcionario';
+            $files['signature']['path'] = public_path('/storage/signature/'.$item->receives->signature);
+            $files['signature']['height'] = 60;
+            $files['signature']['coordinates'] = 'F'. (($accEquip + 20) + 1 + $j + 8);
+            $files['signature']['place'] = 4;
+        }
+
+        return (new minticMaintenanceDevolution($item,$equipments,$files,$activities))->download('Acta cambios equipos.xlsx');
     }
 
     public function upload(Request $request)

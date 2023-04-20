@@ -62,6 +62,8 @@
                                         @can('Exportar mantenimiento de proyecto MinTIC')
                                             <a href="{{ route('mintic_maintenance_export', [$id->id, $item->id]) }}"
                                                 class="btn btn-sm btn-warning">Exportar</a>
+                                            <a href="{{ route('mintic_maintenance_export_devolution', [$id->id, $item->id]) }}"
+                                                class="btn btn-sm btn-warning">Formato de equipos</a>
                                         @endcan
                                         @can('Eliminar mantenimiento de proyecto MinTIC')
                                             <button class="btn btn-sm btn-danger" data-toggle="modal"

@@ -206,7 +206,7 @@ function checkedActivity($idActivity, $activities)
                                 <div class="row" id="origen_retired">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="serial_retired_{{$equipment_item->id}}">Serial equipo/s</label>
+                                            <label for="serial_retired_{{$equipment_item->id}}">Serial equipo/s Retirados</label>
                                             <input type="text" name="serial_retired[]" id="serial_retired_{{$equipment_item->id}}"
                                                 class="form-control" value="{{ $equipment_item->serial }}">
                                         </div>
@@ -286,7 +286,7 @@ function checkedActivity($idActivity, $activities)
                                                 name="serial_install[]"
                                                 class="form-control"
                                                 id="serial_install_{{$equipment_item->id}}"
-                                                value=""
+                                                value="{{$equipment_item->serial}}"
                                                 readonly
                                             >
                                         </div>
