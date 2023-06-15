@@ -181,7 +181,7 @@ class ccjlRentController extends Controller
         $request['date_end'] = Carbon::create($request->date_start)->addMonths($request->total_months);
 
         $id->update($request->all());
-        
+
         for ($i=0; $i < count($request->product); $i++) {
             ccjl_rents_detail::where('id',$request->detail_id[$i])->update([
                 'months' => $request->months[$i],
@@ -294,7 +294,7 @@ class ccjlRentController extends Controller
             ]);
 
             // traid for rest to month to month
-            
+
             $pdf = PDF::loadView('ccjl.rents.invoice_pdf',['id'=>$id]);
             $pdf->save(storage_path('app/public/ccjl/invoice/') .$id->token.'.pdf');
             Mail::send('ccjl.email.invoice',['id' => $id] , function ($mail) use ($pdf,$id) {

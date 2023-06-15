@@ -342,9 +342,9 @@ class MaintenanceController extends Controller
 
                 $image = Image::make($request->file);
                 if ($request->size != 'org') {
-                    $image->resize(null, 500, function ($constraint) {
-                        $constraint->aspectRatio();
-                    });
+                        $image->resize(null, 500, function ($constraint) {
+                            $constraint->aspectRatio();
+                        });
                     $height = 25 + ($request->size_letter * 3);
                     $image->text('ID '.$mintic->code, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));

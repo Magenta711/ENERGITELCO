@@ -177,7 +177,7 @@ return [
         //DonPDF
         Barryvdh\DomPDF\ServiceProvider::class,
         //Spatie Roles y permisos
-        Spatie\Permission\PermissionServiceProvider::class,
+            Spatie\Permission\PermissionServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         //Collective formulario
         // Collective\Html\HtmlServiceProvider::class,

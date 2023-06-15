@@ -184,9 +184,9 @@
                                                                     @csrf
                                                                     @method('PATCH')
                                                                     <ul class="list-group">
-                                                                        <li class="list-group-item"><label for="charges{{$item->id}}"><input type="checkbox" value="1" name="charges" id="charges_{{$item->id}}"> Pendiente por pagar</label> <span class="label label-primary">${{number_format($item->discharges,2,',','.')}}</span></li>
-                                                                        <li class="list-group-item"><label for="pending{{$item->id}}"><input type="checkbox" value="1" name="pending" id="pending_{{$item->id}}"> Caja menor</label> <span class="label label-primary">${{number_format($item->charges,2,',','.')}}</span></li>
-                                                                        <li class="list-group-item"><label for="discharges{{$item->id}}"><input type="checkbox" value="1" name="discharges" id="discharges_{{$item->id}}"> Pendiente por pagos meores a $50.000</label> <span class="label label-primary">${{number_format($item->pending,2,',','.')}}</span></li>
+                                                                            <li class="list-group-item"><label for="charges{{$item->id}}"><input type="checkbox" value="1" name="discharges" id="charges_{{$item->id}}"> Pendiente por pagar</label> <span class="label label-primary">${{number_format($item->discharges,2,',','.')}}</span></li>
+                                                                            <li class="list-group-item"><label for="pending{{$item->id}}"><input type="checkbox" value="1" name="charges" id="pending_{{$item->id}}"> Caja menor</label> <span class="label label-primary">${{number_format($item->charges,2,',','.')}}</span></li>
+                                                                            <li class="list-group-item"><label for="discharges{{$item->id}}"><input type="checkbox" value="1" name="pending" id="discharges_{{$item->id}}"> Pendiente por pagos meores a $50.000</label> <span class="label label-primary">${{number_format($item->pending,2,',','.')}}</span></li>
                                                                     </ul>
                                                                 </div>
                                                                 <div class="modal-footer">

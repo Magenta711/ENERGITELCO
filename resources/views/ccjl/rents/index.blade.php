@@ -14,7 +14,7 @@
 </section>
 {{-- Content main --}}
 <section class="content">
-     
+
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
@@ -50,7 +50,7 @@
                                         @php
                                             $status = $item->statusCheck();
                                         @endphp
-                                        <td><span class="label {{ $status == 'Pendiente' ? 'label-danger' : ($status == 'Al día') ? 'label-success' : 'label-primary' }}">{{$status}}</span></td>
+                                        <td><span class="label {{ ($status == 'Pendiente') ? 'label-danger' : (($status == 'Al día') ? 'label-success' : 'label-primary') }}">{{$status}}</span></td>
                                         <td>
                                             @if (
                                                 auth()->user()->haspermissionTo('CCJL Ver rentas') ||
