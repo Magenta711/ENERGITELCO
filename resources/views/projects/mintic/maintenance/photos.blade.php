@@ -163,7 +163,7 @@
                         'label' => 'Solución de respaldo (4 horas) Si aplica',
                         'description' =>
                             'Registro fotográfico de la solución de respaldo, Aplica siempre y cuendo no se instale una solución alternativa <b>Gabinete abierto</b>',
-                        'place' => 'G46',
+                        'place' => 'L46',
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
@@ -246,11 +246,11 @@
                     'it' => '1',
                     'label' => 'Navegación AP INDOOR',
                     'description' => 'Navegación equipos de computo conectados al AP Indoor (<b>MINTIC</b>)
-                                                                                                                                <ul>
-                                                                                                                                    <li>ping www.google.com /n 100</li>
-                                                                                                                                    <li><a target="_blank" href="https://www.whatismyip.com/my-ip-information/?iref=homegb">https://www.whatismyip.com/my-ip-information/?iref=homegb</a></li>
-                                                                                                                                    <li><a target="_blank" href="http://horalegal.inm.gov.co/">http://horalegal.inm.gov.co</a></li>
-                                                                                                                                </ul>',
+                                                                                                                                                                                <ul>
+                                                                                                                                                                                    <li>ping www.google.com /n 100</li>
+                                                                                                                                                                                    <li><a target="_blank" href="https://www.whatismyip.com/my-ip-information/?iref=homegb">https://www.whatismyip.com/my-ip-information/?iref=homegb</a></li>
+                                                                                                                                                                                    <li><a target="_blank" href="http://horalegal.inm.gov.co/">http://horalegal.inm.gov.co</a></li>
+                                                                                                                                                                                </ul>',
                     'place' => $item->type_format == 'Mantenimiento correctivo' ? 'B80' : 'G97',
                     'accept' => 'image/*',
                     'date_edit' => true,
@@ -265,11 +265,11 @@
                     'it' => '1',
                     'label' => 'Navegación AP OUTDOOR',
                     'description' => 'Navegación equipos de computo conectados al AP Outdoor (<b>MINTIC_CONECTA</b>)
-                                                                                                                                <ul>
-                                                                                                                                    <li>ping <a target="_blank" href="https://www.faceboock.com">www.faceboock.com</a> /n 100</li>
-                                                                                                                                    <li><a target="_blank" href="https://www.whatismyip.com/my-ip-information/?iref=homegb">https://www.whatismyip.com/my-ip-information/?iref=homegb</a></li>
-                                                                                                                                    <li><a target="_blank" href="http://horalegal.inm.gov.co/">http://horalegal.inm.gov.co</a></li>
-                                                                                                                                </ul>',
+                                                                                                                                                                                <ul>
+                                                                                                                                                                                    <li>ping <a target="_blank" href="https://www.faceboock.com">www.faceboock.com</a> /n 100</li>
+                                                                                                                                                                                    <li><a target="_blank" href="https://www.whatismyip.com/my-ip-information/?iref=homegb">https://www.whatismyip.com/my-ip-information/?iref=homegb</a></li>
+                                                                                                                                                                                    <li><a target="_blank" href="http://horalegal.inm.gov.co/">http://horalegal.inm.gov.co</a></li>
+                                                                                                                                                                                </ul>',
                     'place' => $item->type_format == 'Mantenimiento correctivo' ? 'G80' : 'L97',
                     'accept' => 'image/*',
                     'date_edit' => true,
@@ -284,10 +284,10 @@
                     'it' => '1',
                     'label' => 'Prueba de velocidad',
                     'description' => 'Navegación equipos de computo velocidad.
-                                                                                                                                <ul>
-                                                                                                                                    <li>Realizar test de velocidad en la página: <a target="_blank" href="https://www.nperf.com/es/">https://www.nperf.com/es/</a>/</li>
-                                                                                                                                    <li>Realizar test de velocidad en la página: <a target="_blank" href="https://testmy.net/">https://testmy.net/</a>/</li>
-                                                                                                                                </ul>',
+                                                                                                                                                                                <ul>
+                                                                                                                                                                                    <li>Realizar test de velocidad en la página: <a target="_blank" href="https://www.nperf.com/es/">https://www.nperf.com/es/</a>/</li>
+                                                                                                                                                                                    <li>Realizar test de velocidad en la página: <a target="_blank" href="https://testmy.net/">https://testmy.net/</a>/</li>
+                                                                                                                                                                                </ul>',
                     'place' => $item->type_format == 'Mantenimiento correctivo' ? 'L80' : 'B114',
                     'accept' => 'image/*',
                     'date_edit' => true,
@@ -315,10 +315,10 @@
                     'it' => '1',
                     'label' => 'Bloqueo de páginas',
                     'description' => 'Bloqueo de paginas pornografía: tomar  2 URL de la lista, ejemplo
-                                                                                                                                <ul>
-                                                                                                                                    <li><a target="_blank" href="http://furl.telmexla.net.co/dignidad.php">http://furl.telmexla.net.co/dignidad.php</a></li>
-                                                                                                                                    <li><a target="_blank" href="http://furl.telmexla.net.co/dignidad.php">http://furl.telmexla.net.co/dignidad.php</a></li>
-                                                                                                                                </ul>',
+                                                                                                                                                                                <ul>
+                                                                                                                                                                                    <li><a target="_blank" href="http://furl.telmexla.net.co/dignidad.php">http://furl.telmexla.net.co/dignidad.php</a></li>
+                                                                                                                                                                                    <li><a target="_blank" href="http://furl.telmexla.net.co/dignidad.php">http://furl.telmexla.net.co/dignidad.php</a></li>
+                                                                                                                                                                                </ul>',
                     'place' => $item->type_format == 'Mantenimiento correctivo' ? 'G97' : 'L114',
                     'accept' => 'image/*',
                     'date_edit' => true,
@@ -333,10 +333,10 @@
                     'it' => '1',
                     'label' => 'Bloquedo de páginas',
                     'description' => 'Bloqueo de paginas pornografía: tomar  2 URL de la lista, ejemplo
-                                                                                                                                <ul>
-                                                                                                                                    <li><a target="_blank" href="http://furl.telmexla.net.co/dignidad.php">http://furl.telmexla.net.co/dignidad.php</a></li>
-                                                                                                                                    <li><a target="_blank" href="http://furl.telmexla.net.co/dignidad.php">http://furl.telmexla.net.co/dignidad.php</a></li>
-                                                                                                                                </ul>',
+                                                                                                                                                                                <ul>
+                                                                                                                                                                                    <li><a target="_blank" href="http://furl.telmexla.net.co/dignidad.php">http://furl.telmexla.net.co/dignidad.php</a></li>
+                                                                                                                                                                                    <li><a target="_blank" href="http://furl.telmexla.net.co/dignidad.php">http://furl.telmexla.net.co/dignidad.php</a></li>
+                                                                                                                                                                                </ul>',
                     'place' => $item->type_format == 'Mantenimiento correctivo' ? 'L97' : 'B131',
                     'accept' => 'image/*',
                     'date_edit' => true,
@@ -482,7 +482,7 @@
                     'it' => '7',
                     'label' => 'ODU UM',
                     'description' => 'Registro fotográfico ODU última milla',
-                    'place' => 'xxx',
+                    'place' => 'XXX',
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
@@ -496,7 +496,7 @@
                     'it' => '8',
                     'label' => 'ANTENA UM',
                     'description' => 'Registro fotográfico ANTENA última milla',
-                    'place' => 'xxx',
+                    'place' => 'XXX',
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
@@ -510,7 +510,7 @@
                     'it' => '9',
                     'label' => 'IDU UM',
                     'description' => 'Registro fotográfico IDU última milla',
-                    'place' => 'xxx',
+                    'place' => 'XXX',
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
@@ -635,7 +635,7 @@
                         'label' => 'Solución de respaldo (4 horas) Si aplica',
                         'description' =>
                             'Registro fotográfico de la solución de respaldo, Aplica siempre y cuendo no se instale una solución alternativa <b>Gabinete abierto</b>',
-                        'place' => 'L46',
+                        'place' => 'G46',
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
@@ -732,11 +732,11 @@
                         'it' => '5',
                         'label' => 'Navegación AP INDOOR',
                         'description' => 'Navegación equipos de computo conectados al AP Indoor (<b>MINTIC</b>)
-                                                                                                                                                                <ul>
-                                                                                                                                                                    <li>ping www.google.com /n 100</li>
-                                                                                                                                                                    <li><a target="_blank" href="https://www.whatismyip.com/my-ip-information/?iref=homegb">https://www.whatismyip.com/my-ip-information/?iref=homegb</a></li>
-                                                                                                                                                                    <li><a target="_blank" href="http://horalegal.inm.gov.co/">http://horalegal.inm.gov.co</a></li>
-                                                                                                                                                                </ul>',
+                                                                                                                                                                                                                            <ul>
+                                                                                                                                                                                                                                <li>ping www.google.com /n 100</li>
+                                                                                                                                                                                                                                <li><a target="_blank" href="https://www.whatismyip.com/my-ip-information/?iref=homegb">https://www.whatismyip.com/my-ip-information/?iref=homegb</a></li>
+                                                                                                                                                                                                                                <li><a target="_blank" href="http://horalegal.inm.gov.co/">http://horalegal.inm.gov.co</a></li>
+                                                                                                                                                                                                                            </ul>',
                         'place' => 'B80',
                         'accept' => 'image/*',
                         'date_edit' => true,
@@ -751,11 +751,11 @@
                         'it' => '5',
                         'label' => 'Navegación AP OUTDOOR',
                         'description' => 'Navegación equipos de computo conectados al AP Outdoor (<b>MINTIC_CONECTA</b>)
-                                                                                                                                                                <ul>
-                                                                                                                                                                    <li>ping <a target="_blank" href="https://www.faceboock.com">www.faceboock.com</a> /n 100</li>
-                                                                                                                                                                    <li><a target="_blank" href="https://www.whatismyip.com/my-ip-information/?iref=homegb">https://www.whatismyip.com/my-ip-information/?iref=homegb</a></li>
-                                                                                                                                                                    <li><a target="_blank" href="http://horalegal.inm.gov.co/">http://horalegal.inm.gov.co</a></li>
-                                                                                                                                                                </ul>',
+                                                                                                                                                                                                                            <ul>
+                                                                                                                                                                                                                                <li>ping <a target="_blank" href="https://www.faceboock.com">www.faceboock.com</a> /n 100</li>
+                                                                                                                                                                                                                                <li><a target="_blank" href="https://www.whatismyip.com/my-ip-information/?iref=homegb">https://www.whatismyip.com/my-ip-information/?iref=homegb</a></li>
+                                                                                                                                                                                                                                <li><a target="_blank" href="http://horalegal.inm.gov.co/">http://horalegal.inm.gov.co</a></li>
+                                                                                                                                                                                                                            </ul>',
                         'place' => 'G80',
                         'accept' => 'image/*',
                         'date_edit' => true,
@@ -770,10 +770,10 @@
                         'it' => '5',
                         'label' => 'Pruba de velocidad',
                         'description' => 'Navegación equipos de computo velocidad.
-                                                                                                                                                                <ul>
-                                                                                                                                                                    <li>Realizar test de velocidad en la página: <a target="_blank" href="https://www.nperf.com/es/">https://www.nperf.com/es/</a>/</li>
-                                                                                                                                                                    <li>Realizar test de velocidad en la página: <a target="_blank" href="https://testmy.net/">https://testmy.net/</a>/</li>
-                                                                                                                                                                </ul>',
+                                                                                                                                                                                                                            <ul>
+                                                                                                                                                                                                                                <li>Realizar test de velocidad en la página: <a target="_blank" href="https://www.nperf.com/es/">https://www.nperf.com/es/</a>/</li>
+                                                                                                                                                                                                                                <li>Realizar test de velocidad en la página: <a target="_blank" href="https://testmy.net/">https://testmy.net/</a>/</li>
+                                                                                                                                                                                                                            </ul>',
                         'place' => 'L80',
                         'accept' => 'image/*',
                         'date_edit' => true,
@@ -801,10 +801,10 @@
                         'it' => '6',
                         'label' => 'Bloqueo de páginas',
                         'description' => 'Bloqueo de paginas pornografía: tomar  2 URL de la lista, ejemplo
-                                                                                                                                                                <ul>
-                                                                                                                                                                    <li><a target="_blank" href="http://furl.telmexla.net.co/dignidad.php">http://furl.telmexla.net.co/dignidad.php</a></li>
-                                                                                                                                                                    <li><a target="_blank" href="http://furl.telmexla.net.co/dignidad.php">http://furl.telmexla.net.co/dignidad.php</a></li>
-                                                                                                                                                                </ul>',
+                                                                                                                                                                                                                            <ul>
+                                                                                                                                                                                                                                <li><a target="_blank" href="http://furl.telmexla.net.co/dignidad.php">http://furl.telmexla.net.co/dignidad.php</a></li>
+                                                                                                                                                                                                                                <li><a target="_blank" href="http://furl.telmexla.net.co/dignidad.php">http://furl.telmexla.net.co/dignidad.php</a></li>
+                                                                                                                                                                                                                            </ul>',
                         'place' => 'G97',
                         'accept' => 'image/*',
                         'date_edit' => true,
@@ -819,10 +819,10 @@
                         'it' => '6',
                         'label' => 'Bloquedo de páginas',
                         'description' => 'Bloqueo de paginas pornografía: tomar  2 URL de la lista, ejemplo
-                                                                                                                                                                <ul>
-                                                                                                                                                                    <li><a target="_blank" href="http://furl.telmexla.net.co/dignidad.php">http://furl.telmexla.net.co/dignidad.php</a></li>
-                                                                                                                                                                    <li><a target="_blank" href="http://furl.telmexla.net.co/dignidad.php">http://furl.telmexla.net.co/dignidad.php</a></li>
-                                                                                                                                                                </ul>',
+                                                                                                                                                                                                                            <ul>
+                                                                                                                                                                                                                                <li><a target="_blank" href="http://furl.telmexla.net.co/dignidad.php">http://furl.telmexla.net.co/dignidad.php</a></li>
+                                                                                                                                                                                                                                <li><a target="_blank" href="http://furl.telmexla.net.co/dignidad.php">http://furl.telmexla.net.co/dignidad.php</a></li>
+                                                                                                                                                                                                                            </ul>',
                         'place' => 'L97',
                         'accept' => 'image/*',
                         'date_edit' => true,
@@ -854,7 +854,7 @@
                     'it' => '7',
                     'label' => 'ODU UM',
                     'description' => 'Registro fotográfico ODU última milla',
-                    'place' => 'xxx',
+                    'place' => 'XXX',
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
@@ -868,7 +868,7 @@
                     'it' => '8',
                     'label' => 'ANTENA UM',
                     'description' => 'Registro fotográfico de la antena última milla',
-                    'place' => 'xxx',
+                    'place' => 'XXX',
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
@@ -882,7 +882,7 @@
                     'it' => '9',
                     'label' => 'IDU UM',
                     'description' => 'Registro fotográfico IDU última milla',
-                    'place' => 'xxx',
+                    'place' => 'XXX',
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
@@ -943,18 +943,18 @@
                     'it' => '3',
                     'label' => 'Prueba de velocidad en la AP indoor',
                     'description' => 'La prueba corre en la Indoor y debe entregar valor igual o superior al contrato (hay valores minimos), comprobar que las 3APs esten operativos
-                                                                                                                                    <b>system ssh 172.28.10.100 user=admin</b><br>
-                                                                                                                                    <b>admin</b><br><br>
-                                                                                                                                    AP interior se identifica (20667-ZGYO167-AP-INT)
-                                                                                                                                    Servidores:<br>
-                                                                                                                                    <b>speedtest etsi http://172.25.133.10 40 10 1</b><br>
-                                                                                                                                    <b>speedtest etsi http://172.28.103.2 40 10 1</b><br>
-                                                                                                                                    <b>speedtest etsi http://172.28.103.6 40 10 1</b><br>
-
-                                                                                                                                    Para los servicios que están instalados por terceros o satelitales se debe correr los siguientes comandos:<br>
-                                                                                                                                    <b>speedtest etsi http://181.49.90.144 40 10 1</b><br>
-                                                                                                                                    <b>speedtest etsi http://181.49.90.145 40 10 1</b><br>
-                                                                                                                                    <b>speedtest etsi http://181.49.90.146 40 10 1</b>',
+                                                                                                                                                                                    <b>system ssh 172.28.10.100 user=admin</b><br>
+                                                                                                                                                                                    <b>admin</b><br><br>
+                                                                                                                                                                                    AP interior se identifica (20667-ZGYO167-AP-INT)
+                                                                                                                                                                                    Servidores:<br>
+                                                                                                                                                                                    <b>speedtest etsi http://172.25.133.10 40 10 1</b><br>
+                                                                                                                                                                                    <b>speedtest etsi http://172.28.103.2 40 10 1</b><br>
+                                                                                                                                                                                    <b>speedtest etsi http://172.28.103.6 40 10 1</b><br>
+                
+                                                                                                                                                                                    Para los servicios que están instalados por terceros o satelitales se debe correr los siguientes comandos:<br>
+                                                                                                                                                                                    <b>speedtest etsi http://181.49.90.144 40 10 1</b><br>
+                                                                                                                                                                                    <b>speedtest etsi http://181.49.90.145 40 10 1</b><br>
+                                                                                                                                                                                    <b>speedtest etsi http://181.49.90.146 40 10 1</b>',
                     'place' => 'XXX',
                     'write' => 'No',
                     'accept' => 'image/*',

@@ -15,7 +15,7 @@ class minticMaintenanceExportSecundPrevent implements FromView, WithTitle, WithD
 {
     protected $id;
     protected $files;
-    
+
     public function __construct(object $id,$files)
     {
         $this->id = $id;

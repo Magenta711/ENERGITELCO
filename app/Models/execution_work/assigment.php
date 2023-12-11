@@ -28,8 +28,8 @@ class assigment extends Model
     }
     public function extra()
     {
-        return $this->hasMany(tools_add::class, 'id_asignado', 'id');
+        return $this->hasMany(tools_add::class, 'id_assignado', 'id');
     }
 
-    
+
 }

@@ -15,7 +15,7 @@ class CreateKitsStatusTable extends Migration
     {
         Schema::create('kits_status', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('estado_id');
+            $table->string('estado',50);
             $table->timestamps();
         });
     }

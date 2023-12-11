@@ -18,7 +18,7 @@ class minticMaintenanceExportFour implements FromView, WithTitle, ShouldAutoSize
         $this->id = $id;
         $this->files = $files;
     }
-    
+
     public function styles(Worksheet $sheet)
     {
         return [

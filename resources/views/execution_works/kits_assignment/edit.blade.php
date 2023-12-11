@@ -80,7 +80,7 @@
                         {{-- {{dd($id->kit_asignado->tools)}} --}}
                         <h3>Implementos Obligatorios:</h3>
                         <hr>
-                        @foreach ($id->kit_asignado->tools as $tool) 
+                        @foreach ($id->kit_asignado->tools as $tool)
                         <div class="form-group row">
                             <div class="col-md-2 col-sm-4 mb-3">
                                 <Strong>Implemento</Strong><br>
@@ -103,37 +103,59 @@
                     <hr>
                     <h3>Implementos Extras:</h3>
                     <hr>
-                    @php
-                        $i=0;
-                    @endphp
-                    @foreach ($id->extra as $tool_add)
-                        @php
-                            $i++;
-                        @endphp
-                        <div id="list_tools">
-                            <div class="form-group row">
-                                <div class="col-md-2 col-sm-4 mb-3">
-                                    <Strong>Implemento {{$i}}</Strong><br>
-                                    <input type="text" class="form-control tools_name" id="item_{{$i}}" name="item[{{$i}}]" value="{{ $tool_add->nombre }}" required>
+                    <div id="list_tools">
+                        @if (old('item'))
+                            @for ($i = 0; $i < count(old('item')); $i++)
+                                <input type="hidden" name="item_id[{{$i}}]" value="{{old('item_id')[$i]}}" class="tools_id">
+                                <div class="form-group row">
+                                    <div class="col-md-2 col-sm-4 mb-3">
+                                        <Strong>Implemento {{$i + 1}}</Strong><br>
+                                        <input type="text" class="form-control tools_name" id="item_{{$i}}" name="item[{{$i}}]" value="{{ old('item')[$i] }}" required>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4">
+                                        <label for="amount_{{$i}}">Cantidad</label>
+                                        <input type="number" class="form-control tools_amount" id="amount_{{$i}}" name="amount[{{$i}}]" value="{{ old('amount')[$i] }}" required>
+                                    </div>
+                                    <div class="col-md-3 col-sm-4">
+                                        <label for="marca_{{$i}}">Marca</label>
+                                        <input type="text" class="form-control tools_branch" id="marca_{{$i}}" name="marca[{{$i}}]" value="{{ old('marca')[$i] }}">
+                                    </div>
+                                    <div class="col-md-5 col-sm-12 mb-1">
+                                        <label for="observacion_{{$i}}">Observaciones</label>
+                                        <textarea name="observacion[{{$i}}]" id="observacion_{{$i}}" cols="30" rows="2" class="form-control tools_observation">{{old('observacion')[$i]}}</textarea>
+                                    </div>
                                 </div>
-                                <div class="col-md-2 col-sm-4">
-                                    <label for="amount_{{$i}}">Cantidad</label>
-                                    <input type="number" class="form-control tools_amount" id="amount_{{$i}}" name="amount[{{$i}}]" value="{{ $tool_add->cantidad}}" required>
+                            @endfor
+                        @else
+                            @php
+                                $i=0;
+                            @endphp
+                            @foreach ($id->extra as $tool_add)
+                                <input type="hidden" name="item_id[{{$i}}]" value="{{$tool_add->id}}" class="tools_id">
+                                <div class="form-group row">
+                                    <div class="col-md-2 col-sm-4 mb-3">
+                                        <Strong>Implemento {{$i + 1}}</Strong><br>
+                                        <input type="text" class="form-control tools_name" id="item_{{$i}}" name="item[{{$i}}]" value="{{ $tool_add->nombre }}" required>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4">
+                                        <label for="amount_{{$i}}">Cantidad</label>
+                                        <input type="number" class="form-control tools_amount" id="amount_{{$i}}" name="amount[{{$i}}]" value="{{ $tool_add->cantidad}}" required>
+                                    </div>
+                                    <div class="col-md-3 col-sm-4">
+                                        <label for="marca_{{$i}}">Marca</label>
+                                        <input type="text" class="form-control tools_branch" id="marca_{{$i}}" name="marca[{{$i}}]" value="{{ $tool_add->marca}}">
+                                    </div>
+                                    <div class="col-md-5 col-sm-12 mb-1">
+                                        <label for="observacion_{{$i}}">Observaciones</label>
+                                        <textarea name="observacion[{{$i}}]" id="observacion_{{$i}}" cols="30" rows="2" class="form-control tools_observation">{{$tool_add->Observaciones}}</textarea>
+                                    </div>
                                 </div>
-                                <div class="col-md-3 col-sm-4">
-                                    <label for="marca_{{$i}}">Marca</label>
-                                    <input type="text" class="form-control tools_branch" id="marca_{{$i}}" name="marca[{{$i}}]" value="{{ $tool_add->marca}}">
-                                </div>
-                                <div class="col-md-5 col-sm-12 mb-1">
-                                    <label for="observacion_{{$i}}">Observaciones</label>
-                                    <textarea name="observacion[${item}]" id="observacion_{{$i}}" cols="30" rows="2" class="form-control tools_observation">{{$tool_add->Observaciones}}</textarea>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
+                            @endforeach
+                        @endif
+                    </div>
 
                     <div class="btn-group d-grid gap-2 d-md-flex justify-content-md-end">
-                    
+
                     </div>
                     <div class="btn-group d-grid gap-2 d-md-flex justify-content-md-end">
                         <button type="button" class="btn btn-sm btn-info " id="btn_plus_tools"><i class="fa fa-plus"></i> Agregar</button>
@@ -177,7 +199,7 @@
 
 @section('js')
     <script>
-        let num_tools = {{count($id->extra)}}
+        let num_tools = {{ old('item') ? count(old('item')) : count($id->extra) }}
         let tools_values = []
 
         $('#send').click(function () {
@@ -190,7 +212,7 @@
                 })
                 return
             }
-            
+
             $('.loader').show();
             $('#form').submit();
         })
@@ -211,12 +233,12 @@
             }
             return true
         }
-        
+
         $('#amount_tools').blur(function () {
             num_tools = $(this).val()
             updateTool();
         });
-        
+
         function infoUser(element){
             let user_id = element.value;
             let user_name = $( '#name' + user_id ).val()
@@ -225,7 +247,7 @@
             $('#nombre1').val(user_name);
             $('#rol1').val(user_role);
         }
-        
+
         $('#btn_plus_tools').click(function () {
             num_tools++;
             console.log('num_tools',num_tools);
@@ -252,6 +274,7 @@
 
         function generateItemTool(item,value){
             return `
+                <input type="hidden" name="item_id[${item}]" value="${value.id || 0}" id="item_id_${ item }" class="tools_id">
                 <div class="form-group row">
                     <div class="col-md-2 col-sm-4 mb-3">
                         <Strong>Implemento ${item}</Strong><br>
@@ -275,14 +298,16 @@
         }
 
         function saveValuesToolsOld(){
+            let id = $('.tools_id');
             let names = $('.tools_name');
             let amounts = $('.tools_amount');
             let branchs = $('.tools_branch');
             let observations = $('.tools_observation');
             tools_values = []
             for (let i = 0; i < names.length; i++) {
-                
+
                 tools_values.push({
+                    id : ids[i].value,
                     name : names[i].value,
                     amount : amounts[i].value,
                     branch : branchs[i].value,
@@ -295,6 +320,7 @@
 
         function defaulValue() {
             return {
+                id: 0,
                 name : '',
                 amount : '',
                 branch : '',

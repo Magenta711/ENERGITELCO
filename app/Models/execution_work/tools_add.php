@@ -10,7 +10,7 @@ class tools_add extends Model
 
     protected $fillable = [
         'kit_id',
-        'id_asignado',
+        'id_assignado',
         'nombre',
         'cantidad',
         'marca',

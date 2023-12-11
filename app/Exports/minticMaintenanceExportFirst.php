@@ -17,7 +17,7 @@ class minticMaintenanceExportFirst implements FromView, WithTitle, WithDrawings,
     protected $equipments;
     protected $activities;
     protected $files;
-    
+
     public function __construct(object $id,object $equipments,$files,$activities)
     {
         $this->id = $id;

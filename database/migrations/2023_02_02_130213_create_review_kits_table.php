@@ -16,7 +16,8 @@ class CreateReviewKitsTable extends Migration
         Schema::create('review_kits', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_review');//Id de revisión
-            $table->text('comentario');
+            $table->unsignedBigInteger('id_kit');
+            $table->text('comentario')->nullable();
             $table->timestamps();
         });
     }

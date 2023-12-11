@@ -104,7 +104,7 @@ class MinticStopClockController extends Controller
     {
         if ($request->hasFile('file')) {
             $stop_clock = minticStopClock::find($request->id);
-            $mintic = Mintic_School::find($request->id);
+            $mintic = Mintic_School::find($stop_clock->project_id);
             $visit = MinticVisit::where('project_id', $request->id)->where('type', 'maintenance')->first();
             $file_exists = $stop_clock->files->where('description', $request->name_d)->first();
 

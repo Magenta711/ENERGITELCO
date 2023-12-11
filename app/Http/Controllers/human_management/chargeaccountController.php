@@ -85,7 +85,7 @@ class chargeaccountController extends Controller
                 'type_bank_account' => ['required'],
             ]);
         }
-        
+
         if ($request->signature_id) {
             $signature = SignatureChargeAccount::where('name',$request->signature_id)->where('status',0)->first();
             if ($signature) {
@@ -108,7 +108,7 @@ class chargeaccountController extends Controller
                     ]);
                 }
                 if($request->hasFile('files')){
-                    for ($i=0; $i < count($request->file('files')); $i++) { 
+                    for ($i=0; $i < count($request->file('files')); $i++) {
                         $file = $request->file('files')[$i];
                         $name = time().str_random().'.'.$file->getClientOriginalExtension();
                         if ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg') {
@@ -126,7 +126,7 @@ class chargeaccountController extends Controller
                         ]);
                     }
                 }
-                return redirect()->route('chargeaccount')->with('success','Se ha enviado la cuenta de cobro correctamente');   
+                return redirect()->route('chargeaccount')->with('success','Se ha enviado la cuenta de cobro correctamente');
             }
         }
         return redirect()->back()->withErrors(['No se valido firma'])->withInput();
@@ -177,7 +177,7 @@ class chargeaccountController extends Controller
         $id->delete();
         return redirect()->back()->with(['success'=>'Se ha eliminado la cuenta de cobro correctamente']);
     }
-    
+
     public function generate()
     {
         chargeAccount::create([

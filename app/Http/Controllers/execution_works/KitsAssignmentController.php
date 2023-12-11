@@ -78,7 +78,7 @@ class KitsAssignmentController extends Controller
             'cedula_revisor' => ['required'],
             'unique_kit' => ['required']
         ]);
-        $assigment=assigment::create([
+        $assigment = assigment::create([
             'id_kit'=>$request->unique_kit,
             'id_asignado' => $request->cedula_revisor,
             'id_responsable' => auth()->id()
@@ -86,7 +86,7 @@ class KitsAssignmentController extends Controller
         if (isset($request->item) && $request->item) {
             for ($j=1; $j <= count($request->item); $j++) {
                 $tools_add = tools_add::create([
-                    'id_asignado'=>$assigment->id,
+                    'id_assignado'=>$assigment->id,
                     'nombre' => $request->item[$j],
                     'cantidad' => $request->amount[$j],
                     'marca' => $request->marca[$j],
@@ -107,11 +107,9 @@ class KitsAssignmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(assigment $id)
     {
-        $review_tools = review_tools::with(['revision','revisor'])->where('id_asignado',$id)->latest()->first();
-        $id = assigment::find($id);
-        return view('execution_works.kits_assignment.show', compact(['id','review_tools']));
+        return view('execution_works.kits_assignment.show', compact('id'));
     }
 
     /**
@@ -136,11 +134,12 @@ class KitsAssignmentController extends Controller
      */
     public function update(Request $request, $id)
     {
+        return $request;
         assigment::find($id)->update($request->all());
-        tools_add::where('id_asignado',$id)->delete();
+        // tools_add::where('id_assignado',$id)->delete();
         for ($j=1; $j <= count($request->item); $j++) {
             $tools_add = tools_add::create([
-                'id_asignado' => $id,
+                'id_assignado' => $id,
                 'nombre' => isset($request->item[$j]) ? $request->item[$j] : null,
                 'cantidad' => isset($request->amount[$j]) ? $request->amount[$j] : null,
                 'marca' => isset($request->marca[$j]) ? $request->marca[$j] : null,

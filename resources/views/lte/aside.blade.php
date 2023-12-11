@@ -231,6 +231,18 @@ f <!-- =============================================== -->
                          'Lista de implementaciones proyectos de MinTIC',
                          'Adjuntar y ver fotos TSS',
                          'Adjuntar y ver fotos de instalación',
+                         'Crear kits',
+                        'Ver kits',
+                        'Editar Kits',
+                        'Editar todos los Kits',
+                        'Eliminar Kits',
+                        'Eliminar todos los Kits',
+                        'Ver asignación',
+                        'Editar asignación',
+                        'Crear asignación',
+                        'Revisar asignación',
+                        'Ver revisión',
+                        'Crear revisión',
                      ]))
                  <li class="treeview {{ activeMenu('execution_works*') }}{{ activeMenu('project*') }}">
                      <a href="#">
@@ -568,7 +580,18 @@ f <!-- =============================================== -->
                                          class="fa fa-tools"></i> REVISIÓN Y ASIGNACIÓN DE HERRAMIENTA</a></li>
                          @endif
                         @if (auth()->user()->hasAnyPermission([
-                            'Lista de asignación'
+                            'Crear kits',
+                            'Ver kits',
+                            'Editar Kits',
+                            'Editar todos los Kits',
+                            'Eliminar Kits',
+                            'Eliminar todos los Kits',
+                            'Ver asignación',
+                            'Editar asignación',
+                            'Crear asignación',
+                            'Revisar asignación',
+                            'Ver revisión',
+                            'Crear revisión'
                         ]))
                             <li class=" {{ activeMenu('execution_works/kits_assignment*') }}">
                                 <a class="btn-send" href="{{route('kits_assigment')}}">

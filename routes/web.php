@@ -1011,3 +1011,8 @@ Route::get('chargeaccount/download/{id}','human_management\chargeaccountControll
 Route::put('chargeaccount/approve/{id}','human_management\chargeaccountController@approve')->name("chargeaccount_approve")->middleware('auth')->middleware('verified');;
 Route::delete('chargeaccount/{id}','human_management\chargeaccountController@destroy')->name("chargeaccount_delete")->middleware('auth')->middleware('verified');
 Route::get('chargeaccount/generate','human_management\chargeaccountController@generate')->name("chargeaccount_generate")->middleware('auth')->middleware('verified');
+
+Route::get('form/quote', 'quoteController@index')->name('quote');
+Route::get('form/quote/email', 'quoteController@create')->name('quote_email');
+Route::post('form/quote/','quoteController@store')->name("quote_store");
+Route::post('form/visit/','quoteController@visit')->name("quote_visit");

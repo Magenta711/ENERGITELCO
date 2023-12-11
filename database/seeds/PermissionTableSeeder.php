@@ -442,7 +442,7 @@ class PermissionTableSeeder extends Seeder
             // ['name' => 'Adjuntar y ver fotos de instalación', 'category' => 'Ejecución de obras'],
             //EndBlock-20230204
 
-            //Block-20230213 Pablo
+            //Block-20230213 Pablo, Esteban
             // ['name' => 'Crear kits', 'category' => 'Ejecución de obras'],
             // ['name' => 'Ver kits', 'category' => 'Ejecución de obras'],
             // ['name' => 'Editar Kits', 'category' => 'Ejecución de obras'],
@@ -455,7 +455,11 @@ class PermissionTableSeeder extends Seeder
             // ['name' => 'Revisar asignación', 'category' => 'Ejecución de obras'],
             // ['name' => 'Ver revisión', 'category' => 'Ejecución de obras'],
             // ['name' => 'Crear revisión', 'category' => 'Ejecución de obras'],
-            //Block-20230213
+            //EndBlock-20230213
+
+            //Block-20230219 Esteban
+            // ['name' => 'Lista de kits', 'category' => 'Ejecución de obras'],
+            //EndBlock-20230219 Esteban
         ];
 
         foreach ($permissions as $permission) {

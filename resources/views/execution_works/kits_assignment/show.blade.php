@@ -79,11 +79,8 @@
                                 </div>
                             {{-- </div> --}}
                         @endif
-                        {{-- @foreach (  as ) --}}
-                        {{-- @endforeach --}}
                     </div>
                     <hr>
-                    {{-- {{dd($id->kit_asignado->tools)}} --}}
                     <h3>Implementos Obligatorios:</h3>
                     <hr>
                     @foreach ($id->kit_asignado->tools as $tool)

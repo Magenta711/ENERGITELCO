@@ -21,6 +21,18 @@ use Carbon\Carbon;
 
 class MaintenanceController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('verified');
+        $this->middleware('permission:Lista de mantenimiento de proyecto MinTIC|Ver mantenimiento de proyecto MinTIC|Crear mantenimiento de proyecto MinTIC|Editar mantenimiento de proyecto MinTIC|Adjuntar y ver fotos a mantenimiento de proyecto MinTIC|Exportar mantenimiento de proyecto MinTIC|Eliminar mantenimiento de proyecto MinTIC',['only' => ['index']]);
+        $this->middleware('permission:Ver mantenimiento de proyecto MinTIC',['only' => ['show']]);
+        $this->middleware('permission:Editar mantenimiento de proyecto MinTIC',['only' => ['edit','update']]);
+        $this->middleware('permission:Crear mantenimiento de proyecto MinTIC',['only' => ['create','store']]);
+        $this->middleware('permission:Adjuntar y ver fotos a mantenimiento de proyecto MinTIC',['only' => ['upload','photos']]);
+        $this->middleware('permission:Eliminar mantenimiento de proyecto MinTIC',['only' => ['destroy']]);
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -233,11 +245,11 @@ class MaintenanceController extends Controller
                     $j++;
                 }
             }
-    
+
             if ($j = 1) {
                 $j = 8;
             }
-            
+
             $files['signature']['name'] = 'Signature';
             $files['signature']['description'] = 'Firma de funcionario';
             $files['signature']['path'] = public_path('/storage/signature/'.$item->receives->signature);
@@ -260,7 +272,7 @@ class MaintenanceController extends Controller
                 Storage::delete('public/upload/mintic/'.$file_exists->name);
             }
             $file = $request->file('file');
-            
+
             $name = time().str_random().'.'.$file->getClientOriginalExtension();
             if (!(isset($request->write) && $request->write == 'No' ) && ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg')) {
                 $text2 = $mintic->project->long.' / '.$mintic->project->lat;

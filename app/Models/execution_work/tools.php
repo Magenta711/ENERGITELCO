@@ -13,6 +13,8 @@ class tools extends Model
         'nombre',
         'cantidad',
         'marca',
+        'is_perent',
+        'perent_id',
         'Observaciones'
     ];
 }

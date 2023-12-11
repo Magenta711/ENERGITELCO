@@ -17,8 +17,9 @@ class CreateReviewToolAddKitsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_review');
             $table->unsignedBigInteger('id_tool_add');
-            $table->string('estado');    
-            $table->string('comentario');
+            $table->unsignedBigInteger('id_kit');
+            $table->string('estado');
+            $table->text('comentario')->nullable();
             $table->timestamps();
         });
     }

@@ -15,10 +15,10 @@ class CreateToolsTable extends Migration
     {
         Schema::create('tools', function (Blueprint $table) {
             $table->bigIncrements('id');
-
+            $table->unsignedBigInteger('kit_id');
             $table->string('nombre', 100);
             $table->integer('cantidad');
-            $table->string('marca', 100);
+            $table->string('marca', 100)->nullable();
             $table->text('Observaciones')->nullable();
 
 

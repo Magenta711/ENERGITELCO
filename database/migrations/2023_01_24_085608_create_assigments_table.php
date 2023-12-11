@@ -15,10 +15,10 @@ class CreateAssigmentsTable extends Migration
     {
         Schema::create('assigments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
             $table->unsignedBigInteger('id_responsable');
             $table->unsignedBigInteger('id_asignado');
-            $table->unsignedBigInteger('id_kit');       
+            $table->unsignedBigInteger('id_kit');
+            $table->timestamps();
         });
     }
 

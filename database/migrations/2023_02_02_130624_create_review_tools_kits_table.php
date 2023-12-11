@@ -18,8 +18,8 @@ class CreateReviewToolsKitsTable extends Migration
             $table->unsignedBigInteger('id_review');
             $table->unsignedBigInteger('id_kit');
             $table->unsignedBigInteger('id_tool');
-            $table->string('estado');
-            $table->string('comentario');
+            $table->string('estado',20);
+            $table->text('comentario')->nullable();
             $table->timestamps();
         });
     }

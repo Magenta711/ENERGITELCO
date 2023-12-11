@@ -55,7 +55,6 @@ class KitsController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
         $request->validate([
             'nombre' => ['required'],
             'responsable_id' => ['required'],
@@ -69,30 +68,27 @@ class KitsController extends Controller
         for ($i=0; $i < count($arr_name); $i++) {
             $iniciales = $iniciales.str_split($arr_name[$i])[0];
         }
-        // return $iniciales;
-                // $iniciales = ;
-                // $separadas = explode(" ", $iniciales);
-                // $corto = "";
-                // foreach ($separadas as $primera) {
-                //     $corto .= substr($primera, 0, 1);
-                // }
-                // return $corto;
+        $parent = [];
+        $request['history'] = now()->format('d/m/Y H:i:s').': creación de un grupo de '.$request->cantidad.' con '.count($request->item).' herramientas por: '.auth()->user()->name."\n";
         for ($i=0; $i < $request->cantidad; $i++) {
             $request['nombre'] = $nombre_original." ".($i+1);
             $request['nombre_original'] = $nombre_original;
             $kit = kits::create($request->all());
-
             $codigo = "N-".$iniciales."-".$kit->id;
-            // return $codigo;
-            $kit->update([ 'codigo' => $codigo ]);
-            for ($j=1; $j <= count($request->item); $j++) {
+            $kit->update([ 'codigo' => strtoupper($codigo) ]);
+            for ($j=0; $j < count($request->item); $j++) {
                 $tool = tools::create([
                     'kit_id'=>$kit->id,
                     'nombre' => $request->item[$j],
                     'cantidad' => $request->amount[$j],
                     'marca' => $request->marca[$j],
                     'Observaciones' => $request->observacion[$j],
+                    'is_perent' => $i == 0,
+                    'perent_id' => $i == 0 ? null : $parent[$j]
                 ]);
+                if ($i == 0) {
+                    $parent[$j] = $tool->id;
+                }
             }
         }
 
@@ -105,9 +101,8 @@ class KitsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(kits $id)
     {
-        $id = kits::find($id);
         return view('execution_works.kits.show', compact('id'));
     }
 
@@ -117,17 +112,15 @@ class KitsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(kits $id)
     {
         $usuarios = User::where('state',1)->with('roles')->get();
-        $id = kits::find($id);
         return view('execution_works.kits.edit', compact('id','usuarios'));
     }
 
-    public function edit_all($id)
+    public function edit_all(kits $id)
     {
         $usuarios = User::where('state',1)->with('roles')->get();
-        $id = kits::find($id);
         return view('execution_works.kits.edit_all', compact('id','usuarios'));
     }
 
@@ -138,56 +131,127 @@ class KitsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Kits $id)
     {
+        // return $request;
         $request->validate([
             'nombre' => ['required'],
             'item'=>['required'],
         ]);
 
-
-        Kits::find($id)->update($request->all());
-        tools::where('kit_id',$id)->delete();
-        for ($j=1; $j <= count($request->item); $j++) {
-            $tool = tools::create([
-                'kit_id'=>$id,
-                'nombre' => isset($request->item[$j]) ? $request->item[$j] : null,
-                'cantidad' => isset($request->amount[$j]) ? $request->amount[$j] : null,
-                'marca' => isset($request->marca[$j]) ? $request->marca[$j] : null,
-                'Observaciones' => isset($request->observaciones[$j]) ? $request->observaciones[$j] : null,
-            ]);
+        $nombre = $id->nombre;
+        $nombre_original = $request->nombre;
+        $token = $id->token;
+        if( $request->nombre != $id->nombre_original){
+            $nombre_original = $request->nombre;
+            $nombre = $request->nombre." ".end(explode(' ',$id->nombre));
+            $token = Str::random(10);
         }
+        $history = now()->format('d/m/Y H:i:s').': kit individualmente con '.count($request->item).' herramientas editado por: '.auth()->user()->name."\n";
+        $id->update([
+            'nombre_original' => $nombre_original,
+            'nombre' => $nombre,
+            'cantidad_herramientas' => count($request->item),
+            'history' => $id->history.''.$history
+        ]);
+
+        for ($j=0; $j < count($request->item); $j++) {
+            if ($request->item_id[$j] == 0) {
+                $tool = tools::create([
+                    'kit_id'=>$id->id,
+                    'nombre' => $request->item[$j],
+                    'cantidad' => $request->amount[$j],
+                    'marca' => $request->marca[$j],
+                    'Observaciones' => $request->observacion[$j],
+                    'is_perent' => false,
+                    'perent_id' => null
+                ]);
+            }else {
+                $tool = tools::find($request->item_id[$j]);
+                $tool->update([
+                    'nombre' => $request->item[$j],
+                    'cantidad' => $request->amount[$j],
+                    'marca' => $request->marca[$j],
+                    'Observaciones' => $request->observacion[$j],
+                ]);
+            }
+
+        }
+
         return redirect()->route('kits_show', $id)->with('success','Se ha editado el kit correctamente');
     }
 
     public function update_all(Request $request, $token)
     {
+        // return $request;
         $request->validate([
             'nombre' => ['required'],
-            'item'=>['required'],
-            // 'responsable_id' => ['required'],
-            // 'cantidad' => ['required']
-        ]);
-        Kits::where('token',$token)->update([
-            'nombre' => $request->nombre,
-            // 'responsable_id'=> $request->responsable_id
+            'item'=>['required']
         ]);
         $kits = Kits::where('token',$token)->get();
-
+        $parent = [];
         foreach ($kits as $key => $kit) {
-            tools::where('kit_id',$kit->id)->delete();
-            for ($j=1; $j <= count($request->item); $j++) {
-                $tool = tools::create([
-                    'kit_id'=>$kit->id,
-                    'nombre' => isset($request->item[$j]) ? $request->item[$j] : null,
-                    'cantidad' => isset($request->amount[$j]) ? $request->amount[$j] : null,
-                    'marca' => isset($request->marca[$j]) ? $request->marca[$j] : null,
-                    'Observaciones' => isset($request->observaciones[$j]) ? $request->observaciones[$j] : null,
-                ]);
+            $nombre = $kit->nombre;
+            $nombre_original = $request->nombre;
+            if( $request->nombre != $kit->nombre_original){
+                $nombre_original = $request->nombre;
+                $nombre = $request->nombre." ".end(explode(' ',$kit->nombre));
+            }
+            $history = now()->format('d/m/Y H:i:s').': grupo de '.count($kits).' Kits con '.count($request->item).' herramientas editado por: '.auth()->user()->name."\n";
+            $kit->update([
+                'nombre_original' => $nombre_original,
+                'responsable_id' => $request->responsable_id,
+                'nombre' => $nombre,
+                'cantidad_herramientas' => count($request->item),
+                'history' => $kit->history.''.$history
+            ]);
+
+            for ($j=0; $j < count($request->item); $j++) {
+                if ($request->item_id[$j] == 0) {
+                    $tool = tools::create([
+                        'kit_id'=>$kit->id,
+                        'nombre' => $request->item[$j],
+                        'cantidad' => $request->amount[$j],
+                        'marca' => $request->marca[$j],
+                        'Observaciones' => $request->observacion[$j],
+                        'is_perent' => $key == 0,
+                        'perent_id' => $key == 0 ? null : ($request->item_id[$j] > 0 ? $request->item_id[$j] : $parent[$j])
+                    ]);
+                    if ($key == 0) {
+                        $parent[$j] = $tool->id;
+                    }
+                }else {
+                    $tool = tools::find($request->item_id[$j]);
+                    if ($key == 0) {
+                        $tool->update([
+                            'nombre' => $request->item[$j],
+                            'cantidad' => $request->amount[$j],
+                            'marca' => $request->marca[$j],
+                            'Observaciones' => $request->observacion[$j],
+                        ]);
+                    }else {
+                        $tool = tools::where('kit_id',$kit->id)->where('perent_id',$request->item_id[$j])->first();
+                        if ($tool) {
+                            $tool->where('kit_id',$kit->id)->where('perent_id',$request->item_id[$j])->update([
+                                'nombre' => $request->item[$j],
+                                'cantidad' => $request->amount[$j],
+                                'marca' => $request->marca[$j],
+                                'Observaciones' => $request->observacion[$j],
+                            ]);
+                        }else {
+                            $tool = tools::find($request->item_id[$j])->update([
+                                'nombre' => $request->item[$j],
+                                'cantidad' => $request->amount[$j],
+                                'marca' => $request->marca[$j],
+                                'Observaciones' => $request->observacion[$j],
+                            ]);
+                        }
+                    }
+                }
+
             }
         }
-        // return $request;
-       return redirect()->route('kits')->with('success','Se ha editado los kits correctamente');
+        return redirect()->route('kits')->with('success','Se ha editado los kits correctamente');
     }
 
     /**

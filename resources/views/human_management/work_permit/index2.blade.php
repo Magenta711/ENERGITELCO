@@ -161,11 +161,11 @@
 
                         return `
                             @can('Consultar permisos de trabajo')
-                                <a href="human_management/work_permit/show/${row.id}" class="btn btn-sm btn-success">Ver</a>
+                                <a href="/human_management/work_permit/show/${row.id}" class="btn btn-sm btn-success">Ver</a>
                             @endcan
                             ${row.estado == 'Aprobado' ?
                                 `@can('Descargar PDF de permisos de trabajo')
-                                    <a href="human_management/work_permit/download/${row.id}" class="btn btn-warning btn-sm">Descargar</a>
+                                    <a href="/human_management/work_permit/download/${row.id}" class="btn btn-warning btn-sm">Descargar</a>
                                 @endcan` : ''
                             }
                             @can('Eliminar formato de permisos de trabajo')

@@ -11,9 +11,9 @@ class minticMaintenanceExport implements WithMultipleSheets
     protected $equipments;
     protected $activities;
     protected $files;
-    
+
     use Exportable;
-    
+
     public function __construct(object $id, object $equipments, $files,$activities)
     {
         $this->id = $id;
@@ -21,7 +21,7 @@ class minticMaintenanceExport implements WithMultipleSheets
         $this->activities = $activities;
         $this->files = $files;
     }
-    
+
     public function sheets(): array
     {
         $arr['ACTA DE INSTALACIÓN_20032021'] = new minticMaintenanceExportFirst($this->id,$this->equipments,$this->files,$this->activities);

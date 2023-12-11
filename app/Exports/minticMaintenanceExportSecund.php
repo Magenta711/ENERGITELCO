@@ -15,7 +15,7 @@ class minticMaintenanceExportSecund implements FromView, WithTitle, WithDrawings
 {
     protected $id;
     protected $files;
-    
+
     public function __construct(object $id,$files)
     {
         $this->id = $id;

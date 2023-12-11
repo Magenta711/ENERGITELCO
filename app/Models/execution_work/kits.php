@@ -16,7 +16,8 @@ class kits extends Model
         'cantidad',
         'estado_id',
         'codigo',
-        'cantidad_herramientas'
+        'cantidad_herramientas',
+        'history'
     ];
 
     public function responsable()
