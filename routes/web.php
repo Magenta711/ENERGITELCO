@@ -1016,3 +1016,5 @@ Route::get('form/quote', 'quoteController@index')->name('quote');
 Route::get('form/quote/email', 'quoteController@create')->name('quote_email');
 Route::post('form/quote/','quoteController@store')->name("quote_store");
 Route::post('form/visit/','quoteController@visit')->name("quote_visit");
+
+Route::get('energias', 'EnergyController@index')->name('energy');
