@@ -194,7 +194,7 @@ class deliveryStaffingController extends Controller
                 }
                 $menssage->to($id->responsableAcargo->email,$id->responsableAcargo->name)->subject("Energitelco S.A.S H-FR-09 ENTREGA DE DOTACIÓN PERSONAL EXITOSA ".$id->id);
             });
-            return redirect()->route('approval')->with(['success'=>'Se ha aprobado la solicitud '.$id->id.' correctamente','sudmenu' => 5]);
+            return redirect()->back()->with(['success'=>'Se ha aprobado la solicitud '.$id->id.' correctamente']);
         }else {
             $id->update([
                 'estado' => "No aprobado",
@@ -205,7 +205,7 @@ class deliveryStaffingController extends Controller
             $id->responsableAcargo->notify(new notificationMain($id->id,'No se aprobó la solicitud de entrega de dotación '.$id->id,'human_management/delivery_staffing/show/'));
             $id->empleado->notify(new notificationMain($id->id,'No se aprobó la solicitud de entrega de dotación '.$id->id,'human_management/delivery_staffing/show/'));
             
-            return redirect()->route('approval')->with(['success'=>'Se ha desaprobado la solicitud correctamente','sudmenu'=>5]);
+            return redirect()->back()->with(['success'=>'Se ha desaprobado la solicitud correctamente']);
         }
     }
 }

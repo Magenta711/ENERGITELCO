@@ -9,6 +9,7 @@ use App\DriversExam;
 use App\DriversReport;
 use App\DriversTest;
 use App\DriversTraining;
+use App\Exports\DriverDocument;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\invVehicle;
@@ -20,6 +21,11 @@ class driversController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('verified');
+        $this->middleware('permission:Lista de controles de documentos de conductores|Crear controles de documentos de conductores|Editar controles de documentos de conductores|Ver controles de documentos de conductores|Eliminar controles de documentos de conductores',['only'=> ['index']]);
+        $this->middleware('permission:Crear controles de documentos de conductores',['only'=> ['create','store']]);
+        $this->middleware('permission:Editar controles de documentos de conductores',['only'=> ['edit','update']]);
+        $this->middleware('permission:Ver controles de documentos de conductores',['only'=> ['show']]);
+        $this->middleware('permission:Eliminar controles de documentos de conductores',['only'=> ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -40,7 +46,7 @@ class driversController extends Controller
     public function create()
     {
         $users = User::where('state',1)->get();
-        $vehicles = invVehicle::where('status','!=',0)->get();
+        $vehicles = invVehicle::where('status|!=',0)->get();
         return view('logistics_infrastructure.drivers.create',compact('users','vehicles'));
     }
 
@@ -64,6 +70,7 @@ class driversController extends Controller
                     'date' => $value,
                     'city' => $request->report_city[$key],
                     'suject' => $request->report_suject[$key],
+                    'status' => $request->report_status[$key],
                     'observation' => $request->report_observation[$key],
                     'driver_id' => $driver->id
                 ]);
@@ -177,7 +184,8 @@ class driversController extends Controller
                     'vehicle_id' => $request->report_vehicle[$key],
                     'suject' => $request->report_suject[$key],
                     'observation' => $request->report_observation[$key],
-                    'driver_id' => $id->id
+                    'driver_id' => $id->id,
+                    'status' => $request->status[$key]
                 ]);
             }
         }
@@ -258,5 +266,10 @@ class driversController extends Controller
     {
         $id->update(['update' => 0]);
         return redirect()->route('drivers')->with('success','Se ha eliminado la documentación del conductor correctamente');
+    }
+
+    public function download (Drivers $id)
+    {
+        return (new DriverDocument($id))->download('L-FR--18-'.$id->id.'_learned_leassons.xlsx');
     }
 }

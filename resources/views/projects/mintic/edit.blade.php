@@ -13,7 +13,7 @@
     </ol>
 </section>
 <section class="content">
-    @include('includes.alerts')
+     
     <div class="box">
         <div class="box-header">
             <div class="box-title"> proyecto MINTIC</div>
@@ -43,7 +43,7 @@
                             <option disabled selected></option>
                         </select>
                     </div>
-                    <div class="form-group col-md-6" style="display: none">
+                    <div class="form-group col-md-6" {{$id->con_sede == 0 || $id->con_sede == null ? '' : 'style="display: none"'}}>
                         <label for="station_name">Nombre de la sede educativa</label>
                         <input type="text" value="{{$id->name}}" name="name" id="station_name" class="form-control">
                     </div>
@@ -62,6 +62,10 @@
                     <div class="form-group col-sm-6">
                         <label for="code">Id benefiicario</label>
                         <input type="text" id="code" name="code" value="{{ $id->code }}" class="form-control">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="con_sede">Consecutivo</label>
+                        <input type="text" id="con_sede" name="con_sede" value="{{ $id->con_sede }}" class="form-control">
                     </div>
                     <div class="form-group col-sm-6">
                         <label for="population">Centro de población</label>

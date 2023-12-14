@@ -71,10 +71,16 @@ class adminBonusesController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'start_date' => ['required'],
+            'end_date' => ['required']
+        ]);
         $request['status'] = 2;
         $request['total_employees'] = count($request->user_add);
         $request['responsable_id'] = auth()->id();
         $request['date'] = now();
+        $request['total_pay'] = $request->total_pay == 'NaN' ? 0 : $request->total_pay;
+        $request['total_pay_24_7'] = $request->total_pay_24_7 == 'NaN' ? 0 : $request->total_pay_24_7;
         $id = bonu::create($request->all());
         foreach ($request->user_add as $key => $value) {
             $userBonu = bonusUser::create([
@@ -107,7 +113,7 @@ class adminBonusesController extends Controller
                 'driver_1' => $request->driver_1[$key],
                 'driver_2' => $request->driver_2[$key],
 
-                'bonus_24_7' => $request->bonus_24_7[$key],
+                'bonus_24_7' => $request->bonus_24_7[$key] == '' ? 0 : $request->bonus_24_7[$key],
                 'state_24_7' => $request->state_24_7[$key],
                 'last_24_7' => $request->last_24_7[$key],
                 'time_24_7' => $request->time_24_7[$key],
@@ -121,7 +127,7 @@ class adminBonusesController extends Controller
                 'percentage_admin' => $request->percentage_admin[$key],
                 'total_admin' => $request->total_admin[$key],
                 'total_dirver' => $request->total_dirver[$key],
-                'total_user' => $request->total_user[$key],
+                'total_user' => $request->total_user[$key] == 'NaN' ? 0 : $request->total_user[$key],
                 'commentary' => $request->commentary[$key],
             ]);
             if (isset($request->value_pay_credit[$key])) {
@@ -290,7 +296,7 @@ class adminBonusesController extends Controller
                     $menssage->to($data->user->email,$data->user->name)->subject("Energitelco S.A.S, Notificación de pago de bonificaciones");
                 });
             }
-            $id->responsable->notify(new notificationMain($id->id,'Se ha aprobado las el pago de las bonificaciones a administradores y conductores'.$id->id,'human_management/bonus/administratives/show/'));
+            $id->responsable->notify(new notificationMain($id->id,'Se ha aprobado las el pago de las bonificaciones a administradores y conductores'.$id->id,'finances/bonus/administratives/show/'));
             return redirect()->route('admin_bonuses')->with('success','Se ha aprobado el pago de las bonificaciones administradores y conductores correctamente');
         }else {
             $id->update([
@@ -298,7 +304,7 @@ class adminBonusesController extends Controller
                 'commentary'=>$request->commentary,
                 'approve_id' => auth()->id(),
             ]);
-            $id->responsable->notify(new notificationMain($id->id,'No se aprobó las el pago de bonificaciones a administradores y conductores'.$id->id,'human_management/bonus/administratives/show/'));
+            $id->responsable->notify(new notificationMain($id->id,'No se aprobó las el pago de bonificaciones a administradores y conductores'.$id->id,'finances/bonus/administratives/show/'));
             return redirect()->route('admin_bonuses')->with('success','Se ha reprobado el pago de las bonificaciones administradores y conductores correctamente');
         }
     }

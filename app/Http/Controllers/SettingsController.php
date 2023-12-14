@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EmployeeMonth;
 use App\Models\general_setting;
 use App\Models\system_setting;
 use App\Models\SystemMessages;
 use App\Models\Positions;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class SettingsController extends Controller
 {
@@ -276,5 +280,90 @@ class SettingsController extends Controller
     public function upload()
     {
         return response()->json([ 'success' => 'Good' ]);
+    }
+
+    public function modals()
+    {
+        $value = system_setting::where('state',1)->orderBy('id','DESC')->take(1)->first();
+        return view('settings.modals.index',compact('value'));
+    }
+    public function modals_update(Request $request)
+    {
+        $id = system_setting::find($request->current);
+        $id->update([
+            'messege_intro' => $request->messege_intro ? $request->messege_intro : 0,
+            'employee_month' => $request->employee_month ? $request->employee_month : 0,
+            'birthday' => $request->birthday ? $request->birthday : 0,
+            'active_24_7' => $request->active_24_7 ? $request->active_24_7 : 0,
+            'test_intro' => $request->test_intro ? $request->test_intro : 0
+        ]);
+        return redirect()->back()->with('success' ,'Se guardaron los cambios correctamente');
+    }
+    public function empleyee_month()
+    {
+        $employees = EmployeeMonth::orderBy('month','DESC')->get();
+        $users = User::where('state',1)->get();
+        return view('settings.empleyee_month.index',compact('employees','users'));
+    }
+
+    public function empleyee_month_store(Request $request)
+    {
+        $id = EmployeeMonth::create([
+            'user_id' => $request->user_id,
+            'responsable_id' => auth()->id(),
+            'month' => $request->month
+        ]);
+
+        if ($request->hasFile('file')){
+            $file = $request->file('file');
+            $name = time().Str::random(5).'.'.$file->getClientOriginalExtension();
+            $size = $file->getClientSize() / 1000;
+            $path = Storage::putFileAs('public/avatars', $file, $name);
+            $id->file()->create([
+                'name' => $name,
+                'description' => 'Empleado del mes',
+                'size' => $size.' KB',
+                'url' => $path,
+                'type' => $file->getClientOriginalExtension(),
+                'state' => 1
+            ]);
+        }
+
+        return redirect()->route('setting_empleyee_month')->with('success','Se guardo y publico el empleado del mes corectamente');
+    }
+    public function empleyee_month_update(Request $request,EmployeeMonth $id)
+    {
+        $id->update([
+            'user_id' => $request->user_id,
+            'responsable_id' => auth()->id(),
+            'month' => $request->month
+        ]);
+
+        if ($id->file) {
+            Storage::delete('public/avatars'.$id->file->name);
+            $id->file()->delete();
+        }
+        if ($request->hasFile('file')){
+            $file = $request->file('file');
+            $name = time().Str::random(5).'.'.$file->getClientOriginalExtension();
+            $size = $file->getClientSize() / 1000;
+            $path = Storage::putFileAs('public/avatars', $file, $name);
+            $id->file()->create([
+                'name' => $name,
+                'description' => 'Empleado del mes',
+                'size' => $size.' KB',
+                'url' => $path,
+                'type' => $file->getClientOriginalExtension(),
+                'state' => 1
+            ]);
+        }
+
+        return redirect()->route('setting_empleyee_month')->with('success','Se actualizo y publico el empleado del mes corectamente');
+    }
+
+    public function empleyee_month_delete(EmployeeMonth $id)
+    {
+        $id->delete();
+        return redirect()->route('setting_empleyee_month')->with('success','Se eliminado el empleado del mes corectamente');
     }
 }

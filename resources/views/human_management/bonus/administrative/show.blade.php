@@ -14,7 +14,7 @@
 </section>
 
 <section class="content">
-    @include('includes.alerts')
+     
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="box">
@@ -64,6 +64,10 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <p class="text-muted">Total de bonificaciones técnicas: <span id="total_bonus_technical_{{$item->id}}">{{number_format($item->total_bonus_technical)}}</span> con <span id="total_permit_work_{{$item->id}}">{{$item->total_work_permit}}</span> permisos de trabajo</p>
+                                                                <div class="form-group">
+                                                                    <label for="working_days">Días trabajados</label>
+                                                                    <p>{{$item->working_days}}</p>
+                                                                </div>
                                                                 <ul class="list-group">
                                                                     @if ($item->admin_bonus_check)
                                                                         <li class="list-group-item">
@@ -206,6 +210,12 @@
                                                                         </tr>
                                                                     @endif
                                                                 </table>
+                                                                <div>
+                                                                    <div class="form-group">
+                                                                        <label for="discount-{{$item->user_id}}">Descuentos</label>
+                                                                        <p>{{$item->discount}}</p>
+                                                                    </div>
+                                                                </div>
                                                                 <div class="form-group">
                                                                     <label for="commentary_{{$item->user->id}}">Comentarios</label>
                                                                     <p>{!! str_replace("\n", '</br>', addslashes($item->commentary)) !!}</p>
@@ -232,7 +242,7 @@
                                                                     </div>
                                                                     <div class="col-md-3 block_bonus_driver_{{$item->user->id}}" {!! !$item->drive_bonus_check ? 'style="display: none"' : ''!!}>
                                                                         <h4>Descuentos</h4>
-                                                                        <span id="total_pay_driver_{{ $item->user->id }}">${{number_format($item->discount,2,',','.')}}</span>
+                                                                        <span id="total_pay_driver_{{ $item->user->id }}">${{number_format($item->total_discount)}}</span>
                                                                     </div>
                                                                     <div class="col-md-3">
                                                                         <h3>Total neto a pagar</h3>

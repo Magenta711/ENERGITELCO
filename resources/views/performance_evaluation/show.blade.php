@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="box-body">
-            <h4>Técnicos, auxiliares y operativos.</h4>
+            <h4>{{ ($id->type_evaluation_id == 1) ? 'Directivos, Administrativos, Ingenieros' : (($id->type_evaluation_id == 2) ? 'Técnicos, auxiliares y operativos' : 'Personal CVS claro') }}.</h4>
             <div class="row">
                 <div class="col-md-6">
                     <h4>Fecha de la evaluación</h4>

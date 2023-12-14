@@ -5,15 +5,14 @@ namespace App\Http\Controllers\projects;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\project\Mintic\Mintic_School;
-use App\Models\project\Mintic\inventory\EquimentDetail;
 use Illuminate\Support\Facades\Storage;
 use App\Notifications\notificationMain;
-use App\Models\project\Mintic\mintic_maintenance;
 use Image;
 use App\User;
-use App\Exports\minticMaintenanceExport;
 use App\Models\project\Mintic\MinticVisit;
 use App\Models\system_setting;
+use Carbon\Carbon;
+use App\Models\file;
 
 class MinticController extends Controller
 {
@@ -25,8 +24,13 @@ class MinticController extends Controller
         $this->middleware('permission:Ver proyectos de MINTIC',['only' => ['show']]);
         $this->middleware('permission:Editar proyectos de MINTIC',['only' => ['edit','update']]);
         $this->middleware('permission:Crear proyectos de MINTIC',['only' => ['create','store','create2','store2','create3','store3']]);
+        $this->middleware('permission:Adjuntar y ver fotos de proyectos mintic',['only' => ['upload','pintures']]);
         $this->middleware('permission:Eliminar proyectos de MINTIC',['only' => ['destroy']]);
         $this->middleware('permission:Aprobar proyectos de MINTIC',['only' => ['approval','not_approval']]);
+
+        $this->middleware('permission:Adjuntar y ver fotos TSS',['only' => ['upload_tss','tss']]);
+        $this->middleware('permission:Adjuntar y ver fotos de instalación',['only' => ['upload_install','install']]);
+
     }
 
     /**
@@ -36,8 +40,7 @@ class MinticController extends Controller
      */
     public function index()
     {
-        $mintics = Mintic_School::with('technical')->get();
-        return view('projects.mintic.index',compact('mintics'));
+        return view('projects.mintic.index');
     }
 
     /**
@@ -66,6 +69,9 @@ class MinticController extends Controller
         ]);
         $request['responsable_id'] = auth()->id();
         $request['status'] = 4;
+        if (empty($request->con_sede)) {
+            $request['con_sede'] = 0;
+        }
         $id = Mintic_School::create($request->all());
 
         $users = User::where('state',1)->get();
@@ -128,7 +134,7 @@ class MinticController extends Controller
                 $user->notify(new notificationMain($id->id,'Nuevo proyecto MINTIC '.$id->id,'project/mintic/ec/show/'));
             }
         }
-        
+
         return redirect()->route('mintic')->with('success','Se ha creado el proyecto correctamente');
     }
     /**
@@ -165,6 +171,9 @@ class MinticController extends Controller
      */
     public function update(Request $request, Mintic_School $id)
     {
+        if (empty($request->con_sede)) {
+            $request['con_sede'] = 0;
+        }
         $id->update($request->all());
         MinticVisit::where('project_id',$id->id)->delete();
         foreach ($request->date_ec as $key => $value) {
@@ -232,7 +241,8 @@ class MinticController extends Controller
     public function destroy(Mintic_School $id)
     {
         $id->delete();
-        return redirect()->route('mintic')->with('success','Se ha eliminado el proyecto correctamente');
+        // return redirect()->route('mintic')->with('success','Se ha eliminado el proyecto correctamente');
+        return response()->json( $id );
     }
 
     public function upload(Request $request)
@@ -248,56 +258,60 @@ class MinticController extends Controller
                 Storage::delete('public/upload/mintic/'.$file_exists->name);
             }
             $file = $request->file('file');
-            
+
             $name = time().str_random().'.'.$file->getClientOriginalExtension();
             if ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg') {
                 $text = $mintic->name.', '.$mintic->mun.', '.$mintic->dep;
                 $text2 = $mintic->lat.' '.$mintic->long.', '.$mintic->height.'.0 m';
-                $text3 = $visit ? $visit->date.' '.$visit->time : now()->format('Y-m-d H:i:s');
+                $text3 = isset($request->date) && $request->date ? Carbon::create($request->date)->format('Y-m-d H:i:s') : ($visit ? $visit->date.' '.$visit->time : now()->format('Y-m-d H:i:s'));
 
                 $image = Image::make($request->file);
                 if ($request->size != 'org') {
                     $image->resize(null, 500, function ($constraint) {
                         $constraint->aspectRatio();
                     });
+                    $height = 25 + ($request->size_letter * 4);
                     if ($request->vol && $request->vol != '') {
-                        $image->text($request->vol, $image->width() - 10, $image->height() - 62, function($font) use($request) {
+                        $image->text($request->vol, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                             $font->file(public_path('fonts/Calibri/Calibri-Bold.TTF'));
-                            $font->size(11);
+                            $font->size($request->size_letter);
                             $font->color($request->color);
                             $font->align('right');
                             $font->valign('top');
                             $font->angle(0);
                         });
                     }
-    
-                    $image->text('COD '.$mintic->code, $image->width() - 10, $image->height() - 49, function($font) use($request) {
+                    $height = $height - $request->size_letter - 2;
+                    $image->text('COD '.$mintic->code, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Calibri/Calibri-Bold.TTF'));
-                        $font->size(11);
+                        $font->size($request->size_letter);
                         $font->color($request->color);
                         $font->align('right');
                         $font->valign('top');
                         $font->angle(0);
                     });
-                    $image->text($text, $image->width() - 10, $image->height() - 36, function($font) use($request) {
+                    $height = $height - $request->size_letter - 2;
+                    $image->text($text, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Calibri/Calibri-Bold.TTF'));
-                        $font->size(11);
+                        $font->size($request->size_letter);
                         $font->color($request->color);
                         $font->align('right');
                         $font->valign('top');
                         $font->angle(0);
                     });
-                    $image->text($text2, $image->width() - 10, $image->height() - 23, function($font) use($request) {
+                    $height = $height - $request->size_letter - 2;
+                    $image->text($text2, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Calibri/Calibri-Bold.TTF'));
-                        $font->size(11);
+                        $font->size($request->size_letter);
                         $font->color($request->color);
                         $font->align('right');
                         $font->valign('top');
                         $font->angle(0);
                     });
-                    $image->text($text3, $image->width() - 10, $image->height() - 10, function($font) use($request) {
+                    $height = $height - $request->size_letter - 2;
+                    $image->text($text3, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Calibri/Calibri-Bold.TTF'));
-                        $font->size(11);
+                        $font->size($request->size_letter);
                         $font->color($request->color);
                         $font->align('right');
                         $font->valign('top');
@@ -306,9 +320,9 @@ class MinticController extends Controller
                     $size = '650';
                 }else {
                     $size = $file->getClientSize() / 1000;
-                    $const = 0.03 * $size;
-                    $height = ($const / 4);
-                    $image->text($text3, $image->width() - 10, $image->height() - $height, function($font) use($request,$const) {
+                    $const = (10 * $size) / 100;
+                    $height = 25 + ($const / 4);
+                    $image->text($text3, $image->width() - 5, $image->height() - $height, function($font) use($request,$const) {
                         $font->file(public_path('fonts/Calibri/Calibri-Bold.TTF'));
                         $font->size($const);
                         $font->color($request->color);
@@ -317,7 +331,7 @@ class MinticController extends Controller
                         $font->angle(0);
                     });
                     $height += (5+$const);
-                    $image->text($text2, $image->width() - 10, $image->height() - $height, function($font) use($request,$const) {
+                    $image->text($text2, $image->width() - 5, $image->height() - $height, function($font) use($request,$const) {
                         $font->file(public_path('fonts/Calibri/Calibri-Bold.TTF'));
                         $font->size($const);
                         $font->color($request->color);
@@ -326,7 +340,7 @@ class MinticController extends Controller
                         $font->angle(0);
                     });
                     $height += (5+$const);
-                    $image->text($text.' ('.$const.')', $image->width() - 10, $image->height() - $height, function($font) use($request,$const) {
+                    $image->text($text, $image->width() - 5, $image->height() - $height, function($font) use($request,$const) {
                         $font->file(public_path('fonts/Calibri/Calibri-Bold.TTF'));
                         $font->size($const);
                         $font->color($request->color);
@@ -335,7 +349,7 @@ class MinticController extends Controller
                         $font->angle(0);
                     });
                     $height += (5+$const);
-                    $image->text('COD '.$mintic->code, $image->width() - 10, $image->height() - $height, function($font) use($request,$const) {
+                    $image->text('COD '.$mintic->code, $image->width() - 5, $image->height() - $height, function($font) use($request,$const) {
                         $font->file(public_path('fonts/Calibri/Calibri-Bold.TTF'));
                         $font->size($const);
                         $font->color($request->color);
@@ -343,11 +357,10 @@ class MinticController extends Controller
                         $font->valign('top');
                         $font->angle(0);
                     });
-                    
-                    
+
                     if ($request->vol && $request->vol != '') {
                         $height += (5+$const);
-                        $image->text($request->vol, $image->width() - 10, $image->height() - $height, function($font) use($request,$const) {
+                        $image->text($request->vol, $image->width() - 5, $image->height() - $height, function($font) use($request,$const) {
                             $font->file(public_path('fonts/Calibri/Calibri-Bold.TTF'));
                             $font->size($const);
                             $font->color($request->color);
@@ -358,7 +371,7 @@ class MinticController extends Controller
                     }
                 }
 
-                $image->save(public_path('storage/upload/mintic/'.$name));
+                $image->save(public_path('storage/upload/mintic/'.$name),72);
             }else {
                 $size = $file->getClientSize() / 1000;
                 $path = Storage::putFileAs('public/upload/mintic', $file, $name);
@@ -404,15 +417,15 @@ class MinticController extends Controller
     {
         $id->update(['status' => 1,'approver_id' => auth()->id()]);
         $users = User::where('state',1)->get();
-        
+
         foreach ($users as $user) {
             if ($user->hasPermissionTo('Crear proyectos de MINTIC')) {
                 $user->notify(new notificationMain($id->id,'Proyecto MINTIC '.$id->id.' aprobado','project/mintic/ec/show/'));
             }
         }
-        return redirect()->route('approval')->with(['success'=>'Se ha aprobado el proyecto correctamente','sudmenu'=>16]);
+        return redirect()->back()->with(['success'=>'Se ha aprobado el proyecto correctamente']);
     }
-    
+
     public function not_approval(Mintic_School $id)
     {
         $id->update(['status' => 2,'approver_id' => auth()->id()]);
@@ -422,7 +435,7 @@ class MinticController extends Controller
                 $user->notify(new notificationMain($id->id,'Proyecto MINTIC '.$id->id.' desaprobado','project/mintic/ec/show/'));
             }
         }
-        return redirect()->route('approval')->with(['success'=>'Se ha desaprobado el proyecto correctamente','sudmenu'=>16]);
+        return redirect()->back()->with(['success'=>'Se ha desaprobado el proyecto correctamente']);
     }
 
     public function pintures($id)
@@ -430,17 +443,11 @@ class MinticController extends Controller
         $id = Mintic_School::with(['files'])->find($id);
         return view('projects.mintic.pintures',compact('id'));
     }
-    
+
     public function install($id)
     {
         $id = Mintic_School::with(['files'])->find($id);
         return view('projects.mintic.install',compact('id'));
-    }
-
-    public function destroy_maintenance($id,mintic_maintenance $item)
-    {
-        $item->delete();
-        return redirect()->route('mintic_maintenance',$id)->with(['success'=>'Se ha eliminado el mantenimiento correctamente']);
     }
 
     public function upload_install(Request $request)
@@ -451,61 +458,63 @@ class MinticController extends Controller
             $file_exists = $mintic->files->where('description',$request->name_d)->first();
 
             if ($file_exists){
-                Storage::delete('public/upload/mintic/'.$file_exists->name); 
+                Storage::delete('public/upload/mintic/'.$file_exists->name);
             }
             $file = $request->file('file');
-            
+
             $name = time().str_random().'.'.$file->getClientOriginalExtension();
             if ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg') {
                 if ($request->vol && $request->vol == 2) {
                     $text = $mintic->mun.', '.$mintic->dep.', '.$mintic->population;
                     $text2 = $mintic->long.' / '.$mintic->lat;
-                    $text3 = $visit ? $visit->date.' '.$visit->time : now()->format('Y-m-d H:i:s');
-    
+                    $text3 = isset($request->date) && $request->date ? Carbon::create($request->date)->format('Y-m-d H:i:s') : ($visit ? $visit->date.' '.$visit->time : now()->format('Y-m-d H:i:s') );
+
                     $image = Image::make($request->file);
                     if ($request->size != 'org') {
                         $image->resize(null, 500, function ($constraint) {
                             $constraint->aspectRatio();
                         });
                     }
-                    
-                    $image->text('CLARO MINTIC 7K', $image->width() - 10, $image->height() - 86, function($font) use($request) {
+                    $height = 25 + ($request->size_letter * 4);
+                    $image->text('CLARO MINTIC 7K', $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
-                        $font->size(20);
+                        $font->size($request->size_letter);
                         $font->color($request->color);
                         $font->align('right');
                         $font->valign('top');
                         $font->angle(0);
                     });
-
-                    $image->text('COD '.$mintic->code.' '.$mintic->name, $image->width() - 10, $image->height() - 68, function($font) use($request) {
+                    $height = $height - $request->size_letter - 2;
+                    $image->text('COD '.$mintic->code.' '.$mintic->name, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
-                        $font->size(20);
+                        $font->size($request->size_letter);
                         $font->color($request->color);
                         $font->align('right');
                         $font->valign('top');
                         $font->angle(0);
                     });
-
-                    $image->text($text, $image->width() - 10, $image->height() - 50, function($font) use($request) {
+                    $height = $height - $request->size_letter - 2;
+                    $image->text($text, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
-                        $font->size(20);
+                        $font->size($request->size_letter);
                         $font->color($request->color);
                         $font->align('right');
                         $font->valign('top');
                         $font->angle(0);
                     });
-                    $image->text($text2, $image->width() - 10, $image->height() - 32, function($font) use($request) {
+                    $height = $height - $request->size_letter - 2;
+                    $image->text($text2, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
-                        $font->size(20);
+                        $font->size($request->size_letter);
                         $font->color($request->color);
                         $font->align('right');
                         $font->valign('top');
                         $font->angle(0);
                     });
-                    $image->text($text3, $image->width() - 10, $image->height() - 14, function($font) use($request) {
+                    $height = $height - $request->size_letter - 2;
+                    $image->text($text3, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
-                        $font->size(20);
+                        $font->size($request->size_letter);
                         $font->color($request->color);
                         $font->align('right');
                         $font->valign('top');
@@ -516,43 +525,45 @@ class MinticController extends Controller
                 }else {
                     $text = $mintic->name;
                     $text2 = $mintic->long.' / '.$mintic->lat;
-                    $text3 = $visit ? $visit->date.' '.$visit->time : now()->format('Y-m-d H:i:s');
-    
+                    $text3 = isset($request->date) && $request->date ? Carbon::create($request->date)->format('Y-m-d H:i:s') : ($visit ? $visit->date.' '.$visit->time : now()->format('Y-m-d H:i:s') );
+
                     $image = Image::make($request->file);
                     if ($request->size != 'org') {
                         $image->resize(null, 500, function ($constraint) {
                             $constraint->aspectRatio();
                         });
                     }
-
-                    $image->text('COD '.$mintic->code, $image->width() - 10, $image->height() - 68, function($font) use($request) {
+                    $height = 25 + ($request->size_letter * 3);
+                    $image->text('COD '.$mintic->code, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
-                        $font->size(20);
+                        $font->size($request->size_letter);
                         $font->color($request->color);
                         $font->align('right');
                         $font->valign('top');
                         $font->angle(0);
                     });
-
-                    $image->text($text, $image->width() - 10, $image->height() - 50, function($font) use($request) {
+                    $height = $height - $request->size_letter - 2;
+                    $image->text($text, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
-                        $font->size(20);
+                        $font->size($request->size_letter);
                         $font->color($request->color);
                         $font->align('right');
                         $font->valign('top');
                         $font->angle(0);
                     });
-                    $image->text($text2, $image->width() - 10, $image->height() - 32, function($font) use($request) {
+                    $height = $height - $request->size_letter - 2;
+                    $image->text($text2, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
-                        $font->size(20);
+                        $font->size($request->size_letter);
                         $font->color($request->color);
                         $font->align('right');
                         $font->valign('top');
                         $font->angle(0);
                     });
-                    $image->text($text3, $image->width() - 10, $image->height() - 14, function($font) use($request) {
+                    $height = $height - $request->size_letter - 2;
+                    $image->text($text3, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
-                        $font->size(20);
+                        $font->size($request->size_letter);
                         $font->color($request->color);
                         $font->align('right');
                         $font->valign('top');
@@ -614,7 +625,7 @@ class MinticController extends Controller
             $mintic = Mintic_School::find($request->id);
             $file_exists = $mintic->files->where('description',$request->name_d)->first();
             if ($file_exists){
-                Storage::delete('public/upload/mintic/'.$file_exists->name); 
+                Storage::delete('public/upload/mintic/'.$file_exists->name);
             }
             $file = $request->file('file');
             $name = time().str_random().'.'.$file->getClientOriginalExtension();
@@ -668,223 +679,9 @@ class MinticController extends Controller
         }
     }
 
-    public function maintenance(Mintic_School $id)
+    public function list()
     {
-        $maintenances = mintic_maintenance::get();
-        return view('projects.mintic.maintenance.index',compact('id','maintenances'));
-    }
-
-    public function create_maintenance(Mintic_School $id)
-    {
-        $equiments = EquimentDetail::get();
-        return view('projects.mintic.maintenance.create',compact('id','equiments'));
-    }
-
-    public function store_maintenance(Request $request,$id)
-    {
-        $request['project_id'] = $id;
-        $request['status'] = 1;
-        mintic_maintenance::create($request->all());
-
-        return redirect()->route('mintic_maintenance',$id)->with('success','Se ha creado el mantenimiento correctamente');
-    }
-    public function show_maintenance($id,mintic_maintenance $item)
-    {
-        return view('projects.mintic.maintenance.show',compact('id','item'));
-    }
-    public function photos_maintenance($id,mintic_maintenance $item)
-    {
-        return view('projects.mintic.maintenance.photos',compact('id','item'));
-    }
-    public function edit_maintenance($id,mintic_maintenance $item)
-    {
-        $equiments = EquimentDetail::get();
-        return view('projects.mintic.maintenance.edit',compact('id','item','equiments'));
-    }
-
-    public function update_maintenance(Request $request,$id,mintic_maintenance $item)
-    {
-        $id->update($request->all());
-
-        return redirect()->route('mintic_maintenance',$id)->with('success','Se ha actualizado el mantenimiento correctamente');
-    }
-
-    public function export_maintenance($id,mintic_maintenance $item)
-    {
-        $system = system_setting::where('state',1)->orderBy('id','DESC')->take(1)->first();
-
-        $equiments = EquimentDetail::get();
-
-        $files = array();
-        $files['logo_mintic']['name'] = 'Logo_mintic';
-        $files['logo_mintic']['description'] = 'Logo de MinTIC';
-        $files['logo_mintic']['path'] = public_path('/img/mintic.png');
-        $files['logo_mintic']['height'] = 90;
-        $files['logo_mintic']['coordinates'] = 'B3';
-        $files['logo_mintic']['place'] = 3;
-
-        $files['logo_claro']['name'] = 'Logo_Claro';
-        $files['logo_claro']['description'] = 'Logo de Claro';
-        $files['logo_claro']['path'] = public_path('/img/claro.png');
-        $files['logo_claro']['height'] = 80;
-        $files['logo_claro']['coordinates'] = 'N3';
-        $files['logo_claro']['place'] = 3;
-
-        if ($item->files)
-        {
-            foreach ($item->files as $key => $value) {
-                $place = explode('.',$value->description,2);
-                $str = str_random();
-                $files[$str]['name'] = $value->name;
-                $files[$str]['description'] = $value->description;
-                $files[$str]['path'] = public_path('/storage/upload/mintic/'.$value->name);
-                $files[$str]['height'] = 200;
-                $files[$str]['coordinates'] = $value->place;
-                $files[$str]['place'] = $place[0];
-            }
-        }
-
-        return (new minticMaintenanceExport($item,$equiments,$files))->download($id.'_mintic_maintenance.xlsx');
-    }
-
-    public function upload_maintenance(Request $request)
-    {
-        if ($request->hasFile('file')){
-            $mintic = mintic_maintenance::find($request->id);
-            $visit = MinticVisit::where('project_id',$request->id)->where('type','maintenance')->first();
-            $file_exists = $mintic->files->where('description',$request->name_d)->first();
-
-            if ($file_exists){
-                Storage::delete('public/upload/mintic/'.$file_exists->name);
-            }
-            $file = $request->file('file');
-            
-            $name = time().str_random().'.'.$file->getClientOriginalExtension();
-            if ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg') {
-                $text2 = $mintic->project->long.' / '.$mintic->project->lat;
-                $text3 = $visit ? $visit->date.' '.$visit->time : now()->format('Y-m-d H:i:s');
-
-                $image = Image::make($request->file);
-                if ($request->size != 'org') {
-                    $image->resize(null, 500, function ($constraint) {
-                        $constraint->aspectRatio();
-                    });
-                    $image->text('ID '.$mintic->code, $image->width() - 10, $image->height() - 81, function($font) use($request) {
-                        $font->file(public_path('fonts/Arial/ARIAL.TTF'));
-                        $font->size(20);
-                        $font->color($request->color);
-                        $font->align('right');
-                        $font->valign('top');
-                        $font->angle(0);
-                    });
-    
-                    $image->text($mintic->name, $image->width() - 10, $image->height() - 59, function($font) use($request) {
-                        $font->file(public_path('fonts/Arial/ARIAL.TTF'));
-                        $font->size(20);
-                        $font->color($request->color);
-                        $font->align('right');
-                        $font->valign('top');
-                        $font->angle(0);
-                    });
-    
-                    $image->text($text2, $image->width() - 10, $image->height() - 37, function($font) use($request) {
-                        $font->file(public_path('fonts/Arial/ARIAL.TTF'));
-                        $font->size(20);
-                        $font->color($request->color);
-                        $font->align('right');
-                        $font->valign('top');
-                        $font->angle(0);
-                    });
-                    $image->text($text3, $image->width() - 10, $image->height() - 15, function($font) use($request) {
-                        $font->file(public_path('fonts/Arial/ARIAL.TTF'));
-                        $font->size(20);
-                        $font->color($request->color);
-                        $font->align('right');
-                        $font->valign('top');
-                        $font->angle(0);
-                    });
-                    $size = '650';
-                }else {
-                    $size = $file->getClientSize() / 1000;
-                    $const = 0.3 * $size;
-                    $height = $const;
-                    $image->text($text3, $image->width() - 10, $image->height() - $height, function($font) use($request,$const) {
-                        $font->file(public_path('fonts/Arial/ARIAL.TTF'));
-                        $font->size($const);
-                        $font->color($request->color);
-                        $font->align('right');
-                        $font->valign('top');
-                        $font->angle(0);
-                    });
-                    $height += (5+$const);
-                    $image->text($text2, $image->width() - 10, $image->height() - $height, function($font) use($request,$const) {
-                        $font->file(public_path('fonts/Arial/ARIAL.TTF'));
-                        $font->size($const);
-                        $font->color($request->color);
-                        $font->align('right');
-                        $font->valign('top');
-                        $font->angle(0);
-                    });
-                    $height += (5+$const);
-                    $image->text($mintic->name, $image->width() - 10, $image->height() - $height, function($font) use($request,$const) {
-                        $font->file(public_path('fonts/Arial/ARIAL.TTF'));
-                        $font->size($const);
-                        $font->color($request->color);
-                        $font->align('right');
-                        $font->valign('top');
-                        $font->angle(0);
-                    });
-                    $height += (5+$const);
-                    $image->text('ID '.$mintic->code, $image->width() - 10, $image->height() - $height, function($font) use($request,$const) {
-                        $font->file(public_path('fonts/Arial/ARIAL.TTF'));
-                        $font->size($const);
-                        $font->color($request->color);
-                        $font->align('right');
-                        $font->valign('top');
-                        $font->angle(0);
-                    });
-                }
-                $image->save(public_path('storage/upload/mintic/'.$name));
-            }else {
-                $size = $file->getClientSize() / 1000;
-                $path = Storage::putFileAs('public/upload/mintic', $file, $name);
-            }
-            if ($file_exists) {
-                $file_exists->update([
-                    'name' => $name,
-                    'description' => $request->name_d,
-                    'commentary' => $request->commentary,
-                    'size' => $size.' KB',
-                    'url' => 'public/upload/mintic/'.$name,
-                    'type' => $file->getClientOriginalExtension(),
-                    'place' => $request->place,
-                    'state' => 1
-                ]);
-                return response()->json([
-                    'success'=>'Se subio y actualizo correctamente el archivo',
-                    'size' => $size.' KB',
-                    'name' => $name,
-                    'type' => $file->getClientOriginalExtension(),
-                ]);
-            }
-            $mintic->files()->create([
-                'name' => $name,
-                'description' => $request->name_d,
-                'commentary' => $request->commentary,
-                'size' => $size.' KB',
-                'url' => 'public/upload/mintic/'.$name,
-                'type' => $file->getClientOriginalExtension(),
-                'place' => $request->place,
-                'state' => 1
-            ]);
-            return response()->json([
-                'success'=>'Se subio correctamente el archivo',
-                'size' => $size.' KB',
-                'name' => $name,
-                'type' => $file->getClientOriginalExtension(),
-            ]);
-        }else {
-            return response()->json(['success'=>'No se examino un archivo']);
-        }
+        $mintics = Mintic_School::get();
+        return response()->json(['data' => $mintics]);
     }
 }

@@ -12,7 +12,7 @@
     </ol>
 </section>
 <section class="content">
-    @include('includes.alerts')
+     
     <div class="hide">
         <select name="description_id[]" id="description_id_1" class="form-control description_id">
             <option selected disabled></option>

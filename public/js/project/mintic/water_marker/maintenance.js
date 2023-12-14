@@ -1,3 +1,4 @@
+var url = ''
 $(document).ready(function() {
     $.ajaxSetup({
         headers: {
@@ -12,14 +13,79 @@ $(document).ready(function() {
         e.preventDefault();
         upload_again(this.id);
     });
-    $('btn-send').click(function () {
-        
+    $(".btn-delete").click(function(e){
+        e.preventDefault();
+        dlete(this.id.split('_').pop());
     });
     $('.file_input').change(function () {
         num = this.id.split('_')[this.id.split('_').length - 1];
         $('#label_file_'+num).addClass('text-aqua');
     });
+
+    url = $('#url').data('url')
 });
+
+function dlete(btn) {
+
+    let form = $("#form_"+btn)[0];
+    data = new FormData(form);
+    let file_id = $('#file_id_'+btn).val();
+    $.ajax({
+        type:'POST',
+        enctype: 'multipart/form-data',
+        url:'/files/delete/'+file_id,
+        data:data,
+        processData: false,
+        contentType: false,
+        cache: false,
+        timeout: 1000000,
+        beforeSend: function(){
+            $("#"+btn).prop("disabled", true);
+        },
+        success:function(data){
+            console.log('response',data)
+            $('#file_new_'+btn).show();
+            $('#upload_ready_'+btn).hide();
+            $('#exit_'+btn).hide();
+            $("#"+btn).off();
+            $('#item_'+btn).prop("disabled", false);
+            $('#label_item_'+btn).prop("disabled", false);
+            $('#'+btn).click(function(e){
+                e.preventDefault();
+                upload(this.id);
+            });
+            $("#"+btn).prop("disabled", false);
+            $("#"+btn).removeClass("btn-load-again");
+            $("#"+btn).removeClass("btn-success");
+            $("#"+btn).addClass("btn-primary");
+            $("#"+btn).addClass("btn-upload");
+            $("#result_"+btn).addClass('text-success').text('');
+            $("#"+btn).text("Subir");
+            $('#delete_'+btn).hide();
+
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 6000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+            Toast.fire({
+                icon: 'success',
+                title: data.success
+            })
+        },
+        error: function (error) {
+            $("#result_"+btn).addClass('text-red').text("Error");
+            console.log("ERROR : ", error);
+            $("#"+btn).prop("disabled", false);
+        }
+    });
+};
 
 function upload(btn) {
     let form = $("#form_"+btn)[0];
@@ -29,7 +95,7 @@ function upload(btn) {
     $.ajax({
         type:'POST',
         enctype: 'multipart/form-data',
-        url:'/project/mintic/maintenance/'+id+'/'+item,
+        url: url,
         data:data,
         processData: false,
         contentType: false,
@@ -49,6 +115,7 @@ function upload(btn) {
                 $('#item_'+btn).prop("disabled", true);
                 $("#name_"+btn).text(data.name);
                 $("#size_"+btn).text(data.size);
+                $("#date_"+btn).text(data.date);
                 $("#"+btn).prop("disabled", false);
                 $("#"+btn).off();
                 $('#'+btn).click(function(e){
@@ -62,6 +129,12 @@ function upload(btn) {
                 $("#"+btn).text("Cargar de nuevo");
                 $('#type_'+btn).children().remove();
                 $('#icon_'+btn).removeClass('has-img');
+                $('#delete_'+btn).show();
+
+                if(data.file_id) {
+                    $('#file_id_'+btn).val(data.file_id);
+                }    
+
                 if(data.type.toLowerCase() == 'pdf'){
                     $('<i>',{
                         'class' : 'fa fa-file-pdf',

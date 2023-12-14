@@ -7,7 +7,14 @@
     <tr>
         <td></td>
         <td rowspan="7" colspan="4"></td>
-        <td rowspan="7" colspan="8" style="text-align: center">FORMATO NOTIFICACIÓN DEMANTENIMIENTO DE CENTROS DIGITALES</td>
+        <td rowspan="7" colspan="8" style="text-align: center">
+            @if ($id->type_format == 'Mantenimiento correctivo')
+                FORMATO NOTIFICACIÓN DE MANTENIMIENTO CORRECTIVO CENTROS DIGITALES
+            @endif
+            @if ($id->type_format == 'Mantenimiento preventivo')
+                FORMATO NOTIFICACIÓN DE MANTENIMIENTO PREVENTIVO CENTROS DIGITALES
+            @endif
+        </td>
         <td rowspan="7" colspan="3"></td>
     </tr>
     <tr><td></td></tr>
@@ -81,8 +88,8 @@
     <tr>
         <td></td>
         <td colspan="5" style="text-align: center;background: #D0CECE">SEÑALETICA EXTERIOR</td>
-        <td colspan="5" style="text-align: center;background: #D0CECE">SOLUCIÓN DE RESPALDO (4 HORAS SI APLICA)</td>
         <td colspan="5" style="text-align: center;background: #D0CECE">SEÑALETICA INTERIOR</td>
+        <td colspan="5" style="text-align: center;background: #D0CECE">SOLUCIÓN DE RESPALDO (4 HORAS SI APLICA)</td>
     </tr>
     <tr>
         <td></td>

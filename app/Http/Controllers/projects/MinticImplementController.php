@@ -5,6 +5,7 @@ namespace App\Http\Controllers\projects;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\InvUser;
+use App\Models\project\Mintic\inventory\EquimentDetail;
 use App\Models\project\Mintic\inventory\invMinticConsumable;
 use App\Models\project\Mintic\inventory\invMinticEquipment;
 use App\Models\project\Mintic\MinticConsumableImplement;
@@ -17,7 +18,7 @@ class MinticImplementController extends Controller
     {
         $this->middleware(['auth']);
         $this->middleware('verified');
-        $this->middleware('permission:Ver implementación proyectos de MINTIC|Crear asiganción de implemetación de MINTIC|Editar asiganción de implemetación de MINTIC|Ejecutar asiganción de implemetación de MINTIC|Ver asiganción de implemetación de MINTIC|Eliminar asiganción de implemetación de MINTIC',['only' => ['index']]);
+        $this->middleware('permission:Lista de implementaciones proyectos de MinTIC|Ver implementación proyectos de MINTIC|Crear asiganción de implemetación de MINTIC|Editar asiganción de implemetación de MINTIC|Ejecutar asiganción de implemetación de MINTIC|Ver asiganción de implemetación de MINTIC|Eliminar asiganción de implemetación de MINTIC',['only' => ['index']]);
         $this->middleware('permission:Crear asiganción de implemetación de MINTIC',['only' => ['create','store']]);
         $this->middleware('permission:Editar asiganción de implemetación de MINTIC',['only' => ['edit','update']]);
         $this->middleware('permission:Ejecutar asiganción de implemetación de MINTIC',['only' => ['run','save']]);
@@ -45,7 +46,7 @@ class MinticImplementController extends Controller
         $users = User::where('state',1)->get();
         $consumables = invMinticConsumable::where('status',1)->get();
         $equipments = invMinticEquipment::where('status',1)->get();
-        
+
         return view('projects.mintic.add.create',compact('id','users','consumables','equipments'));
     }
 
@@ -68,7 +69,7 @@ class MinticImplementController extends Controller
             'status' => 3,
             'commentary' => $request->commentary
         ]);
-        for ($i=0; $i < count($request->product); $i++) { 
+        for ($i=0; $i < count($request->product); $i++) {
             if ($request->product[$i] == 'consumable' && $request->description[$i]) {
                 $data->details()->create([
                     'productable_id' => $request->description[$i],
@@ -148,7 +149,7 @@ class MinticImplementController extends Controller
         $equipments = invMinticEquipment::get();
         return view('projects.mintic.add.edit',compact('id','item','users','consumables','equipments'));
     }
-    
+
     /**
      * Update the specified resource in storage.
      *
@@ -156,14 +157,14 @@ class MinticImplementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    
+
     public function update(Request $request,$id,MinticConsumableImplement $item)
     {
         $item->update([
             'commentary' => $request->commentary,
             'status' => $item->status == 2 ? 1 : ($item->status == 3 ? 3 : 1),
         ]);
-        
+
         $i = 0;
         foreach ($item->details as $value) {
             if ($value->productable_type == 'App\Models\project\Mintic\inventory\invMinticConsumable') {
@@ -179,7 +180,7 @@ class MinticImplementController extends Controller
             }
             MinticConsumableImplementDetail::find($value->id)->delete();
         }
-        for ($i=0; $i < count($request->product); $i++) { 
+        for ($i=0; $i < count($request->product); $i++) {
             $deliverable = isset($request->delivered[$i]) ? $request->delivered[$i] : 0;
             $spent = isset($request->spent[$i]) ? $request->spent[$i] : 0;
             if ($request->product[$i] == 'consumable' && $request->description[$i]) {
@@ -279,7 +280,7 @@ class MinticImplementController extends Controller
             }
             $i++;
         }
-        
+
         return redirect()->route('mintic_add_consumables',$id)->with('success','Se ha guardado la implementación correctamente');
     }
 }

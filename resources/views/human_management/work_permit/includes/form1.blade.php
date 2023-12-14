@@ -137,8 +137,29 @@
                 </div>
             </div>
             <div class="form-group">
+                ¿El día de hoy se desplaza en vehículo o moto de la empresa?
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" {{(old('vehiculo_desplazamiento') == 'Carro') ? 'checked' : '' }} name="vehiculo_desplazamiento" id="Vehiculo_Carro" value="Carro">
+                    <label class="form-check-label" for="Vehiculo_Carro">
+                        Carro
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" {{(old('vehiculo_desplazamiento') == 'Moto') ? 'checked' : '' }} name="vehiculo_desplazamiento" id="Vehiculo_Moto" value="Moto">
+                    <label class="form-check-label" for="Vehiculo_Moto">
+                        Moto
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" {{(old('vehiculo_desplazamiento') == 'No') ? 'checked' : '' }} name="vehiculo_desplazamiento" id="vehiculo_no" value="No">
+                    <label class="form-check-label" for="vehiculo_no">
+                        No
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
                 <label for="placa">Placa del vehículo en el cual se moviliza</label>
-                <select name="vehicle_id" id="vehicle_id" class="form-control">
+                <select name="vehicle_id" id="vehicle_id" class="form-control" >
                     <option selected disabled>Seleccione la placa del vehículo</option>
                     @foreach ($vehicles as $item)
                         @php
@@ -201,27 +222,6 @@
             <div class="form-group">
                 <label for="negligencias_coordinador"> Negligencias coordinador de su coordinador</label>
                 <input type="text" class="form-control" id="negligencias_coordinador" placeholder="Negligencias de su coordinador" name="negligencias_coordinador" value="{{old('negligencias_coordinador')}}">
-            </div>
-            <div class="form-group">
-                ¿El día de hoy se desplaza en vehículo o moto de la empresa?
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" {{(old('vehiculo_desplazamiento') == 'Carro') ? 'checked' : '' }} name="vehiculo_desplazamiento" id="Vehiculo_Carro" value="Carro">
-                    <label class="form-check-label" for="Vehiculo_Carro">
-                        Carro
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" {{(old('vehiculo_desplazamiento') == 'Moto') ? 'checked' : '' }} name="vehiculo_desplazamiento" id="Vehiculo_Moto" value="Moto">
-                    <label class="form-check-label" for="Vehiculo_Moto">
-                        Moto
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" {{(old('vehiculo_desplazamiento') == 'No') ? 'checked' : '' }} name="vehiculo_desplazamiento" id="vehiculo_no" value="No">
-                    <label class="form-check-label" for="vehiculo_no">
-                        No
-                    </label>
-                </div>
             </div>
             <div class="form-group">
                 ¿Estás trabajando o manipulando equipos Energizados?

@@ -13,7 +13,7 @@
     </ol>
 </section>
 <section class="content">
-    @include('includes.alerts')
+     
     <div class="box">
         <form action="{{ route('review_assignment_tools_update',$id->id) }}" method="post" enctype="multipart/form-data" autocomplete="off">
             <div class="box-body">

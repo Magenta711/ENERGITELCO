@@ -15,9 +15,6 @@ use Illuminate\Support\Facades\Storage;
 class answerController extends Controller
 {
 
-    public function __construct() {
-        
-    }
 
     public function index()
     {
@@ -103,6 +100,9 @@ class answerController extends Controller
             'form_id' => $form->id,
             'user_id' => auth()->check() ? auth()->id() : null,
             'user_form_id' => $form->limit_to_one ? $user->id : null,
+            'name_require' => isset($request->name_require) ? $request->name_require : null,
+            'cc_require' => isset($request->cc_require) ? $request->cc_require : null,
+            'role_require' => isset($request->role_requir) ? $request->role_require : null
         ]);
         $nt = 0;
         $nta = 0;
@@ -175,7 +175,7 @@ class answerController extends Controller
                             for ($i=0; $i < $request->num_file[$nfp]; $i++) {
                                 if ($request->hasFile('file')){
                                     if ($file = $request->file('file')[$nf]) {
-                                        $name = time().$file->getClientOriginalName();
+                                        $name = time().str_random().'.'.$file->getClientOriginalExtension();
                                         $path = Storage::putFileAs('public/upload/files', $file, $name);
                                         Answer::create([
                                             'question_id'=>$question->id,
@@ -281,5 +281,17 @@ class answerController extends Controller
     public function forAuth($form,$email)
     {
         return redirect()->route('answers_create',['form' => $form,'email' => $email]);
+    }
+    public function calification(Request $request,Order $id)
+    {
+        $id->update([
+            'qualification' => $request->qualification
+        ]);
+        foreach ($id->answers as $answer){
+            Answer::find($answer->id)->update([
+                'calification' => isset($request->qualification_answer[$answer->question_id]) ? $request->qualification_answer[$answer->question_id] : 0
+            ]);
+        }
+        return redirect()->back()->with('success','Se ha calificado la respuesta correctamente');
     }
 }

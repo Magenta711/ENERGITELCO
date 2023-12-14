@@ -13,7 +13,7 @@
     </ol>
 </section>
 <section class="content">
-    @include('includes.alerts')
+     
     <div class="box">
         <div class="box-header">
             <div class="box-tools">
@@ -59,7 +59,7 @@
             </div>
         </div>
         <div class="box-footer">
-            <button class="btn btn-sm btn-primary">Guardar</button>
+            <button class="btn btn-sm btn-primary btn-send">Guardar</button>
         </div>
         </form>
     </div>

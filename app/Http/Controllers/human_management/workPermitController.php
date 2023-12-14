@@ -20,7 +20,9 @@ use App\Models\Tasking;
 use App\Notifications\notificationMain;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use App\Models\bonus\MinorBoxUser;
 use Barryvdh\DomPDF\Facade as PDF;
+use App\Models\work1_cut_bonus;
 
 class workPermitController extends Controller
 {
@@ -41,15 +43,40 @@ class workPermitController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($all = null)
+    public function index()
     {
-        if ($all) {
-            $work_permits = Work1::with(['responsableAcargo','users','coordinadorAcargo'])->get();
-        }else {
-            $work_permits = Work1::with(['responsableAcargo','users','coordinadorAcargo'])->whereBetween('created_at',[now()->subDays(10), now()])->get();
-        }
+        $work_permits = Work1::with(['responsableAcargo','users','coordinadorAcargo'])->whereBetween('created_at',[now()->subDays(10), now()])->get();
         return view('human_management.work_permit.index',compact('work_permits'));
     }
+    public function index2()
+    {
+        return view('human_management.work_permit.index2');
+    }
+    public function list()
+    {
+        $work_permits = Work1::select([
+            'id',
+            'codigo_formulario',
+            'estado',
+            'placa_vehiculo',
+            'nombre_eb',
+            'max_altura',
+            'created_at',
+            // 'coordinador',
+            // 'responsable'
+        ])->with([
+            // 'responsableAcargo',
+            'users' => function ($query) {
+                $query->select(['name']);
+            },
+            // 'coordinadorAcargo',
+            'vehicle',
+        ])->get();
+        return response()->json(['data' => $work_permits]);
+    }
+    //  => function ($query) {
+    //     $query->select(['name']);
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -58,14 +85,64 @@ class workPermitController extends Controller
      */
     public function create()
     {
+        $minor_boxes = MinorBoxUser::where('status',1)->where('user_id',auth()->id())->first();
+        $minor_box_unapproved = $this->getMinorBoxByUserPendingApprove();
+        // return $minor_box_unapproved;
         $users = User::where('state',1)->with('roles')->get();
         $projects = Project::get();
         $vehicles = invVehicle::where('status','!=',0)->get();
         $bonus_techinicals = commission_technical::get();
-        $taskings = Tasking::whereYear('created_at',now())->whereMonth('created_at',now())->whereDay('created_at',now())->get();
+        $taskings = Tasking::whereYear('date_start',now())->whereMonth('date_start',now())->whereDay('date_start',now())->get();
+        $myTasking = Tasking::whereYear('date_start',now())->whereMonth('date_start',now())->whereDay('date_start',now())->whereHas('users',function ($query)
+        {
+            return $query->where('id',auth()->id());
+        })->get();
         $works = Work1::whereYear('created_at',now())->whereMonth('created_at',now())->whereDay('created_at',now())->get();
         $message = $this->message;
-        return view('human_management.work_permit.create',compact('users','message','projects','vehicles','bonus_techinicals','taskings','works'));
+        return view('human_management.work_permit.create',compact('users','message','projects','vehicles','bonus_techinicals','taskings','works','minor_boxes', 'minor_box_unapproved'));
+    }
+
+    //cuanto tine la persona->informes
+    //cuanto tiene pendiente->ver->caja menor->codigo generar corte
+
+
+    public function getMinorBoxByUserPendingApprove()
+    {
+        $cut = work1_cut_bonus::where('status',1)->get()->last();
+        if (!$cut) {
+            $cut = work1_cut_bonus::where('status','!=',0)->get()->last();
+        }
+
+        $now = now();
+
+        $items = Work1::whereBetween('created_at',[$cut->end_date,$now])
+                    ->where('estado','!=','No aprobado')
+                    ->where('responsable',auth()->id())
+                    ->with(['work_add'])
+                    ->select('id')
+                    ->get();
+        $array = [];
+        foreach($items as $item) {
+            $t3 = $item->work_add->f9a3u1 && is_numeric($item->work_add->f9a3u1) ? $item->work_add->f9a3u1 : 0;
+            $deli = $item->work_add->deliverable_u1 && is_numeric($item->work_add->deliverable_u1) ? $item->work_add->deliverable_u1 : 0;
+            $dis = $item->work_add->discharges_u1 && is_numeric($item->work_add->discharges_u1) ? $item->work_add->discharges_u1 : 0;
+
+            if ($array) {
+                $caja = $array['caja'];
+                $count = $array['count'];
+                $array = [
+                    'caja' => $caja + $t3,
+                    'count' => $count + 1
+                ];
+            }else {
+                $array = [
+                    'caja' => $t3,
+                    'count' => 1
+                ];
+            }
+        }
+
+        return $array;
     }
 
     /**
@@ -96,7 +173,7 @@ class workPermitController extends Controller
             'f9a3u2' => 'integer',
             'f9a3u3' => 'integer',
         ]);
-        
+
         $required_energizado = '';
         $required_max_altura = '';
         $required_vehiculo = '';
@@ -142,7 +219,7 @@ class workPermitController extends Controller
         }else {
             if($request->max_altura == 'Si'){
                 if (
-                    $request->f2a1 == '' || $request->f2a2 == '' || $request->f2a3 == '' || $request->f2a4 == '' || $request->f2a5 == '' || $request->f2a6 == '' || $request->f2a7 == '' ||$request->documentacion_personal == '' || 
+                    $request->f2a1 == '' || $request->f2a2 == '' || $request->f2a3 == '' || $request->f2a4 == '' || $request->f2a5 == '' || $request->f2a6 == '' || $request->f2a7 == '' ||$request->documentacion_personal == '' ||
                     $request->f2b1u1 == '' || $request->f2b2u1 == '' || $request->f2b3u1 == '' || $request->f2b4u1 == '' || $request->f2b5u1 == '' || $request->f2b6u1 == '' ||  $request->f2c1u1 == '' || $request->f2c2u1 == '' || $request->f2c4u1 == '' || $request->f2c3u1 == '' ||
                     $request->f2d1 == '' || $request->f2d2 == '' || $request->f2d3 == '' || $request->f2d4 == '' ||
                     $request->f2e1 == '' || $request->f2e2 == '' || $request->f2e3 == '' || $request->f2e4 == '' || $request->f2e5 == '' || $request->f2e6 == '' || $request->f2e7 == ''
@@ -154,7 +231,7 @@ class workPermitController extends Controller
         if ($required_energizado || $required_max_altura || $required_vehiculo || $form2 || $form4 || $form5 || $form6) {
             return redirect()->back()->withErrors([$required_energizado,$required_max_altura,$required_vehiculo,$form2,$form4,$form5,$form6])->withInput();
         }
-        
+
         if ($request->f8a1 == '' || $request->f8a1 == 'No' || $request->f8a2 == '' || $request->f8a2 == 'No' || $request->f8a3 == '' || $request->f8a3 == 'No' || $request->f8a4 == '' || $request->f8a4 == 'No' || $request->f8a5 == '' || $request->f8a5 == 'No'){
             $form8 = "El ítem 7 de es obligatorio y/o no permite respuesta \"no\" para el envio del formato";
             return redirect()->back()->withErrors([$form8])->withInput();
@@ -216,7 +293,7 @@ class workPermitController extends Controller
         }
 
         if($request->hasFile('archivos')){
-            for ($i=0; $i < count($request->file('archivos')); $i++) { 
+            for ($i=0; $i < count($request->file('archivos')); $i++) {
                 $file = $request->file('archivos')[$i];
                 $name = time().str_random().'.'.$file->getClientOriginalExtension();
                 if ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg') {
@@ -236,6 +313,11 @@ class workPermitController extends Controller
         }
 
         foreach ($request->cedula as $user) {
+            $tasking[$user] = Tasking::whereBetween('date_start',[now()->format('Y-m-d 00:00:00'),now()->format('Y-m-d 23:59:59')])->whereHas('users',function ($query) use ($user)
+            {
+                $query->where('id',$user);
+            })->first();
+
             Responsable::create([
                 'user_id' => $user,
                 'responsibles_id' => $id->id,
@@ -243,19 +325,130 @@ class workPermitController extends Controller
             ]);
         }
 
+        $arrayId = array();
+        $unData = array();
+        foreach ($tasking as $key => $value) {
+            if ($value) {
+                if (array_key_exists($value->id,$arrayId)) {
+                    array_push( $arrayId[$value->id] , [ $key => true, 'data' => $value ] );
+                }else {
+                    $arrayId[$value->id] = [ $key => true ];
+                }
+            }else {
+                $unData[$key] = $key;
+            }
+        }
+
+        if ($unData) {
+            // if (count($unData) == count($request->cedula)) {
+
+            // }else {
+                if ($arrayId) {
+                    if (count($arrayId) == 1) {
+                        foreach ($arrayId as $key => $value) {
+                            $tasking = Tasking::find($key);
+                            foreach ($unData as $ke => $value) {
+                                Responsable::create([
+                                    'user_id' => $ke,
+                                    'responsibles_type' => 'App\Models\Tasking',
+                                    'responsibles_id' => $key,
+                                ]);
+                            }
+                            if ($request->vehicle_id) {
+                                $vehicleVerify = false;
+                                foreach ($tasking->vehicles as $key => $value) {
+                                    if ($value->vehicle->id == $request->vehicle_id) {
+                                        $vehicleVerify = true;
+                                    }
+                                }
+                                if (!$vehicleVerify) {
+                                    $tasking->vehicles()->create([
+                                        'vehicle_id' => $request->vehicle_id
+                                    ]);
+                                }
+                            }
+                        }
+                    }else{
+                        $ready = false;
+                        foreach ($arrayId as $key => $value) {
+                            if (!$ready) {
+                                $tasking = Tasking::find($key);
+                                foreach ($unData as $ke => $value) {
+                                    Responsable::create([
+                                        'user_id' => $ke,
+                                        'responsibles_type' => 'App\Models\Tasking',
+                                        'responsibles_id' => $key,
+                                    ]);
+                                }
+                                if ($request->vehicle_id) {
+                                    $vehicleVerify = false;
+                                    foreach ($tasking->vehicles as $key => $value) {
+                                        if ($value->vehicle->id == $request->vehicle_id) {
+                                            $vehicleVerify = true;
+                                        }
+                                    }
+                                    if (!$vehicleVerify) {
+                                        $tasking->vehicles()->create([
+                                            'vehicle_id' => $request->vehicle_id
+                                        ]);
+                                    }
+                                }
+                                $ready = true;
+                            }
+                        }
+                    }
+                }else {
+                    if ($request->department && $request->municipality) {
+                        $tasking = Tasking::create([
+                            'responsable_id' => auth()->id(),
+                            'date_start' => now()->format('Y-m-d H:i:s'),
+                            'department' => $request->department,
+                            'municipality' => $request->municipality,
+                            'project' => 'Otro',
+                            'user_inv' => null,
+                            'am' => 1,
+                            'pm' => 1,
+                            'description' => null,
+                            'commentaries' => 'Auto del permiso de trabajo '.$id->id,
+                            'eb_id' => $request->eb,
+                            'station_name' => $request->nombre_eb,
+                            'id_beneficiario' => $request->id_beneficiario ? $request->id_beneficiario : null,
+                            'lat' => $request->lat,
+                            'long' => $request->long,
+                            'status' => 2,
+                        ]);
+
+                        foreach ($unData as $ke => $value) {
+                            Responsable::create([
+                                'user_id' => $ke,
+                                'responsibles_type' => 'App\Models\Tasking',
+                                'responsibles_id' => $tasking->id,
+                            ]);
+                        }
+                        if ($request->vehicle_id) {
+                            $tasking->vehicles()->create([
+                                'vehicle_id' => $request->vehicle_id
+                            ]);
+                        }
+                    }
+                }
+            // }
+        }
+
         $id->coordinadorAcargo->notify(new notificationMain($id->id,'Solicitud de permiso de trabajo '.$id->id,'human_management/work_permit/show/'));
-        Mail::send('human_management.work_permit.emails.main', ['format' => $id,], function ($menssage) use ($id)
+        Mail::send('human_management.work_permit.emails.main', ['format' => $id], function ($menssage) use ($id)
         {
             $emails = system_setting::where('state',1)->pluck('emails_before_approval')->first();
             $company = general_setting::where('state',1)->pluck('company')->first();
             $email = explode(';',$emails);
-            for ($i=0; $i < count($email); $i++) { 
+            for ($i=0; $i < count($email); $i++) {
                 if($email[$i] != ''){
                     $menssage->to(trim($email[$i]),$company);
                 }
             }
             $menssage->to($id->responsableAcargo->email,$id->responsableAcargo->name)->to($id->coordinadorAcargo->email,$id->coordinadorAcargo->name)->subject("Energitelco S.A.S sin aprobar ".$id->id);
         });
+
         return redirect()->route('work_permit')->with('success','Se ha enviado el formulario correctamente para su aprobación por parte de un coordinador.');
 
     }
@@ -316,7 +509,7 @@ class workPermitController extends Controller
         $id->delete();
         return redirect()->route('work_permit')->with('success','Se ha eliminado el formato correctamente');
     }
-    
+
     /**
      * Download in pdf the specified resource from storage.
      *
@@ -328,7 +521,7 @@ class workPermitController extends Controller
         $pdf = PDF::loadView('human_management/work_permit/pdf/main',['trabajo' => $id]);
         return $pdf->download($id->codigo_formulario.'-'.$id->id.'_PERMISO_DE_TRABAJO.pdf');
     }
-    
+
     /**
      * Aprove the specified resource from storage.
      *
@@ -357,7 +550,7 @@ class workPermitController extends Controller
                 'coordinador' => auth()->id(),
                 'commentary'=>$request->commentary,
             ]);
-            
+
             foreach ($id->users as $user) {
                 $user->notify(new notificationMain($id->id,'Se ha aprobado la solicitud de permiso de trabajo '.$id->id,'human_management/work_permit/show/'));
             }
@@ -378,14 +571,14 @@ class workPermitController extends Controller
                 $menssage->subject("Energitelco S.A.S aprobado el PERMISO DE TRABAJO ".$id->id);
             });
 
-            return redirect()->route('approval')->with(['success'=>'Se ha aprobado el permiso de trabajo '.$id->id.' correctamente','sudmenu' => 1]);
+            return redirect()->back()->with(['success'=>'Se ha aprobado el permiso de trabajo '.$id->id.' correctamente']);
         }else {
             $id->update([
                 'estado'=>"No aprobado",
                 'commentary'=>$request->commentary,
                 'coordinador' => auth()->id(),
             ]);
-    
+
             foreach ($id->users as $user) {
                 // Notification
                 $user->notify(new notificationMain($id->id,'No se aprobó la solicitud de permiso de trabajo '.$id->id,'human_management/work_permit/show/'));
@@ -396,7 +589,7 @@ class workPermitController extends Controller
                 Session::forget('notificaiones_aprobacion');
             }
 
-            return redirect()->route('approval')->with(['success'=>'Se ha desaprobado el permiso de trabajo correctamente','sudmenu'=>1]);
+            return redirect()->back()->with(['success'=>'Se ha desaprobado el permiso de trabajo correctamente']);
         }
     }
 }

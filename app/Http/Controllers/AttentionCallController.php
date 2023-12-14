@@ -195,7 +195,7 @@ class AttentionCallController extends Controller
 
         $id->receiverCall->notify(new notificationMain($id->id,'descargo no aprobado '.$id->id,'show_called/'));
 
-        return redirect()->route('attention_call')->with(['success'=>'El descargo fue desaprobado correctamente','sudmenu' => 10]);
+        return redirect()->back()->with(['success'=>'El descargo fue desaprobado correctamente']);
     }
 
     public function approve_call(Request $request,AttentionCall $id)
@@ -222,6 +222,6 @@ class AttentionCallController extends Controller
             }
             $menssage->to($id->receiverCall->email,$id->receiverCall->name)->subject("Energitelco S.A.S. descargo aprobado.");
         });
-        return redirect()->route('attention_call')->with(['success'=>'El descargo fue aprobado correctamente','sudmenu'=>10]);
+        return redirect()->back()->with(['success'=>'El descargo fue aprobado correctamente']);
     }
 }

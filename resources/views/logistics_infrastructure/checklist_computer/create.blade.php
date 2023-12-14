@@ -13,7 +13,7 @@
     </ol>
 </section>
 <section class="content">
-    @include('includes.alerts')
+     
     {{-- setion "content" --}}
     <div class="box">
         <form action="{{ route('checklist_computer_maintenance_store') }}" method="post" enctype="multipart/form-data" autocomplete="off">

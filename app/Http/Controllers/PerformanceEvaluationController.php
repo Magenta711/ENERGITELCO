@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PerformanceEvaluation;
 use App\User;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Mail;
 use App\Notifications\notificationMain;
 
@@ -18,6 +19,7 @@ class PerformanceEvaluationController extends Controller
         $this->middleware('permission:Evaluar evaluaciones de desempeño',['only' => ['autoevaluation','self_assessment_store']]);
         $this->middleware('permission:Calificar evaluaciones de desempeño',['only' => ['responder','store']]);
         $this->middleware('permission:Aprobar evaluación de desempeño',['only' => ['approve_performance','not_approve_performance']]);
+        $this->middleware('permission:Descargar evaluación de desempeño',['only' => ['approve_performance','not_approve_performance']]);
     }
     /**
      * Display a listing of the resource.
@@ -216,9 +218,10 @@ class PerformanceEvaluationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(PerformanceEvaluation $id)
     {
-        //
+        $id->delete();
+        return redirect()->back()->with(['success'=>'Se ha eliminado la evaluación de desempeño correctamente']);
     }
 
     public function autoevaluation(PerformanceEvaluation $id)
@@ -243,7 +246,7 @@ class PerformanceEvaluationController extends Controller
 
         $id->evaluado->notify(new notificationMain($id->id,'Evaluación de desempeño aprobada '.$id->id,'performance_evaluation/show/'));
         //Mail
-        return redirect()->route('approval')->with(['success'=>'Se ha aprobado la evaluación de desempeño correctamente','sudmenu' => 12]);
+        return redirect()->back()->with(['success'=>'Se ha aprobado la evaluación de desempeño correctamente']);
     }
     
     public function not_approve_performance(PerformanceEvaluation $id)
@@ -252,6 +255,15 @@ class PerformanceEvaluationController extends Controller
         //Mail
         $id->evaluado->notify(new notificationMain($id->id,'Evaluación de desempeño desaprobada '.$id->id,'performance_evaluation/show/'));
 
-        return redirect()->route('approval')->with(['success'=>'Se ha desaprobado la evaluación de desempeño correctamente','sudmenu'=>12]);
+        return redirect()->back()->with(['success'=>'Se ha desaprobado la evaluación de desempeño correctamente']);
+    }
+
+    public function download($id)
+    {
+        $id = PerformanceEvaluation::with(['responsable','evaluado'])->find($id);
+        
+        $pdf = PDF::loadView('performance_evaluation/pdf/main',['id' => $id]);
+         $codigo = ($id->type_evaluation_id == 1) ? 'H-FR-04' : (($id->type_evaluation_id == 2) ? 'H-FR-05' : 'H-FR-05');
+        return $pdf->download($codigo.'-'.$id->id.'_EVALUACION_DESEMPENO.pdf');
     }
 }

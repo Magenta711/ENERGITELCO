@@ -68,7 +68,7 @@ function groupMakeups($cable){
             @endforeach
         @endforeach
     </div>
-    @include('includes.alerts')
+     
     <div class="box">
         <div class="box-header">
             <div class="box-title">Crear proyecto</div>

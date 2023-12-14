@@ -18,7 +18,7 @@
     @foreach ($users as $user)
         <input type="hidden" disabled value="{{$user->name}}" id="name_{{$user->id}}">
         <input type="hidden" disabled value="{{$user->register && $user->register->date ? $user->register->date : $user->created_at }}" id="date_start_{{$user->id}}">
-        <input type="hidden" disabled value="{{ ($user->register && $user->register->date_end != '') ? $user->register->date_end : ($user->state == 0) ? $user->updated_at : '' }}" id="date_end_{{$user->id}}">
+        <input type="hidden" disabled value="{{ ($user->register && $user->register->date_end != '') ? $user->register->date_end : (($user->state == 0) ? $user->updated_at : '') }}" id="date_end_{{$user->id}}">
         <input type="hidden" disabled value="{{ ($user->register && $user->register->hasContract()) ? $user->register->hasContract()->salary : 0 }}" id="salary_{{$user->id}}">
         {{-- <input type="hidden" disabled value="{{ ($user->register && $user->register->date_end != '') ? $user->register->date_end : (($user->state == 0) ? $user->updated_at : now()->format('Y-m-d')) }}" id="date_end_r_{{$user->id}}"> --}}
         @foreach ($user->workPermssion7 as $permission)
@@ -31,22 +31,24 @@
             @endif
         @endforeach
         @foreach ($user->Work8Users as $pay)
-            @if ($pay->work->estado == 'Aprobado')
+            @if ($pay->work && $pay->work->estado == 'Aprobado')
+                <input type="hidden" class="id_pay_{{ $user->id }}" value="{{ $pay->id }}">
                 <input type="hidden" class="salary_{{ $user->id }}" value="{{ $pay->total_devengado_tx - $pay->extras_sc_tx - $pay->surcharge_n_tx - $pay->extras_d_tx - $pay->extras_dc_tx - $pay->extras_n_tx - $pay->extras_s_tx - $pay->holyday_n_tx - $pay->extras_hn_tx - $pay->unpaid_leave_tx - $pay->disabilities_1_tx - $pay->disabilities_2_tx }}">
                 <input type="hidden" class="assistance_{{ $user->id }}" value="{{ $pay->assistance_tx }}">
                 <input type="hidden" class="extras_{{ $user->id }}" value="{{ $pay->extras_sc_tx+$pay->surcharge_n_tx + $pay->extras_d_tx + $pay->extras_dc_tx + $pay->extras_n_tx + $pay->extras_s_tx + $pay->holyday_n_tx + $pay->extras_hn_tx + $pay->unpaid_leave_tx + $pay->disabilities_1_tx + $pay->disabilities_2_tx }}">
                 <input type="hidden" class="month_{{ $user->id }}" value="{{ intval(explode('-',$pay->work->start_date)[1]) }}">
+                <input type="hidden" class="year_{{ $user->id }}" value="{{ intval(explode('-',$pay->work->start_date)[0]) }}">
             @endif
         @endforeach
     @endforeach
 </div>
 
 <section class="content">
-    @include('includes.alerts')
+     
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="box">
-                <form action="{{ route('settlement_store') }}" method="post" enctype="multipart/form-data" autocomplete="off">
+                <form action="{{ route('settlement_store') }}" method="post" enctype="multipart/form-data" autocomplete="off" id="form-settlement">
                     <div class="box-body">
                     @csrf
                     
@@ -85,7 +87,7 @@
 @endsection
 @section('js')
     <script src="{{ asset('js/moment/moment.js') }}" defer></script>
-    <script src="{{ asset('js/forms/form9.js') }}" defer></script>
+    <script src="{{ asset('js/forms/settement.js') }}" defer></script>
     <script>
         var bPreguntar = true;
     
@@ -93,7 +95,7 @@
         $(document).ready(function() {
             $('#send').click(function (){
                 bPreguntar = false;
-                return d.submit();
+                return $('#form-settlement').submit();
             });
         });
         function preguntarAntesDeSalir()

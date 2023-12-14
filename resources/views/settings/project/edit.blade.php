@@ -13,7 +13,7 @@
     </ol>
 </section>
 <section class="content">
-    @include('includes.alerts')
+     
             <form action="{{route('project_setting_update',$id->id)}}" method="POST">
                 @csrf
                 @method('PUT')

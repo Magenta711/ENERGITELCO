@@ -14,6 +14,9 @@ class inventaryTechnicalController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('verified');
+        $this->middleware('permission:Ver inventario de técnicos|Editar inventario de técnicos|Lista de inventario de técnicos',['only'=>['index']]);
+        $this->middleware('permission:Ver inventario de técnicos',['only'=>['show']]);
+        $this->middleware('permission:Editar inventario de técnicos',['only'=>['edit','update']]);
     }
     /**
      * Display a listing of the resource.

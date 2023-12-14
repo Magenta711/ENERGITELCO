@@ -13,7 +13,7 @@
         </ol>
     </section>
     <section class="content">
-        @include('includes.alerts')
+         
         <div class="box">
             <div class="box-header">
                 <div class="box-title">Equipos MINTIC</div>
@@ -33,6 +33,7 @@
                                 <th>Nombre</th>
                                 <th>Marca</th>
                                 <th>Fecha</th>
+                                <th>Tipo</th>
                                 <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
@@ -45,7 +46,8 @@
                                     <td>{{$equipment->item}}</td>
                                     <td>{{$equipment->brand }}</td>
                                     <td>{{$equipment->created_at}}</td>
-                                    <td>{{$equipment->status == 1 ? 'En bodega' : ($equipment->status == 2 ? 'En comisión' : 'Instalado') }}</td>
+                                    <td>{{$equipment->status == 1 ? 'En bodega' : ($equipment->status == 2 ? 'En comisión' : ( $equipment->status == 3 ? 'Instalado' : ($equipment->status == 4 ? 'En inversa' : 'En garantía'))) }}</td>
+                                    <td>{{$equipment->type }}</td>
                                     <td>
                                         @can('Ver equipo al inventario Mintic')
                                             <a href="{{route('mintic_inventory_equipment_show',$equipment->id)}}" class="btn btn-sm btn-success">Ver</a>

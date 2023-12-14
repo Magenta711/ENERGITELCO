@@ -12,7 +12,7 @@
     </ol>
 </section>
 <section class="content">
-    @include('includes.alerts')
+     
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Lista de reportes de novedades de nomina y horas extras</h3>
@@ -63,7 +63,7 @@
                                         @endcan
                                     @endif
                                     @if ($payroll->estado != 'Aprobado')
-                                        @can('Aprobar reporte de novedades de nómina y horas extras')
+                                        @can('Eliminar formato de reporte de novedades de nómina y horas extras')
                                             <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete_{{$payroll->id}}">Eliminar</button>
                                             <div class="modal fade" id="delete_{{$payroll->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-md">

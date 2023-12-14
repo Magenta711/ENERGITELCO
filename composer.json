@@ -10,12 +10,14 @@
     "require": {
         "php": "^7.1.3",
         "barryvdh/laravel-dompdf": "^0.8.5",
+        "doctrine/dbal": "2.*",
         "fideloper/proxy": "^4.0",
         "intervention/image": "^2.5",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
         "laraveles/spanish": "^1.2",
         "maatwebsite/excel": "^3.1",
+        "paragonie/random_compat": "^9.99",
         "spatie/laravel-permission": "^3.4"
     },
     "require-dev": {

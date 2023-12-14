@@ -15,6 +15,8 @@ class bonusPayExport implements FromView, WithDrawings, WithStyles, ShouldAutoSi
 {
     use Exportable;
 
+    protected $data;
+
     public function __construct($data) {
         $this->data = $data;
     }

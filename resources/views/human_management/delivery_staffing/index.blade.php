@@ -12,7 +12,7 @@
     </ol>
 </section>
 <section class="content">
-    @include('includes.alerts')
+     
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Lista de entrega de dotación personal</h3>
@@ -37,31 +37,31 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($delivery_staffings as $delivery_staffings)
+                            @foreach ($delivery_staffings as $delivery_staffing)
                             <tr>
-                                <th scope="row">{{ $delivery_staffings->id }}</th>
-                                <th scope="row">{{ $delivery_staffings->codigo_formulario ? $delivery_staffings->codigo_formulario.'-'.$delivery_staffings->id : 'N/A' }}</th>
-                                <td>{{ ($delivery_staffings->responsableAcargo) ? $delivery_staffings->responsableAcargo->name : ''}}</td>
-                                <td>{{ ($delivery_staffings->estado != 'Sin aprobar' && $delivery_staffings->coordinadorAcargo) ? $delivery_staffings->coordinadorAcargo->name : ''}}</td>
-                                <td>{{ $delivery_staffings->created_at }}</td>
+                                <th scope="row">{{ $delivery_staffing->id }}</th>
+                                <th scope="row">{{ $delivery_staffing->codigo_formulario ? $delivery_staffing->codigo_formulario.'-'.$delivery_staffing->id : 'N/A' }}</th>
+                                <td>{{ ($delivery_staffing->responsableAcargo) ? $delivery_staffing->responsableAcargo->name : ''}}</td>
+                                <td>{{ ($delivery_staffing->estado != 'Sin aprobar' && $delivery_staffing->coordinadorAcargo) ? $delivery_staffing->coordinadorAcargo->name : ''}}</td>
+                                <td>{{ $delivery_staffing->created_at }}</td>
                                 <td>
-                                    <small class="label {{($delivery_staffings->estado == 'Sin aprobar') ? 'bg-green' : (($delivery_staffings->estado == 'Aprobado') ? 'bg-blue' : 'bg-red') }}">{{$delivery_staffings->estado}}</small>
+                                    <small class="label {{($delivery_staffing->estado == 'Sin aprobar') ? 'bg-green' : (($delivery_staffing->estado == 'Aprobado') ? 'bg-blue' : 'bg-red') }}">{{$delivery_staffing->estado}}</small>
                                 </td>
                                 <td>
                                     @if (
                                         auth()->user()->hasPermissionTo('Aprobar solicitud de entrega de dotación personal') ||
                                         auth()->user()->hasPermissionTo('Consultar entrega de dotación personal')
                                     )
-                                        <a href="{{route('delivery_staffing_show',$delivery_staffings->id)}}" class="btn btn-sm btn-success">Ver</a>
+                                        <a href="{{route('delivery_staffing_show',$delivery_staffing->id)}}" class="btn btn-sm btn-success">Ver</a>
                                     @endif
-                                    @if ($delivery_staffings->estado == 'Aprobado')
+                                    @if ($delivery_staffing->estado == 'Aprobado')
                                         @can('Descargar PDF de entrega de dotación personal')
-                                            <a href="{{route("delivery_staffing_download",$delivery_staffings->id)}}" class="btn btn-warning btn-sm">Descargar</a>
+                                            <a href="{{route("delivery_staffing_download",$delivery_staffing->id)}}" class="btn btn-warning btn-sm">Descargar</a>
                                         @endcan
                                     @endif
                                     @can('Eliminar formato de entrega de dotación personal')
-                                        <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete_{{$delivery_staffings->id}}">Eliminar</button>
-                                        <div class="modal fade" id="delete_{{$delivery_staffings->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                        <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete_{{$delivery_staffing->id}}">Eliminar</button>
+                                        <div class="modal fade" id="delete_{{$delivery_staffing->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-md">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -70,7 +70,7 @@
                                                         </button>
                                                         <h4 class="modal-title">Eliminar formato</h4>
                                                     </div>
-                                                    <form action="{{route('delivery_staffing_delete',$delivery_staffings->id)}}" method="post">
+                                                    <form action="{{route('delivery_staffing_delete',$delivery_staffing->id)}}" method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                         <div class="modal-body">

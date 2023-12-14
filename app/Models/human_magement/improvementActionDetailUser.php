@@ -16,6 +16,6 @@ class improvementActionDetailUser extends Model
 
     public function detail()
     {
-        return $this->hasOne(improvementActionDetailUser::class,'id','detail_id');
+        return $this->hasOne(improvementActionDetail::class,'id','detail_id');
     }
 }

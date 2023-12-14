@@ -7,7 +7,14 @@
     <tr>
         <td></td>
         <td rowspan="7" colspan="4" style="borde: 1px solid #000000;"></td>
-        <td rowspan="7" colspan="8" style="text-align: center">FORMATO NOTIFICACIÓN DEMANTENIMIENTO DE CENTROS DIGITALES</td>
+        <td rowspan="7" colspan="8" style="text-align: center;border: 1px solid #000000;">
+            @if ($id->type_format == 'Mantenimiento correctivo')
+                FORMATO NOTIFICACIÓN DE MANTENIMIENTO CORRECTIVO CENTROS DIGITALES
+            @endif
+            @if ($id->type_format == 'Mantenimiento preventivo')
+                FORMATO NOTIFICACIÓN DE MANTENIMIENTO PREVENTIVO CENTROS DIGITALES
+            @endif
+        </td>
         <td rowspan="7" colspan="3" style="borde: 1px solid #000000;"></td>
     </tr>
     <tr><td></td></tr>

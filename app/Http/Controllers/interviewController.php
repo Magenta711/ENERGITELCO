@@ -68,11 +68,11 @@ class interviewController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    { 
         //Validate
         $request->validate([
             'name' => ['required'],
-            'email' => ['required','email','unique:registers,email'],
+            'email' => ['required','email'],
             'document' => ['required','unique:registers,document'],
             'address' => ['required'],
             'age' => ['required'],
@@ -84,7 +84,10 @@ class interviewController extends Controller
         //save
         $interview = interview::create($request->all());
 
-        $register = Register::create($request->all());
+        $register = Register::where('document',$request->document)->first();
+        if (!$register) {
+            $register = Register::create($request->all());
+        }
         
         $interview->update(['responsable_id' => auth()->id(),'register_id' => $register->id]);
         
@@ -112,7 +115,7 @@ class interviewController extends Controller
 
         foreach ($users as $user) {
             if ($user->hasPermissionTo('Aprobar entrevistas')){
-                $user->notify(new notificationMain($interview->id,'Nueva entrevista '.$interview->id,'interview/show/'));
+                $user->notify(new notificationMain($interview->id,'Nueva entrevista '.$interview->id,'human_management/interview/show/'));
             }
         }
         
@@ -206,7 +209,7 @@ class interviewController extends Controller
 
         foreach ($users as $user) {
             if ($user->hasPermissionTo('Editar entrevistas')){
-                $user->notify(new notificationMain($id->id,'Entrevista editada '.$id->id,'interview/show/'));
+                $user->notify(new notificationMain($id->id,'Entrevista editada '.$id->id,'human_management/interview/show/'));
             }
         }
         
@@ -243,18 +246,18 @@ class interviewController extends Controller
     {
         $id->update(['state' => 1,'approver_id'=>auth()->id()]);
 
-        $id->responsable->notify(new notificationMain($id->id,'Se ha aprobado la entrevista '.$id->id,'interview/show/'));
+        $id->responsable->notify(new notificationMain($id->id,'Se ha aprobado la entrevista '.$id->id,'human_management/interview/show/'));
 
-        return redirect()->route('approval')->with(['success'=>'Se ha aprobado la entrevista correctamente.','sudmenu' => 11]);
+        return redirect()->back()->with(['success'=>'Se ha aprobado la entrevista correctamente.']);
     }
     
     public function not_approve(interview $id)
     {
         $id->update(['state' => 2,'approver_id'=>auth()->id()]);
 
-        $id->responsable->notify(new notificationMain($id->id,'Se ha desaprobado la entrevista '.$id->id,'interview/show/'));
+        $id->responsable->notify(new notificationMain($id->id,'Se ha desaprobado la entrevista '.$id->id,'human_management/interview/show/'));
 
-        return redirect()->route('approval')->with(['success'=>'Se ha desaprobado la entrevista correctamente.','sudmenu'=>11]);
+        return redirect()->back()->with(['success'=>'Se ha desaprobado la entrevista correctamente.']);
     }
 
     public function presend_documentation(interview $id)
@@ -270,8 +273,8 @@ class interviewController extends Controller
     {
         $request->validate([
             'name' => ['required'],
-            'email' => ['required','email','unique:registers,email,'.$id->register->id],
-            'document' => ['required','unique:registers,document,'.$id->register->id],
+            'email' => ['required','email'],
+            'document' => ['required'],
             'address' => ['required'],
             'age' => ['required'],
             'marital_status' => ['required'],
@@ -305,7 +308,7 @@ class interviewController extends Controller
 
 
         $id->register->update($request->all());
-
+        $id->register->update(['state'=>1]);
         $contract = Contract::create([
             'register_id' => $id->register->id,
             'type_contract' => $request->type_contract,

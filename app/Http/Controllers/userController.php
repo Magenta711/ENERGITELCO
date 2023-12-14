@@ -44,8 +44,7 @@ class userController extends Controller
     
     public function index()
     {
-        $users = User::with(['position','register'])->where('state',1)->get();
-        return view('users.index',compact('users'));
+        return view('users.index');
     }
 
     /**
@@ -70,6 +69,17 @@ class userController extends Controller
     {
         $update_user = user::where('email',$request->email)->where('state',0)->first();
         if ($update_user){
+            $request->validate([
+                'name' => ['required', 'string', 'max:100'],
+                'email' => ['required', 'string', 'email'],
+                'password' => ['required', 'string', 'min:8'],
+                'direccion' => ['required'],
+                'roles' => ['required'],
+                'telefono' => ['required'],
+                'position_id' => ['required'],
+                'area' => ['required'],
+                'cedula' => ['required'],
+            ]);
             $update_user->update($request->all());
             $update_user->update([
                 'state' => 1,
@@ -175,6 +185,19 @@ class userController extends Controller
         if($request->email !== $id->email){
             $id->update([ 'email_verified_at' => null ]);
         }
+        if ($request->password) {
+            $request['password'] = bcrypt($request->password);
+        }else {
+            $request['password'] = $id->password;
+        }
+
+        if ($request->hasFile('file_signature')){
+            $fileSig = $request->file('file_signature');
+            $nameSig = time().str_random().'.'.$fileSig->getClientOriginalExtension();
+            $fileResult = Storage::put('public/signature/', $fileSig, 'public');
+            $request['signature'] = explode('/',$fileResult)[count(explode('/',$fileResult)) - 1];
+        }
+
         $id->update($request->all());
         DB::table('model_has_roles')->where('model_id',$id->id)->delete();
         
@@ -301,14 +324,19 @@ class userController extends Controller
     public function destroy(User $id)
     {
         $id->update(['state'=>0]);
-        return redirect()->route('users')->with('success','Usuario eliminado correctamente');
+        // return redirect()->route('users')->with('success','Usuario eliminado correctamente');
+        return response()->json( $id );
     }
 
     //Restauar
     public function restore(User $id)
     {
-        
         $id->update(['state'=>1,]);
+        if ($id->register) {
+            $id->register->update([
+                'state' => 1
+            ]);
+        }
         return redirect()->route('users')->with('success','Usuario restaurado correctamente');
     }
 
@@ -316,5 +344,11 @@ class userController extends Controller
     {
         $id = User::where('state',1)->get();
         return (new UsersExport)->actives($id)->download(time().'_users.xlsx');
+    }
+
+    public function list()
+    {
+        $users = User::where('state',1)->with(['position','register'])->get();
+        return response()->json(['data' => $users]);
     }
 }

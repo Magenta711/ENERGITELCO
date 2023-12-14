@@ -13,7 +13,7 @@
     $i = 0;
 @endphp
 <section class="content">
-    @include('includes.alerts')
+     
             <div class="box">
                 <div class="box-header">
                     <div class="box-title">Lista de roles</div>

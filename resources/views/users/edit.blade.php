@@ -1,120 +1,29 @@
 @extends('lte.layouts')
 
 @section('content')
-<section class="content-header">
-    <h1>
-        Editar usuario <small>Usuarios</small>
-    </h1>
-    <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
-        <li><a href="#"> Usuarios</a></li>
-        <li class="active">Editar usuarios</li>
-    </ol>
-</section>
-<section class="content">
-    @include('includes.alerts')
-    <div class="row">
-        <div class="col-md-4">
-            @include('users.include.user_information')
-        </div>
-        <div class="col-md-8">
-            <div class="box">
-                <div class="box-header">
-                    <div class="box-tools">
-                        <a href="{{ route('users') }}" 
-                        class="btn btn-sm btn-primary">
-                            Volver
-                        </a>
-                    </div>
-                </div>
-                <form action="{{ route('user_update',$id->id) }}" autocomplete="off" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-                <div class="box-body">
-                    {{-- Info for user --}}
-                    <h3>Información general</h3>
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label for="name">Nombres y apellidos</label>
-                            <input id="name" type="text" class="form-control @error('name') has-error @enderror" name="name"  value="{{ $id->name }}" autofocus placeholder="Nombres y apellidos">
-                            @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="email"> Correo electrónico</label>
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $id->email }}">
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="rol">Rol</label>
-                            <select name="roles" id="rol" class="form-control @error('roles') is-invalid @enderror">
-                                <option selected disabled value=""></option>
-                                @foreach ($roles as $rol)
-                                    <option {{($id->getRoleNames()[0] == $rol->name) ? 'selected' : ''}} value="{{$rol->id}}">{{$rol->name}}</option>
-                                @endforeach
-                            </select>
-                            @error('roles')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="cedula">Número de documento</label>
-                            <input id="cedula" type="text" class="form-control @error('cedula') is-invalid @enderror" name="cedula" value="{{ $id->cedula }}">
-                            @error('cedula')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="direccion">Dirección</label>
-                            <input id="direccion" type="text" class="form-control @error('direccion') is-invalid @enderror" name="direccion" value="{{ $id->direccion }}">
-                            @error('direccion')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="telefono">Teléfono</label>
-                            <input id="telefono" type="text" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{ $id->telefono }}">
-                            @error('telefono')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="position_id">Cargo</label>
-                            <select name="position_id" id="position_id" class="form-control">
-                                <option value="" selected disabled>Selecciona el cargo</option>
-                                @foreach ($positions as $position)
-                                    <option {{ $id->position_id == $position->id ? 'selected' : ''}} value="{{$position->id}}">{{$position->name}}</option>
-                                @endforeach
-                            </select>
-                            @error('position_id')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="area">Área</label>
-                            <input id="area" type="text" class="form-control @error('area') is-invalid @enderror" name="area" value="{{ $id->area }}">
-                            @error('area')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+    <section class="content-header">
+        <h1>
+            Editar usuario <small>Usuarios</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
+            <li><a href="#"> Usuarios</a></li>
+            <li class="active">Editar usuarios</li>
+        </ol>
+    </section>
+    <section class="content">
+
+        <div class="row">
+            <div class="col-md-4">
+                @include('users.include.user_information')
+            </div>
+            <div class="col-md-8">
+                <div class="box">
+                    <div class="box-header">
+                        <div class="box-tools">
+                            <a href="{{ route('users') }}" class="btn btn-sm btn-primary">
+                                Volver
+                            </a>
                         </div>
                     </div>
                     {{-- HasRegister --}}
@@ -280,40 +189,39 @@
                                     </div>
                                 </div>
                             @endif
-                            <div class="form-group">
-                                <label for="contract" class="form-control text-center" id="label_contract"><i class="fas fa-upload"></i></label>
-                                <input type="file" name="contract_file" accept=".pdf" id="contract" style="display: none;">
-                            </div>
                         </div>
-                    </div>
-                    @endif
+                        <div class="box-footer text-right">
+                            <button type="submit" class="btn btn-sm btn-primary">Guardar</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="box-footer text-right">
-                    <button type="submit" class="btn btn-sm btn-primary">Guardar</button>
-                </div>
-                </form>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 @endsection
 
 @section('js')
     <script>
         $(document).ready(function() {
             type_contract();
-            $(".type_contract").click(function (){
+            $(".type_contract").click(function() {
                 type_contract();
             });
-            $('#contract').change(function (){
+            $('#contract').change(function() {
                 $('#label_contract').addClass('text-aqua');
+            });
+            $('#img-signature').change(function() {
+                $('#label-signature').addClass('text-aqua');
+            });
+            $('#img-signature').change(function() {
+                readImage(this);
             });
         });
 
-        function type_contract(){
+        function type_contract() {
             ele = $('.type_contract');
             for (let i = 0; i < ele.length; i++) {
-                if (ele[i].checked){
+                if (ele[i].checked) {
                     if (ele[i].value == "Definido")
                         $('#div_months').removeClass('hide');
                     if (ele[i].value == "Indefinido")
@@ -321,5 +229,15 @@
                 }
             }
         }
-    </script> 
+
+        function readImage(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#' + input.name).attr('src', e.target.result); // Renderizamos la imagen
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 @endsection

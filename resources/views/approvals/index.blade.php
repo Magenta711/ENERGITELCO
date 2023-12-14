@@ -21,7 +21,7 @@
     </ol>
 </section>
 <section class="content">
-    @include('includes.alerts')
+     
     <div class="box">
         <div class="box-header with-border">
             <div class="box-title">
@@ -97,7 +97,7 @@
                     @endcan
                     @can('Aprobar retiro de cesantías')
                         <li {!! sudmenuActive() == 9 ? 'class="active"' : '' !!}>
-                            <a href="#tab_9" data-toggle="tab">Solicitud de retiro de cesatías
+                            <a href="#tab_9" data-toggle="tab">Solicitud de retiro de cesatías o carta laboral
                                 <span class="label label-primary">{{count($trabajos10)}}</span>
                             </a>
                         </li>
@@ -453,7 +453,7 @@
                                                 <td>{{ $trabajo->created_at }}</td>
                                                 <td>
                                                     @can('Consultar retiro de cesantías')
-                                                        <a href="{{route('work_permits_notifications_medical_incapacity_show',$trabajo->id)}}" class="btn btn-sm btn-success">Ver</a>
+                                                        <a href="{{route('request_withdraw_severance_show',$trabajo->id)}}" class="btn btn-sm btn-success">Ver</a>
                                                     @endcan
                                                 </td>
                                             </tr>

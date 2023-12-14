@@ -20,10 +20,13 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="users-edit-{{$item->id}}">Funcionarios</label>
-                                <select name="users[]" id="users-edit-{{$item->id}}" class="select2 form-control custom-select" style="width: 100%; height:36px;">
-                                    @foreach ($users as $user)
-                                        <option id="option_user-edit-{{$item->id}}-{{$user->id}}" {{ selected($item->users,$user->id) ? 'selected' : '' }} data-select2-id="{{$user->id}}" value="{{$user->id}}">{{$user->name}}</option>
-                                    @endforeach
+                                @php
+                                    $valuesUsers = array();
+                                    foreach ($item->users as $user){
+                                        $valuesUsers[] = $user->id;
+                                    }
+                            @endphp
+                                <select name="users[]" id="users-edit-{{$item->id}}" class="form-control select2 select2-hidden-accessible" multiple="" data-placeholder="Selecciona un funcionario" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" value="{{implode('-',$valuesUsers)}}">
                                 </select>
                             </div>
                             <div class="col-md-4">
@@ -78,6 +81,10 @@
                             <div class="col-md-4">
                                 <label for="long-edit-{{$item->id}}">Longitud</label>
                                 <input type="text" value="{{$item->long}}" name="long" id="long-edit-{{$item->id}}" class="form-control">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="id-beneficiario-edit-{{$item->id}}">Id beneficiario</label>
+                                <input type="text" value="{{$item->id_beneficiario}}" name="id_beneficiario" id="id-beneficiario-edit-{{$item->id}}" class="form-control">
                             </div>
                             <div class="col-md-4">
                                 <label for="vehicles-edit-{{$item->id}}">Vehículos</label>

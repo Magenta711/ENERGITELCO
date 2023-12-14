@@ -43,7 +43,7 @@
                                 <tr>
                                     <td class="content-cell" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; box-sizing: border-box; padding: 35px;">
                                     <p
-                                        style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; box-sizing: border-box; color: #3d4852; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: center;">Se ha aprobado el pago de comisiones a {{$item['name']}}</p>
+                                        style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; box-sizing: border-box; color: #3d4852; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: center;">Se ha aprobado el pago de bonificaciones a {{$item['name']}}</p>
                                         <div style="display: flex; width: 100%">
                                             <div style="width: 33%; text-align: center">
                                                 <p>Periodo <br>{{ $bonus->start_date }} - {{ $bonus->end_date }}</p>
@@ -59,28 +59,7 @@
                                             <div style="width: 25%; text-align: center">
                                                 <p>Bonificaciones <br>${{ number_format($item['bonificacion'],2,',','.') }}</p>
                                             </div>
-                                            <div style="width: 25%; text-align: center">
-                                                <p>Viáticos <br>${{number_format($item['viaticos'],2,',','.')}}</p>
-                                            </div>
-                                            <div style="width: 25%; text-align: center">
-                                                <p>Ajustes <br>- ${{number_format($item['ajustes'],2,',','.')}}</p>
-                                            </div>
-                                            <div style="width: 25%; text-align: center">
-                                                <p>Pendientes <br>${{number_format($item['pending'],2,',','.')}}</p>
-                                            </div>
                                        </div>
-                                        <div style="display: flex; width: 100%">
-                                            <div style="width: 33.3%; text-align: center">
-                                                <p>Caja menor <br>${{ number_format($item['caja'], 2,',','.') }}</p>
-                                            </div>
-                                            <div style="width: 33.3%; text-align: center">
-                                                <p>El valor a liquidar es <br>$ {{number_format(($item['caja'] + $item['deliverable']),2,',','.')}}</p>
-                                            </div>
-                                            <div style="width: 33.3%; text-align: center">
-                                                <p>Valor pendiente <br>$ {{number_format($item['discharges'],2,',','.')}}</p>
-                                            </div>
-                                       </div>
-                                       <p style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; box-sizing: border-box; line-height: 1.5em; margin-top: 0; color: #aeaeae; font-size: 12px; text-align: center;">El valor total menores a $50.000 seran almacenados a saldos pendientes.</p>
                                     </td>
                                 </tr>
                             </table>
@@ -92,7 +71,7 @@
                             <table class="footer" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; box-sizing: border-box; margin: 0 auto; padding: 0; text-align: center; width: 570px; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 570px;">
                                 <tr>
                                     <td class="content-cell" align="center" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; box-sizing: border-box; padding: 35px;">
-                                        <p style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; box-sizing: border-box; line-height: 1.5em; margin-top: 0; color: #aeaeae; font-size: 12px; text-align: center;">© 2021 {{config('app.name')}}. Todos los derechos reservados.</p>
+                                        <p style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; box-sizing: border-box; line-height: 1.5em; margin-top: 0; color: #aeaeae; font-size: 12px; text-align: center;">© 2022 {{config('app.name')}}. Todos los derechos reservados.</p>
                                     </td>
                                 </tr>
                             </table>

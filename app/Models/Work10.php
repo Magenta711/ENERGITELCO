@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Work10 extends Model
 {
     protected $table = "work10s";
-    protected $fillable = ['responsable_id','coordinator_id','reason','description','value','letter','commentary','estado'];
+    protected $fillable = ['responsable_id','coordinator_id','reason','description','value','letter','commentary','estado','from'];
     protected $guarder = ['id'];
 
     public function files()

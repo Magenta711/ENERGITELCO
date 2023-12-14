@@ -89,7 +89,7 @@ class computerController extends Controller
         $users = User::where('state',1)->get();
         foreach ($users as $user) {
             if ($user->hasPermissionTo('Lista de computadores del inventario')) {
-                $user->notify(new notificationMain($computer->id,'Nuevo computador registrado '.$computer->id,'invetory/computer/show/'));
+                $user->notify(new notificationMain($computer->id,'Nuevo computador registrado '.$computer->id,'logistics_infrastructure/invetory/computer/show/'));
             }
         }
 
@@ -166,7 +166,7 @@ class computerController extends Controller
         $users = User::where('state',1)->get();
         foreach ($users as $user) {
             if ($user->hasPermissionTo('Lista de computadores del inventario')) {
-                $user->notify(new notificationMain($id->id,'Un computador del inventario fue editado '.$id->id,'invetory/computer/show/'));
+                $user->notify(new notificationMain($id->id,'Un computador del inventario fue editado '.$id->id,'logistics_infrastructure/invetory/computer/show/'));
             }
         }
 

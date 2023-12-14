@@ -31,22 +31,23 @@
             @endif
         @endforeach
         @foreach ($user->Work8Users as $pay)
-            @if ($pay->work->estado == 'Aprobado')
+            @if ($pay->work && $pay->work->estado == 'Aprobado')
                 <input type="hidden" class="salary_{{ $user->id }}" value="{{ $pay->total_devengado_tx - $pay->extras_sc_tx - $pay->surcharge_n_tx - $pay->extras_d_tx - $pay->extras_dc_tx - $pay->extras_n_tx - $pay->extras_s_tx - $pay->holyday_n_tx - $pay->extras_hn_tx - $pay->unpaid_leave_tx - $pay->disabilities_1_tx - $pay->disabilities_2_tx }}">
                 <input type="hidden" class="assistance_{{ $user->id }}" value="{{ $pay->assistance_tx }}">
                 <input type="hidden" class="extras_{{ $user->id }}" value="{{ $pay->extras_sc_tx+$pay->surcharge_n_tx + $pay->extras_d_tx + $pay->extras_dc_tx + $pay->extras_n_tx + $pay->extras_s_tx + $pay->holyday_n_tx + $pay->extras_hn_tx + $pay->unpaid_leave_tx + $pay->disabilities_1_tx + $pay->disabilities_2_tx }}">
                 <input type="hidden" class="month_{{ $user->id }}" value="{{ intval(explode('-',$pay->work->start_date)[1]) }}">
+                <input type="hidden" class="year_{{ $user->id }}" value="{{ intval(explode('-',$pay->work->start_date)[0]) }}">
             @endif
         @endforeach
     @endforeach
 </div>
 
 <section class="content">
-    @include('includes.alerts')
+     
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="box">
-                <form action="{{ route('settlement_update',$id->id) }}" method="post" enctype="multipart/form-data" autocomplete="off">
+                <form action="{{ route('settlement_update',$id->id) }}" method="post" enctype="multipart/form-data" autocomplete="off" id="form-settlement">
                     <div class="box-body">
                     @csrf
                     @method('PUT')
@@ -67,7 +68,7 @@
                                     <h4 class="modal-title">Confirmar</h4>
                                 </div>
                                 <div class="modal-body">
-                                    {{-- <p>{!! ($message) ? str_replace("\n", '</br>', addslashes($message->description)) : '' !!}</p> --}}
+                                    <p>{!! ($message) ? str_replace("\n", '</br>', addslashes($message->description)) : '' !!}</p>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-sm btn-danger pull-left" data-dismiss="modal">Cancelar</button>
@@ -85,7 +86,7 @@
 @endsection
 @section('js')
     <script src="{{ asset('js/moment/moment.js') }}" defer></script>
-    <script src="{{ asset('js/forms/form9.js') }}" defer></script>
+    <script src="{{ asset('js/forms/settement.js') }}" defer></script>
     <script>
         var bPreguntar = true;
     
@@ -93,7 +94,7 @@
         $(document).ready(function() {
             $('#send').click(function (){
                 bPreguntar = false;
-                return d.submit();
+                return $('#form-settlement').submit();
             });
         });
         function preguntarAntesDeSalir()

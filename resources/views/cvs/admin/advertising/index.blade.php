@@ -22,7 +22,7 @@
             <p>Hay un error con las publicaciones activas</p>
         </div>
     @endif
-    @include('includes.alerts')
+     
     <div class="row">
         <div class="col-xs-12">
             <div class="box">

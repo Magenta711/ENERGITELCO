@@ -1,3 +1,15 @@
+@php
+    function userSign($id,$idUser)
+    {
+        foreach ($id->signaturebles as $key => $value) {
+            if ($value->id == $idUser) {
+                return true;
+            }
+        }
+        return false;
+    }
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -157,7 +169,15 @@
                     <tr>
                         <td class="text-uppercase">{{$user->name}}</td>
                         <td class="text-uppercase">{{$user->position->name}}</td>
-                        <td></td>
+                        <td>
+                            @if (userSign($id,$user->id))
+                                Firmado electrónicamente por asistente
+                                <br>
+                                <p><strong>Nombre: </strong>{{$user->name}}</p>
+                                <p><strong>Cédula: </strong>{{$user->cedula}}</p>
+                                <p>Solicitud aprobada y firmada electrónicamente por <strong>{{$user->name}}</strong> en rol de {{$user->getRoleNames()[0]}} Energitelco, con conocimiento de funciones y contenido del presente documento. Se cumple Ley 527 de 1999 y Decreto 19 de 2012</p>
+                            @endif
+                        </td>
                     </tr>
                 @endif
                 @php
@@ -181,7 +201,15 @@
                     <tr>
                         <td class="text-uppercase">{{$user->name}}</td>
                         <td class="text-uppercase">{{$user->position->name}}</td>
-                        <td></td>
+                        <td>
+                            @if (userSign($id,$user->id))
+                                Firmado electrónicamente por asistente
+                                <br>
+                                <p><strong>Nombre: </strong>{{$user->name}}</p>
+                                <p><strong>Cédula: </strong>{{$user->cedula}}</p>
+                                <p>Solicitud aprobada y firmada electrónicamente por <strong>{{$user->name}}</strong> en rol de {{$user->getRoleNames()[0]}} Energitelco, con conocimiento de funciones y contenido del presente documento. Se cumple Ley 527 de 1999 y Decreto 19 de 2012</p>
+                            @endif
+                        </td>
                     </tr>
                 @endif
                 @php

@@ -13,7 +13,7 @@
 </section>
 
 <section class="content">
-    @include('includes.alerts')
+     
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="box">
@@ -78,9 +78,13 @@
             if (this.value == 'carta laboral') {
                 $('.input_value').hide();
                 $('.input_file').hide();
-                $('.input_from').show();
+                $('.input_form').show();
+            }else if(this.value == 'pago de vacaciones'){
+                $('.input_value').hide();
+                $('.input_file').hide();
+                $('.input_form').hide();
             }else {
-                $('.input_from').hide();
+                $('.input_form').show();
                 $('.input_value').show();
                 $('.input_file').show();
             }

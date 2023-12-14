@@ -11,7 +11,7 @@
     </ol>
 </section>
 <section class="content">
-    @include('includes.alerts')
+     
     <div class="box">
         <form action="{{ route('detailed_inspection_vehicles_store') }}" method="post" name="formulario" enctype="multipart/form-data" autocomplete="off">
         @csrf

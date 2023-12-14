@@ -400,7 +400,7 @@ class clearingController extends Controller
     {
         $id->update(['status' => 1,'approver_id' => auth()->id()]);
         $id->responsable->notify(new notificationMain($id->id,'Proyecto de desnomte '.$id->id.' fue aprobado','project/clearing/show/'));
-        return redirect()->route('approval')->with(['success'=>'Se ha aprobado el proyecto correctamente','sudmenu'=>14]);
+        return redirect()->back()->with(['success'=>'Se ha aprobado el proyecto correctamente']);
     }
     public function not_approval(Clearing $id)
     {
@@ -408,7 +408,7 @@ class clearingController extends Controller
         
         $id->responsable->notify(new notificationMain($id->id,'Proyecto de desnomte '.$id->id.' fue desaprobado','project/clearing/show/'));
 
-        return redirect()->route('approval')->with(['success'=>'Se ha desaprobado el proyecto correctamente','sudmenu'=>14]);
+        return redirect()->back()->with(['success'=>'Se ha desaprobado el proyecto correctamente']);
     }
 
     public function export(Clearing $id)

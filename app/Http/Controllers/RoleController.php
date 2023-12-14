@@ -13,7 +13,7 @@ class RoleController extends Controller
         $this->middleware('verified');
         $this->middleware('permission:Lista de roles|Crear roles|Editar roles|Eliminar roles', ['only' => ['index','store']]);
         $this->middleware('permission:Crear roles', ['only' => ['create','store']]);
-        $this->middleware('permission:Editar roles', ['only' => ['edit','update']]);
+        // $this->middleware('permission:Editar roles', ['only' => ['edit','update']]);
         $this->middleware('permission:Eliminar roles', ['only' => ['destroy']]);
     }
     /**
@@ -99,7 +99,7 @@ class RoleController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'permission' => 'required',
+            // 'permission' => 'required',
         ]);
         $role = Role::find($id);
         $role->name = $request->input('name');
@@ -115,9 +115,9 @@ class RoleController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function destroy($id)
+     public function destroy(Role $id)
     {
-        DB::table("roles")->where('id',$id)->delete();
+        $id->delete();
         return redirect()->route('roles.index')
             ->with('success','Se ha eliminado el rol correctamente');
     }

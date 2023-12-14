@@ -284,7 +284,7 @@ class fallProtectionEquipmentInspectionController extends Controller
                 $menssage->to($id->responsableAcargo->email,$id->responsableAcargo->name)->subject("Energitelco S.A.S, INSPECCIÓN DE EQUIPOS DE PROTECCIÓN CONTRA ALTURAS REVISADO Y CERTIFICADO EXITOSA.");
             });
             
-            return redirect()->route('approval')->with(['success'=>'Se ha aprobado la la inspección de equipos de protección contra caídas '.$id->id.' correctamente','sudmenu'=>2]);
+            return redirect()->back()->with(['success'=>'Se ha aprobado la la inspección de equipos de protección contra caídas '.$id->id.' correctamente']);
         }else {
             $id->update([
                 'estado'=>"No aprobado",
@@ -296,7 +296,7 @@ class fallProtectionEquipmentInspectionController extends Controller
             $id->inspeccionador->notify(new notificationMain($id->id,'No se aprobó la solicitud de inspección de equipos de protección contra alturas '.$id->id,'human_management/fall_protection_equipment_inspection/show/'));
             $id->trabajador->notify(new notificationMain($id->id,'No se aprobó la inspección de equipos de protección contra alturas '.$id->id,'human_management/fall_protection_equipment_inspection/show/'));
 
-            return redirect()->route('approval')->with(['success'=>'Se ha desaprobado la inspección de equipos de protección contra caídas '.$id->id.' correctamente','sudmenu' => 2]);
+            return redirect()->back()->with(['success'=>'Se ha desaprobado la inspección de equipos de protección contra caídas '.$id->id.' correctamente']);
         }
     }
 }

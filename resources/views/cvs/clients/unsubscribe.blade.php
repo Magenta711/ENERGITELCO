@@ -11,7 +11,7 @@
                     @method('PUT')
                     <div class="card-body">
                         @if ($message = Session::get('success'))
-                            @include('includes.alerts')
+                             
                         @else
                             <p>
                                 ¿Está seguro de que ya no desea recibir correos electrónicos en {{ $id->email }}? Es posible que se pierda anuncios importantes, grandes ofertas o ventajas exclusivas para los clientes de Claro – Energitelco.</p>

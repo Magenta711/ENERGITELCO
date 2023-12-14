@@ -12,7 +12,7 @@
     </ol>
 </section>
 <section class="content">
-    @include('includes.alerts')
+     
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Liquidación prestaciones sociales</h3>
@@ -29,9 +29,9 @@
                             <tr>
                                 <th scope="col"></th>
                                 <th scope="col">Código</th>
+                                <th scope="col">Funcionario</th>
                                 <th scope="col">Responsable</th>
                                 <th scope="col">Aprobador</th>
-                                <th scope="col">Funcionario</th>
                                 <th scope="col">Fecha</th>
                                 <th scope="col">Estado</th>
                                 <th scope="col">Acciones</th>
@@ -42,9 +42,9 @@
                                 <tr>
                                     <td>{{$item->id}}</td>
                                     <td>H-FR-32-{{$item->id}}</td>
+                                    <td>{{$item->user->name}}</td>
                                     <td>{{$item->responsable->name}}</td>
                                     <td>{{$item->approve ? $item->approve->name:''}}</td>
-                                    <td>{{$item->user->name}}</td>
                                     <td>{{$item->created_at}}</td>
                                     <td>{{($item->status == 1) ? 'Aprobado' : (($item->status == 2 )? 'No aprobado' : 'Sin aprobar')}}</td>
                                     <td>
@@ -72,7 +72,7 @@
                                                             </button>
                                                             <h4 class="modal-title">Eliminar liquidación</h4>
                                                         </div>
-                                                        <form action="{{route('settlement_download',$item->id)}}" method="post">
+                                                        <form action="{{route('settlement_delete',$item->id)}}" method="post">
                                                         @csrf
                                                         @method('DELETE')
                                                             <div class="modal-body">

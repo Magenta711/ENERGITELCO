@@ -23,7 +23,7 @@ class detailedInspectionVehicles extends Controller
         $this->middleware('auth');
         $this->middleware('verified');
         $this->middleware('permission:Aprobar solicitud de Inspección detallada de vehículos|Consultar inspecciones detalladas de vehículos|Descargar PDF de inspecciones detalladas de vehículos|Digitar formulario de inspección detallada de vehículos|Eliminar formato de inspecciones detalladas de vehículos',['only' => ['index']]);
-        $this->middleware('permission:Consultar inspecciones detalladas de vehículos',['only' => ['show']]);
+        $this->middleware('permission:Consultar inspecciones detalladas de vehículos|Aprobar solicitud de Inspección detallada de vehículos',['only' => ['show']]);
         $this->middleware('permission:Descargar PDF de inspecciones detalladas de vehículos',['only' => ['download']]);
         $this->middleware('permission:Digitar formulario de inspección detallada de vehículos',['only' => ['create','store']]);
         $this->middleware('permission:Eliminar formato de inspecciones detalladas de vehículos',['only' => ['destroy']]);
@@ -703,7 +703,7 @@ class detailedInspectionVehicles extends Controller
                 $menssage->to($usuario->email,$usuario->name)->subject("Energitelco S.A.S , Revision satisfactoria de Vehículo y aprobada L-FR-08_0".$id->id);
             });
     
-            return redirect()->route('approval')->with(['success'=>'Se ha aprobado la inspección de vehículo '.$id->id.' correctamente','sudmenu'=>3]);
+            return redirect()->back()->with(['success'=>'Se ha aprobado la inspección de vehículo '.$id->id.' correctamente']);
         }else {
             $id->update([
                 'estado'=>"No aprobado",
@@ -713,7 +713,7 @@ class detailedInspectionVehicles extends Controller
             
             $id->inspeccionador->notify(new notificationMain($id,'No se aprobó la solicitud de inspección de vehículo '.$id->id,'logistics_infrastructure/detailed_inspection_vehicles/show/'));
     
-            return redirect()->route('approval')->with(['success'=>'Se ha desaprobado la inspección de vehículo correctamente','sudmenu'=>3]);
+            return redirect()->back()->with(['success'=>'Se ha desaprobado la inspección de vehículo correctamente']);
         }
     }
 }

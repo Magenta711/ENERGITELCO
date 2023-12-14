@@ -20,9 +20,9 @@
                             <div class="col-md-4">
                                 <label for="users">Funcionarios</label>
                                 <select name="users[]" id="users" disabled class="form-control select2 select2-hidden-accessible" multiple="" data-placeholder="Selecciona un funcionario" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                    @foreach ($users as $user)
+                                    {{-- @foreach ($users as $user)
                                         <option id="option_user_{{$user->id}}" data-select2-id="{{$user->id}}" value="{{$user->id}}">{{$user->name}}</option>
-                                    @endforeach
+                                    @endforeach --}}
                                 </select>
                             </div>
                             <div class="col-md-4">
@@ -78,6 +78,10 @@
                             <div class="col-md-4">
                                 <label for="long">Longitud</label>
                                 <input type="text" value="{{old('long')}}" name="long" id="long" class="form-control">
+                            </div>
+                            <div class="col-md-4" style="display: none;">
+                                <label for="id_beneficiario">Id beneficiario</label>
+                                <input type="text" value="{{old('id_beneficiario')}}" name="id_beneficiario" id="id-beneficiario" class="form-control">
                             </div>
                             <div class="col-md-4">
                                 <label for="vehicles">Vehículos</label>

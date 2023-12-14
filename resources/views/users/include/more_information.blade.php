@@ -9,6 +9,9 @@
                 <li><a href="#settlement" data-toggle="tab">Liquidación</a></li>
             @endif
             <li><a href="#forms" data-toggle="tab">Formatos</a></li>
+            @if ($id->minor_box)
+                <li><a href="#historyMinorBox" data-toggle="tab">Historial caja menor</a></li>
+            @endif
         </ul>
         <div class="tab-content">
             <div class="active tab-pane" id="information">
@@ -131,7 +134,7 @@
                             <p>{{$id->register && $id->register->hasContract() ? $id->register->hasContract()->day_breack : 'N/A'}}</p>
                         </div>
                     </div>
-                        <hr>
+                    <hr>
                     <h4>Información de contacto de emergencia</h4>
                     <div class="row">
                         <div class="col-md-3">
@@ -143,6 +146,24 @@
                             <p>{{$id->register ? $id->register->emergency_contact_number : 'N/A'}}</p>
                         </div>
                     </div>
+                    <hr>
+                    @if ($id->signature)
+                    <h4>Firma física</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="img-signature" style="cursor: pointer"
+                                    enctype="multipart/form-data">
+                                    <picture>
+                                        <img src="/storage/signature/{{$id->signature}}" class="img-fluid img-thumbnail"
+                                            id="blah" alt="{{ $id->signature }}">
+                                    </picture>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6"></div>
+                    </div>
+                    @endif
                     <hr>
                     <h4>Información bancaria</h4>
                     <div class="row">
@@ -582,6 +603,12 @@
                             @endforeach
                         @endif
                     </div>
+                </div>
+            @endif
+            @if ($id->minor_box)
+                <div class="tab-pane" id="historyMinorBox">
+                    <h3>Historial de caja menor</h3>
+                    <p>{!! str_replace("\n", '</br>', addslashes($id->minor_box->history)) !!}</p>
                 </div>
             @endif
             <!-- /.tab-pane -->

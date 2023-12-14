@@ -29,7 +29,7 @@
         </ol>
     </section>
     <section class="content">
-        @include('includes.alerts')
+         
         <form action="{{route('answers_store')}}" id="target" autocomplete="off" method="post" enctype="multipart/form-data">
         @csrf
         <div class="box">
@@ -97,7 +97,14 @@
 @auth
         </div>
             <div class="box-footer">
-                <button class="btn btn-sm btn-primary btn-save">Enviar</button>
+                @if ($id->with_attach)
+                    <input type="hidden" name="name_require" value="{{auth()->user()->name}}">
+                    <input type="hidden" name="cc_require" value="{{auth()->user()->cedula}}">
+                    <input type="hidden" name="role_require" value="{{auth()->user()->position->name}}"> 
+                    <button class="btn btn-sm btn-primary btn-save">Enviar y firmar</button>
+                @else
+                    <button class="btn btn-sm btn-primary btn-save">Enviar</button>
+                @endif
             </div>
         </div>
             </form>

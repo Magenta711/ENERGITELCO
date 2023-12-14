@@ -8,16 +8,16 @@
         </tr>
         <tr>
             <th>Nombre</th>
-            <th>Cédula</th>
             <th># Cuenta</th>
+            <th>Cédula</th>
             <th>Neto a pagar</th>
         </tr>
     </thead>
     <tbody>
         @foreach ($data->work_adds as $item)
             <tr>
-                <td>{{ $item->user->name }}</td>
                 <td>{{ $item->user->cedula }}</td>
+                <td>{{ $item->user->name }}</td>
                 <td>{{ $item->user->register ? $item->user->register->bank_account : '' }}</td>
                 <td>$ {{ number_format($item->total_pay,2,',','.') }}</td>
             </tr>

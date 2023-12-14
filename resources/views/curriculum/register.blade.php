@@ -31,6 +31,7 @@
                 <form method="POST" action="{{ route('user_store') }}" class="form-horizontal">
                     @csrf
                     <input type="hidden" name="register_id" value="{{$id->id}}">
+                    <input type="hidden" name="user_id" value="{{$id->user ? $id->user->id : ''}}">
                 <div class="box-body">
                     <div class="form-group">
                         <label for="name" class="col-sm-4 control-label">Nombres y apellidos</label>
