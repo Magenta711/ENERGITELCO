@@ -13,12 +13,12 @@
             font-family: Arial;
             font-size: 7pt;
         }
- 
+
         body {
             margin: 3cm 2cm 2cm 2cm;
             background: #fff;
         }
- 
+
         header {
             position: fixed;
             top: 0cm;
@@ -34,7 +34,7 @@
             margin-top: -1cm;
             opacity: 0.6;
         }
-        
+
         hr {
             color: black;
         }
@@ -78,7 +78,7 @@
                                 <div class="card-title text-center" >
                                     <h3><b><i>COTIZACIÓN SISTEMA SOLAR CON ENERGITELCO Y MUST</i></b></h3>
                                 </div>
-                                
+
                                 <div class="card-body">
                                     <hr>
                                 <br>
@@ -127,37 +127,41 @@
                                                     <th class="text-center">CANTIDAD</th>
                                                     <th class="text-center">VALOR UNI</th>
                                                     <th class="text-center">VALOR TOTAL</th>
+                                                    <th class="text-center">GARANTÍA</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr class="text-center">
                                                     <td>Paneles solares</td>
-                                                    <td>Monosolar de 550 W</td>
+                                                    <td>{{ $id->ModelPanel }}</td>
                                                     <td id="Paneles">{{$id->CantidadPanel}}</td>
                                                     <td id="ValorPanel">COP ${{number_format($id->ValorPanel,2)}}</td>
                                                     <td id="ValorTotalPanel">COP ${{number_format($id->ValorTotalPanel,2)}}</td>
+                                                    <td>{{ $id->GarantiaPanel }} Años</td>
                                                 </tr>
                                                 <tr class="text-center">
                                                     <td>Reguladores</td>
-                                                    <td>MPPT 100A PC18-10015F MUST</td>
+                                                    <td>{{ $id->ModelRegulador }}</td>
                                                     <td id="Reguladores">{{$id->CantidadRegulador}}</td>
                                                     <td id="ValorRegulador">COP ${{number_format($id->ValorRegulador,2)}}</td>
                                                     <td id="ValorTotalRegulador">COP ${{number_format($id->ValorTotalRegulador,2)}}</td>
+                                                    <td>{{ $id->GarantiaRegulador }} Años</td>
                                                 </tr>
                                                 <tr class="text-center">
                                                     <td>Baterías</td>
-                                                    
-                                                    <td>BATERÍA DE FOSFATO SERIE LP1800</td>
+                                                    <td>{{ $id->ModelBateria }}</td>
                                                     <td id="Baterias">{{$id->CantidadBateria}}</td>
                                                     <td id="ValorBateria">COP ${{number_format($id->ValorBateria,2)}}</td>
                                                     <td id="ValorTotalBateria">COP ${{number_format($id->ValorTotalBateria,2)}}</td>
+                                                    <td>{{ $id->GarantiaBateria }} Años</td>
                                                 </tr>
                                                 <tr class="text-center">
                                                     <td>Inversores</td>
-                                                    <td>3 KW 48V Must </td>
+                                                    <td>{{ $id->ModelInversor }}</td>
                                                     <td id="Inversores">{{$id->CantidadInversor}}</td>
                                                     <td id="ValorInversor">COP ${{number_format($id->ValorInversor,2)}}</td>
                                                     <td id="ValorTotalInversor">COP ${{number_format( $id->ValorTotalInversor, 2)}}</td>
+                                                    <td>{{ $id->GarantiaInversor }} Años</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -165,6 +169,7 @@
                                     </div>
                                     <hr>
                                     <div class="text-center">
+                                        <h5><b>RECIBIRÁS UNA OFERTA ESPECIAL</b></h5>
                                         <h4><b>EL COSTO TOTAL DE TU SISTEMA SOLAR ES DE:</b></h4>
                                         <b><h4 id="totalSistema">COP ${{number_format($id->ValorTotalSistema,2)}}</h4></b>
                                     </div>
@@ -174,6 +179,7 @@
                                             <h5>EL TIEMPO ESTIMADO PARA QUE RECUPERES TU INVERSIÓN ES DE:</h5>
                                             <h6 id="Salva">{{$id->Salva}}</h6>
                                             <h5><b>RECUERDA QUE NUESTROS SISTEMAS SOLARES TE GARANTIZAN UNA VIDA ÚTIL DE MÁS DE 25 AÑOS</b></h5>
+                                            <h5><B>IMPORTANTE:</B>Las empresas que inviertan en sistemas solares pueden deducir el 50% del costo de la inversión de sus impuestos de renta durante los primeros 5 años.
                                         </div>
                                     </div>
                                 </div>
@@ -184,7 +190,7 @@
             </div>
         </div>
     </main>
-     
+
     <footer>
         <br>
         <p class="text-muted" style="color: rgb(0,176,80) !important;">EL MEJOR PREMIO ES LA SATISFACCION DE NUESTROS CLIENTES</p>

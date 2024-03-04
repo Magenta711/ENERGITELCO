@@ -2,7 +2,7 @@
     <div class="col-auto p-5">
         <div class="container mt-5">
             <div class="row justify-content-center">
-                <div class="col-md-9">
+                <div class="col-md-10">
                     <div class="card" style=" box-shadow: 1px 1px 10px 10px rgba(0, 0, 0, 0.1);">
                         <div class="card-title text-center" >
                             <h3><b><i>ESTE ES EL PRIMER PASO PARA QUE CUMPLES TU META ENERGÉTICA</i></b></h3>
@@ -18,37 +18,42 @@
                                             <th class="text-center">CANTIDAD</th>
                                             <th class="text-center">VALOR UNI</th>
                                             <th class="text-center">VALOR TOTAL</th>
+                                            <th class="text-center">GARANTÍA</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr class="text-center">
                                             <td>Paneles solares</td>
-                                            <td>Monosolar de 550 W</td>
+                                            <td>{{ $id->ModelPanel }}</td>
                                             <td id="Paneles"></td>
                                             <td id="ValorPanelTxt"></td>
                                             <td id="ValorTotalPanelTxt"></td>
+                                            <td>{{ $id->GarantiaPanel }} Años</td>
                                         </tr>
                                         <tr class="text-center">
                                             <td>Reguladores</td>
-                                            <td>MPPT 100A PC18-10015F MUST</td>
+                                            <td>{{ $id->ModelRegulador }}</td>
                                             <td id="Reguladores"></td>
                                             <td id="ValorReguladorTxt"></td>
                                             <td id="ValorTotalReguladorTxt"></td>
+                                            <td>{{ $id->GarantiaRegulador }} Años</td>
                                         </tr>
                                         <tr class="text-center">
                                             <td>Baterías</td>
-                                            
-                                            <td>BATERÍA DE FOSFATO SERIE LP1800</td>
+
+                                            <td>{{ $id->ModelBateria }}</td>
                                             <td id="Baterias"></td>
                                             <td id="ValorBateriaTxt"></td>
                                             <td id="ValorTotalBateriaTxt"></td>
+                                            <td>{{ $id->GarantiaBateria }} Años</td>
                                         </tr>
                                         <tr class="text-center">
                                             <td>Inversores</td>
-                                            <td>3 KW 48V Must </td>
+                                            <td>{{ $id->ModelInversor }}</td>
                                             <td id="Inversores"></td>
                                             <td id="ValorInversorTxt"></td>
                                             <td id="ValorTotalInversorTxt"></td>
+                                            <td>{{ $id->GarantiaInversor }} Años</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -56,6 +61,7 @@
                             </div>
                             <hr>
                             <div class="text-center">
+                                <h5><b>RECIBIRÁS UNA OFERTA ESPECIAL</b></h5>
                                 <h4><b>EL COSTO TOTAL DE TU SISTEMA SOLAR ES DE:</b></h4>
                                 <b><h4 id="totalSistema"></h4></b>
                             </div>
@@ -65,6 +71,8 @@
                                     <h5>EL TIEMPO ESTIMADO PARA QUE RECUPERES TU INVERSIÓN ES DE:</h5>
                                     <p id="SalvaTxt"></p>
                                     <h5><b>RECUERDA QUE NUESTROS SISTEMAS SOLARES TE GARANTIZAN UNA VIDA ÚTIL DE MÁS DE 25 AÑOS</b></h5>
+                                    <h5><B>IMPORTANTE:</B>Las empresas que inviertan en sistemas solares pueden deducir el 50% del costo de la inversión de sus impuestos de renta durante los primeros 5 años.
+                                    </h5>
                                 </div>
                                 <div class="col-md-12">
                                     <h5>Te enviaremos un correo con esta cotización</h5>

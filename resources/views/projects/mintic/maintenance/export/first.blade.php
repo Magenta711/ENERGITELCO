@@ -37,8 +37,7 @@ function equipments($equipments)
     </tr>
     <tr>
         <td></td>
-        <td rowspan="7" colspan="4" style="border: 1px solid #000000;"></td>
-        <td rowspan="7" colspan="8" style="border: 1px solid #000000;">
+        <td rowspan="7" colspan="12" style="border: 1px solid #000000;">
             @if ($id->type_format == 'Mantenimiento correctivo')
                 FORMATO NOTIFICACIÓN DE MANTENIMIENTO CORRECTIVO CENTROS DIGITALES
             @endif
@@ -68,12 +67,13 @@ function equipments($equipments)
     </tr>
     <tr>
         <td></td>
-        <td style="border-left: 2px solid #000000;">N° DE CASO IM:</td>
-        <td colspan="4">{{ $id->num }}</td>
-        <td style="border-left: 2px solid #000000;">Fecha:</td>
-        <td colspan="2">{{ $id->date }}</td>
-        <td colspan="2" style="border-left: 2px solid #000000;">Empresa colaboradora:</td>
-        <td colspan="5" style="border-right: 2px solid #000000;">{{ $id->collaborating_company }}</td>
+        <td colspan="12" style="text-align: center; border: 1px solid #000000;">Clasificación: Clasificación: Uso Interno - Pertenece al proyecto MINTIC Centros Digitales Contrato de Aporte 1042</td>
+        <td class="text-center" colspan="3" rowspan="2" style="text-align: center; height: 35px; border: 1px solid #000000;">CODIGO: MTIC-F27</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="4" style="text-align: center; border-left: 1px solid #000000;">N° DE CASO IM: {{ $id->num }}</td>
+        <td colspan="8"></td>
     </tr>
     <tr>
         <td></td>
@@ -92,10 +92,10 @@ function equipments($equipments)
     </tr>
     <tr>
         <td></td>
-        <td colspan="4" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">DEPARTAMENTO</td>
-        <td colspan="5" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">MUNICIPIO</td>
-        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">CENTRO POBLADO</td>
-        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">SEDE INSTITUCIÓN
+        <td colspan="4" style="text-align: center;background: #D0CECE;border: 1px solid #000000; width: 20px">DEPARTAMENTO</td>
+        <td colspan="5" style="text-align: center;background: #D0CECE;border: 1px solid #000000; width: 20px">MUNICIPIO</td>
+        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000; width: 20px; display: grid; align-items: center; justify-content: center;">CENTRO POBLADO</td>
+        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000; height: 30px; white-space: nowrap; word-wrap: break-word; max-width: 100%; overflow: hidden;">SEDE INSTITUCIÓN EDUCATIVA O CASO ESPECIAL
         </td>
     </tr>
     <tr>
@@ -110,7 +110,7 @@ function equipments($equipments)
         <td colspan="2" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">ID BENEFICIARIO
         </td>
         <td colspan="2" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">ID MINTIC</td>
-        <td colspan="5" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">NOMBRE DEL
+        <td colspan="5" style="text-align: center;background: #D0CECE;border: 1px solid #000000; height: 30px; white-space: nowrap; word-wrap: break-word; max-width: 100%; overflow: hidden; vertical-align: middle;">NOMBRE DEL
             RESPONSABLE
             (RESPONSABLE DE LA INSTITUCIÓN EDUCATIVA / AUTORIDAD COMPENTE)</td>
         <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">NÚMERO DE CEDULA
@@ -250,26 +250,78 @@ function equipments($equipments)
     @php
         $j = 0;
     @endphp
+    @if ($id->type_format == 'Mantenimiento preventivo')
+        @foreach (equipments($id->equipments) as $equipment_item)
+            @php
+                $j++;
+            @endphp
+            <tr>
+                <td></td>
+                <td colspan="4" style="text-align: center;border: 1px solid #000000;">
+                    {{ isset($equipment_item['retired']) ? $equipment_item['retired']->serial : 'N/A' }}
+                </td>
+                <td colspan="4" style="border: 1px solid #000000;">
+                    {{ isset($equipment_item['retired']) ? $equipment_item['retired']->detail->name : '' }}
+                </td>
+                <td colspan="4" style="text-align: center;border: 1px solid #000000;">
+                    {{ isset($equipment_item['install']) ? $equipment_item['install']->serial : 'N/A' }}
+                </td>
+                <td colspan="3" style="border: 1px solid #000000;">
+                    {{ isset($equipment_item['install']) ? $equipment_item['install']->detail->name : '' }}
+                </td>
+            </tr>
+        @endforeach
+    @else 
     @foreach (equipments($id->equipments) as $equipment_item)
-        @php
-            $j++;
-        @endphp
+    @php
+        $j++;
+    @endphp
+        @if (!$equipment_item['retired']->serial == '')
         <tr>
             <td></td>
-            <td colspan="4" style="border: 1px solid #000000;">
-                {{ isset($equipment_item['retired']) ? $equipment_item['retired']->serial : '' }}
+            <td colspan="4" style="text-align: center;border: 1px solid #000000;">
+                {{ isset($equipment_item['retired']) ? $equipment_item['retired']->serial : 'N/A' }}
             </td>
             <td colspan="4" style="border: 1px solid #000000;">
                 {{ isset($equipment_item['retired']) ? $equipment_item['retired']->detail->name : '' }}
             </td>
-            <td colspan="4" style="border: 1px solid #000000;">
-                {{ isset($equipment_item['install']) ? $equipment_item['install']->serial : '' }}
+            <td colspan="4" style="text-align: center;border: 1px solid #000000;">
+                {{ isset($equipment_item['install']) ? $equipment_item['install']->serial : 'N/A' }}
             </td>
             <td colspan="3" style="border: 1px solid #000000;">
                 {{ isset($equipment_item['install']) ? $equipment_item['install']->detail->name : '' }}
             </td>
         </tr>
-    @endforeach
+        @endif
+        @endforeach
+            <tr>
+                <td></td>
+                <td colspan="4" style="border: 1px solid #000000;"></td>
+                <td colspan="4" style="border: 1px solid #000000;"></td>
+                <td colspan="4" style="border: 1px solid #000000;"></td>
+                <td colspan="3" style="border: 1px solid #000000;"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="4" style="border: 1px solid #000000;"></td>
+                <td colspan="4" style="border: 1px solid #000000;"></td>
+                <td colspan="4" style="border: 1px solid #000000;"></td>
+                <td colspan="3" style="border: 1px solid #000000;"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="4" style="border: 1px solid #000000;"></td>
+                <td colspan="4" style="border: 1px solid #000000;"></td>
+                <td colspan="4" style="border: 1px solid #000000;"></td>
+                <td colspan="3" style="border: 1px solid #000000;"></td>
+            </tr><tr>
+                <td></td>
+                <td colspan="4" style="border: 1px solid #000000;"></td>
+                <td colspan="4" style="border: 1px solid #000000;"></td>
+                <td colspan="4" style="border: 1px solid #000000;"></td>
+                <td colspan="3" style="border: 1px solid #000000;"></td>
+            </tr>
+    @endif
     @for ($i = $j; $i < 7; $i++)
         <tr>
             <td></td>
@@ -292,7 +344,7 @@ function equipments($equipments)
     </tr>
     <tr>
         <td></td>
-        <td colspan="15" style="border: 1px solid #000000;">{{ $id->fault_description }}</td>
+        <td colspan="15" style="text-align: center; border: 1px solid #000000;">{{ $id->fault_description }}</td>
     </tr>
     {{-- @if ($trabajo->created_at > '2020-12-14 11:00:00') --}}
     <tr>
@@ -310,44 +362,44 @@ function equipments($equipments)
         <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">NOMBRES Y
             APELLIDOS:
         </td>
-        <td colspan="5" style="border: 1px solid #000000;">{{ $id->receives_name }}</td>
+        <td colspan="5" style="text-align: center;border: 1px solid #000000;">{{ $id->receives_name }}</td>
         <td colspan="3" rowspan="2" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">
             NOMBRES Y
             APELLIDOS:</td>
-        <td colspan="4" rowspan="2" style="border: 1px solid #000000;">{{ $id->repair_name }}</td>
+        <td colspan="4" rowspan="2" style="text-align: center;border: 1px solid #000000;">{{ $id->repair_name }}</td>
     </tr>
     <tr>
         <td></td>
         <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">CARGO:</td>
-        <td colspan="5" style="border: 1px solid #000000;">{{ $id->receives_position }}</td>
+        <td colspan="5" style="text-align: center;border: 1px solid #000000;">{{ $id->receives_position }}</td>
     </tr>
     <tr>
         <td></td>
         <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">NÚMERO DE CEDULA:
         </td>
-        <td colspan="5" style="border: 1px solid #000000;">{{ $id->receives_cc }}</td>
+        <td colspan="5" style="text-align: center;border: 1px solid #000000;">{{ $id->receives_cc }}</td>
         <td colspan="3" rowspan="2" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">
             CARGO:
         </td>
-        <td colspan="4" rowspan="2" style="border: 1px solid #000000;">{{ $id->repair_position }}</td>
+        <td colspan="4" rowspan="2" style="text-align: center;border: 1px solid #000000;">{{ $id->repair_position }}</td>
     </tr>
     <tr>
         <td></td>
         <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">NÚMERO DE
             TELÉFONO O
             CEDULAR:</td>
-        <td colspan="5" style="border: 1px solid #000000;">311 306 6482</td>{{-- {{ $id->receives_tel }} --}}
+        <td colspan="5" style="text-align: center;border: 1px solid #000000;">{{ $id->receives_tel }}</td>{{-- 311 306 6482 --}}
     </tr>
     <tr>
         <td></td>
         <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">CORREO
             ELECTRÓNICO:
         </td>
-        <td colspan="5" style="border: 1px solid #000000;">jorge.ortega@energitelco.com</td>{{-- {{ $id->receives_mail }} --}}
+        <td colspan="5" style="text-align: center;border: 1px solid #000000;">{{ $id->receives_mail }}</td>{{--jorge.ortega@energitelco.com  --}}
         <td colspan="3" rowspan="4" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">
             TICKET, SI
             APLICA</td>
-        <td colspan="4" rowspan="4" style="border: 1px solid #000000;">{{ $id->ticket }}</td>
+        <td colspan="4" rowspan="4" style="text-align: center;border: 1px solid #000000;">{{ $id->ticket }}</td>
     </tr>
     <tr>
         <td></td>

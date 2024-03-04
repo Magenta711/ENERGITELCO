@@ -493,6 +493,30 @@ f <!-- =============================================== -->
                                                      EVIDENCIAS DESMONTE EQUIPOS DE TRANSMISIÓN</a>
                                              </li>
                                          @endif
+
+
+                                         {{-- @if (auth()->user()->hasAnyPermission([
+                                            'Lista de proyectos de desmonte',
+                                            'Crear proyectos de desmonte',
+                                            'Eliminar proyectos de desmonte',
+                                            'Ver proyectos de desmonte',
+                                            'Editar proyectos de desmonte',
+                                            'Aprobar proyectos de desmonte',
+                                        ])) --}}
+                                        <li class="treeview {{ activeMenu('project/maintence*') }}">
+                                            <a href="#"><i class="fa fa-wifi"></i> MANTENIMIENTOS<span
+                                                    class="pull-right-container">
+                                                    <i class="fa fa-angle-left pull-right"></i>
+                                                </span>
+                                            </a>
+                                            <ul class="treeview-menu">
+                                                        class="{{ activeMenu('project/maintence/air-conditioning*') }}">
+                                                        <a class="btn-send"href="{{ route('air-conditioning_index') }}"><i
+                                                                ></i>AIRE</a>
+                                            </ul>
+                                        </li>
+                                        {{-- @endif --}}
+
                                          @if (auth()->user()->hasAnyPermission([
                                                      'Lista de proyectos de MINTIC',
                                                      'Crear proyectos de MINTIC',
@@ -1842,6 +1866,37 @@ f <!-- =============================================== -->
                  </ul>
              </li>
          @endif
+
+         @if (auth()->user()->hasAnyPermission([
+                     'CCJL Crear rentas',
+                     'CCJL Lista de rentas',
+                     'CCJL Ver rentas',
+                     'CCJL Editar rentas',
+                     'CCJL Pagar rentas',
+                     'CCJL Recordar pago de rentas',
+                     'CCJL Lista de clientes',
+                     'CCJL Ver clientes',
+                     'CCJL Editar clientes',
+                     'CCJL Lista de canons',
+                     'CCJL Ver canons',
+                     'CCJL Editar canons',
+                     'CCJL Crear servicios',
+                     'CCJL Lista de servicios',
+                     'CCJL Ver servicios',
+                     'CCJL Editar servicios',
+                     'CCJL Crear administraciones',
+                     'CCJL Lista de administraciones',
+                     'CCJL Ver administraciones',
+                     'CCJL Editar Administraciones',
+                 ]))
+         {{-- energias --}}
+            <li class="{{ activeMenu('energias*') }}">
+                <a class="btn-send"href="{{ route('energy') }}">
+                    <i class="fa fa-solar-panel"></i> <span>ENERGIA</span>
+                </a>
+            </li>
+        @endif
+
          {{-- NOTIFICACIONES --}}
          <li class="{{ activeMenu('notifications*') }}">
              <a class="btn-send"href="{{ route('notifications') }}">

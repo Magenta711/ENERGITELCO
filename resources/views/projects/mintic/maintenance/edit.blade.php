@@ -186,21 +186,114 @@ function checkedActivity($idActivity, $activities)
                         <hr>
                     </div>
                     <h3>Serial equipo/s retirados e instalados</h3>
-                    <div id="destino_retired">
-                        @php
-                            $retired = false;
-                        @endphp
+
+                    @if ($item->created_at > '2024-03-01 00:00:00')
+                    <div class="row">
+                        <div class="col-md-6">
                         @foreach ($item->equipments as $equipment_item)
                             @if ($equipment_item->type == 'retired')
                                 @php
                                     $retired = true;
                                 @endphp
+                                        <div class="row" id="origen_retired">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="serial_retired">Serial equipo/s retirados</label>
+                                                    <input type="text" name="serial_retired[]" id="serial_retired"
+                                                        class="form-control" value="{{ $equipment_item->serial }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="detail_retired">Detalle</label>
+                                                    <div class="form-group">
+                                                        <input type="text" name="name_detail[]" class="form-control" value="{{ $equipment_item->detail->name }}">
+                                                        <input type="hidden" name="detail_retired[]" class="form-control" value="{{ $equipment_item->detail_id }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                            @endif
+                         @endforeach
+                        </div>
+                        <div class="col-md-6" style="border-left: 1px solid #0000">
+                        @php
+                        $install = false;
+                        @endphp
+                                @foreach ($item->equipments as $equipment_item)
+                                    @if ($equipment_item->type == 'install')
+                                        @php
+                                            $install = true;
+                                        @endphp
+                                        <div class="row" id="origen_install">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="serial_install">Serial equipo/s instalados</label>
+                                                    <input type="text" name="serial_install[]" class="form-control"
+                                                        value="{{ $equipment_item->serial }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="detail_retired">Detalle</label>
+                                                            <div class="form-group">
+                                                                <input type="text" name="name_detail[]" class="form-control" value="{{ $equipment_item->detail->name }}">
+                                                                <input type="hidden" name="detail_install[]" class="form-control" value="{{ $equipment_item->detail_id }}">
+                                                            </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
+                    </div>
+                    @else
+                        <div id="destino_retired">
+                            @php
+                                $retired = false;
+                            @endphp
+                            @foreach ($item->equipments as $equipment_item)
+                                @if ($equipment_item->type == 'retired')
+                                    @php
+                                        $retired = true;
+                                    @endphp
+                                    <div class="row" id="origen_retired">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="serial_retired">Serial equipo/s retirados</label>
+                                                <input type="text" name="serial_retired[]" id="serial_retired"
+                                                    class="form-control" value="{{ $equipment_item->serial }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="detail_retired">Detalle</label>
+                                                <select name="detail_retired[]" id="detail_retired"
+                                                    class="form-control select2 select2-hidden-accessible"
+                                                    data-placeholder="Selecciona la referencia del equipo"
+                                                    style="width: 100%;" data-select2-id="2" tabindex="-1"
+                                                    aria-hidden="true">
+                                                    <option disabled selected></option>
+                                                    @foreach ($equipments as $equipment)
+                                                        <option
+                                                            {{ $equipment_item->detail_id == $equipment->id ? 'selected' : '' }}
+                                                            value="{{ $equipment->id }}">{{ $equipment->sap }} -
+                                                            {{ $equipment->name }} - {{ $equipment->model_id }} -
+                                                            {{ $equipment->part_id }} - {{ $equipment->brand }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
+                            @if (!$retired)
                                 <div class="row" id="origen_retired">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="serial_retired">Serial equipo/s retirados</label>
+                                            <label for="serial_retired">Serial equipo/s instalados</label>
                                             <input type="text" name="serial_retired[]" id="serial_retired"
-                                                class="form-control" value="{{ $equipment_item->serial }}">
+                                                class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -208,13 +301,11 @@ function checkedActivity($idActivity, $activities)
                                             <label for="detail_retired">Detalle</label>
                                             <select name="detail_retired[]" id="detail_retired"
                                                 class="form-control select2 select2-hidden-accessible"
-                                                data-placeholder="Selecciona la referencia del equipo"
-                                                style="width: 100%;" data-select2-id="2" tabindex="-1"
-                                                aria-hidden="true">
+                                                data-placeholder="Selecciona la referencia del equipo" style="width: 100%;"
+                                                data-select2-id="2" tabindex="-1" aria-hidden="true">
                                                 <option disabled selected></option>
                                                 @foreach ($equipments as $equipment)
-                                                    <option
-                                                        {{ $equipment_item->detail_id == $equipment->id ? 'selected' : '' }}
+                                                    <option {{ old('detail_retired') == $equipment->id ? 'selected' : '' }}
                                                         value="{{ $equipment->id }}">{{ $equipment->sap }} -
                                                         {{ $equipment->name }} - {{ $equipment->model_id }} -
                                                         {{ $equipment->part_id }} - {{ $equipment->brand }}</option>
@@ -224,54 +315,55 @@ function checkedActivity($idActivity, $activities)
                                     </div>
                                 </div>
                             @endif
-                        @endforeach
-                        @if (!$retired)
-                            <div class="row" id="origen_retired">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="serial_retired">Serial equipo/s instalados</label>
-                                        <input type="text" name="serial_retired[]" id="serial_retired"
-                                            class="form-control">
+                        </div>
+                        <button class="btn btn-sm btn-link btn-add" id="btn_add_retired"><i class="fa fa-plus"></i> Agregar
+                            equipo</button>
+                        <hr>
+                        <div id="destino_install">
+                            @php
+                                $install = false;
+                            @endphp
+                            @foreach ($item->equipments as $equipment_item)
+                                @if ($equipment_item->type == 'install')
+                                    @php
+                                        $install = true;
+                                    @endphp
+                                    <div class="row" id="origen_install">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="serial_install">Serial equipo/s instalados</label>
+                                                <input type="text" name="serial_install[]" class="form-control"
+                                                    value="{{ $equipment_item->serial }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="detail_install">Detalle</label>
+                                                <select name="detail_install[]" id="detail_install"
+                                                    class="form-control select2 select2-hidden-accessible"
+                                                    data-placeholder="Selecciona la referencia del equipo"
+                                                    style="width: 100%;" data-select2-id="2" tabindex="-1"
+                                                    aria-hidden="true">
+                                                    <option disabled selected></option>
+                                                    @foreach ($equipments as $equipment)
+                                                        <option
+                                                            {{ $equipment_item->detail_id == $equipment->id ? 'selected' : '' }}
+                                                            value="{{ $equipment->id }}">{{ $equipment->sap }} -
+                                                            {{ $equipment->name }} - {{ $equipment->model_id }} -
+                                                            {{ $equipment->part_id }} - {{ $equipment->brand }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="detail_retired">Detalle</label>
-                                        <select name="detail_retired[]" id="detail_retired"
-                                            class="form-control select2 select2-hidden-accessible"
-                                            data-placeholder="Selecciona la referencia del equipo" style="width: 100%;"
-                                            data-select2-id="2" tabindex="-1" aria-hidden="true">
-                                            <option disabled selected></option>
-                                            @foreach ($equipments as $equipment)
-                                                <option {{ old('detail_retired') == $equipment->id ? 'selected' : '' }}
-                                                    value="{{ $equipment->id }}">{{ $equipment->sap }} -
-                                                    {{ $equipment->name }} - {{ $equipment->model_id }} -
-                                                    {{ $equipment->part_id }} - {{ $equipment->brand }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
-                    </div>
-                    <button class="btn btn-sm btn-link btn-add" id="btn_add_retired"><i class="fa fa-plus"></i> Agregar
-                        equipo</button>
-                    <hr>
-                    <div id="destino_install">
-                        @php
-                            $install = false;
-                        @endphp
-                        @foreach ($item->equipments as $equipment_item)
-                            @if ($equipment_item->type == 'install')
-                                @php
-                                    $install = true;
-                                @endphp
+                                @endif
+                            @endforeach
+                            @if (!$install)
                                 <div class="row" id="origen_install">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="serial_install">Serial equipo/s instalados</label>
-                                            <input type="text" name="serial_install[]" class="form-control"
-                                                value="{{ $equipment_item->serial }}">
+                                            <input type="text" name="serial_install[]" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -279,13 +371,11 @@ function checkedActivity($idActivity, $activities)
                                             <label for="detail_install">Detalle</label>
                                             <select name="detail_install[]" id="detail_install"
                                                 class="form-control select2 select2-hidden-accessible"
-                                                data-placeholder="Selecciona la referencia del equipo"
-                                                style="width: 100%;" data-select2-id="2" tabindex="-1"
-                                                aria-hidden="true">
+                                                data-placeholder="Selecciona la referencia del equipo" style="width: 100%;"
+                                                data-select2-id="2" tabindex="-1" aria-hidden="true">
                                                 <option disabled selected></option>
                                                 @foreach ($equipments as $equipment)
-                                                    <option
-                                                        {{ $equipment_item->detail_id == $equipment->id ? 'selected' : '' }}
+                                                    <option {{ old('detail_install') == $equipment->id ? 'selected' : '' }}
                                                         value="{{ $equipment->id }}">{{ $equipment->sap }} -
                                                         {{ $equipment->name }} - {{ $equipment->model_id }} -
                                                         {{ $equipment->part_id }} - {{ $equipment->brand }}</option>
@@ -295,37 +385,12 @@ function checkedActivity($idActivity, $activities)
                                     </div>
                                 </div>
                             @endif
-                        @endforeach
-                        @if (!$install)
-                            <div class="row" id="origen_install">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="serial_install">Serial equipo/s instalados</label>
-                                        <input type="text" name="serial_install[]" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="detail_install">Detalle</label>
-                                        <select name="detail_install[]" id="detail_install"
-                                            class="form-control select2 select2-hidden-accessible"
-                                            data-placeholder="Selecciona la referencia del equipo" style="width: 100%;"
-                                            data-select2-id="2" tabindex="-1" aria-hidden="true">
-                                            <option disabled selected></option>
-                                            @foreach ($equipments as $equipment)
-                                                <option {{ old('detail_install') == $equipment->id ? 'selected' : '' }}
-                                                    value="{{ $equipment->id }}">{{ $equipment->sap }} -
-                                                    {{ $equipment->name }} - {{ $equipment->model_id }} -
-                                                    {{ $equipment->part_id }} - {{ $equipment->brand }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
-                    </div>
-                    <button class="btn btn-sm btn-link btn-add" id="btn_add_install"><i class="fa fa-plus"></i> Agregar
-                        equipo</button>
+                        </div>
+                        <button class="btn btn-sm btn-link btn-add" id="btn_add_install"><i class="fa fa-plus"></i> Agregar
+                            equipo</button>
+                    @endif
+
+
                     <hr>
                     <h3>Descripción de la falla</h3>
                     <div class="form-group">

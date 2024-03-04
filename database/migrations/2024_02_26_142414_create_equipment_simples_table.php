@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAssigmentsTable extends Migration
+class CreateEquipmentSimplesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateAssigmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('assigments', function (Blueprint $table) {
+        Schema::create('equipment_simples', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_responsable');
-            $table->unsignedBigInteger('id_asignado');
-            $table->unsignedBigInteger('id_kit');
+
+            $table->string('name');
+            $table->integer('status');
+
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateAssigmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('assigments');
+        Schema::dropIfExists('equipment_simples');
     }
 }

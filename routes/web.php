@@ -1016,3 +1016,9 @@ Route::get('form/quote', 'quoteController@index')->name('quote');
 Route::get('form/quote/email', 'quoteController@create')->name('quote_email');
 Route::post('form/quote/','quoteController@store')->name("quote_store");
 Route::post('form/visit/','quoteController@visit')->name("quote_visit");
+
+Route::get('energias', 'EnergyController@index')->name('energy');
+Route::get('energias/editar', 'EnergyController@edit')->name('energy_edit');
+Route::put('energias/update/{id}','EnergyController@update')->name('energy_update');
+
+Route::get('project/maintenance/air-conditioning', 'execution_works\MaintenanceController@index')->name('air-conditioning_index');

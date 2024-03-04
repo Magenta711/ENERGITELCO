@@ -71,7 +71,7 @@ class workPermitViaticsesController extends Controller
         }
         $now = now();
         $items = Work1::whereBetween('created_at',[$cut->end_date,$now])->where('estado','!=','No aprobado')->get();
-        
+
         if ($cut->status == 1 && count($items) > 0) {
             work1_cut_bonus::create([
                 'user_id' => auth()->id(),
@@ -142,7 +142,7 @@ class workPermitViaticsesController extends Controller
                         break;
                     default:
                 }
-                
+
                 if (array_key_exists($user->id,$array)) {
                     $bonus = $array[$user->id]['bonification'];
                     $viat = $array[$user->id]['viatic'];
@@ -178,7 +178,7 @@ class workPermitViaticsesController extends Controller
                 $i++;
             }
         }
-        
+
         return view('human_management.bonus.viatic.show',compact('items','id','array'));
     }
 
@@ -217,11 +217,11 @@ class workPermitViaticsesController extends Controller
         $items = Work1::whereBetween('created_at',[$id->start_date,$id->end_date])->where('estado','!=','No aprobado')->get();
 
         $total = 0;
-        
+
         $total_value_box = $id->value_box;
 
         $user_pending = array();
-        
+
         foreach ($items as $item) {
             $i = 0;
             foreach ($item->users as $user) {
@@ -233,7 +233,7 @@ class workPermitViaticsesController extends Controller
                 $pending = 0;
                 if (!array_key_exists($user->id,$user_pending)) {
                     $wallet = MinorBoxUser::where('user_id',$user->id)->first();
-    
+
                     if ($wallet) {
                         $pending = $wallet->pending;
                         $user_pending[$user->id] = true;
@@ -274,7 +274,7 @@ class workPermitViaticsesController extends Controller
                         ]);
                         break;
                     default:
-                        
+
                         break;
                 }
             }
@@ -330,7 +330,7 @@ class workPermitViaticsesController extends Controller
                             $viatic = $item->work_add->f9a2u1 && is_numeric($item->work_add->f9a2u1) ? $item->work_add->f9a2u1 : 0;
                             $aju = $item->work_add->ajustes_u1 && is_numeric($item->work_add->ajustes_u1) ? $item->work_add->ajustes_u1 : 0;
                             $pen = $item->work_add->pending_u1 && is_numeric($item->work_add->pending_u1) ? $item->work_add->pending_u1 : 0;
-    
+
                             $box = $item->work_add->f9a3u1 && is_numeric($item->work_add->f9a3u1) ? $item->work_add->f9a3u1 : 0;
                             $deli = $item->work_add->deliverable_u1 && is_numeric($item->work_add->deliverable_u1) ? $item->work_add->deliverable_u1 : 0;
                             $dis = $item->work_add->discharges_u1 && is_numeric($item->work_add->discharges_u1) ? $item->work_add->discharges_u1 : 0;
@@ -340,7 +340,7 @@ class workPermitViaticsesController extends Controller
                             $viatic = $item->work_add->f9a2u2 && is_numeric($item->work_add->f9a2u2) ? $item->work_add->f9a2u2 : 0;
                             $aju = $item->work_add->ajustes_u2 && is_numeric($item->work_add->ajustes_u2) ? $item->work_add->ajustes_u2 : 0;
                             $pen = $item->work_add->pending_u2 && is_numeric($item->work_add->pending_u2) ? $item->work_add->pending_u2 : 0;
-    
+
                             $box = $item->work_add->f9a3u2 && is_numeric($item->work_add->f9a3u2) ? $item->work_add->f9a3u2 : 0;
                             $deli = $item->work_add->deliverable_u2 && is_numeric($item->work_add->deliverable_u2) ? $item->work_add->deliverable_u2 : 0;
                             $dis = $item->work_add->discharges_u2 && is_numeric($item->work_add->discharges_u2) ? $item->work_add->discharges_u2 : 0;
@@ -350,7 +350,7 @@ class workPermitViaticsesController extends Controller
                             $viatic = $item->work_add->f9a2u3 && is_numeric($item->work_add->f9a2u3) ? $item->work_add->f9a2u3 : 0;
                             $aju = $item->work_add->ajustes_u3 && is_numeric($item->work_add->ajustes_u3) ? $item->work_add->ajustes_u3 : 0;
                             $pen = $item->work_add->pending_u3 && is_numeric($item->work_add->pending_u3) ? $item->work_add->pending_u3 : 0;
-    
+
                             $box = $item->work_add->f9a3u3 && is_numeric($item->work_add->f9a3u3) ? $item->work_add->f9a3u3 : 0;
                             $deli = $item->work_add->deliverable_u3 && is_numeric($item->work_add->deliverable_u3) ? $item->work_add->deliverable_u3 : 0;
                             $dis = $item->work_add->discharges_u3 && is_numeric($item->work_add->discharges_u3) ? $item->work_add->discharges_u3 : 0;
@@ -360,14 +360,14 @@ class workPermitViaticsesController extends Controller
                             $viatic = $item->work_add->f9a2u4 && is_numeric($item->work_add->f9a2u4) ? $item->work_add->f9a2u4 : 0;
                             $aju = $item->work_add->ajustes_u4 && is_numeric($item->work_add->ajustes_u4) ? $item->work_add->ajustes_u4 : 0;
                             $pen = $item->work_add->pending_u4 && is_numeric($item->work_add->pending_u4) ? $item->work_add->pending_u4 : 0;
-    
+
                             $box = $item->work_add->f9a3u4 && is_numeric($item->work_add->f9a3u4) ? $item->work_add->f9a3u4 : 0;
                             $deli = $item->work_add->deliverable_u4 && is_numeric($item->work_add->deliverable_u4) ? $item->work_add->deliverable_u4 : 0;
                             $dis = $item->work_add->discharges_u4 && is_numeric($item->work_add->discharges_u4) ? $item->work_add->discharges_u4 : 0;
                             break;
                         default:
                     }
-                    
+
                     if (array_key_exists($user->id,$array)) {
                         if ($cut->created_at <= '2021-12-10 24:00:00') {
                             $bonificacion = $array[$user->id]['bonificacion'];
@@ -375,11 +375,11 @@ class workPermitViaticsesController extends Controller
                         $viaticos = $array[$user->id]['viaticos'];
                         $ajustes = $array[$user->id]['ajustes'];
                         $pending = $array[$user->id]['pending'];
-                        
+
                         $caja = $array[$user->id]['caja'];
                         $deliverable = $array[$user->id]['deliverable'];
                         $discharges = $array[$user->id]['discharges'];
-    
+
                         $total_box = $array[$user->id]['total_box'] + $box + $dis;
                         $count = $array[$user->id]['count'];
                         if ($cut->created_at <= '2021-12-10 24:00:00') {
@@ -390,16 +390,16 @@ class workPermitViaticsesController extends Controller
                                 'email' => $user->email,
                                 'cedula' => $user->cedula,
                                 'cuenta' => $user->register ? $user->register->bank_account : '',
-        
+
                                 'bonificacion' => $bonificacion +  $bonus,
                                 'viaticos' => $viaticos + $viatic,
                                 'ajustes' => $ajustes + $aju,
                                 'pending' => $pending + $pen,
-                                
+
                                 'caja' => $caja + $box,
                                 'deliverable' => $deliverable + $deli,
                                 'discharges' => $discharges + $dis,
-        
+
                                 'total_box' => $total_box,
                                 'total_bonus' => $total_bonus,
                                 'total' => $total_bonus + $total_box,
@@ -413,16 +413,16 @@ class workPermitViaticsesController extends Controller
                                 'email' => $user->email,
                                 'cedula' => $user->cedula,
                                 'cuenta' => $user->register ? $user->register->bank_account : '',
-        
+
                                 // 'bonificacion' => $bonificacion +  $bonus,
                                 'viaticos' => $viaticos + $viatic,
                                 'ajustes' => $ajustes + $aju,
                                 'pending' => $pending + $pen,
-                                
+
                                 'caja' => $caja + $box,
                                 'deliverable' => $deliverable + $deli,
                                 'discharges' => $discharges + $dis,
-        
+
                                 'total_box' => $total_box,
                                 'total_bonus' => $total_bonus,
                                 'total' => $total_bonus + $total_box,
@@ -437,16 +437,16 @@ class workPermitViaticsesController extends Controller
                                 'email' => $user->email,
                                 'cedula' => $user->cedula,
                                 'cuenta' => $user->register ? $user->register->bank_account : '',
-        
+
                                 'bonificacion' => $bonus,
                                 'viaticos' => $viatic,
                                 'pending' => $pen,
                                 'ajustes' => $aju,
-        
+
                                 'caja' => $box,
                                 'deliverable' => $deli,
                                 'discharges' => $dis,
-        
+
                                 'total_box' => $box + $dis,
                                 'total_bonus' => $bonus + $viatic + $pen - $aju,
                                 'total' => $box + $dis + $bonus + $viatic + $pen - $aju,
@@ -459,15 +459,15 @@ class workPermitViaticsesController extends Controller
                                 'email' => $user->email,
                                 'cedula' => $user->cedula,
                                 'cuenta' => $user->register ? $user->register->bank_account : '',
-        
+
                                 'viaticos' => $viatic,
                                 'pending' => $pen,
                                 'ajustes' => $aju,
-        
+
                                 'caja' => $box,
                                 'deliverable' => $deli,
                                 'discharges' => $dis,
-        
+
                                 'total_box' => $box + $dis,
                                 'total_bonus' => $viatic + $pen - $aju,
                                 'total' => $box + $dis + $viatic + $pen - $aju,
@@ -556,7 +556,7 @@ class workPermitViaticsesController extends Controller
                         $viaticos = $array[$user->id]['viaticos'];
                         $ajustes = $array[$user->id]['ajustes'];
                         $pending = $array[$user->id]['pending'];
-                        
+
                         $caja = $array[$user->id]['caja'];
                         $deliverable = $array[$user->id]['deliverable'];
                         $discharges = $array[$user->id]['discharges'];
@@ -575,7 +575,7 @@ class workPermitViaticsesController extends Controller
                             'viaticos' => $viaticos + $viatic,
                             'ajustes' => $ajustes + $aju,
                             'pending' => $pending + $pen,
-                            
+
                             'caja' => $caja + $box,
                             'deliverable' => $deliverable + $deli,
                             'discharges' => $discharges + $dis,
@@ -672,10 +672,11 @@ class workPermitViaticsesController extends Controller
                     $AccTotalPagaViatic += $item['total_bonus'];
                     $AccTotalPagarBox += $item['total_box'];
                 }
-                Mail::send('human_management.bonus.viatic.mail.user', ['bonus' => $id,'item' => $item], function ($menssage) use ($item)
-                {
-                    $menssage->to($item['email'],$item['name'])->subject("Energitelco S.A.S PAGO DE COMISIONES A TÉCNICOS APROBADO");
-                });
+                    Mail::send('human_management.bonus.viatic.mail.user', ['bonus' => $id,'item' => $item], function ($menssage) use ($item)
+                    {
+                        $menssage->to($item['email'],$item['name'])->subject("Energitelco S.A.S PAGO DE COMISIONES A TÉCNICOS APROBADO");
+                    });
+                sleep(1);
                 $i++;
             }
 
@@ -694,7 +695,7 @@ class workPermitViaticsesController extends Controller
                 $emails = system_setting::where('state',1)->pluck('emails_before_approval')->first();
                 $company = general_setting::where('state',1)->pluck('company')->first();
                 $email = explode(';',$emails);
-                for ($i=0; $i < count($email); $i++) { 
+                for ($i=0; $i < count($email); $i++) {
                     if($email[$i] != ''){
                         $menssage->to(trim($email[$i]),$company);
                     }
@@ -718,5 +719,5 @@ class workPermitViaticsesController extends Controller
             return redirect()->back()->with(['success'=>'Se ha desaprobado la comisión correctamente']);
         }
     }
-    
+
 }

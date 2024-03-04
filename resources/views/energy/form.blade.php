@@ -46,7 +46,7 @@
             </div>
             <div class="container mt-3">
                 <div class="row justify-content-center">
-                    <div class="col-md-9">
+                    <div class="col-md-10">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="title"><B>Datos de contacto</B></h5>
@@ -105,6 +105,18 @@
                                 @include('energy.check')
                                 <hr>
                                 @include('energy.use')
+                                <input type="hidden" id="ValorUniPanel" value="{{ $id->ValorPanel }}">
+                                <input type="hidden" id="ValorUniRegulador" value="{{ $id->ValorRegulador}}">
+                                <input type="hidden" id="ValorUniBateria" value="{{ $id->ValorBateria}}">
+                                <input type="hidden" id="ValorUniInversor" value="{{ $id->ValorInversor}}">
+                                <input type="hidden" name="ModelPanel" value="{{ $id->ModelPanel }}">
+                                <input type="hidden" name="GarantiaPanel" value="{{ $id->GarantiaPanel }}">
+                                <input type="hidden" name="ModelRegulador" value="{{ $id->ModelRegulador }}">
+                                <input type="hidden" name="GarantiaRegulador" value="{{ $id->GarantiaRegulador }}">
+                                <input type="hidden" name="ModelBateria" value="{{ $id->ModelBateria }}">
+                                <input type="hidden" name="GarantiaBateria" value="{{ $id->GarantiaBateria }}">
+                                <input type="hidden" name="ModelInversor" value="{{ $id->ModelInversor }}">
+                                <input type="hidden" name="GarantiaInversor" value="{{ $id->GarantiaInversor }}">
                                 <input type="hidden" class="form-control" name="TotalConsumo" id="TotalConsumo">
                                 <input type="hidden" class="form-control" name="CantidadPanel" id="CantidadPanel">
                                 <input type="hidden" class="form-control" name="ValorPanel" id="ValorPanel">
@@ -146,7 +158,7 @@
 $(document).ready(function() {
   // Ocultamos la caja al cargar la página
   $(".electrodomesticos").hide();
-  $(".mini-container").hide();
+//   $(".mini-container").hide();
   $(".visit-container").hide();
 
 
@@ -216,7 +228,7 @@ $('#ValorKV').on('change', ValorKV);
 
 
 function ValorKV(){
-    
+
     let CantidadKV = Number($("#cantidadKV").val());
     let ValorKV = Number($("#ValorKV").val());
     let totalKV = CantidadKV*ValorKV;
@@ -233,7 +245,7 @@ function ValorKV(){
 
 
 function Paneles(){
-    
+
     let CantidadKV = Number($("#cantidadKV").val())*1000;
     let CantidadDiaKv = (CantidadKV/30);
     let TotalDiaKv = (CantidadDiaKv*0.2)+CantidadDiaKv;
@@ -246,7 +258,7 @@ function Paneles(){
     $('#Paneles').html(cantidadPaneles)
     $('#CantidadPanel').val(cantidadPaneles)
 
-    let Valor=1100000
+    let Valor=Number($("#ValorUniPanel").val())
     let valorTotalPanel=Valor*cantidadPaneles;
 
     const valorPanelFormateado = "$" + Valor.toString().replace(/\./g, ",").replace(/(\d)(?=(\d{3})+$)/g, "$1.");
@@ -257,8 +269,8 @@ function Paneles(){
     const valorTotalPanelFormateado = "$" + valorTotalPanel.toString().replace(/\./g, ",").replace(/(\d)(?=(\d{3})+$)/g, "$1.");
     $("#ValorTotalPanelTxt").html(valorTotalPanelFormateado);
     $("#ValorTotalPanel").val(valorTotalPanel);
-    return valorTotalPanel
 
+    return valorTotalPanel
 };
 
 function Regulador(){
@@ -268,13 +280,13 @@ function Regulador(){
     let cantidadRegulador=0
     let i=0
 
-    while(i<AmperioHora){      
+    while(i<AmperioHora){
         cantidadRegulador=cantidadRegulador+1
         i=i+100
     }
     $('#Reguladores').html(cantidadRegulador)
 
-    let Valor=1140000
+    let Valor=Number($("#ValorUniRegulador").val())
     let valorTotalRegulador=Valor*cantidadRegulador;
 
     const valorReguladorFormateado = "$" + Valor.toString().replace(/\./g, ",").replace(/(\d)(?=(\d{3})+$)/g, "$1.");
@@ -285,8 +297,8 @@ function Regulador(){
     $("#ValorTotalReguladorTxt").html(valorTotalReguladorFormateado);
 
     $('#CantidadRegulador').val(cantidadRegulador)
-    $("#ValorRegulador").val(Valor);    
-    $("#ValorTotalRegulador").val(valorTotalRegulador); 
+    $("#ValorRegulador").val(Valor);
+    $("#ValorTotalRegulador").val(valorTotalRegulador);
     return valorTotalRegulador
 }
 
@@ -297,13 +309,13 @@ function Inversor(){
     let CantidadInversor=0;
     let i=0;
 
-    while(i<PotenciaTotal){      
+    while(i<PotenciaTotal){
         CantidadInversor=CantidadInversor+1
         i=i+3000
     }
     $('#Inversores').html(CantidadInversor)
 
-    let Valor=2750000
+    let Valor=Number($("#ValorUniInversor").val())
     let valorTotalInversor=Valor*CantidadInversor;
 
     const valorInversorFormateado = "$" + Valor.toString().replace(/\./g, ",").replace(/(\d)(?=(\d{3})+$)/g, "$1.");
@@ -331,7 +343,7 @@ function Bateria(){
     }
     $('#Baterias').html(cantidadBateria)
 
-    let Valor=6287989
+    let Valor=Number($("#ValorUniBateria").val())
     let valorTotalBateria=Valor*cantidadBateria;
 
 
@@ -347,12 +359,42 @@ function Bateria(){
     return valorTotalBateria
 }
 
+function Descuento(){
+    let CantidadKV = Number($("#cantidadKV").val())*1000;
+    let CantidadDiaKv = (CantidadKV/30);
+    let TotalDiaKv = (CantidadDiaKv*0.2)+CantidadDiaKv;
+    let cantidadPaneles = Math.round(TotalDiaKv/550);
+    let descuento=0;
+
+    if(Math.round(cantidadPaneles/2)!=(cantidadPaneles/2)){
+        cantidadPaneles=cantidadPaneles+1
+    }
+
+    if(cantidadPaneles>=10 && cantidadPaneles<=19){
+        descuento=0.03
+    }else if (cantidadPaneles>=20 && cantidadPaneles<=29){
+        descuento=0.05
+    }else if(cantidadPaneles>=30 && cantidadPaneles<=39){
+        descuento=0.07
+    }else if(cantidadPaneles>=40 && cantidadPaneles<=49){
+        descuento=0.09
+    }else if(cantidadPaneles>=50){
+        descuento=0.1
+    }else{
+        descuento=0
+    }
+
+    console.log(descuento);
+
+    return descuento;
+}
 
 function ResultadoSistema(){
-    let valorPaneles=Paneles()
+    let valorPaneles=Paneles();
     let valorRegulador=Regulador()
     let valorInversor=Inversor()
     let valorBateria=Bateria()
+    let descuento=Descuento()
     let CantidadKV = Number($("#cantidadKV").val());
     let ValorKV = Number($("#ValorKV").val());
     let totalKV = CantidadKV*ValorKV;
@@ -360,6 +402,9 @@ function ResultadoSistema(){
     let TotalConsumibles=Math.round(SumaTotalSistema*0.05)
     let TotalInstalado=Math.round(SumaTotalSistema*0.1)
     let ValorTotalSistema=SumaTotalSistema+TotalConsumibles+TotalInstalado
+    console.log(ValorTotalSistema);
+    ValorTotalSistema = ValorTotalSistema-(ValorTotalSistema*descuento)
+    console.log(ValorTotalSistema);
     let Salva=Math.round(ValorTotalSistema/totalKV) + " MESES"
     $('#SalvaTxt').html(Salva)
     $('#Salva').val(Salva)

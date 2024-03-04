@@ -6,14 +6,14 @@
                 <button type="button" onclick="document.getElementById('modal').style.display = 'none'; document.getElementById('page-top').style.overflow = 'auto';" class="close text-white">X</button>
             </header>
             <div class="container d-flex h-75 align-items-center" id="about-prin">
-                <div class="mx-auto text-center">     
+                <div class="mx-auto text-center">
                     <h2 class="text-white mx-auto mt-2 mb-5 text-uppercase">SOMOS TU MEJOR OPCIÓN</h2>
-                    <a class="btn btn-primary js-scroll-trigger" href="{{route('quote')}}">COTIZAR</a>
+                    <a class="btn btn-primary js-scroll-trigger" href="{{route('quote')}}" target="_blank">COTIZAR</a>
                 </div>
             </div>
-            
+
         </section>
-        
+
         <section class="about-section text-center" id="about-top">
             <div class="container">
                 <div class="row">
@@ -25,14 +25,14 @@
                     </div>
                 </div>
             </section>
-            
+
             <section class="text-center" id="about-video">
                 <video autoplay muted loop class="video">
                     <source src="{{asset ('img/files/MustVideo.mp4')}}" type="video/mp4">
                 </video>
             </section>
         <!-- About-->
-       
+
         <section class="about-section text-center" id="about">
             <div class="container">
                 <div class="row">
@@ -40,10 +40,9 @@
                         <h2 class="text-white">SOLUCIONES A LA MEDIDA</h2>
                         <p class="text-white-50">
                             Reconocemos que cada cliente es único, y nuestras soluciones están diseñadas para satisfacer necesidades específicas. Ya sea para instalaciones residenciales, comerciales o industriales, nuestros expertos en energía solar colaboran estrechamente con usted para crear sistemas personalizados que maximizan la eficiencia, reducen los costos operativos y proporcionan un retorno de inversión sólido.                    </div>
-                        
                     </div>
                     <div>
-                
+
                 </div>
                 <section class="about-section text-center" id="about-header">
                     <div class="container">
@@ -59,7 +58,7 @@
                 <div class="row ">
                     <div class="col-lg-12 mx-auto"  id="title"><h2 class="text-white text-center">CES JOSE LUIS SAS</h2></div>
                     <div class="col-lg-6 mx-auto d-flex align-items-center" id="img1">
-                        <div class="mx-auto text-center">     
+                        <div class="mx-auto text-center">
                             <h2 class="text-white">SURAMERICANA</h2>
                             <p class="text-white-50">La nueva sede ubicada en sector de Suramericana en Medellín tiene los equipos más sofisticados de energía solar, estos alimentados por una amplia gama de paneles solares que alimentan al edicio de eléctricidad.
                             </p>
@@ -70,14 +69,14 @@
                         <p class="text-white-50">
                         </p>
                     </div> --}}
-    
+
                     <div class="col-lg-6 mx-auto d-flex align-items-center" id="img2">
-                        <div class="mx-auto text-center">     
+                        <div class="mx-auto text-center">
                             <h2 class="text-white">BARBOSA</h2>
                             <p class="text-white-50">Nuestra novedosa sede en el Municipio de Barbosa cuenta con 6 paneles solares que alimentan a un edificio de seis pisos.
                             </p>
                         </div>
-                       
+
                     </div>
                 </div>
                 <div class="row" id="Equipos">
@@ -95,25 +94,25 @@
                         <img src="https://formaselectricas.com/wp-content/uploads/2022/03/panel-solar.png.webp" alt="panel">
                         <div class="card-txt">
                             <h4 class="card-title text-white">PANEL SOLAR MONOCRISTALINO</h4>
-                        </div> 
+                        </div>
                     </div>
                     <div class="col-md-6" id="Equipo">
                         <img src="{{asset ('img/files/mppt.jpg')}}" alt="panel">
                         <div class="card-txt">
                             <h4 class="card-title text-white">REGULADOR DE CARGA SOLAR MPPT</h4>
-                        </div> 
+                        </div>
                     </div>
                     <div class="col-md-6" id="Equipo">
                         <img src="https://www.emergente.com.co/blog/wp-content/uploads/2022/05/bateria-litio-must.jpg" alt="panel">
                         <div class="card-txt">
                             <h4 class="card-title text-white">BATERÍA DE FOSFATO SERIE LP1800</h4>
-                        </div> 
+                        </div>
                     </div>
                     <div class="col-md-6" id="Equipo">
                         <img src="https://ineldec.com/wp-content/uploads/2023/05/Inversor-Hibrido-MUST-PV33-3048-TLV-Fase-Dividida-3kW-48V-600x600.jpg" alt="panel">
                         <div class="card-txt">
                             <h4 class="card-title text-white">INVERSOR 3 KW 48V MUST</h4>
-                        </div>  
+                        </div>
                     </div>
                 </div>
             </div>
@@ -185,7 +184,7 @@
         /* background-image: url('https://www.pepeenergy.com/blog/embed/ea63925165fe27c7f77d73cf7b2ef1613497601/Paneles-solares-fotovoltaicos..jpg?imagick=1&size=1250'); */
         background-repeat: no-repeat;
         background-size: cover;
-    }   
+    }
 
     #header{
         height: 3vh;
@@ -194,7 +193,7 @@
         /* background-image: url('https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/media/image/2022/08/paneles-solares-2785047.jpg?tf=3840x'); */
         background-repeat: no-repeat;
         background-size: cover;
-    }  
+    }
 
     #img2 {
         height: 50vh;
@@ -209,7 +208,7 @@
             width: 100%;
             height: 50vh;
         }
-    
+
     #about-prin{
         height: 50%;
     }
@@ -239,7 +238,7 @@
     #about-video{
         background: linear-gradient(to bottom, #000000 0%, rgba(0, 0, 0, 0.9) 75%, rgb(0 0 0) 100%);
     }
-    
+
     #text-box{
         display: flex;
         align-items: center;
@@ -270,7 +269,6 @@
 <script>
     document.getElementById('modal').style.display = 'none';
     document.getElementById('modal').style.display = 'block';
-
     document.getElementById('page-top').style.overflow = "hidden";
-        
+
 </script>

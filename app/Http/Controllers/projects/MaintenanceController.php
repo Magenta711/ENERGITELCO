@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\project\Mintic\Mintic_School;
 use App\Models\project\Mintic\inventory\EquimentDetail;
+use App\Models\project\Mintic\inventory\EquipmentSimple;
 use App\Models\project\Mintic\mintic_maintenance;
 use Illuminate\Support\Facades\Storage;
 use App\Notifications\notificationMain;
@@ -51,9 +52,10 @@ class MaintenanceController extends Controller
     public function create(Mintic_School $id)
     {
         $equipments = EquimentDetail::get();
+        $equipment_simples = EquipmentSimple::get();
         $activities = MinticMaintenanceActivity::get();
         $users = User::where('state',1)->get();
-        return view('projects.mintic.maintenance.create',compact('id','equipments','activities','users'));
+        return view('projects.mintic.maintenance.create',compact('id','equipments','activities','users','equipment_simples'));
     }
 
     /**
@@ -128,8 +130,10 @@ class MaintenanceController extends Controller
     {
         $equipments = EquimentDetail::get();
         $activities = MinticMaintenanceActivity::get();
+        $equipment_simples = EquipmentSimple::get();
         $users = User::where('state',1)->get();
-        return view('projects.mintic.maintenance.edit',compact('id','item','equipments','activities','users'));
+
+        return view('projects.mintic.maintenance.edit',compact('id','item','equipments','activities','users','equipment_simples'));
     }
 
     /**
@@ -201,19 +205,21 @@ class MaintenanceController extends Controller
         $equipments = EquimentDetail::get();
         $activities = MinticMaintenanceActivity::get();
 
-        $files = array();
-        $files['logo_mintic']['name'] = 'Logo_mintic';
-        $files['logo_mintic']['description'] = 'Logo de MinTIC';
-        $files['logo_mintic']['path'] = public_path('/img/mintic.png');
-        $files['logo_mintic']['height'] = 90;
-        $files['logo_mintic']['coordinates'] = 'B3';
-        $files['logo_mintic']['place'] = 3;
+        // return $activities;
+
+        // $files = array();
+        // $files['logo_mintic']['name'] = 'Logo_mintic';
+        // $files['logo_mintic']['description'] = 'Logo de MinTIC';
+        // $files['logo_mintic']['path'] = public_path('/img/mintic.png');
+        // $files['logo_mintic']['height'] = 90;
+        // $files['logo_mintic']['coordinates'] = 'B3';
+        // $files['logo_mintic']['place'] = 3;
 
         $files['logo_claro']['name'] = 'Logo_Claro';
         $files['logo_claro']['description'] = 'Logo de Claro';
         $files['logo_claro']['path'] = public_path('/img/claro.png');
         $files['logo_claro']['height'] = 80;
-        $files['logo_claro']['coordinates'] = 'N3';
+        $files['logo_claro']['coordinates'] = 'O3';
         $files['logo_claro']['place'] = 3;
 
         if ($item->files)

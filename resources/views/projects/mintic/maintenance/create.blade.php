@@ -155,7 +155,51 @@
                     </div>
                     <h3>Serial equipo/s retirados e instalados</h3>
                     <div id="destino_retired">
-                        <div class="row" id="origen_retired">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h4><b>Equipos Retirados</b></h4>
+                                        <hr>
+                                        @foreach ($equipment_simples as $item)
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                  <div class="form-group">
+                                                    <label for="ap_outdoor_1_serial">Equipo</label>
+                                                    <input type="text" name="name_retired[]" class="form-control" value="{{ $item->name }}">
+                                                    <input type="hidden" name="detail_retired[]" class="form-control" value="{{ $item->id }}">
+                                                </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                  <div class="form-group">
+                                                    <label for="ap_outdoor_1_detail">Serial</label>
+                                                    <input type="text" name="serial_retired[]" class="form-control">
+                                                  </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h4><b>Equipos Instalados</b></h4>
+                                        <hr>
+                                        @foreach ($equipment_simples as $item)
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                  <div class="form-group">
+                                                    <label for="ap_outdoor_1_serial">Equipo</label>
+                                                    <input type="text" name="name_detail[]" class="form-control" value="{{ $item->name }}">
+                                                    <input type="hidden" name="detail_install[]" class="form-control" value="{{ $item->id }}">
+                                                  </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                  <div class="form-group">
+                                                    <label for="ap_outdoor_1_detail">Serial</label>
+                                                    <input type="text" name="serial_install[]" class="form-control">
+                                                  </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                        {{-- <div class="row" id="origen_retired">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="serial_retired">Serial equipo/s retirados</label>
@@ -180,9 +224,9 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
-                    <button class="btn btn-sm btn-link btn-add" id="btn_add_retired"><i class="fa fa-plus"></i> Agregar
+                    {{-- <button class="btn btn-sm btn-link btn-add" id="btn_add_retired"><i class="fa fa-plus"></i> Agregar
                         equipo</button>
                     <hr>
                     <div id="destino_install">
@@ -213,7 +257,7 @@
                         </div>
                     </div>
                     <button class="btn btn-sm btn-link btn-add" id="btn_add_install"><i class="fa fa-plus"></i> Agregar
-                        equipo</button>
+                        equipo</button> --}}
                     <hr>
                     <h3>Descripción de la falla / Hallazgos</h3>
                     <div class="form-group">
