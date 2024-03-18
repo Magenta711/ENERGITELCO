@@ -82,59 +82,58 @@ function equipments($equipments)
     </tr>
     <tr>
         <td></td>
-        <td colspan="4" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">CONTRATO No.</td>
-        <td colspan="11" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">Contratista</td>
+        <td colspan="4" style="text-align: center;background: #D0CECE;border: 1px solid #000000; "><B>ONTRATO No.</B></td>
+        <td colspan="11" style="text-align: center;background: #D0CECE;border: 1px solid #000000;"><B>Contratista</B></td>
     </tr>
     <tr>
         <td></td>
-        <td colspan="4" style="text-align: center;border: 1px solid #000000;">1042 de 2020</td>
-        <td colspan="11" style="text-align: center;border: 1px solid #000000;">COMCEL SAS</td>
+        <td colspan="4" style="text-align: center;border: 1px solid #000000; height: 30px;">1042 de 2020</td>
+        <td colspan="11" style="text-align: center;border: 1px solid #000000; height: 30px;">COMCEL SAS</td>
     </tr>
     <tr>
         <td></td>
-        <td colspan="4" style="text-align: center;background: #D0CECE;border: 1px solid #000000; width: 20px">DEPARTAMENTO</td>
-        <td colspan="5" style="text-align: center;background: #D0CECE;border: 1px solid #000000; width: 20px">MUNICIPIO</td>
-        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000; width: 20px; display: grid; align-items: center; justify-content: center;">CENTRO POBLADO</td>
-        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000; height: 30px; white-space: nowrap; word-wrap: break-word; max-width: 100%; overflow: hidden;">SEDE INSTITUCIÓN EDUCATIVA O CASO ESPECIAL
+        <td colspan="4" style="text-align: center;background: #D0CECE;border: 1px solid #000000; width: 20px"><B>DEPARTAMENTO</B></td>
+        <td colspan="5" style="text-align: center;background: #D0CECE;border: 1px solid #000000; width: 20px;"><B>MUNICIPIO</B></td>
+        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000; width: 20px;"><B>CENTRO POBLADO</B></td>
+        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000; height: 30px; white-space: nowrap; word-wrap: break-word; max-width: 100%; overflow: hidden;"><b>SEDE INSTITUCIÓN EDUCATIVA O CASO ESPECIAL</b>        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="4" style="text-align: center;border: 1px solid #000000; height: 30px;"><B>{{ $id->department }}</B></td>
+        <td colspan="5" style="text-align: center;border: 1px solid #000000; height: 30px;"><B>{{ $id->municpality }}</B></td>
+        <td colspan="3" style="text-align: center;border: 1px solid #000000; height: 30px;"><B>{{ $id->population }}</B></td>
+        <td colspan="3" style="text-align: center;border: 1px solid #000000; height: 30px;"><B>{{ $id->name }}</B></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="2" style="text-align: center;background: #D0CECE;border: 1px solid #000000;"><B>ID BENEFICIARIO</B>
         </td>
-    </tr>
-    <tr>
-        <td></td>
-        <td colspan="4" style="text-align: center;border: 1px solid #000000;">{{ $id->department }}</td>
-        <td colspan="5" style="text-align: center;border: 1px solid #000000;">{{ $id->municpality }}</td>
-        <td colspan="3" style="text-align: center;border: 1px solid #000000;">{{ $id->population }}</td>
-        <td colspan="3" style="text-align: center;border: 1px solid #000000;">{{ $id->name }}</td>
-    </tr>
-    <tr>
-        <td></td>
-        <td colspan="2" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">ID BENEFICIARIO
-        </td>
-        <td colspan="2" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">ID MINTIC</td>
-        <td colspan="5" style="text-align: center;background: #D0CECE;border: 1px solid #000000; height: 30px; white-space: nowrap; word-wrap: break-word; max-width: 100%; overflow: hidden; vertical-align: middle;">NOMBRE DEL
+        <td colspan="2" style="text-align: center;background: #D0CECE;border: 1px solid #000000;"><B>ID MINTIC</B></td>
+        <td colspan="5" style="text-align: center;background: #D0CECE;border: 1px solid #000000; height: 30px; white-space: nowrap; word-wrap: break-word; max-width: 100%; overflow: hidden; vertical-align: middle;"><B>NOMBRE DEL
             RESPONSABLE
-            (RESPONSABLE DE LA INSTITUCIÓN EDUCATIVA / AUTORIDAD COMPENTE)</td>
-        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">NÚMERO DE CEDULA
+            (RESPONSABLE DE LA INSTITUCIÓN EDUCATIVA / AUTORIDAD COMPENTE)</B></td>
+        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000; vertical-align: middle;"><B>NÚMERO DE CEDULA</B>
         </td>
-        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">NÚMERO DE CONTACTO
+        <td colspan="3" style="text-align: center;background: #D0CECE;border: 1px solid #000000;"><B>NÚMERO DE CONTACTO</B>
         </td>
     </tr>
     <tr>
         <td></td>
-        <td colspan="2" style="text-align: center;border: 1px solid #000000;">{{ $id->code }}</td>
-        <td colspan="2" style="text-align: center;border: 1px solid #000000;">{{ $id->project->con_sede }}</td>
-        <td colspan="5" style="text-align: center;border: 1px solid #000000;">{{ $id->responsable_name }}</td>
-        <td colspan="3" style="text-align: center;border: 1px solid #000000;">{{ $id->responsable_cc }}</td>
-        <td colspan="3" style="text-align: center;border: 1px solid #000000;">{{ $id->responsable_number }}</td>
+        <td colspan="2" style="text-align: center;border: 1px solid #000000; height: 30px;"><B>{{ $id->code }}</B></td>
+        <td colspan="2" style="text-align: center;border: 1px solid #000000;"><B>{{ $id->project->con_sede }}</B></td>
+        <td colspan="5" style="text-align: center;border: 1px solid #000000;"><B>{{ $id->responsable_name }}</B></td>
+        <td colspan="3" style="text-align: center;border: 1px solid #000000;"><B>{{ $id->responsable_cc }}</B></td>
+        <td colspan="3" style="text-align: center;border: 1px solid #000000;"><B>{{ $id->responsable_number }}</B></td>
     </tr>
     <tr>
         <td></td>
-        <td colspan="15" style="text-align: center;background: #D0CECE;border: 1px solid #000000;">CORREO ELECTRÓNICO
+        <td colspan="15" style="text-align: center;background: #D0CECE;border: 1px solid #000000;"><P>CORREO ELECTRÓNICO</P>
         </td>
     </tr>
     <tr>
         <td></td>
         <td colspan="15" style="text-align: center;border: 1px solid #000000;">
-            {{ $id->responsable_email }}
+            <B>{{ $id->responsable_email }}</B>
         </td>
     </tr>
     <tr>
@@ -258,38 +257,38 @@ function equipments($equipments)
             <tr>
                 <td></td>
                 <td colspan="4" style="text-align: center;border: 1px solid #000000;">
+                    {{ isset($equipment_item['retired']) ? $equipment_item['retired']->detail->name : '' }}
+                </td>
+                <td colspan="4" style="text-align: center;border: 1px solid #000000;">
                     {{ isset($equipment_item['retired']) ? $equipment_item['retired']->serial : 'N/A' }}
                 </td>
-                <td colspan="4" style="border: 1px solid #000000;">
-                    {{ isset($equipment_item['retired']) ? $equipment_item['retired']->detail->name : '' }}
+                <td colspan="3" style="text-align: center;border: 1px solid #000000;">
+                    {{ isset($equipment_item['install']) ? $equipment_item['install']->detail->name : '' }}
                 </td>
                 <td colspan="4" style="text-align: center;border: 1px solid #000000;">
                     {{ isset($equipment_item['install']) ? $equipment_item['install']->serial : 'N/A' }}
                 </td>
-                <td colspan="3" style="border: 1px solid #000000;">
-                    {{ isset($equipment_item['install']) ? $equipment_item['install']->detail->name : '' }}
-                </td>
             </tr>
         @endforeach
-    @else 
+    @else
     @foreach (equipments($id->equipments) as $equipment_item)
     @php
         $j++;
     @endphp
-        @if (!$equipment_item['retired']->serial == '')
+        @if (!$equipment_item['retired']->serial == 'N/A')
         <tr>
             <td></td>
-            <td colspan="4" style="text-align: center;border: 1px solid #000000;">
-                {{ isset($equipment_item['retired']) ? $equipment_item['retired']->serial : 'N/A' }}
-            </td>
             <td colspan="4" style="border: 1px solid #000000;">
                 {{ isset($equipment_item['retired']) ? $equipment_item['retired']->detail->name : '' }}
             </td>
             <td colspan="4" style="text-align: center;border: 1px solid #000000;">
-                {{ isset($equipment_item['install']) ? $equipment_item['install']->serial : 'N/A' }}
+                {{ isset($equipment_item['retired']) ? $equipment_item['retired']->serial : 'N/A' }}
             </td>
             <td colspan="3" style="border: 1px solid #000000;">
                 {{ isset($equipment_item['install']) ? $equipment_item['install']->detail->name : '' }}
+            </td>
+            <td colspan="4" style="text-align: center;border: 1px solid #000000;">
+                {{ isset($equipment_item['install']) ? $equipment_item['install']->serial : 'N/A' }}
             </td>
         </tr>
         @endif
@@ -344,7 +343,7 @@ function equipments($equipments)
     </tr>
     <tr>
         <td></td>
-        <td colspan="15" style="text-align: center; border: 1px solid #000000;">{{ $id->fault_description }}</td>
+        <td colspan="15" style="text-align: center; border: 1px solid #000000; height: 60px;">{{ $id->fault_description }}</td>
     </tr>
     {{-- @if ($trabajo->created_at > '2020-12-14 11:00:00') --}}
     <tr>

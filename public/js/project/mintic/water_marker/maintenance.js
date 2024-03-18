@@ -21,9 +21,33 @@ $(document).ready(function() {
         num = this.id.split('_')[this.id.split('_').length - 1];
         $('#label_file_'+num).addClass('text-aqua');
     });
+    $("#rang_hours_before").click(function(){
+        rang_hours()
+    });
 
     url = $('#url').data('url')
 });
+
+function rang_hours(){
+    let date = $("#date_before").val();
+    let hour_init = moment(date+"T"+$("#hour_before_init").val());
+    let hour_end = moment(date+"T"+$("#hour_before_end").val());
+    console.log('hour_init-->',hour_init)
+    console.log('hour_end-->',hour_end)
+    let diff_hour = hour_end.diff(hour_init,'minute')
+    console.log('diff-->',diff_hour);
+    let ip_dates = $('.date-marcker-1')
+    let min_add = diff_hour / ip_dates.length
+    console.log(min_add)
+    for (let i = 0; i < ip_dates.length; i++) {
+        // console.log(i)
+        let new_hour = hour_init.add(min_add*i, 'minutes');
+        let new_date = new_hour
+        let moment_date=moment(new_date).format('YYYY-MM-DD HH:MM:SS');
+        $(ip_dates[i]).val(moment_date)
+        console.log('new_date', moment_date)
+    }
+}
 
 function dlete(btn) {
 
@@ -31,9 +55,9 @@ function dlete(btn) {
     data = new FormData(form);
     let file_id = $('#file_id_'+btn).val();
     $.ajax({
-        type:'POST',
+        type:'DELETE',
         enctype: 'multipart/form-data',
-        url:'/files/delete/'+file_id,
+        url:'/setting/files/delete/'+file_id,
         data:data,
         processData: false,
         contentType: false,
@@ -133,7 +157,7 @@ function upload(btn) {
 
                 if(data.file_id) {
                     $('#file_id_'+btn).val(data.file_id);
-                }    
+                }
 
                 if(data.type.toLowerCase() == 'pdf'){
                     $('<i>',{

@@ -280,13 +280,32 @@ class MaintenanceController extends Controller
             $file = $request->file('file');
 
             $name = time().str_random().'.'.$file->getClientOriginalExtension();
+            $name_sin = 'sin_'.$name;
             if (!(isset($request->write) && $request->write == 'No' ) && ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg')) {
-                $text2 = $mintic->project->long.' / '.$mintic->project->lat;
+                $num_rand = rand(1,2);
+                $num_rand2 = rand(1,10);
+                $num_rand3 = rand(1,10);
+                $lat=$mintic->project->lat;
+                $long=$mintic->project->long;
+
+                if($num_rand==1){
+                    $latitud=$lat-(0.000001*$num_rand2);
+                    $longitud=$long+(0.000001*$num_rand3);
+                }else if($num_rand==2){
+                    $latitud=$lat+(0.000001*$num_rand2);
+                    $longitud=$long-(0.000001*$num_rand3);
+                }
+
+                $text2 = $latitud.' / '.$longitud;
                 $text3 = isset($request->date) && $request->date ? Carbon::create($request->date)->format('Y-m-d H:i:s') : now()->format('Y-m-d H:i:s');
 
                 $image = Image::make($request->file);
+                $image_sin = Image::make($request->file);
                 if ($request->size != 'org') {
                     $image->resize(null, 500, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
+                    $image_sin->resize(null, 500, function ($constraint) {
                         $constraint->aspectRatio();
                     });
                     $height = 25 + ($request->size_letter * 3);
@@ -367,6 +386,32 @@ class MaintenanceController extends Controller
                     });
                 }
                 $image->save(public_path('storage/upload/mintic/'.$name));
+                $image_sin->save(public_path('storage/upload/mintic/'.$name_sin));
+                if ($file_exists) {
+                    $file_exists_sin = $mintic->files->where('description','sin '.$request->name_d)->first();
+                    Storage::delete('public/upload/mintic/'.$file_exists_sin->name);
+                    $file_exists->update([
+                        'name' => $name_sin,
+                        'description' => 'sin '.$request->name_d,
+                        'commentary' => $request->commentary,
+                        'size' => $size.' KB',
+                        'url' => 'public/upload/mintic/'.$name_sin,
+                        'type' => $file->getClientOriginalExtension(),
+                        'place' => 'XXX',
+                        'state' => 1
+                    ]);
+                }else{
+                    $mintic->files()->create([
+                        'name' => $name_sin,
+                        'description' => 'sin '.$request->name_d,
+                        'commentary' => $request->commentary,
+                        'size' => $size.' KB',
+                        'url' => 'public/upload/mintic/'.$name_sin,
+                        'type' => $file->getClientOriginalExtension(),
+                        'place' => 'XXX',
+                        'state' => 1
+                    ]);
+                }
             }else {
                 $size = $file->getClientSize() / 1000;
                 $path = Storage::putFileAs('public/upload/mintic', $file, $name);
@@ -385,7 +430,7 @@ class MaintenanceController extends Controller
                 return response()->json([
                     'success'=>'Se subio y actualizo correctamente el archivo',
                     'size' => $size.' KB',
-                    'name' => $name,
+                    'name' => $name_sin,
                     'type' => $file->getClientOriginalExtension(),
                 ]);
             }
@@ -402,7 +447,7 @@ class MaintenanceController extends Controller
             return response()->json([
                 'success'=>'Se subio correctamente el archivo',
                 'size' => $size.' KB',
-                'name' => $name,
+                'name' => $name_sin,
                 'type' => $file->getClientOriginalExtension(),
             ]);
         }else {

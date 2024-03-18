@@ -171,7 +171,7 @@
                                                 <div class="col-md-6">
                                                   <div class="form-group">
                                                     <label for="ap_outdoor_1_detail">Serial</label>
-                                                    <input type="text" name="serial_retired[]" class="form-control">
+                                                    <input type="text" name="serial_retired[]" class="form-control" value="N/A">
                                                   </div>
                                                 </div>
                                             </div>
@@ -192,7 +192,7 @@
                                                 <div class="col-md-6">
                                                   <div class="form-group">
                                                     <label for="ap_outdoor_1_detail">Serial</label>
-                                                    <input type="text" name="serial_install[]" class="form-control">
+                                                    <input type="text" name="serial_install[]" class="form-control" value="N/A">
                                                   </div>
                                                 </div>
                                             </div>

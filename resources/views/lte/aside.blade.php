@@ -504,7 +504,7 @@ f <!-- =============================================== -->
                                             'Aprobar proyectos de desmonte',
                                         ])) --}}
                                         <li class="treeview {{ activeMenu('project/maintence*') }}">
-                                            <a href="#"><i class="fa fa-wifi"></i> MANTENIMIENTOS<span
+                                            <a href="#"><i class="fa fa-wifi"></i> MSU<span
                                                     class="pull-right-container">
                                                     <i class="fa fa-angle-left pull-right"></i>
                                                 </span>

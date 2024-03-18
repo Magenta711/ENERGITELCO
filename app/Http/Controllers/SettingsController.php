@@ -8,6 +8,7 @@ use App\Models\system_setting;
 use App\Models\SystemMessages;
 use App\Models\Positions;
 use App\User;
+use App\Models\file;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -211,7 +212,7 @@ class SettingsController extends Controller
     public function messages_store(Request $request)
     {
         $request->validate([
-            
+
         ]);
         SystemMessages::where('state',1)->update([
             'state' => 0,
@@ -246,7 +247,7 @@ class SettingsController extends Controller
     {
         return view('settings.position.create');
     }
-    
+
     public function position_setting_store(Request $request)
     {
         $request->validate([
@@ -255,9 +256,9 @@ class SettingsController extends Controller
             'description' => ['required'],
             'offer' => ['required'],
         ]);
-        
+
         $request['state'] = 1;
-        
+
         Positions::create($request->all());
 
         return redirect()->route('position_setting')->with('success','Se ha creado el cargo correctamente');
@@ -271,7 +272,7 @@ class SettingsController extends Controller
             'description' => ['required'],
             'offer' => ['required'],
         ]);
-        
+
         $id->update($request->all());
 
         return redirect()->route('position_setting')->with('success','Se ha actualizado el cargo correctamente');
@@ -365,5 +366,11 @@ class SettingsController extends Controller
     {
         $id->delete();
         return redirect()->route('setting_empleyee_month')->with('success','Se eliminado el empleado del mes corectamente');
+    }
+
+    public function file_delete(Request $request, file $id) {
+        Storage::delete($id->url);
+        $id->delete();
+        return response()->json(['success'=>'Arrchivo eliminado correctamente']);
     }
 }

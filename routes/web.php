@@ -518,6 +518,8 @@ Route::post('setting/position','SettingsController@position_setting_store')->nam
 Route::get('setting/position/{id}/edit','SettingsController@position_setting_edit')->name('position_setting_edit');
 Route::put('setting/position/{id}','SettingsController@position_setting_update')->name('position_setting_update');
 
+Route::delete('setting/files/delete/{id}', 'SettingsController@file_delete')->name('files_delete');
+
 //documents
 Route::get('documents','DocumentsController@index')->name('documents');
 Route::get('documents/show/{id}','DocumentsController@show')->name('documents_show');
@@ -759,7 +761,14 @@ Route::post('project/mintic/ec/upload','projects\MinticController@upload')->name
 Route::delete('project/mintic/ec/{id}','projects\MinticController@destroy')->name('mintic_delete');
 Route::get('project/mintic/ec/{id}','projects\MinticController@pintures')->name('mintic_pintures');
 
-Route::get('project/mintic/install/{id}','projects\MinticController@install')->name('mintic_install');
+Route::get('project/mintic/install/{id}','projects\InstallController@index')->name('install');
+Route::get('project/mintic/install/create/{id}','projects\InstallController@create')->name('install_create');
+Route::post('project/mintic/install/store/{id}','projects\InstallController@store')->name('mintic_installation_store');
+Route::get('project/mintic/install/show/{id}/{item}','projects\InstallController@show')->name('mintic_installation_show');
+Route::get('project/mintic/install/edit/{id}/{item}','projects\InstallController@edit')->name('mintic_installation_edit');
+Route::put('project/mintic/install/{id}/{item}','projects\InstallController@update')->name('mintic_installation_update');
+Route::get('project/mintic/install/{id}/{item}/export','projects\InstallController@export')->name('mintic_installation_export');
+// Route::get('project/mintic/install/{id}','projects\MinticController@install')->name('mintic_install');
 Route::post('project/mintic/install','projects\MinticController@upload_install')->name('mintic_marke_install');
 
 Route::get('project/mintic/tss/{id}','projects\MinticController@tss')->name('mintic_tss');

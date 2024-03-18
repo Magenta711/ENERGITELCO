@@ -32,6 +32,31 @@
                     $i = 1;
                 @endphp
                 <h3>REGISTRO FOTOGRÁFICO ANTES</h3>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="date_before">Fecha de toma de fotos del Antes</label>
+                            <input type="date" name="date_before" id="date_before" class="form-control" value="18/03/2024">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="hour_before_init">Hora del inicio de toma de las fotos del Antes</label>
+                            <input type="time" name="hour_before_init" id="hour_before_init" class="form-control" value="10:00">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="hour_before_end">Hora del fin de toma de las fotos del Antes</label>
+                            <input type="time" name="hour_before_end" id="hour_before_end" class="form-control" value="12:00">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <button id="rang_hours_before" class="btn btn-success form_control btn-before">Establecer</button>
+                        </div>
+                    </div>
+                </div>
                 <h4>5. FORMATO FOTOGRÁFICO</h4>
                 @if ($item->type_format == 'Mantenimiento correctivo')
                     @include('projects.mintic.includes.upload', [
@@ -47,6 +72,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <hr>
                 @endif
@@ -62,6 +88,7 @@
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -76,6 +103,7 @@
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -90,6 +118,7 @@
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 @if ($item->type_format == 'Mantenimiento correctivo')
@@ -106,6 +135,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <hr>
                     @include('projects.mintic.includes.upload', [
@@ -122,6 +152,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <hr>
                 @endif
@@ -137,6 +168,7 @@
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -151,6 +183,7 @@
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 @if ($item->type_format == 'Mantenimiento correctivo')
@@ -167,6 +200,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <hr>
                 @endif
@@ -183,6 +217,7 @@
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -197,6 +232,7 @@
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -210,6 +246,7 @@
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -223,6 +260,7 @@
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -237,6 +275,7 @@
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 @include('projects.mintic.includes.upload', [
                     'ltt' => '1',
@@ -255,6 +294,7 @@
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -274,6 +314,7 @@
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -288,10 +329,11 @@
                                                                                                                                                                                     <li>Realizar test de velocidad en la página: <a target="_blank" href="https://www.nperf.com/es/">https://www.nperf.com/es/</a>/</li>
                                                                                                                                                                                     <li>Realizar test de velocidad en la página: <a target="_blank" href="https://testmy.net/">https://testmy.net/</a>/</li>
                                                                                                                                                                                 </ul>',
-                    'place' => $item->type_format == 'Mantenimiento correctivo' ? 'L80' : 'B114',
+                    'place' => $item->type_format == 'Mantenimiento correctivo' ? 'L80' : 'H115',
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -301,10 +343,11 @@
                     'size_letter' => 20,
                     'it' => '1',
                     'label' => 'Conectividad portal cautivo',
-                    'place' => $item->type_format == 'Mantenimiento correctivo' ? 'B97' : 'G114',
+                    'place' => $item->type_format == 'Mantenimiento correctivo' ? 'B97' : 'C128',
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -319,10 +362,11 @@
                                                                                                                                                                                     <li><a target="_blank" href="http://furl.telmexla.net.co/dignidad.php">http://furl.telmexla.net.co/dignidad.php</a></li>
                                                                                                                                                                                     <li><a target="_blank" href="http://furl.telmexla.net.co/dignidad.php">http://furl.telmexla.net.co/dignidad.php</a></li>
                                                                                                                                                                                 </ul>',
-                    'place' => $item->type_format == 'Mantenimiento correctivo' ? 'G97' : 'L114',
+                    'place' => $item->type_format == 'Mantenimiento correctivo' ? 'G97' : 'H128',
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -337,10 +381,11 @@
                                                                                                                                                                                     <li><a target="_blank" href="http://furl.telmexla.net.co/dignidad.php">http://furl.telmexla.net.co/dignidad.php</a></li>
                                                                                                                                                                                     <li><a target="_blank" href="http://furl.telmexla.net.co/dignidad.php">http://furl.telmexla.net.co/dignidad.php</a></li>
                                                                                                                                                                                 </ul>',
-                    'place' => $item->type_format == 'Mantenimiento correctivo' ? 'L97' : 'B131',
+                    'place' => $item->type_format == 'Mantenimiento correctivo' ? 'L97' : 'M128',
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -354,6 +399,7 @@
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 @if ($item->type_format == 'Mantenimiento preventivo')
@@ -368,6 +414,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <hr>
                     @include('projects.mintic.includes.upload', [
@@ -381,6 +428,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <hr>
                     @include('projects.mintic.includes.upload', [
@@ -394,6 +442,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <hr>
                     @include('projects.mintic.includes.upload', [
@@ -407,6 +456,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <hr>
                     @include('projects.mintic.includes.upload', [
@@ -420,6 +470,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <hr>
                     @include('projects.mintic.includes.upload', [
@@ -433,6 +484,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <hr>
                     @include('projects.mintic.includes.upload', [
@@ -446,6 +498,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     @include('projects.mintic.includes.upload', [
                         'ltt' => '1',
@@ -458,6 +511,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <hr>
                     @include('projects.mintic.includes.upload', [
@@ -466,11 +520,12 @@
                         'num' => $i++,
                         'size_letter' => 20,
                         'it' => '6',
-                        'label' => 'KIT SATELITAL SI APLICA',
-                        'place' => 'G131',
+                        'label' => 'KIT SATELITAL',
+                        'place' => 'C145',
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <hr>
                 @endif
@@ -486,6 +541,7 @@
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -500,6 +556,7 @@
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -514,6 +571,7 @@
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 <div class="form-group">
@@ -537,6 +595,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <hr>
                     @include('projects.mintic.includes.upload', [
@@ -551,6 +610,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <hr>
                     @include('projects.mintic.includes.upload', [
@@ -565,6 +625,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <hr>
                     @include('projects.mintic.includes.upload', [
@@ -579,6 +640,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <hr>
                     @include('projects.mintic.includes.upload', [
@@ -594,6 +656,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <hr>
                     @include('projects.mintic.includes.upload', [
@@ -610,6 +673,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <hr>
                     @include('projects.mintic.includes.upload', [
@@ -624,6 +688,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <hr>
                     @include('projects.mintic.includes.upload', [
@@ -639,6 +704,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <hr>
                     @include('projects.mintic.includes.upload', [
@@ -653,6 +719,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <hr>
                     @include('projects.mintic.includes.upload', [
@@ -668,6 +735,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <hr>
                     @include('projects.mintic.includes.upload', [
@@ -682,6 +750,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <hr>
                     @include('projects.mintic.includes.upload', [
@@ -695,6 +764,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <hr>
                     @include('projects.mintic.includes.upload', [
@@ -708,6 +778,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <hr>
                     @include('projects.mintic.includes.upload', [
@@ -722,6 +793,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <hr>
                     @include('projects.mintic.includes.upload', [
@@ -741,6 +813,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <hr>
                     @include('projects.mintic.includes.upload', [
@@ -760,6 +833,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <hr>
                     @include('projects.mintic.includes.upload', [
@@ -778,6 +852,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <hr>
                     @include('projects.mintic.includes.upload', [
@@ -791,6 +866,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <hr>
                     @include('projects.mintic.includes.upload', [
@@ -809,6 +885,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <hr>
                     @include('projects.mintic.includes.upload', [
@@ -827,6 +904,7 @@
                         'accept' => 'image/*',
                         'date_edit' => true,
                         'delete' => true,
+                        'sin' => true
                     ])
                     <div class="form-group">
                         @include('projects.mintic.includes.upload', [
@@ -840,6 +918,7 @@
                             'accept' => 'image/*',
                             'date_edit' => true,
                             'delete' => true,
+                            'sin' => true
                         ])
                         <hr>
                         <label for="">Observaciones</label>
@@ -858,6 +937,7 @@
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -872,6 +952,7 @@
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -886,6 +967,7 @@
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 {{-- @include('projects.mintic.includes.upload', [
@@ -899,7 +981,8 @@
                     'place' => $item->type_format == 'Mantenimiento correctivo' ? 'L63' : 'L80', // Esté parámetro es si está foto es para el excel que se exporta, si y solo si se da si también se realizo la modificación el método de exportar y tiene también sus reglas
                     'accept' => 'image/*', // que tipo de archivo acepta, esto es asociado al input type file
                     'date_edit' => true, // si tiene fecha abierta
-                    'delete' => true, // si se permite eliminar la foto después de subida
+                    'delete' => true,  // si se permite eliminar la foto después de subida
+                    'sin' => true // para las nuevas versiones si tiene el prefijo sin
                 ])
                 <hr> --}}
                 <h3>AUTOGESTIÓN</h3>
@@ -917,6 +1000,7 @@
                     'write' => 'No',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -933,6 +1017,7 @@
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -950,7 +1035,7 @@
                                                                                                                                                                                     <b>speedtest etsi http://172.25.133.10 40 10 1</b><br>
                                                                                                                                                                                     <b>speedtest etsi http://172.28.103.2 40 10 1</b><br>
                                                                                                                                                                                     <b>speedtest etsi http://172.28.103.6 40 10 1</b><br>
-                
+
                                                                                                                                                                                     Para los servicios que están instalados por terceros o satelitales se debe correr los siguientes comandos:<br>
                                                                                                                                                                                     <b>speedtest etsi http://181.49.90.144 40 10 1</b><br>
                                                                                                                                                                                     <b>speedtest etsi http://181.49.90.145 40 10 1</b><br>
@@ -960,6 +1045,7 @@
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -975,6 +1061,7 @@
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -990,6 +1077,7 @@
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -1006,6 +1094,7 @@
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -1020,6 +1109,7 @@
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 <h3>EVIDENCIAS PARADA DE RELOJ</h3>
@@ -1033,6 +1123,7 @@
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -1045,6 +1136,7 @@
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -1057,6 +1149,7 @@
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 @include('projects.mintic.includes.upload', [
@@ -1069,6 +1162,7 @@
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
                 <h3>OTRAS</h3>
@@ -1082,6 +1176,7 @@
                     'accept' => 'image/*',
                     'date_edit' => true,
                     'delete' => true,
+                    'sin' => true
                 ])
                 <hr>
             </div>
@@ -1090,5 +1185,6 @@
 @endsection
 
 @section('js')
+    <script src="{{ asset('js/moment/moment.js') }}" defer></script>
     <script src="{{ asset('js/project/mintic/water_marker/maintenance.js') }}"></script>
 @endsection

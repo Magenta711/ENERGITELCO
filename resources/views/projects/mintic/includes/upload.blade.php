@@ -6,12 +6,16 @@
             <div class="col-md-8">
                 @php
                     $hasFile = 0;
+                    $hasFileSin = 0;
                 @endphp
                 @foreach ($id->files as $item)
-                    @if ($item->description == $ltt . '. ' . $label)
-                        @php
-                            $hasFile = 1;
-                        @endphp
+                    @if ($item->description == (isset($sin) && $sin  ? 'sin ' : '').$ltt . '. ' . $label || (!$hasFileSin && $item->description == $ltt . '. ' . $label))
+                    @php
+                        $hasFile = 1;
+                        if (isset($sin) && $sin && $item->description == ($sin ? 'sin ' : '').$ltt . '. ' . $label) {
+                            $hasFileSin = 1;
+                        }
+                    @endphp
                         <div class="row" id="exit_{{ $num }}">
                             <div class="col-md-4">
                                 <span
@@ -130,7 +134,7 @@
                         <div class="form-group col-sm-{{ isset($size_letter) ? 4 : 6 }}">
                             <label for="date">Fecha de rotulo</label>
                             <input type="datetime-local" name="date" id="date_{{ $num }}"
-                                class="form-control">
+                                class="form-control date-marcker-{{ $ltt }}">
                         </div>
                         <div
                             class="form-group col-sm-{{ isset($size_letter) ? (isset($date_edit) && $date_edit ? 12 : 4) : (isset($date_edit) && $date_edit ? 12 : 6) }}">
