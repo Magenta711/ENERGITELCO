@@ -503,17 +503,9 @@ f <!-- =============================================== -->
                                             'Editar proyectos de desmonte',
                                             'Aprobar proyectos de desmonte',
                                         ])) --}}
-                                        <li class="treeview {{ activeMenu('project/maintence*') }}">
-                                            <a href="#"><i class="fa fa-wifi"></i> MSU<span
-                                                    class="pull-right-container">
-                                                    <i class="fa fa-angle-left pull-right"></i>
-                                                </span>
-                                            </a>
-                                            <ul class="treeview-menu">
-                                                        class="{{ activeMenu('project/maintence/air-conditioning*') }}">
-                                                        <a class="btn-send"href="{{ route('air-conditioning_index') }}"><i
-                                                                ></i>AIRE</a>
-                                            </ul>
+                                        <li class="{{ activeMenu('project/clearing*') }}">
+                                            <a class="btn-send"href="{{ route('SMU') }}"><i
+                                                    class="fa fa-puzzle-piece"></i> MSU</a>
                                         </li>
                                         {{-- @endif --}}
 

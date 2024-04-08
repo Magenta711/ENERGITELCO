@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\execution_works;
+namespace App\Http\Controllers\projects\maintenances;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\User;
+use App\Models\project\msu\msu_campus;
 
 
-class MaintenanceController extends Controller
+class SMUController extends Controller
 {
     public function __construct()
     {
@@ -21,7 +23,8 @@ class MaintenanceController extends Controller
      */
     public function index()
     {
-        return view('execution_works.maintenance.air-conditioning');
+        $sedes=msu_campus::get();
+        return view('execution_works.maintenance.index', compact('sedes'));
     }
 
     /**
@@ -31,7 +34,8 @@ class MaintenanceController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::where('state',1)->get();
+        return view('execution_works.maintenance.create', compact('users'));
     }
 
     /**
@@ -42,7 +46,15 @@ class MaintenanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'id_sede'=>['required'],
+            'site_name' => ['required'],
+            'mun' => ['required'],
+            'dep' => ['required'],
+        ]);
+        msu_campus::create($request->all());
+
+        return  redirect()->route('SMU')->with('success','Se ha creado el proyecto correctamente');
     }
 
     /**

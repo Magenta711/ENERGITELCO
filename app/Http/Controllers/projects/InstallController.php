@@ -185,7 +185,7 @@ class InstallController extends Controller
         //     $files['signature']['place'] = 4;
         // }
 
-        return view('projects.mintic.install.export.first',compact('item','equipments','activities','files'));
+        // return view('projects.mintic.install.export.first',compact('item','equipments','activities','files'));
 
         return (new minticInstallationExport($item,$equipments,$activities,$files))->download('Formato De Instalación.xlsx');
     }

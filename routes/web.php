@@ -1030,4 +1030,18 @@ Route::get('energias', 'EnergyController@index')->name('energy');
 Route::get('energias/editar', 'EnergyController@edit')->name('energy_edit');
 Route::put('energias/update/{id}','EnergyController@update')->name('energy_update');
 
-Route::get('project/maintenance/air-conditioning', 'execution_works\MaintenanceController@index')->name('air-conditioning_index');
+Route::get('project/maintenance/smu', 'projects\maintenances\SMUController@index')->name('SMU');
+Route::get('project/maintenance/smu/create', 'projects\maintenances\SMUController@create')->name('smu_create');
+Route::post('project/maintenance/smu', 'projects\maintenances\SMUController@store')->name('smu_store');
+
+Route::get('project/maintenance/smu/plant/{id}', 'projects\maintenances\PlantsController@index')->name('plant_index');
+Route::get('project/maintenance/smu/plant/create/{id}', 'projects\maintenances\PlantsController@create')->name('plant_create');
+Route::post('project/maintenance/smu/plant/store/{id}', 'projects\maintenances\PlantsController@store')->name('plant_store');
+Route::get('project/maintenance/smu/plant/edit/{id}', 'projects\maintenances\PlantsController@edit')->name('plant_edit');
+Route::put('project/maintenance/smu/plant/update/{id}', 'projects\maintenances\PlantsController@update')->name('plant_update');
+Route::get('project/maintenance/smu/plant/export/{id}', 'projects\maintenances\PlantsController@export')->name('plant_export');
+
+
+
+
+
