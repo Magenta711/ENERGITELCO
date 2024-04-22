@@ -503,10 +503,7 @@ f <!-- =============================================== -->
                                             'Editar proyectos de desmonte',
                                             'Aprobar proyectos de desmonte',
                                         ])) --}}
-                                        <li class="{{ activeMenu('project/clearing*') }}">
-                                            <a class="btn-send"href="{{ route('SMU') }}"><i
-                                                    class="fa fa-puzzle-piece"></i> MSU</a>
-                                        </li>
+
                                         {{-- @endif --}}
 
                                          @if (auth()->user()->hasAnyPermission([
@@ -550,6 +547,10 @@ f <!-- =============================================== -->
                                                      'Adjuntar y ver fotos TSS',
                                                      'Adjuntar y ver fotos de instalación',
                                                  ]))
+                                                 <li class="{{ activeMenu('project/maintenance/smu*') }}">
+                                                    <a class="btn-send"href="{{ route('SMU') }}"><i
+                                                            class="fa fa-file-invoice"></i> MSU</a>
+                                                </li>
                                              <li class="treeview {{ activeMenu('project/mintic*') }}">
                                                  <a href="#"><i class="fa fa-wifi"></i> MINTIC<span
                                                          class="pull-right-container">

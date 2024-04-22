@@ -1040,8 +1040,24 @@ Route::post('project/maintenance/smu/plant/store/{id}', 'projects\maintenances\P
 Route::get('project/maintenance/smu/plant/edit/{id}', 'projects\maintenances\PlantsController@edit')->name('plant_edit');
 Route::put('project/maintenance/smu/plant/update/{id}', 'projects\maintenances\PlantsController@update')->name('plant_update');
 Route::get('project/maintenance/smu/plant/export/{id}', 'projects\maintenances\PlantsController@export')->name('plant_export');
+Route::get('project/maintenance/smu/plant/photos/{id}/{item}', 'projects\maintenances\PlantsController@photos')->name('plant_photos');
+Route::post('project/maintenance/smu/plant/{id}/{item}/upload', 'projects\maintenances\PlantsController@upload')->name('plant_upload');
 
 
+Route::get('project/maintenance/smu/air/{id}', 'projects\maintenances\AirController@index')->name('air_index');
+Route::get('project/maintenance/smu/air/create/{id}', 'projects\maintenances\AirController@create')->name('air_create');
+Route::post('project/maintenance/smu/air/create/{id}', 'projects\maintenances\AirController@store')->name('air_store');
+Route::get('project/maintenance/smu/air/export/{id}', 'projects\maintenances\AirController@export')->name('air_export');
+Route::get('project/maintenance/smu/air/photos/{id}/{item}', 'projects\maintenances\AirController@photos')->name('air_photos');
+Route::post('project/maintenance/smu/air/{id}/{item}/upload', 'projects\maintenances\AirController@upload')->name('air_upload');
+Route::get('project/maintenance/smu/air/edit/{id}', 'projects\maintenances\AirController@edit')->name('air_edit');
+Route::put('project/maintenance/smu/air/update/{id}', 'projects\maintenances\AirController@update')->name('air_update');
 
-
-
+Route::get('project/maintenance/smu/land/{id}','projects\maintenances\LandController@index')->name('land_index');
+Route::get('project/maintenance/smu/land/create/{id}','projects\maintenances\LandController@create')->name('land_create');
+Route::post('project/maintenance/smu/land/store/{id}','projects\maintenances\LandController@store')->name('land_store');
+Route::get('project/maintenance/smu/land/export/{id}','projects\maintenances\LandController@export')->name('land_export');
+Route::get('project/maintenance/smu/land/edit/{id}','projects\maintenances\LandController@edit')->name('land_edit');
+Route::put('project/maintenance/smu/land/update/{id}','projects\maintenances\LandController@update')->name('land_update');
+Route::get('project/maintenance/smu/land/photos/{id}/{item}','projects\maintenances\LandController@photos')->name('land_photos');
+Route::post('project/maintenance/smu/land/{id}/{item}/upload','projects\maintenances\LandController@upload')->name('land_upload');

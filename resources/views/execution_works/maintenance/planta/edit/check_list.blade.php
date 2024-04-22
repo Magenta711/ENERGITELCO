@@ -73,12 +73,14 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="slpe[{{ $i }}][forma_detectarlo]" value="{{ $check['slpe'][$i]["forma_detectarlo"] }}">
+                    {{-- <input type="text" class="form-control" name="slpe[{{ $i }}][forma_detectarlo]" value="{{ $check['slpe'][$i]["forma_detectarlo"] }}"> --}}
+                    <textarea name="slpe[{{ $i }}][forma_detectarlo]" class="form-control" id="" cols="15" rows="5">{{ $check['slpe'][$i]["forma_detectarlo"] }}</textarea>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="slpe[{{ $i }}][forma_corregirlo]" value="{{ $check['slpe'][$i]["forma_corregirlo"] }}">
+                    {{-- <input type="text" class="form-control" name="slpe[{{ $i }}][forma_corregirlo]" value="{{ $check['slpe'][$i]["forma_corregirlo"] }}"> --}}
+                    <textarea name="slpe[{{ $i }}][forma_corregirlo]" class="form-control" id="" cols="15" rows="5">{{ $check['slpe'][$i]["forma_corregirlo"] }}</textarea>
                 </div>
             </div>
         </div>
@@ -145,12 +147,14 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="scpe[{{ $i }}][forma_detectarlo]" value="{{ $check['scpe'][$i]["forma_detectarlo"] }}">
+                    {{-- <input type="text" class="form-control" name="scpe[{{ $i }}][forma_detectarlo]" value="{{ $check['scpe'][$i]["forma_detectarlo"] }}"> --}}
+                    <textarea name="scpe[{{ $i }}][forma_detectarlo]" class="form-control" id="" cols="15" rows="5">{{ $check['scpe'][$i]["forma_detectarlo"] }}</textarea>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="scpe[{{ $i }}][forma_corregirlo]" value="{{ $check['scpe'][$i]["forma_corregirlo"] }}">
+                    {{-- <input type="text" class="form-control" name="scpe[{{ $i }}][forma_corregirlo]" value="{{ $check['scpe'][$i]["forma_corregirlo"] }}"> --}}
+                    <textarea name="scpe[{{ $i }}][forma_corregirlo]" class="form-control" id="" cols="15" rows="5">{{ $check['scpe'][$i]["forma_corregirlo"] }}</textarea>
                 </div>
             </div>
         </div>
@@ -218,12 +222,14 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="sa[{{ $i }}][forma_detectarlo]" value="{{ $check['sa'][$i]["forma_detectarlo"] }}">
+                    {{-- <input type="text" class="form-control" name="sa[{{ $i }}][forma_detectarlo]" value="{{ $check['sa'][$i]["forma_detectarlo"] }}"> --}}
+                    <textarea name="sa[{{ $i }}][forma_detectarlo]" class="form-control" id="" cols="15" rows="5">{{ $check['sa'][$i]["forma_detectarlo"] }}</textarea>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="sa[{{ $i }}][forma_corregirlo]" value="{{ $check['sa'][$i]["forma_corregirlo"] }}">
+                    {{-- <input type="text" class="form-control" name="sa[{{ $i }}][forma_corregirlo]" value="{{ $check['sa'][$i]["forma_corregirlo"] }}"> --}}
+                    <textarea name="sa[{{ $i }}][forma_corregirlo]" class="form-control" id="" cols="15" rows="5">{{ $check['sa'][$i]["forma_corregirlo"] }}</textarea>
                 </div>
             </div>
         </div>
@@ -291,12 +297,14 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="srpe[{{ $i }}][forma_detectarlo]" value="{{ $check['srpe'][$i]["forma_detectarlo"] }}">
+                    {{-- <input type="text" class="form-control" name="srpe[{{ $i }}][forma_detectarlo]" value="{{ $check['srpe'][$i]["forma_detectarlo"] }}"> --}}
+                    <textarea name="srpe[{{ $i }}][forma_detectarlo]" class="form-control" id="" cols="15" rows="5">{{ $check['srpe'][$i]["forma_detectarlo"] }}</textarea>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="srpe[{{ $i }}][forma_corregirlo]" value="{{ $check['srpe'][$i]["forma_corregirlo"] }}">
+                    {{-- <input type="text" class="form-control" name="srpe[{{ $i }}][forma_corregirlo]" value="{{ $check['srpe'][$i]["forma_corregirlo"] }}"> --}}
+                    <textarea name="srpe[{{ $i }}][forma_corregirlo]" class="form-control" id="" cols="15" rows="5">{{ $check['srpe'][$i]["forma_corregirlo"] }}</textarea>
                 </div>
             </div>
         </div>
@@ -364,12 +372,14 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="seape[{{ $i }}][forma_detectarlo]" value="{{ $check['seape'][$i]["forma_detectarlo"] }}">
+                    {{-- <input type="text" class="form-control" name="seape[{{ $i }}][forma_detectarlo]" value="{{ $check['seape'][$i]["forma_detectarlo"] }}"> --}}
+                    <textarea name="seape[{{ $i }}][forma_detectarlo]" class="form-control" id="" cols="15" rows="5">{{ $check['seape'][$i]["forma_detectarlo"] }}</textarea>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="seape[{{ $i }}][forma_corregirlo]" value="{{ $check['seape'][$i]["forma_corregirlo"] }}">
+                    {{-- <input type="text" class="form-control" name="seape[{{ $i }}][forma_corregirlo]" value="{{ $check['seape'][$i]["forma_corregirlo"] }}"> --}}
+                    <textarea name="seape[{{ $i }}][forma_corregirlo]" class="form-control" id="" cols="15" rows="5">{{ $check['seape'][$i]["forma_corregirlo"] }}</textarea>
                 </div>
             </div>
         </div>
@@ -437,12 +447,14 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="semoceo[{{ $i }}][forma_detectarlo]" value="{{ $check['semoceo'][$i]["forma_detectarlo"] }}">
+                    {{-- <input type="text" class="form-control" name="semoceo[{{ $i }}][forma_detectarlo]" value="{{ $check['semoceo'][$i]["forma_detectarlo"] }}"> --}}
+                    <textarea name="semoceo[{{ $i }}][forma_detectarlo]" class="form-control" id="" cols="15" rows="5">{{ $check['semoceo'][$i]["forma_detectarlo"] }}</textarea>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="semoceo[{{ $i }}][forma_corregirlo]" value="{{ $check['semoceo'][$i]["forma_corregirlo"] }}">
+                    {{-- <input type="text" class="form-control" name="semoceo[{{ $i }}][forma_corregirlo]" value="{{ $check['semoceo'][$i]["forma_corregirlo"] }}"> --}}
+                    <textarea name="semoceo[{{ $i }}][forma_corregirlo]" class="form-control" id="" cols="15" rows="5">{{ $check['semoceo'][$i]["forma_corregirlo"] }}</textarea>
                 </div>
             </div>
         </div>
@@ -511,12 +523,14 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="gme[{{ $i }}][forma_detectarlo]" value="{{ $check['gme'][$i]["forma_detectarlo"] }}">
+                    {{-- <input type="text" class="form-control" name="gme[{{ $i }}][forma_detectarlo]" value="{{ $check['gme'][$i]["forma_detectarlo"] }}"> --}}
+                    <textarea name="gme[{{ $i }}][forma_detectarlo]" class="form-control" id="" cols="15" rows="5">{{ $check['gme'][$i]["forma_detectarlo"] }}</textarea>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="gme[{{ $i }}][forma_corregirlo]" value="{{ $check['gme'][$i]["forma_corregirlo"] }}">
+                    {{-- <input type="text" class="form-control" name="gme[{{ $i }}][forma_corregirlo]" value="{{ $check['gme'][$i]["forma_corregirlo"] }}"> --}}
+                    <textarea name="gme[{{ $i }}][forma_corregirlo]" class="form-control" id="" cols="15" rows="5">{{ $check['gme'][$i]["forma_corregirlo"] }}</textarea>
                 </div>
             </div>
         </div>
@@ -584,12 +598,14 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="mc[{{ $i }}][forma_detectarlo]" value="{{ $check['mc'][$i]["forma_detectarlo"] }}">
+                    {{-- <input type="text" class="form-control" name="mc[{{ $i }}][forma_detectarlo]" value="{{ $check['mc'][$i]["forma_detectarlo"] }}"> --}}
+                    <textarea name="mc[{{ $i }}][forma_detectarlo]" class="form-control" id="" cols="15" rows="5">{{ $check['mc'][$i]["forma_detectarlo"] }}</textarea>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="mc[{{ $i }}][forma_corregirlo]" value="{{ $check['mc'][$i]["forma_corregirlo"] }}">
+                    {{-- <input type="text" class="form-control" name="mc[{{ $i }}][forma_corregirlo]" value="{{ $check['mc'][$i]["forma_corregirlo"] }}"> --}}
+                    <textarea name="mc[{{ $i }}][forma_corregirlo]" class="form-control" id="" cols="15" rows="5">{{ $check['mc'][$i]["forma_corregirlo"] }}</textarea>
                 </div>
             </div>
         </div>
@@ -657,12 +673,14 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="ta[{{ $i }}][forma_detectarlo]" value="{{ $check['ta'][$i]["forma_detectarlo"] }}">
+                    {{-- <input type="text" class="form-control" name="ta[{{ $i }}][forma_detectarlo]" value="{{ $check['ta'][$i]["forma_detectarlo"] }}"> --}}
+                    <textarea name="ta[{{ $i }}][forma_detectarlo]" class="form-control" id="" cols="15" rows="5">{{ $check['ta'][$i]["forma_detectarlo"] }}</textarea>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="ta[{{ $i }}][forma_corregirlo]" value="{{ $check['ta'][$i]["forma_corregirlo"] }}">
+                    {{-- <input type="text" class="form-control" name="ta[{{ $i }}][forma_corregirlo]" value="{{ $check['ta'][$i]["forma_corregirlo"] }}"> --}}
+                    <textarea name="ta[{{ $i }}][forma_corregirlo]" class="form-control" id="" cols="15" rows="5">{{ $check['ta'][$i]["forma_corregirlo"] }}</textarea>
                 </div>
             </div>
         </div>

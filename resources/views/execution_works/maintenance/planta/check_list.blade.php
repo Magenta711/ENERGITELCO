@@ -49,7 +49,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="slpe[1][estado]" id="slpe_1_1" value="{{ old("slpe[1][estado]") }}">
+            <input type="text" class="form-control" name="slpe[1][estado]" id="slpe_1_1" value="SIN ALARMAS">
         </div>
     </div>
     <div class="col-md-2">
@@ -59,12 +59,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="slpe[1][forma_detectarlo]" id="slpe_1_3" value="{{ old("slpe[1][forma_detectarlo]") }}">
+            {{-- <input type="text" class="form-control" name="slpe[1][forma_detectarlo]" id="slpe_1_3" value="{{ old("slpe[1][forma_detectarlo]") }}"> --}}
+            <textarea name="slpe[1][forma_detectarlo]" id="slpe[1][forma_detectarlo]" value="{{ old("slpe[1][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="slpe[1][forma_corregirlo]" id="slpe_1_4" value="{{ old("slpe[1][forma_corregirlo]") }}">
+            {{-- <input type="text" class="form-control" name="slpe[1][forma_corregirlo]" id="slpe_1_4" value="{{ old("slpe[1][forma_corregirlo]") }}"> --}}
+            <textarea name="slpe[1][forma_corregirlo]" id="slpe[1][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -77,7 +79,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="slpe[2][estado]" id="slpe_2_1" value="{{ old("slpe[2][estado]") }}">
+            <input type="text" class="form-control" name="slpe[2][estado]" id="slpe_2_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -87,12 +89,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="slpe[2][forma_detectarlo]" id="slpe_2_3" value="{{ old("slpe[2][forma_detectarlo]") }}">
+            {{-- <input type="text" class="form-control" name="slpe[2][forma_detectarlo]" id="slpe_2_3" value="{{ old("slpe[2][forma_detectarlo]") }}"> --}}
+            <textarea name="slpe[2][forma_detectarlo]" id="slpe[2][forma_detectarlo]" value="{{ old("slpe[2][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="slpe[2][forma_corregirlo]" id="slpe_2_4" value="{{ old("slpe[2][forma_corregirlo]") }}">
+            {{-- <input type="text" class="form-control" name="slpe[2][forma_corregirlo]" id="slpe_2_4" value="{{ old("slpe[2][forma_corregirlo]") }}"> --}}
+            <textarea name="slpe[2][forma_corregirlo]" id="slpe[2][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -105,7 +109,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="slpe[3][estado]" id="slpe_3_1" value="{{ old("slpe[3][estado]") }}">
+            <input type="text" class="form-control" name="slpe[3][estado]" id="slpe_3_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -115,12 +119,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="slpe[3][forma_detectarlo]" id="slpe_3_3" value="{{ old("slpe[3][forma_detectarlo]") }}">
+            {{-- <input type="text" class="form-control" name="slpe[3][forma_detectarlo]" id="slpe_3_3" value="{{ old("slpe[3][forma_detectarlo]") }}"> --}}
+            <textarea name="slpe[3][forma_detectarlo]" id="slpe[3][forma_detectarlo]" value="{{ old("slpe[3][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="slpe[3][forma_corregirlo]" id="slpe_3_4" value="{{ old("slpe[3][forma_corregirlo]") }}">
+            {{-- <input type="text" class="form-control" name="slpe[3][forma_corregirlo]" id="slpe_3_4" value="{{ old("slpe[3][forma_corregirlo]") }}"> --}}
+            <textarea name="slpe[3][forma_corregirlo]" id="slpe[3][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -133,7 +139,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="slpe[4][estado]" id="slpe_4_1" value="{{ old("slpe[4][estado]") }}">
+            <input type="text" class="form-control" name="slpe[4][estado]" id="slpe_4_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -143,12 +149,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="slpe[4][forma_detectarlo]" id="slpe_4_3" value="{{ old("slpe[4][forma_detectarlo]") }}">
+            {{-- <input type="text" class="form-control" name="slpe[4][forma_detectarlo]" id="slpe_4_3" value="{{ old("slpe[4][forma_detectarlo]") }}"> --}}
+            <textarea name="slpe[4][forma_detectarlo]" id="slpe[4][forma_detectarlo]" value="{{ old("slpe[4][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="slpe[4][forma_corregirlo]" id="slpe_4_4" value="{{ old("slpe[4][forma_corregirlo]") }}">
+            {{-- <input type="text" class="form-control" name="slpe[4][forma_corregirlo]" id="slpe_4_4" value="{{ old("slpe[4][forma_corregirlo]") }}"> --}}
+            <textarea name="slpe[4][forma_corregirlo]" id="slpe[4][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -161,7 +169,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="slpe[5][estado]" id="slpe_5_1" value="{{ old("slpe[5][estado]") }}">
+            <input type="text" class="form-control" name="slpe[5][estado]" id="slpe_5_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -171,12 +179,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="slpe[5][forma_detectarlo]" id="slpe_5_3" value="{{ old("slpe[5][forma_detectarlo]") }}">
+            {{-- <input type="text" class="form-control" name="slpe[5][forma_detectarlo]" id="slpe_5_3" value="{{ old("slpe[5][forma_detectarlo]") }}"> --}}
+            <textarea name="slpe[5][forma_detectarlo]" id="slpe[5][forma_detectarlo]" value="{{ old("slpe[5][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="slpe[5][forma_corregirlo]" id="slpe_5_4" value="{{ old("slpe[5][forma_corregirlo]") }}">
+            {{-- <input type="text" class="form-control" name="slpe[5][forma_corregirlo]" id="slpe_5_4" value="{{ old("slpe[5][forma_corregirlo]") }}"> --}}
+            <textarea name="slpe[5][forma_corregirlo]" id="slpe[5][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -189,7 +199,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="slpe[6][estado]" id="slpe_6_1" value="{{ old("slpe[6][estado]") }}">
+            <input type="text" class="form-control" name="slpe[6][estado]" id="slpe_6_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -199,12 +209,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="slpe[6][forma_detectarlo]" id="slpe_6_3" value="{{ old("slpe[6][forma_detectarlo]") }}">
+            {{-- <input type="text" class="form-control" name="slpe[6][forma_detectarlo]" id="slpe_6_3" value="{{ old("slpe[6][forma_detectarlo]") }}"> --}}
+            <textarea name="slpe[6][forma_detectarlo]" id="slpe[6][forma_detectarlo]" value="{{ old("slpe[6][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="slpe[6][forma_corregirlo]" id="slpe_6_4" value="{{ old("slpe[6][forma_corregirlo]") }}">
+            {{-- <input type="text" class="form-control" name="slpe[6][forma_corregirlo]" id="slpe_6_4" value="{{ old("slpe[6][forma_corregirlo]") }}"> --}}
+            <textarea name="slpe[6][forma_corregirlo]" id="slpe[6][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -217,7 +229,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="slpe[7][estado]" id="slpe_7_1" value="{{ old("slpe[7][estado]") }}">
+            <input type="text" class="form-control" name="slpe[7][estado]" id="slpe_7_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -227,12 +239,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="slpe[7][forma_detectarlo]" id="slpe_7_3" value="{{ old("slpe[7][forma_detectarlo]") }}">
+            {{-- <input type="text" class="form-control" name="slpe[7][forma_detectarlo]" id="slpe_7_3" value="{{ old("slpe[7][forma_detectarlo]") }}"> --}}
+            <textarea name="slpe[7][forma_detectarlo]" id="slpe[7][forma_detectarlo]" value="{{ old("slpe[7][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="slpe[7][forma_corregirlo]" id="slpe_7_4" value="{{ old("slpe[7][forma_corregirlo]") }}">
+            {{-- <input type="text" class="form-control" name="slpe[7][forma_corregirlo]" id="slpe_7_4" value="{{ old("slpe[7][forma_corregirlo]") }}"> --}}
+            <textarea name="slpe[7][forma_corregirlo]" id="slpe[7][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -245,7 +259,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="slpe[8][estado]" id="slpe_8_1" value="{{ old("slpe[8][estado]") }}">
+            <input type="text" class="form-control" name="slpe[8][estado]" id="slpe_8_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -255,12 +269,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="slpe[8][forma_detectarlo]" id="slpe_8_3" value="{{ old("slpe[8][forma_detectarlo]") }}">
+            {{-- <input type="text" class="form-control" name="slpe[8][forma_detectarlo]" id="slpe_8_3" value="{{ old("slpe[8][forma_detectarlo]") }}"> --}}
+            <textarea name="slpe[8][forma_detectarlo]" id="slpe[8][forma_detectarlo]" value="{{ old("slpe[8][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="slpe[8][forma_corregirlo]" id="slpe_8_4" value="{{ old("slpe[8][forma_corregirlo]") }}">
+            {{-- <input type="text" class="form-control" name="slpe[8][forma_corregirlo]" id="slpe_8_4" value="{{ old("slpe[8][forma_corregirlo]") }}"> --}}
+            <textarea name="slpe[8][forma_corregirlo]" id="slpe[8][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -273,7 +289,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="slpe[9][estado]" id="slpe_9_1" value="{{ old("slpe[9][estado]") }}">
+            <input type="text" class="form-control" name="slpe[9][estado]" id="slpe_9_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -283,12 +299,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="slpe[9][forma_detectarlo]" id="slpe_9_3" value="{{ old("slpe[9][forma_detectarlo]") }}">
+            {{-- <input type="text" class="form-control" name="slpe[9][forma_detectarlo]" id="slpe_9_3" value="{{ old("slpe[9][forma_detectarlo]") }}"> --}}
+            <textarea name="slpe[9][forma_detectarlo]" id="slpe[9][forma_detectarlo]" value="{{ old("slpe[9][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="slpe[9][forma_corregirlo]" id="slpe_9_4" value="{{ old("slpe[9][forma_corregirlo]") }}">
+            {{-- <input type="text" class="form-control" name="slpe[9][forma_corregirlo]" id="slpe_9_4" value="{{ old("slpe[9][forma_corregirlo]") }}"> --}}
+            <textarea name="slpe[9][forma_corregirlo]" id="slpe[9][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -346,7 +364,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[1][estado]" id="scpe_1_1" value="{{ old('scpe[1][estado]') }}">
+            <input type="text" class="form-control" name="scpe[1][estado]" id="scpe_1_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -356,12 +374,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[1][forma_detectarlo]" id="scpe_1_3" value="{{ old('scpe[1][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="scpe[1][forma_detectarlo]" id="scpe_1_3" value="{{ old('scpe[1][forma_detectarlo]') }}"> --}}
+            <textarea name="scpe[1][forma_detectarlo]" id="scpe[1][forma_detectarlo]" value="{{ old("scpe[1][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[1][forma_corregirlo]" id="scpe_1_4" value="{{ old('scpe[1][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="scpe[1][forma_corregirlo]" id="scpe_1_4" value="{{ old('scpe[1][forma_corregirlo]') }}"> --}}
+            <textarea name="scpe[1][forma_corregirlo]" id="scpe[1][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -376,7 +396,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[2][estado]" id="scpe_2_1" value="{{ old('scpe[2][estado]') }}">
+            <input type="text" class="form-control" name="scpe[2][estado]" id="scpe_2_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -386,12 +406,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[2][forma_detectarlo]" id="scpe_2_3" value="{{ old('scpe[2][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="scpe[2][forma_detectarlo]" id="scpe_2_3" value="{{ old('scpe[2][forma_detectarlo]') }}"> --}}
+            <textarea name="scpe[2][forma_detectarlo]" id="scpe[2][forma_detectarlo]" value="{{ old("scpe[2][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[2][forma_corregirlo]" id="scpe_2_4" value="{{ old('scpe[2][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="scpe[2][forma_corregirlo]" id="scpe_2_4" value="{{ old('scpe[2][forma_corregirlo]') }}"> --}}
+            <textarea name="scpe[2][forma_corregirlo]" id="scpe[2][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -406,7 +428,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[3][estado]" id="scpe_3_1" value="{{ old('scpe[3][estado]') }}">
+            <input type="text" class="form-control" name="scpe[3][estado]" id="scpe_3_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -416,12 +438,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[3][forma_detectarlo]" id="scpe_3_3" value="{{ old('scpe[3][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="scpe[3][forma_detectarlo]" id="scpe_3_3" value="{{ old('scpe[3][forma_detectarlo]') }}"> --}}
+            <textarea name="scpe[3][forma_detectarlo]" id="scpe[3][forma_detectarlo]" value="{{ old("scpe[3][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[3][forma_corregirlo]" id="scpe_3_4" value="{{ old('scpe[3][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="scpe[3][forma_corregirlo]" id="scpe_3_4" value="{{ old('scpe[3][forma_corregirlo]') }}"> --}}
+            <textarea name="scpe[3][forma_corregirlo]" id="scpe[3][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -436,7 +460,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[4][estado]" id="scpe_4_1" value="{{ old('scpe[4][estado]') }}">
+            <input type="text" class="form-control" name="scpe[4][estado]" id="scpe_4_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -446,12 +470,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[4][forma_detectarlo]" id="scpe_4_3" value="{{ old('scpe[4][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="scpe[4][forma_detectarlo]" id="scpe_4_3" value="{{ old('scpe[4][forma_detectarlo]') }}"> --}}
+            <textarea name="scpe[4][forma_detectarlo]" id="scpe[4][forma_detectarlo]" value="{{ old("scpe[4][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[4][forma_corregirlo]" id="scpe_4_4" value="{{ old('scpe[4][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="scpe[4][forma_corregirlo]" id="scpe_4_4" value="{{ old('scpe[4][forma_corregirlo]') }}"> --}}
+            <textarea name="scpe[4][forma_corregirlo]" id="scpe[4][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -466,7 +492,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[5][estado]" id="scpe_5_1" value="{{ old('scpe[5][estado]') }}">
+            <input type="text" class="form-control" name="scpe[5][estado]" id="scpe_5_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -476,12 +502,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[5][forma_detectarlo]" id="scpe_5_3" value="{{ old('scpe[5][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="scpe[5][forma_detectarlo]" id="scpe_5_3" value="{{ old('scpe[5][forma_detectarlo]') }}"> --}}
+            <textarea name="scpe[5][forma_detectarlo]" id="scpe[5][forma_detectarlo]" value="{{ old("scpe[5][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[5][forma_corregirlo]" id="scpe_5_4" value="{{ old('scpe[5][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="scpe[5][forma_corregirlo]" id="scpe_5_4" value="{{ old('scpe[5][forma_corregirlo]') }}"> --}}
+            <textarea name="scpe[5][forma_corregirlo]" id="scpe[5][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -496,7 +524,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[6][estado]" id="scpe_6_1" value="{{ old('scpe[6][estado]') }}">
+            <input type="text" class="form-control" name="scpe[6][estado]" id="scpe_6_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -506,12 +534,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[6][forma_detectarlo]" id="scpe_6_3" value="{{ old('scpe[6][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="scpe[6][forma_detectarlo]" id="scpe_6_3" value="{{ old('scpe[6][forma_detectarlo]') }}"> --}}
+            <textarea name="scpe[6][forma_detectarlo]" id="scpe[6][forma_detectarlo]" value="{{ old("scpe[6][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[6][forma_corregirlo]" id="scpe_6_4" value="{{ old('scpe[6][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="scpe[6][forma_corregirlo]" id="scpe_6_4" value="{{ old('scpe[6][forma_corregirlo]') }}"> --}}
+            <textarea name="scpe[6][forma_corregirlo]" id="scpe[6][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -526,7 +556,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[7][estado]" id="scpe_7_1" value="{{ old('scpe[7][estado]') }}">
+            <input type="text" class="form-control" name="scpe[7][estado]" id="scpe_7_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -536,12 +566,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[7][forma_detectarlo]" id="scpe_7_3" value="{{ old('scpe[7][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="scpe[7][forma_detectarlo]" id="scpe_7_3" value="{{ old('scpe[7][forma_detectarlo]') }}"> --}}
+            <textarea name="scpe[7][forma_detectarlo]" id="scpe[7][forma_detectarlo]" value="{{ old("scpe[7][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[7][forma_corregirlo]" id="scpe_7_4" value="{{ old('scpe[7][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="scpe[7][forma_corregirlo]" id="scpe_7_4" value="{{ old('scpe[7][forma_corregirlo]') }}"> --}}
+            <textarea name="scpe[7][forma_corregirlo]" id="scpe[7][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -556,7 +588,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[8][estado]" id="scpe_8_1" value="{{ old('scpe[8][estado]') }}">
+            <input type="text" class="form-control" name="scpe[8][estado]" id="scpe_8_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -566,12 +598,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[8][forma_detectarlo]" id="scpe_8_3" value="{{ old('scpe[8][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="scpe[8][forma_detectarlo]" id="scpe_8_3" value="{{ old('scpe[8][forma_detectarlo]') }}"> --}}
+            <textarea name="scpe[8][forma_detectarlo]" id="scpe[8][forma_detectarlo]" value="{{ old("scpe[8][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[8][forma_corregirlo]" id="scpe_8_4" value="{{ old('scpe[8][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="scpe[8][forma_corregirlo]" id="scpe_8_4" value="{{ old('scpe[8][forma_corregirlo]') }}"> --}}
+            <textarea name="scpe[8][forma_corregirlo]" id="scpe[8][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -586,7 +620,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[9][estado]" id="scpe_9_1" value="{{ old('scpe[9][estado]') }}">
+            <input type="text" class="form-control" name="scpe[9][estado]" id="scpe_9_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -596,12 +630,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[9][forma_detectarlo]" id="scpe_9_3" value="{{ old('scpe[9][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="scpe[9][forma_detectarlo]" id="scpe_9_3" value="{{ old('scpe[9][forma_detectarlo]') }}"> --}}
+            <textarea name="scpe[9][forma_detectarlo]" id="scpe[9][forma_detectarlo]" value="{{ old("scpe[9][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[9][forma_corregirlo]" id="scpe_9_4" value="{{ old('scpe[9][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="scpe[9][forma_corregirlo]" id="scpe_9_4" value="{{ old('scpe[9][forma_corregirlo]') }}"> --}}
+            <textarea name="scpe[9][forma_corregirlo]" id="scpe[9][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -616,7 +652,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[10][estado]" id="scpe_10_1" value="{{ old('scpe[10][estado]') }}">
+            <input type="text" class="form-control" name="scpe[10][estado]" id="scpe_10_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -626,12 +662,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[10][forma_detectarlo]" id="scpe_10_3" value="{{ old('scpe[10][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="scpe[10][forma_detectarlo]" id="scpe_10_3" value="{{ old('scpe[10][forma_detectarlo]') }}"> --}}
+            <textarea name="scpe[10][forma_detectarlo]" id="scpe[10][forma_detectarlo]" value="{{ old("scpe[10][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[10][forma_corregirlo]" id="scpe_10_4" value="{{ old('scpe[10][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="scpe[10][forma_corregirlo]" id="scpe_10_4" value="{{ old('scpe[10][forma_corregirlo]') }}"> --}}
+            <textarea name="scpe[10][forma_corregirlo]" id="scpe[10][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -646,7 +684,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[11][estado]" id="scpe_11_1" value="{{ old('scpe[11][estado]') }}">
+            <input type="text" class="form-control" name="scpe[11][estado]" id="scpe_11_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -656,12 +694,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[11][forma_detectarlo]" id="scpe_11_3" value="{{ old('scpe[11][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="scpe[11][forma_detectarlo]" id="scpe_11_3" value="{{ old('scpe[11][forma_detectarlo]') }}"> --}}
+            <textarea name="scpe[11][forma_detectarlo]" id="scpe[11][forma_detectarlo]" value="{{ old("scpe[11][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[11][forma_corregirlo]" id="scpe_11_4" value="{{ old('scpe[11][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="scpe[11][forma_corregirlo]" id="scpe_11_4" value="{{ old('scpe[11][forma_corregirlo]') }}"> --}}
+            <textarea name="scpe[11][forma_corregirlo]" id="scpe[11][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -676,7 +716,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[12][estado]" id="scpe_12_1" value="{{ old('scpe[12][estado]') }}">
+            <input type="text" class="form-control" name="scpe[12][estado]" id="scpe_12_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -686,12 +726,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[12][forma_detectarlo]" id="scpe_12_3" value="{{ old('scpe[12][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="scpe[12][forma_detectarlo]" id="scpe_12_3" value="{{ old('scpe[12][forma_detectarlo]') }}"> --}}
+            <textarea name="scpe[12][forma_detectarlo]" id="scpe[12][forma_detectarlo]" value="{{ old("scpe[12][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[12][forma_corregirlo]" id="scpe_12_4" value="{{ old('scpe[12][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="scpe[12][forma_corregirlo]" id="scpe_12_4" value="{{ old('scpe[12][forma_corregirlo]') }}"> --}}
+            <textarea name="scpe[12][forma_corregirlo]" id="scpe[12][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -706,7 +748,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[13][estado]" id="scpe_13_1" value="{{ old('scpe[13][estado]') }}">
+            <input type="text" class="form-control" name="scpe[13][estado]" id="scpe_13_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -716,12 +758,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[13][forma_detectarlo]" id="scpe_13_3" value="{{ old('scpe[13][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="scpe[13][forma_detectarlo]" id="scpe_13_3" value="{{ old('scpe[13][forma_detectarlo]') }}"> --}}
+            <textarea name="scpe[13][forma_detectarlo]" id="scpe[13][forma_detectarlo]" value="{{ old("scpe[13][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[13][forma_corregirlo]" id="scpe_13_4" value="{{ old('scpe[13][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="scpe[13][forma_corregirlo]" id="scpe_13_4" value="{{ old('scpe[13][forma_corregirlo]') }}"> --}}
+            <textarea name="scpe[13][forma_corregirlo]" id="scpe[13][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -736,7 +780,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[14][estado]" id="scpe_14_1" value="{{ old('scpe[14][estado]') }}">
+            <input type="text" class="form-control" name="scpe[14][estado]" id="scpe_14_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -746,12 +790,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[14][forma_detectarlo]" id="scpe_14_3" value="{{ old('scpe[14][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="scpe[14][forma_detectarlo]" id="scpe_14_3" value="{{ old('scpe[14][forma_detectarlo]') }}"> --}}
+            <textarea name="scpe[14][forma_detectarlo]" id="scpe[14][forma_detectarlo]" value="{{ old("scpe[14][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[14][forma_corregirlo]" id="scpe_14_4" value="{{ old('scpe[14][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="scpe[14][forma_corregirlo]" id="scpe_14_4" value="{{ old('scpe[14][forma_corregirlo]') }}"> --}}
+            <textarea name="scpe[14][forma_corregirlo]" id="scpe[14][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -766,7 +812,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[15][estado]" id="scpe_15_1" value="{{ old('scpe[15][estado]') }}">
+            <input type="text" class="form-control" name="scpe[15][estado]" id="scpe_15_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -776,12 +822,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[15][forma_detectarlo]" id="scpe_15_3" value="{{ old('scpe[15][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="scpe[15][forma_detectarlo]" id="scpe_15_3" value="{{ old('scpe[15][forma_detectarlo]') }}"> --}}
+            <textarea name="scpe[15][forma_detectarlo]" id="scpe[15][forma_detectarlo]" value="{{ old("scpe[15][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="scpe[15][forma_corregirlo]" id="scpe_15_4" value="{{ old('scpe[15][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="scpe[15][forma_corregirlo]" id="scpe_15_4" value="{{ old('scpe[15][forma_corregirlo]') }}"> --}}
+            <textarea name="scpe[15][forma_corregirlo]" id="scpe[15][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -839,7 +887,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="sa[1][estado]" id="sa[1][1]" value="{{ old('sa[1][estado]') }}">
+            <input type="text" class="form-control" name="sa[1][estado]" id="sa[1][1]" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -849,12 +897,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="sa[1][forma_detectarlo]" id="sa[1][3]" value="{{ old('sa[1][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="sa[1][forma_detectarlo]" id="sa[1][3]" value="{{ old('sa[1][forma_detectarlo]') }}"> --}}
+            <textarea name="sa[1][forma_detectarlo]" id="sa[1][forma_detectarlo]" value="{{ old("sa[1][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="sa[1][forma_corregirlo]" id="sa[1][4]" value="{{ old('sa[1][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="sa[1][forma_corregirlo]" id="sa[1][4]" value="{{ old('sa[1][forma_corregirlo]') }}"> --}}
+            <textarea name="sa[1][forma_corregirlo]" id="sa[1][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -869,7 +919,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="sa[2][estado]" id="sa[2][1]" value="{{ old('sa[2][estado]') }}">
+            <input type="text" class="form-control" name="sa[2][estado]" id="sa[2][1]" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -879,12 +929,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="sa[2][forma_detectarlo]" id="sa[2][3]" value="{{ old('sa[2][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="sa[2][forma_detectarlo]" id="sa[2][3]" value="{{ old('sa[2][forma_detectarlo]') }}"> --}}
+            <textarea name="sa[2][forma_detectarlo]" id="sa[2][forma_detectarlo]" value="{{ old("sa[2][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="sa[2][forma_corregirlo]" id="sa[2][4]" value="{{ old('sa[2][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="sa[2][forma_corregirlo]" id="sa[2][4]" value="{{ old('sa[2][forma_corregirlo]') }}"> --}}
+            <textarea name="sa[2][forma_corregirlo]" id="sa[2][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -899,7 +951,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="sa[3][estado]" id="sa[3][1]" value="{{ old('sa[3][estado]') }}">
+            <input type="text" class="form-control" name="sa[3][estado]" id="sa[3][1]" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -909,12 +961,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="sa[3][forma_detectarlo]" id="sa[3][3]" value="{{ old('sa[3][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="sa[3][forma_detectarlo]" id="sa[3][3]" value="{{ old('sa[3][forma_detectarlo]') }}"> --}}
+            <textarea name="sa[3][forma_detectarlo]" id="sa[3][forma_detectarlo]" value="{{ old("sa[3][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="sa[3][forma_corregirlo]" id="sa[3][4]" value="{{ old('sa[3][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="sa[3][forma_corregirlo]" id="sa[3][4]" value="{{ old('sa[3][forma_corregirlo]') }}"> --}}
+            <textarea name="sa[3][forma_corregirlo]" id="sa[3][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -929,7 +983,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="sa[4][estado]" id="sa[4][1]" value="{{ old('sa[4][estado]') }}">
+            <input type="text" class="form-control" name="sa[4][estado]" id="sa[4][1]" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -939,12 +993,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="sa[4][forma_detectarlo]" id="sa[4][3]" value="{{ old('sa[4][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="sa[4][forma_detectarlo]" id="sa[4][3]" value="{{ old('sa[4][forma_detectarlo]') }}"> --}}
+            <textarea name="sa[4][forma_detectarlo]" id="sa[4][forma_detectarlo]" value="{{ old("sa[4][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="sa[4][forma_corregirlo]" id="sa[4][4]" value="{{ old('sa[4][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="sa[4][forma_corregirlo]" id="sa[4][4]" value="{{ old('sa[4][forma_corregirlo]') }}"> --}}
+            <textarea name="sa[4][forma_corregirlo]" id="sa[4][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -959,7 +1015,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="sa[5][estado]" id="sa[5][1]" value="{{ old('sa[5][estado]') }}">
+            <input type="text" class="form-control" name="sa[5][estado]" id="sa[5][1]" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -969,12 +1025,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="sa[5][forma_detectarlo]" id="sa[5][3]" value="{{ old('sa[5][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="sa[5][forma_detectarlo]" id="sa[5][3]" value="{{ old('sa[5][forma_detectarlo]') }}"> --}}
+            <textarea name="sa[5][forma_detectarlo]" id="sa[5][forma_detectarlo]" value="{{ old("sa[5][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="sa[5][forma_corregirlo]" id="sa[5][4]" value="{{ old('sa[5][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="sa[5][forma_corregirlo]" id="sa[5][4]" value="{{ old('sa[5][forma_corregirlo]') }}"> --}}
+            <textarea name="sa[5][forma_corregirlo]" id="sa[5][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -989,7 +1047,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="sa[6][estado]" id="sa[6][1]" value="{{ old('sa[6][estado]') }}">
+            <input type="text" class="form-control" name="sa[6][estado]" id="sa[6][1]" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -999,12 +1057,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="sa[6][forma_detectarlo]" id="sa[6][3]" value="{{ old('sa[6][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="sa[6][forma_detectarlo]" id="sa[6][3]" value="{{ old('sa[6][forma_detectarlo]') }}"> --}}
+            <textarea name="sa[6][forma_detectarlo]" id="sa[6][forma_detectarlo]" value="{{ old("sa[6][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="sa[6][forma_corregirlo]" id="sa[6][4]" value="{{ old('sa[6][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="sa[6][forma_corregirlo]" id="sa[6][4]" value="{{ old('sa[6][forma_corregirlo]') }}"> --}}
+            <textarea name="sa[6][forma_corregirlo]" id="sa[6][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -1063,7 +1123,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[1][estado]" id="srpe_1_1" value="{{ old('srpe[1][estado]') }}">
+            <input type="text" class="form-control" name="srpe[1][estado]" id="srpe_1_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -1073,12 +1133,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[1][forma_detectarlo]" id="srpe_1_3" value="{{ old('srpe[1][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="srpe[1][forma_detectarlo]" id="srpe_1_3" value="{{ old('srpe[1][forma_detectarlo]') }}"> --}}
+            <textarea name="srpe[1][forma_detectarlo]" id="srpe[1][forma_detectarlo]" value="{{ old("srpe[1][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[1][forma_corregirlo]" id="srpe_1_4" value="{{ old('srpe[1][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="srpe[1][forma_corregirlo]" id="srpe_1_4" value="{{ old('srpe[1][forma_corregirlo]') }}"> --}}
+            <textarea name="srpe[1][forma_corregirlo]" id="srpe[1][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -1103,12 +1165,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[2][forma_detectarlo]" id="srpe_2_3" value="{{ old('srpe_2_3') }}">
+            {{-- <input type="text" class="form-control" name="srpe[2][forma_detectarlo]" id="srpe_2_3" value="{{ old('srpe_2_3') }}"> --}}
+            <textarea name="srpe[2][forma_detectarlo]" id="srpe[2][forma_detectarlo]" value="{{ old("srpe[2][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[2][forma_corregirlo]" id="srpe_2_4" value="{{ old('srpe_2_4') }}">
+            {{-- <input type="text" class="form-control" name="srpe[2][forma_corregirlo]" id="srpe_2_4" value="{{ old('srpe_2_4') }}"> --}}
+            <textarea name="srpe[2][forma_corregirlo]" id="srpe[2][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -1133,12 +1197,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[3][forma_detectarlo]" id="srpe_3_3" value="{{ old('srpe_3_3') }}">
+            {{-- <input type="text" class="form-control" name="srpe[3][forma_detectarlo]" id="srpe_3_3" value="{{ old('srpe_3_3') }}"> --}}
+            <textarea name="srpe[3][forma_detectarlo]" id="srpe[3][forma_detectarlo]" value="{{ old("srpe[3][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[3][forma_corregirlo]" id="srpe_3_4" value="{{ old('srpe_3_4') }}">
+            {{-- <input type="text" class="form-control" name="srpe[3][forma_corregirlo]" id="srpe_3_4" value="{{ old('srpe_3_4') }}"> --}}
+            <textarea name="srpe[3][forma_corregirlo]" id="srpe[3][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -1163,12 +1229,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[4][forma_detectarlo]" id="srpe_4_3" value="{{ old('srpe_4_3') }}">
+            {{-- <input type="text" class="form-control" name="srpe[4][forma_detectarlo]" id="srpe_4_3" value="{{ old('srpe_4_3') }}"> --}}
+            <textarea name="srpe[4][forma_detectarlo]" id="srpe[4][forma_detectarlo]" value="{{ old("srpe[4][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[4][forma_corregirlo]" id="srpe_4_4" value="{{ old('srpe_4_4') }}">
+            {{-- <input type="text" class="form-control" name="srpe[4][forma_corregirlo]" id="srpe_4_4" value="{{ old('srpe_4_4') }}"> --}}
+            <textarea name="srpe[4][forma_corregirlo]" id="srpe[4][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -1193,12 +1261,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[5][forma_detectarlo]" id="srpe_5_3" value="{{ old('srpe_5_3') }}">
+            {{-- <input type="text" class="form-control" name="srpe[5][forma_detectarlo]" id="srpe_5_3" value="{{ old('srpe_5_3') }}"> --}}
+            <textarea name="srpe[5][forma_detectarlo]" id="srpe[5][forma_detectarlo]" value="{{ old("srpe[5][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[5][forma_corregirlo]" id="srpe_5_4" value="{{ old('srpe_5_4') }}">
+            {{-- <input type="text" class="form-control" name="srpe[5][forma_corregirlo]" id="srpe_5_4" value="{{ old('srpe_5_4') }}"> --}}
+            <textarea name="srpe[5][forma_corregirlo]" id="srpe[5][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -1223,12 +1293,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[6][forma_detectarlo]" id="srpe_6_3" value="{{ old('srpe_6_3') }}">
+            {{-- <input type="text" class="form-control" name="srpe[6][forma_detectarlo]" id="srpe_6_3" value="{{ old('srpe_6_3') }}"> --}}
+            <textarea name="srpe[6][forma_detectarlo]" id="srpe[6][forma_detectarlo]" value="{{ old("srpe[6][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[6][forma_corregirlo]" id="srpe_6_4" value="{{ old('srpe_6_4') }}">
+            {{-- <input type="text" class="form-control" name="srpe[6][forma_corregirlo]" id="srpe_6_4" value="{{ old('srpe_6_4') }}"> --}}
+            <textarea name="srpe[6][forma_corregirlo]" id="srpe[6][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -1253,12 +1325,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[7][forma_detectarlo]" id="srpe_7_3" value="{{ old('srpe_7_3') }}">
+            {{-- <input type="text" class="form-control" name="srpe[7][forma_detectarlo]" id="srpe_7_3" value="{{ old('srpe_7_3') }}"> --}}
+            <textarea name="srpe[7][forma_detectarlo]" id="srpe[7][forma_detectarlo]" value="{{ old("srpe[7][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[7][forma_corregirlo]" id="srpe_7_4" value="{{ old('srpe_7_4') }}">
+            {{-- <input type="text" class="form-control" name="srpe[7][forma_corregirlo]" id="srpe_7_4" value="{{ old('srpe_7_4') }}"> --}}
+            <textarea name="srpe[7][forma_corregirlo]" id="srpe[7][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -1283,12 +1357,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[8][forma_detectarlo]" id="srpe_8_3" value="{{ old('srpe_8_3') }}">
+            {{-- <input type="text" class="form-control" name="srpe[8][forma_detectarlo]" id="srpe_8_3" value="{{ old('srpe_8_3') }}"> --}}
+            <textarea name="srpe[8][forma_detectarlo]" id="srpe[8][forma_detectarlo]" value="{{ old("srpe[8][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[8][forma_corregirlo]" id="srpe_8_4" value="{{ old('srpe_8_4') }}">
+            {{-- <input type="text" class="form-control" name="srpe[8][forma_corregirlo]" id="srpe_8_4" value="{{ old('srpe_8_4') }}"> --}}
+            <textarea name="srpe[8][forma_corregirlo]" id="srpe[8][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -1313,12 +1389,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[9][forma_detectarlo]" id="srpe_9_3" value="{{ old('srpe_9_3') }}">
+            {{-- <input type="text" class="form-control" name="srpe[9][forma_detectarlo]" id="srpe_9_3" value="{{ old('srpe_9_3') }}"> --}}
+            <textarea name="srpe[9][forma_detectarlo]" id="srpe[9][forma_detectarlo]" value="{{ old("srpe[9][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[9][forma_corregirlo]" id="srpe_9_4" value="{{ old('srpe_9_4') }}">
+            {{-- <input type="text" class="form-control" name="srpe[9][forma_corregirlo]" id="srpe_9_4" value="{{ old('srpe_9_4') }}"> --}}
+            <textarea name="srpe[9][forma_corregirlo]" id="srpe[9][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -1333,7 +1411,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[10][estado]" id="srpe_10_1" value="{{ old('srpe[10][estado]') }}">
+            <input type="text" class="form-control" name="srpe[10][estado]" id="srpe_10_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -1343,12 +1421,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[10][forma_detectarlo]" id="srpe_10_3" value="{{ old('srpe[10][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="srpe[10][forma_detectarlo]" id="srpe_10_3" value="{{ old('srpe[10][forma_detectarlo]') }}"> --}}
+            <textarea name="srpe[10][forma_detectarlo]" id="srpe[10][forma_detectarlo]" value="{{ old("srpe[10][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[10][forma_corregirlo]" id="srpe_10_4" value="{{ old('srpe[10][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="srpe[10][forma_corregirlo]" id="srpe_10_4" value="{{ old('srpe[10][forma_corregirlo]') }}"> --}}
+            <textarea name="srpe[10][forma_corregirlo]" id="srpe[10][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -1363,7 +1443,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[11][estado]" id="srpe_11_1" value="{{ old('srpe[11][estado]') }}">
+            <input type="text" class="form-control" name="srpe[11][estado]" id="srpe_11_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -1373,12 +1453,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[11][forma_detectarlo]" id="srpe_11_3" value="{{ old('srpe[11][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="srpe[11][forma_detectarlo]" id="srpe_11_3" value="{{ old('srpe[11][forma_detectarlo]') }}"> --}}
+            <textarea name="srpe[11][forma_detectarlo]" id="srpe[11][forma_detectarlo]" value="{{ old("srpe[11][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[11][forma_corregirlo]" id="srpe_11_4" value="{{ old('srpe[11][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="srpe[11][forma_corregirlo]" id="srpe_11_4" value="{{ old('srpe[11][forma_corregirlo]') }}"> --}}
+            <textarea name="srpe[11][forma_corregirlo]" id="srpe[11][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -1393,7 +1475,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[12][estado]" id="srpe_12_1" value="{{ old('srpe[12][estado]') }}">
+            <input type="text" class="form-control" name="srpe[12][estado]" id="srpe_12_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -1403,12 +1485,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[12][forma_detectarlo]" id="srpe_12_3" value="{{ old('srpe[12][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="srpe[12][forma_detectarlo]" id="srpe_12_3" value="{{ old('srpe[12][forma_detectarlo]') }}"> --}}
+            <textarea name="srpe[12][forma_detectarlo]" id="srpe[12][forma_detectarlo]" value="{{ old("srpe[12][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[12][forma_corregirlo]" id="srpe_12_4" value="{{ old('srpe[12][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="srpe[12][forma_corregirlo]" id="srpe_12_4" value="{{ old('srpe[12][forma_corregirlo]') }}"> --}}
+            <textarea name="srpe[12][forma_corregirlo]" id="srpe[12][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -1423,7 +1507,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[13][estado]" id="srpe_13_1" value="{{ old('srpe[13][estado]') }}">
+            <input type="text" class="form-control" name="srpe[13][estado]" id="srpe_13_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -1433,12 +1517,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[13][forma_detectarlo]" id="srpe_13_3" value="{{ old('srpe[13][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="srpe[13][forma_detectarlo]" id="srpe_13_3" value="{{ old('srpe[13][forma_detectarlo]') }}"> --}}
+            <textarea name="srpe[13][forma_detectarlo]" id="srpe[13][forma_detectarlo]" value="{{ old("srpe[13][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[13][forma_corregirlo]" id="srpe_13_4" value="{{ old('srpe[13][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="srpe[13][forma_corregirlo]" id="srpe_13_4" value="{{ old('srpe[13][forma_corregirlo]') }}"> --}}
+            <textarea name="srpe[13][forma_corregirlo]" id="srpe[13][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -1453,7 +1539,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[14][estado]" id="srpe_14_1" value="{{ old('srpe[14][estado]') }}">
+            <input type="text" class="form-control" name="srpe[14][estado]" id="srpe_14_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -1463,12 +1549,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[14][forma_detectarlo]" id="srpe_14_3" value="{{ old('srpe[14][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="srpe[14][forma_detectarlo]" id="srpe_14_3" value="{{ old('srpe[14][forma_detectarlo]') }}"> --}}
+            <textarea name="srpe[14][forma_detectarlo]" id="srpe[14][forma_detectarlo]" value="{{ old("srpe[14][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[14][forma_corregirlo]" id="srpe_14_4" value="{{ old('srpe[14][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="srpe[14][forma_corregirlo]" id="srpe_14_4" value="{{ old('srpe[14][forma_corregirlo]') }}"> --}}
+            <textarea name="srpe[14][forma_corregirlo]" id="srpe[14][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -1483,7 +1571,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[15][estado]" id="srpe_15_1" value="{{ old('srpe[15][estado]') }}">
+            <input type="text" class="form-control" name="srpe[15][estado]" id="srpe_15_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -1493,12 +1581,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[15][forma_detectarlo]" id="srpe_15_3" value="{{ old('srpe[15][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="srpe[15][forma_detectarlo]" id="srpe_15_3" value="{{ old('srpe[15][forma_detectarlo]') }}"> --}}
+            <textarea name="srpe[15][forma_detectarlo]" id="srpe[15][forma_detectarlo]" value="{{ old("srpe[15][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="srpe[15][forma_corregirlo]" id="srpe_15_4" value="{{ old('srpe[15][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="srpe[15][forma_corregirlo]" id="srpe_15_4" value="{{ old('srpe[15][forma_corregirlo]') }}"> --}}
+            <textarea name="srpe[15][forma_corregirlo]" id="srpe[15][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -1557,7 +1647,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="seape[1][estado]" id="seape_1_1" value="{{ old('seape[1][estado]') }}">
+            <input type="text" class="form-control" name="seape[1][estado]" id="seape_1_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -1567,12 +1657,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="seape[1][forma_detectarlo]" id="seape_1_3" value="{{ old('seape[1][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="seape[1][forma_detectarlo]" id="seape_1_3" value="{{ old('seape[1][forma_detectarlo]') }}"> --}}
+            <textarea name="seape[1][forma_detectarlo]" id="seape[1][forma_detectarlo]" value="{{ old("seape[1][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="seape[1][forma_corregirlo]" id="seape_1_4" value="{{ old('seape[1][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="seape[1][forma_corregirlo]" id="seape_1_4" value="{{ old('seape[1][forma_corregirlo]') }}"> --}}
+            <textarea name="seape[1][forma_corregirlo]" id="seape[1][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -1587,7 +1679,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="seape[2][estado]" id="seape_2_1" value="{{ old('seape[2][estado]') }}">
+            <input type="text" class="form-control" name="seape[2][estado]" id="seape_2_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -1597,12 +1689,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="seape[2][forma_detectarlo]" id="seape_2_3" value="{{ old('seape[2][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="seape[2][forma_detectarlo]" id="seape_2_3" value="{{ old('seape[2][forma_detectarlo]') }}"> --}}
+            <textarea name="seape[2][forma_detectarlo]" id="seape[2][forma_detectarlo]" value="{{ old("seape[2][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="seape[2][forma_corregirlo]" id="seape_2_4" value="{{ old('seape[2][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="seape[2][forma_corregirlo]" id="seape_2_4" value="{{ old('seape[2][forma_corregirlo]') }}"> --}}
+            <textarea name="seape[2][forma_corregirlo]" id="seape[2][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -1617,7 +1711,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="seape[3][estado]" id="seape_3_1" value="{{ old('seape[3][estado]') }}">
+            <input type="text" class="form-control" name="seape[3][estado]" id="seape_3_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -1627,12 +1721,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="seape[3][forma_detectarlo]" id="seape_3_3" value="{{ old('seape[3][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="seape[3][forma_detectarlo]" id="seape_3_3" value="{{ old('seape[3][forma_detectarlo]') }}"> --}}
+            <textarea name="seape[3][forma_detectarlo]" id="seape[3][forma_detectarlo]" value="{{ old("seape[3][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="seape[3][forma_corregirlo]" id="seape_3_4" value="{{ old('seape[3][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="seape[3][forma_corregirlo]" id="seape_3_4" value="{{ old('seape[3][forma_corregirlo]') }}"> --}}
+            <textarea name="seape[3][forma_corregirlo]" id="seape[3][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -1647,7 +1743,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="seape[4][estado]" id="seape_4_1" value="{{ old('seape[4][estado]') }}">
+            <input type="text" class="form-control" name="seape[4][estado]" id="seape_4_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -1657,12 +1753,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="seape[4][forma_detectarlo]" id="seape_4_3" value="{{ old('seape[4][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="seape[4][forma_detectarlo]" id="seape_4_3" value="{{ old('seape[4][forma_detectarlo]') }}"> --}}
+            <textarea name="seape[4][forma_detectarlo]" id="seape[4][forma_detectarlo]" value="{{ old("seape[4][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="seape[4][forma_corregirlo]" id="seape_4_4" value="{{ old('seape[4][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="seape[4][forma_corregirlo]" id="seape_4_4" value="{{ old('seape[4][forma_corregirlo]') }}"> --}}
+            <textarea name="seape[4][forma_corregirlo]" id="seape[4][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -1677,7 +1775,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="seape[5][estado]" id="seape_5_1" value="{{ old('seape[5][estado]') }}">
+            <input type="text" class="form-control" name="seape[5][estado]" id="seape_5_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -1687,12 +1785,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="seape[5][forma_detectarlo]" id="seape_5_3" value="{{ old('seape[5][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="seape[5][forma_detectarlo]" id="seape_5_3" value="{{ old('seape[5][forma_detectarlo]') }}"> --}}
+            <textarea name="seape[5][forma_detectarlo]" id="seape[5][forma_detectarlo]" value="{{ old("seape[5][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="seape[5][forma_corregirlo]" id="seape_5_4" value="{{ old('seape[5][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="seape[5][forma_corregirlo]" id="seape_5_4" value="{{ old('seape[5][forma_corregirlo]') }}"> --}}
+            <textarea name="seape[5][forma_corregirlo]" id="seape[5][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -1707,7 +1807,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="seape[6][estado]" id="seape_6_1" value="{{ old('seape[6][estado]') }}">
+            <input type="text" class="form-control" name="seape[6][estado]" id="seape_6_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -1717,12 +1817,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="seape[6][forma_detectarlo]" id="seape_6_3" value="{{ old('seape[6][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="seape[6][forma_detectarlo]" id="seape_6_3" value="{{ old('seape[6][forma_detectarlo]') }}"> --}}
+            <textarea name="seape[6][forma_detectarlo]" id="seape[6][forma_detectarlo]" value="{{ old("seape[6][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="seape[6][forma_corregirlo]" id="seape_6_4" value="{{ old('seape[6][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="seape[6][forma_corregirlo]" id="seape_6_4" value="{{ old('seape[6][forma_corregirlo]') }}"> --}}
+            <textarea name="seape[6][forma_corregirlo]" id="seape[6][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -1737,7 +1839,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="seape[7][estado]" id="seape_7_1" value="{{ old('seape[7][estado]') }}">
+            <input type="text" class="form-control" name="seape[7][estado]" id="seape_7_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -1747,12 +1849,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="seape[7][forma_detectarlo]" id="seape_7_3" value="{{ old('seape[7][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="seape[7][forma_detectarlo]" id="seape_7_3" value="{{ old('seape[7][forma_detectarlo]') }}"> --}}
+            <textarea name="seape[7][forma_detectarlo]" id="seape[7][forma_detectarlo]" value="{{ old("seape[7][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="seape[7][forma_corregirlo]" id="seape_7_4" value="{{ old('seape[7][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="seape[7][forma_corregirlo]" id="seape_7_4" value="{{ old('seape[7][forma_corregirlo]') }}"> --}}
+            <textarea name="seape[7][forma_corregirlo]" id="seape[7][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -1767,7 +1871,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="seape[8][estado]" id="seape_8_1" value="{{ old('seape[8][estado]') }}">
+            <input type="text" class="form-control" name="seape[8][estado]" id="seape_8_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -1777,12 +1881,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="seape[8][forma_detectarlo]" id="seape_8_3" value="{{ old('seape[8][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="seape[8][forma_detectarlo]" id="seape_8_3" value="{{ old('seape[8][forma_detectarlo]') }}"> --}}
+            <textarea name="seape[8][forma_detectarlo]" id="seape[8][forma_detectarlo]" value="{{ old("seape[8][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="seape[8][forma_corregirlo]" id="seape_8_4" value="{{ old('seape[8][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="seape[8][forma_corregirlo]" id="seape_8_4" value="{{ old('seape[8][forma_corregirlo]') }}"> --}}
+            <textarea name="seape[8][forma_corregirlo]" id="seape[8][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -1841,7 +1947,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[1][estado]" id="semoceo_1_1" value="{{ old('semoceo[1][estado]') }}">
+            <input type="text" class="form-control" name="semoceo[1][estado]" id="semoceo_1_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -1851,12 +1957,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[1][forma_detectarlo]" id="semoceo_1_3" value="{{ old('semoceo[1][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[1][forma_detectarlo]" id="semoceo_1_3" value="{{ old('semoceo[1][forma_detectarlo]') }}"> --}}
+            <textarea name="semoceo[1][forma_detectarlo]" id="semoceo[1][forma_detectarlo]" value="{{ old("semoceo[1][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[1][forma_corregirlo]" id="semoceo_1_4" value="{{ old('semoceo[1][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[1][forma_corregirlo]" id="semoceo_1_4" value="{{ old('semoceo[1][forma_corregirlo]') }}"> --}}
+            <textarea name="semoceo[1][forma_corregirlo]" id="semoceo[1][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -1871,7 +1979,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[2][estado]" id="semoceo_2_1" value="{{ old('semoceo[2][estado]') }}">
+            <input type="text" class="form-control" name="semoceo[2][estado]" id="semoceo_2_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -1881,12 +1989,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[2][forma_detectarlo]" id="semoceo_2_3" value="{{ old('semoceo[2][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[2][forma_detectarlo]" id="semoceo_2_3" value="{{ old('semoceo[2][forma_detectarlo]') }}"> --}}
+            <textarea name="semoceo[2][forma_detectarlo]" id="semoceo[2][forma_detectarlo]" value="{{ old("semoceo[2][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[2][forma_corregirlo]" id="semoceo_2_4" value="{{ old('semoceo[2][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[2][forma_corregirlo]" id="semoceo_2_4" value="{{ old('semoceo[2][forma_corregirlo]') }}"> --}}
+            <textarea name="semoceo[2][forma_corregirlo]" id="semoceo[2][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -1901,7 +2011,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[3][estado]" id="semoceo_3_1" value="{{ old('semoceo[3][estado]') }}">
+            <input type="text" class="form-control" name="semoceo[3][estado]" id="semoceo_3_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -1911,12 +2021,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[3][forma_detectarlo]" id="semoceo_3_3" value="{{ old('semoceo[3][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[3][forma_detectarlo]" id="semoceo_3_3" value="{{ old('semoceo[3][forma_detectarlo]') }}"> --}}
+            <textarea name="semoceo[3][forma_detectarlo]" id="semoceo[3][forma_detectarlo]" value="{{ old("semoceo[3][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[3][forma_corregirlo]" id="semoceo_3_4" value="{{ old('semoceo[3][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[3][forma_corregirlo]" id="semoceo_3_4" value="{{ old('semoceo[3][forma_corregirlo]') }}"> --}}
+            <textarea name="semoceo[3][forma_corregirlo]" id="semoceo[3][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -1931,7 +2043,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[4][estado]" id="semoceo_4_1" value="{{ old('semoceo[4][estado]') }}">
+            <input type="text" class="form-control" name="semoceo[4][estado]" id="semoceo_4_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -1941,12 +2053,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[4][forma_detectarlo]" id="semoceo_4_3" value="{{ old('semoceo[4][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[4][forma_detectarlo]" id="semoceo_4_3" value="{{ old('semoceo[4][forma_detectarlo]') }}"> --}}
+            <textarea name="semoceo[4][forma_detectarlo]" id="semoceo[4][forma_detectarlo]" value="{{ old("semoceo[4][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[4][forma_corregirlo]" id="semoceo_4_4" value="{{ old('semoceo[4][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[4][forma_corregirlo]" id="semoceo_4_4" value="{{ old('semoceo[4][forma_corregirlo]') }}"> --}}
+            <textarea name="semoceo[4][forma_corregirlo]" id="semoceo[4][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -1961,7 +2075,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[5][estado]" id="semoceo_5_1" value="{{ old('semoceo[5][estado]') }}">
+            <input type="text" class="form-control" name="semoceo[5][estado]" id="semoceo_5_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -1971,12 +2085,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[5][forma_detectarlo]" id="semoceo_5_3" value="{{ old('semoceo[5][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[5][forma_detectarlo]" id="semoceo_5_3" value="{{ old('semoceo[5][forma_detectarlo]') }}"> --}}
+            <textarea name="semoceo[5][forma_detectarlo]" id="semoceo[5][forma_detectarlo]" value="{{ old("semoceo[5][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[5][forma_corregirlo]" id="semoceo_5_4" value="{{ old('semoceo[5][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[5][forma_corregirlo]" id="semoceo_5_4" value="{{ old('semoceo[5][forma_corregirlo]') }}"> --}}
+            <textarea name="semoceo[5][forma_corregirlo]" id="semoceo[5][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -1991,7 +2107,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[6][estado]" id="semoceo_6_1" value="{{ old('semoceo[6][estado]') }}">
+            <input type="text" class="form-control" name="semoceo[6][estado]" id="semoceo_6_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -2001,12 +2117,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[6][forma_detectarlo]" id="semoceo_6_3" value="{{ old('semoceo[6][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[6][forma_detectarlo]" id="semoceo_6_3" value="{{ old('semoceo[6][forma_detectarlo]') }}"> --}}
+            <textarea name="semoceo[6][forma_detectarlo]" id="semoceo[6][forma_detectarlo]" value="{{ old("semoceo[6][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[6][forma_corregirlo]" id="semoceo_6_4" value="{{ old('semoceo[6][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[6][forma_corregirlo]" id="semoceo_6_4" value="{{ old('semoceo[6][forma_corregirlo]') }}"> --}}
+            <textarea name="semoceo[6][forma_corregirlo]" id="semoceo[6][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -2021,7 +2139,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[7][estado]" id="semoceo_7_1" value="{{ old('semoceo[7][estado]') }}">
+            <input type="text" class="form-control" name="semoceo[7][estado]" id="semoceo_7_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -2031,12 +2149,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[7][forma_detectarlo]" id="semoceo_7_3" value="{{ old('semoceo[7][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[7][forma_detectarlo]" id="semoceo_7_3" value="{{ old('semoceo[7][forma_detectarlo]') }}"> --}}
+            <textarea name="semoceo[7][forma_detectarlo]" id="semoceo[7][forma_detectarlo]" value="{{ old("semoceo[7][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[7][forma_corregirlo]" id="semoceo_7_4" value="{{ old('semoceo[7][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[7][forma_corregirlo]" id="semoceo_7_4" value="{{ old('semoceo[7][forma_corregirlo]') }}"> --}}
+            <textarea name="semoceo[7][forma_corregirlo]" id="semoceo[7][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -2051,7 +2171,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[8][estado]" id="semoceo_8_1" value="{{ old('semoceo[8][estado]') }}">
+            <input type="text" class="form-control" name="semoceo[8][estado]" id="semoceo_8_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -2061,12 +2181,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[8][forma_detectarlo]" id="semoceo_8_3" value="{{ old('semoceo[8][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[8][forma_detectarlo]" id="semoceo_8_3" value="{{ old('semoceo[8][forma_detectarlo]') }}"> --}}
+            <textarea name="semoceo[8][forma_detectarlo]" id="semoceo[8][forma_detectarlo]" value="{{ old("semoceo[8][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[8][forma_corregirlo]" id="semoceo_8_4" value="{{ old('semoceo[8][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[8][forma_corregirlo]" id="semoceo_8_4" value="{{ old('semoceo[8][forma_corregirlo]') }}"> --}}
+            <textarea name="semoceo[8][forma_corregirlo]" id="semoceo[8][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -2081,7 +2203,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[9][estado]" id="semoceo_9_1" value="{{ old('semoceo[9][estado]') }}">
+            <input type="text" class="form-control" name="semoceo[9][estado]" id="semoceo_9_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -2091,12 +2213,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[9][forma_detectarlo]" id="semoceo_9_3" value="{{ old('semoceo[9][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[9][forma_detectarlo]" id="semoceo_9_3" value="{{ old('semoceo[9][forma_detectarlo]') }}"> --}}
+            <textarea name="semoceo[9][forma_detectarlo]" id="semoceo[9][forma_detectarlo]" value="{{ old("semoceo[9][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[9][forma_corregirlo]" id="semoceo_9_4" value="{{ old('semoceo[9][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[9][forma_corregirlo]" id="semoceo_9_4" value="{{ old('semoceo[9][forma_corregirlo]') }}"> --}}
+            <textarea name="semoceo[9][forma_corregirlo]" id="semoceo[9][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -2111,7 +2235,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[10][estado]" id="semoceo_10_1" value="{{ old('semoceo[10][estado]') }}">
+            <input type="text" class="form-control" name="semoceo[10][estado]" id="semoceo_10_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -2121,12 +2245,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[10][forma_detectarlo]" id="semoceo_10_3" value="{{ old('semoceo[10][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[10][forma_detectarlo]" id="semoceo_10_3" value="{{ old('semoceo[10][forma_detectarlo]') }}"> --}}
+            <textarea name="semoceo[10][forma_detectarlo]" id="semoceo[10][forma_detectarlo]" value="{{ old("semoceo[10][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[10][forma_corregirlo]" id="semoceo_10_4" value="{{ old('semoceo[10][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[10][forma_corregirlo]" id="semoceo_10_4" value="{{ old('semoceo[10][forma_corregirlo]') }}"> --}}
+            <textarea name="semoceo[10][forma_corregirlo]" id="semoceo[10][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -2141,7 +2267,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[11][estado]" id="semoceo_11_1" value="{{ old('semoceo[11][estado]') }}">
+            <input type="text" class="form-control" name="semoceo[11][estado]" id="semoceo_11_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -2151,12 +2277,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[11][forma_detectarlo]" id="semoceo_11_3" value="{{ old('semoceo[11][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[11][forma_detectarlo]" id="semoceo_11_3" value="{{ old('semoceo[11][forma_detectarlo]') }}"> --}}
+            <textarea name="semoceo[11][forma_detectarlo]" id="semoceo[11][forma_detectarlo]" value="{{ old("semoceo[11][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[11][forma_corregirlo]" id="semoceo_11_4" value="{{ old('semoceo[11][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[11][forma_corregirlo]" id="semoceo_11_4" value="{{ old('semoceo[11][forma_corregirlo]') }}"> --}}
+            <textarea name="semoceo[11][forma_corregirlo]" id="semoceo[11][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -2171,7 +2299,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[12][estado]" id="semoceo_12_1" value="{{ old('semoceo[12][estado]') }}">
+            <input type="text" class="form-control" name="semoceo[12][estado]" id="semoceo_12_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -2181,12 +2309,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[12][forma_detectarlo]" id="semoceo_12_3" value="{{ old('semoceo[12][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[12][forma_detectarlo]" id="semoceo_12_3" value="{{ old('semoceo[12][forma_detectarlo]') }}"> --}}
+            <textarea name="semoceo[12][forma_detectarlo]" id="semoceo[12][forma_detectarlo]" value="{{ old("semoceo[12][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[12][forma_corregirlo]" id="semoceo_12_4" value="{{ old('semoceo[12][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[12][forma_corregirlo]" id="semoceo_12_4" value="{{ old('semoceo[12][forma_corregirlo]') }}"> --}}
+            <textarea name="semoceo[12][forma_corregirlo]" id="semoceo[12][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -2201,7 +2331,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[13][estado]" id="semoceo_13_1" value="{{ old('semoceo[13][estado]') }}">
+            <input type="text" class="form-control" name="semoceo[13][estado]" id="semoceo_13_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -2211,12 +2341,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[13][forma_detectarlo]" id="semoceo_13_3" value="{{ old('semoceo[13][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[13][forma_detectarlo]" id="semoceo_13_3" value="{{ old('semoceo[13][forma_detectarlo]') }}"> --}}
+            <textarea name="semoceo[13][forma_detectarlo]" id="semoceo[13][forma_detectarlo]" value="{{ old("semoceo[13][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[13][forma_corregirlo]" id="semoceo_13_4" value="{{ old('semoceo[13][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[13][forma_corregirlo]" id="semoceo_13_4" value="{{ old('semoceo[13][forma_corregirlo]') }}"> --}}
+            <textarea name="semoceo[13][forma_corregirlo]" id="semoceo[13][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -2231,7 +2363,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[14][estado]" id="semoceo_14_1" value="{{ old('semoceo[14][estado]') }}">
+            <input type="text" class="form-control" name="semoceo[14][estado]" id="semoceo_14_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -2241,12 +2373,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[14][forma_detectarlo]" id="semoceo_14_3" value="{{ old('semoceo[14][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[14][forma_detectarlo]" id="semoceo_14_3" value="{{ old('semoceo[14][forma_detectarlo]') }}"> --}}
+            <textarea name="semoceo[14][forma_detectarlo]" id="semoceo[14][forma_detectarlo]" value="{{ old("semoceo[14][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[14][forma_corregirlo]" id="semoceo_14_4" value="{{ old('semoceo[14][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[14][forma_corregirlo]" id="semoceo_14_4" value="{{ old('semoceo[14][forma_corregirlo]') }}"> --}}
+            <textarea name="semoceo[14][forma_corregirlo]" id="semoceo[14][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -2261,7 +2395,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[15][estado]" id="semoceo_15_1" value="{{ old('semoceo[15][estado]') }}">
+            <input type="text" class="form-control" name="semoceo[15][estado]" id="semoceo_15_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -2271,12 +2405,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[15][forma_detectarlo]" id="semoceo_15_3" value="{{ old('semoceo[15][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[15][forma_detectarlo]" id="semoceo_15_3" value="{{ old('semoceo[15][forma_detectarlo]') }}"> --}}
+            <textarea name="semoceo[15][forma_detectarlo]" id="semoceo[15][forma_detectarlo]" value="{{ old("semoceo[15][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[15][forma_corregirlo]" id="semoceo_15_4" value="{{ old('semoceo[15][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[15][forma_corregirlo]" id="semoceo_15_4" value="{{ old('semoceo[15][forma_corregirlo]') }}"> --}}
+            <textarea name="semoceo[15][forma_corregirlo]" id="semoceo[15][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -2291,7 +2427,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[16][estado]" id="semoceo_16_1" value="{{ old('semoceo[16][estado]') }}">
+            <input type="text" class="form-control" name="semoceo[16][estado]" id="semoceo_16_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -2301,12 +2437,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[16][forma_detectarlo]" id="semoceo_16_3" value="{{ old('semoceo[16][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[16][forma_detectarlo]" id="semoceo_16_3" value="{{ old('semoceo[16][forma_detectarlo]') }}"> --}}
+            <textarea name="semoceo[16][forma_detectarlo]" id="semoceo[16][forma_detectarlo]" value="{{ old("semoceo[16][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[16][forma_corregirlo]" id="semoceo_16_4" value="{{ old('semoceo[16][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[16][forma_corregirlo]" id="semoceo_16_4" value="{{ old('semoceo[16][forma_corregirlo]') }}"> --}}
+            <textarea name="semoceo[16][forma_corregirlo]" id="semoceo[16][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -2321,7 +2459,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[17][estado]" id="semoceo_17_1" value="{{ old('semoceo[17][estado]') }}">
+            <input type="text" class="form-control" name="semoceo[17][estado]" id="semoceo_17_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -2331,12 +2469,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[17][forma_detectarlo]" id="semoceo_17_3" value="{{ old('semoceo[17][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[17][forma_detectarlo]" id="semoceo_17_3" value="{{ old('semoceo[17][forma_detectarlo]') }}"> --}}
+            <textarea name="semoceo[17][forma_detectarlo]" id="semoceo[17][forma_detectarlo]" value="{{ old("semoceo[17][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[17][forma_corregirlo]" id="semoceo_17_4" value="{{ old('semoceo[17][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[17][forma_corregirlo]" id="semoceo_17_4" value="{{ old('semoceo[17][forma_corregirlo]') }}"> --}}
+            <textarea name="semoceo[17][forma_corregirlo]" id="semoceo[17][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -2351,7 +2491,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[18][estado]" id="semoceo_18_1" value="{{ old('semoceo[18][estado]') }}">
+            <input type="text" class="form-control" name="semoceo[18][estado]" id="semoceo_18_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -2361,12 +2501,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[18][forma_detectarlo]" id="semoceo_18_3" value="{{ old('semoceo[18][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[18][forma_detectarlo]" id="semoceo_18_3" value="{{ old('semoceo[18][forma_detectarlo]') }}"> --}}
+            <textarea name="semoceo[18][forma_detectarlo]" id="semoceo[18][forma_detectarlo]" value="{{ old("semoceo[18][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[18][forma_corregirlo]" id="semoceo_18_4" value="{{ old('semoceo[18][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[18][forma_corregirlo]" id="semoceo_18_4" value="{{ old('semoceo[18][forma_corregirlo]') }}"> --}}
+            <textarea name="semoceo[18][forma_corregirlo]" id="semoceo[18][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -2381,7 +2523,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[19][estado]" id="semoceo_19_1" value="{{ old('semoceo[19][estado]') }}">
+            <input type="text" class="form-control" name="semoceo[19][estado]" id="semoceo_19_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -2391,12 +2533,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[19][forma_detectarlo]" id="semoceo_19_3" value="{{ old('semoceo[19][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[19][forma_detectarlo]" id="semoceo_19_3" value="{{ old('semoceo[19][forma_detectarlo]') }}"> --}}
+            <textarea name="semoceo[19][forma_detectarlo]" id="semoceo[19][forma_detectarlo]" value="{{ old("semoceo[19][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="semoceo[19][forma_corregirlo]" id="semoceo_19_4" value="{{ old('semoceo[19][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="semoceo[19][forma_corregirlo]" id="semoceo_19_4" value="{{ old('semoceo[19][forma_corregirlo]') }}"> --}}
+            <textarea name="semoceo[19][forma_corregirlo]" id="semoceo[19][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -2454,7 +2598,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[1][estado]" id="gme_1_1" value="{{ old('ggme[1][estado]') }}">
+            <input type="text" class="form-control" name="gme[1][estado]" id="gme_1_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -2464,12 +2608,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[1][forma_detectarlo]" id="gme_1_3" value="{{ old('ggme[1][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="gme[1][forma_detectarlo]" id="gme_1_3" value="{{ old('ggme[1][forma_detectarlo]') }}"> --}}
+            <textarea name="gme[1][forma_detectarlo]" id="gme[1][forma_detectarlo]" value="{{ old("gme[1][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[1][forma_corregirlo]" id="gme_1_4" value="{{ old('ggme[1][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="gme[1][forma_corregirlo]" id="gme_1_4" value="{{ old('ggme[1][forma_corregirlo]') }}"> --}}
+            <textarea name="gme[1][forma_corregirlo]" id="gme[1][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -2484,7 +2630,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[2][estado]" id="gme_2_1" value="{{ old('ggme[2][estado]') }}">
+            <input type="text" class="form-control" name="gme[2][estado]" id="gme_2_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -2494,12 +2640,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[2][forma_detectarlo]" id="gme_2_3" value="{{ old('ggme[2][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="gme[2][forma_detectarlo]" id="gme_2_3" value="{{ old('ggme[2][forma_detectarlo]') }}"> --}}
+            <textarea name="gme[2][forma_detectarlo]" id="gme[2][forma_detectarlo]" value="{{ old("gme[2][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[2][forma_corregirlo]" id="gme_2_4" value="{{ old('ggme[2][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="gme[2][forma_corregirlo]" id="gme_2_4" value="{{ old('ggme[2][forma_corregirlo]') }}"> --}}
+            <textarea name="gme[2][forma_corregirlo]" id="gme[2][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -2514,7 +2662,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[3][estado]" id="gme_3_1" value="{{ old('ggme[3][estado]') }}">
+            <input type="text" class="form-control" name="gme[3][estado]" id="gme_3_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -2524,12 +2672,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[3][forma_detectarlo]" id="gme_3_3" value="{{ old('ggme[3][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="gme[3][forma_detectarlo]" id="gme_3_3" value="{{ old('ggme[3][forma_detectarlo]') }}"> --}}
+            <textarea name="gme[3][forma_detectarlo]" id="gme[3][forma_detectarlo]" value="{{ old("gme[3][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[3][forma_corregirlo]" id="gme_3_4" value="{{ old('ggme[3][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="gme[3][forma_corregirlo]" id="gme_3_4" value="{{ old('ggme[3][forma_corregirlo]') }}"> --}}
+            <textarea name="gme[3][forma_corregirlo]" id="gme[3][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -2544,7 +2694,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[4][estado]" id="gme_4_1" value="{{ old('ggme[4][estado]') }}">
+            <input type="text" class="form-control" name="gme[4][estado]" id="gme_4_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -2554,12 +2704,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[4][forma_detectarlo]" id="gme_4_3" value="{{ old('ggme[4][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="gme[4][forma_detectarlo]" id="gme_4_3" value="{{ old('ggme[4][forma_detectarlo]') }}"> --}}
+            <textarea name="gme[4][forma_detectarlo]" id="gme[4][forma_detectarlo]" value="{{ old("gme[4][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[4][forma_corregirlo]" id="gme_4_4" value="{{ old('ggme[4][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="gme[4][forma_corregirlo]" id="gme_4_4" value="{{ old('ggme[4][forma_corregirlo]') }}"> --}}
+            <textarea name="gme[4][forma_corregirlo]" id="gme[4][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -2574,7 +2726,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[5][estado]" id="gme_5_1" value="{{ old('ggme[5][estado]') }}">
+            <input type="text" class="form-control" name="gme[5][estado]" id="gme_5_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -2584,12 +2736,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[5][forma_detectarlo]" id="gme_5_3" value="{{ old('ggme[5][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="gme[5][forma_detectarlo]" id="gme_5_3" value="{{ old('ggme[5][forma_detectarlo]') }}"> --}}
+            <textarea name="gme[5][forma_detectarlo]" id="gme[5][forma_detectarlo]" value="{{ old("gme[5][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[5][forma_corregirlo]" id="gme_5_4" value="{{ old('ggme[5][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="gme[5][forma_corregirlo]" id="gme_5_4" value="{{ old('ggme[5][forma_corregirlo]') }}"> --}}
+            <textarea name="gme[5][forma_corregirlo]" id="gme[5][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -2604,7 +2758,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[6][estado]" id="gme_6_1" value="{{ old('ggme[6][estado]') }}">
+            <input type="text" class="form-control" name="gme[6][estado]" id="gme_6_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -2614,12 +2768,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[6][forma_detectarlo]" id="gme_6_3" value="{{ old('ggme[6][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="gme[6][forma_detectarlo]" id="gme_6_3" value="{{ old('ggme[6][forma_detectarlo]') }}"> --}}
+            <textarea name="gme[6][forma_detectarlo]" id="gme[6][forma_detectarlo]" value="{{ old("gme[6][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[6][forma_corregirlo]" id="gme_6_4" value="{{ old('ggme[6][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="gme[6][forma_corregirlo]" id="gme_6_4" value="{{ old('ggme[6][forma_corregirlo]') }}"> --}}
+            <textarea name="gme[6][forma_corregirlo]" id="gme[6][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -2634,7 +2790,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[7][estado]" id="gme_7_1" value="{{ old('ggme[7][estado]') }}">
+            <input type="text" class="form-control" name="gme[7][estado]" id="gme_7_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -2644,12 +2800,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[7][forma_detectarlo]" id="gme_7_3" value="{{ old('ggme[7][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="gme[7][forma_detectarlo]" id="gme_7_3" value="{{ old('ggme[7][forma_detectarlo]') }}"> --}}
+            <textarea name="gme[7][forma_detectarlo]" id="gme[7][forma_detectarlo]" value="{{ old("gme[7][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[7][forma_corregirlo]" id="gme_7_4" value="{{ old('ggme[7][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="gme[7][forma_corregirlo]" id="gme_7_4" value="{{ old('ggme[7][forma_corregirlo]') }}"> --}}
+            <textarea name="gme[7][forma_corregirlo]" id="gme[7][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -2664,7 +2822,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[8][estado]" id="gme_8_1" value="{{ old('ggme[8][estado]') }}">
+            <input type="text" class="form-control" name="gme[8][estado]" id="gme_8_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -2674,12 +2832,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[8][forma_detectarlo]" id="gme_8_3" value="{{ old('ggme[8][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="gme[8][forma_detectarlo]" id="gme_8_3" value="{{ old('ggme[8][forma_detectarlo]') }}"> --}}
+            <textarea name="gme[8][forma_detectarlo]" id="gme[8][forma_detectarlo]" value="{{ old("gme[8][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[8][forma_corregirlo]" id="gme_8_4" value="{{ old('ggme[8][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="gme[8][forma_corregirlo]" id="gme_8_4" value="{{ old('ggme[8][forma_corregirlo]') }}"> --}}
+            <textarea name="gme[8][forma_corregirlo]" id="gme[8][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -2693,7 +2853,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[9][estado]" id="gme_9_1" value="{{ old('ggme[9][estado]') }}">
+            <input type="text" class="form-control" name="gme[9][estado]" id="gme_9_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -2703,12 +2863,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[9][forma_detectarlo]" id="gme_9_3" value="{{ old('ggme[9][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="gme[9][forma_detectarlo]" id="gme_9_3" value="{{ old('ggme[9][forma_detectarlo]') }}"> --}}
+            <textarea name="gme[9][forma_detectarlo]" id="gme[9][forma_detectarlo]" value="{{ old("gme[9][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[9][forma_corregirlo]" id="gme_9_4" value="{{ old('ggme[9][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="gme[9][forma_corregirlo]" id="gme_9_4" value="{{ old('ggme[9][forma_corregirlo]') }}"> --}}
+            <textarea name="gme[9][forma_corregirlo]" id="gme[9][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -2723,7 +2885,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[10][estado]" id="gme_10_1" value="{{ old('gme[10][estado]') }}">
+            <input type="text" class="form-control" name="gme[10][estado]" id="gme_10_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -2733,12 +2895,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[10][forma_detectarlo]" id="gme_10_3" value="{{ old('gme[10][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="gme[10][forma_detectarlo]" id="gme_10_3" value="{{ old('gme[10][forma_detectarlo]') }}"> --}}
+            <textarea name="gme[10][forma_detectarlo]" id="gme[10][forma_detectarlo]" value="{{ old("gme[10][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[10][forma_corregirlo]" id="gme_10_4" value="{{ old('gme[10][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="gme[10][forma_corregirlo]" id="gme_10_4" value="{{ old('gme[10][forma_corregirlo]') }}"> --}}
+            <textarea name="gme[10][forma_corregirlo]" id="gme[10][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -2753,7 +2917,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[11][estado]" id="gme_11_1" value="{{ old('gme[11][estado]') }}">
+            <input type="text" class="form-control" name="gme[11][estado]" id="gme_11_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -2763,12 +2927,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[11][forma_detectarlo]" id="gme_11_3" value="{{ old('gme[11][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="gme[11][forma_detectarlo]" id="gme_11_3" value="{{ old('gme[11][forma_detectarlo]') }}"> --}}
+            <textarea name="gme[11][forma_detectarlo]" id="gme[11][forma_detectarlo]" value="{{ old("gme[11][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[11][forma_corregirlo]" id="gme_11_4" value="{{ old('gme[11][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="gme[11][forma_corregirlo]" id="gme_11_4" value="{{ old('gme[11][forma_corregirlo]') }}"> --}}
+            <textarea name="gme[11][forma_corregirlo]" id="gme[11][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -2783,7 +2949,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[12][estado]" id="gme_12_1" value="{{ old('gme[12][estado]') }}">
+            <input type="text" class="form-control" name="gme[12][estado]" id="gme_12_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -2793,12 +2959,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[12][forma_detectarlo]" id="gme_12_3" value="{{ old('gme[12][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="gme[12][forma_detectarlo]" id="gme_12_3" value="{{ old('gme[12][forma_detectarlo]') }}"> --}}
+            <textarea name="gme[12][forma_detectarlo]" id="gme[12][forma_detectarlo]" value="{{ old("gme[12][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="gme[12][forma_corregirlo]" id="gme_12_4" value="{{ old('gme[12][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="gme[12][forma_corregirlo]" id="gme_12_4" value="{{ old('gme[12][forma_corregirlo]') }}"> --}}
+            <textarea name="gme[12][forma_corregirlo]" id="gme[12][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -2856,7 +3024,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="mc[1][estado]" id="mc_1_1" value="{{ old('mc[1][estado]') }}">
+            <input type="text" class="form-control" name="mc[1][estado]" id="mc_1_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -2866,12 +3034,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="mc[1][forma_detectarlo]" id="mc_1_3" value="{{ old('mc[1][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="mc[1][forma_detectarlo]" id="mc_1_3" value="{{ old('mc[1][forma_detectarlo]') }}"> --}}
+            <textarea name="mc[1][forma_detectarlo]" id="mc[1][forma_detectarlo]" value="{{ old("mc[1][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="mc[1][forma_corregirlo]" id="mc_1_4" value="{{ old('mc[1][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="mc[1][forma_corregirlo]" id="mc_1_4" value="{{ old('mc[1][forma_corregirlo]') }}"> --}}
+            <textarea name="mc[1][forma_corregirlo]" id="mc[1][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -2886,7 +3056,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="mc[2][estado]" id="mc_2_1" value="{{ old('mc[2][estado]') }}">
+            <input type="text" class="form-control" name="mc[2][estado]" id="mc_2_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -2896,12 +3066,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="mc[2][forma_detectarlo]" id="mc_2_3" value="{{ old('mc[2][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="mc[2][forma_detectarlo]" id="mc_2_3" value="{{ old('mc[2][forma_detectarlo]') }}"> --}}
+            <textarea name="mc[2][forma_detectarlo]" id="mc[2][forma_detectarlo]" value="{{ old("mc[2][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="mc[2][forma_corregirlo]" id="mc_2_4" value="{{ old('mc[2][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="mc[2][forma_corregirlo]" id="mc_2_4" value="{{ old('mc[2][forma_corregirlo]') }}"> --}}
+            <textarea name="mc[2][forma_corregirlo]" id="mc[2][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -2916,7 +3088,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="mc[3][estado]" id="mc_3_1" value="{{ old('mc[3][estado]') }}">
+            <input type="text" class="form-control" name="mc[3][estado]" id="mc_3_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -2926,12 +3098,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="mc[3][forma_detectarlo]" id="mc_3_3" value="{{ old('mc[3][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="mc[3][forma_detectarlo]" id="mc_3_3" value="{{ old('mc[3][forma_detectarlo]') }}"> --}}
+            <textarea name="mc[3][forma_detectarlo]" id="mc[3][forma_detectarlo]" value="{{ old("mc[3][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="mc[3][forma_corregirlo]" id="mc_3_4" value="{{ old('mc[3][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="mc[3][forma_corregirlo]" id="mc_3_4" value="{{ old('mc[3][forma_corregirlo]') }}"> --}}
+            <textarea name="mc[3][forma_corregirlo]" id="mc[3][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -2946,7 +3120,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="mc[4][estado]" id="mc_4_1" value="{{ old('mc[4][estado]') }}">
+            <input type="text" class="form-control" name="mc[4][estado]" id="mc_4_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -2956,12 +3130,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="mc[4][forma_detectarlo]" id="mc_4_3" value="{{ old('mc[4][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="mc[4][forma_detectarlo]" id="mc_4_3" value="{{ old('mc[4][forma_detectarlo]') }}"> --}}
+            <textarea name="mc[4][forma_detectarlo]" id="mc[4][forma_detectarlo]" value="{{ old("mc[4][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="mc[4][forma_corregirlo]" id="mc_4_4" value="{{ old('mc[4][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="mc[4][forma_corregirlo]" id="mc_4_4" value="{{ old('mc[4][forma_corregirlo]') }}"> --}}
+            <textarea name="mc[4][forma_corregirlo]" id="mc[4][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -2976,7 +3152,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="mc[5][estado]" id="mc_5_1" value="{{ old('mc[5][estado]') }}">
+            <input type="text" class="form-control" name="mc[5][estado]" id="mc_5_1" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -2986,12 +3162,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="mc[5][forma_detectarlo]" id="mc_5_3" value="{{ old('mc[5][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="mc[5][forma_detectarlo]" id="mc_5_3" value="{{ old('mc[5][forma_detectarlo]') }}"> --}}
+            <textarea name="mc[5][forma_detectarlo]" id="mc[5][forma_detectarlo]" value="{{ old("mc[5][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="mc[5][forma_corregirlo]" id="mc_5_4" value="{{ old('mc[5][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="mc[5][forma_corregirlo]" id="mc_5_4" value="{{ old('mc[5][forma_corregirlo]') }}"> --}}
+            <textarea name="mc[5][forma_corregirlo]" id="mc[5][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -3049,7 +3227,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[1][estado]" id="ta_1_1" value="{{ old('tta[1][estado]') }}">
+            <input type="text" class="form-control" name="ta[1][estado]" id="ta_1_1" value="N/A">
         </div>
     </div>
     <div class="col-md-2">
@@ -3059,12 +3237,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[1][forma_detectarlo]" id="ta_1_3" value="{{ old('tta[1][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="ta[1][forma_detectarlo]" id="ta_1_3" value="{{ old('tta[1][forma_detectarlo]') }}"> --}}
+            <textarea name="ta[1][forma_detectarlo]" id="ta[1][forma_detectarlo]" value="{{ old("ta[1][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[1][forma_corregirlo]" id="ta_1_4" value="{{ old('tta[1][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="ta[1][forma_corregirlo]" id="ta_1_4" value="{{ old('tta[1][forma_corregirlo]') }}"> --}}
+            <textarea name="ta[1][forma_corregirlo]" id="ta[1][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -3079,7 +3259,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[2][estado]" id="ta_2_1" value="{{ old('tta[2][estado]') }}">
+            <input type="text" class="form-control" name="ta[2][estado]" id="ta_2_1" value="N/A">
         </div>
     </div>
     <div class="col-md-2">
@@ -3089,12 +3269,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[2][forma_detectarlo]" id="ta_2_3" value="{{ old('tta[2][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="ta[2][forma_detectarlo]" id="ta_2_3" value="{{ old('tta[2][forma_detectarlo]') }}"> --}}
+            <textarea name="ta[2][forma_detectarlo]" id="ta[2][forma_detectarlo]" value="{{ old("ta[2][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[2][forma_corregirlo]" id="ta_2_4" value="{{ old('tta[2][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="ta[2][forma_corregirlo]" id="ta_2_4" value="{{ old('tta[2][forma_corregirlo]') }}"> --}}
+            <textarea name="ta[2][forma_corregirlo]" id="ta[2][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -3109,7 +3291,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[3][estado]" id="ta_3_1" value="{{ old('tta[3][estado]') }}">
+            <input type="text" class="form-control" name="ta[3][estado]" id="ta_3_1" value="N/A">
         </div>
     </div>
     <div class="col-md-2">
@@ -3119,12 +3301,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[3][forma_detectarlo]" id="ta_3_3" value="{{ old('tta[3][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="ta[3][forma_detectarlo]" id="ta_3_3" value="{{ old('tta[3][forma_detectarlo]') }}"> --}}
+            <textarea name="ta[3][forma_detectarlo]" id="ta[3][forma_detectarlo]" value="{{ old("ta[3][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[3][forma_corregirlo]" id="ta_3_4" value="{{ old('tta[3][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="ta[3][forma_corregirlo]" id="ta_3_4" value="{{ old('tta[3][forma_corregirlo]') }}"> --}}
+            <textarea name="ta[3][forma_corregirlo]" id="ta[3][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -3139,7 +3323,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[4][estado]" id="ta_4_1" value="{{ old('tta[4][estado]') }}">
+            <input type="text" class="form-control" name="ta[4][estado]" id="ta_4_1" value="N/A">
         </div>
     </div>
     <div class="col-md-2">
@@ -3149,12 +3333,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[4][forma_detectarlo]" id="ta_4_3" value="{{ old('tta[4][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="ta[4][forma_detectarlo]" id="ta_4_3" value="{{ old('tta[4][forma_detectarlo]') }}"> --}}
+            <textarea name="ta[4][forma_detectarlo]" id="ta[4][forma_detectarlo]" value="{{ old("ta[4][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[4][forma_corregirlo]" id="ta_4_4" value="{{ old('tta[4][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="ta[4][forma_corregirlo]" id="ta_4_4" value="{{ old('tta[4][forma_corregirlo]') }}"> --}}
+            <textarea name="ta[4][forma_corregirlo]" id="ta[4][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -3169,7 +3355,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[5][estado]" id="ta_5_1" value="{{ old('tta[5][estado]') }}">
+            <input type="text" class="form-control" name="ta[5][estado]" id="ta_5_1" value="N/A">
         </div>
     </div>
     <div class="col-md-2">
@@ -3179,12 +3365,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[5][forma_detectarlo]" id="ta_5_3" value="{{ old('tta[5][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="ta[5][forma_detectarlo]" id="ta_5_3" value="{{ old('tta[5][forma_detectarlo]') }}"> --}}
+            <textarea name="ta[5][forma_detectarlo]" id="ta[5][forma_detectarlo]" value="{{ old("ta[5][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[5][forma_corregirlo]" id="ta_5_4" value="{{ old('tta[5][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="ta[5][forma_corregirlo]" id="ta_5_4" value="{{ old('tta[5][forma_corregirlo]') }}"> --}}
+            <textarea name="ta[5][forma_corregirlo]" id="ta[5][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -3199,7 +3387,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[6][estado]" id="ta_6_1" value="{{ old('tta[6][estado]') }}">
+            <input type="text" class="form-control" name="ta[6][estado]" id="ta_6_1" value="N/A">
         </div>
     </div>
     <div class="col-md-2">
@@ -3209,12 +3397,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[6][forma_detectarlo]" id="ta_6_3" value="{{ old('tta[6][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="ta[6][forma_detectarlo]" id="ta_6_3" value="{{ old('tta[6][forma_detectarlo]') }}"> --}}
+            <textarea name="ta[6][forma_detectarlo]" id="ta[6][forma_detectarlo]" value="{{ old("ta[6][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[6][forma_corregirlo]" id="ta_6_4" value="{{ old('tta[6][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="ta[6][forma_corregirlo]" id="ta_6_4" value="{{ old('tta[6][forma_corregirlo]') }}"> --}}
+            <textarea name="ta[6][forma_corregirlo]" id="ta[6][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -3229,7 +3419,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[7][estado]" id="ta_7_1" value="{{ old('tta[7][estado]') }}">
+            <input type="text" class="form-control" name="ta[7][estado]" id="ta_7_1" value="N/A">
         </div>
     </div>
     <div class="col-md-2">
@@ -3239,12 +3429,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[7][forma_detectarlo]" id="ta_7_3" value="{{ old('tta[7][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="ta[7][forma_detectarlo]" id="ta_7_3" value="{{ old('tta[7][forma_detectarlo]') }}"> --}}
+            <textarea name="ta[7][forma_detectarlo]" id="ta[7][forma_detectarlo]" value="{{ old("ta[7][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[7][forma_corregirlo]" id="ta_7_4" value="{{ old('tta[7][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="ta[7][forma_corregirlo]" id="ta_7_4" value="{{ old('tta[7][forma_corregirlo]') }}"> --}}
+            <textarea name="ta[7][forma_corregirlo]" id="ta[7][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -3259,7 +3451,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[8][estado]" id="ta_8_1" value="{{ old('tta[8][estado]') }}">
+            <input type="text" class="form-control" name="ta[8][estado]" id="ta_8_1" value="N/A">
         </div>
     </div>
     <div class="col-md-2">
@@ -3269,12 +3461,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[8][forma_detectarlo]" id="ta_8_3" value="{{ old('tta[8][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="ta[8][forma_detectarlo]" id="ta_8_3" value="{{ old('tta[8][forma_detectarlo]') }}"> --}}
+            <textarea name="ta[8][forma_detectarlo]" id="ta[8][forma_detectarlo]" value="{{ old("ta[8][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[8][forma_corregirlo]" id="ta_8_4" value="{{ old('tta[8][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="ta[8][forma_corregirlo]" id="ta_8_4" value="{{ old('tta[8][forma_corregirlo]') }}"> --}}
+            <textarea name="ta[8][forma_corregirlo]" id="ta[8][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -3289,7 +3483,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[9][estado]" id="ta_9_1" value="{{ old('tta[9][estado]') }}">
+            <input type="text" class="form-control" name="ta[9][estado]" id="ta_9_1" value="N/A">
         </div>
     </div>
     <div class="col-md-2">
@@ -3299,12 +3493,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[9][forma_detectarlo]" id="ta_9_3" value="{{ old('tta[9][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="ta[9][forma_detectarlo]" id="ta_9_3" value="{{ old('tta[9][forma_detectarlo]') }}"> --}}
+            <textarea name="ta[9][forma_detectarlo]" id="ta[9][forma_detectarlo]" value="{{ old("ta[9][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[9][forma_corregirlo]" id="ta_9_4" value="{{ old('tta[9][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="ta[9][forma_corregirlo]" id="ta_9_4" value="{{ old('tta[9][forma_corregirlo]') }}"> --}}
+            <textarea name="ta[9][forma_corregirlo]" id="ta[9][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -3319,7 +3515,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[10][estado]" id="ta_10_1" value="{{ old('ta[10][estado]') }}">
+            <input type="text" class="form-control" name="ta[10][estado]" id="ta_10_1" value="N/A">
         </div>
     </div>
     <div class="col-md-2">
@@ -3329,12 +3525,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[10][forma_detectarlo]" id="ta_10_3" value="{{ old('ta[10][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="ta[10][forma_detectarlo]" id="ta_10_3" value="{{ old('ta[10][forma_detectarlo]') }}"> --}}
+            <textarea name="ta[10][forma_detectarlo]" id="ta[10][forma_detectarlo]" value="{{ old("ta[10][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[10][forma_corregirlo]" id="ta_10_4" value="{{ old('ta[10][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="ta[10][forma_corregirlo]" id="ta_10_4" value="{{ old('ta[10][forma_corregirlo]') }}"> --}}
+            <textarea name="ta[10][forma_corregirlo]" id="ta[10][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -3349,7 +3547,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[11][estado]" id="ta_11_1" value="{{ old('ta[11][estado]') }}">
+            <input type="text" class="form-control" name="ta[11][estado]" id="ta_11_1" value="N/A">
         </div>
     </div>
     <div class="col-md-2">
@@ -3359,12 +3557,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[11][forma_detectarlo]" id="ta_11_3" value="{{ old('ta[11][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="ta[11][forma_detectarlo]" id="ta_11_3" value="{{ old('ta[11][forma_detectarlo]') }}"> --}}
+            <textarea name="ta[11][forma_detectarlo]" id="ta[11][forma_detectarlo]" value="{{ old("ta[11][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[11][forma_corregirlo]" id="ta_11_4" value="{{ old('ta[11][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="ta[11][forma_corregirlo]" id="ta_11_4" value="{{ old('ta[11][forma_corregirlo]') }}"> --}}
+            <textarea name="ta[11][forma_corregirlo]" id="ta[11][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -3379,7 +3579,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[12][estado]" id="ta_12_1" value="{{ old('ta[12][estado]') }}">
+            <input type="text" class="form-control" name="ta[12][estado]" id="ta_12_1" value="N/A">
         </div>
     </div>
     <div class="col-md-2">
@@ -3389,12 +3589,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[12][forma_detectarlo]" id="ta_12_3" value="{{ old('ta[12][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="ta[12][forma_detectarlo]" id="ta_12_3" value="{{ old('ta[12][forma_detectarlo]') }}"> --}}
+            <textarea name="ta[12][forma_detectarlo]" id="ta[12][forma_detectarlo]" value="{{ old("ta[12][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[12][forma_corregirlo]" id="ta_12_4" value="{{ old('ta[12][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="ta[12][forma_corregirlo]" id="ta_12_4" value="{{ old('ta[12][forma_corregirlo]') }}"> --}}
+            <textarea name="ta[12][forma_corregirlo]" id="ta[12][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>
@@ -3409,7 +3611,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[13][estado]" id="ta_13_1" value="{{ old('ta[13][estado]') }}">
+            <input type="text" class="form-control" name="ta[13][estado]" id="ta_13_1" value="N/A">
         </div>
     </div>
     <div class="col-md-2">
@@ -3419,12 +3621,14 @@
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[13][forma_detectarlo]" id="ta_13_3" value="{{ old('ta[13][forma_detectarlo]') }}">
+            {{-- <input type="text" class="form-control" name="ta[13][forma_detectarlo]" id="ta_13_3" value="{{ old('ta[13][forma_detectarlo]') }}"> --}}
+            <textarea name="ta[13][forma_detectarlo]" id="ta[13][forma_detectarlo]" value="{{ old("ta[13][forma_detectarlo]") }}" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
     <div class="col-md-3">
         <div class="form-group">
-            <input type="text" class="form-control" name="ta[13][forma_corregirlo]" id="ta_13_4" value="{{ old('ta[13][forma_corregirlo]') }}">
+            {{-- <input type="text" class="form-control" name="ta[13][forma_corregirlo]" id="ta_13_4" value="{{ old('ta[13][forma_corregirlo]') }}"> --}}
+            <textarea name="ta[13][forma_corregirlo]" id="ta[13][forma_corregirlo]" class="form-control" cols="15" rows="5"></textarea>
         </div>
     </div>
 </div>

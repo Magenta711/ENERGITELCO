@@ -2,34 +2,35 @@
 
 namespace App\Models\project\msu;
 
-use App\User;
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 use App\Models\file;
 
-class plant_general extends Model
+class general_land extends Model
 {
-    protected $table = 'plant_generals';
+    protected $table = 'general_lands';
 
     protected $fillable = [
         'maintenance_id',
-        'name_base',
-        'location',
-        'leadership',
-        'zone',
-        'modus',
-        'structure',
-        'order_work',
-        'site_owner',
-        'amount_plant',
-        'region',
         'creator_id',
-        'update_id'
+        'update_id',
+        'revisor',
+        'tecnico',
+        'instrumento',
+        'proteccion',
+        'pararrayos',
+        'medicion',
+        'medicion_resistencia',
+        'observaciones',
+        'check',
+        'plan_mejora',
     ];
 
     public function campus()
     {
         return $this->hasOne(msu_campus::class, 'id','maintenance_id');
     }
+
     public function creador()
     {
         return $this->hasOne(User::class, 'id','creator_id');
@@ -39,6 +40,7 @@ class plant_general extends Model
     {
         return $this->hasOne(User::class, 'id','update_id');
     }
+
     public function files()
     {
         return $this->morphMany(file::class, 'fileble');

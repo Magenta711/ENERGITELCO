@@ -18,7 +18,7 @@
     function resizeHeightCell($string) {
         $str_len = strlen($string);
         // $min_height = 12;
-        $size = ceil($str_len/41) * 11;   
+        $size = ceil($str_len/41) * 11;
 
         // echo $string;
         if ($size>0) {
@@ -434,7 +434,27 @@
             <td colspan="3" style="font-size: 8pt; font-family:Arial, Helvetica, sans-serif; border: 1px solid #000000;">{{ $check['ta']["$i"]["forma_corregirlo"] }}</td>
         </tr>
     @endfor
-
+    <tr>
+        <td colspan="5" style="font-size: 8pt; font-family:Arial, Helvetica, sans-serif; border: 1px solid #000000; height: 1px">9- Fusibles o  Minibreakers</td>
+        <td colspan="1" style="font-size: 8pt; font-family:Arial, Helvetica, sans-serif; border: 1px solid #000000;"></td>
+        <td colspan="1" style="font-size: 8pt; font-family:Arial, Helvetica, sans-serif; border: 1px solid #000000;"></td>
+        <td colspan="2" style="font-size: 6pt; font-family:Arial, Helvetica, sans-serif; border: 1px solid #000000;"></td>
+        <td colspan="3" style="font-size: 8pt; font-family:Arial, Helvetica, sans-serif; border: 1px solid #000000;"></td>
+    </tr>
+    <tr>
+        <td colspan="5" style="font-size: 8pt; font-family:Arial, Helvetica, sans-serif; border: 1px solid #000000; height: 1px">10- Selectores</td>
+        <td colspan="1" style="font-size: 8pt; font-family:Arial, Helvetica, sans-serif; border: 1px solid #000000;"></td>
+        <td colspan="1" style="font-size: 8pt; font-family:Arial, Helvetica, sans-serif; border: 1px solid #000000;"></td>
+        <td colspan="2" style="font-size: 6pt; font-family:Arial, Helvetica, sans-serif; border: 1px solid #000000;"></td>
+        <td colspan="3" style="font-size: 8pt; font-family:Arial, Helvetica, sans-serif; border: 1px solid #000000;"></td>
+    </tr>
+    <tr>
+        <td colspan="5" style="font-size: 8pt; font-family:Arial, Helvetica, sans-serif; border: 1px solid #000000; height: 1px">11- Pulsadores</td>
+        <td colspan="1" style="font-size: 8pt; font-family:Arial, Helvetica, sans-serif; border: 1px solid #000000;"></td>
+        <td colspan="1" style="font-size: 8pt; font-family:Arial, Helvetica, sans-serif; border: 1px solid #000000;"></td>
+        <td colspan="2" style="font-size: 6pt; font-family:Arial, Helvetica, sans-serif; border: 1px solid #000000;"></td>
+        <td colspan="3" style="font-size: 8pt; font-family:Arial, Helvetica, sans-serif; border: 1px solid #000000;"></td>
+    </tr>
     <tr>
         <td colspan="12" style="font-size: 8pt; font-family:Arial, Helvetica, sans-serif; text-align: center; border: 3px solid #000000; background-color: #C00000; font-weight: bold">4. RESULTADO DE PRUEBAS</td>
     </tr>
@@ -445,7 +465,7 @@
         <tr>
             <td colspan="5" style="font-size: 8pt; font-family:Arial, Helvetica, sans-serif; border: 1px solid #000000;">{{ $check['prueba_realizada']["$i"]["item"] }}</td>
             <td colspan="1" style="font-size: 8pt; font-family:Arial, Helvetica, sans-serif; border: 1px solid #000000;">{{ $check['prueba_realizada']["$i"]["estado"] }}</td>
-            <td colspan="1" style="font-size: 8pt; font-family:Arial, Helvetica, sans-serif; border: 1px solid #000000;">{{ $check['prueba_realizada']["$i"]["causa_posible"] }}</td> 
+            <td colspan="1" style="font-size: 8pt; font-family:Arial, Helvetica, sans-serif; border: 1px solid #000000;">{{ $check['prueba_realizada']["$i"]["causa_posible"] }}</td>
             <td colspan="2" style="font-size: 6pt; font-family:Arial, Helvetica, sans-serif; border: 1px solid #000000; height: {{ resizeHeightCell($check['prueba_realizada']["$i"]["forma_detectarlo"]).'px' }}">{{ $check['prueba_realizada']["$i"]["forma_detectarlo"] }}</td>
             <td colspan="3" style="font-size: 8pt; font-family:Arial, Helvetica, sans-serif; border: 1px solid #000000;">{{ $check['prueba_realizada']["$i"]["forma_corregirlo"] }}</td>
         </tr>

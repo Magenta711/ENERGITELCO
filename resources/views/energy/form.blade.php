@@ -170,7 +170,7 @@ $(document).ready(function() {
         }
     });
 
-    $( '#VisitCheck' ).on( 'click', function() {
+    $( '#V  isitCheck' ).on( 'click', function() {
         if( $(this).is(':checked') ){
            $('#Visita').val('True')
            $('#VisitTxt').html('Pronto nos contáctaremos contigo para agendar tu cita')

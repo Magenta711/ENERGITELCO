@@ -4,19 +4,16 @@ namespace App\Http\Controllers\projects\maintenances;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\User;
 use App\Models\project\msu\msu_campus;
-use App\Models\project\msu\smu_plants;
-use App\Models\project\msu\plant_general;
-use App\Models\project\msu\plant_check;
-use App\Models\project\msu\plant_resultado;
-use App\Exports\msuPlantExport;
+use App\Models\project\msu\List_Air;
+use App\Models\project\msu\General_Air;
+use App\Exports\msuAirExport;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 use Image;
 
 
-
-class PlantsController extends Controller
+class AirController extends Controller
 {
     public function __construct()
     {
@@ -24,7 +21,6 @@ class PlantsController extends Controller
         $this->middleware('verified');
 
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -32,9 +28,10 @@ class PlantsController extends Controller
      */
     public function index(msu_campus $id)
     {
-        $general=plant_general::get();
+        $general=General_Air::get();
         // return $general;
-        return view('execution_works.maintenance.planta.index', compact('id', 'general'));
+        // return $general->editor->name;
+        return view('execution_works.maintenance.aire.index', compact('id','general'));
     }
 
     /**
@@ -44,7 +41,9 @@ class PlantsController extends Controller
      */
     public function create(msu_campus $id)
     {
-        return view('execution_works.maintenance.planta.create', compact('id'));
+        $list=List_Air::get();
+        // return $list;
+        return view('execution_works.maintenance.aire.create', compact('id','list'));
     }
 
     /**
@@ -56,41 +55,39 @@ class PlantsController extends Controller
     public function store(Request $request, msu_campus $id)
     {
         $request->validate([
-            'name_base' => ['required'],
-            'location' => ['required'],
+            'revisor' => ['required'],
+            'tecnico' => ['required'],
         ]);
+
         $request['maintenance_id'] = $id->id;
         $request['creator_id'] = auth()->id();
         $request['update_id'] = auth()->id();
-        $general = plant_general::create($request->all());
-        $request['plant_id'] = $general->id;
-        $plants= smu_plants::create($request->all());
-        $resultados=plant_resultado::create($request->all());
-        $slpe_str = json_encode($request->slpe);
-        $scpe_str = json_encode($request->scpe);
-        $sa_str = json_encode($request->sa);
-        $srpe_str = json_encode($request->srpe);
-        $seape_str = json_encode($request->seape);
-        $semoceo_str = json_encode($request->semoceo);
-        $gme_str = json_encode($request->gme);
-        $mc_str = json_encode($request->mc);
-        $ta_str = json_encode($request->ta);
-        $prueba_realizada_str = json_encode($request->prueba_realizada);
-        $check=plant_check::create([
+
+        $aa = json_encode($request->aa);
+        $temp = json_encode($request->temp);
+        $compresor = json_encode($request->compresor);
+        $unidad = json_encode($request->unidad);
+        $manejadora = json_encode($request->manejadora);
+        $actions = json_encode($request->actions);
+        $check = json_encode($request->check);
+        // return $actions;
+        $general = General_Air::create([
             'maintenance_id'=>$request->maintenance_id,
-            'plant_id'=>$request->plant_id,
-            'slpe'=>$slpe_str,
-            'scpe'=>$scpe_str,
-            'sa'=>$sa_str,
-            'srpe'=>$srpe_str,
-            'seape'=>$seape_str,
-            'semoceo'=>$semoceo_str,
-            'gme'=>$gme_str,
-            'mc'=>$mc_str,
-            'ta'=>$ta_str,
-            'prueba_realizada'=>$prueba_realizada_str,
+            'revisor'=>$request->revisor,
+            'tecnico'=>$request->tecnico,
+            'dates_a_a'=>$aa,
+            'temp'=>$temp,
+            'compresor'=>$compresor,
+            'unidad'=>$unidad,
+            'manejadora'=>$manejadora,
+            'check'=>$check,
+            'actions'=>$actions,
+            'plan_mejora'=>$request->plan_mejora,
+            'creator_id'=>$request->creator_id,
+            'update_id'=>$request->update_id,
         ]);
-        return redirect()->route('plant_index',$request->maintenance_id)->with('success','Se ha creado el mantenimiento correctamente');
+
+        return redirect()->route('air_index',$request->maintenance_id)->with('success','Se ha creado el mantenimiento correctamente');
     }
 
     /**
@@ -104,38 +101,30 @@ class PlantsController extends Controller
         //
     }
 
-    public function photos($id, plant_general $item)
-    {
-        return view('execution_works.maintenance.planta.photos', compact('id','item'));
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(plant_general $id)
+    public function edit(General_Air $id)
     {
-        // return $id->id;
-        $check_str=plant_check::where('plant_id',$id->id)->get()->first();
-        $plant=smu_plants::where('plant_id',$id->id)->get()->first();
-        $resultado=plant_resultado::where('plant_id', $id->id)->get()->first();
+        // return $id->check;
+        $list=List_Air::get();
+        $dates['revisor']=$id->revisor;
+        $dates['tecnico']=$id->tecnico;
+        $dates['dates_a_a']=json_decode($id->dates_a_a, true);
+        $dates['temp']=json_decode($id->temp, true);
+        $dates['compresor']=json_decode($id->compresor, true);
+        $dates['unidad']=json_decode($id->unidad, true);
+        $dates['actions']=json_decode($id->actions, true);
+        $dates['manejadora']=json_decode($id->manejadora, true);
+        $dates['plan_mejora']=$id->plan_mejora;
+        $dates['check']=json_decode($id->check, true);
 
-        $check['slpe']=json_decode($check_str->slpe, true);
-        $check['scpe']=json_decode($check_str->scpe, true);
-        $check['sa']=json_decode($check_str->sa, true);
-        $check['srpe']=json_decode($check_str->srpe, true);
-        $check['seape']=json_decode($check_str->seape, true);
-        $check['semoceo']=json_decode($check_str->semoceo, true);
-        $check['gme']=json_decode($check_str->gme, true);
-        $check['mc']=json_decode($check_str->mc, true);
-        $check['ta']=json_decode($check_str->ta, true);
-        $check['prueba_realizada']=json_decode($check_str->prueba_realizada, true);
+        // return $dates['check'];
 
-        // return count($check['slpe']);
-
-        return view('execution_works.maintenance.planta.edit', compact('id', 'check', 'plant', 'resultado'));
+        return view('execution_works.maintenance.aire.edit', compact('id','dates','list'));
     }
 
     /**
@@ -145,63 +134,62 @@ class PlantsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,plant_general $id)
+    public function update(Request $request, General_Air $id)
     {
-        $request['update_id'] = auth()->id();
-        $id->update($request->all());
-        $request['maintenance_id'] = $id->maintenance_id;
-        $request['plant_id'] = $id->id;
-        smu_plants::where('plant_id',$id->id)->delete();
-        $plants= smu_plants::create($request->all());
-        plant_resultado::where('plant_id',$id->id)->delete();
-        $resultados=plant_resultado::create($request->all());
-        $slpe_str = json_encode($request->slpe);
-        $scpe_str = json_encode($request->scpe);
-        $sa_str = json_encode($request->sa);
-        $srpe_str = json_encode($request->srpe);
-        $seape_str = json_encode($request->seape);
-        $semoceo_str = json_encode($request->semoceo);
-        $gme_str = json_encode($request->gme);
-        $mc_str = json_encode($request->mc);
-        $ta_str = json_encode($request->ta);
-        $prueba_realizada_str = json_encode($request->prueba_realizada);
-        plant_check::where('plant_id',$id->id)->delete();
-        $check=plant_check::create([
-            'maintenance_id'=>$request->maintenance_id,
-            'plant_id'=>$request->plant_id,
-            'slpe'=>$slpe_str,
-            'scpe'=>$scpe_str,
-            'sa'=>$sa_str,
-            'srpe'=>$srpe_str,
-            'seape'=>$seape_str,
-            'semoceo'=>$semoceo_str,
-            'gme'=>$gme_str,
-            'mc'=>$mc_str,
-            'ta'=>$ta_str,
-            'prueba_realizada'=>$prueba_realizada_str,
+        $request->validate([
+            'revisor' => ['required'],
+            'tecnico' => ['required'],
         ]);
 
-        return redirect()->route('plant_index',$request->maintenance_id)->with('success','Se ha actualizado el mantenimiento correctamente');
+        $request['maintenance_id'] = $id->campus->id;
+        $request['update_id'] = auth()->id();
+
+        $dates_a_a = json_encode($request->aa);
+        $temp = json_encode($request->temp);
+        $compresor = json_encode($request->compresor);
+        $unidad = json_encode($request->unidad);
+        $manejadora = json_encode($request->manejadora);
+        $actions = json_encode($request->actions);
+        $check = json_encode($request->check);
+        if($id){
+            $id->update([
+                'maintenance_id'=>$request->maintenance_id,
+                'revisor'=>$request->revisor,
+                'tecnico'=>$request->tecnico,
+                'dates_a_a'=>$dates_a_a,
+                'temp'=>$temp,
+                'compresor'=>$compresor,
+                'unidad'=>$unidad,
+                'manejadora'=>$manejadora,
+                'check'=>$check,
+                'actions'=>$actions,
+                'plan_mejora'=>$request->plan_mejora,
+                'update_id'=>$request->update_id
+            ]);
+        }
+        return redirect()->route('air_index',$request->maintenance_id)->with('success','Se ha actualizado el mantenimiento correctamente');
     }
 
-    public function export(plant_general $id)
+    public function export(General_Air $id)
     {
+        $dates['revisor']=$id->revisor;
+        $dates['tecnico']=$id->tecnico;
+        $dates['dates_a_a']=json_decode($id->dates_a_a, true);
+        $dates['temp']=json_decode($id->temp, true);
+        $dates['compresor']=json_decode($id->compresor, true);
+        $dates['unidad']=json_decode($id->unidad, true);
+        $dates['actions']=json_decode($id->actions, true);
+        $dates['manejadora']=json_decode($id->manejadora, true);
+        $dates['plan_mejora']=$id->plan_mejora;
+        $dates['check']=json_decode($id->check, true);
+        $dates['campus']=$id->campus->site_name;
 
-
-        $check_str=plant_check::where('plant_id',$id->id)->get()->first();
-        $plant=smu_plants::where('plant_id',$id->id)->get()->first();
-        $resultado=plant_resultado::where('plant_id', $id->id)->get()->first();
-
-        $check['slpe']=json_decode($check_str->slpe, true);
-        $check['scpe']=json_decode($check_str->scpe, true);
-        $check['sa']=json_decode($check_str->sa, true);
-        $check['srpe']=json_decode($check_str->srpe, true);
-        $check['seape']=json_decode($check_str->seape, true);
-        $check['semoceo']=json_decode($check_str->semoceo, true);
-        $check['gme']=json_decode($check_str->gme, true);
-        $check['mc']=json_decode($check_str->mc, true);
-        $check['ta']=json_decode($check_str->ta, true);
-        $check['prueba_realizada']=json_decode($check_str->prueba_realizada, true);
+        $files['logo_claro']['name'] = 'Logo_Claro';
+        $files['logo_claro']['description'] = 'Logo de Claro';
+        $files['logo_claro']['path'] = public_path('/img/claro.png');
+        $files['logo_claro']['height'] = 80;
+        $files['logo_claro']['coordinates'] = 'O3';
+        $files['logo_claro']['place'] = 3;
 
         if ($id->files)
         {
@@ -220,33 +208,8 @@ class PlantsController extends Controller
             }
         }
 
-        $files['logo_claro']['name'] = 'Logo_Claro';
-        $files['logo_claro']['description'] = 'Logo de Claro';
-        $files['logo_claro']['path'] = public_path('/img/claro.png');
-        $files['logo_claro']['height'] = 80;
-        $files['logo_claro']['coordinates'] = 'L1';
-        $files['logo_claro']['place'] = 3;
-
-        $string=$check['slpe'][5]["forma_detectarlo"];
-
-        $str_len = strlen($string);
-
-        return (new msuPlantExport($id,$check,$plant,$resultado ,$files))->download('PE ATS VERSION 2.xlsx');
-
+        return (new msuAirExport($dates,$files))->download('AA-1A EM2.xlsx');
     }
-
-    function convertStringToArray($str) {
-        // Check if the input is a single word (no spaces)
-        if (strpos($str, ' ') !== false) {
-          return null; // Handle multi-word input (return error or default)
-        }
-
-        // Split the string into an array of characters
-        $charactersArray = str_split($str);
-
-        // Return the array of characters
-        return $charactersArray;
-      }
 
     /**
      * Remove the specified resource from storage.
@@ -259,11 +222,65 @@ class PlantsController extends Controller
         //
     }
 
+    public function photos($id, General_Air $item)
+    {
+        Carbon::setLocale('es');
+
+        $fecha=now()->format(__('j F Y H:i:s'));
+        $fechaCarbon = Carbon::parse($fecha);
+
+            $palabras = explode(" ", $fecha);
+
+            switch ($palabras[1]) {
+                case "January":
+                $palabras[1] = "Enero";
+                break;
+                case "February":
+                $palabras[1] = "Febrero";
+                break;
+                case "March":
+                $palabras[1] = "Marzo";
+                break;
+                case "April":
+                $palabras[1] = "Abril";
+                break;
+                case "May":
+                $palabras[1] = "Mayo";
+                break;
+                case "June":
+                $palabras[1] = "Junio";
+                break;
+                case "July":
+                $palabras[1] = "Julio";
+                break;
+                case "August":
+                $palabras[1] = "Agosto";
+                break;
+                case "September":
+                $palabras[1] = "Septiembre";
+                break;
+                case "October":
+                $palabras[1] = "Octubre";
+                break;
+                case "November":
+                $palabras[1] = "Noviembre";
+                break;
+                case "December":
+                $palabras[1] = "Diciembre";
+                break;
+                default:
+                echo "Mes no encontrado: " . $palabras[1];
+            }
+        $frase_modificada = implode(" ", $palabras);
+
+        return view('execution_works.maintenance.aire.photos', compact('id', 'item'));
+    }
+
     public function upload(Request $request)
     {
         if ($request->hasFile('file')){
-            $plant = plant_general::find($request->id);
-            $file_exists = $plant->files->where('description',$request->name_d)->first();
+            $air = General_Air::find($request->id);
+            $file_exists = $air->files->where('description',$request->name_d)->first();
 
             if ($file_exists){
                 Storage::delete('public/upload/mintic/'.$file_exists->name);
@@ -272,11 +289,18 @@ class PlantsController extends Controller
 
             $name = time().str_random().'.'.$file->getClientOriginalExtension();
             if (!(isset($request->write) && $request->write == 'No' ) && ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg')) {
-
-                $lat=$plant->campus->lat;
-                $long=$plant->campus->long;
+                $num_rand = rand(1,2);
+                $num_rand2 = rand(1,10);
+                $num_rand3 = rand(1,10);
+                $lat=$air->campus->lat;
+                $long=$air->campus->long;
+                $rand2 = (0.000001*$num_rand2);
+                $rand3 = (0.000001*$num_rand3);
 
                 $text2 = isset($request->date) && $request->date ? Carbon::create($request->date)->format('j F Y H:i:s') : now()->format('j F Y H:i:s');
+                $palabras = explode(" ", $text2);
+
+                $frase_modificada = implode(" ", $palabras);
 
 
                 $text3 = $lat.'N '.$long . 'W';
@@ -309,7 +333,7 @@ class PlantsController extends Controller
                         $font->angle(0);
                     });
                     $height = $height - $request->size_letter - 2;
-                    $image->text($plant->campus->dep.'-'.$plant->campus->mun, $image->width() - 5, $image->height() - $height, function($font) use($request) {
+                    $image->text($air->campus->dep.'-'.$air->campus->mun, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size($request->size_letter);
                         $font->color($request->color);
@@ -318,7 +342,7 @@ class PlantsController extends Controller
                         $font->angle(0);
                     });
                     $height = $height - $request->size_letter - 2;
-                    $image->text($plant->campus->site_name, $image->width() - 5, $image->height() - $height, function($font) use($request) {
+                    $image->text($air->campus->site_name, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size($request->size_letter);
                         $font->color($request->color);
@@ -327,7 +351,7 @@ class PlantsController extends Controller
                         $font->angle(0);
                     });
                     $height = $height - $request->size_letter - 2;
-                    $image->text($plant->campus->dep, $image->width() - 5, $image->height() - $height, function($font) use($request) {
+                    $image->text($air->campus->dep, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size($request->size_letter);
                         $font->color($request->color);
@@ -336,7 +360,7 @@ class PlantsController extends Controller
                         $font->angle(0);
                     });
                     $height = $height - $request->size_letter - 2;
-                    $image->text('#BTS'.$plant->campus->mun, $image->width() - 5, $image->height() - $height, function($font) use($request) {
+                    $image->text('#BTS'.$air->campus->mun, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size($request->size_letter);
                         $font->color($request->color);
@@ -367,7 +391,7 @@ class PlantsController extends Controller
                         $font->angle(0);
                     });
                     $height += (5+$const);
-                    $image->text($plant->campus->population, $image->width() - 5, $image->height() - $height, function($font) use($request,$const) {
+                    $image->text($air->campus->population, $image->width() - 5, $image->height() - $height, function($font) use($request,$const) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size($const);
                         $font->color($request->color);
@@ -376,7 +400,7 @@ class PlantsController extends Controller
                         $font->angle(0);
                     });
                     $height += (5+$const);
-                    $image->text($plant->campus->site_name, $image->width() - 5, $image->height() - $height, function($font) use($request,$const) {
+                    $image->text($air->campus->site_name, $image->width() - 5, $image->height() - $height, function($font) use($request,$const) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size($const);
                         $font->color($request->color);
@@ -408,7 +432,7 @@ class PlantsController extends Controller
                     'type' => $file->getClientOriginalExtension(),
                 ]);
             }
-            $plant->files()->create([
+            $air->files()->create([
                 'name' => $name,
                 'description' => $request->name_d,
                 'commentary' => $request->commentary,
@@ -427,65 +451,5 @@ class PlantsController extends Controller
         }else {
             return response()->json(['success'=>'No se examino un archivo']);
         }
-    }
-
-    public function coords($lat, $long){
-                $num_rand = rand(1,2);
-                $num_rand2 = rand(1,10);
-                $num_rand3 = rand(1,10);
-
-                return $lat;
-                if($num_rand==1){
-                    $latitud=$lat-(0.000001*$num_rand2);
-                    $longitud=$long+(0.000001*$num_rand3);;
-                }else if($num_rand==2){
-                    $latitud=$lat+(0.000001*$num_rand2);
-                    $longitud=$long-(0.000001*$num_rand3);
-                }
-                $coordenadas = array(
-                    "lat" => $latitud,
-                    "long" => $long
-                  );
-
-
-                $lat=$id->campus->lat;
-                $long=$id->campus->long;
-                $num_rand = rand(1,2);
-                $num_rand2 = rand(1,10);
-                $num_rand3 = rand(1,10);
-                $string_lat = strval($lat);
-                $string_long = strval($long);
-                $string[1]=str_split($string_lat);
-                $string[2]=str_split($string_long);
-                // return $string[2];
-                for($i=1; $i<=2; $i++){
-                    for($j=0; $j < count($string[$i]); $j++){
-                        // return count($string[$i]);
-                        if($string[$i][$j]==',' || $string[$i][$j]=='.'){
-                            $dec[$i]=count($string[$i])-$j-1;
-                        };
-                    };
-                };
-                // return $dec[2];
-
-                    if($num_rand==1){
-                            $latitud=$lat-(0.000001*$num_rand2);
-                            $longitud=$long+(0.000001*$num_rand3);;
-                    }else if($num_rand==2){
-                            $latitud=$lat+(0.000001*$num_rand2);
-                            $longitud=$long-(0.000001*$num_rand3);
-                    }
-                    $coordenadas = array(
-                        "lat" => $latitud,
-                        "long" => $long
-                    );
-                // return $coodernadas;
-
-                $string_lat= strval($lat);
-
-                // return str_split($string_lat);
-                $coordenadas=$this->coords($lat, $long);
-
-        return $coodernadas;
     }
 }

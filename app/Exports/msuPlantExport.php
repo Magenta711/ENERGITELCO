@@ -13,7 +13,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Concerns\Exportable;
 
 
-class msuPlantExport implements FromView, WithTitle, ShouldAutoSize, WithStyles
+class msuPlantExport implements FromView, WithTitle, WithDrawings, ShouldAutoSize, WithStyles
 {
     protected $id;
     protected $check;
@@ -22,7 +22,7 @@ class msuPlantExport implements FromView, WithTitle, ShouldAutoSize, WithStyles
 
     protected $files;
 
-        use Exportable;
+    use Exportable;
 
 
     public function __construct($id,$check,$plant, $resultado,$files)
@@ -38,7 +38,7 @@ class msuPlantExport implements FromView, WithTitle, ShouldAutoSize, WithStyles
     {
         $array = array();
         foreach ($this->files as $key => $value) {
-            if ($value['place'] == 3 || $value['place'] == 4) {
+            if ($value['place'] == 1 || $value['place'] == 4) {
                 $array[$key] = new Drawing();
                 $array[$key]->setName($value['name']);
                 $array[$key]->setDescription($value['description']);
@@ -52,23 +52,6 @@ class msuPlantExport implements FromView, WithTitle, ShouldAutoSize, WithStyles
 
     public function styles(Worksheet $sheet)
     {
-        // $j = 1;
-        // $accEquip = 1;
-        // foreach ($this->equipments as $equipment_item) {
-        //     if ( $equipment_item->type == 'retired' ){
-        //         $j++;
-        //     }
-        // }
-        // foreach ($this->equipments as $equipment_item) {
-        //     if ( $equipment_item->is_informe ){
-        //         $accEquip++;
-        //     }
-        // }
-
-        // if ($j = 1) {
-        //     $j = 8;
-        // }
-
         $sheet->getStyle('F2' . $sheet->getHighestRow())->getAlignment()->setWrapText(true);
         $sheet->getStyle('F15' . $sheet->getHighestRow())->getAlignment()->setWrapText(true);
 
@@ -103,8 +86,8 @@ class msuPlantExport implements FromView, WithTitle, ShouldAutoSize, WithStyles
             39    => ['font' => ['bold' => true,]],
             40    => ['font' => ['bold' => true,]],
             41    => ['font' => ['bold' => true,]],
-            160    => ['font' => ['bold' => true,]],
-            161    => ['font' => ['bold' => true,]],
+            163    => ['font' => ['bold' => true,]],
+            164    => ['font' => ['bold' => true,]],
         ];
     }
 

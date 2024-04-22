@@ -1,26 +1,26 @@
-
 @extends('lte.layouts')
 @section('content')
 <section class="content-header">
     <h1>
-        Plantas Eléctricas
+        Aires Acondicionados
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
         <li><a href="#"> Ejecución de obras</a></li>
         <li class="active">Proyectos</li>
         <li class="active">SMU</li>
-        <li class="active">Plantas Eléctricas</li>
+        <li class="active">Aires Acondicionados</li>
 
     </ol>
 </section>
 <SECTION class="content">
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title">Lista de mantenimientos de Planta Eléctrica</h3>
+            <h3 class="box-title">Lista de mantenimientos de Aires acondicionados</h3>
             <div class="box-tools">
-                    <a href="{{route('plant_create', $id->id)}}" class="btn btn-sm btn-success btn-send">Crear</a>
+                    <a href="{{route('air_create', $id->id)}}" class="btn btn-sm btn-success btn-send">Crear</a>
                     <a href="{{ route('SMU', $id->maintenance_id) }}" class="btn btn-sm btn-primary">Volver</a>
+
             </div>
         </div>
         <div class="box-body">
@@ -42,15 +42,15 @@
                             @foreach ($general as $item)
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
-                                    <td class="text-center">{{ $item->name_base }}</td>
-                                    <td class="text-center">{{ $item->modus }}</td>
+                                    <td class="text-center">{{ $item->campus->site_name }}</td>
+                                    <td class="text-center">{{ $item->campus->modus }}</td>
                                     <td class="text-center">{{ $item->creador->name }}</td>
                                     <td class="text-center">{{ $item->editor->name ? $item->editor->name : 'Sin editar'  }}</td>
                                     <td class="text-center">{{ $item->updated_at }}</td>
                                     <td class="text-center">
-                                        <a href="{{ route('plant_edit', $item->id) }}" class="btn btn-warning">Editar</a>
-                                        <a href="{{ route('plant_photos',[$item->campus->id,$item->id]) }}" class="btn btn-primary">Fotos</a>
-                                        <a href="{{ route('plant_export', $item->id) }}" class="btn btn-danger">Exportar</a>
+                                        <a href="{{ route('air_edit',$item->id) }}" class="btn btn-warning">Editar</a>
+                                        <a href="{{ route('air_photos',[$item->campus->id, $item->id]) }}" class="btn btn-primary">Fotos</a>
+                                        <a href="{{ route('air_export', $item->id) }}" class="btn btn-danger">Exportar</a>
                                     </td>
                                 </tr>
                             @endforeach

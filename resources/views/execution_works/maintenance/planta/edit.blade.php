@@ -141,7 +141,7 @@
                             </h4>
                         </div>
                         <div id="collapseFour" class="panel-collapse collapse">
-                            <div class="box-body">                                
+                            <div class="box-body">
                                 <HR>
                                     <h4><b>PRUEBA REALIZADA</b></h4>
                                 </HR>
@@ -213,7 +213,7 @@
                                                 </div>
                                             </div>
                                         </div>
-@endfor
+                                @endfor
                             </div>
                         </div>
                     </div>
@@ -317,7 +317,7 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                            </div>
+                                </div>
                             </div>
                         </div>
                     </div>

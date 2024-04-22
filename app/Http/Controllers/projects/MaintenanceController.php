@@ -68,7 +68,6 @@ class MaintenanceController extends Controller
     {
         $request->validate([
             'receives_id' => ['required'],
-            // 'name' => ['required'],
         ]);
         $request['project_id'] = $id;
         $request['status'] = 1;
@@ -195,6 +194,7 @@ class MaintenanceController extends Controller
 
     public function photos($id,mintic_maintenance $item)
     {
+        // return $item;
         return view('projects.mintic.maintenance.photos',compact('id','item'));
     }
 
@@ -205,15 +205,6 @@ class MaintenanceController extends Controller
         $equipments = EquimentDetail::get();
         $activities = MinticMaintenanceActivity::get();
 
-        // return $activities;
-
-        // $files = array();
-        // $files['logo_mintic']['name'] = 'Logo_mintic';
-        // $files['logo_mintic']['description'] = 'Logo de MinTIC';
-        // $files['logo_mintic']['path'] = public_path('/img/mintic.png');
-        // $files['logo_mintic']['height'] = 90;
-        // $files['logo_mintic']['coordinates'] = 'B3';
-        // $files['logo_mintic']['place'] = 3;
 
         $files['logo_claro']['name'] = 'Logo_Claro';
         $files['logo_claro']['description'] = 'Logo de Claro';

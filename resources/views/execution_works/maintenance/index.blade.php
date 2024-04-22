@@ -3,7 +3,7 @@
 @section('content')
 <section class="content-header">
     <h1>
-        AIRES ACONDICIONADOS
+        MANTENIMIENTO SMU
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
@@ -16,13 +16,13 @@
         <div class="box-header">
             <h3 class="box-title">Lista de mantenimientos</h3>
             <div class="box-tools">
-                    <a href="{{route('smu_create')}}" class="btn btn-sm btn-primary btn-send">Crear</a>
+                    <a href="{{route('smu_create')}}" class="btn btn-sm btn-success btn-send">Crear</a>
             </div>
         </div>
         <div class="box-body">
             <div class="box-body">
                 <div class="table-responsive table-hover">
-                    <table id="table_minitc" class="table table-striped table-bordered" data-page-length='15'>
+                    <table id="table_index" class="table table-striped table-bordered" data-page-length='15'>
                         <thead>
                             <tr>
                                 <th class="text-center">#</th>
@@ -43,9 +43,9 @@
                                     <td class="text-center">{{ $item->updated_at->format('Y-m-d') }}</td>
                                     <td>
                                         <a href="{{ route('plant_index', $item->id) }}" class="btn btn-success">Planta Eléctrica</a>
-                                        <a href="" class="btn btn-primary">Aires Acondicionados</a>
+                                        <a href="{{ route('air_index', $item->id) }}" class="btn btn-primary">Aires Acondicionados</a>
                                         <a href="" class="btn btn-info">Media, Baja Tensión</a>
-                                        <a href="" class="btn btn-warning">Puesta a Tierra</a>
+                                        <a href="{{ route('land_index', $item->id) }}" class="btn btn-warning">Puesta a Tierra</a>
                                         <a href="" class="btn btn-danger">Eliminar</a>
                                     </td>
                                 @endforeach

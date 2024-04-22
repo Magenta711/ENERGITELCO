@@ -49,7 +49,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="prueba_realizada[1][estado]" id="prueba_realizada[1][]" value="{{ old('prueba_realizada[1][estado]') }}">
+            <input type="text" class="form-control" name="prueba_realizada[1][estado]" id="prueba_realizada[1][]" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -79,7 +79,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="prueba_realizada[2][estado]" id="prueba_realizada[2][]" value="{{ old('prueba_realizada[2][estado]') }}">
+            <input type="text" class="form-control" name="prueba_realizada[2][estado]" id="prueba_realizada[2][]" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -109,7 +109,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="prueba_realizada[3][estado]" id="prueba_realizada[3][]" value="{{ old('prueba_realizada[3][estado]') }}">
+            <input type="text" class="form-control" name="prueba_realizada[3][estado]" id="prueba_realizada[3][]" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
@@ -139,7 +139,7 @@
     </div>
     <div class="col-md-2">
         <div class="form-group">
-            <input type="text" class="form-control" name="prueba_realizada[4][estado]" id="prueba_realizada[4][]" value="{{ old('prueba_realizada[4][estado]') }}">
+            <input type="text" class="form-control" name="prueba_realizada[4][estado]" id="prueba_realizada[4][]" value="BUENO">
         </div>
     </div>
     <div class="col-md-2">
