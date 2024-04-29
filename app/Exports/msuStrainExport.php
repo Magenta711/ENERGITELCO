@@ -13,24 +13,18 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Concerns\Exportable;
 
 
-class msuPlantExport implements FromView, WithTitle, WithDrawings, ShouldAutoSize, WithStyles
+class msuStrainExport implements FromView, WithTitle, WithDrawings, ShouldAutoSize, WithStyles
 {
     protected $id;
-    protected $check;
-    protected $plant;
-    protected $resultado;
-
+    protected $dates;
     protected $files;
-
     use Exportable;
 
 
-    public function __construct($id,$check,$plant, $resultado,$files)
+    public function __construct($id, $dates, $files)
     {
         $this->id = $id;
-        $this->check = $check;
-        $this->plant = $plant;
-        $this->resultado = $resultado;
+        $this->dates = $dates;
         $this->files = $files;
     }
 
@@ -52,9 +46,6 @@ class msuPlantExport implements FromView, WithTitle, WithDrawings, ShouldAutoSiz
 
     public function styles(Worksheet $sheet)
     {
-        $sheet->getStyle('F2' . $sheet->getHighestRow())->getAlignment()->setWrapText(true);
-        $sheet->getStyle('F15' . $sheet->getHighestRow())->getAlignment()->setWrapText(true);
-
         return [
             'A' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
             'B' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
@@ -68,42 +59,31 @@ class msuPlantExport implements FromView, WithTitle, WithDrawings, ShouldAutoSiz
             'J' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
             'K' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
             'L' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
+            'L2' => ['alignment' => ['horizontal' => 'center']],
 
-            1    => ['font' => ['bold' => true,]],
-            2    => ['font' => ['bold' => true,]],
-            3    => ['font' => ['bold' => true,]],
-            4    => ['font' => ['bold' => true,]],
-            5    => ['font' => ['bold' => true,]],
-            6    => ['font' => ['bold' => true,]],
-            7    => ['font' => ['bold' => true,]],
-            8    => ['font' => ['bold' => true,]],
-            9    => ['font' => ['bold' => true,]],
-            10    => ['font' => ['bold' => true,]],
-            12    => ['font' => ['bold' => true,]],
-            13    => ['font' => ['bold' => true,]],
-            26    => ['font' => ['bold' => true,]],
-            38    => ['height' => ['auto']],
-            39    => ['font' => ['bold' => true,]],
-            40    => ['font' => ['bold' => true,]],
-            41    => ['font' => ['bold' => true,]],
-            163    => ['font' => ['bold' => true,]],
-            164    => ['font' => ['bold' => true,]],
+            1    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'center']],
+            2    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'center']],
+            3    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'center']],
+            4    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'center']],
+            10    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'center']],
+            15    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'center']],
+            25    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'center']],
+            190    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'top']],
+            166    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'top']],
         ];
     }
 
     public function view(): View
     {
-        return view('execution_works.maintenance.planta.export',[
+        return view('execution_works.maintenance.tension.export',[
             'id' => $this->id,
-            'check' => $this->check,
-            'plant' => $this->plant,
-            'resultado' => $this->resultado,
+            'dates' => $this->dates,
             'files' => $this->files,
         ]);
     }
 
     public function title(): string
     {
-        return 'ACTA DE PLANTA';
+        return 'FORMATO EM5';
     }
 }

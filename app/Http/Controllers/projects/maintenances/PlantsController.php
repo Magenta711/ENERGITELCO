@@ -13,6 +13,7 @@ use App\Models\project\msu\plant_resultado;
 use App\Exports\msuPlantExport;
 use Illuminate\Support\Facades\Storage;
 use Image;
+use Carbon\Carbon;
 
 
 
@@ -102,11 +103,6 @@ class PlantsController extends Controller
     public function show($id)
     {
         //
-    }
-
-    public function photos($id, plant_general $item)
-    {
-        return view('execution_works.maintenance.planta.photos', compact('id','item'));
     }
 
     /**
@@ -223,7 +219,7 @@ class PlantsController extends Controller
         $files['logo_claro']['name'] = 'Logo_Claro';
         $files['logo_claro']['description'] = 'Logo de Claro';
         $files['logo_claro']['path'] = public_path('/img/claro.png');
-        $files['logo_claro']['height'] = 80;
+        $files['logo_claro']['height'] = 60;
         $files['logo_claro']['coordinates'] = 'L1';
         $files['logo_claro']['place'] = 3;
 
@@ -273,11 +269,14 @@ class PlantsController extends Controller
             $name = time().str_random().'.'.$file->getClientOriginalExtension();
             if (!(isset($request->write) && $request->write == 'No' ) && ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg')) {
 
-                $lat=$plant->campus->lat;
-                $long=$plant->campus->long;
+                $coordenadas = $this->coords($plant->campus->lat, $plant->campus->long);
 
-                $text2 = isset($request->date) && $request->date ? Carbon::create($request->date)->format('j F Y H:i:s') : now()->format('j F Y H:i:s');
+                $lat=$coordenadas['latitud'];
+                $long=$coordenadas['longitud'];
 
+                $text2_sin = isset($request->date) && $request->date ? Carbon::create($request->date)->format('j F Y H:i:s') : now()->format('j F Y H:i:s');
+
+                $text2 = $this->month($text2_sin);
 
                 $text3 = $lat.'N '.$long . 'W';
 
@@ -429,63 +428,133 @@ class PlantsController extends Controller
         }
     }
 
+    public function photos($id, plant_general $item)
+    {
+        return view('execution_works.maintenance.planta.photos', compact('id','item'));
+    }
+
     public function coords($lat, $long){
+
                 $num_rand = rand(1,2);
-                $num_rand2 = rand(1,10);
-                $num_rand3 = rand(1,10);
-
-                return $lat;
-                if($num_rand==1){
-                    $latitud=$lat-(0.000001*$num_rand2);
-                    $longitud=$long+(0.000001*$num_rand3);;
-                }else if($num_rand==2){
-                    $latitud=$lat+(0.000001*$num_rand2);
-                    $longitud=$long-(0.000001*$num_rand3);
-                }
-                $coordenadas = array(
-                    "lat" => $latitud,
-                    "long" => $long
-                  );
-
-
-                $lat=$id->campus->lat;
-                $long=$id->campus->long;
-                $num_rand = rand(1,2);
-                $num_rand2 = rand(1,10);
-                $num_rand3 = rand(1,10);
                 $string_lat = strval($lat);
                 $string_long = strval($long);
                 $string[1]=str_split($string_lat);
                 $string[2]=str_split($string_long);
-                // return $string[2];
+                $lenght[1]=count($string[1]);
+                // return $string[1];
                 for($i=1; $i<=2; $i++){
+                    // return count($string[$i]);
+                    $num_rand2 = rand(1,10);
+                    $num_rand3 = rand(1,10);
                     for($j=0; $j < count($string[$i]); $j++){
-                        // return count($string[$i]);
                         if($string[$i][$j]==',' || $string[$i][$j]=='.'){
                             $dec[$i]=count($string[$i])-$j-1;
                         };
                     };
-                };
-                // return $dec[2];
-
-                    if($num_rand==1){
-                            $latitud=$lat-(0.000001*$num_rand2);
-                            $longitud=$long+(0.000001*$num_rand3);;
-                    }else if($num_rand==2){
-                            $latitud=$lat+(0.000001*$num_rand2);
-                            $longitud=$long-(0.000001*$num_rand3);
+                    $first=count($string[$i])-1;
+                    $second=count($string[$i])-2;
+                    if($dec[$i]>=5){
+                        // return $string[$i][$first];
+                        if($num_rand==1){
+                            if($string[$i][$first]+$num_rand2<10 && $string[$i][$second]+$num_rand3<10){
+                                $string[$i][$first] = $string[$i][$first] + $num_rand2;
+                                $string[$i][$second] = $string[$i][$second] + $num_rand3;
+                            }else if($string[$i][$first]-$num_rand>0 && $string[$i][$second]-$num_rand3>0){
+                                $string[$i][$first] = $string[$i][$first]- $num_rand2;
+                                $string[$i][$second] = $string[$i][$second]- $num_rand3;
+                                // return 'Hola';
+                            }else{
+                                $string[$i][$first] = $string[$i][$first];
+                                $string[$i][$second] = $string[$i][$second];
+                            }
+                        }
+                        else{
+                            if($string[$i][$first]+$num_rand2<10){
+                                $string[$i][$first] = $string[$i][$first] + $num_rand2;
+                            }else if($string[$i][$first]-$num_rand>0 ){
+                                $string[$i][$first] = $string[$i][$first]- $num_rand2;
+                            }else{
+                                $string[$i][$first] = $string[$i][$second];
+                            }
+                        }
+                    }else if($dec[$i]<5 && $dec[$i]>=3){
+                        if($num_rand){
+                            if($string[$i][$first]+$num_rand2<10){
+                                $string[$i][$first] = $string[$i][$first] + $num_rand2;
+                            }else if($string[$i][$first]-$num_rand>0 ){
+                                $string[$i][$first] = $string[$i][$first]- $num_rand2;
+                            }else{
+                                $string[$i][$first] = $string[$i][$first];
+                            }
+                        }
                     }
-                    $coordenadas = array(
-                        "lat" => $latitud,
-                        "long" => $long
-                    );
-                // return $coodernadas;
+                    if( $string[$i][$first]==-1 ||  $string[$i][$first]==0){
+                        $string[$i][$first]= $string[$i][$first]+2;
+                    }
+                    if( $string[$i][$second]==-1 ||  $string[$i][$second]==0){
+                        $string[$i][$second]= $string[$i][$second]+2;
+                    }
+                    // return $string[$i];
+                    $string[$i][$first] = strval($string[$i][$first]);
+                    $string[$i][$second] = strval($string[$i][$second]);
+                };
+                $latitud=implode($string[1]);
+                $longitud=implode($string[2]);
 
-                $string_lat= strval($lat);
-
-                // return str_split($string_lat);
-                $coordenadas=$this->coords($lat, $long);
+                $coodernadas = array(
+                    "latitud" => $latitud,
+                    "longitud"=> $longitud,
+                );
 
         return $coodernadas;
+    }
+
+    public function month($date){
+
+            $palabras = explode(" ", $date);
+
+            switch ($palabras[1]) {
+                case "January":
+                $palabras[1] = "Enero";
+                break;
+                case "February":
+                $palabras[1] = "Febrero";
+                break;
+                case "March":
+                $palabras[1] = "Marzo";
+                break;
+                case "April":
+                $palabras[1] = "Abril";
+                break;
+                case "May":
+                $palabras[1] = "Mayo";
+                break;
+                case "June":
+                $palabras[1] = "Junio";
+                break;
+                case "July":
+                $palabras[1] = "Julio";
+                break;
+                case "August":
+                $palabras[1] = "Agosto";
+                break;
+                case "September":
+                $palabras[1] = "Septiembre";
+                break;
+                case "October":
+                $palabras[1] = "Octubre";
+                break;
+                case "November":
+                $palabras[1] = "Noviembre";
+                break;
+                case "December":
+                $palabras[1] = "Diciembre";
+                break;
+                default:
+                echo "Mes no encontrado: " . $palabras[1];
+            }
+        $frase_modificada = implode(" ", $palabras);
+
+        return $frase_modificada;
     }
 }

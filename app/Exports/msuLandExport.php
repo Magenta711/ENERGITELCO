@@ -32,7 +32,7 @@ class msuLandExport implements FromView, WithTitle, WithDrawings, ShouldAutoSize
     {
         $array = array();
         foreach ($this->files as $key => $value) {
-            if ($value['place'] == 1 || $value['place'] == 4) {
+            if ($value['place'] == 1 || $value['place'] == 4 || $value['place'] == 3) {
                 $array[$key] = new Drawing();
                 $array[$key]->setName($value['name']);
                 $array[$key]->setDescription($value['description']);

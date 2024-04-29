@@ -1061,3 +1061,12 @@ Route::get('project/maintenance/smu/land/edit/{id}','projects\maintenances\LandC
 Route::put('project/maintenance/smu/land/update/{id}','projects\maintenances\LandController@update')->name('land_update');
 Route::get('project/maintenance/smu/land/photos/{id}/{item}','projects\maintenances\LandController@photos')->name('land_photos');
 Route::post('project/maintenance/smu/land/{id}/{item}/upload','projects\maintenances\LandController@upload')->name('land_upload');
+
+Route::get('project/maintenance/smu/strain/{id}','projects\maintenances\StrainController@index')->name('strain_index');
+Route::get('project/maintenance/smu/strain/create/{id}','projects\maintenances\StrainController@create')->name('strain_create');
+Route::post('project/maintenance/smu/strain/store/{id}','projects\maintenances\StrainController@store')->name('strain_store');
+Route::get('project/maintenance/smu/strain/edit/{id}','projects\maintenances\StrainController@edit')->name('strain_edit');
+Route::put('project/maintenance/smu/strain/update/{id}','projects\maintenances\StrainController@update')->name('strain_update');
+Route::get('project/maintenance/smu/strain/photos/{id}/{item}','projects\maintenances\StrainController@photos')->name('strain_photos');
+Route::post('project/maintenance/smu/strain/{id}/{item}/upload','projects\maintenances\StrainController@upload')->name('strain_upload');
+Route::get('project/maintenance/smu/strain/export/{id}','projects\maintenances\StrainController@export')->name('strain_export');

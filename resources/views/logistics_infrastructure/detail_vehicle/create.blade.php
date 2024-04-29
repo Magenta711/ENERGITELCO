@@ -11,7 +11,7 @@
     </ol>
 </section>
 <section class="content">
-     
+
     <div class="box">
         <form action="{{ route('detailed_inspection_vehicles_store') }}" method="post" name="formulario" enctype="multipart/form-data" autocomplete="off">
         @csrf
@@ -83,27 +83,29 @@
                     }
                 }
             }
-            form = false;
-            form1 = false;
+            form = true;
+            form1 = true;
             cant = 11;
-            if (con == con2 && con == 5){
-                form = true;
-            }else{
-                alert('Parar el vehículo y no moverlo hasta que el se subsane el inconveniente y el Director de Proyecto de su visto bueno.');
-            }
-            if (con3 == con4 && con3 == cant){
-                form1 = true;
-            }else{
-                alert('Parar el vehículo y no moverlo hasta que el se subsane el inconveniente y el Director de Proyecto de su visto bueno.');
-                alert('Reparar el vehículo con autorización del Director de proyectos y no moverlo hasta que el se subsane el inconveniente y el Director de Proyecto de su visto bueno.');
-            }
+            // if (con == con2 && con == 5){
+            //     form = true;
+            // }
+            // else{
+            //     alert('Parar el vehículo y no moverlo hasta que el se subsane el inconveniente y el Director de Proyecto de su visto bueno.');
+            // }
+            // if (con3 == con4 && con3 == cant){
+            //     form1 = true;
+            // }
+            // else{
+            //     alert('Parar el vehículo y no moverlo hasta que el se subsane el inconveniente y el Director de Proyecto de su visto bueno.');
+            //     alert('Reparar el vehículo con autorización del Director de proyectos y no moverlo hasta que el se subsane el inconveniente y el Director de Proyecto de su visto bueno.');
+            // }
             if(form && form1){
                 alert('Bajo gravedad de juramento certifico que la información suministrada en el presente formulario es 100% verídica para la fecha y hora de la revisión y soy consciente que el fraude pone en riesgo la seguridad de mis compañeros y por ende tiene efectos según reglamento interno en mi hoja de vida. Está seguro de aprobar el formulario y le debe dar aceptar para enviar.');
             }
             return [form, form1];
         }
         var bPreguntar = true;
-    
+
         window.onbeforeunload = preguntarAntesDeSalir;
         $(document).ready(function() {
             $('.files').change(function () {
@@ -124,7 +126,7 @@
                     return submit();
                 }
             });
-            
+
         });
         function preguntarAntesDeSalir()
         {

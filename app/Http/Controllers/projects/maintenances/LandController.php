@@ -11,6 +11,7 @@ use App\Models\project\msu\msu_campus;
 use App\Models\project\msu\list_land;
 use App\Models\project\msu\general_land;
 use App\Exports\msuLandExport;
+use Carbon\Carbon;
 
 class LandController extends Controller
 {
@@ -182,8 +183,8 @@ class LandController extends Controller
         $files['logo_claro']['name'] = 'Logo_Claro';
         $files['logo_claro']['description'] = 'Logo de Claro';
         $files['logo_claro']['path'] = public_path('/img/claro.png');
-        $files['logo_claro']['height'] = 80;
-        $files['logo_claro']['coordinates'] = 'O3';
+        $files['logo_claro']['height'] = 70;
+        $files['logo_claro']['coordinates'] = 'L1';
         $files['logo_claro']['place'] = 3;
 
         // $files['logo_claro']['name'] = 'Logo_Claro';
@@ -243,19 +244,14 @@ class LandController extends Controller
 
             $name = time().str_random().'.'.$file->getClientOriginalExtension();
             if (!(isset($request->write) && $request->write == 'No' ) && ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg')) {
-                $num_rand = rand(1,2);
-                $num_rand2 = rand(1,10);
-                $num_rand3 = rand(1,10);
-                $lat=$land->campus->lat;
-                $long=$land->campus->long;
-                $rand2 = (0.000001*$num_rand2);
-                $rand3 = (0.000001*$num_rand3);
+                $coordenadas = $this->coords($land->campus->lat, $land->campus->long);
 
-                $text2 = isset($request->date) && $request->date ? Carbon::create($request->date)->format('j F Y H:i:s') : now()->format('d/m/Y H:i:s');
-                $palabras = explode(" ", $text2);
+                $lat=$coordenadas['latitud'];
+                $long=$coordenadas['longitud'];
 
-                $frase_modificada = implode(" ", $palabras);
+                $text2_sin = isset($request->date) && $request->date ? Carbon::create($request->date)->format('j F Y H:i:s') : now()->format('j F Y H:i:s');
 
+                $text2 = $this->month($text2_sin);
 
                 $text3 = $lat.'N '.$long . 'W';
 
@@ -387,5 +383,129 @@ class LandController extends Controller
         }else {
             return response()->json(['success'=>'No se examino un archivo']);
         }
+    }
+
+    public function coords($lat, $long){
+
+        $num_rand = rand(1,2);
+        $string_lat = strval($lat);
+        $string_long = strval($long);
+        $string[1]=str_split($string_lat);
+        $string[2]=str_split($string_long);
+        $lenght[1]=count($string[1]);
+        // return $string[1];
+        for($i=1; $i<=2; $i++){
+            // return count($string[$i]);
+            $num_rand2 = rand(1,10);
+            $num_rand3 = rand(1,10);
+            for($j=0; $j < count($string[$i]); $j++){
+                if($string[$i][$j]==',' || $string[$i][$j]=='.'){
+                    $dec[$i]=count($string[$i])-$j-1;
+                };
+            };
+            $first=count($string[$i])-1;
+            $second=count($string[$i])-2;
+            if($dec[$i]>=5){
+                // return $string[$i][$first];
+                if($num_rand==1){
+                    if($string[$i][$first]+$num_rand2<10 && $string[$i][$second]+$num_rand3<10){
+                        $string[$i][$first] = $string[$i][$first] + $num_rand2;
+                        $string[$i][$second] = $string[$i][$second] + $num_rand3;
+                    }else if($string[$i][$first]-$num_rand>0 && $string[$i][$second]-$num_rand3>0){
+                        $string[$i][$first] = $string[$i][$first]- $num_rand2;
+                        $string[$i][$second] = $string[$i][$second]- $num_rand3;
+                        // return 'Hola';
+                    }else{
+                        $string[$i][$first] = $string[$i][$first];
+                        $string[$i][$second] = $string[$i][$second];
+                    }
+                }
+                else{
+                    if($string[$i][$first]+$num_rand2<10){
+                        $string[$i][$first] = $string[$i][$first] + $num_rand2;
+                    }else if($string[$i][$first]-$num_rand>0 ){
+                        $string[$i][$first] = $string[$i][$first]- $num_rand2;
+                    }else{
+                        $string[$i][$first] = $string[$i][$second];
+                    }
+                }
+            }else if($dec[$i]<5 && $dec[$i]>=3){
+                if($num_rand){
+                    if($string[$i][$first]+$num_rand2<10){
+                        $string[$i][$first] = $string[$i][$first] + $num_rand2;
+                    }else if($string[$i][$first]-$num_rand>0 ){
+                        $string[$i][$first] = $string[$i][$first]- $num_rand2;
+                    }else{
+                        $string[$i][$first] = $string[$i][$first];
+                    }
+                }
+            }
+            if( $string[$i][$first]==-1 ||  $string[$i][$first]==0){
+                $string[$i][$first]= $string[$i][$first]+2;
+            }
+            if( $string[$i][$second]==-1 ||  $string[$i][$second]==0){
+                $string[$i][$second]= $string[$i][$second]+2;
+            }
+            // return $string[$i];
+            $string[$i][$first] = strval($string[$i][$first]);
+            $string[$i][$second] = strval($string[$i][$second]);
+        };
+        $latitud=implode($string[1]);
+        $longitud=implode($string[2]);
+
+        $coodernadas = array(
+            "latitud" => $latitud,
+            "longitud"=> $longitud,
+        );
+    return $coodernadas;
+    }
+
+    public function month($date){
+
+        $palabras = explode(" ", $date);
+
+        switch ($palabras[1]) {
+            case "January":
+            $palabras[1] = "Enero";
+            break;
+            case "February":
+            $palabras[1] = "Febrero";
+            break;
+            case "March":
+            $palabras[1] = "Marzo";
+            break;
+            case "April":
+            $palabras[1] = "Abril";
+            break;
+            case "May":
+            $palabras[1] = "Mayo";
+            break;
+            case "June":
+            $palabras[1] = "Junio";
+            break;
+            case "July":
+            $palabras[1] = "Julio";
+            break;
+            case "August":
+            $palabras[1] = "Agosto";
+            break;
+            case "September":
+            $palabras[1] = "Septiembre";
+            break;
+            case "October":
+            $palabras[1] = "Octubre";
+            break;
+            case "November":
+            $palabras[1] = "Noviembre";
+            break;
+            case "December":
+            $palabras[1] = "Diciembre";
+            break;
+            default:
+            echo "Mes no encontrado: " . $palabras[1];
+        }
+    $frase_modificada = implode(" ", $palabras);
+
+    return $frase_modificada;
     }
 }

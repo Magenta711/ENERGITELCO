@@ -44,7 +44,7 @@
                                     <td>
                                         <a href="{{ route('plant_index', $item->id) }}" class="btn btn-success">Planta Eléctrica</a>
                                         <a href="{{ route('air_index', $item->id) }}" class="btn btn-primary">Aires Acondicionados</a>
-                                        <a href="" class="btn btn-info">Media, Baja Tensión</a>
+                                        <a href="{{ route('strain_index', $item->id) }}" class="btn btn-info">Media, Baja Tensión</a>
                                         <a href="{{ route('land_index', $item->id) }}" class="btn btn-warning">Puesta a Tierra</a>
                                         <a href="" class="btn btn-danger">Eliminar</a>
                                     </td>
