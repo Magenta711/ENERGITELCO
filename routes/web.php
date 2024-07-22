@@ -1033,6 +1033,8 @@ Route::put('energias/update/{id}','EnergyController@update')->name('energy_updat
 Route::get('project/maintenance/smu', 'projects\maintenances\SMUController@index')->name('SMU');
 Route::get('project/maintenance/smu/create', 'projects\maintenances\SMUController@create')->name('smu_create');
 Route::post('project/maintenance/smu', 'projects\maintenances\SMUController@store')->name('smu_store');
+Route::get('project/maintenance/edit/{id}', 'projects\maintenances\SMUController@edit')->name('smu_edit');
+Route::put('project/maintenance/update/{id}', 'projects\maintenances\SMUController@update')->name('smu_update');
 
 Route::get('project/maintenance/smu/plant/{id}', 'projects\maintenances\PlantsController@index')->name('plant_index');
 Route::get('project/maintenance/smu/plant/create/{id}', 'projects\maintenances\PlantsController@create')->name('plant_create');

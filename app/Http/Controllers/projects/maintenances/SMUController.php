@@ -51,6 +51,8 @@ class SMUController extends Controller
             'site_name' => ['required'],
             'mun' => ['required'],
             'dep' => ['required'],
+            'long' => ['required'],
+            'lat' => ['required'],
         ]);
         msu_campus::create($request->all());
 
@@ -74,9 +76,10 @@ class SMUController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(msu_campus $id)
     {
-
+        // return $id;
+        return view('execution_works.maintenance.edit', compact('id'));
     }
 
     /**
@@ -86,9 +89,20 @@ class SMUController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, msu_campus $id)
     {
+        $request->validate([
+            'id_sede'=>['required'],
+            'site_name' => ['required'],
+            // 'mun' => ['required'],
+            'dep' => ['required'],
+            'long' => ['required'],
+            'lat' => ['required'],
+        ]);
 
+        $id->update($request->all());
+
+        return  redirect()->route('SMU')->with('success','Se ha actualizado el proyecto correctamente');
     }
 
     /**

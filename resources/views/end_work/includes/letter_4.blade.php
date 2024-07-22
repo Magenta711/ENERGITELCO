@@ -9,7 +9,7 @@
     <div id="collapseFour" class="panel-collapse collapse">
         <div class="form-group">
             <label for="layoffs">Valor de cesantías</label>
-            <input type="text" name="layoffs" id="layoffs" class="form-control">
+            <input type="text" name="layoffs" id="layoffs" class="form-control" value="0">
         </div>
         <div class="form-group">
             <label for="letter4">Detalles</label>
