@@ -8,6 +8,8 @@
             <div class="container d-flex h-75 align-items-center" id="about-prin">
                 <div class="mx-auto text-center">
                     <h2 class="text-white mx-auto mt-2 mb-5 text-uppercase">SOMOS TU MEJOR OPCIÓN</h2>
+                    <p class="text-white text-uppercase"><b>¡Nos encargaremos de hacer tu hogar o empresa sostenible energéticamente!</b></p>
+                    <p class="text-white-50"><b>Cotiza tu fúturo sistema solar con Energitelco</b></p>
                     <a class="btn btn-primary js-scroll-trigger" href="{{route('quote')}}" target="_blank">COTIZAR</a>
                 </div>
             </div>
@@ -60,7 +62,7 @@
                     <div class="col-lg-6 mx-auto d-flex align-items-center" id="img1">
                         <div class="mx-auto text-center">
                             <h2 class="text-white">SURAMERICANA</h2>
-                            <p class="text-white-50">La nueva sede ubicada en sector de Suramericana en Medellín tiene los equipos más sofisticados de energía solar, estos alimentados por una amplia gama de paneles solares que alimentan al edicio de eléctricidad.
+                            <p class="text-white-50">La nueva sede ubicada en sector de Suramericana en Medellín tiene los equipos más sofisticados de energía solar, estos alimentados por una amplia gama de paneles solares que alimentan al edificio de electricidad.
                             </p>
                         </div>
                     </div>
@@ -73,7 +75,7 @@
                     <div class="col-lg-6 mx-auto d-flex align-items-center" id="img2">
                         <div class="mx-auto text-center">
                             <h2 class="text-white">BARBOSA</h2>
-                            <p class="text-white-50">Nuestra novedosa sede en el Municipio de Barbosa cuenta con 6 paneles solares que alimentan a un edificio de seis pisos.
+                            <p class="text-white-50">Nuestro Centro Empresarial y de Servicios ubicado en el municipio de Barbosa cuenta con un complejo de última generación. Esta moderna instalación está equipada con sistemas avanzados de energía renovable, alimentados por una red de paneles solares que proveen electricidad a todo el edificio.
                             </p>
                         </div>
 
@@ -91,7 +93,7 @@
                          </div>
                     </div>
                     <div class="col-md-6" id="Equipo">
-                        <img src="https://formaselectricas.com/wp-content/uploads/2022/03/panel-solar.png.webp" alt="panel">
+                        <img src="{{asset ('img/files/monosolar.jpg')}}" alt="panel">
                         <div class="card-txt">
                             <h4 class="card-title text-white">PANEL SOLAR MONOCRISTALINO</h4>
                         </div>
@@ -180,16 +182,18 @@
     #img1{
         height: 50vh;
         width: 100%;
-        background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.7)),url('https://www.cambioenergetico.com/blog/wp-content/uploads/placas-solares-madrid-scaled.jpg');
+        background-image: linear-gradient(rgba(0,0,0,1),rgba(0,0,0,0.3)),url('https://www.cesjoseluis.com/img/pages/fachada3.jpeg');
         /* background-image: url('https://www.pepeenergy.com/blog/embed/ea63925165fe27c7f77d73cf7b2ef1613497601/Paneles-solares-fotovoltaicos..jpg?imagick=1&size=1250'); */
         background-repeat: no-repeat;
         background-size: cover;
+        background-position: center center;
+
     }
 
     #header{
         height: 3vh;
         width: 100%;
-        background-image: linear-gradient(rgba(0,0,0,1),rgba(0,0,0,0.1),rgba(0,0,0,1)),url('https://sonidey.com/blog/wp-content/uploads/2019/07/paneles-solares-fotovoltaico-monocristalino.jpg');
+        background-image: linear-gradient(rgba(0,0,0,1),rgba(0,0,0,0.6),rgba(0,0,0,1)),url('https://sonidey.com/blog/wp-content/uploads/2019/07/paneles-solares-fotovoltaico-monocristalino.jpg');
         /* background-image: url('https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/media/image/2022/08/paneles-solares-2785047.jpg?tf=3840x'); */
         background-repeat: no-repeat;
         background-size: cover;
@@ -198,10 +202,11 @@
     #img2 {
         height: 50vh;
         width: 100%;
-        background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.7)),url('https://novelec.presproyectos.es/wp-content/uploads/2019/01/placas-solares-instalar-comprar-venta.jpg');
+        background-image: linear-gradient(rgba(0,0,0,1),rgba(0,0,0,0.3)),url('https://www.cesjoseluis.com/img/pages/fachada5.jpg');
         /* background-image: url('https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/media/image/2022/08/paneles-solares-2785047.jpg?tf=3840x'); */
         background-repeat: no-repeat;
         background-size: cover;
+        background-position: center center;
     }
 
     .video {
@@ -211,6 +216,19 @@
 
     #about-prin{
         height: 50%;
+    }
+
+    #about-prin h2, #img1 h2, #img2 h2{
+        font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        font-size: 2rem;
+        /* line-height: 1.5rem; */
+        letter-spacing: 0.5rem;
+        /* background: rgba(121, 155, 206, 1); */
+        background: linear-gradient(rgba(121, 155, 206, 1), rgba(121, 155, 206, 1));
+        -webkit-text-fill-color: transparent;
+        /* -webkit-background-clip: text; */
+        background-clip: text;
+        font-weight: bold;
     }
 
     #about-top {
@@ -263,6 +281,11 @@
         width: 50%;
         border-radius: 20px;
         object-fit: cover;
+    }
+
+    .text-uppercase{
+        /* -webkit-text-stroke-width: 2px;
+        -webkit-text-stroke-color: #000; */
     }
 </style>
 
