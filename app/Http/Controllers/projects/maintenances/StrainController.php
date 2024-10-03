@@ -27,7 +27,7 @@ class StrainController extends Controller
      */
     public function index(msu_campus $id)
     {
-        $general=general_strain::get();
+        $general=general_strain::where('maintenance_id',$id->id)->get();
         return view('execution_works.maintenance.tension.index', compact('id','general'));
     }
 
@@ -247,7 +247,7 @@ class StrainController extends Controller
                     $image_sin->resize(null, 500, function ($constraint) {
                         $constraint->aspectRatio();
                     });
-                    $height = 25 + ($request->size_letter * 3);
+                    $height = 50 + ($request->size_letter * 3);
                     $image->text($text2, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size($request->size_letter);
@@ -276,6 +276,15 @@ class StrainController extends Controller
                     });
                     $height = $height - $request->size_letter - 2;
                     $image->text($strain->campus->site_name, $image->width() - 5, $image->height() - $height, function($font) use($request) {
+                        $font->file(public_path('fonts/Arial/ARIAL.TTF'));
+                        $font->size($request->size_letter);
+                        $font->color($request->color);
+                        $font->align('right');
+                        $font->valign('top');
+                        $font->angle(0);
+                    });
+                    $height = $height - $request->size_letter - 2;
+                    $image->text('OT '.$strain->campus->OT, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size($request->size_letter);
                         $font->color($request->color);

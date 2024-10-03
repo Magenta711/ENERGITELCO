@@ -27,9 +27,13 @@
                 <div class="card-body">
                     <p><small>Todo campo con <span class="text-danger">*</span> es <b>obligatorio.</b></small></p>
                     <div class="row">
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-2">
                             <label for="id_sede">Id de la sede *</label>
                             <input type="text" id="id_sede" name="id_sede" value="{{ $id->id_sede }}" class="form-control">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="OT">Código OT</label>
+                            <input type="text" id="OT" name="OT" value="{{ $id->OT }}" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="department">Departamentos *</label>

@@ -34,23 +34,24 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($sedes as $item)
                             <TR>
-                                @foreach ($sedes as $item)
                                     <td class="text-center">{{ $loop->iteration }}</td>
                                     <td class="text-center">{{ $item->id_sede }}</td>
                                     <td class="text-center">{{ $item->site_name }}</td>
                                     <td class="text-center">{{ $item->structure }}</td>
                                     <td class="text-center">{{ $item->updated_at->format('Y-m-d') }}</td>
-                                    <td>
-                                        <a href="{{ route('plant_index', $item->id) }}" class="btn btn-success">Planta Eléctrica</a>
-                                        <a href="{{ route('air_index', $item->id) }}" class="btn btn-primary">Aires Acondicionados</a>
-                                        <a href="{{ route('strain_index', $item->id) }}" class="btn btn-info">Media, Baja Tensión</a>
-                                        <a href="{{ route('land_index', $item->id) }}" class="btn btn-danger">Puesta a Tierra</a>
+                                    <td class="btn-group btn-group-toggle">
+                                            <a href="{{ route('plant_index', $item->id) }}" class="btn btn-success">Planta Eléctrica</a>
+                                            <a href="{{ route('air_index', $item->id) }}" class="btn btn-primary">Aires Acondicionados</a>
+                                            <a href="{{ route('strain_index', $item->id) }}" class="btn btn-info">Media, Baja Tensión</a>
+                                            <a href="{{ route('land_index', $item->id) }}" class="btn btn-danger">Puesta a Tierra</a>
+                                            <a href="{{ route('operation_index', $item->id) }}" class="btn" style="background: rgb(248, 101, 4); color:white">Operación </a>
                                         <a >|</a>
                                         <a href="{{ route('smu_edit', $item->id) }}" class="btn btn-warning">Editar</a>
                                     </td>
+                                </TR>
                                 @endforeach
-                            </TR>
                         </tbody>
                     </table>
                 </div>

@@ -1030,6 +1030,8 @@ Route::get('energias', 'EnergyController@index')->name('energy');
 Route::get('energias/editar', 'EnergyController@edit')->name('energy_edit');
 Route::put('energias/update/{id}','EnergyController@update')->name('energy_update');
 
+Route::get('products', 'ProductsController@index')->name('energy_products');
+
 Route::get('project/maintenance/smu', 'projects\maintenances\SMUController@index')->name('SMU');
 Route::get('project/maintenance/smu/create', 'projects\maintenances\SMUController@create')->name('smu_create');
 Route::post('project/maintenance/smu', 'projects\maintenances\SMUController@store')->name('smu_store');
@@ -1072,3 +1074,15 @@ Route::put('project/maintenance/smu/strain/update/{id}','projects\maintenances\S
 Route::get('project/maintenance/smu/strain/photos/{id}/{item}','projects\maintenances\StrainController@photos')->name('strain_photos');
 Route::post('project/maintenance/smu/strain/{id}/{item}/upload','projects\maintenances\StrainController@upload')->name('strain_upload');
 Route::get('project/maintenance/smu/strain/export/{id}','projects\maintenances\StrainController@export')->name('strain_export');
+
+Route::get('project/maintenance/smu/operation/{id}','projects\maintenances\OperationController@index')->name('operation_index');
+Route::get('project/maintenance/smu/operation/create/{id}','projects\maintenances\OperationController@create')->name('operation_create');
+Route::post('project/maintenance/smu/operation/store/{id}','projects\maintenances\OperationController@store')->name('operation_store');
+Route::get('project/maintenance/smu/operation/edit/{id}','projects\maintenances\OperationController@edit')->name('operation_edit');
+Route::put('project/maintenance/smu/operation/update/{id}','projects\maintenances\OperationController@update')->name('operation_update');
+Route::get('project/maintenance/smu/operation/export/{id}','projects\maintenances\OperationController@export')->name('operation_export');
+Route::get('project/maintenance/smu/operation/photos/{id}/{item}','projects\maintenances\OperationController@photos')->name('operation_photos');
+Route::put('project/maintenance/smu/operation/cantidad_photos/{id}/{item}','projects\maintenances\OperationController@cantidad_photos')->name('operation_cantidad_photos');
+Route::put('project/maintenance/smu/operation/descripcion_photos/{id}/{item}','projects\maintenances\OperationController@descripcion_photos')->name('operation_descripcion_photos');
+Route::post('project/maintenance/smu/operation/{id}/{item}/upload','projects\maintenances\operationController@upload')->name('operation_upload');
+

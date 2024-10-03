@@ -53,7 +53,10 @@ class SMUController extends Controller
             'dep' => ['required'],
             'long' => ['required'],
             'lat' => ['required'],
+            'OT' => ['required'],
+            'plants_amount' => ['required'],
         ]);
+
         msu_campus::create($request->all());
 
         return  redirect()->route('SMU')->with('success','Se ha creado el proyecto correctamente');
@@ -98,6 +101,8 @@ class SMUController extends Controller
             'dep' => ['required'],
             'long' => ['required'],
             'lat' => ['required'],
+            'OT' => ['required'],
+            'plants_amount' => ['required'],
         ]);
 
         $id->update($request->all());

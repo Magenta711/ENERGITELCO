@@ -15,8 +15,6 @@ use Illuminate\Support\Facades\Storage;
 use Image;
 use Carbon\Carbon;
 
-
-
 class PlantsController extends Controller
 {
     public function __construct()
@@ -33,8 +31,7 @@ class PlantsController extends Controller
      */
     public function index(msu_campus $id)
     {
-        $general=plant_general::get();
-        // return $general;
+        $general=plant_general::where('maintenance_id',$id->id)->get();
         return view('execution_works.maintenance.planta.index', compact('id', 'general'));
     }
 
@@ -182,8 +179,6 @@ class PlantsController extends Controller
 
     public function export(plant_general $id)
     {
-
-
         $check_str=plant_check::where('plant_id',$id->id)->get()->first();
         $plant=smu_plants::where('plant_id',$id->id)->get()->first();
         $resultado=plant_resultado::where('plant_id', $id->id)->get()->first();
@@ -226,7 +221,7 @@ class PlantsController extends Controller
         $string=$check['slpe'][5]["forma_detectarlo"];
 
         $str_len = strlen($string);
-
+        // return $files;
         return (new msuPlantExport($id,$check,$plant,$resultado ,$files))->download('PE ATS VERSION 2.xlsx');
 
     }
@@ -289,7 +284,7 @@ class PlantsController extends Controller
                     $image_sin->resize(null, 500, function ($constraint) {
                         $constraint->aspectRatio();
                     });
-                    $height = 25 + ($request->size_letter * 5);
+                    $height = 50 + ($request->size_letter * 5);
                     $image->text($text2, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size($request->size_letter);
@@ -336,6 +331,15 @@ class PlantsController extends Controller
                     });
                     $height = $height - $request->size_letter - 2;
                     $image->text('#BTS'.$plant->campus->mun, $image->width() - 5, $image->height() - $height, function($font) use($request) {
+                        $font->file(public_path('fonts/Arial/ARIAL.TTF'));
+                        $font->size($request->size_letter);
+                        $font->color($request->color);
+                        $font->align('right');
+                        $font->valign('top');
+                        $font->angle(0);
+                    });
+                    $height = $height - $request->size_letter - 2;
+                    $image->text('OT '.$plant->campus->OT, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size($request->size_letter);
                         $font->color($request->color);

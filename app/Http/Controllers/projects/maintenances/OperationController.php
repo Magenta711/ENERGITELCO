@@ -4,16 +4,15 @@ namespace App\Http\Controllers\projects\maintenances;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\project\msu\msu_campus;
-use App\Models\project\msu\List_Air;
-use App\Models\project\msu\General_Air;
-use App\Exports\msuAirExport;
 use Illuminate\Support\Facades\Storage;
-use Carbon\Carbon;
 use Image;
+use App\User;
+use App\Models\project\msu\msu_campus;
+use App\Models\project\msu\GeneralOperation;
+use App\Exports\msuOperationExport;
+use Carbon\Carbon;
 
-
-class AirController extends Controller
+class OperationController extends Controller
 {
     public function __construct()
     {
@@ -21,6 +20,7 @@ class AirController extends Controller
         $this->middleware('verified');
 
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -28,10 +28,8 @@ class AirController extends Controller
      */
     public function index(msu_campus $id)
     {
-        $general=General_Air::where('maintenance_id',$id->id)->get();
-        // return $general;
-        // return $general->editor->name;
-        return view('execution_works.maintenance.aire.index', compact('id','general'));
+        $general=GeneralOperation::where('maintenance_id',$id->id)->get();
+        return view('execution_works.maintenance.operacion.index', compact('id','general'));
     }
 
     /**
@@ -41,9 +39,10 @@ class AirController extends Controller
      */
     public function create(msu_campus $id)
     {
-        $list=List_Air::get();
-        // return $list;
-        return view('execution_works.maintenance.aire.create', compact('id','list'));
+        // return $id;
+
+        return view('execution_works.maintenance.operacion.create', compact('id'));
+
     }
 
     /**
@@ -57,37 +56,36 @@ class AirController extends Controller
         $request->validate([
             'revisor' => ['required'],
             'tecnico' => ['required'],
+            'empresa' => ['required'],
+            'fechaElaboracion' => ['required'],
         ]);
 
         $request['maintenance_id'] = $id->id;
         $request['creator_id'] = auth()->id();
         $request['update_id'] = auth()->id();
 
-        $aa = json_encode($request->aa);
-        $temp = json_encode($request->temp);
-        $compresor = json_encode($request->compresor);
-        $unidad = json_encode($request->unidad);
-        $manejadora = json_encode($request->manejadora);
-        $actions = json_encode($request->actions);
-        $check = json_encode($request->check);
-        // return $actions;
-        $general = General_Air::create([
+        $fotos= json_encode($request->fotos);
+        $general= json_encode($request->general);
+        $activity= json_encode($request->activity);
+        $findings= json_encode($request->findings);
+        $transport= json_encode($request->transport);
+
+        $general = GeneralOperation::create([
             'maintenance_id'=>$request->maintenance_id,
-            'revisor'=>$request->revisor,
-            'tecnico'=>$request->tecnico,
-            'dates_a_a'=>$aa,
-            'temp'=>$temp,
-            'compresor'=>$compresor,
-            'unidad'=>$unidad,
-            'manejadora'=>$manejadora,
-            'check'=>$check,
-            'actions'=>$actions,
-            'plan_mejora'=>$request->plan_mejora,
             'creator_id'=>$request->creator_id,
             'update_id'=>$request->update_id,
+            'revisor'=>$request->revisor,
+            'tecnico'=>$request->tecnico,
+            'empresa'=>$request->empresa,
+            'fechaElaboracion'=>$request->fechaElaboracion,
+            'fotos'=>$fotos,
+            'general'=>$general,
+            'activity'=>$activity,
+            'findings'=>$findings,
+            'transport'=>$transport,
         ]);
 
-        return redirect()->route('air_index',$request->maintenance_id)->with('success','Se ha creado el mantenimiento correctamente');
+        return redirect()->route('operation_index',$request->maintenance_id)->with('success','Se ha creado el mantenimiento correctamente');
     }
 
     /**
@@ -96,9 +94,42 @@ class AirController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function photos($id, GeneralOperation $item)
     {
-        //
+        // return $item->files;
+        return view('execution_works.maintenance.operacion.photos', compact('id', 'item'));
+    }
+
+    public function cantidad_photos(Request $request, $id, GeneralOperation $item)
+    {
+        if(count($item->files)>$request->numPhoto || !($request->numPhoto%2 == 0)){
+            $error='No se aceptan valores Impares y/o ingresar menos campos de los que ya tienen fotos';
+            return redirect()->back()->withErrors([$error])->withInput();
+        }
+
+        $item->update([
+            'cantidad_fotos'=>$request->numPhoto,
+        ]);
+        return redirect()->route('operation_photos',[$id, $item])->with('success','Se ha creado los campos satisfactoriamente');
+
+        // return view('execution_works.maintenance.operacion.photos', compact('id', 'item'));
+    }
+
+    public function descripcion_photos(Request $request, $id, GeneralOperation $item)
+    {
+        $descriptions = $request->input('description');
+        return ($descriptions);
+        // if(count($item->files)>$request->numPhoto || !($request->numPhoto%2 == 0)){
+        //     $error='No se aceptan valores Impares y/o ingresar menos campos de los que ya tienen fotos';
+        //     return redirect()->back()->withErrors([$error])->withInput();
+        // }
+
+        // $item->update([
+        //     'cantidad_fotos'=>$request->numPhoto,
+        // ]);
+        // return redirect()->route('operation_photos',[$id, $item])->with('success','Se ha creado los campos satisfactoriamente');
+
+        // return view('execution_works.maintenance.operacion.photos', compact('id', 'item'));
     }
 
     /**
@@ -107,24 +138,16 @@ class AirController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(General_Air $id)
+    public function edit(GeneralOperation $id)
     {
-        // return $id->check;
-        $list=List_Air::get();
-        $dates['revisor']=$id->revisor;
-        $dates['tecnico']=$id->tecnico;
-        $dates['dates_a_a']=json_decode($id->dates_a_a, true);
-        $dates['temp']=json_decode($id->temp, true);
-        $dates['compresor']=json_decode($id->compresor, true);
-        $dates['unidad']=json_decode($id->unidad, true);
-        $dates['actions']=json_decode($id->actions, true);
-        $dates['manejadora']=json_decode($id->manejadora, true);
-        $dates['plan_mejora']=$id->plan_mejora;
-        $dates['check']=json_decode($id->check, true);
-
-        // return $dates['check'];
-
-        return view('execution_works.maintenance.aire.edit', compact('id','dates','list'));
+        // return $id;
+        $general['fotos']=json_decode($id->fotos, true);
+        $general['general']=json_decode($id->general, true);
+        $general['activity']=json_decode($id->activity, true);
+        $general['findings']=json_decode($id->findings, true);
+        $general['transport']=json_decode($id->transport, true);
+        // return $general['general'];
+        return view('execution_works.maintenance.operacion.edit', compact('id','general'));
     }
 
     /**
@@ -134,62 +157,101 @@ class AirController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, General_Air $id)
+    public function update(Request $request, GeneralOperation $id)
     {
         $request->validate([
             'revisor' => ['required'],
             'tecnico' => ['required'],
+            'empresa' => ['required'],
+            'fechaElaboracion' => ['required'],
         ]);
 
-        $request['maintenance_id'] = $id->campus->id;
-        $request['update_id'] = auth()->id();
+        $fotos= json_encode($request->fotos);
+        $general= json_encode($request->general);
+        $activity= json_encode($request->activity);
+        $findings= json_encode($request->findings);
+        $transport= json_encode($request->transport);
 
-        $dates_a_a = json_encode($request->aa);
-        $temp = json_encode($request->temp);
-        $compresor = json_encode($request->compresor);
-        $unidad = json_encode($request->unidad);
-        $manejadora = json_encode($request->manejadora);
-        $actions = json_encode($request->actions);
-        $check = json_encode($request->check);
-        if($id){
-            $id->update([
-                'maintenance_id'=>$request->maintenance_id,
-                'revisor'=>$request->revisor,
-                'tecnico'=>$request->tecnico,
-                'dates_a_a'=>$dates_a_a,
-                'temp'=>$temp,
-                'compresor'=>$compresor,
-                'unidad'=>$unidad,
-                'manejadora'=>$manejadora,
-                'check'=>$check,
-                'actions'=>$actions,
-                'plan_mejora'=>$request->plan_mejora,
-                'update_id'=>$request->update_id
-            ]);
-        }
-        return redirect()->route('air_index',$request->maintenance_id)->with('success','Se ha actualizado el mantenimiento correctamente');
+        $request['update_id'] = auth()->id();
+        $request['maintenance_id'] = $id->campus->id;
+
+        $id->update([
+            'update_id'=>$request->update_id,
+            'revisor'=>$request->revisor,
+            'tecnico'=>$request->tecnico,
+            'empresa'=>$request->empresa,
+            'fechaElaboracion'=>$request->fechaElaboracion,
+            'fotos'=>$fotos,
+            'general'=>$general,
+            'activity'=>$activity,
+            'findings'=>$findings,
+            'transport'=>$transport,
+        ]);
+
+        return redirect()->route('operation_index',$request->maintenance_id)->with('success','Se ha actualizado el mantenimiento correctamente');
     }
 
-    public function export(General_Air $id)
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
     {
-        $dates['revisor']=$id->revisor;
-        $dates['tecnico']=$id->tecnico;
-        $dates['dates_a_a']=json_decode($id->dates_a_a, true);
-        $dates['temp']=json_decode($id->temp, true);
-        $dates['compresor']=json_decode($id->compresor, true);
-        $dates['unidad']=json_decode($id->unidad, true);
-        $dates['actions']=json_decode($id->actions, true);
-        $dates['manejadora']=json_decode($id->manejadora, true);
-        $dates['plan_mejora']=$id->plan_mejora;
-        $dates['check']=json_decode($id->check, true);
-        $dates['campus']=$id->campus->site_name;
+        //
+    }
+
+    public function export(GeneralOperation $id)
+    {
+
+
+        $dates['fotos']=json_decode($id->fotos, true);
+        $dates['general']=json_decode($id->general, true);
+        $dates['activity']=json_decode($id->activity, true);
+        $dates['findings']=json_decode($id->findings, true);
+        $dates['transport']=json_decode($id->transport, true);
+
 
         $files['logo_claro']['name'] = 'Logo_Claro';
         $files['logo_claro']['description'] = 'Logo de Claro';
         $files['logo_claro']['path'] = public_path('/img/claro.png');
-        $files['logo_claro']['height'] = 80;
-        $files['logo_claro']['coordinates'] = 'N2';
+        $files['logo_claro']['height'] = 90;
+        $files['logo_claro']['coordinates'] = 'K1';
         $files['logo_claro']['place'] = 3;
+
+        if($id->empresa=='CINCO'){
+            $files['logo_cinco']['name'] = 'Logo_cinco';
+            $files['logo_cinco']['description'] = 'Logo de Cinco';
+            $files['logo_cinco']['path'] = public_path('/img/cinco.jpg');
+            $files['logo_cinco']['height'] = 90;
+            $files['logo_cinco']['coordinates'] = 'B1';
+            $files['logo_cinco']['place'] = 3;
+        }
+
+        if($id->empresa=='LITEYCA'){
+            $files['logo_liteyca']['name'] = 'Logo_liteyca';
+            $files['logo_liteyca']['description'] = 'Logo de liteyca';
+            $files['logo_liteyca']['path'] = public_path('/img/LITEYCA.jpg');
+            $files['logo_liteyca']['height'] = 90;
+            $files['logo_liteyca']['coordinates'] = 'B1';
+            $files['logo_liteyca']['place'] = 3;
+        }
+        if($id->empresa=='INMEL'){
+            $files['logo_inmel']['name'] = 'Logo_inmel';
+            $files['logo_inmel']['description'] = 'Logo de inmel';
+            $files['logo_inmel']['path'] = public_path('/img/inmel.jpeg');
+            $files['logo_inmel']['height'] = 90;
+            $files['logo_inmel']['coordinates'] = 'B1';
+            $files['logo_inmel']['place'] = 3;
+        }
+
+        // $files['logo_claro']['name'] = 'Logo_Claro';
+        // $files['logo_claro']['description'] = 'Logo de Claro';
+        // $files['logo_claro']['path'] = public_path('/img/claro.png');
+        // $files['logo_claro']['height'] = 80;
+        // $files['logo_claro']['coordinates'] = 'O3';
+        // $files['logo_claro']['place'] = 3;
 
         if ($id->files)
         {
@@ -207,31 +269,16 @@ class AirController extends Controller
                 }
             }
         }
-
-        return (new msuAirExport($dates,$files))->download('AA-1A EM2.xlsx');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-    public function photos($id, General_Air $item)
-    {
-        return view('execution_works.maintenance.aire.photos', compact('id', 'item'));
+        // return $id;
+        // return view('execution_works.maintenance.operacion.export', compact('id','dates'));
+        return (new msuOperationExport($id, $dates,$files))->download('OT'.$id->campus->OT.'_'.$id->campus->site_name.' SISTEMA PUESTA TIERRA.xlsx');
     }
 
     public function upload(Request $request)
     {
         if ($request->hasFile('file')){
-            $air = General_Air::find($request->id);
-            $file_exists = $air->files->where('description',$request->name_d)->first();
+            $operation = GeneralOperation::find($request->id);
+            $file_exists = $operation->files->where('description',$request->name_d)->first();
 
             if ($file_exists){
                 Storage::delete('public/upload/mintic/'.$file_exists->name);
@@ -240,7 +287,8 @@ class AirController extends Controller
 
             $name = time().str_random().'.'.$file->getClientOriginalExtension();
             if (!(isset($request->write) && $request->write == 'No' ) && ($file->getClientOriginalExtension() == 'JPG' || $file->getClientOriginalExtension() == 'PNG' || $file->getClientOriginalExtension() == 'JPEG' || $file->getClientOriginalExtension() == 'jpg' || $file->getClientOriginalExtension() == 'png' || $file->getClientOriginalExtension() == 'jpeg')) {
-                $coordenadas = $this->coords($air->campus->lat, $air->campus->long);
+
+                $coordenadas = $this->coords($operation->campus->lat, $operation->campus->long);
 
                 $lat=$coordenadas['latitud'];
                 $long=$coordenadas['longitud'];
@@ -248,7 +296,6 @@ class AirController extends Controller
                 $text2_sin = isset($request->date) && $request->date ? Carbon::create($request->date)->format('j F Y H:i:s') : now()->format('j F Y H:i:s');
 
                 $text2 = $this->month($text2_sin);
-
 
                 $text3 = $lat.'N '.$long . 'W';
 
@@ -280,7 +327,7 @@ class AirController extends Controller
                         $font->angle(0);
                     });
                     $height = $height - $request->size_letter - 2;
-                    $image->text($air->campus->dep.'-'.$air->campus->mun, $image->width() - 5, $image->height() - $height, function($font) use($request) {
+                    $image->text($operation->campus->dep.'-'.$operation->campus->mun, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size($request->size_letter);
                         $font->color($request->color);
@@ -289,7 +336,7 @@ class AirController extends Controller
                         $font->angle(0);
                     });
                     $height = $height - $request->size_letter - 2;
-                    $image->text($air->campus->site_name, $image->width() - 5, $image->height() - $height, function($font) use($request) {
+                    $image->text($operation->campus->site_name, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size($request->size_letter);
                         $font->color($request->color);
@@ -298,7 +345,7 @@ class AirController extends Controller
                         $font->angle(0);
                     });
                     $height = $height - $request->size_letter - 2;
-                    $image->text($air->campus->dep, $image->width() - 5, $image->height() - $height, function($font) use($request) {
+                    $image->text($operation->campus->dep, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size($request->size_letter);
                         $font->color($request->color);
@@ -307,7 +354,7 @@ class AirController extends Controller
                         $font->angle(0);
                     });
                     $height = $height - $request->size_letter - 2;
-                    $image->text('#BTS'.$air->campus->mun, $image->width() - 5, $image->height() - $height, function($font) use($request) {
+                    $image->text('#BTS'.$operation->campus->mun, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size($request->size_letter);
                         $font->color($request->color);
@@ -316,7 +363,7 @@ class AirController extends Controller
                         $font->angle(0);
                     });
                     $height = $height - $request->size_letter - 2;
-                    $image->text('OT '.$air->campus->OT, $image->width() - 5, $image->height() - $height, function($font) use($request) {
+                    $image->text('OT '.$operation->campus->OT, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size($request->size_letter);
                         $font->color($request->color);
@@ -347,7 +394,7 @@ class AirController extends Controller
                         $font->angle(0);
                     });
                     $height += (5+$const);
-                    $image->text($air->campus->population, $image->width() - 5, $image->height() - $height, function($font) use($request,$const) {
+                    $image->text($operation->campus->population, $image->width() - 5, $image->height() - $height, function($font) use($request,$const) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size($const);
                         $font->color($request->color);
@@ -356,7 +403,7 @@ class AirController extends Controller
                         $font->angle(0);
                     });
                     $height += (5+$const);
-                    $image->text($air->campus->site_name, $image->width() - 5, $image->height() - $height, function($font) use($request,$const) {
+                    $image->text($operation->campus->site_name, $image->width() - 5, $image->height() - $height, function($font) use($request,$const) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size($const);
                         $font->color($request->color);
@@ -388,7 +435,7 @@ class AirController extends Controller
                     'type' => $file->getClientOriginalExtension(),
                 ]);
             }
-            $air->files()->create([
+            $operation->files()->create([
                 'name' => $name,
                 'description' => $request->name_d,
                 'commentary' => $request->commentary,
@@ -481,6 +528,7 @@ class AirController extends Controller
             "latitud" => $latitud,
             "longitud"=> $longitud,
         );
+
     return $coodernadas;
     }
 

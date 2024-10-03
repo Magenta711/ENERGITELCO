@@ -72,15 +72,11 @@ class msuLandExport implements FromView, WithTitle, WithDrawings, ShouldAutoSize
             40    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'center']],
             43    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'center']],
             190    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'top']],
-            // 166    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'top']],
-            // 19    => ['font' => ['bold' => true,]],
-            // 37    => ['font' => ['bold' => true,]],
         ];
     }
 
     public function view(): View
     {
-        // return $files;
         return view('execution_works.maintenance.tierra.export',[
             'id' => $this->id,
             'dates' => $this->dates,

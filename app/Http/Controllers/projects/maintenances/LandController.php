@@ -29,7 +29,7 @@ class LandController extends Controller
      */
     public function index(msu_campus $id)
     {
-        $general=general_land::get();
+        $general=general_land::where('maintenance_id',$id->id)->get();
 
         return view('execution_works.maintenance.tierra.index', compact('id','general'));
     }
@@ -187,13 +187,6 @@ class LandController extends Controller
         $files['logo_claro']['coordinates'] = 'L1';
         $files['logo_claro']['place'] = 3;
 
-        // $files['logo_claro']['name'] = 'Logo_Claro';
-        // $files['logo_claro']['description'] = 'Logo de Claro';
-        // $files['logo_claro']['path'] = public_path('/img/claro.png');
-        // $files['logo_claro']['height'] = 80;
-        // $files['logo_claro']['coordinates'] = 'O3';
-        // $files['logo_claro']['place'] = 3;
-
         if ($id->files)
         {
             foreach ($id->files as $key => $value) {
@@ -206,13 +199,10 @@ class LandController extends Controller
                     $files[$str]['height'] = 200;
                     $files[$str]['coordinates'] = $value->place;
                     $files[$str]['place'] = $place[0];
-                    // return $place;
                 }
             }
         }
-        // return $dates;
-        // return view('execution_works.maintenance.tierra.export', compact('id','dates'));
-        return (new msuLandExport($id, $dates,$files))->download('SPT-1A EM6 FORMATO PRUEBA.xlsx');
+        return (new msuLandExport($id,$dates,$files))->download('SPT-1A EM6 FORMATO PRUEBA.pdf');
     }
 
     /**
@@ -264,7 +254,7 @@ class LandController extends Controller
                     $image_sin->resize(null, 500, function ($constraint) {
                         $constraint->aspectRatio();
                     });
-                    $height = 25 + ($request->size_letter * 3);
+                    $height = 50 + ($request->size_letter * 3);
                     $image->text($text2, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size($request->size_letter);
@@ -293,6 +283,15 @@ class LandController extends Controller
                     });
                     $height = $height - $request->size_letter - 2;
                     $image->text($land->campus->site_name, $image->width() - 5, $image->height() - $height, function($font) use($request) {
+                        $font->file(public_path('fonts/Arial/ARIAL.TTF'));
+                        $font->size($request->size_letter);
+                        $font->color($request->color);
+                        $font->align('right');
+                        $font->valign('top');
+                        $font->angle(0);
+                    });
+                    $height = $height - $request->size_letter - 2;
+                    $image->text('OT '.$land->campus->OT, $image->width() - 5, $image->height() - $height, function($font) use($request) {
                         $font->file(public_path('fonts/Arial/ARIAL.TTF'));
                         $font->size($request->size_letter);
                         $font->color($request->color);

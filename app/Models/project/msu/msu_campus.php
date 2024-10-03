@@ -21,6 +21,7 @@ class msu_campus extends Model
         'locate',
         'structure',
         'plants_amount',
+        'OT',
     ];
 
 }

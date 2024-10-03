@@ -1883,10 +1883,19 @@ f <!-- =============================================== -->
                      'CCJL Editar Administraciones',
                  ]))
          {{-- energias --}}
-            <li class="{{ activeMenu('energias*') }}">
-                <a class="btn-send"href="{{ route('energy') }}">
-                    <i class="fa fa-solar-panel"></i> <span>ENERGIA</span>
+            <li class="treeview {{ activeMenu('cotizacion*') }} {{ activeMenu('productos*') }}">
+                <a href="#">
+                    <i class="fa fa-solar-panel"></i> <span>ENERGÍAS</span><span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
                 </a>
+                <ul class="treeview-menu">
+                    <li class="{{ activeMenu('cotizacion*') }}"><a class="btn-send" href="{{ route('energy') }}"><i
+                                class="fa fa-file-alt"></i> COTIZACIONES</a></li>
+                    <li class="{{ activeMenu('productos*') }}"><a class="btn-send" href="{{ route('energy_products') }}"><i
+                                class="fa fa-cart-plus"></i> PRODUCTOS</a></li>
+                    {{-- REPORTE DE VENTAS --}}
+                </ul>
             </li>
         @endif
 
