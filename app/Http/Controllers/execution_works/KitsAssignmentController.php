@@ -52,7 +52,6 @@ class KitsAssignmentController extends Controller
     //Sección de asignación
     public function assignment()
     {
-        // $id = kits::find($id);
         $kits = kits::where('estado_id',2)->where('responsable_id',auth()->id())->get();
         $usuarios = User::where('state',1)->with('roles')->get();
         return view('execution_works.kits.assigment', compact('usuarios', 'kits'));
@@ -73,7 +72,6 @@ class KitsAssignmentController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
         $request->validate([
             'cedula_revisor' => ['required'],
             'unique_kit' => ['required']
@@ -81,7 +79,8 @@ class KitsAssignmentController extends Controller
         $assigment = assigment::create([
             'id_kit'=>$request->unique_kit,
             'id_asignado' => $request->cedula_revisor,
-            'id_responsable' => auth()->id()
+            'id_responsable' => auth()->id(),
+            'status'=>1,
         ]);
         if (isset($request->item) && $request->item) {
             for ($j=1; $j <= count($request->item); $j++) {
@@ -109,6 +108,7 @@ class KitsAssignmentController extends Controller
      */
     public function show(assigment $id)
     {
+        // return $id->extra;
         return view('execution_works.kits_assignment.show', compact('id'));
     }
 
@@ -132,14 +132,13 @@ class KitsAssignmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, assigment $id)
     {
-        return $request;
         assigment::find($id)->update($request->all());
-        // tools_add::where('id_assignado',$id)->delete();
+        tools_add::where('id_assignado',$id)->delete();
         for ($j=1; $j <= count($request->item); $j++) {
             $tools_add = tools_add::create([
-                'id_assignado' => $id,
+                'id_assignado' => $id->id,
                 'nombre' => isset($request->item[$j]) ? $request->item[$j] : null,
                 'cantidad' => isset($request->amount[$j]) ? $request->amount[$j] : null,
                 'marca' => isset($request->marca[$j]) ? $request->marca[$j] : null,

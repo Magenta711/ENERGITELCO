@@ -35,10 +35,6 @@ class ReviewkitsController extends Controller
 
     public function index()
     {
-        // ahhh
-        // $assigment = assigment::with(['asignado', 'kit_asignado', 'responsable'])->get();
-        #Aquí se debe listar es los user status 1 osea activo, condicionar que tenga asignaciones
-        // $users = User::where('state',1)->get();
         $users = User::where('state',1)->get();
         return view('execution_works.review_assignment.index', compact(['users']));
     }
@@ -50,14 +46,8 @@ class ReviewkitsController extends Controller
      */
     public function review($id)
     {
-        // $id = assigment::find($id);
-        // $assigment = assigment::with(['asignado', 'kit_asignado', 'responsable'])->get();
-        #Traido entonces el ID del user
         $user = User::find($id);
-        // return $user->assigment_kits[0]->kit_asignado->review_kits;
-        // $review_kits = review_kits::find();
         $review_tools = review_tools::with(['revision','revisor'])->get();
-
         return view('execution_works.review_assignment.review', compact(['user','review_tools']));
     }
 
@@ -78,25 +68,43 @@ class ReviewkitsController extends Controller
             'date_review'=> ['required'],
             'commentary'=> ['required']
         ]);
-        // return $request;
+
         $review_tools = review_tools::create([
-            'id_asignado'=> $request->id_user,
-            'id_revisor'=> auth()->user()->id,
-            'fecha_revision'=> $request -> date_review,
-        ]);
+                'id_asignado'=> $request->id_user,
+                'id_revisor'=> auth()->user()->id,
+                'fecha_revision'=> $request -> date_review,
+            ]);
         for ($k=0; $k < count($request->kit_id); $k++) {
+            $kit= kits::find($request->kit_id[$k]);
+            $kit->update([
+                'estado_id'=>$request->status_kit[$k],
+            ]);
+            $assigment=assigment::where('id_kit',$request->kit_id[$k])->first();
+            $assigment->update([
+               'status'=>$request->status_kit[$k],
+            ]);
             $review_kit = review_kits::find($request->kit_id[$k]);
+
             $review_kit = review_kits::create([
                 'id_review'=>$review_tools->id,
                 'id_kit' => $request->kit_id[$k],
-                'comentario'=>$review_kit->commentary.Carbon::create(now())->format('Y-m-d').': '.$request->commentary[$k],
-                // 'comentario'=> $request -> commentary[$k],
             ]);
+
+            $newComment = [
+                'date' => Carbon::now()->format('Y-m-d'),
+                'comment' => $request->commentary[$k]
+            ];
+
+            $comments[] = $newComment;
+
+            $review_kit->update([
+                'comentario' => json_encode($comments)
+            ]);
+
             for ($i=0; $i < count($request->herramienta_id[$k]); $i++) {
                 if ($request->observacion_tool[$k][$i] != ""){
                 $tool = tools::find($request->herramienta_id[$k][$i]);
                 $tool->update([
-                    // 'Observaciones'=>$tool->Observaciones.Carbon::create(now())->format('Y-m-d').' '.$request->observacion_tool[$k][$i],
                     'Observaciones'=>$request->observacion_tool[$k][$i],
                 ]);
                 }
@@ -108,7 +116,6 @@ class ReviewkitsController extends Controller
                     'comentario'=>$request->observacion_tool[$k][$i],
                 ]);
             }
-            // return $request;
             if (isset($request->herramienta_extra_id[$k])){
                 for ($n=0; $n < count($request->herramienta_extra_id[$k]); $n++) {
                     if ($request->observacion_extra[$k][$n] != ""){
@@ -141,7 +148,7 @@ class ReviewkitsController extends Controller
     {
         $user = User::find($id);
         $review_tools = review_tools::with(['revision','revisor'])->where('id_asignado',$id)->latest()->first();
-        // return $review_tools;
+        // return $review_tools->review_tools;
 
         return view('execution_works.review_assignment.show', compact(['user','review_tools']));
     }

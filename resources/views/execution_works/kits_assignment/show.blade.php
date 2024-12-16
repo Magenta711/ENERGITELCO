@@ -41,8 +41,6 @@
                                 <p>{{$id->responsable->name }}</p>
                             </div>
                         </div>
-                        {{-- @foreach (  as ) --}}
-                        {{-- @endforeach --}}
                     </div>
                     <div class="row">
                         <div class="col-md-4">
@@ -57,18 +55,10 @@
                                 <p>{{ $id->created_at->format('Y-m-d') }}</p>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="user_id">Fecha de revisión</label>
-                                <p></p>
-                            </div>
-                        </div>
                         <hr>
                         @if (isset($assigments->kit_asignado->review_kits))
                         <h4>Historial:</h4>
-                            {{-- <div class="row"> --}}
                                 <div class="md">
-                                    {{-- {{dd($assigments->kit_asignado->review_kits)}} --}}
                                     <div class="col-md-6 col-sm-4">
                                         @foreach ($assigments->kit_asignado->review_kits as $review_kit)
                                             <div class="form-group row">
@@ -77,8 +67,7 @@
                                         @endforeach
                                     </div>
                                 </div>
-                            {{-- </div> --}}
-                        @endif
+|                        @endif
                     </div>
                     <hr>
                     <h3>Implementos Obligatorios:</h3>
@@ -108,30 +97,27 @@
                    <hr>
                    @foreach ($id->extra as $tool_add)
                    <div class="form-group row">
-                    <div class="col-md-2 col-sm-4 mb-3">
-                        <Strong>Implemento</Strong><br>
-                        <p>{{ $tool_add->nombre }}</p>
+                        <div class="col-md-2 col-sm-4 mb-3">
+                            <Strong>Implemento</Strong><br>
+                            <p>{{ $tool_add->nombre }}</p>
+                        </div>
+                        <div class="col-md-2 col-sm-4">
+                            <label for="amount_${item}">Cantidad</label>
+                            <p>{{ $tool_add->cantidad}}</p>
+                        </div>
+                        <div class="col-md-3 col-sm-4">
+                            <label for="marca_${item}">Marca</label>
+                            <p>{{ $tool_add->marca}}</p>
+                        </div>
+                        <div class="col-md-5 col-sm-12 mb-1">
+                            <label for="observacion_${item}">Observaciones</label>
+                            <p>{{ $tool_add->Observaciones}}</p>
+                        </div>
                     </div>
-                    <div class="col-md-2 col-sm-4">
-                        <label for="amount_${item}">Cantidad</label>
-                        <p>{{ $tool_add->cantidad}}</p>
-                    </div>
-                    <div class="col-md-3 col-sm-4">
-                        <label for="marca_${item}">Marca</label>
-                        <p>{{ $tool_add->marca}}</p>
-                    </div>
-                    <div class="col-md-5 col-sm-12 mb-1">
-                        <label for="observacion_${item}">Observaciones</label>
-                        <p>{{ $tool_add->Observaciones}}</p>
-                    </div>
-                </div>
                    @endforeach
                 </div>
             </div>
         </div>
     </div>
-
-
-
 </section>
 @endsection

@@ -265,7 +265,6 @@ class OperationController extends Controller
                     $files[$str]['height'] = 200;
                     $files[$str]['coordinates'] = $value->place;
                     $files[$str]['place'] = $place[0];
-                    // return $place;
                 }
             }
         }

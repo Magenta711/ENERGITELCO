@@ -21,5 +21,9 @@ class review_tools extends Model
         {
             return $this->hasOne(User::class, 'id', 'id_revisor');
         }
+        public function review_tools()
+        {
+            return $this->hasMany(review_tools_kits::class, 'id_review', 'id');
+        }
 }
 

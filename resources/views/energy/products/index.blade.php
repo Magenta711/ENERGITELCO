@@ -3,7 +3,7 @@
 @section('content')
 <section class="content-header">
     <h1>
-        Energía Solar <small></small>
+        Energía Solar <small>ENERGÍAS</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
@@ -15,14 +15,11 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header">
-                    <div class="box-title">Productos</div>
+                    <div class="box-title text-center">Productos</div>
                     <div class="box-tools">
-                        {{-- @can('Disparar evaluación de desempeño') --}}
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target=".bd-example-modal-lg">Editar valores de cotización</button>
-                   {{-- @endcan --}}
+                        <a href="{{ route('energy_products.create') }}" class="btn btn-success">Agregar Productos</a>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

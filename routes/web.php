@@ -1031,6 +1031,7 @@ Route::get('energias/editar', 'EnergyController@edit')->name('energy_edit');
 Route::put('energias/update/{id}','EnergyController@update')->name('energy_update');
 
 Route::get('products', 'ProductsController@index')->name('energy_products');
+Route::get('products/create', 'ProductsController@create')->name('energy_products.create');
 
 Route::get('project/maintenance/smu', 'projects\maintenances\SMUController@index')->name('SMU');
 Route::get('project/maintenance/smu/create', 'projects\maintenances\SMUController@create')->name('smu_create');

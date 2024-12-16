@@ -62,6 +62,7 @@
                         $incre_kit = 0;
                     @endphp
                     @foreach ($user->assigment_kits as $assigments)
+                    @if ($assigments->status==1)
                         <input type="hidden" readonly name="kit_id[{{ $incre_kit }}]"
                             value="{{ $assigments->kit_asignado->id }}">
                         <div class="panel box box">
@@ -85,9 +86,17 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="date">Fecha de asignación</label>
-                                        {{-- <p>{{$assigments->created_at->format('Y--d')}}</p> --}}
                                         <input type="date" value="{{ $assigments->created_at->format('Y-m-d') }}"
                                             id="date" class="form-control controlName" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="status_kit">Estado del Kit</label>
+                                        <select name="status_kit[{{ $incre_kit }}]" id="status_kit" class="form-control">
+                                            <option value="1" {{ $assigments->kit_asignado->estado_id == 1 ? 'selected' : '' }}>Asignado</option>
+                                            <option value="2" {{ $assigments->kit_asignado->estado_id == 2 ? 'selected' : '' }}>Devuelto</option>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -134,7 +143,7 @@
                                                 <select name="status_tools[{{ $incre_kit }}][{{ $incre_tool_kit }}]"
                                                     id="status_tools" class="form-control selectorkits">
                                                     <option value="tool_state_1">Mal Estado</option>
-                                                    <option value="tool_state_2">Buen Estado</option>
+                                                    <option value="tool_state_2" selected>Buen Estado</option>
                                                     <option value="tool_state_3">Reemplazado</option>
                                                 </select>
                                             </div>
@@ -200,7 +209,6 @@
                                                 </label>
                                                 <textarea name="observacion_extra[{{ $incre_kit }}][{{ $incre_tool_kit }}]"
                                                     id="observacion_{{ $incre_tool_kit }}" cols="30" rows="2" class="form-control tools_observation">{{$tool_add->Observaciones }}</textarea>
-                                                {{-- <textarea name="observacion[{{ $incre_kit }}][{{$incre_tool_kit}}]" id="observacion_{{$incre_tool_kit}}" cols="30" rows="2" class="form-control tools_observation">{{$tool_add->Observaciones}}</textarea>                                 --}}
                                             </div>
                                         </div>
                                         @php
@@ -209,18 +217,20 @@
                                     @endforeach
                                     <hr>
                                     @if (isset($assigments->kit_asignado->review_kits))
-                                        {{-- <div class="row"> --}}
-                                            <div class="md">
-                                                {{-- {{dd($assigments->kit_asignado->review_kits)}} --}}
+                                            <div class="row">
                                                 <div class="col-md-6">
                                                     @foreach ($assigments->kit_asignado->review_kits as $review_kit)
-                                                        <div class="form-group row">
-                                                            <p>-{{ $review_kit->comentario }}</p>
-                                                        </div>
+                                                        @php
+                                                            $comments = json_decode($review_kit->comentario, true);
+                                                        @endphp
+                                                        @if (is_array($comments))
+                                                            @foreach ($comments as $comment)
+                                                                <p>Fecha: {{ $comment['date'] }} - Comentario: {{ $comment['comment'] }}</p>
+                                                            @endforeach
+                                                        @endif
                                                     @endforeach
                                                 </div>
                                             </div>
-                                        {{-- </div> --}}
                                     @endif
                                     <div class="row">
                                         <div class="md">
@@ -241,6 +251,7 @@
                         @php
                             $incre_kit++;
                         @endphp
+                    @endif
                     @endforeach
                     <input type="submit" class="btn btn-sm btn-info btn-send">
                 </div>

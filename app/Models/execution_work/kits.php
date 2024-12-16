@@ -40,10 +40,8 @@ class kits extends Model
         return $this->hasMany(review_kits::class, 'id_kit', 'id');
     }
 
-    // public function asignado()
-    // {
-    //     return $this->hasMany(assigment::class, 'id_asignado', 'id');
-    // }
-
-
+    public function assigments()
+    {
+        return $this->hasMany(assigment::class, 'id_kit', 'id');
+    }
 }

@@ -31,8 +31,7 @@ class KitsController extends Controller
 
     public function index()
     {
-        $kits = kits::with(['responsable','estado_kit'])->get();
-
+        $kits = kits::with(['responsable','estado_kit', 'assigments'])->get();
         return view('execution_works.kits.index', compact('kits'));
     }
 
@@ -61,7 +60,7 @@ class KitsController extends Controller
             'cantidad' => ['required']
         ]);
         $request['estado_id'] = 2;
-        $request['token'] = Str::random(10);//Asi se puede crear el token
+        $request['token'] = Str::random(10);
         $nombre_original = $request['nombre'];
         $arr_name = explode(' ',$nombre_original);
         $iniciales = '';
@@ -115,6 +114,7 @@ class KitsController extends Controller
     public function edit(kits $id)
     {
         $usuarios = User::where('state',1)->with('roles')->get();
+        // return $id;
         return view('execution_works.kits.edit', compact('id','usuarios'));
     }
 
@@ -131,55 +131,75 @@ class KitsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kits $id)
-    {
-        // return $request;
-        $request->validate([
-            'nombre' => ['required'],
-            'item'=>['required'],
-        ]);
+    // public function update(Request $request, Kits $id)
+    // {
+    //     $request->validate([
+    //         'nombre' => ['required'],
+    //         'item'=>['required'],
+    //     ]);
 
-        $nombre = $id->nombre;
-        $nombre_original = $request->nombre;
-        $token = $id->token;
-        if( $request->nombre != $id->nombre_original){
-            $nombre_original = $request->nombre;
-            $nombre = $request->nombre." ".end(explode(' ',$id->nombre));
-            $token = Str::random(10);
-        }
-        $history = now()->format('d/m/Y H:i:s').': kit individualmente con '.count($request->item).' herramientas editado por: '.auth()->user()->name."\n";
-        $id->update([
-            'nombre_original' => $nombre_original,
-            'nombre' => $nombre,
-            'cantidad_herramientas' => count($request->item),
-            'history' => $id->history.''.$history
-        ]);
+    //     return $request;
 
-        for ($j=0; $j < count($request->item); $j++) {
-            if ($request->item_id[$j] == 0) {
-                $tool = tools::create([
-                    'kit_id'=>$id->id,
-                    'nombre' => $request->item[$j],
-                    'cantidad' => $request->amount[$j],
-                    'marca' => $request->marca[$j],
-                    'Observaciones' => $request->observacion[$j],
-                    'is_perent' => false,
-                    'perent_id' => null
-                ]);
-            }else {
-                $tool = tools::find($request->item_id[$j]);
-                $tool->update([
-                    'nombre' => $request->item[$j],
-                    'cantidad' => $request->amount[$j],
-                    'marca' => $request->marca[$j],
-                    'Observaciones' => $request->observacion[$j],
-                ]);
-            }
+    //     $nombre = $id->nombre;
+    //     $nombre_original = $request->nombre;
+    //     $token = $id->token;
+    //     if( $request->nombre != $id->nombre_original){
+    //         $nombre_original = $request->nombre;
+    //         $nombre = $request->nombre." ".end(explode(' ',$id->nombre));
+    //         $token = Str::random(10);
+    //     }
 
-        }
+    //     $history = now()->format('d/m/Y H:i:s').': kit individualmente con '.count($request->item).' herramientas editado por: '.auth()->user()->name."\n";
+    //     $id->update([
+    //         'nombre_original' => $nombre_original,
+    //         'responsable_id' => $request->responsable_id,
+    //         'nombre' => $nombre,
+    //         'cantidad_herramientas' => count($request->item),
+    //         'history' => $id->history.''.$history
+    //     ]);
+    //     // $tools = tools::where('kit_id',$id->id)->first()->get();
+    //     $is_parent= $tools->is_parent;
+    //     $parent_id= $tools->parent_id;
+    //     return $tools->is_parent;
+    //     return $parent_id;
+    //     return $is_parent;
+    //     for ($j=1; $j <= count($request->item); $j++) {
+    //         // $tool = tools::create([
+    //         //     'kit_id'=>$id,
+    //         //     'nombre' => isset($request->item[$j]) ? $request->item[$j] : null,
+    //         //     'cantidad' => isset($request->amount[$j]) ? $request->amount[$j] : null,
+    //         //     'marca' => isset($request->marca[$j]) ? $request->marca[$j] : null,
+    //         //     'Observaciones' => isset($request->observaciones[$j]) ? $request->observaciones[$j] : null,
+    //         // ]);
+    //     }
+    //     return redirect()->route('kits_show', $id)->with('success','Se ha editado el kit correctamente');
 
-        return redirect()->route('kits_show', $id)->with('success','Se ha editado el kit correctamente');
-    }
+    //     // for ($j=0; $j < count($request->item); $j++) {
+    //     //     return $request->item_id;
+    //     //     if ($request->item_id[$j] == 0) {
+    //     //         $tool = tools::create([
+    //     //             'kit_id'=>$id->id,
+    //     //             'nombre' => $request->item[$j],
+    //     //             'cantidad' => $request->amount[$j],
+    //     //             'marca' => $request->marca[$j],
+    //     //             'Observaciones' => $request->observacion[$j],
+    //     //             'is_perent' => false,
+    //     //             'perent_id' => null
+    //     //         ]);
+    //     //     }else {
+    //     //         $tool = tools::find($request->item_id[$j]);
+    //     //         $tool->update([
+    //     //             'nombre' => $request->item[$j],
+    //     //             'cantidad' => $request->amount[$j],
+    //     //             'marca' => $request->marca[$j],
+    //     //             'Observaciones' => $request->observacion[$j],
+    //     //         ]);
+    //     //     }
+
+    //     // }
+
+    //     // return redirect()->route('kits_show', $id)->with('success','Se ha editado el kit correctamente');
+    // }
 
     public function update_all(Request $request, $token)
     {

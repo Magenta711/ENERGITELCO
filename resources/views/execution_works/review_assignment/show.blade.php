@@ -97,20 +97,12 @@
                                         <div class="col-md-1 col-sm-4">
                                             <label for="amount_{{ $incre_tool_kit }}">Cantidad</label>
                                             <p>{{ $tool->cantidad}}</p>
-                                            {{-- <input type="text"
-                                                name="amount[{{ $incre_kit }}][{{ $incre_tool_kit }}]"
-                                                id="amount_{{ $incre_tool_kit }}" value="{{ $tool->cantidad }}"
-                                                class="form-control tools_amount" disabled> --}}
                                         </div>
-                                        <div class="col-md-2 col-sm-4">
+                                        <div class="col-md-3 col-sm-4">
                                             <label for="marca_{{ $incre_tool_kit }}">Marca</label>
                                             <p>{{ $tool->marca}}</p>
-                                            {{-- <input type="text"
-                                                name="marca[{{ $incre_kit }}][{{ $incre_tool_kit }}]"
-                                                id="marca_{{ $incre_tool_kit }}" value="{{ $tool->marca }}"
-                                                class="form-control tools_branch" disabled> --}}
                                         </div>
-                                        <div class="col-md-2 col-sm-4">
+                                        {{-- <div class="col-md-2 col-sm-4">
                                             <label for="status_tools">Estado</label>
                                             <select name="status_tools[{{ $incre_kit }}][{{ $incre_tool_kit }}]"
                                                 id="status_tools" class="form-control selectorkits">
@@ -118,12 +110,11 @@
                                                 <option value="tool_state_2">Buen Estado</option>
                                                 <option value="tool_state_3">Reemplazado</option>
                                             </select>
-                                        </div>
-                                        <div class="col-md-4 col-sm-12 mb-1">
+                                        </div> --}}
+                                        <div class="col-md-5 col-sm-12 mb-1">
                                             <label for="observacion_{{ $incre_tool_kit }}">Observaciones
                                                 (Historial)
                                             </label>
-                                            {{-- <p>{{ $tool->Observaciones}}</p> --}}
                                             <textarea name="observacion_tool[{{ $incre_kit }}][{{ $incre_tool_kit }}]"
                                                 id="observacion_{{ $incre_tool_kit }}" cols="30" rows="2" class="form-control tools_observation" disabled>{{ $tool->Observaciones }}</textarea>
                                         </div>
@@ -160,7 +151,7 @@
                                                 class="form-control tools_amount" disabled>
                                                 <p>{{ $tool_add->cantidad }}</p>
                                         </div>
-                                        <div class="col-md-2 col-sm-4">
+                                        <div class="col-md-3 col-sm-4">
                                             <label for="marca_{{ $incre_tool_kit }}">Marca</label>
                                             {{-- <p>{{ $tool_add->marca}}</p> --}}
                                             <input type="hidden"
@@ -169,17 +160,7 @@
                                                 class="form-control tools_branch" disabled >
                                                 <p>{{ $tool_add->marca }}</p>
                                         </div>
-                                        <div class="col-md-2 col-sm-4">
-                                            <label for="status_tools">Estado</label>
-                                            <select name="status_tools_add[{{ $incre_kit }}][{{ $incre_tool_kit }}]"
-                                                id="status_tools" class="form-control selectorkits">
-                                                <option value="Mal Estado" default>Mal Estado</option>
-                                                <option value="Buen Estado" selected>Buen Estado</option>
-                                                <option value="Reemplazado">Reemplazado</option>
-                                            </select>
-                                            <p></p>
-                                        </div>
-                                        <div class="col-md-4 col-sm-12 mb-1">
+                                        <div class="col-md-5 col-sm-12 mb-1">
                                             <label for="observacion_{{ $incre_tool_kit }}">Observaciones
                                                 (Historial)
                                             </label>
@@ -195,18 +176,20 @@
                                 <hr>
                                 @if (isset($assigments->kit_asignado->review_kits))
                                 <h4>Historial:</h4>
-                                    {{-- <div class="row"> --}}
-                                        <div class="md">
-                                            {{-- {{dd($assigments->kit_asignado->review_kits)}} --}}
-                                            <div class="col-md-6 col-sm-4">
-                                                @foreach ($assigments->kit_asignado->review_kits as $review_kit)
-                                                    <div class="form-group row">
-                                                        <p>-{{ $review_kit->comentario }}</p>
-                                                    </div>
-                                                @endforeach
-                                            </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            @foreach ($assigments->kit_asignado->review_kits as $review_kit)
+                                                @php
+                                                    $comments = json_decode($review_kit->comentario, true);
+                                                @endphp
+                                                @if (is_array($comments))
+                                                    @foreach ($comments as $comment)
+                                                        <p><b>Fecha: {{ $comment['date'] }}</b> - Comentario: {{ $comment['comment'] ?  $comment['comment'] : 'Sin comentarios'}}</p>
+                                                    @endforeach
+                                                @endif
+                                            @endforeach
                                         </div>
-                                    {{-- </div> --}}
+                                    </div>
                                 @endif
                             </div>
                         </div>

@@ -12,6 +12,7 @@ class assigment extends Model
         'id_responsable',
         'id_asignado',
         'id_kit',
+        'status',
     ];
 
     public function asignado()
@@ -30,6 +31,4 @@ class assigment extends Model
     {
         return $this->hasMany(tools_add::class, 'id_assignado', 'id');
     }
-
-
 }

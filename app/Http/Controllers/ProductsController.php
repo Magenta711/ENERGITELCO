@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('auth');
+        $this->middleware('verified');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +28,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        return view('energy.products.create');
     }
 
     /**

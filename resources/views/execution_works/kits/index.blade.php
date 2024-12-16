@@ -14,7 +14,6 @@
 </section>
 {{-- Content main --}}
 <section class="content">
-     
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
@@ -45,21 +44,22 @@
                                 @foreach ($kits as $kit)
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
+                                        <td>{{count($kit->assigments)}}</td>
                                         <td>{{$kit->codigo}}</td>
                                         <td>{{$kit->nombre}}</td>
                                         <td>{{$kit->responsable->name}}</td>
                                         <td>{{$kit->estado_kit->estado}}</td>
                                         <td>
                                             <div class="btn-group ms-2">
-                                                @can('Ver kits')    
+                                                @can('Ver kits')
                                                 <a href="{{ route('kits_show',$kit->id) }}" class="btn btn-sm btn-primary" value="Ver"> Ver</a>
                                                 @endcan
                                                 @can('Editar todos los Kits')
                                                 <a  href="{{ route('kits_edit_all',$kit->id) }}" class="btn btn-sm btn-success" value="Editar todos los kit">Editar todos los kit</a>
                                                 @endcan
-                                                @can('Editar Kits')
+                                                {{-- @can('Editar Kits')
                                                 <a  href="{{ route('kits_edit',$kit->id) }}" class="btn btn-sm bg-olive" value="Editar este kit">Editar este kit</a>
-                                                @endcan
+                                                @endcan --}}
                                                 @can('Eliminar Kits')
                                                 <input type="submit" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#modal_delete_{{$kit->id}}" value="Eliminar">
                                                 @include('execution_works.kits.modals.delete')
