@@ -1030,8 +1030,22 @@ Route::get('energias', 'EnergyController@index')->name('energy');
 Route::get('energias/editar', 'EnergyController@edit')->name('energy_edit');
 Route::put('energias/update/{id}','EnergyController@update')->name('energy_update');
 
-Route::get('products', 'ProductsController@index')->name('energy_products');
-Route::get('products/create', 'ProductsController@create')->name('energy_products.create');
+Route::get('energy/products', 'energy\ProductsController@index')->name('energy_products');
+Route::get('energy/products/create', 'energy\ProductsController@create')->name('energy_products.create');
+Route::post('energy/products/store', 'energy\ProductsController@store')->name('energy_products.store');
+Route::put('energy/products/update/{id}', 'energy\ProductsController@update')->name('energy_products.update');
+Route::delete('energy/products/destroy/{id}', 'energy\ProductsController@destroy')->name('energy_products.destroy');
+
+Route::get('energy/clients', 'energy\EnergyClientsController@index')->name('energy_clients');
+Route::post('energy/clients/store', 'energy\EnergyClientsController@store')->name('energy_clients.store');
+Route::put('energy/clients/update/{id}', 'energy\EnergyClientsController@update')->name('energy_clients.update');
+Route::delete('energy/clients/destroy/{id}', 'energy\EnergyClientsController@destroy')->name('energy_clients.destroy');
+
+Route::get('energy/sales', 'energy\EnergySaleController@index')->name('energy_sale');
+Route::get('energy/sales/create', 'energy\EnergySaleController@create')->name('energy_sale.create');
+Route::post('energy/sales/store', 'energy\EnergySaleController@store')->name('energy_sale.store');
+Route::get('energy/sales/show/{id}', 'energy\EnergySaleController@show')->name('energy_sale.show');
+
 
 Route::get('project/maintenance/smu', 'projects\maintenances\SMUController@index')->name('SMU');
 Route::get('project/maintenance/smu/create', 'projects\maintenances\SMUController@create')->name('smu_create');

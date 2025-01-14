@@ -38,19 +38,21 @@
 @endsection
 
 @section('js')
-    <script>      
+    <script>
         let num_tools = {{old('item') ? count(old('item')) : 0}}
         // Kits disponibles
         $('#namekit').change(function () {
             let ids = $('.kit-id-'+this.value)
             let nombres = $('.kit-nombres-'+this.value)
+            console.log(ids.val());
+            console.log(nombres);
             let html_kits = `<option value=""></option>`
             for (let i = 0; i < ids.length; i++) {
                 $('#unique_kit').prop( "disabled", false )
                 html_kits += `<option value="${ids[i].value}">${nombres[i].value}</option>`;
             }
             $('#unique_kit').html(html_kits);
-            
+
         })
 
         // End Kits disponibles
@@ -76,14 +78,14 @@
 
                 if (old) {
                     $('#implementos_obligatorios').show()
-                
+
                     let nombre = $('.tool-nombre-'+old)
                     let cantidad = $('.tool-cantidad-'+old)
                     let marca = $('.tool-marca-'+old)
                     let Observaciones = $('.tool-Observaciones-'+old)
                     let html_tools = ''
                     for (let i = 0; i < nombre.length; i++) {
-        
+
                         value = {
                             nombre: nombre[i].value,
                             cantidad: cantidad[i].value,
@@ -100,19 +102,19 @@
         }
 
         // end Function old
-        
+
         // Kits disponibles seleccionado
         $('#unique_kit').change(function () {
             if (this.value) {
                 $('#implementos_obligatorios').show()
-               
+
                 let nombre = $('.tool-nombre-'+this.value)
                 let cantidad = $('.tool-cantidad-'+this.value)
                 let marca = $('.tool-marca-'+this.value)
                 let Observaciones = $('.tool-Observaciones-'+this.value)
                 let html_tools = ''
                 for (let i = 0; i < nombre.length; i++) {
-    
+
                     value = {
                         nombre: nombre[i].value,
                         cantidad: cantidad[i].value,
@@ -149,7 +151,7 @@
                 })
                 return
             }
-            
+
             $('.loader').show();
             $('#form').submit();
         })
@@ -170,12 +172,12 @@
             }
             return true
         }
-        
+
         $('#amount_tools').blur(function () {
             num_tools = $(this).val()
             updateTool();
         });
-        
+
         function infoUser(element){
             let user_id = element.value;
             let user_name = $( '#name' + user_id ).val()
@@ -184,7 +186,7 @@
             $('#nombre1').val(user_name);
             $('#rol1').val(user_role);
         }
-        
+
         $('#btn_plus_tools').click(function () {
             num_tools++;
             updateTool();
@@ -263,7 +265,7 @@
             let observations = $('.tools_observation');
             tools_values = []
             for (let i = 0; i < names.length; i++) {
-                
+
                 tools_values.push({
                     name : names[i].value,
                     amount : amounts[i].value,

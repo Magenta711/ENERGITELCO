@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal_edit_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+ 56<div class="modal fade" id="modal_edit_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <form action="{{route('setting_empleyee_month_update',$item->id)}}" method="POST" enctype="multipart/form-data">

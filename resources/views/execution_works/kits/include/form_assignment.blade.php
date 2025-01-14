@@ -5,7 +5,7 @@
 
 {{-- Campos de recursos de kits --}}
 @foreach ($kits as $kit)
-    <input type="hidden" value="{{$kit->token}}" id="kit_token_{{$kit->id}}" class="kit-token-{{$kit->token}}">
+    <input type="text" value="{{$kit->token}}" id="kit_token_{{$kit->id}}" class="kit-token-{{$kit->token}}">
     <input type="hidden" value="{{$kit->id}}" id="kit_id_{{$kit->id}}" class="kit-id-{{$kit->token}}">
     <input type="hidden" value="{{$kit->nombre}}" id="kit_nombre_{{$kit->id}}" class="kit-nombres-{{$kit->token}}">
 
@@ -77,7 +77,7 @@
 
 <div id="list_tools">
     @if (old('item'))
-        
+
         @for ($i = 1; $i <= count(old('item')); $i++)
             <div class="form-group row">
                 <div class="col-md-2 col-sm-4 mb-3">
@@ -86,7 +86,7 @@
                 </div>
                 <div class="col-md-2 col-sm-4">
                     <label for="amount">Cantidad</label>
-                    
+
                     <input type="text" name="amount[{{$i}}]" id="amount_{{$i}}" value="{{ old('amount')[$i] }}" class="form-control tools_amount" required>
                 </div>
                 <div class="col-md-3 col-sm-4">

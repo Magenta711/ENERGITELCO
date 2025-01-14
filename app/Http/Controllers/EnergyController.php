@@ -20,9 +20,7 @@ class EnergyController extends Controller
     public function index()
     {
         $id=EnergyValues::first();
-        $Quote=QuoteEnergy::latest()->first()->get();   
-
-        // return $Quote;
+        $Quote=QuoteEnergy::latest()->first()->get();
         return view('energy.admin.index',compact('id','Quote'));
     }
 

@@ -460,6 +460,24 @@ class PermissionTableSeeder extends Seeder
             //Block-20230219 Esteban
             // ['name' => 'Lista de kits', 'category' => 'Ejecución de obras'],
             //EndBlock-20230219 Esteban
+
+            //Block->20250109 Pablo
+            // ['name' => 'Lista de Energías', 'category' => 'Energías'],
+            // ['name' => 'Ver Productos', 'category' => 'Energías'],
+            // ['name' => 'Ver Cotizaciones', 'category' => 'Energías'],
+            // ['name' => 'Ver Ventas', 'category' => 'Energías'],
+            // ['name' => 'Ver Clientes', 'category' => 'Energías'],
+            // ['name' => 'Crear Productos', 'category' => 'Energías'],
+            // ['name' => 'Crear Clientes', 'category' => 'Energías'],
+            // ['name' => 'Crear Ventas', 'category' => 'Energías'],
+            // ['name' => 'Editar Ventas', 'category' => 'Energías'],
+            // ['name' => 'Editar Productos', 'category' => 'Energías'],
+            // ['name' => 'Editar Clientes', 'category' => 'Energías'],
+            // ['name' => 'ELiminar Ventas', 'category' => 'Energías'],
+            // ['name' => 'ELiminar Productos', 'category' => 'Energías'],
+            // ['name' => 'ELiminar Clientes', 'category' => 'Energías'],
+            //End Block->20250109 Pablo
+
         ];
 
         foreach ($permissions as $permission) {

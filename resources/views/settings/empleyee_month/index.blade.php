@@ -12,7 +12,7 @@
     </ol>
 </section>
 <section class="content">
-   
+
   <div class="box box-solid">
     <div class="box-header with-border">
       <i class="fa fa-text-width"></i>
@@ -57,7 +57,7 @@
                         </span>
                     </div>
                 </div>
-                @include('settings.empleyee_month.include.modals.edit')
+                @include('settings.empleyee_month.include.modals.edit')2
                 <div class="modal fade" id="modal_delete_{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
@@ -126,7 +126,7 @@
     function readImageEdit (input,id) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
-            
+
             reader.onload = function (e) {
                 $('#preimg_edit_'+id).attr('src', e.target.result); // Renderizamos la imagen
             }
@@ -136,7 +136,7 @@
     function readImage (input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
-            
+
             reader.onload = function (e) {
                 $('#preimg_create').attr('src', e.target.result); // Renderizamos la imagen
             }

@@ -17,11 +17,59 @@
                 <div class="box-header">
                     <div class="box-title text-center">Productos</div>
                     <div class="box-tools">
+                        @can('Crear Productos')
                         <a href="{{ route('energy_products.create') }}" class="btn btn-success">Agregar Productos</a>
+                        @endcan
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="box-body">
+                        <div class="table-responsive table-hover">
+                            <table id="table_index" class="table table-striped table-bordered text-center" data-page-length='15'>
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Codigo de Producto </th>
+                                        <th class="text-center">Modelo </th>
+                                        <th class="text-center">Tipo Producto</th>
+                                        <th class="text-center">Estado</th>
+                                        <th class="text-center">Precio</th>
+                                        <th class="text-center">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($id as $item)
+                                        <tr>
+                                            <td>{{ $item->cod_product }}</td>
+                                            <td>{{ $item->model }}</td>
+                                            <td>{{ $item->type }}</td>
+                                            <td>{{ $item->status == 1 ? 'En Bodega' : 'Vendido' }}</td>
+                                            <td>${{ number_format($item->price, 2, ',', '.') }}</td>
+                                            <td>
+                                                @can('Ver Productos')
+                                                <a href="" class="btn btn-info"  data-toggle="modal" data-target=".review-{{ $item->id }}-modal-lg"><i class="fa fa-eye"></i></a>
+                                                @endcan
+                                                @if ($item->status==1)
+                                                @can('Editar Productos')
+                                                <a href="" class="btn btn-warning" data-toggle="modal" data-target=".edit-{{ $item->id }}-modal-lg"><i class="fa fa-edit"></i></a>
+                                                @endcan
+                                                @can('ELiminar Productos')
+                                                <a href="" class="btn btn-danger" data-toggle="modal" data-target=".delete-{{ $item->id }}-modal-lg"><i class="fa fa-trash"></i></a>
+                                                @endcan
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        @include('energy.products.includes.delete')
+                                        @include('energy.products.includes.edit')
+                                        @include('energy.products.includes.review')
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 @endsection
