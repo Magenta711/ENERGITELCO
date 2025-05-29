@@ -62,6 +62,9 @@
                 <img class="img-fluid" src="https://energitelco.com/assets/img/hhh2.png" alt="" />
             </div>
         </section>
+
+        @include('store.products-section')
+
         <!-- Projects-->
         <section class="projects-section bg-light" id="projects">
             <div class="container">
@@ -122,7 +125,7 @@
                 <!-- Project Four Row-->
                 <!-- Change -->
                 <div class="row justify-content-center no-gutters">
-                    <div class="col-lg-6"><img class="img-fluid" src="https://energitelco.com/assets/img/solar.png" alt="" /></div> 
+                    <div class="col-lg-6"><img class="img-fluid" src="https://energitelco.com/assets/img/solar.png" alt="" /></div>
                     <div class="col-lg-6 order-lg-first">
                         <div class="bg-black text-center h-100 project">
                             <div class="d-flex h-100">
@@ -246,9 +249,8 @@
         <script src="https://energitelco.com/js/scripts.js"></script>
     </body>
 
-    @include('energy')
+    {{-- @include('energy') --}}
     {{-- <button type="button" onclick="document.getElementById('modal').style.display = 'block'">Abrir modal</button> --}}
 </html>
 
 
-  

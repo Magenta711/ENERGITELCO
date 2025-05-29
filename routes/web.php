@@ -19,9 +19,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-Route::get('/',function () {
-    return view('welcome');
-});
+Route::get('/','WelcomeController@index')->name('welcome');
 
 Route::get('example',function ()
 {
@@ -1099,5 +1097,21 @@ Route::get('project/maintenance/smu/operation/export/{id}','projects\maintenance
 Route::get('project/maintenance/smu/operation/photos/{id}/{item}','projects\maintenances\OperationController@photos')->name('operation_photos');
 Route::put('project/maintenance/smu/operation/cantidad_photos/{id}/{item}','projects\maintenances\OperationController@cantidad_photos')->name('operation_cantidad_photos');
 Route::put('project/maintenance/smu/operation/descripcion_photos/{id}/{item}','projects\maintenances\OperationController@descripcion_photos')->name('operation_descripcion_photos');
-Route::post('project/maintenance/smu/operation/{id}/{item}/upload','projects\maintenances\operationController@upload')->name('operation_upload');
+
+Route::get('product/store/view/{id}','StoreProductsController@show')->name('store.products_show');
+Route::post('product/store/add_cart/{id}','StoreProductsController@add_cart')->name('store.add_cart')->middleware('auth:tienda')->middleware('verified');
+Route::get('product/store/show_cart/{id}','StoreProductsController@show_cart')->name('store.show_cart')->middleware('auth:tienda')->middleware('verified');
+Route::post('product/store/delete_product','StoreProductsController@delete_product')->name('store.delete_product');
+Route::post('product/store/amount_product','StoreProductsController@amount_product')->name('store.amount_product');
+
+Route::get('product/store/auth','ClientsAuth\RegisterController@index')->name('register_client');
+Route::post('product/store/register','ClientsAuth\RegisterController@register')->name('register');
+
+Route::post('product/store/login','ClientsAuth\LoginController@login')->name('login_client');
+Route::post('product/store/logout','ClientsAuth\LoginController@logout')->name('logout_client');
+
+Route::post('product/store/store_address','StoreProductsController@store_address')->name('store.store_address');
+
+Route::get('product/store/pay/show/{id}/{form}','StoreProductsController@pay_show')->name('store.pay_show')->middleware('auth:tienda');
+Route::post('product/store/pay/pay/','StoreProductsController@pay')->name('store.pay')->middleware('auth:tienda');
 
