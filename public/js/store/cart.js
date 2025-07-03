@@ -1,11 +1,21 @@
 $(document).ready(function () {
     $('.hide-container').hide();
 
+    $('#amount_item').on('input change', function () {
+        let amount = parseInt($(this).val());
+        let available = parseInt($('#available').val());
+        if (amount < 1) {
+            $(this).val(1);
+        } else if (amount > available) {
+            $(this).val(available);
+        }
+    });
+
     $('.btn-remove').click(function (e) {
         e.preventDefault();
         const product = $(this).data('id');
         const productId = $(this).data('euge');
-        console.log('Valor del producto: '+productId);
+        console.log('Valor del producto: ' + productId);
 
         $.ajax({
             url: '/product/store/delete_product',
@@ -28,10 +38,18 @@ $(document).ready(function () {
     });
 
     $('.amount_items').change(function () {
-        const productId = $(this).data('id');
-        const amount = $(this).val();
-        const Id = $(this).data('euge');
-        const valor_item = $('#valor_item-' + Id).val();
+        let productId = $(this).data('id');
+        let amount = parseInt($(this).val());
+        let Id = $(this).data('euge');
+        let valor_item = parseFloat($('#valor_item-' + Id).val());
+        let available = parseInt($('#available-'+Id).val());
+        if (amount < 1) {
+            $(this).val(1);
+            amount = 1;
+        } else if (amount > available) {
+            $(this).val(available);
+            amount = available;
+        }
         $.ajax({
             url: '/product/store/amount_product',
             method: 'POST',
@@ -45,7 +63,7 @@ $(document).ready(function () {
                 if (response.success) {
                     amount_item(response.total, response.count, valor_item, Id, amount)
                 } else {
-                    console.log('No se pudo eliminar el producto.');
+                    console.log('No se pudo agregar el producto.');
                 }
             },
             error: function (xhr) {

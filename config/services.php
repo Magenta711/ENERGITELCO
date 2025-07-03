@@ -34,4 +34,9 @@ return [
         'secret' => env('SPARKPOST_SECRET'),
     ],
 
+    'wompi' => [
+        'public_key' => env('WOMPI_PUBLIC_KEY'),
+        'secret_integrity_key' => env('WOMPI_SECRET_INTEGRITY_KEY'),
+        'secret_event_key' => env('WOMPI_SECRET_EVENT_KEY'),
+    ],
 ];

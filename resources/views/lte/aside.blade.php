@@ -1532,7 +1532,7 @@ f <!-- =============================================== -->
                     'ELiminar Clientes',
                 ]))
             {{-- energias --}}
-            <li class="treeview {{ activeMenu('energias*') }} {{ activeMenu('productos*') }}">
+            <li class="treeview {{ activeMenu('energy*') }} {{ activeMenu('productos*') }}">
                 <a href="#">
                     <i class="fa fa-solar-panel"></i> <span>ENERGÍAS</span><span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
@@ -1547,14 +1547,43 @@ f <!-- =============================================== -->
                         <li class="{{ activeMenu('energias/productos*') }}"><a class="btn-send"
                                 href="{{ route('energy_products') }}"><i class="fa fa-boxes"></i> PRODUCTOS</a></li>
                     @endif
-                    @if (auth()->user()->hasAnyPermission(['Ver Clientes', 'Crear Clientes', 'Editar Clientes', 'ELiminar Clientes']))
-                        <li class="{{ activeMenu('energias/clientes*') }}"><a class="btn-send"
-                                href="{{ route('energy_clients') }}"><i class="fa fa-users"></i> CLIENTES</a></li>
-                    @endif
-                    @if (auth()->user()->hasAnyPermission(['Ver Ventas', 'Crear Ventas', 'Editar Ventas', 'ELiminar Ventas']))
-                        <li class="{{ activeMenu('energias/ventas*') }}"><a class="btn-send"
-                                href="{{ route('energy_sale') }}"><i class="fa fa-cart-plus"></i> VENTAS</a></li>
-                    @endif
+                    <li class="treeview {{ activeMenu('energy/sales*') }}{{ activeMenu('energy/clients*') }}">
+                        <a href="#"><i class="fa fa-donate"></i> PRINCIPAL<span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            @if (auth()->user()->hasAnyPermission(['Ver Clientes', 'Crear Clientes', 'Editar Clientes', 'ELiminar Clientes']))
+                                <li class="{{ activeMenu('energy/clients*') }}"><a class="btn-send"
+                                        href="{{ route('energy_clients') }}"><i class="fa fa-users"></i>
+                                        CLIENTES</a></li>
+                            @endif
+                            @if (auth()->user()->hasAnyPermission(['Ver Ventas', 'Crear Ventas', 'Editar Ventas', 'ELiminar Ventas']))
+                                <li class="{{ activeMenu('energy/ventas*') }}"><a class="btn-send"
+                                        href="{{ route('energy_sale') }}"><i class="fa fa-cart-plus"></i> VENTAS</a>
+                                </li>
+                            @endif
+                        </ul>
+                    </li>
+                    <li class="treeview {{ activeMenu('energy/store/ventas*') }} {{ activeMenu('energy/store/users*') }}">
+                        <a href="#"><i class="fa fa-store"></i> TIENDA VIRTUAL<span
+                                class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            @if (auth()->user()->hasAnyPermission(['Ver Clientes', 'Crear Clientes', 'Editar Clientes', 'ELiminar Clientes']))
+                            <li class="{{ activeMenu('energy/store/users*') }}"><a class="btn-send"
+                                    href="{{ route('energy_store_users.index') }}"><i class="fa fa-users"></i>
+                                    USUARIOS</a></li>
+                            @endif
+                            @if (auth()->user()->hasAnyPermission(['Ver Ventas', 'Crear Ventas', 'Editar Ventas', 'ELiminar Ventas']))
+                            <li class="{{ activeMenu('energy/store/ventas*') }}"><a class="btn-send"
+                                    href="{{ route('energy_store_ventas.ventas') }}"><i class="fa fa-cart-plus"></i>
+                                    VENTAS</a></li>
+                            @endif
+                        </ul>
+                    </li>
                 </ul>
             </li>
         @endif

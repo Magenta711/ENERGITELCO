@@ -2,9 +2,7 @@
 
 namespace App\Models\ClientsUsers;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\Authenticatable;
+use App\Models\store\Pay;
 use Illuminate\Foundation\Auth\User as AuthenticatableUser;
 
 class Clients extends AuthenticatableUser
@@ -19,4 +17,10 @@ class Clients extends AuthenticatableUser
         'number',
         'email_verified_at',
     ];
+
+
+    public function compras()
+    {
+        return $this->hasMany(Pay::class, 'id_client', 'id')->where('status', 'APPROVED');
+    }
 }

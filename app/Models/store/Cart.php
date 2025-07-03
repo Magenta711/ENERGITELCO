@@ -11,7 +11,7 @@ class Cart extends Model
     protected $fillable = ['client_id','products','total'];
 
 
-    public function clients(){
-        return $this->hasOne(billboard_type::class, 'id', 'client_id');
-    }
+    // public function clients(){
+    //     return $this->hasOne(billboard_type::class, 'id', 'client_id');
+    // }
 }

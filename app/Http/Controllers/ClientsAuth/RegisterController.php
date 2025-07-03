@@ -46,7 +46,7 @@ class RegisterController extends Controller
 
     public function index()
     {
-        return view('store.client.auth');
+        return view('store.client.register');
     }
 
     /**

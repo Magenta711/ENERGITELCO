@@ -20,9 +20,8 @@ class LoginController extends Controller
             'email' => $request->email,
             'password' => $request->password
         ], $request->remember)) {
-            return redirect()->intended('/product/store/view/105519');
+            return redirect()->intended(route('store.show_cart'));
         }
-
         return back()->withErrors([
             'email' => 'Las credenciales no son válidas.',
         ])->withInput($request->only('email', 'remember'));
@@ -33,6 +32,11 @@ class LoginController extends Controller
         Auth::guard('tienda')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/product/store/auth'); // o a donde quieras redirigir
+        return redirect('/product/store/auth/login');
+    }
+
+    public function index()
+    {
+        return view('store.client.login');
     }
 }

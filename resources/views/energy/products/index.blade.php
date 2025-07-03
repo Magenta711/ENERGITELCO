@@ -42,7 +42,7 @@
                                             <td>{{ $item->cod_product }}</td>
                                             <td>{{ $item->model }}</td>
                                             <td>{{ $item->type }}</td>
-                                            <td>{{ $item->status == 1 ? 'En Bodega' : 'Vendido' }}</td>
+                                            <td>{{ $item->status == 1 ? 'En Bodega' : ( $item->status == 3 ? 'Vendido' : 'Pendiente') }}</td>
                                             <td>${{ number_format($item->price, 2, ',', '.') }}</td>
                                             <td>
                                                 @can('Ver Productos')

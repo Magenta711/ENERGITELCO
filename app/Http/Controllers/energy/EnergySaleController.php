@@ -99,7 +99,7 @@ class EnergySaleController extends Controller
 
         $products->update([
             'id_buyer'=>$Cliente_id,
-            'status'=>2,
+            'status'=>3,
         ]);
 
         $nombre_original = $products->type;

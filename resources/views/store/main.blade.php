@@ -18,7 +18,9 @@
         rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="https://energitelco.com/css/styles.css" rel="stylesheet" />
-    {{-- <link rel="stylesheet" href="{{asset("assets/$theme/bower_components/bootstrap/dist/css/bootstrap.min.css")}}"> --}}
+    {{-- <link rel="stylesheet" href="{{ asset("assets/$theme/bower_components/bootstrap/dist/css/bootstrap.min.css") }}"> --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.min.js"></script>
@@ -35,15 +37,18 @@
             @auth('tienda')
                 <div class="btn-group">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">{{ $cliente->name }}</a>
+                        <a class="nav-link" href="#" id="user">{{ strtoupper($cliente->name) }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('store.show_cart', $cliente->id) }}"><i class="fa fa-cart-plus"></i> {{ count($all_products) }}</a>
+                        <a href="{{ route('store.orders') }}" class="nav-link">COMPRAS</a>
                     </li>
                     <li class="nav-item">
-                        <form action="{{ route('logout_client') }}" method="POST">
+                        <a class="nav-link" href="{{ route('store.show_cart', $cliente->id) }}"><i
+                                class="fa fa-cart-plus"></i> {{ count($all_products) }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <form id="logout" action="{{ route('logout_client') }}" method="POST">
                             @csrf
-                            {{-- <a class="nav-link submit" href="#">Cerrar Sesión</a> --}}
                         </form>
                     </li>
                 </div>
@@ -53,42 +58,42 @@
                     <a class="nav-link" href="{{ route('register_client') }}">Ingresar</a>
                 </li>
             @endguest
-
         </div>
     </ul>
-        @yield('style')
+    </main>
+    @yield('style')
     <section>
         @yield('content')
     </section>
-        @yield('script')
+    @yield('script')
 
     {{-- @include('store.products-section-min') --}}
-
-    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script> --}}
 </body>
 
 </html>
 
 <script>
     $(document).ready(function() {
-        $("#add_cart").click(function() {
-            console.log($("#amount_item").val());
-            $("#input_amount_item").val($("#amount_item").val());
-            $("#add_cart_form").submit();
+        $("#user").click(function() {
+            $("#logout").submit();
         });
     });
+
 </script>
+
 
 <style>
     .nav {
         display: flex;
         align-items: center;
         justify-content: space-around;
-        background-color:
+        padding: 10px 0px 10px 0px;
     }
 
-    .nav .nav-content {
-        display: flex;
-        flex-wrap: wrap;
+    .nav-link {
+        color: #000000;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 600;
     }
 </style>
