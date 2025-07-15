@@ -29,7 +29,7 @@
     justify-content: center;
 }
 
-.container .img {
+.container .img-principal {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -39,7 +39,7 @@
     margin-right: 5%;
 }
 
-.container .img img {
+.container .img-principal img {
     object-fit: contain;
     width: 100%;
 }
@@ -118,13 +118,13 @@
         max-width: 100%;
     }
 
-    .container .pay .price {    
+    .container .pay .price {
         font-weight: bold;
         font-size: 12pt;
         margin: 10% 0 10% 0;
     }
 
-    .container .img {
+    .container .img-principal {
         width: 100%;
     }
 
@@ -143,9 +143,8 @@
     }
 
     .pay {
-        width: 100%;
-        position: fixed;
         height: 20%;
+        margin-bottom: 5%;
     }
 
     .amount_div {

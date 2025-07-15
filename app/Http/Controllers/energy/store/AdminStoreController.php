@@ -5,6 +5,7 @@ namespace App\Http\Controllers\energy\store;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ClientsUsers\Clients;
+use App\Models\Energy\SolarShippingValue;
 use App\Models\store\Pay;
 use App\Models\SolarProducts;
 
@@ -38,9 +39,10 @@ class AdminStoreController extends Controller
     public function ventas()
     {
         $ventas = Pay::where('status', 'APPROVED')->get();
+        $shipping = SolarShippingValue::first();
 
 
-        return view('energy.store.ventas', compact('ventas'));
+        return view('energy.store.ventas', compact('ventas', 'shipping'));
     }
 
     /**
@@ -56,7 +58,7 @@ class AdminStoreController extends Controller
             return redirect()->route('energy_store_ventas.ventas')->with('error', 'Orden no encontrada');
         }
 
-        $order->client->locate = $order->client->locate ? json_decode($order->client->locate, true) : [];
+        $order->locate = $order->locate ? json_decode($order->locate, true) : [];
         $products = collect();
 
         foreach ($order->products as $value) {

@@ -7,7 +7,7 @@
     justify-content: center;
 }
 
-.container .img {
+.container .img-principal {
     width: 20%;
     height: auto;
     overflow: hidden;
@@ -17,7 +17,7 @@
     justify-content: center;
 }
 
-.container .img img {
+.container .img-principal img {
     object-fit: contain;
     width: 100%;
     aspect-ratio: 1 / 1;
@@ -86,7 +86,7 @@
         margin: 10% 0 10% 0;
     }
 
-    .container .img {
+    .container .img-principal {
         width: 100%;
     }
 

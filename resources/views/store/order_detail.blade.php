@@ -24,6 +24,23 @@
                         <div class="row">
                             <div>Productos: {{ count($order->products) }}</div>
                         </div>
+                        @if ($order->collect=='envio')
+                                        <div class="row">
+                                            <div><b>Enviado:</b>
+                                                {{ $order->locate['address'] ?? '' }} - {{ $order->locate['city'] ?? '' }} - {{ $order->locate['name_contact'] ?? '' }} - {{ $order->locate['number_contact'] ?? '' }}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div><b>Valor envio:</b> ${{ number_format($order->valor_envio, 2, ',', '.') }}
+                                            </div>
+                                    </div>
+                                @else
+                                <div class="row">
+                                    <div><b>Recogida:</b>
+                                        {{ $order->locate['name_contact'] ?? '' }} - {{ $order->locate['number_contact'] ?? '' }}
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -61,7 +78,7 @@
                 <hr>
                 <div class="container">
                     <div class="sub-total text-right">
-                        <h3><b>Total de la compra ({{ $cantidad }}): ${{ number_format($order->valor, 2, ',', '.') }}</b></h3>
+                        <h3><b>Total de la compra ({{ $cantidad }}): ${{ number_format($order->valor+$order->valor_envio, 2, ',', '.') }}</b></h3>
                     </div>
                 </div>
             @else

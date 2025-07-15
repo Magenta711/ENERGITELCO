@@ -7,8 +7,16 @@
     gap: 5%;
 }
 
-.md-container{
+.md-content{
     width: 75%;
+}
+
+.mini-container{
+    width: 100%;
+}
+
+.btn-container{
+    width: 100%;
 }
 
 .min-container{
@@ -27,4 +35,16 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+
+@media (max-width: 768px) {
+    .container {
+        align-items: center;
+        justify-content: center;
+    }
+
+    .min-container{
+        width: 75%;
+    }
 }

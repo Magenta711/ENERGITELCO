@@ -5,7 +5,7 @@
     <div class="container align-items-center">
         <div class="row justify-content-center">
             @foreach ($products as $item)
-            <a href="{{ route('store.products_show',$item->id) }}" class="btn card" target="_black">
+            <a href="{{ route('store.products_show',$item->type) }}" class="btn card" target="_black">
                     <div class="img">
                         @foreach ($item->files as $items)
                             <img id="img" src="/storage/energy/{{$items->name}}" alt="Attachment">
@@ -59,6 +59,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        margin-top: 5%;
     }
 
     .products-section .container .card .img img{

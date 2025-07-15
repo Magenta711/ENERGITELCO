@@ -1,5 +1,6 @@
 $(document).ready(function () {
     $('.hide-container').hide();
+    evaluarStock()
 
     $('#amount_item').on('input change', function () {
         let amount = parseInt($(this).val());
@@ -27,6 +28,7 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.success) {
                     update(productId, response.total, response.count)
+                    evaluarStock();
                 } else {
                     console.log('No se pudo eliminar el producto.');
                 }
@@ -42,7 +44,7 @@ $(document).ready(function () {
         let amount = parseInt($(this).val());
         let Id = $(this).data('euge');
         let valor_item = parseFloat($('#valor_item-' + Id).val());
-        let available = parseInt($('#available-'+Id).val());
+        let available = parseInt($('#available-' + Id).val());
         if (amount < 1) {
             $(this).val(1);
             amount = 1;
@@ -96,4 +98,24 @@ function formatoNumero(valor) {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
     }).format(valor);
+}
+
+function evaluarStock() {
+    if ($('.unable').length > 0) {
+        $('#btn-comprar')
+            .addClass('disabled')
+            .css({
+                'pointer-events': 'none',
+                'opacity': '0.5'
+            })
+            .text('Stock insuficiente');
+    } else {
+        $('#btn-comprar')
+            .removeClass('disabled')
+            .css({
+                'pointer-events': '',
+                'opacity': ''
+            })
+            .text('Proceder al pago');
+    }
 }

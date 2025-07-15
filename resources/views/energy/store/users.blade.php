@@ -139,7 +139,7 @@
                                                                             <div class="col-md-12 text-center">
                                                                                 <a href="{{ route('energy_store_ventas_show.ventas_show', $items->reference) }}"><h4>Compra #{{ $items->reference }}</h4></a>
                                                                                 <p><b>Fecha:</b> {{ $items->created_at }}</p>
-                                                                                <p><b>Total:</b> ${{ number_format($items->valor, 2, ',', '.') }}</p>
+                                                                                <p><b>Total:</b> ${{ number_format($items->valor+$items->valor_envio, 2, ',', '.') }}</p>
                                                                                 <p><b>Estado:</b> {{ $items->status }}</p>
                                                                             </div>
                                                                         </div>

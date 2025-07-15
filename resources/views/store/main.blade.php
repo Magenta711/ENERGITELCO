@@ -37,25 +37,25 @@
             @auth('tienda')
                 <div class="btn-group">
                     <li class="nav-item">
-                        <a class="nav-link" href="#" id="user">{{ strtoupper($cliente->name) }}</a>
-                    </li>
-                    <li class="nav-item">
                         <a href="{{ route('store.orders') }}" class="nav-link">COMPRAS</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('store.show_cart', $cliente->id) }}"><i
-                                class="fa fa-cart-plus"></i> {{ count($all_products) }}</a>
-                    </li>
-                    <li class="nav-item">
-                        <form id="logout" action="{{ route('logout_client') }}" method="POST">
-                            @csrf
-                        </form>
-                    </li>
+                            class="fa fa-cart-plus"></i> {{ count($all_products) }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <form id="logout" action="{{ route('logout_client') }}" method="POST">
+                                @csrf
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" id="user"><i class="fas fa-sign-out-alt"></i></a>
+                        </li>
                 </div>
             @endauth
             @guest('tienda')
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register_client') }}">Ingresar</a>
+                    <a class="nav-link" href="{{ route('login_client_show') }}">Ingresar</a>
                 </li>
             @endguest
         </div>
@@ -67,7 +67,6 @@
     </section>
     @yield('script')
 
-    {{-- @include('store.products-section-min') --}}
 </body>
 
 </html>

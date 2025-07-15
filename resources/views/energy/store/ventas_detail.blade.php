@@ -35,13 +35,25 @@
                                     <div class="row">
                                         <div><b>Comprador:</b> {{ $order->client->name }}</div>
                                     </div>
-                                    <div class="row">
-                                        <div><b>Enviado:</b>
-                                             {{ $order->client->locate['address'] ?? '' }} - {{ $order->client->locate['city'] ?? '' }} - {{ $order->client->locate['name_contact'] ?? '' }} - {{ $order->client->locate['number_contact'] ?? '' }}
+                                    @if ($order->collect=='envio')
+                                        <div class="row">
+                                            <div><b>Enviado:</b>
+                                                {{ $order->locate['address'] ?? '' }} - {{ $order->locate['city'] ?? '' }} - {{ $order->locate['name_contact'] ?? '' }} - {{ $order->locate['number_contact'] ?? '' }}
+                                            </div>
                                         </div>
-                                    </div>
+                                        <div class="row">
+                                            <div><b>Valor envio:</b> ${{ number_format($order->valor_envio, 2, ',', '.') }}
+                                            </div>
+                                        </div>
+                                    @else
+                                        <div class="row">
+                                            <div><b>Recogida:</b>
+                                                {{ $order->locate['name_contact'] ?? '' }} - {{ $order->locate['number_contact'] ?? '' }}
+                                            </div>
+                                        </div>
+                                    @endif
                                     <div class="row">
-                                        <div><b>Total:</b> ${{ number_format($order->valor, 2, ',', '.') }}</div>
+                                        <div><b>Total:</b> ${{ number_format($order->valor+$order->valor_envio, 2, ',', '.') }}</div>
                                     </div>
                                     <div class="row">
                                         <div><b>Estado de la transacción:</b> {{ $order->status }}</div>
@@ -98,7 +110,7 @@
                             <div class="container">
                                 <div class="sub-total text-right">
                                     <h3><b>Total de la compra ({{ $cantidad }}):
-                                            ${{ number_format($order->valor, 2, ',', '.') }}</b></h3>
+                                            ${{ number_format($order->valor+$order->valor_envio, 2, ',', '.') }}</b></h3>
                                 </div>
                             </div>
                         @else

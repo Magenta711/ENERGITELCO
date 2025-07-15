@@ -1030,11 +1030,20 @@ Route::get('energias', 'EnergyController@index')->name('energy');
 Route::get('energias/editar', 'EnergyController@edit')->name('energy_edit');
 Route::put('energias/update/{id}', 'EnergyController@update')->name('energy_update');
 
-Route::get('energy/products', 'energy\ProductsController@index')->name('energy_products');
+Route::get('energy/products/category/types/{id}/{item}', 'energy\ProductsController@index')->name('energy_products_types');
+Route::get('energy/products/category', 'energy\ProductsController@categoryIndex')->name('energy_products');
 Route::get('energy/products/create', 'energy\ProductsController@create')->name('energy_products.create');
 Route::post('energy/products/store', 'energy\ProductsController@store')->name('energy_products.store');
 Route::put('energy/products/update/{id}', 'energy\ProductsController@update')->name('energy_products.update');
 Route::delete('energy/products/destroy/{id}', 'energy\ProductsController@destroy')->name('energy_products.destroy');
+Route::delete('energy/products/destroy/{id}/{item}/{type}', 'energy\ProductsController@destroy_all')->name('energy_products.destroy_all');
+Route::delete('energy/products/destroy/subcategory_id/{id}/{item}', 'energy\ProductsController@destroy_category')->name('energy_products.destroy_category');
+
+Route::post('energy/products/category/store', 'energy\ProductsController@category')->name('energy_products_category.store');
+Route::delete('energy/products/category/delete/{id}/{item}', 'energy\ProductsController@destroy_category')->name('energy_products_category.delete');
+Route::post('energy/products/subcategory/store/{id}', 'energy\ProductsController@subcategory')->name('energy_products_subcategory.store');
+Route::get('energy/products/category/show/{id}', 'energy\ProductsController@categoryShow')->name('energy_products_category.show');
+Route::put('energy/products/category/shipping/{id}', 'energy\ProductsController@update_shipping')->name('energy_products.shipping');
 
 Route::get('energy/clients', 'energy\EnergyClientsController@index')->name('energy_clients');
 Route::post('energy/clients/store', 'energy\EnergyClientsController@store')->name('energy_clients.store');
@@ -1106,19 +1115,19 @@ Route::put('project/maintenance/smu/operation/descripcion_photos/{id}/{item}', '
 
 
 
-Route::group([
-    'middleware' => [
-        'tienda.session',
-        \App\Http\Middleware\EncryptCookies::class,
-        \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-        StartSession::class,
-        ShareErrorsFromSession::class,
-        \App\Http\Middleware\VerifyCsrfToken::class,
-        \Illuminate\Routing\Middleware\SubstituteBindings::class,
-    ]
-], function () {
+// Route::group([
+//     'middleware' => [
+//         'tienda.session',
+//         \App\Http\Middleware\EncryptCookies::class,
+//         \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+//         StartSession::class,
+//         ShareErrorsFromSession::class,
+//         \App\Http\Middleware\VerifyCsrfToken::class,
+//         \Illuminate\Routing\Middleware\SubstituteBindings::class,
+//     ]
+// ], function () {
     Route::get('product/store/view/{id}', 'StoreProductsController@show')->name('store.products_show');
-    Route::post('product/store/add_cart/{id}', 'StoreProductsController@add_cart')->name('store.add_cart')->middleware('auth:tienda')->middleware('verified');
+    Route::post('product/store/add_cart/{id}', 'StoreProductsController@add_cart')->name('store.add_cart')->middleware('auth:tienda');
     Route::get('product/store/show_cart', 'StoreProductsController@show_cart')->name('store.show_cart')->middleware('auth:tienda')->middleware('verified');
     Route::post('product/store/delete_product', 'StoreProductsController@delete_product')->name('store.delete_product');
     Route::post('product/store/amount_product', 'StoreProductsController@amount_product')->name('store.amount_product');
@@ -1131,6 +1140,7 @@ Route::group([
     Route::post('product/store/logout', 'ClientsAuth\LoginController@logout')->name('logout_client');
 
     Route::post('product/store/store_address', 'StoreProductsController@store_address')->name('store.store_address');
+    Route::post('product/store/collect', 'StoreProductsController@collect')->name('store.collect');
 
     Route::get('product/store/pay/show/{id}/{form}', 'StoreProductsController@pay_show')->name('store.pay_show')->middleware('auth:tienda');
     Route::post('product/store/pay/pay/', 'StoreProductsController@pay')->name('store.pay');
@@ -1138,4 +1148,4 @@ Route::group([
 
     Route::get('product/store/orders', 'StoreProductsController@orders_show')->name('store.orders')->middleware('auth:tienda')->middleware('verified');
     Route::get('product/store/orders/{id}', 'StoreProductsController@orders_detail')->name('store.orders_detail')->middleware('auth:tienda')->middleware('verified');
-});
+// });

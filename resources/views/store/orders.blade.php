@@ -22,7 +22,7 @@
                                     <b>Pedido {{ $order->reference }}</b>
                                 </div>
                                 <div class="row">
-                                    <div>Total: ${{ number_format($order->valor, 2, ',', '.') }}</div>
+                                    <div>Total: ${{ number_format($order->valor+$order->valor_envio, 2, ',', '.') }}</div>
                                 </div>
                                 <div class="row">
                                     <div>Estado: {{ $order->status }}</div>

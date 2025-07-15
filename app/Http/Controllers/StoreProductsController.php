@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Energy\SolarShippingValue;
 use Illuminate\Http\Request;
 use App\Models\SolarProducts;
 use App\Models\file;
@@ -106,37 +107,41 @@ class StoreProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(SolarProducts $id)
+    public function show($item)
     {
-        $cliente = Auth::guard('tienda')->user();
-        $product = SolarProducts::where('status', 1)->get();
-        $types = [];
-
-        foreach ($product as $item) {
-            $type = $item->type;
-            if (!in_array($type, $types)) {
-                $types[] = $type;
-            }
-        }
-        $available = count(SolarProducts::where('status', 1)->where('type', $type)->get());
-        $id['disponibles'] = $available;
-        foreach ($types as $value) {
-            $product = SolarProducts::where('status', 1)->where('type', $value)->get();
-            if ($product) {
-                $products[] = $product;
-            }
-        }
-        $all_products = [];
-        $cart_client = Cart::where('client_id', auth('tienda')->id())->first();
-        if ($cart_client) {
-            $all_products = $cart_client ? json_decode($cart_client->products, true) ?? [] : [];
-        }
-
-        if (is_numeric($id)) {
-            $id = SolarProducts::find($id);
-        }
+        $id = SolarProducts::where('type', $item)->where('status', 1)->first();
         if ($id && $id->status == 1) {
-            return view('store.products', compact('id', 'products', 'cliente', 'cart_client', 'all_products'));
+            $cliente = Auth::guard('tienda')->user();
+            $product = SolarProducts::where('status', 1)->get();
+            $min_product = [];
+            $productos = SolarProducts::selectRaw('MIN(id) as id')
+                ->where('status', 1)->where('type', '!=', $id->type)
+                ->groupBy('type')
+                ->get();
+            $min_product = SolarProducts::whereIn('id', $productos->pluck('id'))->get();
+            $types = [];
+
+            $available = count(SolarProducts::where('type', $item)->where('status', 1)->get());
+            $id['disponibles'] = $available;
+            foreach ($product as $item) {
+                $type = $item->type;
+                if (!in_array($type, $types)) {
+                    $types[] = $type;
+                }
+            }
+            foreach ($types as $value) {
+                $product = SolarProducts::where('status', 1)->where('type', $value)->get();
+                if ($product) {
+                    $products[] = $product;
+                }
+            }
+            $all_products = [];
+            $cart_client = Cart::where('client_id', auth('tienda')->id())->first();
+            if ($cart_client) {
+                $all_products = $cart_client ? json_decode($cart_client->products, true) ?? [] : [];
+            }
+            // return $id;
+            return view('store.products', compact('id', 'products', 'cliente', 'cart_client', 'all_products', 'min_product'));
         } else {
             return redirect()->route('welcome')->with('title', 'No disponible')->with('success',);
         }
@@ -145,6 +150,13 @@ class StoreProductsController extends Controller
     public function show_cart()
     {
         $cart_client = Cart::where('client_id', auth('tienda')->id())->first();
+        $productos = SolarProducts::selectRaw('MIN(id) as id')
+            ->where('status', 1)
+            ->groupBy('type')
+            ->get();
+
+        $min_product = SolarProducts::whereIn('id', $productos->pluck('id'))->get();
+
         $products = [];
         $all_products = $cart_client ? (json_decode($cart_client->products, true) ?? []) : [];
         $cliente = Auth::guard('tienda')->user();
@@ -161,7 +173,7 @@ class StoreProductsController extends Controller
             }
         };
 
-        return view('store.cart', compact('cart_client', 'all_products', 'cliente', 'product', 'products'));
+        return view('store.cart', compact('cart_client', 'all_products', 'cliente', 'product', 'products', 'min_product'));
     }
 
     /**
@@ -225,7 +237,7 @@ class StoreProductsController extends Controller
             ]);
 
             $products = is_array($Pay->products) ? $Pay->products : [];
-            $item = [];
+
             foreach ($products as $value) {
                 $product = SolarProducts::find($value['id']);
                 if ($product) {
@@ -439,6 +451,73 @@ class StoreProductsController extends Controller
 
         $cliente->locate = json_encode($addres);
         $cliente->save();
+
+        $Pay = pay::where('reference', $request->reference)->first();
+        $products = is_array($Pay->products) ? $Pay->products : [];
+        foreach ($products as $value) {
+            $product = SolarProducts::find($value['id']);
+            if ($product) {
+                $items[] = $product;
+            }
+        }
+
+        $peso_volumetrico=0;
+        $peso_normal=0;
+        foreach ($items as $item) {
+            $peso_volumetrico+=($item->ancho*$item->alto*$item->largo)/5000;
+            $peso_normal+=$item->peso;
+        }
+
+        $shipping=SolarShippingValue::first();
+
+        $peso_cobrado=max($peso_volumetrico, $peso_normal);
+        $kilos_adicionales = max(0, ceil($peso_cobrado - $shipping->kilos_adicionales));
+        $costo_adicional = $kilos_adicionales * $shipping->valor_kilos_adic;
+        $seguro = 0.01 * $Pay->valor;
+
+        $total_envio = $shipping->base + $costo_adicional + $seguro;
+        $total_envio+=$total_envio*($shipping->porcentaje_aumentado/100);
+        $total=$total_envio+$Pay->valor;
+
+        $Pay->collect = $request->locate;
+        $Pay->locate = json_encode($addres);
+        $Pay->valor_envio = $total_envio;
+        $Pay->save();
+
+        return response()->json([
+            'total_valor_text'=>number_format($total, 2, ',','.'),
+            'total_envio_text'=>number_format($total_envio, 2, ',','.'),
+            'total_valor'=>$total,
+            'success' => true,
+        ]);
+    }
+
+    public function collect(Request $request)
+    {
+        $request->validate([
+            'contact_number' => 'required',
+            'contact_name' => 'required',
+        ]);
+
+        $cliente = Auth::guard('tienda')->user();
+        $pay = Pay::where('reference', $request->reference)->first();
+        if (!$pay) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Pago no encontrado con esa referencia.',
+            ], 404);
+        }
+        $addres = [
+            'number_contact' => $request->contact_number,
+            'name_contact' => $request->contact_name,
+        ];
+        $cliente->locate = json_encode($addres);
+        $cliente->save();
+        $pay->collect = $request->locate;
+        $pay->locate = json_encode($addres);
+        $pay->valor_envio = 0;
+        $pay->save();
+
         return response()->json([
             'success' => true,
         ]);
@@ -509,6 +588,7 @@ class StoreProductsController extends Controller
                 $products[$tipo]['valor'] = $products[$tipo]['cantidad'] * $value['valor'];
             }
         }
+        $order->locate = $order->locate ? json_decode($order->locate, true) : [];
         $order->products = $products;
         $order->total = collect($products)->sum('valor');
         return view('store.order_detail', compact('cliente', 'order', 'all_products', 'products'));

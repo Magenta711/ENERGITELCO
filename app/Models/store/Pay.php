@@ -10,7 +10,7 @@ class Pay extends Model
 {
     protected $table = 'pays';
 
-    protected $fillable = ['reference', 'transaction_id', 'id_client', 'products', 'valor', 'status', 'reserva_created', 'expiration_date'];
+    protected $fillable = ['reference', 'transaction_id', 'id_client', 'products', 'valor', 'collect', 'locate', 'status', 'reserva_created', 'expiration_date'];
 
     protected $casts = [
         'products' => 'array',

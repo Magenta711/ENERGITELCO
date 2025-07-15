@@ -18,7 +18,7 @@
             <div class="md-container">
                 @foreach ($products as $item)
                     <div class="container" id="cart-{{ $item->id }}">
-                        <div class="img">
+                        <div class="img-principal">
                             @foreach ($item->files as $items)
                                 <img id="img" src="/storage/energy/{{ $items->name }}" alt="Attachment">
                             @endforeach
@@ -44,12 +44,16 @@
                                         <input type="hidden" id="available-{{ $item['id'] }}"
                                             value="{{ $item->disponibles }}" min="1"
                                             max="{{ $item->disponibles }}">
+                                            <br>
+                                            @if ($item->disponibles < $item->cantidad)
+                                                <span class="badge badge-pill badge-danger unable" data-id="{{ $item['type'] }}"><b>No hay suficientes</b></span>
+                                            @endif
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="div">
                                         <a href="#" class="btn btn-danger btn-remove" data-id="{{ $item['type'] }}"
-                                            data-euge="{{ $item['id'] }}">Eliminar</a>
+                                            data-euge="{{ $item['id'] }}" aria-disabled="true">Eliminar</a>
                                     </div>
                                 </div>
                             </div>
@@ -65,7 +69,7 @@
             <div class="pay">
                 <div>Subtotal:</div>
                 <div class="price">${{ number_format($cart_client->total, 2, ',', '.') }}</div>
-                <a href="{{ route('store.pay_show', [$cart_client->id, 1]) }}" class="btn btn-warning">Proceder al pago</a>
+                <a href="{{ route('store.pay_show', [$cart_client->id, 1]) }}" class="btn btn-warning" id="btn-comprar">Proceder al pago</a>
             </div>
             <input type="hidden" id="total" value="{{ $cart_client->total }}">
 
@@ -94,7 +98,7 @@
     <div class="hide-container">
         No tienes ningún porducto en el carrito
     </div>
-
+    @include('store.products-section-min')
 @endsection
 
 
