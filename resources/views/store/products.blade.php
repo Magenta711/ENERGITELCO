@@ -48,7 +48,7 @@
                     max="{{ $id->disponibles }}"></div>
             <button type="button" style="background-color: #ff8400" id="add_cart">Agregar al Carrito</button>
         </div>
-        <form action="{{ route('store.add_cart', $id->id) }}" method="POST" id="add_cart_form">
+        <form action="{{ route('store.add_cart', [$id->id, 1]) }}" method="POST" id="add_cart_form">
             @csrf
             <input type="hidden" name="amount_item" id="input_amount_item">
         </form>

@@ -1,7 +1,7 @@
 .big-container {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     width: 100%;
 }
@@ -9,6 +9,7 @@
 .pay {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     height: 100%;
 }
 
@@ -16,7 +17,7 @@
     display: flex;
     flex-wrap: nowrap;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     width: 75%;
 }
 
@@ -37,11 +38,30 @@
     height: auto;
     overflow: hidden;
     margin-right: 5%;
+    height: 200px;
+}
+
+.container .kit-max-img {
+    width: 15%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-content: center;
+    height: 200px;
+    overflow: hidden;
+    align-items: stretch;
+    justify-items: center;
+    margin-right: 5%;
+}
+
+.container .kit-max-img img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
 }
 
 .container .img-principal img {
-    object-fit: contain;
-    width: 100%;
+    object-fit: cover;
+    height: 100%;
 }
 
 .container .info {

@@ -1544,8 +1544,12 @@ f <!-- =============================================== -->
                                 href="{{ route('energy') }}"><i class="fa fa-file-alt"></i> COTIZACIONES</a></li>
                     @endif
                     @if (auth()->user()->hasAnyPermission(['Ver Productos', 'Crear Productos', 'Editar Productos', 'ELiminar Productos']))
-                        <li class="{{ activeMenu('energias/productos*') }}"><a class="btn-send"
+                        <li class="{{ activeMenu('energy/products*') }}"><a class="btn-send"
                                 href="{{ route('energy_products') }}"><i class="fa fa-boxes"></i> PRODUCTOS</a></li>
+                    @endif
+                    @if (auth()->user()->hasAnyPermission(['Ver Productos', 'Crear Productos', 'Editar Productos', 'ELiminar Productos']))
+                        <li class="{{ activeMenu('energy/kits*') }}"><a class="btn-send"
+                                href="{{ route('energy_kits.index') }}"><i class="fa fa-solar-panel"></i> KITS SOLARES</a></li>
                     @endif
                     <li class="treeview {{ activeMenu('energy/sales*') }}{{ activeMenu('energy/clients*') }}">
                         <a href="#"><i class="fa fa-donate"></i> PRINCIPAL<span class="pull-right-container">

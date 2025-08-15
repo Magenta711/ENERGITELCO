@@ -21,7 +21,6 @@ class UpdatePay extends Migration
             $table->integer('valor')->nullable();
             $table->string('status')->nullable();
             $table->timestamp('reserva_created')->nullable();
-
         });
     }
 

@@ -38,10 +38,32 @@
     width: 15%;
     overflow: hidden;
     margin-right: 5%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.products .kit-max-img {
+    width: 15%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-content: center;
+    height: 200px;
+    overflow: hidden;
+    align-items: stretch;
+    justify-items: center;
+    margin-right: 5%;
+}
+
+.products .kit-max-img img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
 }
 
 .products .img img {
-    object-fit: cover;
+    object-fit: contain;
     width: 100%;
 }
 

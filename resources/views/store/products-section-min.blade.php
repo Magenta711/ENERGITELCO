@@ -4,6 +4,24 @@
     </div>
     <div class="container align-items-center">
         <div class="row justify-content-center">
+            @foreach ($min_kit as $kit)
+                <a href="{{ route('store.kit_show', $kit->type) }}" class="btn card" target="_black">
+                    <div class="content-kit-img">
+                        <div class="kit-min-img">
+                            @foreach ($kit->files as $item)
+                                <img id="img" src="/storage/energy/{{ $item->name }}" alt="Attachment">
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="text">
+                        <div class="card-title">{{ $kit->name }}</div>
+                        <div class="card-title">{{ $kit->type }}</div>
+                        <div class="card-title"><b>
+                                <h4>${{ number_format($kit->price, 2, ',', '.') }}</h4>
+                            </b></div>
+                    </div>
+                </a>
+            @endforeach
             @foreach ($min_product as $item)
                 <a href="{{ route('store.products_show', $item->type) }}" class="btn card">
                     <div class="img">
@@ -37,11 +55,9 @@
 
     .products-section .container .row {
         display: flex;
-        flex-wrap: nowrap;
+        flex-wrap: wrap;
         justify-content: center;
         gap: 20px;
-        flex-direction: row;
-        align-items: center;
     }
 
     .products-section .container .card {
@@ -67,11 +83,28 @@
     }
 
     .products-section .container .card .img img {
-        object-fit: cover;
+        object-fit: contain;
         width: 100%;
         height: 100%;
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
+    }
+
+    .kit-min-img {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        align-content: center;
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+        align-items: center;
+        justify-items: center;
+    }
+
+    .kit-min-img img {
+        width: 80%;
+        height: auto;
+        object-fit: cover;
     }
 
     @media (max-width: 768px) {

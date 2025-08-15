@@ -37,7 +37,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <a class="btn btn-success" data-toggle="modal" data-target=".category-modal-lg" >Nueva
+                            <a class="btn btn-success" data-toggle="modal" data-target=".category-modal-lg">Nueva
                                 Subcategoría</a>
                         </div>
                     </div>
@@ -56,9 +56,11 @@
                                 <div class="col-md-12 text-right">
                                     <a href="" class="btn btn-success" data-toggle="modal"
                                         data-target=".create-product-{{ $item->id }}-modal-lg">Agregar productos</a>
-                                        @if ($item->SoldProducts() == 0)
-                                            <a href="" class="btn btn-danger" data-target=".delete-category-{{ $item->id }}-modal-lg" data-toggle="modal">Eliminar categoría</a>
-                                        @endif
+                                    @if ($item->SoldProducts() == 0)
+                                        <a href="" class="btn btn-danger"
+                                            data-target=".delete-category-{{ $item->id }}-modal-lg"
+                                            data-toggle="modal">Eliminar categoría</a>
+                                    @endif
                                 </div>
                             </div>
                             <hr>
@@ -91,18 +93,20 @@
                                                                 <a href="{{ route('energy_products_types', [$id->id, $items->type]) }}"
                                                                     class="btn btn-info"><i class="fa fa-eye"></i></a>
                                                             @endcan
-                                                            @if ($items->status == 1)
+                                                            {{-- @if ($items->status == 1) --}}
                                                                 @can('Editar Productos')
-                                                                    <a href="" class="btn btn-warning" data-toggle="modal"
+                                                                    <a href="" class="btn btn-warning"
+                                                                        data-toggle="modal"
                                                                         data-target=".edit-product-{{ $items->id }}-modal-lg"><i
                                                                             class="fa fa-edit"></i></a>
                                                                 @endcan
-                                                                @if ( $item->SoldProducts($items->type) == 0)
-                                                                        <a href="" class="btn btn-danger" data-toggle="modal"
-                                                                            data-target=".delete-{{ $items->id }}-modal-lg"><i
-                                                                                class="fa fa-trash"></i></a>
+                                                                @if ($item->SoldProducts($items->type) == 0)
+                                                                    <a href="" class="btn btn-danger"
+                                                                        data-toggle="modal"
+                                                                        data-target=".delete-{{ $items->id }}-modal-lg"><i
+                                                                            class="fa fa-trash"></i></a>
                                                                 @endif
-                                                            @endif
+                                                            {{-- @endif --}}
                                                         </td>
                                                     </tr>
                                                     @include('energy.products.types.edit')
@@ -124,44 +128,42 @@
     </section>
 @endsection
 
-@section('css')
-    <link rel="stylesheet" href="{{ asset("assets/$theme/bower_components/select2/dist/css/select2.min.css") }}">
-@endsection
-
 @section('js')
-    <script src="{{ asset("assets/$theme/bower_components/select2/dist/js/select2.full.min.js") }}"></script>
-    <script src="{{ asset('js/project/mintic/create.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $('#file_create').change(function() {
-                $($('#' + this.id).parent().children('label')).addClass('text-aqua');
-                readImage(this);
+            $('[id^=file_create_]').change(function() {
+                const id = this.id.replace('file_create_', '');
+                $(this).siblings('label').addClass('text-aqua');
+                readImageDynamic(this, id);
             });
+
             $('.file-edit').change(function() {
-                let id = this.id.split('_')[this.id.split('_').length - 1];
-                $($('#' + this.id).parent().children('label')).addClass('text-aqua');
+                const id = this.id.replace('file_', ''); // Extrae el ID del archivo
                 readImageEdit(this, id);
             });
         });
 
-        function readImageEdit(input, id) {
+        function readImageDynamic(input, id) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
 
                 reader.onload = function(e) {
-                    $('#preimg_edit_' + id).attr('src', e.target.result); // Renderizamos la imagen
+                    $('#preimg_create_' + id).attr('src', e.target.result);
                 }
+
                 reader.readAsDataURL(input.files[0]);
             }
         }
 
-        function readImage(input) {
+        //Funcion para actualizar la imagen, cuando hay varios inputs files
+        function readImageEdit(input, id) {
             if (input.files && input.files[0]) {
-                var reader = new FileReader();
+                let reader = new FileReader();
 
                 reader.onload = function(e) {
-                    $('#preimg_create').attr('src', e.target.result); // Renderizamos la imagen
-                }
+                    $('#preimg_edit_' + id).attr('src', e.target.result); // Actualiza previsualización
+                };
+
                 reader.readAsDataURL(input.files[0]);
             }
         }

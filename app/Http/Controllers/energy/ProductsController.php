@@ -114,19 +114,22 @@ class ProductsController extends Controller
             $id = SolarProducts::create($request->all());
             $codigo = 'PE-' . $iniciales . '-' . $id->id;
             $id->update(['cod_product' => strtoupper($codigo)]);
-            if ($request->hasFile('file')) {
-                $file = $request->file('file');
-                $name = $request->type . time() . '.' . $file->getClientOriginalExtension();
-                $size = $file->getClientSize() / 1000;
-                $path = Storage::putFileAs('public/energy', $file, $name);
-                $id->files()->create([
-                    'name' => $name,
-                    'description' => 'Foto de Producto Solar',
-                    'size' => $size . ' KB',
-                    'url' => $path,
-                    'type' => $file->getClientOriginalExtension(),
-                    'state' => 1
-                ]);
+            $inputName = 'file_' . $request->subcategory_id;
+            if ($request->hasFile($inputName)) {
+                $file = $request->file($inputName);
+                if ($file !== null) {
+                    $name = $request->type . time() . '.' . $file->getClientOriginalExtension();
+                    $size = $file->getClientSize() / 1000;
+                    $path = Storage::putFileAs('public/energy', $file, $name);
+                    $id->files()->create([
+                        'name' => $name,
+                        'description' => 'Foto de Producto Solar',
+                        'size' => $size . ' KB',
+                        'url' => $path,
+                        'type' => $file->getClientOriginalExtension(),
+                        'state' => 1
+                    ]);
+                }
             }
         }
         return redirect()->route('energy_products_category.show', $request->category_id)->with('success', 'Se ha generado los equipos correctamente');
@@ -181,10 +184,62 @@ class ProductsController extends Controller
         }
 
         foreach ($products as $product) {
-            $product->update($request->except(['file']));
+            $product->update($request->except(['file', 'serie']));
+            foreach ($product->files as $oldFile) {
+                if (Storage::exists($oldFile->url)) {
+                    Storage::delete($oldFile->url);
+                }
+                $oldFile->delete();
+            }
+            $inputName = 'file_' . $id->id;
+            if ($request->hasFile($inputName)) {
+                $file = $request->file($inputName);
+                $name = $request->type . time() . '.' . $file->getClientOriginalExtension();
+                $size = $file->getClientSize() / 1000;
+                $path = Storage::putFileAs('public/energy', $file, $name);
+                $product->files()->create([
+                    'name' => $name,
+                    'description' => 'Foto de Producto Solar',
+                    'size' => $size . ' KB',
+                    'url' => $path,
+                    'type' => $file->getClientOriginalExtension(),
+                    'state' => 1
+                ]);
+            }
         }
 
+
         return redirect()->route('energy_products_category.show', $id->category_id)->with('success', 'Se ha actualizado el equipo correctamente');
+    }
+
+    public function update_category(Request $request, CategoryProducts $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+        $id->update(['name' => $request->name]);
+        return redirect()->route('energy_products')->with('success', 'Se ha actualizado la categoría correctamente');
+    }
+
+    public function update_subcategory(Request $request, SubcategoryProducts $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+        $id->update(['name' => $request->name]);
+        return redirect()->route('energy_products_category.show', $id->category_id)->with('success', 'Se ha actualizado la subcategoría correctamente');
+    }
+
+    public function update_product(Request $request, SolarProducts $id)
+    {
+        $request->validate([
+            'serie' => 'required|string|max:255',
+            'status' => 'required',
+        ]);
+        $id->serie=$request->serie;
+        $id->status = $request->status;
+        $id->save();
+        return redirect()->route('energy_products_types', [$id->category_id, $id->type])->with('success', 'Se ha actualizado el equipo correctamente');
     }
 
     /**
@@ -215,7 +270,7 @@ class ProductsController extends Controller
     {
         $ids = SolarProducts::where('category_id', $id)->where('subcategory_id', $item)->get();
 
-        if($ids){
+        if ($ids) {
             foreach ($ids as $product) {
                 $product->delete();
             }

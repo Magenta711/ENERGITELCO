@@ -41,7 +41,7 @@ use App\Models\Work8;
 use App\Models\execution_work\assigment;
 use App\Models\execution_work\review_tools;
 
-class User extends Authenticatable implements MustVerifyEmail
+class  User extends Authenticatable implements MustVerifyEmail
 {
     use HasRoles;
     use Notifiable;

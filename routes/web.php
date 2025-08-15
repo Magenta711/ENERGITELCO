@@ -1035,6 +1035,7 @@ Route::get('energy/products/category', 'energy\ProductsController@categoryIndex'
 Route::get('energy/products/create', 'energy\ProductsController@create')->name('energy_products.create');
 Route::post('energy/products/store', 'energy\ProductsController@store')->name('energy_products.store');
 Route::put('energy/products/update/{id}', 'energy\ProductsController@update')->name('energy_products.update');
+Route::put('energy/products/update/products/{id}', 'energy\ProductsController@update_product')->name('energy_products.update_product');
 Route::delete('energy/products/destroy/{id}', 'energy\ProductsController@destroy')->name('energy_products.destroy');
 Route::delete('energy/products/destroy/{id}/{item}/{type}', 'energy\ProductsController@destroy_all')->name('energy_products.destroy_all');
 Route::delete('energy/products/destroy/subcategory_id/{id}/{item}', 'energy\ProductsController@destroy_category')->name('energy_products.destroy_category');
@@ -1059,6 +1060,20 @@ Route::get('energy/store/users', 'energy\store\AdminStoreController@index')->nam
 Route::get('energy/store/ventas', 'energy\store\AdminStoreController@ventas')->name('energy_store_ventas.ventas');
 Route::get('energy/store/ventas/show/{id}', 'energy\store\AdminStoreController@ventas_show')->name('energy_store_ventas_show.ventas_show');
 
+Route::get('energy/kits', 'energy\SolarKitsController@index')->name('energy_kits.index');
+Route::get('energy/kits/crear', 'energy\SolarKitsController@create')->name('energy_kits.create');
+Route::post('energy/kits/store', 'energy\SolarKitsController@store')->name('energy_kits.store');
+Route::get('energy/kits/show/{id}', 'energy\SolarKitsController@show')->name('energy_kits.show');
+Route::get('energy/kits/edit/{id}', 'energy\SolarKitsController@edit')->name('energy_kits.edit');
+Route::put('energy/kits/update/{id}', 'energy\SolarKitsController@update')->name('energy_kits.update');
+Route::delete('energy/kits/destroy_all/{id}', 'energy\SolarKitsController@destroy_all')->name('energy_kits.destroy_all');
+
+Route::get('energy/kits/get_subcategories/{id}', 'energy\SolarKitsController@getsubcategories')->name('energy_kits.get_subcategories');
+Route::get('energy/kits/get_products/{id}', 'energy\SolarKitsController@getProducts')->name('energy_kits.get_products');
+Route::get('energy/kits/get_info/{id}', 'energy\SolarKitsController@getInfo')->name('energy_kits.get_info');
+Route::get('energy/kits/amount_products/{id}/{amount}/{kit}', 'energy\SolarKitsController@amountProducts')->name('energy_kits.amount_products');
+
+Route::post('energy/kits/offer/', 'energy\SolarKitsController@offer')->name('energy_kits.offer');
 
 Route::get('project/maintenance/smu', 'projects\maintenances\SMUController@index')->name('SMU');
 Route::get('project/maintenance/smu/create', 'projects\maintenances\SMUController@create')->name('smu_create');
@@ -1127,7 +1142,7 @@ Route::put('project/maintenance/smu/operation/descripcion_photos/{id}/{item}', '
 //     ]
 // ], function () {
     Route::get('product/store/view/{id}', 'StoreProductsController@show')->name('store.products_show');
-    Route::post('product/store/add_cart/{id}', 'StoreProductsController@add_cart')->name('store.add_cart')->middleware('auth:tienda');
+    Route::post('product/store/add_cart/{id}/{type}', 'StoreProductsController@add_cart')->name('store.add_cart')->middleware('auth:tienda');
     Route::get('product/store/show_cart', 'StoreProductsController@show_cart')->name('store.show_cart')->middleware('auth:tienda')->middleware('verified');
     Route::post('product/store/delete_product', 'StoreProductsController@delete_product')->name('store.delete_product');
     Route::post('product/store/amount_product', 'StoreProductsController@amount_product')->name('store.amount_product');
@@ -1148,4 +1163,7 @@ Route::put('project/maintenance/smu/operation/descripcion_photos/{id}/{item}', '
 
     Route::get('product/store/orders', 'StoreProductsController@orders_show')->name('store.orders')->middleware('auth:tienda')->middleware('verified');
     Route::get('product/store/orders/{id}', 'StoreProductsController@orders_detail')->name('store.orders_detail')->middleware('auth:tienda')->middleware('verified');
+
+    Route::get('product/store/kit/{id}', 'StoreProductsController@show_kit')->name('store.kit_show');
+
 // });

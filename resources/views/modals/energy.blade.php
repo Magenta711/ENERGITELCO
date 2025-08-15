@@ -293,5 +293,4 @@
     document.getElementById('modal').style.display = 'none';
     document.getElementById('modal').style.display = 'block';
     document.getElementById('page-top').style.overflow = "hidden";
-
 </script>

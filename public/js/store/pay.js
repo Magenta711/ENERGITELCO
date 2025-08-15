@@ -120,7 +120,7 @@ function llaveIntegridad() {
             console.log('Cadena de integridad g:', response.string);
         },
         error: function () {
-            console.log('Error al enviar los datos');
+            console.log('Error al enviar los datos de la llave de integridad');
         }
     });
 }

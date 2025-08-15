@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-            <form action="{{ route('energy_products.update', $item->id) }}" method="POST">
+            <form action="{{ route('energy_products.update_product', $item->id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="row">
@@ -25,19 +25,13 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="type">Tipo de Equipo</label>
-                                <select name="type" id="type" class="form-control">
-                                    <option {{ $item->type ==  'Inversor Solar' ? 'selected' : ''}} value="Inversor Solar">Inversor Solar</option>
-                                    <option {{ $item->type ==  'Inversor de Potencia' ? 'selected' : ''}} value="Inversor de Potencia">Inversor de Potencia</option>
-                                    <option {{ $item->type ==  'Batería' ? 'selected' : ''}} value="Batería">Batería</option>
-                                    <option {{ $item->type ==  'Panel Solar' ? 'selected' : ''}} value="Panel Solar">Panel Solar</option>
-                                    <option {{ $item->type ==  'Otro' ? 'selected' : ''}} value="Otro">Otro</option>
-                                </select>
+                                <input type="text" class="form-control" id="type" name="type" value="{{ $item->type }}" disabled>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="model">Modelo</label>
-                                <input type="text" class="form-control" id="model" name="model" value="{{ $item->model }}">
+                                <input type="text" class="form-control" id="model" name="model" value="{{ $item->model }}" disabled>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -49,25 +43,30 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="power">Potencia</label>
-                                <input type="text" class="form-control" id="power" name="power" value="{{ $item->power }}">
+                                <input type="text" class="form-control" id="power" name="power" value="{{ $item->power }}" disabled>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="price">Precio</label>
-                                <input type="number" class="form-control" id="price" name="price" value="{{ $item->price }}">
+                                <input type="number" class="form-control" id="price" name="price" value="{{ $item->price }}" disabled>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="warranty">Garantía</label>
-                                <input type="text" class="form-control" id="warranty" name="warranty" value="{{ $item->warranty }}">
+                                <label for="status">Estado</label>
+                                <select name="status" id="status" class="form-control" {{ $item->status == 3 ? 'disabled' : '' }}>
+                                    <option {{ $item->status ==  '1' ? 'selected' : ''}} value="1">Disponible</option>
+                                    <option {{ $item->status ==  '2' ? 'selected' : ''}} value="2">No disponible</option>
+                                    <option {{ $item->status ==  '3' ? 'selected' : ''}} value="3">Vendido</option>
+                                    <option {{ $item->status ==  '4' ? 'selected' : ''}} value="4">En Kit </option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="desription">Descripción</label>
-                                <textarea name="description" id="description" cols="30" rows="4" class="form-control">{{ $item->description }}</textarea>
+                                <textarea name="description" id="description" cols="30" rows="4" class="form-control" disabled>{{ $item->description }}</textarea>
                             </div>
                         </div>
                 </div>

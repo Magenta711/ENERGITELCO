@@ -19,7 +19,8 @@
                                     <li>Los equipos se mostrarán en la tienda por tipo.</li>
                                     <li>Los datos del equipo son los mismos para todos los equipos del mismo tipo que se
                                         registrarán.</li>
-                                    <li>La cantidad de equipos se refiere a la cantidad de equipos del mismo  tipo o modelo que
+                                    <li>La cantidad de equipos se refiere a la cantidad de equipos del mismo tipo o
+                                        modelo que
                                         se registrarán.</li>
                                     <li>La imagen del equipo debe ser de buena calidad y resolución.</li>
                                     <li>La imagen del equipo debe ser cuadrada.</li>
@@ -31,7 +32,8 @@
                                         <li>Baterías: Capacidad en amperios-hora (Ah).</li>
                                         <li>Controladores de carga: Potencia en amperios (A).</li>
                                     </ul>
-                                    <li>La descripción del producto debe ser corta pero detallada, puesto que esta será la información con la que se ofertará el producto.</li>
+                                    <li>La descripción del producto debe ser corta pero detallada, puesto que esta será
+                                        la información con la que se ofertará el producto.</li>
                                     <li>La garantía del producto debe ser ingresada en meses.</li>
                                     <li>El precio no debe llevar puntos o comas</li>
                                     <li>Dimensiones del equipo:</li>
@@ -71,21 +73,21 @@
                             </div>
                             <div class="col-md-12 text-center">
                                 <div class="form-group">
-                                    <label for="file_create">Imagen</label><br>
+                                    <label for="file_create_{{ $item->id }}">Imagen</label><br>
                                     <div class="text-center mb-3" style="padding: 10px; width: 100%;">
-                                        <img src="" alt="" width="40%" id="preimg_create">
+                                        <img src="" alt="" width="40%"
+                                            id="preimg_create_{{ $item->id }}">
                                     </div>
-                                    <label for="file_create" class="form-control text-center"><i
-                                            class="fa fa-upload"></i></label>
-                                    <input type="file" name="file" id="file_create" class="hide"
-                                        accept="image/*" value="{{ old('file') }}">
+                                    <label for="file_create_{{ $item->id }}" class="form-control text-center">
+                                        <i class="fa fa-upload"></i>
+                                    </label>
+                                    <input type="file" name="file_{{ $item->id }}"
+                                        id="file_create_{{ $item->id }}" class="hide" accept="image/*"
+                                        value="{{ old('file_' . $item->id) }}">
                                 </div>
                             </div>
                         </div>
                         <hr>
-                        <div class="row">
-
-                        </div>
                         <hr>
                         <div class="row">
                             <div class="col-md-4">
@@ -162,11 +164,12 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="desription">Descripción*</label>
-                                    <textarea name="description" id="description" cols="30" rows="4" class="form-control" placeholder="Panel solar Bifacial M410-144"></textarea>
+                                    <textarea name="description" id="description" cols="30" rows="4" class="form-control"
+                                        placeholder="Panel solar Bifacial M410-144"></textarea>
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-success submit">Guardar</button>
+                        <button class="btn btn-success submit btn-send">Guardar</button>
                     </div>
                 </form>
             </div>

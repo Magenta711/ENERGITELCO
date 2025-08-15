@@ -43,7 +43,7 @@
                                             <td>{{ $item->cod_product }}</td>
                                             <td>{{ $item->model }}</td>
                                             <td>{{ $item->type }}</td>
-                                            <td>{{ $item->status == 1 ? 'En Bodega' : ($item->status == 3 ? 'Vendido' : 'Pendiente') }}
+                                            <td>{{ $item->status == 1 ? 'En Bodega' : ($item->status == 3 ? 'Vendido' : ($item->status==4 ? 'En Kit' : 'Pendiente - No disponible')) }}
                                             </td>
                                             <td>${{ number_format($item->price, 2, ',', '.') }}</td>
                                             <td>
@@ -52,7 +52,14 @@
                                                         data-target=".review-{{ $item->id }}-modal-lg"><i
                                                             class="fa fa-eye"></i></a>
                                                 @endcan
-                                                @if ($item->status == 1)
+                                                @if ($item->status != 3)
+                                                    @can('Editar Productos')
+                                                        <a href="" class="btn btn-warning" data-toggle="modal"
+                                                            data-target=".edit-{{ $item->id }}-modal-lg"><i
+                                                                class="fa fa-edit"></i></a>
+                                                    @endcan
+                                                @endif
+                                                @if ($item->status != 3)
                                                     @can('ELiminar Productos')
                                                         <a href="" class="btn btn-danger" data-toggle="modal"
                                                             data-target=".delete-{{ $item->id }}-modal-lg"><i

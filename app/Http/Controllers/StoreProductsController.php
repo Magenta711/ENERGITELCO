@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Energy\SolarKit;
 use App\Models\Energy\SolarShippingValue;
 use Illuminate\Http\Request;
 use App\Models\SolarProducts;
@@ -32,15 +33,19 @@ class StoreProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function add_cart(Request $request, SolarProducts $id)
+    public function add_cart(Request $request, $id, $type)
     {
+        if ($type == 1) {
+            $id = SolarProducts::find($id);
+        } else {
+            $id = SolarKit::find($id);
+        }
         $cart_client = Cart::where('client_id', auth('tienda')->id())->first();
 
         $products = [];
         $all_products = [];
         $total = 0;
         $exist = false;
-
         $total_product = $request->amount_item * $id->price;
 
         $all_products = $cart_client ? json_decode($cart_client->products, true) ?? [] : [];
@@ -60,6 +65,7 @@ class StoreProductsController extends Controller
 
         if (!$exist) {
             $product = [
+                'type' => $type,
                 'product' => $id->type,
                 'cantidad' => (int)$request->amount_item,
                 'valor' => $total_product,
@@ -118,7 +124,33 @@ class StoreProductsController extends Controller
                 ->where('status', 1)->where('type', '!=', $id->type)
                 ->groupBy('type')
                 ->get();
+            $kits = SolarKit::selectRaw('MIN(id) as id')
+                ->where('status', 1)
+                ->groupBy('type')
+                ->get();
             $min_product = SolarProducts::whereIn('id', $productos->pluck('id'))->get();
+            $min_kit = SolarKit::whereIn('id', $kits->pluck('id'))->get()->all();
+            foreach ($min_kit as $kit) {
+                $kit->products = is_array($kit->products) ? $kit->products : [];
+                $equiposList = [];
+                $tiposAgregados = [];
+                $filesAgregados = 0;
+                foreach ($kit->products as $producto) {
+                    $equipo = SolarProducts::find($producto['id']);
+                    if ($equipo && $equipo->files && !in_array($equipo->type, $tiposAgregados)) {
+                        foreach ($equipo->files as $file) {
+                            $equiposList[] = $file;
+                            $tiposAgregados[] = $equipo->type;
+                            $filesAgregados++;
+                            break;
+                        }
+                    }
+                    if ($filesAgregados >= 4) {
+                        break;
+                    }
+                }
+                $kit->files = $equiposList;
+            }
             $types = [];
 
             $available = count(SolarProducts::where('type', $item)->where('status', 1)->get());
@@ -141,9 +173,88 @@ class StoreProductsController extends Controller
                 $all_products = $cart_client ? json_decode($cart_client->products, true) ?? [] : [];
             }
             // return $id;
-            return view('store.products', compact('id', 'products', 'cliente', 'cart_client', 'all_products', 'min_product'));
+            return view('store.products', compact('id', 'products', 'cliente', 'cart_client', 'all_products', 'min_product', 'min_kit'));
         } else {
-            return redirect()->route('welcome')->with('title', 'No disponible')->with('success',);
+            return redirect()->route('welcome')->with('title', 'No disponible')->with('success');
+        }
+    }
+
+    public function show_kit($type)
+    {
+        $id = SolarKit::where('type', $type)->where('status', 1)->first();
+        if ($id && $id->status == 1) {
+            $cliente = Auth::guard('tienda')->user();
+            $id->caracteristics = json_decode($id->caracteristics, true);
+            $product = SolarProducts::where('status', 1)->get();
+            $min_product = [];
+            $productos = SolarProducts::selectRaw('MIN(id) as id')
+                ->where('status', 1)
+                ->groupBy('type')
+                ->get();
+            $kits = SolarKit::selectRaw('MIN(id) as id')
+                ->where('status', 1)->where('type', '!=', $id->type)
+                ->groupBy('type')
+                ->get();
+            $min_product = SolarProducts::whereIn('id', $productos->pluck('id'))->get()->all();
+            $min_kit = SolarKit::whereIn('id', $kits->pluck('id'))->get()->all();
+            foreach ($min_kit as $kit) {
+                $kit->products = is_array($kit->products) ? $kit->products : [];
+                $equiposList = [];
+                $tiposAgregados = [];
+                $filesAgregados = 0;
+                foreach ($kit->products as $producto) {
+                    $equipo = SolarProducts::find($producto['id']);
+                    if ($equipo && $equipo->files && !in_array($equipo->type, $tiposAgregados)) {
+                        foreach ($equipo->files as $file) {
+                            $equiposList[] = $file;
+                            $tiposAgregados[] = $equipo->type;
+                            $filesAgregados++;
+                            break;
+                        }
+                    }
+                    if ($filesAgregados >= 4) {
+                        break;
+                    }
+                }
+                $kit->files = $equiposList;
+            }
+            $types = [];
+            $available = count(SolarKit::where('type', $type)->where('status', 1)->get());
+            $id['disponibles'] = $available;
+            foreach ($product as $type) {
+                $type = $type->type;
+                if (!in_array($type, $types)) {
+                    $types[] = $type;
+                }
+            }
+            foreach ($types as $value) {
+                $product = SolarProducts::where('status', 1)->where('type', $value)->get();
+                if ($product) {
+                    $products[] = $product;
+                }
+            }
+            $all_products = [];
+            $cart_client = Cart::where('client_id', auth('tienda')->id())->first();
+            if ($cart_client) {
+                $all_products = $cart_client ? json_decode($cart_client->products, true) ?? [] : [];
+            }
+            $productos = collect();
+            foreach ($id->products as $product) {
+                $product = SolarProducts::find($product['id']);
+                if ($product) {
+                    if (!isset($productos[$product->type])) {
+                        $product->cantidad = 1;
+                        $productos[$product->type] = $product;
+                    } else {
+                        $productos[$product->type]->cantidad += 1;
+                        $productos[$product->type]->valor += $product->price;
+                    }
+                }
+            }
+
+            return view('store.kit.kits', compact('id', 'products', 'cliente', 'cart_client', 'all_products', 'min_product', 'min_kit', 'productos'));
+        } else {
+            return redirect()->route('welcome')->with('title', 'No disponible')->with('success');
         }
     }
 
@@ -154,26 +265,77 @@ class StoreProductsController extends Controller
             ->where('status', 1)
             ->groupBy('type')
             ->get();
-
+        $kits = SolarKit::selectRaw('MIN(id) as id')
+            ->where('status', 1)
+            ->groupBy('type')
+            ->get();
         $min_product = SolarProducts::whereIn('id', $productos->pluck('id'))->get();
-
+        $min_kit = SolarKit::whereIn('id', $kits->pluck('id'))->get()->all();
+        foreach ($min_kit as $kit) {
+            $kit->products = is_array($kit->products) ? $kit->products : [];
+            $equiposList = [];
+            $tiposAgregados = [];
+            $filesAgregados = 0;
+            foreach ($kit->products as $producto) {
+                $equipo = SolarProducts::find($producto['id']);
+                if ($equipo && $equipo->files && !in_array($equipo->type, $tiposAgregados)) {
+                    foreach ($equipo->files as $file) {
+                        $equiposList[] = $file;
+                        $tiposAgregados[] = $equipo->type;
+                        $filesAgregados++;
+                        break;
+                    }
+                }
+                if ($filesAgregados >= 4) {
+                    break;
+                }
+            }
+            $kit->files = $equiposList;
+        }
         $products = [];
         $all_products = $cart_client ? (json_decode($cart_client->products, true) ?? []) : [];
         $cliente = Auth::guard('tienda')->user();
         $product = SolarProducts::where('status', 1)->get();
         foreach ($all_products as $item) {
-            $product = SolarProducts::where('type', $item['product'])->first();
-            $available = count(SolarProducts::where('status', 1)->where('type', $item['product'])->get());
-
+            if ($item['type'] == 1) {
+                $product = SolarProducts::where('type', $item['product'])->first();
+                $available = count(SolarProducts::where('status', 1)->where('type', $item['product'])->get());
+            } else {
+                $product = SolarKit::where('type', $item['product'])->first();
+                $available = count(SolarKit::where('status', 1)->where('type', $item['product'])->get());
+                $product->products = is_array($product->products) ? $product->products : [];
+                $equiposList = [];
+                $tiposAgregados = [];
+                $filesAgregados = 0;
+                foreach ($product->products as $items) {
+                    $produ = SolarProducts::find($items['id']);
+                    if ($produ && $produ->files && !in_array($produ->type, $tiposAgregados)) {
+                        foreach ($produ->files as $file) {
+                            $equiposList[] = $file;
+                            $tiposAgregados[] = $produ->type;
+                            $filesAgregados++;
+                            break;
+                        }
+                    }
+                    if ($filesAgregados >= 4) {
+                        break;
+                    }
+                }
+                $product->files = $equiposList;
+            }
             if ($product) {
+                if ($item['type'] == 1) {
+                    $product['typeGorup'] = 'Producto';
+                } else {
+                    $product['typeGorup'] = 'Kit';
+                }
                 $product['cantidad'] = $item['cantidad'];
                 $product['valor'] = $item['valor'];
                 $product['disponibles'] = $available;
                 $products[] = $product;
             }
         };
-
-        return view('store.cart', compact('cart_client', 'all_products', 'cliente', 'product', 'products', 'min_product'));
+        return view('store.cart', compact('cart_client', 'all_products', 'cliente', 'product', 'products', 'min_product', 'min_kit'));
     }
 
     /**
@@ -239,9 +401,15 @@ class StoreProductsController extends Controller
             $products = is_array($Pay->products) ? $Pay->products : [];
 
             foreach ($products as $value) {
-                $product = SolarProducts::find($value['id']);
-                if ($product) {
-                    $items[] = $product;
+                if ($value['GroupType'] == 'producto') {
+                    $items[] = SolarProducts::find($value['id']);
+                } else {
+                    $kit = SolarKit::find($value['id']);
+                    $items[] = $kit;
+                    $kit->products = is_array($kit->products) ? $kit->products : [];
+                    foreach ($kit->products as $product) {
+                        $items[] = SolarProducts::find($product['id']);
+                    }
                 }
             }
 
@@ -365,21 +533,35 @@ class StoreProductsController extends Controller
                 }
 
                 $all_products = json_decode($cart->products, true) ?? [];
-
+                $items = [];
+                if (empty($all_products)) {
+                    throw new \Exception('No hay productos en el carrito');
+                }
                 foreach ($all_products as $value) {
-                    $items = SolarProducts::where('status', 1)
-                        ->where('type', $value['product'])
-                        ->limit($value['cantidad'])
-                        ->lockForUpdate()
-                        ->get();
+                    if ($value['type'] == 1) {
+                        $items = SolarProducts::where('status', 1)
+                            ->where('type', $value['product'])
+                            ->limit($value['cantidad'])
+                            ->lockForUpdate()
+                            ->get();
+                        foreach ($items as $item) {
+                            $item->groupType = 'producto';
+                            $products['products'][] = $item;
+                        }
+                    } else {
+                        $items = SolarKit::where('status', 1)
+                            ->where('type', $value['product'])
+                            ->limit($value['cantidad'])
+                            ->lockForUpdate()
+                            ->get();
+                        foreach ($items as $item) {
+                            $item->groupType = 'kit';
+                            $products['products'][] = $item;
+                        }
+                    }
 
                     if ($items->count() < $value['cantidad']) {
                         throw new \Exception('No hay suficiente stock para el producto: ' . $value['product']);
-                    }
-
-                    foreach ($items as $item) {
-                        // $item->update(['status' => 2]);
-                        $products['products'][] = $item;
                     }
                 }
 
@@ -399,12 +581,13 @@ class StoreProductsController extends Controller
                 $products['products'][] = $item;
                 $products['total'] = $item->valor ?? 0;
             }
-            Pay::create([
+            $pay = Pay::create([
                 'reference' => $reference,
                 'id_client' => $cliente->id,
                 'products' => collect($products['products'])->map(function ($item) {
                     return [
                         'id'    => $item->id,
+                        'GroupType' => $item->groupType,
                         'type'  => $item->type,
                         'valor' => $item->price,
                     ];
@@ -414,7 +597,6 @@ class StoreProductsController extends Controller
                 'reserva_created' => now(),
                 'expiration_date' => now()->addMinutes(1),
             ]);
-
             DB::commit();
             Log::info("Reserva creada para referencia $reference por el cliente {$cliente->id}");
         } catch (\Exception $e) {
@@ -454,30 +636,35 @@ class StoreProductsController extends Controller
 
         $Pay = pay::where('reference', $request->reference)->first();
         $products = is_array($Pay->products) ? $Pay->products : [];
+
         foreach ($products as $value) {
-            $product = SolarProducts::find($value['id']);
+            if ($value['GroupType'] == 'producto') {
+                $product = SolarProducts::find($value['id']);
+            } else {
+                $product = SolarKit::find($value['id']);
+            }
             if ($product) {
                 $items[] = $product;
             }
         }
 
-        $peso_volumetrico=0;
-        $peso_normal=0;
+        $peso_volumetrico = 0;
+        $peso_normal = 0;
         foreach ($items as $item) {
-            $peso_volumetrico+=($item->ancho*$item->alto*$item->largo)/5000;
-            $peso_normal+=$item->peso;
+            $peso_volumetrico += ($item->ancho * $item->alto * $item->largo) / 5000;
+            $peso_normal += $item->peso;
         }
 
-        $shipping=SolarShippingValue::first();
+        $shipping = SolarShippingValue::first();
 
-        $peso_cobrado=max($peso_volumetrico, $peso_normal);
+        $peso_cobrado = max($peso_volumetrico, $peso_normal);
         $kilos_adicionales = max(0, ceil($peso_cobrado - $shipping->kilos_adicionales));
         $costo_adicional = $kilos_adicionales * $shipping->valor_kilos_adic;
         $seguro = 0.01 * $Pay->valor;
 
         $total_envio = $shipping->base + $costo_adicional + $seguro;
-        $total_envio+=$total_envio*($shipping->porcentaje_aumentado/100);
-        $total=$total_envio+$Pay->valor;
+        $total_envio += $total_envio * ($shipping->porcentaje_aumentado / 100);
+        $total = $total_envio + $Pay->valor;
 
         $Pay->collect = $request->locate;
         $Pay->locate = json_encode($addres);
@@ -485,9 +672,9 @@ class StoreProductsController extends Controller
         $Pay->save();
 
         return response()->json([
-            'total_valor_text'=>number_format($total, 2, ',','.'),
-            'total_envio_text'=>number_format($total_envio, 2, ',','.'),
-            'total_valor'=>$total,
+            'total_valor_text' => number_format($total, 2, ',', '.'),
+            'total_envio_text' => number_format($total_envio, 2, ',', '.'),
+            'total_valor' => $total,
             'success' => true,
         ]);
     }
@@ -495,8 +682,8 @@ class StoreProductsController extends Controller
     public function collect(Request $request)
     {
         $request->validate([
-            'contact_number' => 'required',
-            'contact_name' => 'required',
+            'number_contact' => 'required',
+            'name_contact' => 'required',
         ]);
 
         $cliente = Auth::guard('tienda')->user();
@@ -508,8 +695,8 @@ class StoreProductsController extends Controller
             ], 404);
         }
         $addres = [
-            'number_contact' => $request->contact_number,
-            'name_contact' => $request->contact_name,
+            'number_contact' => $request->number_contact,
+            'name_contact' => $request->name_contact,
         ];
         $cliente->locate = json_encode($addres);
         $cliente->save();
@@ -572,15 +759,37 @@ class StoreProductsController extends Controller
         }
 
         $products = collect();
-
         foreach ($order->products as $value) {
-            $product = SolarProducts::where('id', $value['id'])->first();
-
+            if ($value['GroupType'] == 'producto') {
+                $product = SolarProducts::where('id', $value['id'])->first();
+            } else {
+                $product = SolarKit::where('id', $value['id'])->first();
+                $product->products = is_array($product->products) ? $product->products : [];
+                $equiposList = [];
+                $tiposAgregados = [];
+                $filesAgregados = 0;
+                foreach ($product->products as $items) {
+                    $produ = SolarProducts::find($items['id']);
+                    if ($produ && $produ->files && !in_array($produ->type, $tiposAgregados)) {
+                        foreach ($produ->files as $file) {
+                            $equiposList[] = $file;
+                            $tiposAgregados[] = $produ->type;
+                            $filesAgregados++;
+                            break;
+                        }
+                    }
+                    if ($filesAgregados >= 4) {
+                        break;
+                    }
+                }
+                $product->files = $equiposList;
+            }
             if ($product) {
                 $tipo = $product->type;
                 if (!$products->has($tipo)) {
                     $product->cantidad = 1;
                     $product->valor = $value['valor'];
+                    $product->groupType = $value['GroupType'];
                     $products[$tipo] = $product;
                 } else {
                     $products[$tipo]->cantidad += 1;

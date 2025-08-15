@@ -23,7 +23,6 @@ class SubcategoryProducts extends Model
     public function SameProducts()
     {
         $products = $this->products()
-            ->where('status', 1)
             ->get()
             ->groupBy('type')
             ->map(function ($items) {
