@@ -248,7 +248,7 @@
         <!-- Core theme JS-->
         <script src="https://energitelco.com/js/scripts.js"></script>
     </body>
-    @if(!empty($productosOff))
+    @if($offer->status == 1)
         @include('modals.offer')
     @endif
     {{-- <button type="button" onclick="document.getElementById('modal').style.display = 'block'">Abrir modal</button> --}}

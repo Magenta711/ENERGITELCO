@@ -146,15 +146,37 @@ background: #fff;">
                             <TH>CONCEPTO</TH>
                             <TH>GARANTÍA</TH>
                             <th>PRECIO</th>
+                            <th>TOTAL</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="text-center">
-                            <td>1.00</td>
-                            <td>{{$id->product->type}} - {{ $id->product->model }}</td>
-                            <td>{{ $id->warranty }}</td>
-                            <td>${{ number_format($id->valor, 2,',','.') }}</td>
-                        </tr>
+                        @if ($id->product)
+                            <tr class="text-center">
+                                <td>1.00</td>
+                                <td>{{$id->product->type}} - {{ $id->product->model }}</td>
+                                <td>{{ $id->warranty }}</td>
+                                <td>${{ number_format($id->valor, 2,',','.') }}</td>
+                                
+                                <td>${{ number_format($id->valor, 2,',','.') }}</td>
+                            </tr>
+                        @else
+                            @foreach ($id->ProductsLists() as $item)
+                                <tr class="text-center">
+                                    <td>{{ $item['amount'] }}</td>
+                                    @if ($item['type'] == 'SolarProduct' && $item['type'] != 'ExtraItem')
+                                        <td>{{ $item['details']['type'] }}</td>
+                                    @elseif ($item['type'] == 'SolarKit' && $item['type'] != 'ExtraItem')
+                                        <td>{{ $item['details']['name'] }}</td>
+                                    @endif
+                                    @if ($item['type'] == 'ExtraItem')
+                                        <td>{{ $item['item'] }}</td>
+                                    @endif
+                                    <td>{{ $item['warranty'] ?? '' }}</td>
+                                    <td>${{ number_format($item['value'], 2, ',', '.')  }}</td>
+                                    <td>${{ number_format(($item['value']*$item['amount']), 2, ',', '.')  }}</td>
+                                </tr>
+                            @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>

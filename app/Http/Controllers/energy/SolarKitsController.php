@@ -92,6 +92,16 @@ class SolarKitsController extends Controller
         return response()->json($products);
     }
 
+    public function getProduct($id)
+    {
+        $product = SolarProducts::find($id);
+        $product->disponibles = SolarProducts::where('subcategory_id', $product->subcategory_id)
+            ->where('type', $product->type)
+            ->where('status', 1)
+            ->count();
+        return response()->json($product);
+    }
+
     public function getInfo($id)
     {
         $id = EnergySolarKit::find($id);
@@ -115,6 +125,8 @@ class SolarKitsController extends Controller
             'type' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
             'price' => ['required', 'numeric'],
+            'price_install' => ['required', 'numeric'],
+            'price_transporte' => ['required', 'numeric'],
         ]);
 
         $request['status'] = 1;
@@ -184,8 +196,10 @@ class SolarKitsController extends Controller
                     'description' => $request['description'],
                     'warranty' => $request['warranty'],
                     'price' => $request['price'],
+                    'price_install' => $request['price_install'],
+                    'price_transporte' => $request['price_transporte'],
                     'discount' => $request['discount'] ?? 0,
-                    'final_price' => $request['final_price'] ?? $request['price'],
+                    'final_price' => $request['price'] + $request['price_install'] + $request['price_transporte'],
                     'status' => $request['status'],
                     'alto' => $alto,
                     'ancho' => $ancho,
@@ -298,6 +312,8 @@ class SolarKitsController extends Controller
             'type' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
             'price' => ['required', 'numeric'],
+            'price_transporte' => ['required', 'numeric'],
+            'price_install' => ['required', 'numeric'],
         ]);
         $kits = EnergySolarKit::where('type', $id->type)->get();
         $caracteristics = [
@@ -378,9 +394,10 @@ class SolarKitsController extends Controller
                     'caracteristics' => $request['caracteristics'],
                     'description' => $request['description'],
                     'warranty' => $request['warranty'],
-                    'price' => $request['price'],
+                    'price_install' => $request['price_install'],
+                    'price_transporte' => $request['price_transporte'],
                     'discount' => $request['discount'] ?? 0,
-                    'final_price' => $request['final_price'] ?? $request['price'],
+                    'final_price' => $request['price'] + $request['price_install'] + $request['price_transporte'],
                     'alto' => $alto,
                     'ancho' => $ancho,
                     'largo' => $largo,

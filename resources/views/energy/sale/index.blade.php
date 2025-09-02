@@ -42,8 +42,13 @@
                                         <tr>
                                             <td>{{ $sale->id }}</td>
                                             <td>{{ $sale->cod_sale }}</td>
+                                            @if ($sale->product)
                                             <td>{{ $sale->product->type }}</td>
                                             <td>{{ $sale->product->cod_product  .' - ' .$sale->product->model}}</td>
+                                            @else
+                                            <td>Varios</td>
+                                            <td>Varios</td>
+                                            @endif
                                             <td>{{ $sale->client->name }}</td>
                                             <td>{{ $sale->created_at->format('Y-m-d') }}</td>
                                             <td>

@@ -62,29 +62,29 @@ class WelcomeController extends Controller
         $productosOff = [];
 
         $offer = Offer::first();
-        if($offer->status == 1 )
-        if ($offer && $offer->kit_id) {
-            $kitOff = SolarKit::find($offer->kit_id);
-            if ($kitOff && $kitOff->products && count($kitOff->products) > 0) {
-                foreach ($kitOff->products as $prod) {
-                    if (!isset($prod['id'])) {
-                        continue;
-                    }
-                    $product = SolarProducts::find($prod['id']);
-                    if ($product) {
-                        $product->valor = $product->price ?? 0;
-                        if (!isset($productosOff[$product->type])) {
-                            $product->cantidad = 1;
-                            $productosOff[$product->type] = $product;
-                        } else {
-                            $productosOff[$product->type]->cantidad = ($productosOff[$product->type]->cantidad ?? 0) + 1;
-                            $productosOff[$product->type]->valor = ($productosOff[$product->type]->valor ?? 0) + ($product->price ?? 0);
+        if($offer->status == 1 ){
+            if ($offer && $offer->kit_id) {
+                $kitOff = SolarKit::find($offer->kit_id);
+                if ($kitOff && $kitOff->products && count($kitOff->products) > 0) {
+                    foreach ($kitOff->products as $prod) {
+                        if (!isset($prod['id'])) {
+                            continue;
+                        }
+                        $product = SolarProducts::find($prod['id']);
+                        if ($product) {
+                            $product->valor = $product->price ?? 0;
+                            if (!isset($productosOff[$product->type])) {
+                                $product->cantidad = 1;
+                                $productosOff[$product->type] = $product;
+                            } else {
+                                $productosOff[$product->type]->cantidad = ($productosOff[$product->type]->cantidad ?? 0) + 1;
+                                $productosOff[$product->type]->valor = ($productosOff[$product->type]->valor ?? 0) + ($product->price ?? 0);
+                            }
                         }
                     }
                 }
             }
         }
-        // return $productosOff;
         return view('welcome', compact('products', 'types', 'kits', 'equiposList', 'offer', 'kitOff', 'productosOff'));
     }
 }

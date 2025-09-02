@@ -17,6 +17,8 @@ class SolarKit extends Model
         'description',
         'warranty',
         'price',
+        'price_install',
+        'price_transporte',
         'discount',
         'final_price',
         'urlFile',
@@ -42,6 +44,16 @@ class SolarKit extends Model
         $kits = [];
         foreach ($types as $type) {
             $kits[] = self::where('type', $type)->first();
+        }
+        return $kits;
+    }
+
+    public static function TypeKitFree()
+    {
+        $types = self::select('type')->distinct()->pluck('type');
+        $kits = [];
+        foreach ($types as $type) {
+            $kits[] = self::where('type', $type)->where('status', 1)->first();
         }
         return $kits;
     }

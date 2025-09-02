@@ -54,13 +54,6 @@
                                         value="{{ old('type') }}" placeholder="Kit Solar Aislado" required>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="serie">Serie</label>
-                                    <input type="text" class="form-control" id="serie" name="serie"
-                                        value="{{ old('serie') }}" placeholder="Número de serie del equipo" required>
-                                </div>
-                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
@@ -92,9 +85,23 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="price">Precio*</label>
+                                    <label for="price">Valor del Kit*</label>
                                     <input type="number" class="form-control" id="price" name="price"
-                                        value="{{ old('price') }}" placeholder="Precio del equipo">
+                                        value="{{ old('price') }}" placeholder="Precio del equipo" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="price_install">Valor de la instalación*</label>
+                                    <input type="number" class="form-control" id="price_install" name="price_install"
+                                        value="{{ old('price_install') }}" placeholder="Precio de la instación del sistema" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="price_transporte">Valor transporte*</label>
+                                    <input type="number" class="form-control" id="price_transporte" name="price_transporte"
+                                        value="{{ old('price_transporte') }}" placeholder="Precio de transporte" required>
                                 </div>
                             </div>
                             <div class="col-md-4">

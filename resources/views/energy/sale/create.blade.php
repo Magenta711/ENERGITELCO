@@ -63,8 +63,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="ide">Documento</label>
-                                        <input type="text" class="form-control" name="ide"
-                                            id="ide">
+                                        <input type="text" class="form-control" name="ide" id="ide">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -117,7 +116,8 @@
                                     class="form-control" name="departamentNew" id="departamentNew"
                                     value="{{ old('departamentNew') }}"></div>
                             <div class="col-md-4"><label for="municipioNew">Municipio</label><input type="text"
-                                    class="form-control" name="municipioNew" id="municipioNew" value="{{ old('municipioNew') }}">
+                                    class="form-control" name="municipioNew" id="municipioNew"
+                                    value="{{ old('municipioNew') }}">
                             </div>
                             <div class="col-md-4"><label for="type_clientNew">Tipo de Cliente</label><select
                                     name="type_clientNew" id="type_clientNew" class="form-control">
@@ -129,112 +129,136 @@
                                 </select></div>
                         </div>
                         <hr>
-                        <h4>Producto</h4>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="productId">Seleccione el tipo de producto disponible</label>
-                                    <select name="productId" id="productId" class="form-control selectorkits">
-                                        <option value=""></option>
-                                        @php
-                                            $addedproducts = [];
-                                        @endphp
-                                        @foreach ($products as $product)
-                                            @if (!in_array($product->type, $addedproducts))
-                                                <option {{ old('name_product') == $product->id ? 'selected' : '' }}
-                                                    value="{{ $product->type }}">
-                                                    {{ $product->type }}
-                                                </option>
-                                                @php
-                                                    $addedproducts[] = $product->type;
-                                                @endphp
-                                            @endif
-                                        @endforeach
-                                    </select>
+                        <h4><b>Productos</b></h4>
+                        <div id="list_tools">
+                            @php
+                                $oldCategories = old('category', []);
+                            @endphp
+
+                            @foreach ($oldCategories as $i => $catId)
+                                <div class="select-container">
+                                    <div class="row select-group">
+                                        {{-- Categoria --}}
+                                        <div class="col-md-3">
+                                            <label>Categoria</label>
+                                            <select class="form-control category select2"
+                                                name="products[category][{{ $i }}]"
+                                                data-index="{{ $i }}">
+                                                <option value="">Seleccione una categoria</option>
+                                                @foreach ($categorias as $cat)
+                                                    <option value="{{ $cat->id }}"
+                                                        {{ $catId == $cat->id ? 'selected' : '' }}>
+                                                        {{ $cat->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        {{-- Subcategoria --}}
+                                        <div class="col-md-3">
+                                            <label>Subcategoria</label>
+                                            <select class="form-control subcategori"
+                                                name="products[subcategori][{{ $i }}]"
+                                                data-index="{{ $i }}">
+                                                <option value="">Seleccione una subcategoria</option>
+                                                @foreach ($subcategoriasOld[$i] ?? [] as $sub)
+                                                    <option value="{{ $sub->id }}"
+                                                        {{ old("subcategori.$i") == $sub->id ? 'selected' : '' }}>
+                                                        {{ $sub->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        {{-- Producto --}}
+                                        <div class="col-md-3">
+                                            <label>Productos</label>
+                                            <select class="form-control products"
+                                                name="products[products][{{ $i }}]"
+                                                data-index="{{ $i }}">
+                                                <option value="">Seleccione un producto</option>
+                                                @foreach ($productosOld[$i] ?? [] as $prod)
+                                                    <option value="{{ $prod->id }}"
+                                                        {{ old("products.$i") == $prod->id ? 'selected' : '' }}>
+                                                        {{ $prod->model }} - {{ $prod->type }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="amount">Cantidad</label>
+                                                <input type="number"
+                                                    name="products[amount_products][{{ $i }}]"
+                                                    id="amount_products_{{ $i }}"
+                                                    class="form-control amnount_products"
+                                                    value="{{ old("amount_products.$i") }}"
+                                                    data-index="{{ $i }}" disabled required>
+                                                <span id="alert_amount{{ $i }}" class="color-red alert">No hay
+                                                    suficientes productos para la cantidad de Kits: <i
+                                                        id="none_disponible{{ $i }}">Disponibles</i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="ModelProduct">Seleccione el modelo de Producto Disponible</label>
-                                    <select name="ModelProduct" id="ModelProduct" class="form-control" disabled>
-                                        <option value=""></option>
-                                    </select>
-                                </div>
-                            </div>
+                            @endforeach
+                        </div>
+                        <div class="btn-group d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="button" class="btn btn-sm btn-info " id="btn_plus_tools"><i
+                                    class="fa fa-plus"></i> Agregar</button>
+                            <button type="button" class="btn btn-sm btn-danger" id="btn_minus_tools"><i
+                                    class="fa fa-minus"></i> Eliminar</button>
                         </div>
                         <hr>
-                        <div id="equipments" hidden>
-                            <h4>Equipo</h4>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="type">Tipo de Equipo</label>
-                                        <p id="type"></p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="model">Modelo</label>
-                                        <p id="model"></p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="serie">Serie</label>
-                                        <p id="serie"></p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="potencia">Potencia</label>
-                                        <p id="potencia"></p>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="price">Precio DEFINIDO</label>
-                                        <p id="price"></p>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="garantia">Garantía DEFINIDA</label>
-                                        <p id="garantia"></p>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="desription">Descripción</label>
-                                        <p id="desription"></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
+                        <h4><b>Kits</b></h4>
+                        <div id="list_kits">
+                            @php
+                                $oldCategories = old('kitGroup', []);
+                            @endphp
+                        </div>
+                        <div class="btn-group d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="button" class="btn btn-sm btn-info " id="btn_plus_kits"><i
+                                    class="fa fa-plus"></i> Agregar</button>
+                            <button type="button" class="btn btn-sm btn-danger" id="btn_minus_kits"><i
+                                    class="fa fa-minus"></i> Eliminar</button>
+                        </div>
+                        <hr>
+                        <h4>Item adicional</h4>
+                        <div class="extra_item">
+                            @php
+                                $oldCategories = old('ItemGroup', []);
+                            @endphp
+                        </div>
+                        <div class="btn-group d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="button" class="btn btn-sm btn-info " id="btn_plus_item"><i
+                                    class="fa fa-plus"></i> Agregar</button>
+                            <button type="button" class="btn btn-sm btn-danger" id="btn_minus_item"><i
+                                    class="fa fa-minus"></i> Eliminar</button>
+                        </div>
+                        <hr>
+                        <div id="equipments">
                             <h4>Detalles de venta</h4>
-                            <div class="row" id="sale" hidden>
-                                <div class="col-md-4">
+                            <div class="row" id="sale">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="fechaventa">Fecha de la Venta</label>
                                         <input type="date" class="form-control" id="fechaventa" name="fechaventa"
                                             value="{{ old('fechaventa') }}" required>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6 text-center">
                                     <div class="form-group">
-                                        <label for="garantiaventa">Garantía de Venta</label>
-                                        <input type="text" class="form-control" id="garantiaventa"
-                                            name="garantiaventa" value="{{ old('garantiaventa') }}" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="valorventa">Valor Total de la Venta</label>
-                                        <input type="number" class="form-control" id="valorventa" name="valorventa"
-                                            value="{{ old('valorventa') }}" required>
+                                        <b>
+                                            <h2 id="valorventa"></h2>
+                                            <input type="hidden" name="valorventa" id="valorventaInput"
+                                                value="{{ old('valorventa') }}" required>
+                                        </b>
                                     </div>
                                 </div>
                             </div>
-                            <a href="" class="btn btn-info" data-toggle="modal"
+                            <a href="" class="btn btn-success" data-toggle="modal"
                                 data-target=".save-modal-lg">Guardar</a>
                         </div>
                     </div>
@@ -244,9 +268,287 @@
         </div>
     </section>
 @endsection
-
 @section('js')
+    <script src="{{ asset("assets/$theme/bower_components/select2/dist/js/select2.full.min.js") }}"></script>
+    <script src="{{ asset('js/project/mintic/maintence/create.js') }}"></script>
     <script>
+        $(document).ready(function() {
+            $('.select2').select2();
+            $('.alert').hide();
+        });
+        let index = {{ count(old('category', [])) }};
+        let indexKit = {{ count(old('kitGroup', [])) }};
+        let indexItem = {{ count(old('ItemGroup', [])) }};
+        let categorias = @json($categorias);
+        let kits = @json($kits);
+
+        function createSelect(index) {
+            let html = `
+                <div class="select-container">
+                    <div class="row select-group">
+                        <div class="col-md-4">
+                            <label>Categoria</label>
+                            <select class="form-control category select2" name="products[category][${index}]" data-index="${index}" required>
+                                <option value="">Seleccione una categoria</option>`;
+            categorias.forEach(cat => {
+                html += `<option value="${cat.id}">${cat.name}</option>`;
+            });
+            html += `</select></div>`;
+
+            html += `
+                    <div class="col-md-4">
+                        <label>Subcategoria</label>
+                        <select class="form-control subcategori select2" name="products[subcategori][${index}]" data-index="${index}" required>
+                            <option value="">Seleccione una subcategoria</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Productos</label>
+                        <select class="form-control products select2" name="products[products][${index}]" data-index="${index}" required>
+                            <option value="">Seleccione un producto</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="amount">Cantidad</label>
+                            <input type="number" name="products[amount_products][${index}]"
+                                id="amount_products_${index}" class="form-control amount_products text-center"
+                                value="" data-index="${index}" data-disponibles="" disabled required>
+                                <span id="alert_amount${index}"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="value">Valor por unidad</label>
+                            <input type="number" name="products[value_products][${index}]"
+                                id="value_products_${index}" class="form-control value_products text-center"
+                                value="" data-index="${index}" disabled required>
+                                <span id="alert_amount${index}"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="warranty">Garantía en meses</label>
+                            <input type="text" name="products[warranty_products][${index}]"
+                                id="warranty_products_${index}" class="form-control warranty_products text-center"
+                                value="" data-index="${index}" disabled required>
+                                <span id="alert_warranty${index}"></span>
+                        </div>
+                    </div>
+                </div><hr>`;
+            return html;
+        }
+
+        function createSelectKit(indexKit) {
+            let html = `
+                <div class="select-container">
+                    <div class="row select-group">
+                        <div class="col-md-4">
+                            <label>Categoria</label>
+                            <select class="form-control kit select2" name="kit[kit][${indexKit}]" data-index="${indexKit}" required>
+                                <option value="">Seleccione una categoria</option>`;
+            kits.forEach(cat => {
+                html += `<option value="${cat.id}">${cat.name}</option>`;
+            });
+            html += `</select></div>`;
+
+            html += `
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="value">Valor del Kit</label>
+                            <input type="number" name="kit[value_kits][${indexKit}]"
+                                id="value_kit_${indexKit}" class="form-control value_products text-center"
+                                value="" data-index="${indexKit}" disabled required>
+                                <span id="alert_amount${indexKit}"></span>
+                            <input type="hidden" name=""
+                                id="value_kit_${indexKit}" class="form-control amount_products text-center"
+                                value="1" data-index="${indexKit}" disabled required>
+                                <span id="alert_amount${indexKit}"></span>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="warranty">Garantía en meses</label>
+                            <input type="text" name="kit[warranty_kits][${indexKit}]"
+                                id="warranty_kits_${indexKit}" class="form-control warranty_kits text-center"
+                                value="" data-index="${indexKit}" disabled required>
+                                <span id="alert_warranty${indexKit}"></span>
+                        </div>
+                    </div>
+                </div><hr>`;
+            return html;
+        }
+
+        function createSelectItem(indexItem) {
+            let html = `
+                        <div class="select-container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="extra_item">Nombre del Item</label>
+                                        <input type="text" class="form-control" id="extra_item" name="item[extra_item][${indexItem}]"
+                                            value=""
+                                            placeholder="Ejemplo: Instalación, transporte, etc." required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="extra_value">Valor del Item</label>
+                                        <input type="number" class="form-control amount_products" id="extra_value" name="item[extra_value][${indexItem}]"
+                                            value="" placeholder="Valor del item adicional" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+            return html;
+        }
+
+        $('#btn_plus_tools').click(function() {
+            $('#list_tools').append(createSelect(index));
+            index++;
+        });
+
+        $('#btn_minus_tools').click(function() {
+            if (index > 0) {
+                $('#list_tools .select-container').last().remove();
+                index--;
+            }
+            totalValor();
+        });
+
+        $('#btn_plus_kits').click(function() {
+            $('#list_kits').append(createSelectKit(indexKit));
+            indexKit++;
+        });
+
+        $('#btn_minus_kits').click(function() {
+            if (indexKit > 0) {
+                $('#list_kits .select-container').last().remove();
+                indexKit--;
+            }
+            totalValor();
+        });
+
+        $('#btn_plus_item').click(function() {
+            $('.extra_item').append(createSelectItem(indexItem));
+            indexItem++;
+        });
+
+        $('#btn_minus_item').click(function() {
+            if (indexItem > 0) {
+                $('.extra_item .select-container').last().remove();
+                indexItem--;
+            }
+            totalValor();
+        });
+
+        // Cargar subcategorías
+        $(document).on('change', '.category', function() {
+            const id = $(this).val();
+            const i = $(this).data('index');
+            const subSelect = $(`[name="products[subcategori][${i}]"]`);
+            const prodSelect = $(`[name="products[products][${i}]"]`);
+            const prodAmount = $(`[name="products[amount_products][${i}]"]`);
+            const prodValue = $(`[name="products[value_products][${i}]"]`);
+            const prodWarranty = $(`[name="products[warranty_products][${i}]"]`);
+            prodAmount.prop('disabled', true);
+            prodValue.prop('disabled', true);
+            prodWarranty.prop('disabled', true);
+
+            subSelect.prop('disabled', true).html('<option value="">Cargando...</option>');
+            prodSelect.prop('disabled', true).html('<option value="">Seleccione una subcategoria</option>');
+
+            if (id) {
+                $.get('/energy/kits/get_subcategories/' + id, function(data) {
+                    let html = '<option value="">Seleccione una subcategoria</option>';
+                    data.forEach(item => {
+                        html += `<option value="${item.id}">${item.name}</option>`;
+                    });
+                    subSelect.html(html).prop('disabled', false);
+
+                });
+            }
+        });
+
+        // Cargar productos
+        $(document).on('change', '.subcategori', function() {
+            const id = $(this).val();
+            const i = $(this).data('index');
+            const prodSelect = $(`[name="products[products][${i}]"]`);
+
+            prodSelect.prop('disabled', true).html('<option value="">Cargando...</option>');
+
+            if (id) {
+                $.get('/energy/kits/get_products/' + id, function(data) {
+                    let html = '<option value="">Seleccione un producto</option>';
+                    data.forEach(item => {
+                        html += `<option value="${item.id}">${item.model} - ${item.type}</option>`;
+                    });
+                    prodSelect.html(html).prop('disabled', false);
+                    $(`[name="products[amount_products][${i}]"]`).val(1).prop('disabled', true);
+                    $(`[name="products[value_products][${i}]"]`).prop('disabled', true);
+                    $(`[name="products[warranty_products][${i}]"]`).prop('disabled', true);
+                });
+            }
+        });
+
+        // Cargar productos
+        $(document).on('change', '.products', function() {
+            const id = $(this).val();
+            const i = $(this).data('index');
+            if (id) {
+                $.get('/energy/kits/get_product/' + id, function(data) {
+                    $(`[name="products[amount_products][${i}]"]`).val(1).prop('disabled', false).attr(
+                        'data-disponibles', data.disponibles);
+                    $(`[name="products[value_products][${i}]"]`).val(data.price).prop('disabled', false);
+                    $(`[name="products[warranty_products][${i}]"]`).val(data.warranty).prop('disabled',
+                        false);
+                    totalValor();
+                });
+            }
+        });
+
+        $(document).on('change', '.kit', function() {
+            const id = $(this).val();
+            const i = $(this).data('index');
+            if (id) {
+                $.get('/energy/kits/get_info/' + id, function(data) {
+                    $(`[name="kit[value_kits][${i}]"]`).val(data.price).prop('disabled', false);
+                    $(`[name="kit[warranty_kits][${i}]"]`).val(data.warranty).prop('disabled',
+                        false);
+                    totalValor();
+                });
+            }
+        });
+
+        $(document).on('change', '.amount_products', function() {
+            const i = $(this).data('index');
+            const amount = $(this).val();
+            const disponibles = $(this).data('disponibles');
+            console.log(disponibles);
+
+            if (amount > disponibles) {
+                $(`#alert_amount${i}`).addClass('text-danger').text('No hay suficientes equipos disponibles: ' +
+                    disponibles).show();
+                $('.btn-success').prop('disabled', true);
+            } else {
+                $(`#alert_amount${i}`).hide();
+                $('.btn-success').prop('disabled', false);
+                totalValor();
+            }
+        });
+
+        $(document).on('change', '.value_products', function() {
+            totalValor();
+        });
+
+        $(document).on('change', '#extra_value', function() {
+            totalValor();
+        });
+
         $('#newClient').change(function() {
             const checkbox = $('#newClient');
             if (checkbox.is(':checked')) {
@@ -274,47 +576,19 @@
             $('#type_client').val(user_typeClient);
         }
 
-        $('#productId').change(function() {
-            let selectedType = $(this).val();
-            let escapedType = CSS.escape(selectedType);
-            let products = [];
-            $(`input[id=${escapedType}]`).each(function() {
-                products.push({
-                    id: $(this).data('id'),
-                    name: $(this).val()
-                });
+        function totalValor() {
+            let total = 0;
+            $('.value_products').each(function() {
+                let value = parseFloat($(this).val()) || 0;
+                let amount = parseInt($(this).closest('.select-group').find('.amount_products').val()) || 0;
+                total += value * amount;
             });
-
-            let html_products = '<option value="">Seleccione un modelo</option>';
-            products.forEach(product => {
-                html_products += `<option value="${product.id}">${product.name}</option>`;
-            });
-
-            $('#ModelProduct').prop('disabled', false).html(html_products);
-        })
-
-        $('#ModelProduct').change(function() {
-            $('#equipments').prop('hidden', false)
-            $('#sale').prop('hidden', false)
-            $('.submit').prop('disabled', false)
-
-            let type = $('#EquipType-' + this.value)
-            let model = $('#EquipModel-' + this.value)
-            let serie = $('#EquipSerie-' + this.value)
-            let power = $('#EquipPower-' + this.value)
-            let price = $('#EquipPrice-' + this.value)
-            let warranty = $('#EquipWarranty-' + this.value)
-            let description = $('#EquipDescription-' + this.value)
-
-            $('#type').text(type.val())
-            $('#model').text(model.val())
-            $('#serie').text(serie.val())
-            $('#potencia').text(power.val())
-            $('#price').text(price.val())
-            $('#valorventa').val(price.val())
-            $('#garantia').text(warranty.val())
-            $('#garantiaventa').val(warranty.val())
-            $('#desription').text(description.val())
-        })
+            total += parseFloat($('#extra_value').val()) || 0;
+            $('#valorventa').text('$' + total.toLocaleString('es-CO', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }));
+            $('#valorventaInput').val(total);
+        }
     </script>
 @endsection

@@ -1071,6 +1071,7 @@ Route::delete('energy/kits/destroy_all/{id}', 'energy\SolarKitsController@destro
 Route::get('energy/kits/get_subcategories/{id}', 'energy\SolarKitsController@getsubcategories')->name('energy_kits.get_subcategories');
 Route::get('energy/kits/get_products/{id}', 'energy\SolarKitsController@getProducts')->name('energy_kits.get_products');
 Route::get('energy/kits/get_info/{id}', 'energy\SolarKitsController@getInfo')->name('energy_kits.get_info');
+Route::get('energy/kits/get_product/{id}', 'energy\SolarKitsController@getProduct')->name('energy_kits.get_product');
 Route::get('energy/kits/amount_products/{id}/{amount}/{kit}', 'energy\SolarKitsController@amountProducts')->name('energy_kits.amount_products');
 
 Route::post('energy/kits/offer/', 'energy\SolarKitsController@offer')->name('energy_kits.offer');

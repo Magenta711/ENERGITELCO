@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-success submit" disabled>Guardar</button>
+                <button class="btn btn-success submit">Guardar</button>
             </div>
         </div>
     </div>

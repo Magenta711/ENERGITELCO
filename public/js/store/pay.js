@@ -113,11 +113,8 @@ function llaveIntegridad() {
             _token: window.csrfToken,
         },
         success: function (response) {
-            console.log('Respuesta completa:', response);
             $('#public-key').val(response.public_key);
             $('#signature-integrity').val(response.calculated);
-            console.log('Firma de integridad g:', response.calculated);
-            console.log('Cadena de integridad g:', response.string);
         },
         error: function () {
             console.log('Error al enviar los datos de la llave de integridad');

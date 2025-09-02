@@ -74,6 +74,18 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
+                            <label for="price">Precio de instalacion</label>
+                            <p>{{ $kit->price_install }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="price">Precio de transporte</label>
+                            <p>{{ $kit->price_transporte }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
                             <label for="warranty">Garantía</label>
                             <p>{{ $kit->warranty }}</p>
                         </div>

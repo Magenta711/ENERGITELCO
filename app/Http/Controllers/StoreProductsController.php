@@ -636,23 +636,19 @@ class StoreProductsController extends Controller
 
         $Pay = pay::where('reference', $request->reference)->first();
         $products = is_array($Pay->products) ? $Pay->products : [];
-
+        $peso_volumetrico = 0;
+        $peso_normal = 0;
+        $total_envio_kit = 0;
         foreach ($products as $value) {
             if ($value['GroupType'] == 'producto') {
                 $product = SolarProducts::find($value['id']);
+                $peso_volumetrico += ($product->ancho * $product->alto * $product->largo) / 5000;
+                $peso_normal += $product->peso;
+
             } else {
                 $product = SolarKit::find($value['id']);
+                $total_envio_kit += $product->price_transporte;
             }
-            if ($product) {
-                $items[] = $product;
-            }
-        }
-
-        $peso_volumetrico = 0;
-        $peso_normal = 0;
-        foreach ($items as $item) {
-            $peso_volumetrico += ($item->ancho * $item->alto * $item->largo) / 5000;
-            $peso_normal += $item->peso;
         }
 
         $shipping = SolarShippingValue::first();
@@ -663,8 +659,10 @@ class StoreProductsController extends Controller
         $seguro = 0.01 * $Pay->valor;
 
         $total_envio = $shipping->base + $costo_adicional + $seguro;
-        $total_envio += $total_envio * ($shipping->porcentaje_aumentado / 100);
+        $total_envio += $total_envio * ($shipping->porcentaje_aumentado / 100) + $total_envio_kit;
         $total = $total_envio + $Pay->valor;
+        $total = round($total);
+        $total_envio = round($total_envio);
 
         $Pay->collect = $request->locate;
         $Pay->locate = json_encode($addres);
