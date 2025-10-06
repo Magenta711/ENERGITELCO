@@ -234,14 +234,6 @@
             updateTool();
         });
 
-        // function infoUser(element){
-        //     let user_id = element.value;
-        //     let user_name = $( '#name' + user_id ).val()
-        //     let user_role = $( '#cargo' + user_id ).val()
-
-        //     $('#nombre1').val(user_name);
-        //     $('#rol1').val(user_role);
-        // }
 
         $('#btn_plus_tools').click(function() {
             num_tools++;

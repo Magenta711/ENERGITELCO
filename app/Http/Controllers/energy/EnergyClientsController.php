@@ -5,6 +5,7 @@ namespace App\Http\Controllers\energy;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Energy\SolarClients;
+use Dotenv\Regex\Success;
 
 class EnergyClientsController extends Controller
 {
@@ -64,10 +65,23 @@ class EnergyClientsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function infoUser($id)
     {
-        //
+        $client = SolarClients::find($id);
+
+        if (!$client) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Cliente no encontrado'
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'client' => $client
+        ]);
     }
+
 
     /**
      * Show the form for editing the specified resource.

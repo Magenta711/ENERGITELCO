@@ -1050,6 +1050,7 @@ Route::get('energy/clients', 'energy\EnergyClientsController@index')->name('ener
 Route::post('energy/clients/store', 'energy\EnergyClientsController@store')->name('energy_clients.store');
 Route::put('energy/clients/update/{id}', 'energy\EnergyClientsController@update')->name('energy_clients.update');
 Route::delete('energy/clients/destroy/{id}', 'energy\EnergyClientsController@destroy')->name('energy_clients.destroy');
+Route::get('energy/clients/info_user/{id}', 'energy\EnergyClientsController@infoUser')->name('energy_clients.info_user');
 
 Route::get('energy/sales', 'energy\EnergySaleController@index')->name('energy_sale');
 Route::get('energy/sales/create', 'energy\EnergySaleController@create')->name('energy_sale.create');
@@ -1168,3 +1169,25 @@ Route::put('project/maintenance/smu/operation/descripcion_photos/{id}/{item}', '
     Route::get('product/store/kit/{id}', 'StoreProductsController@show_kit')->name('store.kit_show');
 
 // });
+
+
+//Cotizacion del sistema solar
+Route::get('energy/quote_system', 'energy\quote\QuoteEnergySystemController@index')->name('quote_energy_system.index');
+Route::get('energy/quote_system/items', 'energy\quote\QuoteEnergySystemController@Items')->name('quote_energy_system.items');
+Route::post('energy/quote_system/items/store', 'energy\quote\QuoteEnergySystemController@Items_store')->name('quote_energy_system.items_store');
+
+Route::get('energy/quote_system/create', 'energy\quote\QuoteEnergySystemController@create')->name('quote_energy_system.create');
+Route::post('energy/quote_system/store', 'energy\quote\QuoteEnergySystemController@store')->name('quote_energy_system.store');
+Route::get('energy/quote_system/generated/{id}', 'energy\quote\QuoteEnergySystemController@generated')->name('quote_energy_system.generated');
+Route::get('energy/quote_system/edit/{id}', 'energy\quote\QuoteEnergySystemController@edit')->name('quote_energy_system.edit');
+Route::put('energy/quote_system/update/{id}', 'energy\quote\QuoteEnergySystemController@update')->name('quote_energy_system.update');
+Route::delete('energy/quote_system/destroy/{id}', 'energy\quote\QuoteEnergySystemController@destroy')->name('quote_energy_system.destroy');
+
+Route::put('energy/quote_system/flujo_update/{id}', 'energy\quote\QuoteEnergySystemController@FLujoUpdate')->name('quote_energy_system.fLujo_pdate');
+Route::put('energy/quote_system/precio_update/{id}', 'energy\quote\QuoteEnergySystemController@PrecioUpdate')->name('quote_energy_system.precio_pdate');
+Route::get('energy/quote_system/approved/{id}', 'energy\quote\QuoteEnergySystemController@Approved')->name('quote_energy_system.approved');
+Route::get('energy/quote_system/export/{id}', 'energy\quote\QuoteEnergySystemController@export')->name('quote_energy_system.export');
+
+
+
+

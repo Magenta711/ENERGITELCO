@@ -1532,7 +1532,7 @@ f <!-- =============================================== -->
                     'ELiminar Clientes',
                 ]))
             {{-- energias --}}
-            <li class="treeview {{ activeMenu('energy*') }} {{ activeMenu('productos*') }}">
+            <li class="treeview {{ activeMenu('energy*') }} {{ activeMenu('productos*') }} {{ activeMenu('energias*') }}">
                 <a href="#">
                     <i class="fa fa-solar-panel"></i> <span>ENERGÍAS</span><span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
@@ -1540,8 +1540,24 @@ f <!-- =============================================== -->
                 </a>
                 <ul class="treeview-menu">
                     @if (auth()->user()->hasAnyPermission(['Ver Cotizaciones']))
-                        <li class="{{ activeMenu('energias/cotizacion*') }}"><a class="btn-send"
-                                href="{{ route('energy') }}"><i class="fa fa-file-alt"></i> COTIZACIONES</a></li>
+                        <li class="treeview {{ activeMenu('energias*') }}{{ activeMenu('energy*') }}">
+                            <a href="#"><i class="fa fa-file-alt"></i> COTIZACIONES<span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                {{-- @if (auth()->user()->hasAnyPermission(['Ver Clientes', 'Crear Clientes', 'Editar Clientes', 'ELiminar Clientes'])) --}}
+                                    <li class="{{ activeMenu('energias*') }}"><a class="btn-send"
+                                            href="{{ route('energy') }}"><i class="fa fa-users"></i>
+                                            NORMAL</a></li>
+                                {{-- @endif
+                                @if (auth()->user()->hasAnyPermission(['Ver Ventas', 'Crear Ventas', 'Editar Ventas', 'ELiminar Ventas'])) --}}
+                                    <li class="{{ activeMenu('energy/quote_system*') }}"><a class="btn-send"
+                                            href="{{ route('quote_energy_system.index') }}"><i class="fa fa-file"></i>SISTEMA SOLAR</a>
+                                    </li>
+                                {{-- @endif --}}
+                            </ul>
+                        </li>
                     @endif
                     @if (auth()->user()->hasAnyPermission(['Ver Productos', 'Crear Productos', 'Editar Productos', 'ELiminar Productos']))
                         <li class="{{ activeMenu('energy/products*') }}"><a class="btn-send"

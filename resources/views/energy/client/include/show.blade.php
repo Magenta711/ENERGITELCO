@@ -45,9 +45,15 @@
                                 <div class="col-md-3">
                                     <p>{{ $sale->cod_sale }}</p>
                                 </div>
-                                <div class="col-md-3">
-                                    <p>{{ $sale->product->type }} - {{ $sale->product->cod_product }}</p>
-                                </div>
+                                @if ($sale->product)
+                                    <div class="col-md-3">
+                                        <p>{{ $sale->product->type }} - {{ $sale->product->cod_product }}</p>
+                                    </div>
+                                @else
+                                    <div class="col-md-3">
+                                        <p>Varios</p>
+                                    </div>
+                                @endif
                                 <div class="col-md-3">
                                     <p>{{ $sale->datesale }}</p>
                                 </div>
