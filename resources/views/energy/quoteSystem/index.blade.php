@@ -18,8 +18,11 @@
                 <div class="box-header">
                     <div class="box-title text-center">Ventas</div>
                     <div class="box-tools">
-                        @can('Crear Ventas')
-                            <a href="{{ route('quote_energy_system.create') }}" class="btn btn-info" ><i class="fa fa-plus"></i> Nueva Cotización</a>
+                        @can('Crear Cotizaciones')
+
+                        <a href="{{ route('quote_energy_system.create') }}" class="btn btn-info" ><i class="fa fa-plus"></i> Nueva Cotización</a>
+                        @endcan
+                        @can('Crear Items Cotizaciones')
                             <a href="{{ route('quote_energy_system.items') }}" class="btn btn-success" ><i class="fa fa-plus"></i> Items de Cotización</a>
                             {{-- <a href="{{ route('energy_sale.create') }}" class="btn btn-success" ><i class="fa fa-plus"></i> Nueva Venta</a> --}}
                         @endcan
@@ -52,23 +55,24 @@
                                             <td>{{ $item->created_at->format('Y-m-d') }}</td>
                                             <td>{{ $item->status }}</td>
                                             <td>
+                                                @can('Ver Cotizaciones')
                                                 <a href="{{ route('quote_energy_system.generated', $item->id) }}" class="btn btn-info btn-sm" title="Ver Cotización"><i class="fa fa-eye"></i></a>
-                                                <a href="{{ route('quote_energy_system.edit', $item->id) }}" class="btn btn-warning btn-sm" title="Editar Cotización"><i class="fa fa-edit"></i></a>
-                                                <a href="{{ route('quote_energy_system.export', $item->id) }}" class="btn btn-success btn-sm" title="Descargar Cotización"><i class="fa fa-download"></i></a>
-                                                    <form action="{{ route('quote_energy_system.destroy', $item->id) }}" method="POST" style="display: inline-block;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm" title="Eliminar Cotización" onclick="return confirm('¿Estás seguro de eliminar esta cotización?')"><i class="fa fa-trash"></i></button>
-                                                    </form>
-                                                {{-- @can('Editar Ventas')
                                                 @endcan
-                                                @can('Eliminar Ventas')
-                                                    <form action="{{ route('quote_energy_system.destroy', $item->id) }}" method="POST" style="display: inline-block;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm" title="Eliminar Cotización" onclick="return confirm('¿Estás seguro de eliminar esta cotización?')"><i class="fa fa-trash"></i></button>
-                                                    </form>
-                                                @endcan --}}
+                                                @can('Editar Cotizaciones')
+                                                <a href="{{ route('quote_energy_system.edit', $item->id) }}" class="btn btn-warning btn-sm" title="Editar Cotización"><i class="fa fa-edit"></i></a>
+                                                @endcan
+                                                @if ($item->status=='Aprobada')
+                                                <a href="{{ route('quote_energy_system.export', $item->id) }}" class="btn btn-success btn-sm" title="Descargar Cotización"><i class="fa fa-download"></i></a>
+                                                @endif
+                                                @can('Eliminar Cotizaciones')
+                                                    @if ($item->status=='Pendiente')
+                                                        <form action="{{ route('quote_energy_system.destroy', $item->id) }}" method="POST" style="display: inline-block;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger btn-sm" title="Eliminar Cotización" onclick="return confirm('¿Estás seguro de eliminar esta cotización?')"><i class="fa fa-trash"></i></button>
+                                                        </form>
+                                                    @endif
+                                                @endcan
                                             </td>
                                         </tr>
                                     @endforeach

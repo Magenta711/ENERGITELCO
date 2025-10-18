@@ -12,13 +12,16 @@ class SimulacionPrecotizacion extends Model
         'Operador',
         'PromProduccion',
         'PromProduccionAnual',
+        'PromedioCO2',
         'kwh_ipc',
         'factor_potencia',
+        'Equipos'
     ];
 
     protected $casts = [
         'kwh_ipc' => 'array',
         'factor_potencia' => 'array',
+        'Equipos' => 'array',
     ];
 
     public function cotizacion()

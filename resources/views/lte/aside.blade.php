@@ -1546,16 +1546,16 @@ f <!-- =============================================== -->
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                {{-- @if (auth()->user()->hasAnyPermission(['Ver Clientes', 'Crear Clientes', 'Editar Clientes', 'ELiminar Clientes'])) --}}
+                                @if (auth()->user()->hasAnyPermission('Ver Cotizaciones'))
                                     <li class="{{ activeMenu('energias*') }}"><a class="btn-send"
                                             href="{{ route('energy') }}"><i class="fa fa-users"></i>
                                             NORMAL</a></li>
-                                {{-- @endif
-                                @if (auth()->user()->hasAnyPermission(['Ver Ventas', 'Crear Ventas', 'Editar Ventas', 'ELiminar Ventas'])) --}}
+                                @endif
+                                @if (auth()->user()->hasAnyPermission(['Crear Items Cotizaciones', 'Crear Cotizaciones', 'Editar Cotizaciones', 'ELiminar Cotizaciones']))
                                     <li class="{{ activeMenu('energy/quote_system*') }}"><a class="btn-send"
                                             href="{{ route('quote_energy_system.index') }}"><i class="fa fa-file"></i>SISTEMA SOLAR</a>
                                     </li>
-                                {{-- @endif --}}
+                                @endif
                             </ul>
                         </li>
                     @endif

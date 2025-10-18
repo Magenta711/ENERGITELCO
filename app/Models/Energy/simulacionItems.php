@@ -12,12 +12,15 @@ class simulacionItems extends Model
         'Operador',
         'PromProduccion',
         'PromProduccionAnual',
+        'PromedioCO2',
         'kwh_ipc',
         'factor_potencia',
+        'Equipos'
     ];
 
     protected $casts = [
         'kwh_ipc' => 'array',
+        'Equipos' => 'array',
         'factor_potencia' => 'array',
     ];
 

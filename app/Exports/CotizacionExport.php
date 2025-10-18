@@ -44,19 +44,21 @@ class CotizacionExport implements FromView, WithTitle, WithDrawings, ShouldAutoS
 
     public function styles(Worksheet $sheet)
     {
-        // return [
-        //     'A' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
-        //     'B' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
-        //     'C' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
-        //     'D' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
-        //     'E' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
-        //     'F' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
-        //     'G' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
-        //     'H' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
-        //     'I' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
-        //     'J' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
-        //     'K' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
-        //     'L' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
+        return [
+            'A' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
+            'B' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
+            'C' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
+            'D' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
+            'E' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
+            'F' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
+            'G' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
+            'H' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
+            'I' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
+            'J' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
+            'K' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
+            'L' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
+            'M' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
+            'N' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
         //     'L2' => ['alignment' => ['horizontal' => 'center']],
 
         //     1    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'center']],
@@ -68,7 +70,7 @@ class CotizacionExport implements FromView, WithTitle, WithDrawings, ShouldAutoS
         //     25    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'center']],
         //     190    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'top']],
         //     166    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'top']],
-        // ];
+        ];
     }
 
     public function view(): View

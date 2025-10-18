@@ -21,7 +21,7 @@
             </div>
             <div class="box-body">
                 <hr>
-                <form action="{{ route('quote_energy_system.store') }}" method="POST">
+                <form action="{{ route('quote_energy_system.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="panel box box-success">
                         <div class="box-header with-border">
@@ -31,12 +31,12 @@
                                 </a>
                             </h4>
                         </div>
-                        <div id="Cliente" class="panel-collapse collapse show">
+                        <div id="Cliente" class="panel-collapse collapse">
                             <div class="box-body">
                                 <div id="selectClient">
                                     <h4>Cliente</h4>
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="client">Seleccione el cliente</label>
                                                 <select onchange="infoUser(this)" name="client" id="client"
@@ -50,14 +50,14 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="nameClient">Nombre</label>
                                                 <input type="text" class="form-control" name="nameClient"
                                                     id="nameClient">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="typeId">Tipo de Identificación</label>
                                                 <select name="typeId" id="typeId" class="form-control">
@@ -70,26 +70,25 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="ide">Documento</label>
                                                 <input type="text" class="form-control" name="ide" id="ide">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <div class="form-group">
-                                                <label for="locate">Ubicación</label>
-                                                <input type="text" class="form-control" name="locate" id="locate">
+                                                <label for="email">Correo</label>
+                                                <input type="text" class="form-control" name="email" id="email">
                                             </div>
                                         </div>
-                                        <div class="col-md-4"><label for="type_client">Tipo de Cliente</label><select
-                                                name="type_client" id="type_client" class="form-control">
-                                                <option selected></option>
-                                                <option value="Distribuidor">Distribuidor</option>
-                                                <option value="Cliente Final">Cliente Final</option>
-                                                <option value="Instalador">Instalador</option>
-                                                <option value="Otro">Otro</option>
-                                            </select></div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="telefono">Teléfono</label>
+                                                <input type="text" class="form-control" name="telefono" id="telefono">
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                                 <input type="hidden" name="newCliente" id="newCliente" value="0">
@@ -125,21 +124,32 @@
                                             type="text" class="form-control" name="emailNew" id="emailNew"
                                             value="{{ old('emailNew') }}">
                                     </div>
-                                    <div class="col-md-4"><label for="departamentNew">Departamento</label><input
-                                            type="text" class="form-control" name="departamentNew"
-                                            id="departamentNew" value="{{ old('departamentNew') }}"></div>
-                                    <div class="col-md-4"><label for="municipioNew">Municipio</label><input
-                                            type="text" class="form-control" name="municipioNew" id="municipioNew"
-                                            value="{{ old('municipioNew') }}">
+                                </div>
+                                <hr>
+                                <h4>Responsable</h4>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="responsable_id">Responsable</label>
+                                        <input type="text" class="form-control" value="{{ auth()->user()->name }}"
+                                            readonly>
+                                        <input type="hidden" class="form-control" value="{{ auth()->user()->id }}"
+                                            name="responsable_id">
                                     </div>
-                                    <div class="col-md-4"><label for="type_clientNew">Tipo de Cliente</label><select
-                                            name="type_clientNew" id="type_clientNew" class="form-control">
-                                            <option selected></option>
-                                            <option value="Distribuidor">Distribuidor</option>
-                                            <option value="Cliente Final">Cliente Final</option>
-                                            <option value="Instalador">Instalador</option>
-                                            <option value="Otro">Otro</option>
-                                        </select></div>
+                                    <div class="col-md-3">
+                                        <label for="responsable_telefono">Teléfono</label>
+                                        <input type="text" class="form-control" name="responsable_telefono"
+                                            value="{{ auth()->user()->telefono }}">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="responsable_direccion">Dirección</label>
+                                        <input type="text" class="form-control" name="responsable_direccion"
+                                            value="CALLE 48B NRO 66 - 65 MEDELLIN">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="responsable_correo">Correo</label>
+                                        <input type="text" class="form-control" name="responsable_correo"
+                                            value="solar@energitelco.com">
+                                    </div>
                                 </div>
                                 <hr>
                                 <div class="locate">
@@ -208,6 +218,39 @@
                                         </div>
                                     </div>
                                 </div>
+                                <hr>
+                                <div class="photos">
+                                    <div class="col-md-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="file_servicios">Cuenta de Servicios</label><br>
+                                                <div class="text-center mb-3" style="padding: 10px; width: 100%;">
+                                                    <img src="" alt="" width="40%"
+                                                        id="preimg_servicios">
+                                                </div>
+                                                <label for="file_servicios" class="form-control text-center">
+                                                    <i class="fa fa-upload"></i>
+                                                </label>
+                                                <input type="file" name="file_servicios" id="file_servicios"
+                                                    class="hide file_create" accept="image/*">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="file_maps">Vista aérea de la zona</label><br>
+                                                    <div class="text-center mb-3" style="padding: 10px; width: 100%;">
+                                                        <img src="" alt="" width="40%" id="preimg_maps">
+                                                    </div>
+                                                    <label for="file_maps" class="form-control text-center">
+                                                        <i class="fa fa-upload"></i>
+                                                    </label>
+                                                    <input type="file" name="file_maps" id="file_maps"
+                                                        class="hide file_create" accept="image/*">
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -243,6 +286,22 @@
                                             <input type="number" name="validez_oferta" id="validez_oferta"
                                                 class="form-control" required
                                                 value="{{ $plantilla->validez_oferta ?? '60' }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="fecha_oferta">FECHA PRESENTACION DE LA OFERTA:</label>
+                                            <input type="text" name="fecha_oferta" id="fecha_oferta"
+                                                class="form-control" required
+                                                value="{{ $plantilla->fecha_oferta ?? '' }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="fin_oferta">ACEPTACION MAXIMA DE OFERTA CON EMISION DE DOCUMENTO DE ORDEN DE COMPRA:</label>
+                                            <input type="text" name="fin_oferta" id="fin_oferta"
+                                                class="form-control" required
+                                                value="{{ $plantilla->fin_oferta ?? '' }}">
                                         </div>
                                     </div>
 
@@ -315,7 +374,6 @@
                                             <textarea name="nota_importante" id="nota_importante" class="form-control" required rows="2">{{ $plantilla->nota_importante ?? 'TODAS LAS GARANTIAS ESTAN SUJETAS A LA EJECUCION DE MANTENIMIENTOS PERIODICOS...' }}</textarea>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -472,7 +530,8 @@
                                                         </td>
                                                         <td>
                                                             <input type="radio" name="panel"
-                                                                value="{{ $precios->item }}" {{ $precios->panel == 'Si' ? 'checked' : '' }}>
+                                                                value="{{ $precios->item }}"
+                                                                {{ $precios->panel == 'Si' ? 'checked' : '' }}>
                                                         </td>
                                                         <td><input type="number" step="0.01"
                                                                 name="precios[{{ $i }}][usd]"
@@ -498,6 +557,45 @@
                                         </table>
 
                                         <button type="button" class="btn btn-success" id="Btn-plus-precios"><i
+                                                class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h5><b>Listado de Equipos</b></h5>
+                                        <table class="table table-bordered">
+                                            <thead class="thead-light">
+                                                <tr class="text-center">
+                                                    <th style="width: 10%;">Item</th>
+                                                    <th style="width: 60%;">Descripción Técina</th>
+                                                    <th style="width: 20%;">Cantidad</th>
+
+                                                    <th style="width: 5%;">Acción</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="listadoEquiposTable">
+                                                @foreach ($plantilla->simulacionItems->Equipos as $i => $equipos)
+                                                    <tr class="text-center">
+                                                        <td><input type="text"
+                                                                name="Equipos[{{ $i }}][item]"
+                                                                value="{{ $equipos['item'] }}" class="form-control"
+                                                                required value=""></td>
+                                                        <td><input type="text"
+                                                                name="Equipos[{{ $i }}][descripcion]"
+                                                                value="{{ $equipos['descripcion'] }}"
+                                                                class="form-control" required></td>
+                                                        <td><input type="number"
+                                                                name="Equipos[{{ $i }}][cantidad]"
+                                                                value="{{ $equipos['cantidad'] }}" class="form-control"
+                                                                required></td>
+                                                        <td><button type="button" class="btn btn-danger btn-sm"
+                                                                onclick="removeRow(this)">X</button></td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+
+                                        <button type="button" class="btn btn-success" id="Btn-plus-equipos"><i
                                                 class="fa fa-plus"></i></button>
                                     </div>
                                 </div>
@@ -596,7 +694,16 @@
                                             cualquiera de los valores para ver su efecto en los cálculos.</small>
                                     </div>
                                 </div>
-
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="PromedioCO2">Consumo Promedio del cliente de CO2:</label>
+                                            <input type="number" class="form-control" name="PromedioCO2"
+                                                value="{{ $plantilla->simulacionItems->PromedioCO2 }}">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -610,6 +717,19 @@
 @section('js')
     <script>
         $(document).ready(function() {
+            $('.file_create').change(function() {
+                const idPreview = this.id.replace('file_', 'preimg_');
+                console.log('Renderizando preview:', idPreview);
+                readImage(this, idPreview);
+            });
+
+            $('.file-edit').change(function() {
+                let id = this.id.split('_')[this.id.split('_').length - 1];
+                console.log(id);
+                $($('#' + this.id).parent().children('label')).addClass('text-aqua');
+                readImageEdit(this, id);
+            });
+
             if ($('#newClients').is(':hidden')) {
                 $('#newClients').find('input, select, textarea').prop('disabled', true);
             }
@@ -643,8 +763,19 @@
             });
         });
 
+        function readImage(input, idPreview) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#' + idPreview).attr('src', e.target.result); // renderizamos la imagen correcta
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
         let rowIndex = {{ count($plantilla->flujos) ?? 0 }};
         let rowPrecios = {{ count($plantilla->precios) ?? 0 }};
+        let rowEquipos = {{ count($plantilla->simulacionItems->Equipos) }};
 
         $('#Btn-plus-Objetivos').click(function() {
             rowIndex++;
@@ -654,6 +785,11 @@
         $('#Btn-plus-precios').click(function() {
             rowPrecios++;
             $('#listadoPreciosTable').append(createPrecios(rowPrecios));
+        });
+
+        $('#Btn-plus-equipos').click(function() {
+            rowEquipos++;
+            $('#listadoEquiposTable').append(createEquipos(rowEquipos));
         });
 
         function createObjetivos(rowIndex) {
@@ -675,6 +811,19 @@
                     </select>
                 </td>
                 <td><input type="text" name="flujo[${rowIndex}][avance]" class="form-control" required></td>
+                <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">X</button></td>
+            </tr>
+            `;
+            return row;
+        }
+
+
+        function createEquipos(rowEquipos) {
+            let row = `
+            <tr class="text-center">
+                <td><input type="text" name="Equipos[${rowEquipos}][item]" class="form-control" required value=""></td>
+                <td><input type="text" name="Equipos[${rowEquipos}][descripcion]" class="form-control" required></td>
+                <td><input type="number" name="Equipos[${rowEquipos}][cantidad]" class="form-control" required></td>
                 <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">X</button></td>
             </tr>
             `;
@@ -728,6 +877,11 @@
             button.closest('tr').remove();
         }
 
+        function removeEquipos(button) {
+            rowEquipos--;
+            button.closest('tr').remove();
+        }
+
         $('#newClient').change(function() {
             const checkbox = $('#newClient');
             if (checkbox.is(':checked')) {
@@ -749,12 +903,12 @@
 
                 if (data.success) {
                     console.log(data.client);
-                    $('#nameClient').val(data.client.name).prop('readonly', false);
-                    $('#ide').val(data.client.ide);
-                    $('#typeId').val(data.client.typeId);
+                    $('#nameClient').val(data.client.name).prop('readonly', true);
+                    $('#ide').val(data.client.ide).prop('readonly', true);
+                    $('#typeId').val(data.client.typeId).prop('disabled', true);
+                    $('#telefono').val(data.client.tel).prop('readonly', true);
+                    $('#email').val(data.client.email).prop('readonly', true);
 
-                    // $('#locate').val(data.client.locate);
-                    // $('#type_client').val(data.client.typeClient);
                 } else {
                     alert(data.message);
                 }

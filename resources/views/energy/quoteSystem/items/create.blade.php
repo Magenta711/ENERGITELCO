@@ -147,14 +147,14 @@
                                         <div class="form-group">
                                             <label for="Iva">% IVA</label>
                                             <input type="number" name="Iva" id="Iva" class="form-control"
-                                                required value="{{ $item->iva ?? 19 }}">
+                                                required value="{{ $item->iva}}">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="ValorKW">VALOR ACTUAL KW/H</label>
-                                            <input type="number" name="ValorKW" id="ValorKW" class="form-control"
-                                                required value="{{ $item->valor_kw ?? 19 }}">
+                                            <input type="number" step="0.01" name="ValorKW" id="ValorKW" class="form-control"
+                                                required value="{{ $item->valor_kw}}">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -300,7 +300,7 @@
                                                         <td><input type="number"
                                                                 name="precios[{{ $i }}][cantidad]"
                                                                 class="form-control" required
-                                                                value="{{ $precios->cantidad }}" min="1"></td>
+                                                                value="{{ $precios->cantidad }}"></td>
                                                         <td>
                                                             <button type="button" class="btn btn-danger btn-sm"
                                                                 onclick="removePrecios(this)">X</button>
@@ -311,6 +311,35 @@
                                         </table>
 
                                         <button type="button" class="btn btn-success" id="Btn-plus-precios"><i
+                                                class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h5><b>Listado de Equipos</b></h5>
+                                        <table class="table table-bordered">
+                                            <thead class="thead-light">
+                                                <tr class="text-center">
+                                                    <th style="width: 10%;">Item</th>
+                                                    <th style="width: 60%;">Descripción Técina</th>
+                                                    <th style="width: 20%;">Cantidad</th>
+
+                                                    <th style="width: 5%;">Acción</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="listadoEquiposTable">
+                                                @foreach ($item->simulacionItems->Equipos as $i => $equipos)
+                                                    <tr class="text-center">
+                                                        <td><input type="text" name="Equipos[{{ $i }}][item]" value="{{ $equipos['item'] }}" class="form-control" required value=""></td>
+                                                        <td><input type="text" name="Equipos[{{ $i }}][descripcion]" value="{{ $equipos['descripcion'] }}" class="form-control" required></td>
+                                                        <td><input type="number" name="Equipos[{{ $i }}][cantidad]" value="{{ $equipos['cantidad'] }}" class="form-control" required></td>
+                                                        <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">X</button></td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+
+                                        <button type="button" class="btn btn-success" id="Btn-plus-equipos"><i
                                                 class="fa fa-plus"></i></button>
                                     </div>
                                 </div>
@@ -405,7 +434,15 @@
                                             cualquiera de los valores para ver su efecto en los cálculos.</small>
                                     </div>
                                 </div>
-
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="PromedioCO2">Consumo Promedio del cliente de CO2:</label>
+                                            <input type="number" class="form-control" name="PromedioCO2" value="{{ $item->simulacionItems->PromedioCO2 }}">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -450,6 +487,7 @@
 
         let rowIndex = {{ count($item->flujos) ?? 0 }};
         let rowPrecios = {{ count($item->precios) ?? 0 }};
+        let rowEquipos = {{ count($item->simulacionItems->Equipos) }};
 
         $('#Btn-plus-Objetivos').click(function() {
             rowIndex++;
@@ -459,6 +497,11 @@
         $('#Btn-plus-precios').click(function() {
             rowPrecios++;
             $('#listadoPreciosTable').append(createPrecios(rowPrecios));
+        });
+
+        $('#Btn-plus-equipos').click(function() {
+            rowEquipos++;
+            $('#listadoEquiposTable').append(createEquipos(rowEquipos));
         });
 
         function createObjetivos(rowIndex) {
@@ -480,6 +523,18 @@
                     </select>
                 </td>
                 <td><input type="text" name="flujo[${rowIndex}][avance]" class="form-control" required></td>
+                <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">X</button></td>
+            </tr>
+            `;
+            return row;
+        }
+
+        function createEquipos(rowEquipos) {
+            let row = `
+            <tr class="text-center">
+                <td><input type="text" name="Equipos[${rowEquipos}][item]" class="form-control" required value=""></td>
+                <td><input type="text" name="Equipos[${rowEquipos}][descripcion]" class="form-control" required></td>
+                <td><input type="number" name="Equipos[${rowEquipos}][cantidad]" class="form-control" required></td>
                 <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">X</button></td>
             </tr>
             `;
@@ -528,6 +583,11 @@
 
         function removePrecios(button) {
             rowPrecios--;
+            button.closest('tr').remove();
+        }
+
+        function removeEquipos(button) {
+            rowEquipos--;
             button.closest('tr').remove();
         }
     </script>

@@ -478,6 +478,11 @@ class PermissionTableSeeder extends Seeder
             // ['name' => 'ELiminar Clientes', 'category' => 'Energías'],
             //End Block->20250109 Pablo
 
+            // ['name' => 'Aprobar y rechazar Cotizaciones', 'category' => 'Energías'],
+            // ['name' => 'Crear Items Cotizaciones', 'category' => 'Energías'],
+            // ['name' => 'Crear Cotizaciones', 'category' => 'Energías'],
+            // ['name' => 'Editar Cotizaciones', 'category' => 'Energías'],
+            // ['name' => 'Eliminar Cotizaciones', 'category' => 'Energías'],
         ];
 
         foreach ($permissions as $permission) {

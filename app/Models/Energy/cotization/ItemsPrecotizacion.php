@@ -13,6 +13,8 @@ class ItemsPrecotizacion extends Model
         'objetivo_proyecto',
         'descripcion_proyecto',
         'validez_oferta',
+        'fecha_oferta',
+        'fin_oferta',
         'polizas',
         'garantia_equipos',
         'garantia_celdas',

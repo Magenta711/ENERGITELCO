@@ -1185,8 +1185,10 @@ Route::delete('energy/quote_system/destroy/{id}', 'energy\quote\QuoteEnergySyste
 
 Route::put('energy/quote_system/flujo_update/{id}', 'energy\quote\QuoteEnergySystemController@FLujoUpdate')->name('quote_energy_system.fLujo_pdate');
 Route::put('energy/quote_system/precio_update/{id}', 'energy\quote\QuoteEnergySystemController@PrecioUpdate')->name('quote_energy_system.precio_pdate');
-Route::get('energy/quote_system/approved/{id}', 'energy\quote\QuoteEnergySystemController@Approved')->name('quote_energy_system.approved');
+Route::post('energy/quote_system/approved/{id}', 'energy\quote\QuoteEnergySystemController@Approved')->name('quote_energy_system.approved');
+Route::post('energy/quote_system/no_approved/{id}', 'energy\quote\QuoteEnergySystemController@NoApproved')->name('quote_energy_system.no_approved');
 Route::get('energy/quote_system/export/{id}', 'energy\quote\QuoteEnergySystemController@export')->name('quote_energy_system.export');
+Route::get('energy/quote_system/review/{token}', 'energy\quote\QuoteEnergySystemController@review')->name('quote_energy_system.review');
 
 
 

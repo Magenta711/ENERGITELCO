@@ -4,6 +4,7 @@ namespace App\models\energy\cotization;
 
 use App\Models\ClientsUsers\Clients;
 use App\Models\Energy\SolarClients;
+use App\Models\file;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,6 +13,7 @@ class Precotizacion extends Model
     protected $table = 'precotizacions';
 
     protected $fillable = [
+        'token',
         'client_id',
         'locateProject',
         'claseSystem',
@@ -19,12 +21,21 @@ class Precotizacion extends Model
         'estrato',
         'consumo',
         'radiacion',
-        'status'
+        'status',
+        'responsable_id',
+        'telefeno_responsable',
+        'direccion_responsable',
+        'email',
     ];
 
     public function client()
     {
         return $this->belongsTo(SolarClients::class, 'client_id');
+    }
+
+    public function responsable()
+    {
+        return $this->belongsTo(User::class, 'responsable_id');
     }
 
     public function items()
@@ -45,5 +56,10 @@ class Precotizacion extends Model
     public function simulacion()
     {
         return $this->hasOne(SimulacionPrecotizacion::class, 'precotizacion_id');
+    }
+
+    public function files()
+    {
+        return $this->morphMany(file::class, 'fileble');
     }
 }

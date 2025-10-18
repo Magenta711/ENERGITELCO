@@ -1,22 +1,43 @@
-@extends('lte.layouts')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
-    <section class="content-header">
-        <h1>
-            Energía Solar <small>ENERGÍAS</small>
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
-            <li class="">Cotizaciones</li>
-            <li class="active">Sistema Solar</li>
-        </ol>
-    </section>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>{{ config('app.name', 'ENERGIRTELCO SAS') }}</title>
+    <link rel="shortcut icon" href="{{ asset('img/logo_sm.png') }}" />
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="{{ asset("assets/$theme/bower_components/bootstrap/dist/css/bootstrap.min.css") }}">
+    {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> --}}
+    <!-- Font Awesome -->
+    <link href="{{ asset("assets/$theme/bower_components/font-awesome/css/all.min.css") }}" rel="stylesheet">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="{{ asset("assets/$theme/bower_components/Ionicons/css/ionicons.min.css") }}">
+    <!-- Theme style -->
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+    folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="{{ asset("assets/$theme/dist/css/skins/_all-skins.min.css") }}">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+    <!-- Google Font -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+    <link rel="stylesheet" href="{{ asset("assets/$theme/dist/css/AdminLTE.min.css") }}">
+</head>
+
+<body>
     <section class="content">
         <div class="box">
             <div class="box-header">
                 <div class="box-title">Realizar Cotización</div>
                 <div class="box-tools">
-                    <a href="{{ route('quote_energy_system.index') }}" class="btn btn-sm btn-primary">Volver</a>
                 </div>
             </div>
             <div class="box-body">
@@ -68,7 +89,7 @@
                         </div>
                     </div>
                 </div>
-                 <hr>
+                <hr>
                 <h4>Objetivos</h4>
                 <div class="row">
                     <div class="col-md-12">
@@ -171,8 +192,8 @@
                             <div class="col-md-6 text-center">
                                 <label for="img">{{ $items->name }}</label>
                                 <br>
-                                <img id="img" src="/storage/energy/quotes/{{ $items->name }}" style="width: 75%;"
-                                    alt="Attachment">
+                                <img id="img" src="/storage/energy/quotes/{{ $items->name }}"
+                                    style="width: 75%;" alt="Attachment">
                             </div>
                         @endforeach
                     </div>
@@ -224,16 +245,10 @@
                 </div>
                 <hr>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <h5><b>Flujo de la Inversión</b></h5>
                     </div>
-                    <div class="col-md-6 text-right">
-                        <a href="" class="btn btn-warning" data-toggle="modal" data-target=".flujo-modal-lg"><i
-                                class="fa fa-edit"></i></a>
-                    </div>
-                    @include('energy.quoteSystem.includes.flujo_update')
-                    <div class="col-md-12">
-                        <br>
+                    <div class="col-md-12 text-right">
                         <table class="table table-bordered">
                             <thead class="thead-light text-center">
                                 <tr class="text-center">
@@ -283,11 +298,6 @@
                     <div class="col-md-6">
                         <h5><b>Listado de Precios</b></h5>
                     </div>
-                    <div class="col-md-6 text-right">
-                        <a href="" class="btn btn-warning" data-toggle="modal" data-target=".precio-modal-lg"><i
-                                class="fa fa-edit"></i></a>
-                    </div>
-                    @include('energy.quoteSystem.includes.precios_update')
                     <div class="col-md-12">
                         <br>
                         <table class="table table-bordered">
@@ -336,7 +346,8 @@
                         <div class="text-right">
                             <h4><b>Total USD: ${{ number_format($id->totalUSD, 2, ',', '.') }}</b></h4>
                             <h4><b>Total COP: ${{ number_format($id->totalCOP, 2, ',', '.') }}</b></h4>
-                            <h4><b>IVA: ${{ number_format($id->totalCOP * ($id->items->iva / 100), 2, ',', '.') }}</b></h4>
+                            <h4><b>IVA: ${{ number_format($id->totalCOP * ($id->items->iva / 100), 2, ',', '.') }}</b>
+                            </h4>
                         </div>
                     </div>
                 </div>
@@ -481,140 +492,13 @@
                         </div>
                     </div>
                 </div>
-
-                <hr>
-                @can('Aprobar y rechazar Cotizaciones')
-                    @if ($id->status == 'Pendiente')
-                    <a href="" class="btn btn-success" data-toggle="modal"
-                        data-target=".approved-modal-lg">Aprobar</a>
-                    <a href="" class="btn btn-danger" data-toggle="modal"
-                        data-target=".noapproved-modal-lg">Rechazar</a>
-                    @endif
-                @endcan
-                @include('energy.quoteSystem.includes.approved')
-                @include('energy.quoteSystem.includes.noapproved')
             </div>
     </section>
-@endsection
-
-@section('js')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        $(document).ready(function() {
-            $('.')
-
-
-            $('.typeInversion').each(function() {
-                let typeInversion = $(this).val();
-                let id = $(this).data('id');
-                if (typeInversion === 'Valor2') {
-                    $(`.cop[data-id=${id}]`).prop('readonly', true);
-                    $(`.usd[data-id=${id}]`).prop('readonly', false);
-                    $(`.cop[data-id=${id}]`).val('');
-                } else {
-                    $(`.usd[data-id=${id}]`).prop('readonly', true);
-                    $(`.cop[data-id=${id}]`).prop('readonly', false);
-                    $(`.usd[data-id=${id}]`).val('');
-                }
-            });
-
-            $('.typeInversion').change(function() {
-                let typeInversion = $(this).val();
-                let id = $(this).data('id');
-                if (typeInversion === 'Valor2') {
-                    $(`.cop[data-id=${id}]`).prop('readonly', true);
-                    $(`.usd[data-id=${id}]`).prop('readonly', false);
-                    $(`.cop[data-id=${id}]`).val('');
-                } else {
-                    $(`.usd[data-id=${id}]`).prop('readonly', true);
-                    $(`.cop[data-id=${id}]`).prop('readonly', false);
-                    $(`.usd[data-id=${id}]`).val('');
-                }
-            });
-        });
-
-        let rowIndex = {{ count($id->flujos) ?? 0 }};
-        let rowPrecios = {{ count($id->precios) ?? 0 }};
-
-        $('#Btn-plus-Objetivos').click(function() {
-            rowIndex++;
-            $('#flujoInversionTable').append(createObjetivos(rowIndex));
-        });
-
-        $('#Btn-plus-precios').click(function() {
-            rowPrecios++;
-            $('#listadoPreciosTable').append(createPrecios(rowPrecios));
-        });
-
-        function createObjetivos(rowIndex) {
-            let row = `
-            <tr class="text-center">
-                <td><input type="number" name="flujo[${rowIndex}][item]" class="form-control" required value="${rowIndex}"></td>
-                <td><input type="text" name="flujo[${rowIndex}][hito]" class="form-control" required></td>
-                <td>
-                    <input type="number" name="flujo[${rowIndex}][inversion]" class="form-control" required
-                        value="" max="100" min="0">
-                </td>
-                <td>
-                    <select name="flujo[${rowIndex}][t {{ $flujo->typeInversion == '}][' ? 'selected' : '' }}ypeInversion]" class="form-control" required id="">
-                        <option></option>
-                        <option value="Valor2">Valor Equipos</option>
-                        <option value="Valor3">Mano de Obra y Consumibles</option>
-                        <option value="Valor4">Certificación y Tramites</option>
-                        <option value="Valor5">Impuestos</option>
-                    </select>
-                </td>
-                <td><input type="text" name="flujo[${rowIndex}][avance]" class="form-control" required></td>
-                <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">X</button></td>
-            </tr>
-            `;
-            return row;
-        }
-
-        function createPrecios(rowPrecios) {
-            let row = `
-             <tr>
-                <td><input type="text" name="precios[${rowPrecios}][codigo]" class="form-control" required
-                        value="ENER SOLAR ${rowPrecios}"></td>
-                <td><input type="number" name="precios[${rowPrecios}][item]" class="form-control" required
-                        value="${rowPrecios}"></td>
-                <td><input type="text" name="precios[${rowPrecios}][descripcion]"
-                        class="form-control" required value="">
-                </td>
-                <td>
-                    <select name="precios[${rowPrecios}][typeInversion]" class="form-control" required id="" data-id="${rowPrecios}">
-                        <option></option>
-                        <option value="Valor2">Valor Equipos</option>
-                        <option value="Valor3">Mano de Obra y Consumibles</option>
-                        <option value="Valor4">Certificación y Tramites</option>
-                        <option value="Valor5">Impuestos</option>
-                    </select>
-                </td>
-                <td><input type="number" step="0.01" name="precios[${rowPrecios}][cop]"
-                        class="form-control" required value="" data-id="${rowPrecios}"></td>
-                <td><input type="number" step="0.01" name="precios[${rowPrecios}][usd]"
-                        class="form-control" required value="" data-id="${rowPrecios}"></td>
-                <td><input type="number" name="precios[${rowPrecios}][cantidad]"
-                        class="form-control" required value=""></td>
-                <td>
-                    <button type="button" class="btn btn-danger btn-sm"
-                        onclick="removeRow(this)">X</button>
-                </td>
-            </tr>
-            `;
-            return row;
-        }
-
-        function removeRow(button) {
-            rowIndex--;
-            button.closest('tr').remove();
-        }
-
-        function removePrecios(button) {
-            rowPrecios--;
-            button.closest('tr').remove();
-        }
         const data = @json($id->retorno);
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{ asset('js/quotes/grafica1.js') }}"></script>
-@endsection
+</body>
+
+</html>

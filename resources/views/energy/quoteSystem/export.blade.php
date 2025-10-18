@@ -1,12 +1,19 @@
 <table>
     <tr>
-        <td style="width: 35px"></td>
+        <td style="width: 25px"></td>
         <td style="width: 114px"></td>
-        <td style="width: 105px"></td>
-        <td style="width: 105px"></td>
-        <td style="width: 136px"></td>
-        <td style="width: 109px"></td>
-        <td style="width: 164px"></td>
+        <td style="width: 95px"></td>
+        <td style="width: 95px"></td>
+        <td style="width: 126px"></td>
+        <td style="width: 99px"></td>
+        <td style="width: 154px"></td>
+        <td style="width: 93px"></td>
+        <td style="width: 126px"></td>
+        <td style="width: 126px"></td>
+        <td style="width: 226px"></td>
+        <td style="width: 250px"></td>
+        <td style="width: 180px"></td>
+        <td style="width: 84px"></td>
     </tr>
     <tr>
         <td></td>
@@ -107,7 +114,7 @@
         <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold">VALIDEZ DE LA OFERTA:</td>
         <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $id->items->validez_oferta }}</td>
         <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold">FECHA DE LA OFERTA:</td>
-        <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;"></td>
+        <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $id->items->fecha_oferta }}</td>
         <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold">POLIZAS RC, PATRONALES Y RE:</td>
         <td colspan="3" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $id->items->polizas }}</td>
         <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold"></td>
@@ -153,7 +160,7 @@
         <td colspan="3" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold">FECHA PRESENTACION DE LA OFERTA:</td>
         <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;"></td>
         <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold">ACEPTACION MAXIMA DE OFERTA CON EMISION DE DOCUMENTO DE ORDEN DE COMPRA:</td>
-        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;"></td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $id->fin_oferta }}</td>
         <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold"></td>
         <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold"></td>
     </tr>
@@ -260,28 +267,356 @@
     </tr>
     <tr>
         <td></td>
-        <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000; font-weight:bold">ESTRATO DEL PROYECTO:</td>
+        <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold">ESTRATO DEL PROYECTO:</td>
         <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $id->estrato }}</td>
-        <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000; font-weight:bold">VALOR INVERSION:</td>
+        <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold">VALOR INVERSION:</td>
         <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; border: 3px solid #000000;">${{ number_format($id->totalSistema, 2, ',', '.') }}</td>
-        <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000; font-weight:bold">VALOR ACTUAL KW/H:</td>
+        <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold">VALOR ACTUAL KW/H:</td>
         <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $id->items->valor_kw }}</td>
-        <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000; font-weight:bold">OPERADOR DE RED:</td>
+        <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold">OPERADOR DE RED:</td>
         <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $id->simulacion->Operador }}</td>
-        <td colspan="3" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold"></td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold"></td>
     </tr>
     <tr>
         <td></td>
-        <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000; font-weight:bold">CAPACIDAD INSTALADA KWp:</td>
+        <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold">CAPACIDAD INSTALADA KWp:</td>
         <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $id->capacidadInstalada }}</td>
-        <td colspan="3" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000; font-weight:bold">HORAS PROMEDIO DE PRODUCCION PROD./DIA:</td>
+        <td colspan="3" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold">HORAS PROMEDIO DE PRODUCCION PROD./DIA:</td>
         <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $id->simulacion->PromProduccion }}</td>
-        <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000; font-weight:bold">DIAS DE PRODUCCION AL AÑO:</td>
+        <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold">DIAS DE PRODUCCION AL AÑO:</td>
         <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $id->simulacion->PromProduccionAnual }}</td>
-        <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000; font-weight:bold">FACTOR DE EFICIENCIA:</td>
-        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;"></td>
+        <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold">FACTOR DE EFICIENCIA:</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
     </tr>
-    @foreach ($id->simulacion->kwh as $item)
+    @foreach ($id->produccionFinal as $key => $item)
+    <tr>
+        <td></td>
+        <td colspan="3" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold">FACTOR DE EFICIENCIA::</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $item['valor_factor'] }}</td>
+        <td colspan="9" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
 
+
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="3" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold">KW/H PRODUCIDOS AÑO {{ $key }}:</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $item['factor'] }}</td>
+        <td colspan="4" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold">VALOR KW/H AÑO EN CURSO CON AUMENTO EN IPC ESTIMADO:</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $item['valor_kwh'] }}</td>
+        <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold">PRODUCCION AÑO {{ $key }} EN COP:</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $item['kwh'] }}</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="3" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold">VALOR PRODUCCION AÑO: {{ $item['etiqueta'] }}</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $item['produccion'] }}</td>
+        <td colspan="3" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold">VALOR PRODUCCION AÑO: {{ $item['etiqueta'] }}</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $item['mantenimiento'] }}</td>
+        <td colspan="3" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold">VALOR COP ESTIMADO AÑO{{ $item['etiqueta'] }}</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $item['estimacion'] }}</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
+    </tr>
+    @endforeach
+    <tr>
+        <td></td>
+        <td colspan="4" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold">TOTAL KW/H PRODUCIDOS DURANTE 30 AÑOS:</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $id->totalProducido }}</td>
+        <td colspan="8" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
+
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="4" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold">TOTAL PRODUCCION ECONOMICA DEL PROYECTO:</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $id->totalEstimacion }}</td>
+        <td colspan="5" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt;">Consumo Promedio del cliente:</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $id->simulacion->PromedioCO2 }}</td>
+        <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="4" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold">TOTAL TONELADAS DE OXIGENO PRODUCIDAS:</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $id->totalOxigeno }}</td>
+        <td colspan="5" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt;">CO2 FABRICACION DEL SISTEMA:</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $id->FabricacionCO2 }}</td>
+        <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="4" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold">PRODUCCION MENSUAL DE KW/H</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $id->produccionMensualKw }}</td>
+        <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;">+/- 5%</td>
+        <td colspan="3" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt;">CO2 OPERACION Y MTTO:</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">0</td>
+        <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="4" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold">AREA REQUERIDA PARA EL CULTIBO EN METROS CUADRADOS</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $id->areaRequerida }}</td>
+        <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;">Medida obligatoria 2,3 m x Largo          hasta cumplir área</td>
+        <td colspan="3" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt;">CO2 ENERGIA CONSUMIDA:</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $id->EnergiaCO2 }}</td>
+        <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="4" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold">Radiación KW/h/metro cuadrado/día</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $id->radiacion }}</td>
+        <td colspan="5" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt;">CO2 TOTAL:</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $id->TotalCO2 }}</td>
+        <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="4" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold">PRODUCCION MENSUAL EN PESOS</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $id->produccionMensualCOP }}</td>
+        <td colspan="8" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="4" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold">MESES DE RECUPERACION DE INVERSION</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $id->MesesRecuperacion }}</td>
+        <td colspan="8" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="9" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
+        <td colspan="1" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt; border: 3px solid #000000; font-weight:bold">ITEM</td>
+        <td colspan="1" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt; border: 3px solid #000000; font-weight:bold">DESCRIPCION</td>
+        <td colspan="1" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt; border: 3px solid #000000; font-weight:bold">CANTIDAD</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
+    </tr>
+    @foreach ($id->simulacion->Equipos as $equipos)
+        <tr>
+            <td></td>
+            <td colspan="9" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
+            <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $equipos['item'] }}</td>
+            <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $equipos['descripcion'] }}</td>
+            <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $equipos['cantidad'] }}</td>
+            <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
+        </tr>
+    @endforeach
+    <tr>
+        <td></td>
+        <td colspan="13" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="9" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; border: 3px solid #000000; font-weight:bold">CAPACIDAD INSTALADA  KWP</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;">{{ $id->capacidadInstalada }}</td>
+        <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="13" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="13" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="13" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; color:#00B050">NOTA: EL PROYECTO ESTA CALCULADO PARA LOGRAR REDUCIR LA CUENTA DE ENERGIA 48%, PERO ESTO OCURRE MIENTRAS LAS CONDICIONES DE CONSUMO SIGAN IGUALES, ESTABLES EN CASO DE INCREMENTO APARECERA COSTO
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="13" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="3" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;">DATOS COMERCIALES DEL RESPONSABLE:</td>
+        <td colspan="10" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="3" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;">{{ $id->responsable->name }}</td>
+        <td colspan="10" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="3" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;">{{ $id->direccion_responsable }}</td>
+        <td colspan="10" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="3" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;">{{ $id->telefeno_responsable }}</td>
+        <td colspan="10" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="3" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;">{{ $id->email }}</td>
+        <td colspan="10" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="13" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="7" rowspan="2" style="background-color:#C4D79B; text-align: center; font-size: 16pt; font-weight:bold"><h2>UBICACIÓN DEL PROYECTO EN LA PROPIEDAD</h2></td>
+        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="13" rowspan="36" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
+    </tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr>
+        <td></td>
+        <td colspan="7" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 12pt; border: 3px solid #000000; font-weight:bold; color:white">COSTO REAL DE MI INVERSION TENIENDO EN CUENTA LOS INCENTIVOS TRIBUTARIOS:</td>
+        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="7" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="7" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white">INVERSION INECIAL DE TU TRANSICION TRASICION ENERGETICA:</td>
+        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="2" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="3" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 12pt; border: 3px solid #000000; font-weight:bold; color:white"> $ {{ number_format($id->totalSistema, 2, ',', '.') }}</td>
+        <td colspan="2" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="7" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="7" rowspan="2" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white">RECUERDA QUE TE ENTREGAREMOS LA INSCRIPCION ANTE LA UNIDAD DE PLANEACION MINERO ENERGETICA CON LO CUAL PODRAS DESCONTARLE LA SUGUIENTE SUMA EN LA RENTA DEL SIGUIENTE AÑO:</td>
+        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="2" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="3" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 12pt; border: 3px solid #000000; font-weight:bold; color:white">$ {{ number_format($id->descuentoRenta, 2, ',', '.') }}</td>
+        <td colspan="2" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="7" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="7" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="7" rowspan="2" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white">ADEMAS SI ERES RESPONSABLE DEL IVA SEGÚN TU REGIMEN TRIBUTARIO, PODRAS RECUPERAR EL IMPUESTO A LA VENTAS POR VALOR DE:</td>
+        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="2" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="3" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 12pt; border: 3px solid #000000; font-weight:bold; color:white"> $ {{ number_format($id->valores['Valor5'], 2, ',', '.') }}</td>
+        <td colspan="2" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="7" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="7" rowspan="2" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white">INVERSION REAL CONTABLEMENTE DEL SISTEMA DE ENERGIA ALTERNATIVA:</td>
+        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="2" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="3" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 12pt; border: 3px solid #000000; font-weight:bold; color:white">$ {{ number_format($id->totalInversion, 2, ',', '.') }}</td>
+        <td colspan="2" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="7" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="13" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white; border-bottom: 5px solid #000000;"></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="1" rowspan="1" style="background-color:gray; text-align: center; font-size: 8pt;color:white">MESES</td>
+        <td colspan="4" rowspan="1" style="background-color:gray; text-align: center; font-size: 8pt;color:white">KW/H MENSUAL ACUMULADO</td>
+        <td colspan="4" rowspan="1" style="background-color:gray; text-align: center; font-size: 8pt;color:white">COP MENSUAL ACUMULADO</td>
+        <td colspan="4" rowspan="1" style="background-color:gray; text-align: center; font-size: 8pt;color:white">RETORNO INVERSION</td>
+    </tr>
+    @foreach ($id->retorno as $key => $valores)
+    <tr>
+        <td></td>
+        <td colspan="1" rowspan="1" style="background-color:gray; text-align: center; font-size: 8pt;color:black">{{ $key }}</td>
+        <td colspan="4" rowspan="1" style="background-color:gray; text-align: center; font-size: 8pt;color:black">{{ number_format($valores['KW'], 2, ',', '.') }} KW/H</td>
+        <td colspan="4" rowspan="1" style="background-color:gray; text-align: center; font-size: 8pt;color:black">$ {{ number_format($valores['COP'], 2, ',', '.') }}</td>
+        <td colspan="4" rowspan="1" style="background-color:gray; text-align: center; font-size: 8pt;color:black">$ {{ number_format($valores['RETORNO'], 2, ',', '.') }}</td>
+    </tr>
     @endforeach
 </table>

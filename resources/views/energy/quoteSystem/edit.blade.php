@@ -21,7 +21,7 @@
             </div>
             <div class="box-body">
                 <hr>
-                <form action="{{ route('quote_energy_system.update', $plantilla->id) }}" method="POST">
+                <form action="{{ route('quote_energy_system.update', $plantilla->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="panel box box-success">
@@ -32,7 +32,7 @@
                                 </a>
                             </h4>
                         </div>
-                        <div id="Cliente" class="panel-collapse collapse show">
+                        <div id="Cliente" class="panel-collapse collapse">
                             <div class="box-body">
                                 <hr>
                                 <div class="locate">
@@ -51,8 +51,7 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="claseSystem">Clase ON/OFF GRID</label>
-                                                <select name="claseSystem" id="claseSystem" class="form-control"
-                                                    required>
+                                                <select name="claseSystem" id="claseSystem" class="form-control" required>
                                                     <option selected></option>
                                                     <option {{ $plantilla->claseSystem == 'ON GRID' ? 'selected' : '' }}
                                                         value="ON GRID">ON GRID</option>
@@ -80,16 +79,15 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="radiacion">Radiación Promedio KWh/m2/día</label>
-                                                <input type="number" step="0.01" class="form-control"
-                                                    name="radiacion" id="radiacion" value="{{ $plantilla->radiacion }}"
-                                                    required>
+                                                <input type="number" step="0.01" class="form-control" name="radiacion"
+                                                    id="radiacion" value="{{ $plantilla->radiacion }}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label for="usd">Precio Dolar</label>
                                                 <input type="number" class="form-control" name="usd" id="usd"
-                                                    value="{{ $plantilla->items->usd ?? 0}}" required>
+                                                    value="{{ $plantilla->items->usd ?? 0 }}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
@@ -99,6 +97,82 @@
                                                     id="typeProject" value="{{ $plantilla->typeProject }}" required>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="row">
+                                        @if ($plantilla->file_servicios)
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label
+                                                        for="file_{{ $plantilla->file_servicios->description }}">{{ $plantilla->file_servicios->description }}</label><br>
+                                                    <div class="text-center mb-3" style="padding: 10px; width: 100%;">
+                                                        <img src="/storage/energy/quotes/{{ $plantilla->file_servicios->name }}"
+                                                            alt="" width="75%"
+                                                            id="preimg_{{ $plantilla->file_servicios->description }}">
+                                                    </div>
+                                                    <label for="file_{{ $plantilla->file_servicios->description }}"
+                                                        class="form-control text-center">
+                                                        <i class="fa fa-upload"></i>
+                                                    </label>
+                                                    <input type="file"
+                                                        name="file_{{ $plantilla->file_servicios->description }}"
+                                                        id="file_{{ $plantilla->file_servicios->description }}"
+                                                        class="hide file_create" accept="image/*">
+                                                </div>
+                                            </div>
+                                        @else
+                                            <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="file_Servicios">Cuenta de Servicios</label><br>
+                                                        <div class="text-center mb-3" style="padding: 10px; width: 100%;">
+                                                            <img src="" alt="" width="40%"
+                                                                id="preimg_Servicios">
+                                                        </div>
+                                                        <label for="file_Servicios" class="form-control text-center">
+                                                            <i class="fa fa-upload"></i>
+                                                        </label>
+                                                        <input type="file" name="file_Servicios" id="file_Servicios"
+                                                            class="hide file_create" accept="image/*">
+                                                    </div>
+                                                </div>
+                                        @endif
+                                        @if ($plantilla->file_maps)
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label
+                                                        for="file_Mapa">{{ $plantilla->file_maps->description }}</label><br>
+                                                    <div class="text-center mb-3" style="padding: 10px; width: 100%;">
+                                                        <img src="/storage/energy/quotes/{{ $plantilla->file_maps->name }}"
+                                                            alt="" width="75%"
+                                                            id="preimg_{{ $plantilla->file_maps->description }}">
+                                                    </div>
+                                                    <label for="file_Mapa"
+                                                        class="form-control text-center">
+                                                        <i class="fa fa-upload"></i>
+                                                    </label>
+                                                    <input type="file"
+                                                        name="file_Mapa"
+                                                        id="file_Mapa"
+                                                        class="hide file_create" accept="image/*">
+                                                </div>
+                                            </div>
+                                        @else
+                                             <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="file_Mapa">Vista aérea de la zona</label><br>
+                                                        <div class="text-center mb-3" style="padding: 10px; width: 100%;">
+                                                            <img src="" alt="" width="40%"
+                                                                id="preimg_Mapa">
+                                                        </div>
+                                                        <label for="file_Mapa" class="form-control text-center">
+                                                            <i class="fa fa-upload"></i>
+                                                        </label>
+                                                        <input type="file" name="file_Mapa" id="file_Mapa"
+                                                            class="hide file_create" accept="image/*">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -138,7 +212,22 @@
                                                 value="{{ $plantilla->items->validez_oferta ?? '60' }}">
                                         </div>
                                     </div>
-
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="fecha_oferta">FECHA PRESENTACION DE LA OFERTA:</label>
+                                            <input type="text" name="fecha_oferta" id="fecha_oferta"
+                                                class="form-control" required
+                                                value="{{ $plantilla->items->fecha_oferta ?? '' }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="fin_oferta">ACEPTACION MAXIMA DE OFERTA CON EMISION DE DOCUMENTO DE
+                                                ORDEN DE COMPRA:</label>
+                                            <input type="text" name="fin_oferta" id="fin_oferta" class="form-control"
+                                                required value="{{ $plantilla->items->fin_oferta ?? '' }}">
+                                        </div>
+                                    </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="polizas">Pólizas RC, Patronales y RE</label>
@@ -228,14 +317,14 @@
                                         <div class="form-group">
                                             <label for="Iva">% IVA</label>
                                             <input type="number" name="Iva" id="Iva" class="form-control"
-                                                required value="{{ $plantilla->iva ?? 19 }}">
+                                                required value="{{ $plantilla->items->iva }}">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="ValorKW">VALOR ACTUAL KW/H</label>
                                             <input type="number" step="0.01" name="ValorKW" id="ValorKW"
-                                                class="form-control" required value="{{ $plantilla->valor_kw ?? 19 }}">
+                                                class="form-control" required value="{{ $plantilla->items->valor_kw }}">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -365,7 +454,8 @@
                                                         </td>
                                                         <td>
                                                             <input type="radio" name="panel"
-                                                                value="{{ $precios->item }}" {{ $precios->panel == 'Si' ? 'checked' : '' }}>
+                                                                value="{{ $precios->item }}"
+                                                                {{ $precios->panel == 'Si' ? 'checked' : '' }}>
                                                         </td>
                                                         <td><input type="number" step="0.01"
                                                                 name="precios[{{ $i }}][usd]"
@@ -391,6 +481,45 @@
                                         </table>
 
                                         <button type="button" class="btn btn-success" id="Btn-plus-precios"><i
+                                                class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h5><b>Listado de Equipos</b></h5>
+                                        <table class="table table-bordered">
+                                            <thead class="thead-light">
+                                                <tr class="text-center">
+                                                    <th style="width: 10%;">Item</th>
+                                                    <th style="width: 60%;">Descripción Técina</th>
+                                                    <th style="width: 20%;">Cantidad</th>
+
+                                                    <th style="width: 5%;">Acción</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="listadoEquiposTable">
+                                                @foreach ($plantilla->simulacion->Equipos as $i => $equipos)
+                                                    <tr class="text-center">
+                                                        <td><input type="text"
+                                                                name="Equipos[{{ $i }}][item]"
+                                                                value="{{ $equipos['item'] }}" class="form-control"
+                                                                required value=""></td>
+                                                        <td><input type="text"
+                                                                name="Equipos[{{ $i }}][descripcion]"
+                                                                value="{{ $equipos['descripcion'] }}"
+                                                                class="form-control" required></td>
+                                                        <td><input type="number"
+                                                                name="Equipos[{{ $i }}][cantidad]"
+                                                                value="{{ $equipos['cantidad'] }}" class="form-control"
+                                                                required></td>
+                                                        <td><button type="button" class="btn btn-danger btn-sm"
+                                                                onclick="removeRow(this)">X</button></td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+
+                                        <button type="button" class="btn btn-success" id="Btn-plus-equipos"><i
                                                 class="fa fa-plus"></i></button>
                                     </div>
                                 </div>
@@ -489,7 +618,16 @@
                                             cualquiera de los valores para ver su efecto en los cálculos.</small>
                                     </div>
                                 </div>
-
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="PromedioCO2">Consumo Promedio del cliente de CO2:</label>
+                                            <input type="number" class="form-control" name="PromedioCO2"
+                                                value="{{ $plantilla->simulacion->PromedioCO2 }}">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -503,9 +641,18 @@
 @section('js')
     <script>
         $(document).ready(function() {
-            if ($('#newClients').is(':hidden')) {
-                $('#newClients').find('input, select, textarea').prop('disabled', true);
-            }
+            $('.file_create').change(function() {
+                const idPreview = this.id.replace('file_', 'preimg_');
+                console.log('Renderizando preview:', idPreview);
+                readImage(this, idPreview);
+            });
+
+            $('.file-edit').change(function() {
+                let id = this.id.split('_')[this.id.split('_').length - 1];
+                console.log(id);
+                $($('#' + this.id).parent().children('label')).addClass('text-aqua');
+                readImageEdit(this, id);
+            });
 
             $('.typeInversion').each(function() {
                 let typeInversion = $(this).val();
@@ -536,8 +683,20 @@
             });
         });
 
+        function readImage(input, idPreview) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#' + idPreview).attr('src', e.target.result); // renderizamos la imagen correcta
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
         let rowIndex = {{ count($plantilla->flujos) ?? 0 }};
         let rowPrecios = {{ count($plantilla->precios) ?? 0 }};
+        let rowEquipos = {{ count($plantilla->simulacion->Equipos) ?? 0 }};
+
 
         $('#Btn-plus-Objetivos').click(function() {
             rowIndex++;
@@ -547,6 +706,11 @@
         $('#Btn-plus-precios').click(function() {
             rowPrecios++;
             $('#listadoPreciosTable').append(createPrecios(rowPrecios));
+        });
+
+        $('#Btn-plus-equipos').click(function() {
+            rowEquipos++;
+            $('#listadoEquiposTable').append(createEquipos(rowEquipos));
         });
 
         function createObjetivos(rowIndex) {
@@ -568,6 +732,19 @@
                     </select>
                 </td>
                 <td><input type="text" name="flujo[${rowIndex}][avance]" class="form-control" required></td>
+                <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">X</button></td>
+            </tr>
+            `;
+            return row;
+        }
+
+
+        function createEquipos(rowEquipos) {
+            let row = `
+            <tr class="text-center">
+                <td><input type="text" name="Equipos[${rowEquipos}][item]" class="form-control" required value=""></td>
+                <td><input type="text" name="Equipos[${rowEquipos}][descripcion]" class="form-control" required></td>
+                <td><input type="number" name="Equipos[${rowEquipos}][cantidad]" class="form-control" required></td>
                 <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">X</button></td>
             </tr>
             `;
@@ -618,36 +795,9 @@
             button.closest('tr').remove();
         }
 
-        $('#newClient').change(function() {
-            const checkbox = $('#newClient');
-            if (checkbox.is(':checked')) {
-                $('#newClients').show();
-                $('#selectClient').hide();
-                $('#newCliente').val(1);
-                $('#newClients').find('input, select, textarea').prop('disabled', false);
-            } else {
-                $('#newClients').hide();
-                $('#selectClient').show();
-                $('#newCliente').val(0);
-                $('#newClients').find('input, select, textarea').prop('disabled', true);
-            }
-        })
-
-        function infoUser(element) {
-            let id = element.value;
-            $.get(`/energy/clients/info_user/` + id, function(data) {
-
-                if (data.success) {
-                    console.log(data.client);
-                    $('#nameClient').val(data.client.name).prop('readonly', false);
-                    $('#ide').val(data.client.ide);
-                    $('#typeId').val(data.client.typeId);
-                    $('#locate').val(data.client.locate);
-                    $('#type_client').val(data.client.typeClient);
-                } else {
-                    alert(data.message);
-                }
-            });
+        function removeEquipos(button) {
+            rowEquipos--;
+            button.closest('tr').remove();
         }
     </script>
 @endsection

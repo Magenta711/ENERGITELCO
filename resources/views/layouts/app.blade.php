@@ -1,7 +1,8 @@
+@extends('lte.layouts')
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head><meta http-equiv="Content-Type" content="text/html; charset=gb18030">
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     {{-- IconNav --}}
@@ -11,13 +12,13 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'ENERGIRTELCO SAS') }}</title>
-    
+
     <!-- Scripts -->
     <script src="{{asset("assets/$theme/bower_components/jquery/dist/jquery.min.js")}}"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
-    
+
     <link href="{{asset("assets/$theme/bower_components/font-awesome/css/all.min.css")}}" rel="stylesheet">
-    
+
     <!-- Fonts -->
     {{-- <link rel="dns-prefetch" href="//fonts.gstatic.com"> --}}
     {{-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> --}}
