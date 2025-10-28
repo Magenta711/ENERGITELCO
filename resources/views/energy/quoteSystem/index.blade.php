@@ -56,7 +56,9 @@
                                             <td>{{ $item->status }}</td>
                                             <td>
                                                 @can('Ver Cotizaciones')
+                                                @if ($item->status != 'Solicitado')
                                                 <a href="{{ route('quote_energy_system.generated', $item->id) }}" class="btn btn-info btn-sm" title="Ver Cotización"><i class="fa fa-eye"></i></a>
+                                                @endif
                                                 @endcan
                                                 @can('Editar Cotizaciones')
                                                 <a href="{{ route('quote_energy_system.edit', $item->id) }}" class="btn btn-warning btn-sm" title="Editar Cotización"><i class="fa fa-edit"></i></a>
@@ -65,7 +67,7 @@
                                                 <a href="{{ route('quote_energy_system.export', $item->id) }}" class="btn btn-success btn-sm" title="Descargar Cotización"><i class="fa fa-download"></i></a>
                                                 @endif
                                                 @can('Eliminar Cotizaciones')
-                                                    @if ($item->status=='Pendiente')
+                                                    @if ($item->status=='Pendiente' || $item->status=='Rechazada' || $item->status=='Solicitado')
                                                         <form action="{{ route('quote_energy_system.destroy', $item->id) }}" method="POST" style="display: inline-block;">
                                                             @csrf
                                                             @method('DELETE')

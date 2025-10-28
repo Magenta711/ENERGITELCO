@@ -19,19 +19,18 @@ class QuoteEnergySystemController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('verified');
-        $this->middleware('auth', ['except' => ['review']]);
+        $this->middleware('auth')->except(['review', 'export','client_create','client_store']);
+        $this->middleware('verified')->except(['review', 'export', 'client_create','client_store']);
         $this->middleware('permission:Ver Cotizaciones', ['only' => ['index']]);
-        $this->middleware('permission:Crear Items Cotizaciones', ['only' => ['items','Items_store']]);
-        $this->middleware('permission:Crear Cotizaciones', ['only' => ['store','create']]);
-        $this->middleware('permission:Editar Cotizaciones', ['only' => ['update','edit']]);
-        $this->middleware('permission:ELiminar Cotizaciones', ['only' => ['destroy']]);
+        $this->middleware('permission:Crear Items Cotizaciones', ['only' => ['items', 'Items_store']]);
+        $this->middleware('permission:Crear Cotizaciones', ['only' => ['store', 'create']]);
+        $this->middleware('permission:Editar Cotizaciones', ['only' => ['update', 'edit']]);
+        $this->middleware('permission:Eliminar Cotizaciones', ['only' => ['destroy']]);
     }
 
     public function review($token)
     {
-        $id=precotizacion::where('token', $token)->first();
+        $id = precotizacion::where('token', $token)->first();
         $id = $this->Calculated($id);
         $retorno = $id->retorno;
         $formatted = [];
@@ -156,7 +155,7 @@ class QuoteEnergySystemController extends Controller
 
                 $file = $request->file('file_servicios');
                 if ($file !== null) {
-                    $name = 'Servicios-' . $data['locateProject'] . time() . '.' . $file->getClientOriginalExtension();
+                    $name = 'Servicios_' . time() . '.' . $file->getClientOriginalExtension();
                     $size = $file->getClientSize() / 1000;
                     $path = Storage::putFileAs('public/energy/quotes', $file, $name);
                     $precotizacion->files()->create([
@@ -174,7 +173,7 @@ class QuoteEnergySystemController extends Controller
             if ($request->hasFile('file_maps')) {
                 $file = $request->file('file_maps');
                 if ($file !== null) {
-                    $name = 'Mapa-' . $data['locateProject'] . time() . '.' . $file->getClientOriginalExtension();
+                    $name = 'Mapa_' . time() . '.' . $file->getClientOriginalExtension();
                     $size = $file->getClientSize() / 1000;
                     $path = Storage::putFileAs('public/energy/quotes', $file, $name);
                     $precotizacion->files()->create([
@@ -192,7 +191,7 @@ class QuoteEnergySystemController extends Controller
             $precotizacion->items()->create([
                 'precotizacion_id'    => $precotizacion->id,
                 'objetivo_proyecto'   => $data['objetivo_proyecto'],
-                'descripcion_proyecto'=> $data['descripcion_proyecto'],
+                'descripcion_proyecto' => $data['descripcion_proyecto'],
                 'validez_oferta'      => $data['validez_oferta'],
                 'fecha_oferta'        => $data['fecha_oferta'],
                 'fin_oferta'          => $data['fin_oferta'],
@@ -200,7 +199,7 @@ class QuoteEnergySystemController extends Controller
                 'garantia_equipos'    => $data['garantia_equipos'],
                 'garantia_celdas'     => $data['garantia_celdas'],
                 'garantia_materiales' => $data['garantia_materiales'],
-                'verificacion_sistema'=> $data['verificacion_sistema'],
+                'verificacion_sistema' => $data['verificacion_sistema'],
                 'nivel_sst'           => $data['nivel_sst'],
                 'mantenimiento'       => $data['mantenimiento'],
                 'nota_importante'     => $data['nota_importante'],
@@ -243,6 +242,108 @@ class QuoteEnergySystemController extends Controller
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()->with('error', 'Error al crear la cotización: ' . $e->getMessage());
+        }
+    }
+
+    public function client_create()
+    {
+        $plantilla = [];
+        $plantilla = cotizaciones::latest()->first();
+        return view('energy.quoteSystem.client', compact('plantilla'));
+    }
+
+    public function client_store(Request $request)
+    {
+        $data = request()->all();
+        DB::begintransaction();
+        try {
+            $client_exists = SolarClients::where('ide', $data['ideNew'])->first();
+            $data['client'] = $client_exists ? $client_exists->id : null;
+            if (!$client_exists) {
+                $client = SolarClients::create([
+                    'name'      => $data['nameNew'],
+                    'typeId'    => $data['typeIdNew'],
+                    'ide'    => $data['ideNew'],
+                    'email'    => $data['emailNew'],
+                    'tel'    => $data['telNew'],
+                ]);
+                $data['client'] = $client->id;
+            }
+
+            $plantilla = cotizaciones::latest()->first();
+
+            $precotizacion = precotizacion::create([
+                'token'         => $data['_token'],
+                'client_id'     => $data['client'],
+                'locateProject' => $data['ciudad'],
+                'direccion' => $data['direccion'],
+                'claseSystem'   => $data['claseSystem'],
+                'typeProject'   => $data['typeProject'],
+                'estrato'       => $data['estrato'],
+                'consumo'       => $data['consumo'],
+                'status'        => 'Solicitado',
+            ]);
+
+            if ($request->hasFile('file_servicios')) {
+                $file = $request->file('file_servicios');
+                if ($file !== null) {
+                    $name = 'Servicios_' . $data['ciudad'] . time() . '.' . $file->getClientOriginalExtension();
+                    $size = $file->getClientSize() / 1000;
+                    $path = Storage::putFileAs('public/energy/quotes', $file, $name);
+                    $precotizacion->files()->create([
+                        'name' => $name,
+                        'description' => 'Servicios',
+                        'size' => $size . ' KB',
+                        'url' => $path,
+                        'type' => $file->getClientOriginalExtension(),
+                        'place' => 'C105',
+                        'state' => 1
+                    ]);
+                }
+            }
+
+            $precotizacion->items()->create([
+                'objetivo_proyecto'   => $plantilla['objetivo_proyecto'],
+                'descripcion_proyecto' => $plantilla['descripcion_proyecto'],
+                'validez_oferta'      => $plantilla['validez_oferta'],
+                'fecha_oferta'        => $plantilla['fecha_oferta'],
+                'fin_oferta'          => $plantilla['fin_oferta'],
+                'polizas'             => $plantilla['polizas'],
+                'garantia_equipos'    => $plantilla['garantia_equipos'],
+                'garantia_celdas'     => $plantilla['garantia_celdas'],
+                'garantia_materiales' => $plantilla['garantia_materiales'],
+                'verificacion_sistema' => $plantilla['verificacion_sistema'],
+                'nivel_sst'           => $plantilla['nivel_sst'],
+                'mantenimiento'       => $plantilla['mantenimiento'],
+                'nota_importante'     => $plantilla['nota_importante'],
+                'iva'                 => $plantilla['Iva'],
+                'valor_kw'            => $plantilla['ValorKW'],
+                'usd'                 => $plantilla['usd'],
+            ]);
+            $precotizacion->flujos()->createMany($plantilla->flujos->toArray());
+
+            $precotizacion->precios()->createMany($plantilla->precios->toArray());
+
+            $precotizacion->simulacion()->create([
+                'Operador'              => $plantilla->simulacionItems->Operador,
+                'PromProduccion'        => $plantilla->simulacionItems->PromProduccion,
+                'PromProduccionAnual'   => $plantilla->simulacionItems->PromProduccionAnual,
+                'PromedioCO2'           => $plantilla->simulacionItems->PromedioCO2,
+                'kwh_ipc'               => $plantilla->simulacionItems->kwh_ipc,
+                'factor_potencia'       => $plantilla->simulacionItems->factor_potencia,
+                'Equipos'               => $plantilla->simulacionItems->Equipos
+            ]);
+
+            Mail::send('energy.quoteSystem.email.solicitud_email', ['id' => $precotizacion], function ($mail) use ($precotizacion) {
+                $mail->subject("UN CLIENTE HA SOLICITADO UNA COTIZACIÓN DE SU SISTEMA SOLAR");
+                $mail->to('solar@energitelco.com', 'Energitelco SAS');
+            });
+
+            DB::commit();
+            return response()->json(['success' => true]);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return response()->json(['error' => 'Error al crear la cotización: ' . $th->getMessage()], 500);
         }
     }
 
@@ -393,9 +494,10 @@ class QuoteEnergySystemController extends Controller
     public function update(Request $request, precotizacion $id)
     {
         $data = request()->all();
-        return $data;
         DB::begintransaction();
         try {
+            $status = $id->status == 'Solicitado' ? 'Pendiente' : $id->status;
+
             $id->update([
                 'token'         => $data['_token'],
                 'locateProject' => $data['locateProject'],
@@ -404,6 +506,11 @@ class QuoteEnergySystemController extends Controller
                 'estrato'       => $data['estrato'],
                 'consumo'       => $data['consumo'],
                 'radiacion'    => $data['radiacion'],
+                'status'        => $status,
+                'responsable_id' => $data['responsable_id'],
+                'telefeno_responsable' => $data['responsable_telefono'],
+                'direccion_responsable' => $data['responsable_direccion'],
+                'email' => $data['responsable_correo'],
             ]);
 
             $id->items()->update([
@@ -425,49 +532,57 @@ class QuoteEnergySystemController extends Controller
                 'usd'                 => $data['usd'],
             ]);
 
-            // foreach ($id->files as $oldFile) {
-            //     if (Storage::exists($oldFile->url)) {
-            //         Storage::delete($oldFile->url);
-            //     }
-            //     $oldFile->delete();
-            // }
 
-            //  if ($request->hasFile('file_Servicios')) {
+            if ($request->hasFile('file_Servicios')) {
+                $file = $request->file('file_Servicios');
+                $oldFile = $id->files->where('description', 'Servicios')->first();
 
-            //     $file = $request->file('file_Servicios');
-            //     if ($file !== null) {
-            //         $name = 'Servicios-'.$data['locateProject'] . time() . '.' . $file->getClientOriginalExtension();
-            //         $size = $file->getClientSize() / 1000;
-            //         $path = Storage::putFileAs('public/energy/quotes', $file, $name);
-            //         $id->files()->create([
-            //             'name' => $name,
-            //             'description' => 'Servicios',
-            //             'size' => $size . ' KB',
-            //             'url' => $path,
-            //             'type' => $file->getClientOriginalExtension(),
-            //             'place' => 'C105',
-            //             'state' => 1
-            //         ]);
-            //     }
-            // }
+                if ($oldFile) {
+                    if (Storage::exists($oldFile->url)) {
+                        Storage::delete($oldFile->url);
+                    }
+                    $oldFile->delete();
+                }
+                if ($file !== null) {
+                    $name = 'Servicios_' . time() . '.' . $file->getClientOriginalExtension();
+                    $size = $file->getClientSize() / 1000;
+                    $path = Storage::putFileAs('public/energy/quotes', $file, $name);
+                    $id->files()->create([
+                        'name' => $name,
+                        'description' => 'Servicios',
+                        'size' => $size . ' KB',
+                        'url' => $path,
+                        'type' => $file->getClientOriginalExtension(),
+                        'place' => 'C105',
+                        'state' => 1
+                    ]);
+                }
+            }
 
-            // if ($request->hasFile('file_Mapa')) {
-            //     $file = $request->file('file_Mapa');
-            //     if ($file !== null) {
-            //         $name = 'Mapa-'.$data['locateProject'] . time() . '.' . $file->getClientOriginalExtension();
-            //         $size = $file->getClientSize() / 1000;
-            //         $path = Storage::putFileAs('public/energy/quotes', $file, $name);
-            //         $id->files()->create([
-            //             'name' => $name,
-            //             'description' => 'Mapa',
-            //             'size' => $size . ' KB',
-            //             'url' => $path,
-            //             'type' => $file->getClientOriginalExtension(),
-            //             'place' => 'C125',
-            //             'state' => 1,
-            //         ]);
-            //     }
-            // }
+            if ($request->hasFile('file_Mapa')) {
+                $file = $request->file('file_Mapa');
+                if ($file !== null) {
+                    $oldFile = $id->files->where('description', 'Mapa')->first();
+                    if ($oldFile) {
+                        if (Storage::exists($oldFile->url)) {
+                            Storage::delete($oldFile->url);
+                        }
+                        $oldFile->delete();
+                    }
+                    $name = 'Mapa_' . time() . '.' . $file->getClientOriginalExtension();
+                    $size = $file->getClientSize() / 1000;
+                    $path = Storage::putFileAs('public/energy/quotes', $file, $name);
+                    $id->files()->create([
+                        'name' => $name,
+                        'description' => 'Mapa',
+                        'size' => $size . ' KB',
+                        'url' => $path,
+                        'type' => $file->getClientOriginalExtension(),
+                        'place' => 'C125',
+                        'state' => 1,
+                    ]);
+                }
+            }
 
             $id->flujos()->delete();
             $id->precios()->delete();
@@ -570,19 +685,19 @@ class QuoteEnergySystemController extends Controller
         $precotizacion = precotizacion::find($id);
         if ($precotizacion) {
             $charts = [
-                'chart1' => 'Gráfica de Retorno Inversión',
-                'chart2' => 'Gráfica de COP Mensual Acumulado',
+                'chart1' => 'Grafica_de_Retorno_Inversion',
+                'chart2' => 'Grafica_de_COP_Mensual_Acumulado',
             ];
 
             foreach ($charts as $inputName => $description) {
                 $chartData = $request->input($inputName);
-
+                $placeholder = $inputName === 'chart1' ? 'J105' : 'J130';
                 if ($chartData) {
                     $image = str_replace('data:image/png;base64,', '', $chartData);
                     $image = str_replace(' ', '+', $image);
                     $binaryImage = base64_decode($image);
 
-                    $name = 'Grafica-' . $description . '-' . time() . '.png';
+                    $name = 'Grafica_' . $description . '_' . time() . '.png';
                     $path = 'public/energy/quotes/' . $name;
 
                     Storage::put($path, $binaryImage);
@@ -595,7 +710,7 @@ class QuoteEnergySystemController extends Controller
                         'size' => $size . ' KB',
                         'url' => $path,
                         'type' => 'png',
-                        'place' => 'I105',
+                        'place' => $placeholder,
                         'state' => 1,
                     ]);
                 }
@@ -646,18 +761,18 @@ class QuoteEnergySystemController extends Controller
 
         if ($id->files) {
             foreach ($id->files as $key => $value) {
+                $height = $value->description == 'Mapa' || $value->description == 'Servicios' ? 225 : 400;
                 $place = explode('.', $value->description, 2);
                 $str = str_random();
                 $files[$str]['name'] = $value->name;
                 $files[$str]['description'] = $value->description;
                 $files[$str]['path'] = public_path('/storage/energy/quotes/' . $value->name);
-                $files[$str]['height'] = 225;
+                $files[$str]['height'] = $height;
                 $files[$str]['coordinates'] = $value->place;
                 $files[$str]['place'] = 1;
             }
         }
 
-        return (new CotizacionExport($id, $files))->download('Prubea' . $id->created_at . '.xlsx');
-        return view('energy.quoteSystem.export', compact('id'));
+        return (new CotizacionExport($id, $files))->download('PRE-COTIZACION' . $id->created_at . $id->locateProject . '.xlsx');
     }
 }

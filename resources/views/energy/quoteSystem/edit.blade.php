@@ -21,7 +21,8 @@
             </div>
             <div class="box-body">
                 <hr>
-                <form action="{{ route('quote_energy_system.update', $plantilla->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('quote_energy_system.update', $plantilla->id) }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="panel box box-success">
@@ -36,6 +37,56 @@
                             <div class="box-body">
                                 <hr>
                                 <div class="locate">
+                                <h4>Cliente</h4>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="responsable_id">Responsable</label>
+                                        <input type="text" class="form-control" value="{{ $plantilla->client->name }}"
+                                            readonly>
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">Teléfono</label>
+                                        <input type="text" class="form-control" name=""
+                                            value="{{ $plantilla->client->tel }}" readonly>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">Dirección</label>
+                                        <input type="text" class="form-control" name=""
+                                            value="{{ $plantilla->direccion }}" readonly>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">Correo</label>
+                                        <input type="text" class="form-control" name=""
+                                            value="{{ $plantilla->client->email }}" readonly>
+                                    </div>
+                                </div>
+                                <h4>Responsable</h4>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="responsable_id">Responsable</label>
+                                        <input type="text" class="form-control" value="{{$pantilla->responsable->name ??  auth()->user()->name }}"
+                                            readonly>
+                                        <input type="hidden" class="form-control" value="{{ $pantilla->responsable->id ?? auth()->user()->id }}"
+                                            name="responsable_id">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="responsable_telefono">Teléfono</label>
+                                        <input type="text" class="form-control" name="responsable_telefono"
+                                            value="{{ $pantilla->responsable->telefono ?? auth()->user()->telefono }}">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="responsable_direccion">Dirección</label>
+                                        <input type="text" class="form-control" name="responsable_direccion"
+                                            value="{{ $pantilla->responsable ?? 'CALLE 48B NRO 66 - 65 MEDELLIN' }}">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="responsable_correo">Correo</label>
+                                        <input type="text" class="form-control" name="responsable_correo"
+                                            value="{{ $pantilla->responsable ?? 'solar@energitelco.com' }}">
+                                    </div>
+                                </div>
+                                <hr>
                                     <h4>Ubicacióne Información del Proyecto</h4>
                                     <div class="row">
                                         <div class="col-md-4">
@@ -98,6 +149,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="row">
                                         @if ($plantilla->file_servicios)
                                             <div class="col-md-6">
@@ -116,11 +168,10 @@
                                                     <input type="file"
                                                         name="file_{{ $plantilla->file_servicios->description }}"
                                                         id="file_{{ $plantilla->file_servicios->description }}"
-                                                        class="hide file_create" accept="image/*">
+                                                        class="d-none file_create hide" accept="image/*">
                                                 </div>
                                             </div>
                                         @else
-                                            <div class="col-md-12">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="file_Servicios">Cuenta de Servicios</label><br>
@@ -131,8 +182,8 @@
                                                         <label for="file_Servicios" class="form-control text-center">
                                                             <i class="fa fa-upload"></i>
                                                         </label>
-                                                        <input type="file" name="file_Servicios" id="file_Servicios"
-                                                            class="hide file_create" accept="image/*">
+                                                        <input type=" file" name="file_Servicios" id="file_Servicios"
+                                                            class="d-none hide file_create" accept="image/*">
                                                     </div>
                                                 </div>
                                         @endif
@@ -146,30 +197,26 @@
                                                             alt="" width="75%"
                                                             id="preimg_{{ $plantilla->file_maps->description }}">
                                                     </div>
-                                                    <label for="file_Mapa"
-                                                        class="form-control text-center">
+                                                    <label for="file_Mapa" class="form-control text-center">
                                                         <i class="fa fa-upload"></i>
                                                     </label>
-                                                    <input type="file"
-                                                        name="file_Mapa"
-                                                        id="file_Mapa"
+                                                    <input type="file" name="file_Mapa" id="file_Mapa"
                                                         class="hide file_create" accept="image/*">
                                                 </div>
                                             </div>
                                         @else
-                                             <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="file_Mapa">Vista aérea de la zona</label><br>
-                                                        <div class="text-center mb-3" style="padding: 10px; width: 100%;">
-                                                            <img src="" alt="" width="40%"
-                                                                id="preimg_Mapa">
-                                                        </div>
-                                                        <label for="file_Mapa" class="form-control text-center">
-                                                            <i class="fa fa-upload"></i>
-                                                        </label>
-                                                        <input type="file" name="file_Mapa" id="file_Mapa"
-                                                            class="hide file_create" accept="image/*">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="file_Mapa">Vista aérea de la zona</label><br>
+                                                    <div class="text-center mb-3" style="padding: 10px; width: 100%;">
+                                                        <img src="" alt="" width="40%"
+                                                            id="preimg_Mapa">
                                                     </div>
+                                                    <label for="file_Mapa" class="form-control text-center">
+                                                        <i class="fa fa-upload"></i>
+                                                    </label>
+                                                    <input type="file" name="file_Mapa" id="file_Mapa"
+                                                        class="hide file_create" accept="image/*">
                                                 </div>
                                             </div>
                                         @endif
@@ -183,7 +230,6 @@
                             <h4 class="box-title">
                                 <a class="text-center" data-toggle="collapse" data-parent="#accordion" href="#Objetivo">
                                     OBJETIVO DE OFERTA E IMPLEMENTACION
-
                                 </a>
                             </h4>
                         </div>
@@ -423,7 +469,8 @@
                                                         <td><input type="text"
                                                                 name="precios[{{ $i }}][codigo]"
                                                                 class="form-control" required
-                                                                value="{{ $precios->codigo }}"></td>
+                                                                value="{{ $precios->codigo }}">
+                                                        </td>
                                                         <td><input type="number"
                                                                 name="precios[{{ $i }}][item]"
                                                                 class="form-control" required
@@ -461,12 +508,14 @@
                                                                 name="precios[{{ $i }}][usd]"
                                                                 class="form-control usd" required
                                                                 value="{{ $precios->usd }}"
-                                                                data-id="{{ $i }}"></td>
+                                                                data-id="{{ $i }}">
+                                                        </td>
                                                         <td><input type="number" step="0.01"
                                                                 name="precios[{{ $i }}][cop]"
                                                                 class="form-control cop" required
                                                                 value="{{ $precios->cop }}"
-                                                                data-id="{{ $i }}"></td>
+                                                                data-id="{{ $i }}">
+                                                        </td>
                                                         <td><input type="number"
                                                                 name="precios[{{ $i }}][cantidad]"
                                                                 class="form-control" required
@@ -507,11 +556,13 @@
                                                         <td><input type="text"
                                                                 name="Equipos[{{ $i }}][descripcion]"
                                                                 value="{{ $equipos['descripcion'] }}"
-                                                                class="form-control" required></td>
+                                                                class="form-control" required>
+                                                        </td>
                                                         <td><input type="number"
                                                                 name="Equipos[{{ $i }}][cantidad]"
                                                                 value="{{ $equipos['cantidad'] }}" class="form-control"
-                                                                required></td>
+                                                                required>
+                                                        </td>
                                                         <td><button type="button" class="btn btn-danger btn-sm"
                                                                 onclick="removeRow(this)">X</button></td>
                                                     </tr>

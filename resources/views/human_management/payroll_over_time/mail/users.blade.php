@@ -96,7 +96,7 @@
                                 <tr>
                                     <td style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; box-sizing: border-box;">
                                         <p style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; box-sizing: border-box; color: #3d4852; line-height: 1.5em; margin-top: 0; text-align: left; font-size: 12px;">Si tienes problemas haciendo click en el botón "Click aquí para descargar", copia y pega el siguiente
-                            enlace en tu navegador: <a href="{{config('app.url')}}/finances/payroll_overtime_news_report/export/{{$data->work_id}}" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; box-sizing: border-box; color: #3869d4;">{{config('app.url')}}/finances/payroll_overtime_news_report/export/{{$data->work_id}}</a></p>
+                            enlace en tu navegador: <a href="{{url('/finances/payroll_overtime_news_report/export/'.{{$data->work_id)}}" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; box-sizing: border-box; color: #3869d4;">{{config('app.url')}}/finances/payroll_overtime_news_report/export/{{$data->work_id}}</a></p>
                                     </td>
                                 </tr>
                             </table>

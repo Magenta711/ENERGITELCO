@@ -501,9 +501,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         $(document).ready(function() {
-            $('.')
-
-
             $('.typeInversion').each(function() {
                 let typeInversion = $(this).val();
                 let id = $(this).data('id');

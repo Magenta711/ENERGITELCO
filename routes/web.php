@@ -1189,6 +1189,8 @@ Route::post('energy/quote_system/approved/{id}', 'energy\quote\QuoteEnergySystem
 Route::post('energy/quote_system/no_approved/{id}', 'energy\quote\QuoteEnergySystemController@NoApproved')->name('quote_energy_system.no_approved');
 Route::get('energy/quote_system/export/{id}', 'energy\quote\QuoteEnergySystemController@export')->name('quote_energy_system.export');
 Route::get('energy/quote_system/review/{token}', 'energy\quote\QuoteEnergySystemController@review')->name('quote_energy_system.review');
+Route::get('energy/quote_system/client_create', 'energy\quote\QuoteEnergySystemController@client_create')->name('quote_energy_system.client_create');
+Route::post('energy/quote_system/client_store', 'energy\quote\QuoteEnergySystemController@client_store')->name('quote_energy_system.client_store');
 
 
 

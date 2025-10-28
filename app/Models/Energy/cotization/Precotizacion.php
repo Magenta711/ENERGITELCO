@@ -16,6 +16,7 @@ class Precotizacion extends Model
         'token',
         'client_id',
         'locateProject',
+        'direccion',
         'claseSystem',
         'typeProject',
         'estrato',
