@@ -134,76 +134,6 @@
                             @php
                                 $oldCategories = old('category', []);
                             @endphp
-
-                            @foreach ($oldCategories as $i => $catId)
-                                <div class="select-container">
-                                    <div class="row select-group">
-                                        {{-- Categoria --}}
-                                        <div class="col-md-3">
-                                            <label>Categoria</label>
-                                            <select class="form-control category select2"
-                                                name="products[category][{{ $i }}]"
-                                                data-index="{{ $i }}">
-                                                <option value="">Seleccione una categoria</option>
-                                                @foreach ($categorias as $cat)
-                                                    <option value="{{ $cat->id }}"
-                                                        {{ $catId == $cat->id ? 'selected' : '' }}>
-                                                        {{ $cat->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-
-                                        {{-- Subcategoria --}}
-                                        <div class="col-md-3">
-                                            <label>Subcategoria</label>
-                                            <select class="form-control subcategori"
-                                                name="products[subcategori][{{ $i }}]"
-                                                data-index="{{ $i }}">
-                                                <option value="">Seleccione una subcategoria</option>
-                                                @foreach ($subcategoriasOld[$i] ?? [] as $sub)
-                                                    <option value="{{ $sub->id }}"
-                                                        {{ old("subcategori.$i") == $sub->id ? 'selected' : '' }}>
-                                                        {{ $sub->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-
-                                        {{-- Producto --}}
-                                        <div class="col-md-3">
-                                            <label>Productos</label>
-                                            <select class="form-control products"
-                                                name="products[products][{{ $i }}]"
-                                                data-index="{{ $i }}">
-                                                <option value="">Seleccione un producto</option>
-                                                @foreach ($productosOld[$i] ?? [] as $prod)
-                                                    <option value="{{ $prod->id }}"
-                                                        {{ old("products.$i") == $prod->id ? 'selected' : '' }}>
-                                                        {{ $prod->model }} - {{ $prod->type }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="amount">Cantidad</label>
-                                                <input type="number"
-                                                    name="products[amount_products][{{ $i }}]"
-                                                    id="amount_products_{{ $i }}"
-                                                    class="form-control amnount_products"
-                                                    value="{{ old("amount_products.$i") }}"
-                                                    data-index="{{ $i }}" disabled required>
-                                                <span id="alert_amount{{ $i }}" class="color-red alert">No hay
-                                                    suficientes productos para la cantidad de Kits: <i
-                                                        id="none_disponible{{ $i }}">Disponibles</i></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                </div>
-                            @endforeach
                         </div>
                         <div class="btn-group d-grid gap-2 d-md-flex justify-content-md-end">
                             <button type="button" class="btn btn-sm btn-info " id="btn_plus_tools"><i
@@ -258,8 +188,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="" class="btn btn-success" data-toggle="modal"
-                                data-target=".save-modal-lg">Guardar</a>
+                            <a class="btn btn-success" data-toggle="modal" data-target=".save-modal-lg">Guardar</a>
                         </div>
                     </div>
                     @include('energy.sale.include.save')
@@ -315,7 +244,7 @@
                             <label for="amount">Cantidad</label>
                             <input type="number" name="products[amount_products][${index}]"
                                 id="amount_products_${index}" class="form-control amount_products text-center"
-                                value="" data-index="${index}" data-disponibles="" disabled required>
+                                value="" data-index="${index}" data-disponibles="" data-id="" disabled required>
                                 <span id="alert_amount${index}"></span>
                         </div>
                     </div>
@@ -337,7 +266,14 @@
                                 <span id="alert_warranty${index}"></span>
                         </div>
                     </div>
-                </div><hr>`;
+                </div>
+                <div class="serial">
+                    <h4>Ingrese los seriales de los equipos</h4>
+                    <div class="row" id="serials_${index}">
+
+                    </div>
+                </div>
+                <hr>`;
             return html;
         }
 
@@ -499,14 +435,16 @@
         $(document).on('change', '.products', function() {
             const id = $(this).val();
             const i = $(this).data('index');
+            const $container = $('#serials_' + i);
             if (id) {
                 $.get('/energy/kits/get_product/' + id, function(data) {
                     $(`[name="products[amount_products][${i}]"]`).val(1).prop('disabled', false).attr(
-                        'data-disponibles', data.disponibles);
+                        'data-disponibles', data.disponibles).attr('data-id', data.id);
                     $(`[name="products[value_products][${i}]"]`).val(data.price).prop('disabled', false);
                     $(`[name="products[warranty_products][${i}]"]`).val(data.warranty).prop('disabled',
                         false);
                     totalValor();
+                    $('#serials_' + i).append(InputSerials(i, 1, $container, id));
                 });
             }
         });
@@ -528,7 +466,8 @@
             const i = $(this).data('index');
             const amount = $(this).val();
             const disponibles = $(this).data('disponibles');
-            console.log(disponibles);
+            const id = $(this).data('id');
+            const $container = $('#serials_' + i);
 
             if (amount > disponibles) {
                 $(`#alert_amount${i}`).addClass('text-danger').text('No hay suficientes equipos disponibles: ' +
@@ -539,7 +478,32 @@
                 $('.btn-success').prop('disabled', false);
                 totalValor();
             }
+            InputSerials(i, amount, $container, id);
         });
+
+        function InputSerials(i, amount, $container, id) {
+            // tomar valores actuales de los seriales (en orden)
+            const existing = $container.find('input[type="text"]').map(function() {
+                return $(this).val();
+            }).get();
+
+            // vaciar contenedor
+            $container.empty();
+
+            // reconstruir con valores previos cuando existan
+            for (let s = 0; s < amount; s++) {
+                const val = existing[s] || '';
+                const html = `
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="serial_${i}_${s}">Serial ${s + 1}</label>
+                            <input type="text" name="products[serials][${id}][]" id="serial_${i}_${s}" class="form-control" value="${val}">
+                        </div>
+                    </div>
+                `;
+                $container.append(html);
+            }
+        }
 
         $(document).on('change', '.value_products', function() {
             totalValor();

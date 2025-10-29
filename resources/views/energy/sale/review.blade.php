@@ -1,14 +1,26 @@
-<div class="modal fade review-{{ $sale->id }}-modal-lg" tabindex="-1" role="dialog"
-    aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"><b>{{ $sale->cod_sale }}</b></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+@extends('lte.layouts')
+
+@section('content')
+    <section class="content-header">
+        <h1>
+            Nueva Venta <small>ENERGÍAS</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-home"></i> Inicio</a></li>
+            <li><a href="#">Energías</a></li>
+            <li><a href="#">Ventas</a></li>
+            <li class="active">Crear</li>
+        </ol>
+    </section>
+    <section class="content">
+       <div class="box">
+             <div class="box-header">
+                <div class="box-title">Venta <b>{{ $sale->cod_sale }}</b></div>
+                <div class="box-tools">
+                    <a href="{{ route('energy_sale') }}" class="btn btn-sm btn-primary">Volver</a>
+                </div>
             </div>
-            <div class="modal-body">
+            <div class="box-body">
                 <div class="row">
                     <div class="col-md-12 text-center">
                         <h4><b>Venta</b></h4>
@@ -142,7 +154,7 @@
                                     <p>{{ $item['warranty'] }}</p>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="type">Cantidad Vendida</label>
                                     <p>{{ $item['amount'] }}</p>
@@ -165,8 +177,16 @@
                     </div>
                     <hr>
                 @endforeach
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <a href="#" id="seriales_{{ $sale->id }}" data-id="{{ $sale->id }}" class="btn btn-info"
+                            data-toggle="modal" data-target=".all-products-modal-lg">Ver
+                            Series de Productos Vendidos</a>
+                    </div>
+                </div>
+                @include('energy.sale.include.allProducts')
                 @endif
             </div>
-        </div>
-    </div>
-</div>
+       </div>
+    </section>
+@endsection

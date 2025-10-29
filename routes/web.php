@@ -1056,6 +1056,8 @@ Route::get('energy/sales', 'energy\EnergySaleController@index')->name('energy_sa
 Route::get('energy/sales/create', 'energy\EnergySaleController@create')->name('energy_sale.create');
 Route::post('energy/sales/store', 'energy\EnergySaleController@store')->name('energy_sale.store');
 Route::get('energy/sales/show/{id}', 'energy\EnergySaleController@show')->name('energy_sale.show');
+Route::get('energy/sales/review/{id}', 'energy\EnergySaleController@review')->name('energy_sale.review');
+Route::post('energy/sales/reverse/{id}', 'energy\EnergySaleController@reverse')->name('energy_sale.reverse');
 
 Route::get('energy/store/users', 'energy\store\AdminStoreController@index')->name('energy_store_users.index');
 Route::get('energy/store/ventas', 'energy\store\AdminStoreController@ventas')->name('energy_store_ventas.ventas');

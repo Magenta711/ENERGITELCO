@@ -23,22 +23,13 @@ class EnergySaleController extends Controller
         $this->middleware('permission:Editar Ventas', ['only' => ['update','edit']]);
         $this->middleware('permission:ELiminar Ventas', ['only' => ['destroy']]);
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $sales=SolarSeller::get();
         return view('energy.sale.index', compact('sales'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $client=SolarClients::get();
@@ -48,12 +39,6 @@ class EnergySaleController extends Controller
         return view('energy.sale.create', compact('client', 'products', 'categorias', 'kits'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -143,6 +128,7 @@ class EnergySaleController extends Controller
             }
 
         }
+
         DB::beginTransaction();
         try {
             $itemSold = [];
@@ -158,18 +144,21 @@ class EnergySaleController extends Controller
                             $productUpdate->update([
                                 'id_buyer' => $Cliente_id,
                                 'status' => 3,
+                                'serie' => $request->products['serials'][$productData['product_id']][$i-1] ?? $productUpdate->serie,
                             ]);
                             $itemSold[] = [
                                 'type' => 'SolarProduct',
                                 'id' => $productUpdate->id,
                                 'value' => $productData['value'],
                                 'warranty' => $productData['warranty'],
+                                'serie' => $productUpdate['serie'],
                             ];
                         }
 
                     }
                 }
             }
+
 
             if (isset($kitSoldData)) {
                 foreach ($kitSoldData as $kitData) {
@@ -239,9 +228,35 @@ class EnergySaleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function review($id)
     {
-        //
+        $sale=SolarSeller::find($id);
+        return view('energy.sale.review', compact('sale'));
+    }
+
+    public function reverse($id)
+    {
+        $sale=SolarSeller::find($id);
+        foreach ($sale->AllProducts() as $item) {
+            if ($item['type'] == 'SolarProduct') {
+                $product=SolarProducts::find($item['id']);
+                $product->update([
+                    'status'=>1,
+                    'id_buyer'=>null,
+                ]);
+            }
+            if ($item['type'] == 'SolarKit') {
+                $kit=SolarKit::find($item['id']);
+                $kit->update([
+                    'status'=>1,
+                    'id_buyer'=>null,
+                ]);
+            }
+        }
+        $sale->update([
+            'status'=>'Revertida',
+        ]);
+        return redirect()->route('energy_sale')->with('success','Venta Revertida correctamente');
     }
 
     /**

@@ -10,7 +10,7 @@ use App\Models\SolarProducts;
 class SolarSeller extends Model
 {
     protected $table = "solar_sellers";
-    protected $fillable = ['cod_sale','id_seller','id_Client','id_Product','itemList','productsList','warranty','valor', 'datesale'];
+    protected $fillable = ['cod_sale', 'id_seller', 'id_Client', 'id_Product', 'itemList', 'productsList', 'warranty', 'valor', 'datesale', 'status'];
 
     protected $casts = [
         'productsList' => 'array',
@@ -39,20 +39,20 @@ class SolarSeller extends Model
 
     public function ProductsLists()
     {
-        $productsLists=[];
+        $productsLists = [];
         foreach ($this->productsList as $item) {
-        $found = false;
-        foreach ($productsLists as &$existingItem) {
-            if ($existingItem['type'] == $item['type']) {
-                $existingItem['amount'] = isset($existingItem['amount']) ? $existingItem['amount'] + 1 : 2;
-                $found = true;
-                break;
+            $found = false;
+            foreach ($productsLists as &$existingItem) {
+                if ($existingItem['type'] == $item['type']) {
+                    $existingItem['amount'] = isset($existingItem['amount']) ? $existingItem['amount'] + 1 : 2;
+                    $found = true;
+                    break;
+                }
             }
-        }
-        unset($existingItem);
+            unset($existingItem);
 
-        if(!$found){
-            if ($item['type'] == 'SolarProduct') {
+            if (!$found) {
+                if ($item['type'] == 'SolarProduct') {
                     $itemDetails = SolarProducts::find($item['id']);
                     $item['details'] = $itemDetails;
                 }
@@ -61,7 +61,24 @@ class SolarSeller extends Model
                     $item['details'] = $itemDetails;
                 }
                 $item['amount'] = 1;
-            $productsLists[] = $item;
+                $productsLists[] = $item;
+            }
+        }
+        return $productsLists;
+    }
+
+    public function AllProducts()
+    {
+        $productsLists = [];
+        foreach ($this->productsList as $item) {
+            $found = false;
+
+            if (!$found) {
+                if ($item['type'] == 'SolarProduct') {
+                    $itemDetails = SolarProducts::find($item['id']);
+                    $item['details'] = $itemDetails;
+                    $productsLists[] = $item;
+                }
             }
         }
         return $productsLists;
