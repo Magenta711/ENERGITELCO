@@ -13,6 +13,7 @@
                     <h3 class="text-center"><b>Al aprobar esta cotización se enviará un correo al cliente</b></h3>
                     <input type="hidden" name="chart1" id="chart1">
                     <input type="hidden" name="chart2" id="chart2">
+                    <input type="hidden" name="chart3" id="chart3">
                     <button type="submit" class="btn-submit btn btn-success">Aprobar</button>
                 </form>
             </div>

@@ -1193,7 +1193,5 @@ Route::get('energy/quote_system/export/{id}', 'energy\quote\QuoteEnergySystemCon
 Route::get('energy/quote_system/review/{token}', 'energy\quote\QuoteEnergySystemController@review')->name('quote_energy_system.review');
 Route::get('energy/quote_system/client_create', 'energy\quote\QuoteEnergySystemController@client_create')->name('quote_energy_system.client_create');
 Route::post('energy/quote_system/client_store', 'energy\quote\QuoteEnergySystemController@client_store')->name('quote_energy_system.client_store');
-
-
-
-
+Route::get('energy/quote_system/PDF/{id}', 'energy\quote\QuoteEnergySystemController@PDF')->name('quote_energy_system.PDF');
+Route::post('energy/quote_system/update_files/{id}', 'energy\quote\QuoteEnergySystemController@update_files')->name('quote_energy_system.update_files');

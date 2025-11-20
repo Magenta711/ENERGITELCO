@@ -13,6 +13,8 @@ class PreciosPrecotizacion extends Model
         'codigo',
         'item',
         'descripcion',
+        'unidad',
+        'exento',
         'typeInversion',
         'panel',
         'usd',

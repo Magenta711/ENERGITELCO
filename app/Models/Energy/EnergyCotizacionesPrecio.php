@@ -12,6 +12,8 @@ class EnergyCotizacionesPrecio extends Model
         'codigo',
         'item',
         'descripcion',
+        'unidad',
+        'exento',
         'typeInversion', // Nuevo campo para el tipo de inversión
         'panel',
         'usd',

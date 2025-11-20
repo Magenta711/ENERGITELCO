@@ -21,12 +21,18 @@ class Precotizacion extends Model
         'typeProject',
         'estrato',
         'consumo',
+        'potenciaPanel',
+        'margenError',
+        'alturaPanel',
+        'trasiego',
+        'distanPuntos',
         'radiacion',
         'status',
         'responsable_id',
         'telefeno_responsable',
         'direccion_responsable',
         'email',
+        'status_files',
     ];
 
     public function client()

@@ -14,6 +14,7 @@ class FlujosPrecotizacion extends Model
         'inversion',
         'typeInversion',
         'avance',
+        'rubro',
         'valor',
         'total'
     ];

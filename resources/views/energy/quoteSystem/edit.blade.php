@@ -148,6 +148,27 @@
                                                     id="typeProject" value="{{ $plantilla->typeProject }}" required>
                                             </div>
                                         </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="alturaPanel">Altura de Instalación de los Paneles</label>
+                                                <input type="number" class="form-control" name="alturaPanel"
+                                                    id="alturaPanel" value="{{ $plantilla->alturaPanel }}" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="trasiego">Requiero Trasiego Vertical</label>
+                                                <input type="text" class="form-control" name="trasiego"
+                                                    id="trasiego" value="{{ $plantilla->trasiego }}" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="distanPuntos">Distancia al Punto de Ins.</label>
+                                                <input type="text" class="form-control" name="distanPuntos"
+                                                    id="distanPuntos" value="{{ $plantilla->distanPuntos }}" required>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="row">
@@ -379,11 +400,12 @@
                                             <thead class="thead-light">
                                                 <tr class="text-center">
                                                     <th style="width: 10%;">Item</th>
-                                                    <th style="width: 30%;">Hito</th>
+                                                    <th style="width: 20%;">Hito</th>
                                                     <th style="width: 10%;">% Inversión</th>
                                                     <th style="width: 15%;">Tipo Inversion</th>
-                                                    <th style="width: 25%;">Avance Calendario Implementación</th>
-                                                    <th>Acción</th>
+                                                    <th style="width: 15%;">Rubro del Pago</th>
+                                                    <th style="width: 20%;">Avance Calendario Implementación</th>
+                                                    <th style="width: 10%">Acción</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="flujoInversionTable">
@@ -429,6 +451,12 @@
                                                         </td>
                                                         <td>
                                                             <input type="text"
+                                                                name="flujo[{{ $i }}][rubro]"
+                                                                class="form-control" required
+                                                                value="{{ $flujo->rubro }}">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text"
                                                                 name="flujo[{{ $i }}][avance]"
                                                                 class="form-control" required
                                                                 value="{{ $flujo->avance }}">
@@ -453,8 +481,10 @@
                                             <thead class="thead-light">
                                                 <tr class="text-center">
                                                     <th style="width: 12%;">Código</th>
-                                                    <th style="width: 10%;">Item</th>
-                                                    <th style="width: 30%;">Descripción</th>
+                                                    <th style="width: 7%;">Item</th>
+                                                    <th style="width: 20%;">Descripción</th>
+                                                    <th style="width: 10%;">Unidad</th>
+                                                    <th style="width: 7%;">Exento de Iva</th>
                                                     <th style="width: 15%;">Tipo Inversion</th>
                                                     <th style="width: 5%;">Paneles</th>
                                                     <th style="width: 10%;">Valor USD</th>
@@ -480,10 +510,26 @@
                                                                 class="form-control" required
                                                                 value="{{ $precios->descripcion }}">
                                                         </td>
+                                                        <td><input type="text"
+                                                                name="precios[{{ $i }}][unidad]"
+                                                                class="form-control" required
+                                                                value="{{ $precios->unidad }}">
+                                                        </td>
+                                                        <td>
+                                                            <select name="precios[{{ $i }}][exento]"
+                                                                class="form-control" required>
+                                                                <option value="SI"
+                                                                    {{ $precios->exento == 'SI' ? 'selected' : '' }}>
+                                                                    SI</option>
+                                                                <option value="NO"
+                                                                    {{ $precios->exento == 'NO' ? 'selected' : '' }}>
+                                                                    NO</option>
+                                                            </select>
+                                                        </td>
                                                         <td>
                                                             <select name="precios[{{ $i }}][typeInversion]"
                                                                 class="form-control typeInversion" required id=""
-                                                                data-id="{{ $i }}">
+                                                                data-id="{{ $precios->item }}">
                                                                 <option></option>
                                                                 <option value="Valor2"
                                                                     {{ $precios->typeInversion == 'Valor2' ? 'selected' : '' }}>
@@ -508,13 +554,13 @@
                                                                 name="precios[{{ $i }}][usd]"
                                                                 class="form-control usd" required
                                                                 value="{{ $precios->usd }}"
-                                                                data-id="{{ $i }}">
+                                                                data-id="{{ $precios->item }}">
                                                         </td>
                                                         <td><input type="number" step="0.01"
                                                                 name="precios[{{ $i }}][cop]"
                                                                 class="form-control cop" required
                                                                 value="{{ $precios->cop }}"
-                                                                data-id="{{ $i }}">
+                                                                data-id="{{ $precios->item }}">
                                                         </td>
                                                         <td><input type="number"
                                                                 name="precios[{{ $i }}][cantidad]"
@@ -533,6 +579,29 @@
                                                 class="fa fa-plus"></i></button>
                                     </div>
                                 </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h5><b>Fórmulas para calcular Valores</b></h5>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="FormulaValor3">Formula Para Valor 3</label>
+                                            <input type="text" name="FormulaValor3" id="FormulaValor3"
+                                                class="form-control" required
+                                                value="{{ $plantilla->simulacion->FormulaValor3 ?? '' }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="FormulaValor4">Formula Para Valor 4</label>
+                                            <input type="text" name="FormulaValor4" id="FormulaValor4"
+                                                class="form-control" required
+                                                value="{{ $plantilla->simulacion->FormulaValor4 ?? '' }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <h5><b>Listado de Equipos</b></h5>
@@ -572,6 +641,20 @@
 
                                         <button type="button" class="btn btn-success" id="Btn-plus-equipos"><i
                                                 class="fa fa-plus"></i></button>
+                                    </div>
+                                     <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="potenciaPanel">Potencia de los Paneles (KW)</label>
+                                            <input type="number" step="0.01" name="potenciaPanel" id="potenciaPanel"
+                                                class="form-control" required value="{{ $plantilla->potenciaPanel ?? '' }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="margenError">Margen de Error en Producción Mensual</label>
+                                            <input type="number" step="0.01" name="margenError" id="margenError"
+                                                class="form-control" required value="{{ $plantilla->margenError ?? '' }}">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -708,6 +791,7 @@
             $('.typeInversion').each(function() {
                 let typeInversion = $(this).val();
                 let id = $(this).data('id');
+                console.log('Aqui entra');
                 if (typeInversion === 'Valor2') {
                     $(`.cop[data-id=${id}]`).prop('readonly', true);
                     $(`.usd[data-id=${id}]`).prop('readonly', false);
@@ -719,19 +803,19 @@
                 }
             });
 
-            $('.typeInversion').change(function() {
-                let typeInversion = $(this).val();
-                let id = $(this).data('id');
-                if (typeInversion === 'Valor2') {
-                    $(`.cop[data-id=${id}]`).prop('readonly', true);
-                    $(`.usd[data-id=${id}]`).prop('readonly', false);
-                    $(`.cop[data-id=${id}]`).val('');
-                } else {
-                    $(`.usd[data-id=${id}]`).prop('readonly', true);
-                    $(`.cop[data-id=${id}]`).prop('readonly', false);
-                    $(`.usd[data-id=${id}]`).val('');
-                }
-            });
+        });
+
+        $(document).on('change', '.typeInversion', function () {
+            console.log('Aqui entra');
+            let typeInversion = $(this).val();
+            let id = $(this).data('id');
+            if (typeInversion === 'Valor2') {
+                $(`.cop[data-id=${id}]`).prop('readonly', true).val('');
+                $(`.usd[data-id=${id}]`).prop('readonly', false);
+            } else {
+                $(`.usd[data-id=${id}]`).prop('readonly', true).val('');
+                $(`.cop[data-id=${id}]`).prop('readonly', false);
+            }
         });
 
         function readImage(input, idPreview) {
@@ -782,6 +866,7 @@
                         <option value="Valor5">Impuestos</option>
                     </select>
                 </td>
+                <td><input type="text" name="flujo[${rowIndex}][rubro]" class="form-control" required></td>
                 <td><input type="text" name="flujo[${rowIndex}][avance]" class="form-control" required></td>
                 <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">X</button></td>
             </tr>
@@ -812,8 +897,22 @@
                 <td><input type="text" name="precios[${rowPrecios}][descripcion]"
                         class="form-control" required value="">
                 </td>
+                <td><input type="text"
+                    name="precios[${rowPrecios}][unidad]" class="form-control" required value="{{ $precios->unidad }}">
+                </td>
                 <td>
-                    <select name="precios[${rowPrecios}][typeInversion]" class="form-control" required id="" data-id="${rowPrecios}">
+                    <select name="precios[${rowPrecios}][exento]"
+                        class="form-control" required>
+                        <option value="SI"
+                            {{ $precios->exento == 'SI' ? 'selected' : '' }}>
+                            SI</option>
+                        <option value="NO"
+                            {{ $precios->exento == 'NO' ? 'selected' : '' }}>
+                            NO</option>
+                    </select>
+                </td>
+                <td>
+                    <select name="precios[${rowPrecios}][typeInversion]" class="form-control typeInversion" required id="" data-id="${rowPrecios}">
                         <option></option>
                         <option value="Valor2">Valor Equipos</option>
                         <option value="Valor3">Mano de Obra y Consumibles</option>
@@ -821,10 +920,13 @@
                         <option value="Valor5">Impuestos</option>
                     </select>
                 </td>
-                <td><input type="number" step="0.01" name="precios[${rowPrecios}][cop]"
-                        class="form-control" required value="" data-id="${rowPrecios}"></td>
+                <td>
+                    <input type="radio" name="panel" value="${rowPrecios}">
+                </td>
                 <td><input type="number" step="0.01" name="precios[${rowPrecios}][usd]"
-                        class="form-control" required value="" data-id="${rowPrecios}"></td>
+                    class="form-control usd" required value="" data-id="${rowPrecios}"></td>
+                <td><input type="number" step="0.01" name="precios[${rowPrecios}][cop]"
+                    class="form-control cop" required value="" data-id="${rowPrecios}"></td>
                 <td><input type="number" name="precios[${rowPrecios}][cantidad]"
                         class="form-control" required value=""></td>
                 <td>

@@ -63,6 +63,18 @@
     </tr>
     <tr>
         <td></td>
+        <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: left; font-size: 8pt; font-weight:bold">ALTURA DE LA INSTALACION DE PANELES</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $id->alturaPanel }}</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: left; font-size: 8pt; font-weight:bold">METROS</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; font-weight:bold"></td>
+        <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold">REQUIERE TRASIEGO VERTICAL</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $id->trasiego }}</td>
+        <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold">DISTANCIA AL PUNTO DE INST:</td>
+        <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $id->distanPuntos }}</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold"></td>
+    </tr>
+    <tr>
+        <td></td>
         <td colspan="13" rowspan="1" style="background-color:#C4D79B;"></td>
     </tr>
     <tr>
@@ -195,7 +207,8 @@
         <td colspan="5" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000; font-weight:bold">ITO</td>
         <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000; font-weight:bold">INVERSION</td>
         <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000; font-weight:bold">VALOR</td>
-        <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000; font-weight:bold">VALOR INVERSION ACUMULADA</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000; font-weight:bold">VALOR PAGO</td>
+        <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000; font-weight:bold">RUBRO DEL PAGO</td>
         <td colspan="3" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000; font-weight:bold">AVANCE CALENDARIO IMPLEEMNTACION</td>
     </tr>
     @foreach ($id->flujos as $flujo)
@@ -205,15 +218,16 @@
             <td colspan="5" rowspan="1" style="background-color:#C4D79B; text-align: left; font-size: 8pt; border: 3px solid #000000;">{{ $flujo->hito }}</td>
             <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ number_format($flujo->inversion, 0, ',', '.') }}% {{ $flujo->typeInversion }}</td>
             <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; border: 3px solid #000000;">${{ number_format($flujo->valor, 2, ',', '.') }}</td>
-            <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; border: 3px solid #000000;">${{ number_format($flujo->valorAcumulado, 2, ',', '.') }}</td>
+            <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; border: 3px solid #000000;">${{ number_format($flujo->valorAcumulado, 2, ',', '.') }}</td>
+            <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; border: 3px solid #000000;">{{ $flujo->rubro }}</td>
             <td colspan="3" rowspan="1" style="background-color:#C4D79B; text-align: left; font-size: 8pt; border: 3px solid #000000;">{{ $flujo->avance }}</td>
         </tr>
     @endforeach
     <tr>
         <td></td>
-        <td colspan="9" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold"></td>
+        <td colspan="8" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold"></td>
         <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; border: 3px solid #000000;">${{ number_format($flujo->valorAcumulado, 2, ',', '.') }}</td>
-        <td colspan="3" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold"></td>
+        <td colspan="4" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold"></td>
     </tr>
     <tr>
         <td></td>
@@ -223,7 +237,9 @@
         <td></td>
         <td colspan="2" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt; border: 3px solid #000000; font-weight:bold">LISTADO DE PRECIOS</td>
         <td colspan="1" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt; border: 3px solid #000000; font-weight:bold">ITEM</td>
-        <td colspan="5" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt; border: 3px solid #000000; font-weight:bold">DESCRIPCION</td>
+        <td colspan="3" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt; border: 3px solid #000000; font-weight:bold">DESCRIPCION</td>
+        <td colspan="1" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt; border: 3px solid #000000; font-weight:bold">UNIDAD</td>
+        <td colspan="1" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt; border: 3px solid #000000; font-weight:bold">EXENTO DE IVA</td>
         <td colspan="1" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt; border: 3px solid #000000; font-weight:bold">VALOR USD</td>
         <td colspan="1" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt; border: 3px solid #000000; font-weight:bold">VALOR COP</td>
         <td colspan="1" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt; border: 3px solid #000000; font-weight:bold">CANTIDAD</td>
@@ -234,7 +250,9 @@
             <td></td>
             <td colspan="2" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $precio->codigo }}</td>
             <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $precio->item }}</td>
-            <td colspan="5" rowspan="1" style="background-color:#C4D79B; text-align: left; font-size: 8pt; border: 3px solid #000000;">{{ $precio->descripcion }}</td>
+            <td colspan="3" rowspan="1" style="background-color:#C4D79B; text-align: left; font-size: 8pt; border: 3px solid #000000;">{{ $precio->descripcion }}</td>
+            <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: left; font-size: 8pt; border: 3px solid #000000;">{{ $precio->unidad }}</td>
+            <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: left; font-size: 8pt; border: 3px solid #000000;">{{ $precio->exento }}</td>
             <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; border: 3px solid #000000;">${{ number_format($precio->usd, 2, ',', '.') ?? 0}}</td>
             <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; border: 3px solid #000000;">${{ number_format($precio->cop, 2, ',', '.') ?? 0}} </td>
             <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; border: 3px solid #000000;">{{ $precio->cantidad }}</td>
@@ -294,8 +312,6 @@
         <td colspan="3" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; font-weight:bold">FACTOR DE EFICIENCIA::</td>
         <td colspan="1" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt; border: 3px solid #000000;">{{ $item['valor_factor'] }}</td>
         <td colspan="9" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
-
-
     </tr>
     <tr>
         <td></td>
@@ -465,8 +481,17 @@
     </tr>
     <tr>
         <td></td>
-        <td colspan="13" rowspan="36" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
+        <td colspan="13" rowspan="45" style="background-color:#C4D79B; text-align: center; font-size: 8pt;"></td>
     </tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
+    <tr></tr>
     <tr></tr>
     <tr></tr>
     <tr></tr>
@@ -504,100 +529,99 @@
     <tr></tr>
     <tr>
         <td></td>
-        <td colspan="7" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 12pt; border: 3px solid #000000; font-weight:bold; color:white">COSTO REAL DE MI INVERSION TENIENDO EN CUENTA LOS INCENTIVOS TRIBUTARIOS:</td>
-        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="8" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 12pt; border: 3px solid #000000; font-weight:bold; color:black">RETORNO DE INVERSION TENIENDO EN CUENTA DESCUENTO DE IMPUESTOS Y BENEFICIOS TRIBUTARIOS</td>
+        <td colspan="5" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 12pt; border: 3px solid #000000; font-weight:bold; color:white">COSTO REAL DE MI INVERSION TENIENDO EN CUENTA LOS INCENTIVOS TRIBUTARIOS:</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="8" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="5" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
 
     </tr>
     <tr>
         <td></td>
-        <td colspan="7" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
-        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
-
+        <td colspan="8" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="5" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white">INVERSION INECIAL DE TU TRANSICION TRASICION ENERGETICA:</td>
     </tr>
     <tr>
         <td></td>
-        <td colspan="7" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white">INVERSION INECIAL DE TU TRANSICION TRASICION ENERGETICA:</td>
-        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td colspan="2" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="8" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="1" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
         <td colspan="3" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 12pt; border: 3px solid #000000; font-weight:bold; color:white"> $ {{ number_format($id->totalSistema, 2, ',', '.') }}</td>
-        <td colspan="2" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
-        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="1" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
     </tr>
     <tr>
         <td></td>
-        <td colspan="7" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
-        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="8" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="5" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
     </tr>
     <tr>
         <td></td>
-        <td colspan="7" rowspan="2" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white">RECUERDA QUE TE ENTREGAREMOS LA INSCRIPCION ANTE LA UNIDAD DE PLANEACION MINERO ENERGETICA CON LO CUAL PODRAS DESCONTARLE LA SUGUIENTE SUMA EN LA RENTA DEL SIGUIENTE AÑO:</td>
-        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="8" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="5" rowspan="2" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white">RECUERDA QUE TE ENTREGAREMOS LA INSCRIPCION ANTE LA UNIDAD DE PLANEACION MINERO ENERGETICA CON LO CUAL PODRAS DESCONTARLE LA SUGUIENTE SUMA EN LA RENTA DEL SIGUIENTE AÑO:</td>
     </tr>
     <tr>
         <td></td>
-        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="8" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
     </tr>
     <tr>
         <td></td>
-        <td colspan="2" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="8" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="1" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
         <td colspan="3" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 12pt; border: 3px solid #000000; font-weight:bold; color:white">$ {{ number_format($id->descuentoRenta, 2, ',', '.') }}</td>
-        <td colspan="2" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
-        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="1" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
     </tr>
     <tr>
         <td></td>
-        <td colspan="7" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
-        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="8" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="5" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
     </tr>
     <tr>
         <td></td>
-        <td colspan="7" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
-        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="8" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="5" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
     </tr>
     <tr>
         <td></td>
-        <td colspan="7" rowspan="2" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white">ADEMAS SI ERES RESPONSABLE DEL IVA SEGÚN TU REGIMEN TRIBUTARIO, PODRAS RECUPERAR EL IMPUESTO A LA VENTAS POR VALOR DE:</td>
-        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="8" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="5" rowspan="2" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white">ADEMAS SI ERES RESPONSABLE DEL IVA SEGÚN TU REGIMEN TRIBUTARIO, PODRAS RECUPERAR EL IMPUESTO A LA VENTAS POR VALOR DE:</td>
     </tr>
     <tr>
         <td></td>
-        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="8" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
     </tr>
     <tr>
         <td></td>
-        <td colspan="2" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="8" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="1" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
         <td colspan="3" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 12pt; border: 3px solid #000000; font-weight:bold; color:white"> $ {{ number_format($id->valores['Valor5'], 2, ',', '.') }}</td>
-        <td colspan="2" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
-        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="1" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
     </tr>
     <tr>
         <td></td>
-        <td colspan="7" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
-        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="8" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="5" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
     </tr>
     <tr>
         <td></td>
-        <td colspan="7" rowspan="2" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white">INVERSION REAL CONTABLEMENTE DEL SISTEMA DE ENERGIA ALTERNATIVA:</td>
-        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="8" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="5" rowspan="2" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white">INVERSION REAL CONTABLEMENTE DEL SISTEMA DE ENERGIA ALTERNATIVA:</td>
     </tr>
     <tr>
         <td></td>
-        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="8" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
     </tr>
     <tr>
         <td></td>
-        <td colspan="2" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="8" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="1" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
         <td colspan="3" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 12pt; border: 3px solid #000000; font-weight:bold; color:white">$ {{ number_format($id->totalInversion, 2, ',', '.') }}</td>
-        <td colspan="2" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
-        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="1" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
     </tr>
     <tr>
         <td></td>
-        <td colspan="7" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
-        <td colspan="6" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="8" rowspan="1" style="background-color:#C4D79B; text-align: center; font-size: 8pt;color:white"></td>
+        <td colspan="5" rowspan="1" style="background-color:#00B050; text-align: center; font-size: 8pt;color:white"></td>
     </tr>
     <tr>
         <td></td>

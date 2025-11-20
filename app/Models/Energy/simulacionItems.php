@@ -15,7 +15,9 @@ class simulacionItems extends Model
         'PromedioCO2',
         'kwh_ipc',
         'factor_potencia',
-        'Equipos'
+        'Equipos',
+        'FormulaValor3',
+        'FormulaValor4',
     ];
 
     protected $casts = [

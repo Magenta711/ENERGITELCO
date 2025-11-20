@@ -11,6 +11,8 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Events\AfterSheet;
+use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 
 
 class CotizacionExport implements FromView, WithTitle, WithDrawings, ShouldAutoSize, WithStyles
@@ -24,6 +26,25 @@ class CotizacionExport implements FromView, WithTitle, WithDrawings, ShouldAutoS
     {
         $this->id = $id;
         $this->files = $files;
+    }
+
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class => function (AfterSheet $event) {
+                $sheet = $event->sheet->getDelegate();
+
+                // 👉 Configurar orientación horizontal
+                $sheet->getPageSetup()->setOrientation(PageSetup::ORIENTATION_LANDSCAPE);
+
+                // (Opcional) Ajustar el tamaño del papel a A4
+                $sheet->getPageSetup()->setPaperSize(PageSetup::PAPERSIZE_A4);
+
+                // (Opcional) Escalar para que todo entre en una página
+                $sheet->getPageSetup()->setFitToWidth(1);
+                $sheet->getPageSetup()->setFitToHeight(0);
+            },
+        ];
     }
 
     public function drawings()
@@ -45,37 +66,37 @@ class CotizacionExport implements FromView, WithTitle, WithDrawings, ShouldAutoS
     public function styles(Worksheet $sheet)
     {
         return [
-            'A' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
-            'B' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
-            'C' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
-            'D' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
-            'E' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
-            'F' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
-            'G' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
-            'H' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
-            'I' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
-            'J' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
-            'K' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
-            'L' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
-            'M' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
-            'N' => ['alignment' => ['wrapText' => true,'vertical' => 'center']],
-        //     'L2' => ['alignment' => ['horizontal' => 'center']],
+            'A' => ['alignment' => ['wrapText' => true, 'vertical' => 'center']],
+            'B' => ['alignment' => ['wrapText' => true, 'vertical' => 'center']],
+            'C' => ['alignment' => ['wrapText' => true, 'vertical' => 'center']],
+            'D' => ['alignment' => ['wrapText' => true, 'vertical' => 'center']],
+            'E' => ['alignment' => ['wrapText' => true, 'vertical' => 'center']],
+            'F' => ['alignment' => ['wrapText' => true, 'vertical' => 'center']],
+            'G' => ['alignment' => ['wrapText' => true, 'vertical' => 'center']],
+            'H' => ['alignment' => ['wrapText' => true, 'vertical' => 'center']],
+            'I' => ['alignment' => ['wrapText' => true, 'vertical' => 'center']],
+            'J' => ['alignment' => ['wrapText' => true, 'vertical' => 'center']],
+            'K' => ['alignment' => ['wrapText' => true, 'vertical' => 'center']],
+            'L' => ['alignment' => ['wrapText' => true, 'vertical' => 'center']],
+            'M' => ['alignment' => ['wrapText' => true, 'vertical' => 'center']],
+            'N' => ['alignment' => ['wrapText' => true, 'vertical' => 'center']],
+            //     'L2' => ['alignment' => ['horizontal' => 'center']],
 
-        //     1    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'center']],
-        //     2    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'center']],
-        //     3    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'center']],
-        //     4    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'center']],
-        //     10    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'center']],
-        //     15    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'center']],
-        //     25    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'center']],
-        //     190    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'top']],
-        //     166    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'top']],
+            //     1    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'center']],
+            //     2    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'center']],
+            //     3    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'center']],
+            //     4    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'center']],
+            //     10    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'center']],
+            //     15    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'center']],
+            //     25    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'center']],
+            //     190    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'top']],
+            //     166    => ['font' => ['bold' => true,], 'alignment' => ['wrapText' => true,'vertical' => 'top']],
         ];
     }
 
     public function view(): View
     {
-        return view('energy.quoteSystem.export',[
+        return view('energy.quoteSystem.export', [
             'id' => $this->id,
             'files' => $this->files,
         ]);
@@ -86,4 +107,3 @@ class CotizacionExport implements FromView, WithTitle, WithDrawings, ShouldAutoS
         return 'FORMATO EM5';
     }
 }
-

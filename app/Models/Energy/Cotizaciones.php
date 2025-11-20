@@ -20,7 +20,9 @@ class cotizaciones extends Model
         'mantenimiento',
         'nota_importante',
         'iva',
-        'valor_kw'
+        'valor_kw',
+        'potenciaPanel',
+        'margenError'
     ];
 
     public function flujos()

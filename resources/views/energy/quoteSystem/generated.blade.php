@@ -20,6 +20,12 @@
                 </div>
             </div>
             <div class="box-body">
+                @if ($id->status_files == 'Pendiente' && $id->status == 'Aprobada')
+                    <div class="alert alert-warning">
+                        <h4><i class="icon fa fa-warning"></i> Atención!</h4>
+                        La cotización se ha editado, por favor actualizar las imágenes adjuntas con el botón al final del documento.
+                    </div>
+                @endif
                 <h4>Ubicacióne Información del Proyecto</h4>
                 <div class="row">
                     <div class="col-md-4">
@@ -67,8 +73,26 @@
                             <p> {{ $id->typeProject }}</p>
                         </div>
                     </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="alturaPanel">Altura de Instalación de los Paneles</label>
+                            <p>{{ old('alturaPanel') }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="trasiego">Requiero Trasiego Vertical</label>
+                            <p>{{ old('trasiego') }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="distanPuntos">Distancia al Punto de Ins.</label>
+                            <p>{{ old('distanPuntos') }}</p>
+                        </div>
+                    </div>
                 </div>
-                 <hr>
+                <hr>
                 <h4>Objetivos</h4>
                 <div class="row">
                     <div class="col-md-12">
@@ -88,41 +112,41 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="validez_oferta">Validez de la Oferta (días)</label>
-                                <p>{{ $id->items->validez_oferta}}</p>
+                            <p>{{ $id->items->validez_oferta }}</p>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="fecha_oferta">FECHA PRESENTACION DE LA OFERTA:</label>
-                                <p>{{ $id->items->fecha_oferta }}</p>
+                            <p>{{ $id->items->fecha_oferta }}</p>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="fin_oferta">ACEPTACION MAXIMA DE OFERTA CON EMISION DE DOCUMENTO DE ORDEN DE
                                 COMPRA:</label>
-                                <p>{{ $id->items->fin_oferta}}</p>
+                            <p>{{ $id->items->fin_oferta }}</p>
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="polizas">Pólizas RC, Patronales y RE</label>
-                                <p>{{ $id->items->polizas}}</p>
+                            <p>{{ $id->items->polizas }}</p>
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="garantia_equipos">Garantía Equipos Electrónicos (años)</label>
-                                <p>{{ $id->items->garantia_equipos }}</p>
+                            <p>{{ $id->items->garantia_equipos }}</p>
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="garantia_celdas">Garantía Celdas Solares (años)</label>
-                                <p>{{ $id->items->garantia_celdas}}</p>
+                            <p>{{ $id->items->garantia_celdas }}</p>
                         </div>
                     </div>
 
@@ -130,50 +154,50 @@
                         <div class="form-group">
                             <label for="garantia_materiales">Garantía Materiales Eléctricos y Obras Civiles
                                 (años)</label>
-                                <p>{{ $id->items->garantia_materiales}}</p>
+                            <p>{{ $id->items->garantia_materiales }}</p>
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="verificacion_sistema">Verificación Operación Sistema</label>
-                                <p>{{ $id->items->verificacion_sistema }}</p>
+                            <p>{{ $id->items->verificacion_sistema }}</p>
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="nivel_sst">Nivel SST</label>
-                                <p>{{ $id->items->nivel_sst}}</p>
+                            <p>{{ $id->items->nivel_sst }}</p>
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="mantenimiento">Mantenimiento Incluido</label>
-                                <p>{{ $id->items->mantenimiento}}></p>
+                            <p>{{ $id->items->mantenimiento }}></p>
                         </div>
                     </div>
 
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="nota_importante">Nota Importante</label>
-                            <p>{{ $id->items->nota_importante}}</p>
+                            <p>{{ $id->items->nota_importante }}</p>
                         </div>
                     </div>
                 </div>
                 <hr>
                 <h4>Imagenes</h4>
                 @if ($id->files)
-                    <div class="row">
-
+                    <div class="row">   
                         @foreach ($id->files as $items)
-                            <div class="col-md-6 text-center">
+                        @if ($items->description == 'Mapa' || $items->description == 'Servicios')                            <div class="col-md-6 text-center">
                                 <label for="img">{{ $items->name }}</label>
                                 <br>
                                 <img id="img" src="/storage/energy/quotes/{{ $items->name }}" style="width: 75%;"
                                     alt="Attachment">
                             </div>
+                        @endif
                         @endforeach
                     </div>
                 @endif
@@ -227,11 +251,11 @@
                     <div class="col-md-6">
                         <h5><b>Flujo de la Inversión</b></h5>
                     </div>
-                    <div class="col-md-6 text-right">
+                    {{-- <div class="col-md-6 text-right">
                         <a href="" class="btn btn-warning" data-toggle="modal" data-target=".flujo-modal-lg"><i
                                 class="fa fa-edit"></i></a>
                     </div>
-                    @include('energy.quoteSystem.includes.flujo_update')
+                    @include('energy.quoteSystem.includes.flujo_update') --}}
                     <div class="col-md-12">
                         <br>
                         <table class="table table-bordered">
@@ -243,6 +267,7 @@
                                     <th style="width: 10%;">Tipo Inversion</th>
                                     <th style="width: 10%;">Valor</th>
                                     <th style="width: 10%;">Valor Acumulado</th>
+                                    <th style="width: 10%;">Rubro del Pago</th>
                                     <th style="width: 25%;">Avance Calendario Implementación</th>
                                 </tr>
                             </thead>
@@ -271,6 +296,9 @@
                                             <p>${{ number_format($flujo->valorAcumulado, 2, ',', '.') }}</p>
                                         </td>
                                         <td>
+                                            <p>{{ $flujo->rubro }}</p>
+                                        </td>
+                                        <td>
                                             <p>{{ $flujo->avance }}</p>
                                         </td>
                                     </tr>
@@ -283,11 +311,11 @@
                     <div class="col-md-6">
                         <h5><b>Listado de Precios</b></h5>
                     </div>
-                    <div class="col-md-6 text-right">
+                    {{-- <div class="col-md-6 text-right">
                         <a href="" class="btn btn-warning" data-toggle="modal" data-target=".precio-modal-lg"><i
                                 class="fa fa-edit"></i></a>
                     </div>
-                    @include('energy.quoteSystem.includes.precios_update')
+                    @include('energy.quoteSystem.includes.precios_update') --}}
                     <div class="col-md-12">
                         <br>
                         <table class="table table-bordered">
@@ -296,6 +324,8 @@
                                     <th style="width: 12%;">Código</th>
                                     <th style="width: 5%;">Item</th>
                                     <th style="width: 30%;">Descripción</th>
+                                    <th style="width: 10%;">Unidad</th>
+                                    <th style="width: 7%;">Exento de Iva</th>
                                     <th style="width: 15%;">Tipo Inversion</th>
                                     <th style="width: 10%;">Valor USD</th>
                                     <th style="width: 10%;">Valor COP</th>
@@ -314,6 +344,12 @@
                                         </td>
                                         <td>
                                             <p>{{ $precios->descripcion }}</p>
+                                        </td>
+                                        <td>
+                                            <p>{{ $precios->unidad }}</p>
+                                        </td>
+                                        <td>
+                                            <p>{{ $precios->exento }}</p>
                                         </td>
                                         <td>
                                             <p>{{ $precios->typeInversion }}</p>
@@ -362,6 +398,18 @@
                                 @endforeach
                             </tbody>
                         </table>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="potenciaPanel">Potencia de los Paneles (KW)</label>
+                            <p>{{ $id->potenciaPanel ?? '' }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="margenError">Margen de Error en Producción Mensual</label>
+                            <p>{{ $id->margenError ?? '' }}</p>
+                        </div>
                     </div>
                 </div>
                 <hr>
@@ -442,7 +490,86 @@
                 <div class="container" style="width: 85%;">
                     <canvas id="grafica2"></canvas>
                 </div>
+                <div class="container" style="width: 85%;">
+                    <canvas id="grafica3"></canvas>
+                </div>
                 <h4>Resumen de la Inversión</h4>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="totalProducido">TOTAL KW/H PRODUCIDOS DURANTE 30 AÑOS:</label>
+                            <h4> <b>
+                                    {{ $id->totalProducido }}
+                                </b>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="totalEstimacion">TOTAL PRODUCCION ECONOMICA DEL PROYECTO:</label>
+                            <h4> <b>
+                                    {{ $id->totalEstimacion }}
+                                </b>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="totalOxigeno">TOTAL TONELADAS DE OXIGENO PRODUCIDAS:</label>
+                            <h4> <b>
+                                    {{ $id->totalOxigeno }}
+                                </b>
+                            </h4>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="areaRequerida">AREA REQUERIDA PARA EL CULTIBO EN METROS CUADRADOS</label>
+                            <h4> <b>
+                                    {{ $id->areaRequerida }}
+                                </b>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="radiacion">Radiación KW/h/metro cuadrado/día</label>
+                            <h4> <b>
+                                    {{ $id->radiacion }}
+                                </b>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="MesesRecuperacion">MESES DE RECUPERACION DE INVERSION</label>
+                            <h4> <b>
+                                    {{ $id->MesesRecuperacion }}
+                                </b>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="produccionMensualCOP">PRODUCCION MENSUAL EN PESOS</label>
+                            <h3> <b>
+                                    {{ $id->produccionMensualCOP }}
+                                </b>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="produccionMensualKw">PRODUCCION MENSUAL DE KW/H</label>
+                            <h3> <b>
+                                    {{ $id->produccionMensualKw }}
+                                </b>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <hr>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
@@ -485,10 +612,19 @@
                 <hr>
                 @can('Aprobar y rechazar Cotizaciones')
                     @if ($id->status == 'Pendiente')
-                    <a href="" class="btn btn-success" data-toggle="modal"
-                        data-target=".approved-modal-lg">Aprobar</a>
-                    <a href="" class="btn btn-danger" data-toggle="modal"
-                        data-target=".noapproved-modal-lg">Rechazar</a>
+                        <a href="" class="btn btn-success" data-toggle="modal"
+                            data-target=".approved-modal-lg">Aprobar</a>
+                        <a href="" class="btn btn-danger" data-toggle="modal"
+                            data-target=".noapproved-modal-lg">Rechazar</a>
+                    @endif
+                    @if ($id->status_files == 'Pendiente' && $id->status == 'Aprobada')
+                        <form action="{{ route('quote_energy_system.update_files', $id->id) }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="chart1" id="chart1">
+                            <input type="hidden" name="chart2" id="chart2">
+                            <input type="hidden" name="chart3" id="chart3">
+                        <button class="btn-submit btn btn-success">Actualizar Imágenes</button>
+                        </form>
                     @endif
                 @endcan
                 @include('energy.quoteSystem.includes.approved')
@@ -612,6 +748,7 @@
             button.closest('tr').remove();
         }
         const data = @json($id->retorno);
+        const dataImpuesto = @json($id->retornoImpuesto);
     </script>
     <script src="{{ asset('js/quotes/grafica1.js') }}"></script>
 @endsection

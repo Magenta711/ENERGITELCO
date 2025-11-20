@@ -14,6 +14,7 @@ class FlujosInversion extends Model
         'inversion',
         'typeInversion',
         'avance',
+        'rubro',
         'valor',
         'total'
     ];
