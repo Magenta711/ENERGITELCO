@@ -71,9 +71,10 @@
 
         $coordenadas = [
             1 => ['top' => '100px', 'left' => '40px'], //Servicios
-            2 => ['top' => '400px', 'left' => '40px'], //Mapa
+            2 => ['top' => '500px', 'left' => '40px'], //Mapa
             3 => ['top' => '100px', 'left' => '750px'], //Grafica 1
-            4 => ['top' => '450px', 'left' => '750px'], //Grafica 2
+            4 => ['top' => '500px', 'left' => '750px'], //Grafica 2
+            5 => ['top' => '50px', 'left' => '70px'], //Grafica 3
         ];
 
         $posicion = 0;
@@ -106,15 +107,20 @@
                 @endphp
                 @include('energy.quoteSystem.tablas.partial.image2', ['file' => $file])
             @endif
-            {{-- <p>
-            {{ $coordenadas[$item] }}
-        </p> --}}
         @endforeach
         {{-- Tabla 1 --}}
         @include('energy.quoteSystem.tablas.tabla3')
     </div>
     <div style="position: relative; width: 100%; min-height: 100vh;">
         {{-- Tabla 4 --}}
+        @foreach ($files as $item => $file)
+            @if ($file['place'] == 4)
+                @php
+                    $posicion=5;
+                @endphp
+                @include('energy.quoteSystem.tablas.partial.image2', ['file' => $file])
+            @endif
+        @endforeach
         @include('energy.quoteSystem.tablas.tabla4')
     </div>
 </body>

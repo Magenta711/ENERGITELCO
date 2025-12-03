@@ -33,6 +33,7 @@ class Precotizacion extends Model
         'direccion_responsable',
         'email',
         'status_files',
+        'notaPrecio'
     ];
 
     public function client()

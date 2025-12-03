@@ -22,7 +22,8 @@ class cotizaciones extends Model
         'iva',
         'valor_kw',
         'potenciaPanel',
-        'margenError'
+        'margenError',
+        'notaPrecio'
     ];
 
     public function flujos()

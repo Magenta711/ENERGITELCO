@@ -42,6 +42,18 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
+                            <label for="email">Correo Electrónico</label>
+                            <p> {{ $id->client->email }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="tel">Teléfono</label>
+                            <p> {{ $id->client->tel }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
                             <label for="locateProject">Ubicación del Proyecto</label>
                             <p> {{ $id->locateProject }}</p>
                         </div>
@@ -189,7 +201,7 @@
                 <hr>
                 <h4>Imagenes</h4>
                 @if ($id->files)
-                    <div class="row">   
+                    <div class="row">
                         @foreach ($id->files as $items)
                         @if ($items->description == 'Mapa' || $items->description == 'Servicios')                            <div class="col-md-6 text-center">
                                 <label for="img">{{ $items->name }}</label>
@@ -618,13 +630,13 @@
                             data-target=".noapproved-modal-lg">Rechazar</a>
                     @endif
                     @if ($id->status_files == 'Pendiente' && $id->status == 'Aprobada')
-                        <form action="{{ route('quote_energy_system.update_files', $id->id) }}" method="POST">
+                        <form id="UpdateFileForm" action="{{ route('quote_energy_system.update_files', $id->id) }}" method="POST" >
                             @csrf
                             <input type="hidden" name="chart1" id="chart1">
                             <input type="hidden" name="chart2" id="chart2">
                             <input type="hidden" name="chart3" id="chart3">
-                        <button class="btn-submit btn btn-success">Actualizar Imágenes</button>
                         </form>
+                        <a id="UpdateFileButton" class="btn-submit btn btn-success">Actualizar Imágenes</a>
                     @endif
                 @endcan
                 @include('energy.quoteSystem.includes.approved')

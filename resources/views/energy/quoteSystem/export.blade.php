@@ -269,7 +269,7 @@
         <td></td>
         <td colspan="6" rowspan="2" style="background-color:#C4D79B; text-align: left; font-size: 8pt; border: 3px solid #000000; font-weight:bold">Notas
             <br>
-            No hay
+            {{ $id->notaPrecio }}
         </td>
         <td colspan="4" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; border: 3px solid #000000; font-weight:bold">SUBTOTAL COP</td>
         <td colspan="3" rowspan="1" style="background-color:#C4D79B; text-align: right; font-size: 8pt; border: 3px solid #000000;">${{ number_format($id->totalCOP, 2, ',', '.') }}</td>

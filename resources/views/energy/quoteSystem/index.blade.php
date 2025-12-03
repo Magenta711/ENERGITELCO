@@ -64,7 +64,7 @@
                                                 <a href="{{ route('quote_energy_system.edit', $item->id) }}" class="btn btn-warning btn-sm" title="Editar Cotización"><i class="fa fa-edit"></i></a>
                                                 @endcan
                                                 @if ($item->status=='Aprobada')
-                                                <a href="{{ route('quote_energy_system.export', $item->id) }}" class="btn btn-success btn-sm" title="Descargar Cotización"><i class="fa fa-download"></i></a>
+                                                <a href="{{ route('quote_energy_system.PDF', $item->id) }}" class="btn btn-success btn-sm" title="Descargar Cotización"><i class="fa fa-download"></i></a>
                                                 @endif
                                                 @can('Eliminar Cotizaciones')
                                                     @if ($item->status=='Pendiente' || $item->status=='Rechazada' || $item->status=='Solicitado')

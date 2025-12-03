@@ -403,6 +403,8 @@
                     style="background-color:#C4D79B; text-align: left; font-size: 8pt; font-weight:bold; border: 0px solid #C4D79B">
                     FIN DE FASE IMPLEMENTACION E INICIO DE FASE PRODUCCION.</td>
             </tr>
+        </table>
+        <table>
             <tr>
                 <td colspan="2" rowspan="1"
                     style="background-color:#00B050; text-align: center; font-size: 8pt; border: 1px solid #000000; font-weight:bold">
@@ -432,6 +434,7 @@
                     style="background-color:#00B050; text-align: center; font-size: 8pt; border: 1px solid #000000; font-weight:bold">
                     TOTAL</td>
             </tr>
+
             @foreach ($id->precios as $precio)
                 <tr>
                     <td colspan="2" rowspan="1"
@@ -479,7 +482,7 @@
                     style="background-color:#C4D79B; text-align: left; font-size: 8pt; border: 1px solid #000000; font-weight:bold">
                     Notas
                     <br>
-                    No hay
+                    {{ $id->notaPrecio }}
                 </td>
                 <td colspan="4" rowspan="1"
                     style="background-color:#C4D79B; text-align: right; font-size: 8pt; border: 1px solid #000000; font-weight:bold">

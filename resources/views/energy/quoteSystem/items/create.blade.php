@@ -344,7 +344,26 @@
                                 <hr>
                                 <div class="row">
                                     <div class="col-md-12">
+                                        <label for="notaPrecio">Nota</label>
+                                        <textarea name="notaPrecio" id="notaPrecio" class="form-control" rows="3">{{ $item->notaPrecio ?? '' }}</textarea>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-12">
                                         <h5><b>Fórmulas para calcular Valores</b></h5>
+                                        <h5>Instrucciones: </h5>
+                                        <ul>
+                                            <li><b>Importante:</b> Los valores son los correspondiente al número del item (Ejem:1+2 = Item 1 + Item 2)</li>
+                                            Utilizar los siguientes nombres de variables en las fórmulas:
+                                            <li><b>TotalCOP</b>: SubTotal del proyecto en pesos.</li>
+                                            <li><b>TotalUSD</b>: Subtotal del proyecto en dolares.</li>
+                                            <li><b>IVA</b>: Valor del Iva al subtotal en pesos.</li>
+                                            <li>No de dejar espacios entre las operaciones</li>
+                                            <li>Usar solo los siguientes símbolos (+,-,*,/)</li>
+                                        </ul>
+                                        <h5>Ejemplo:</h5>
+                                        <p>TotalCOP-12-13</p>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">

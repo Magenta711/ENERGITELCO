@@ -375,5 +375,29 @@ document.addEventListener('DOMContentLoaded', () => {
         e.target.submit();
     });
 
+    document.getElementById('UpdateFileForm').addEventListener('submit', function (e) {
+        e.preventDefault();
 
+        const chart1Image = document.getElementById('grafica').toDataURL('image/png');
+        const chart2Image = document.getElementById('grafica2').toDataURL('image/png');
+        const chart3Image = document.getElementById('grafica3').toDataURL('image/png');
+
+        document.getElementById('chart1').value = chart1Image;
+        document.getElementById('chart2').value = chart2Image;
+        document.getElementById('chart3').value = chart3Image;
+
+        e.target.submit();
+    });
+
+    document.getElementById('UpdateFileButton').addEventListener('click', function () {
+
+        const chart1Image = document.getElementById('grafica').toDataURL('image/png');
+        const chart2Image = document.getElementById('grafica2').toDataURL('image/png');
+        const chart3Image = document.getElementById('grafica3').toDataURL('image/png');
+
+        document.getElementById('chart1').value = chart1Image;
+        document.getElementById('chart2').value = chart2Image;
+        document.getElementById('chart3').value = chart3Image;
+        document.getElementById('UpdateFileForm').submit();
+    });
 });
