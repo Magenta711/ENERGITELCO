@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>ENERGITELCO</title>
+        <title>COLSOLYTEL</title>
 
         {{-- <link rel="stylesheet" href="{{asset("assets/$theme/bower_components/bootstrap/dist/css/bootstrap.min.css")}}"> --}}
 
@@ -22,7 +22,10 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="https://energitelco.com/assets/img/logo.png" alt="ENERGITELCO"></a>
+                <a class="navbar-brand js-scroll-trigger" href="#page-top">
+                    {{-- <img src="https://energitelco.com/assets/img/logo.png" alt="ENERGITELCO"> --}}
+                    COLSOLYTEL
+                </a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars"></i>
@@ -41,7 +44,7 @@
         <header class="masthead">
             <div class="container d-flex h-100 align-items-center">
                 <div class="mx-auto text-center">
-                    <h1 class="mx-auto my-0 text-uppercase">ENERGITELCO</h1>
+                    <h1 class="mx-auto my-0 text-uppercase">COLSOLYTEL</h1>
                     <h2 class="text-white-50 mx-auto mt-2 mb-5">NUESTRO MEJOR PREMIO ES LA SATISFACCIÓN DE NUESTROS CLIENTES</h2>
                     <a class="btn btn-primary js-scroll-trigger" href="{{ url('energy/quote_system/client_create') }}">Cotiza tu Sistema Solar</a>
                 </div>
@@ -55,7 +58,7 @@
                         <h2 class="text-white mb-4">Nosotros</h2>
                         <h2 class="text-white">Más de 15 años trabajando por el crecimiento del sector en Colombia</h2>
                         <p class="text-white-50">
-                            ENERGITELCO es una empresa conformada por personal entusiasta, con conocimiento y experiencia en el área de energía y de las telecomunicaciones, con el objetivo claro de asegurar una operación continua y confiable de las infraestructuras de sus clientes.
+                            COLSOLYTEL es una empresa conformada por personal entusiasta, con conocimiento y experiencia en el área de energía y de las telecomunicaciones, con el objetivo claro de asegurar una operación continua y confiable de las infraestructuras de sus clientes.
                         </p>
                     </div>
                 </div>
@@ -73,7 +76,7 @@
                     <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="https://energitelco.com/assets/img/hhh2.jpeg" alt="" /></div>
                     <div class="col-xl-4 col-lg-5">
                         <div class="featured-text text-center text-lg-left">
-                            <h4>Energía para telecomunicaciones S.A.S.</h4>
+                            <h4>Colombia Solar y Telecomunicaciones S.A.S</h4>
                         </div>
                     </div>
                 </div>
@@ -239,7 +242,7 @@
             </div>
         </section>
         <!-- Footer-->
-        <footer class="footer bg-black small text-center text-white-50"><div class="container">Copyright © ENERGITELCO 2022</div></footer>
+        <footer class="footer bg-black small text-center text-white-50"><div class="container">Copyright © COLSOLYTEL 2025</div></footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>

@@ -8,14 +8,14 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Página principal <small>Sistema de gestión de calidad de Energitelco S.A.S</small>
+            Página principal <small>Sistema de gestión de calidad de COLSOLYTEL S.A.S</small>
         </h1>
         <ol class="breadcrumb">
             <li class="active">Inicio</li>
         </ol>
     </section>
     <section class="content">
-         
+
         {{-- Content main --}}
 
         {{-- Reports --}}
@@ -278,7 +278,7 @@
                     </div>
                 </div>
             @else
-            
+
                 <div class="col-md-8">
                     @if (count($taskings))
                         <div class="box box-danger">
@@ -622,7 +622,7 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
-                    
+
                 </div>
                 <!-- /.box-footer-->
             </div>
@@ -634,7 +634,7 @@
 
         </div>
     </section>
-    
+
 @endsection
 
 @section('css')
@@ -657,7 +657,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        
+
         $(document).ready(function() {
             // var calendar = $('#calendar').fullCalendar({
             //     editable: true,
@@ -685,7 +685,7 @@
         @endif
             @if ($system->employee_month)
             Swal.fire({
-                
+
                 html: '<h1 style="font-size: 16pt;color:#0080ff;">RECONOCIMIENTO AL EMPLEADO DEL MES</h1><p style="font-size: 14pt;color:#252525">"No es lo que sabes, es lo que haces con lo que sabes"</p><div style="display: flex;">    <div style="width:40%">        @php            $i = 3;            $j = 1;        @endphp        @foreach($months as $key => $month)            @php                $good = false;            @endphp            @if($i % 3 == 0)                <div style="display: flex;width:100%">            @endif                <div style="border: 1px solid #000000;width: 33.3%">                    <p>{{$month}}</p>                    @foreach($employee_months as $employee )                        @if (intval(explode("-",$employee->month)[1]) == ($key + 1))                            @if ($employee->file)                                <img src="storage/avatars/{{$employee->file->name}}" width="100%">                            @else                                <img src="img/{{$employee->user->foto}}" width="100%">                            @endif                            <p class="text-center">{{$employee->user->name}}</p>                            @php                                $good = true;                            @endphp                        @endif                    @endforeach            @if (!$good)                <img src="img/anonimus.png" width="100%">            @endif                </div>            @if($j % 3 == 0)                </div>            @endif            @php                $i++;                $j++;            @endphp        @endforeach    </div>    <div  style="width:60%"><p style="font-size: 12pt">Comenzaremos de nuevo este año, con el programa y la motivación para que seas el empleado del mes.</p><p style="font-size: 12pt">Te invitamos a que leas y te enteres de nuestros valores corporativos que encuentran y lo apliques en tu vida laboral diaria.</p><p style="font-size: 12pt">Los valores son.</p>        <ul style="font-size: 12pt;text-align:left">            <li>Honestidad</li>            <li>Saber seguir instrucciones</li>            <li>Estar de lado de la empresa (Lealtad)</li>            <li>Compromiso</li>            <li>Desarrollo humano</li>            <li>Respeto</li>        </ul>        <p style="font-size: 14pt;color:#252525">¡Anímate a ser el mejor compañero y colaborador del mes!</p>    </div></div><p><small style="font-size: 9pt">ENERGITELCO S.A.S.</small></p>',
                 width: 1000,
                 showConfirmButton: false,

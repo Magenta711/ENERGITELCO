@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>ENERGITELCO</title>
+        <title>COLSOLYTEL</title>
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <link rel="icon" type="image/x-icon" href="{{asset('img/logo_sm.png')}}" />
@@ -17,7 +17,7 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{{asset('css/guest.css')}}" rel="stylesheet" />
         @yield('css')
-        
+
     </head>
     <?php function activeMenu($url)
     {
@@ -27,7 +27,7 @@
     <body id="page-top">
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="https://www.energitelco.com.co"><img src="{{asset('img/logo.png')}}" alt="ENERGITELCO"></a>
+                <a class="navbar-brand js-scroll-trigger" href="https://www.energitelco.com.co">COLSOLYTEL</a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars"></i>
@@ -57,7 +57,7 @@
         </nav>
         @yield('content')
         <!-- Footer-->
-        <footer class="footer bg-black small text-center text-white-50"><div class="container">Copyright © ENERGITELCO 2019 - 2022</div></footer>
+        <footer class="footer bg-black small text-center text-white-50"><div class="container">Copyright © COLSOLYTEL 2019 - 2025</div></footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>

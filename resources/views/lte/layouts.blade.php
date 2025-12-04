@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>{{ config('app.name', 'ENERGIRTELCO SAS') }}</title>
+  <title>{{ config('app.name', 'COLSOLYTEL SAS') }}</title>
   <link rel="shortcut icon" href="{{asset('img/logo_sm.png')}}" />
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -15,20 +15,20 @@
   <!-- Font Awesome -->
   <link href="{{asset("assets/$theme/bower_components/font-awesome/css/all.min.css")}}" rel="stylesheet">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="{{asset("assets/$theme/bower_components/Ionicons/css/ionicons.min.css")}}">  
+  <link rel="stylesheet" href="{{asset("assets/$theme/bower_components/Ionicons/css/ionicons.min.css")}}">
   <!-- Theme style -->
   <!-- AdminLTE Skins. Choose a skin from the css/skins
     folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{asset("assets/$theme/dist/css/skins/_all-skins.min.css")}}">
-  
+
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="{{asset("css/style.css")}}">
-  
+
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-  
+
   <link rel="stylesheet" href="{{asset("assets/$theme/dist/css/AdminLTE.min.css")}}">
-  
+
   @yield('css')
 </head>
 <!-- ADD THE CLASS layout-boxed TO GET A BOXED LAYOUT -->
