@@ -483,6 +483,13 @@ class PermissionTableSeeder extends Seeder
             // ['name' => 'Crear Cotizaciones', 'category' => 'Energías'],
             // ['name' => 'Editar Cotizaciones', 'category' => 'Energías'],
             // ['name' => 'Eliminar Cotizaciones', 'category' => 'Energías'],
+
+
+            // ['name' => 'Crear Album', 'category' => 'Energías'],
+            // ['name' => 'Ver Album', 'category' => 'Energías'],
+            // ['name' => 'Editar Album', 'category' => 'Energías'],
+            // ['name' => 'Eliminar Album', 'category' => 'Energías'],
+            // ['name' => 'Eliminar Imagen de Album', 'category' => 'Energías'],
         ];
 
         foreach ($permissions as $permission) {

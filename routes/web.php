@@ -1195,3 +1195,16 @@ Route::get('energy/quote_system/client_create', 'energy\quote\QuoteEnergySystemC
 Route::post('energy/quote_system/client_store', 'energy\quote\QuoteEnergySystemController@client_store')->name('quote_energy_system.client_store');
 Route::get('energy/quote_system/PDF/{id}', 'energy\quote\QuoteEnergySystemController@PDF')->name('quote_energy_system.PDF');
 Route::post('energy/quote_system/update_files/{id}', 'energy\quote\QuoteEnergySystemController@update_files')->name('quote_energy_system.update_files');
+
+//Albumes de proyectos
+Route::get('/albums', 'energy\album\AlbumProjectsController@index')->name('album_projects.index');
+Route::get('/albums/create', 'energy\album\AlbumProjectsController@create')->name('album_projects.create');
+Route::post('/albums', 'energy\album\AlbumProjectsController@store')->name('album_projects.store');
+Route::get('/gallery', 'energy\album\AlbumProjectsController@gallery')->name('album_projects.gallery');
+Route::get('/gallery/{slug}/{id}/images', 'energy\album\AlbumProjectsController@images')->name('album_projects.images');
+Route::get('/albums/{slug}/{id}/gallery', 'energy\album\AlbumProjectsController@showGallery')->name('album_projects.show_gallery');
+Route::post('/albums/{id}/upload', 'energy\album\AlbumProjectsController@upload')->name('album_projects.upload');
+Route::delete('/albums/{id}/destroy', 'energy\album\AlbumProjectsController@destroy')->name('album_projects.destroy');
+Route::delete('/albums/destroy_image/{id}', 'energy\album\AlbumProjectsController@destroy_image')->name('album_projects.destroy_image');
+Route::get('/albums/{slug}/{id}/edit', 'energy\album\AlbumProjectsController@edit')->name('album_projects.edit');
+Route::put('/albums/{id}', 'energy\album\AlbumProjectsController@update')->name('album_projects.update');

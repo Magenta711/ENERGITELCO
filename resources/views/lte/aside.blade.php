@@ -1497,7 +1497,7 @@ f <!-- =============================================== -->
                 </li>
             @endcan
             <li class="treeview {{ activeMenu('learned_lesson*') }}">
-                <a href="#"><i class="fas fa-user-injured"></i> Modales de entrada<span
+                <a href="#"><i class="fas fa-user-injured"></i> MODALES DE ENTRADA<span
                         class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
@@ -1530,9 +1530,13 @@ f <!-- =============================================== -->
                     'ELiminar Ventas',
                     'ELiminar Productos',
                     'ELiminar Clientes',
+                    'Ver Album',
+                    'Crear Album',
+                    'Editar Album',
+                    'ELiminar Album',
                 ]))
             {{-- energias --}}
-            <li class="treeview {{ activeMenu('energy*') }} {{ activeMenu('productos*') }} {{ activeMenu('energias*') }}">
+            <li class="treeview {{ activeMenu('energy*') }} {{ activeMenu('productos*') }} {{ activeMenu('energias*') }} {{ activeMenu('albums*') }}">
                 <a href="#">
                     <i class="fa fa-solar-panel"></i> <span>ENERGÍAS</span><span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
@@ -1604,6 +1608,10 @@ f <!-- =============================================== -->
                             @endif
                         </ul>
                     </li>
+                    @if (auth()->user()->hasAnyPermission(['Ver Album', 'Crear Album', 'Editar Album', 'ELiminar Album']))
+                        <li class="{{ activeMenu('albums*') }}"><a class="btn-send" href="{{ route('album_projects.index') }}"><i class="fa fa-image"></i> ÁLBUMES DE PROYECTOS</a>
+                        </li>
+                    @endif
                 </ul>
             </li>
         @endif

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Energy\Album\AlbumProject;
 use App\Models\Energy\Offer;
 use App\Models\Energy\SolarKit;
 use App\Models\execution_work\kits;
@@ -85,6 +86,8 @@ class WelcomeController extends Controller
                 }
             }
         }
-        return view('welcome', compact('products', 'types', 'kits', 'equiposList', 'offer', 'kitOff', 'productosOff'));
+
+        $projects = AlbumProject::where('status', 1)->limit(3)->get();
+        return view('welcome.body', compact('products', 'types', 'kits', 'equiposList', 'offer', 'kitOff', 'productosOff', 'projects'));
     }
 }
