@@ -18,7 +18,7 @@ class AlbumProjectsController extends Controller
         $this->middleware('permission:Ver Album', ['only' => ['index', 'images']]);
         $this->middleware('permission:Crear Album', ['only' => ['store', 'create', 'upload']]);
         $this->middleware('permission:Editar Album', ['only' => ['update', 'edit', 'upload']]);
-        $this->middleware('permission:Eliminar Album', ['only' => ['destroy','destroy_image']]);
+        $this->middleware('permission:Eliminar Album', ['only' => ['destroy', 'destroy_image']]);
     }
     /**
      * Display a listing of the resource.
@@ -94,6 +94,10 @@ class AlbumProjectsController extends Controller
 
     public function upload(Request $request, $projectId)
     {
+        $request->validate([
+            'file' => 'required|mimes:jpg,jpeg,png,gif,webp,mp4,mov,webm|max:51200'
+        ]);
+
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $imageName = time() . '_' . $file->getClientOriginalName();
@@ -103,22 +107,34 @@ class AlbumProjectsController extends Controller
             if (!file_exists($destinationPath)) {
                 mkdir($destinationPath, 0755, true);
             }
+            $mimeType = $file->getMimeType();
 
             $file->move($destinationPath, $imageName);
 
             $relativePath = 'uploads/album/' . $projectId . '_' . $slug . '/' . $imageName;
+            $type = explode('/', $mimeType)[0];
+
+            if ($type == 'image') {
+                $type = 'image';
+            } elseif ($type == 'video') {
+                $type = 'video';
+            }
 
             try {
+
+
                 $image = AlbumImage::create([
                     'project_real_id' => $projectId,
-                    'image' => $relativePath
+                    'image' => $relativePath,
+                    'type' => $type
                 ]);
 
                 return response()->json([
                     'success' => true,
                     'message' => 'Imagen subida correctamente',
                     'path' => asset($relativePath),
-                    'id' => $image->id
+                    'id' => $image->id,
+                    'type' => $type,
                 ]);
             } catch (\Exception $e) {
                 Log::error('Error creando AlbumImage: ' . $e->getMessage(), [
@@ -143,7 +159,7 @@ class AlbumProjectsController extends Controller
         return view('welcome.gallery.gallery', compact('projects'));
     }
 
-    public function showGallery($slug,$id)
+    public function showGallery($slug, $id)
     {
         $project = AlbumProject::with('images')->findOrFail($id);
 

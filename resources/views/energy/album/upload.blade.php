@@ -66,7 +66,12 @@
                     @endcan
                 </div>
                 <hr>
-                <h4>Imágenes</h4>
+                <h4><b>
+                        Imágenes/Videos
+                    </b>
+                </h4>
+                <p>El archivo de imagen no puede superar los 10 MB de tamaño.</p>
+                <p>El archivo de video no puede superar los 50 MB de tamaño.</p>
                 @can('Crear Album')
                     <form action="{{ route('album_projects.upload', $project->id) }}" method="POST" class="dropzone"
                         id="project-dropzone">
@@ -77,11 +82,34 @@
                 <div class="row mt-3" id="gallery-container">
                     <div class="col-md-12">
                         <h4><b>
+                                Videos subidos
+                            </b>
+                        </h4>
+                        @foreach ($project->images->where('type', 'video') as $image)
+                            <div class="col-md-3 text-center" id="image-{{ $image->id }}">
+                                <div class="thumbnail">
+                                    <video controls class="img-responsive img-thumbnail"
+                                        style="height: 200px; object-fit: cover;">
+                                        <source src="{{ asset($image->image) }}" type="video/mp4">
+                                        Tu navegador no soporta la etiqueta de video.
+                                    </video>
+                                    @can('Eliminar Imagen de Album')
+                                        <button class="btn btn-danger btn-xs btn-block mt-1 delete-image"
+                                            data-id="{{ $image->id }}" id="delete-project">
+                                            Eliminar
+                                        </button>
+                                    @endcan
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="col-md-12">
+                        <h4><b>
                                 Imágenes subidas
                             </b>
                         </h4>
                     </div>
-                    @foreach ($project->images as $image)
+                    @foreach ($project->images->where('type', 'image') as $image)
                         <div class="col-md-3" id="image-{{ $image->id }}">
                             <div class="thumbnail">
                                 <img src="{{ asset($image->image) }}" class="img-responsive img-thumbnail">
@@ -94,6 +122,7 @@
                             </div>
                         </div>
                     @endforeach
+
                 </div>
             </div>
         </div>
@@ -209,30 +238,50 @@
             url: "{{ route('album_projects.upload', $project->id) }}",
             method: 'post',
             paramName: "file",
-            maxFilesize: 2,
-            acceptedFiles: "image/*",
+            maxFilesize: 50,
+            acceptedFiles: "image/*, video/*",
             headers: {
                 'X-CSRF-TOKEN': "{{ csrf_token() }}"
             },
             success: function(file, response) {
                 if (response.success) {
-                    let html = `
-                        <div class="col-md-3" id="image-${response.id}">
-                            <div class="thumbnail">
-                                <img src="${response.path}"
-                                    class="img-responsive img-thumbnail">
+                    if (response.type === 'image') {
+                        let html = `
+                            <div class="col-md-3" id="image-${response.id}">
+                                <div class="thumbnail">
+                                    <img src="${response.path}"
+                                        class="img-responsive img-thumbnail">
 
-                                <button class="btn btn-danger btn-xs btn-block delete-image"
-                                        data-id="${response.id}">
-                                    Eliminar
-                                </button>
+                                    <button class="btn btn-danger btn-xs btn-block delete-image"
+                                            data-id="${response.id}">
+                                        Eliminar
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    `;
+                        `;
+                        document
+                            .getElementById('gallery-container')
+                            .insertAdjacentHTML('beforeend', html);
+                    } else {
+                        let html = `
+                            <div class="col-md-3 text-center" id="image-${response.id}">
+                                <div class="thumbnail">
+                                    <video controls class="img-responsive img-thumbnail" style="height: 200px; object-fit: cover;">
+                                        <source src="${response.path}" type="video/mp4">
+                                        Tu navegador no soporta la etiqueta de video.
+                                    </video>
 
-                    document
-                        .getElementById('gallery-container')
-                        .insertAdjacentHTML('beforeend', html);
+                                    <button class="btn btn-danger btn-xs btn-block delete-image"
+                                            data-id="${response.id}">
+                                        Eliminar
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        document
+                            .getElementById('gallery-container')
+                            .insertAdjacentHTML('beforeend', html);
+                    }
                 }
             },
             // Agrega un mensaje de error personalizado

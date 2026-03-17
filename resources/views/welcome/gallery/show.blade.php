@@ -16,25 +16,38 @@
                         <div class="col-md-12">
                             <div class="card-columns el-element-overlay">
                                 @if ($project->images)
-                                    @foreach ($project->images as $image)
+                                    @foreach ($project->images->where('type', 'video') as $image)
                                         <div class="card">
                                             <div class="el-card-image">
                                                 <div class="el-card-avatar el-overlay-1">
-                                                    <a href="{{ asset($image->image) }}" data-lightbox="gallery" class="pinterest-item" target="_blank">
-                                                        <img src="{{ asset($image->image) }}" data-lightbox="gallery" alt="{{ $image->name }}"
-                                                            width="100%" loading="lazy"/>
+                                                    <video controls width="100%" class="pinterest-item" loading="lazy">
+                                                        <source src="{{ asset($image->image) }}" type="video/mp4">
+                                                        Your browser does not support the video tag.
+                                                    </video>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                    @foreach ($project->images->where('type', 'image') as $image)
+                                        <div class="card">
+                                            <div class="el-card-image">
+                                                <div class="el-card-avatar el-overlay-1">
+                                                    <a href="{{ asset($image->image) }}" data-lightbox="gallery"
+                                                        class="pinterest-item" target="_blank">
+                                                        <img src="{{ asset($image->image) }}" data-lightbox="gallery"
+                                                            alt="{{ $image->name }}" width="100%" loading="lazy" />
                                                     </a>
                                                 </div>
                                             </div>
                                         </div>
                                     @endforeach
-                                    </div>
                                 @endif
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </section>
     {{-- </header> --}}

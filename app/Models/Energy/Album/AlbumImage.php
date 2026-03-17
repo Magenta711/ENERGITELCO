@@ -8,7 +8,8 @@ class AlbumImage extends Model
 {
     protected $fillable = [
         'project_real_id',
-        'image'
+        'image',
+        'type'
     ];
 
     public function project()
