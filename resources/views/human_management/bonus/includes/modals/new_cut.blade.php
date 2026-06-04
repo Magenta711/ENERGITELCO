@@ -11,7 +11,7 @@
                 @csrf
                 <div class="modal-body">
                     <p>¿Está seguro de generar un corte para pago de víaticos y caja menor?</p>
-                    <p><small>Se generar listado de víaticos y otro de caja menor editables con estado pendientes.</small></p>
+                    <p><small>Se generará listado de víaticos y otro de caja menor editables con estado pendientes.</small></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

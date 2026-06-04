@@ -157,7 +157,7 @@
                         </thead>
                         <tbody>
                             @foreach ($minor_boxes as $item)
-                                @if ($item->charges || $item->discharges)
+                                @if (($item->charges || $item->discharges) && $item->user->state == 1)
                                     <tr>
                                         <td>{{$item->user->name}}</td>
                                         <td>${{number_format($item->charges,2,',','.')}}</td>
