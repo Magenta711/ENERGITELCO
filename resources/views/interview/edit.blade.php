@@ -12,7 +12,7 @@
     </ol>
 </section>
 <section class="content">
-    @include('includes.alerts')
+     
     {{-- Content main --}}
     <div class="box">
         <div class="box-header">
@@ -38,7 +38,7 @@
                             </div>
                             <div class="col-md-3">
                                 <label for="tel">Teléfono</label>
-                                <input type="text" name="tel" value="{{ $id->tel }}" id="tel" class="form-control">
+                                <input type="text" name="tel" value="{{ $id->register->tel }}" id="tel" class="form-control">
                             </div>
                             <div class="col-md-4">
                                 <label for="email">Correo eletrónico</label>

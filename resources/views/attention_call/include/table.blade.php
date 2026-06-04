@@ -23,7 +23,7 @@
                 </td>
                 <td>{{$call->created_at}}</td>
                 <td>
-                    @can('Ver llamados de atención', Model::class)
+                    @can('Ver llamados de atención')
                     <a href="{{route('attention_call_show',$call->id)}}" class="btn btn-sm btn-success">Ver</a>
                     @endcan
                     @if ($call->receiverCall->id == auth()->id() && $call->state == 'Sin argumentos')

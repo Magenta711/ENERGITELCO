@@ -76,7 +76,7 @@ class MemorandumController extends Controller
                     'memorandum_id' => $memo->id,
                     'state' => 0,
                 ]);
-                $item->notify(new notificationMain($memo->id,'Nuevo memorando '.$memo->id,'memorandum/show/'));
+                $item->notify(new notificationMain($memo->id,'Nuevo memorando '.$memo->id,'human_management/memorandum/show/'));
                 Mail::send('emails.memorandum', ['id' => $memo,'user' => $item], function ($message) use($item) {
                     $message->to($item->email, $item->name);
                     $message->subject('Energitelco S.A.S. Memorando');
@@ -113,7 +113,7 @@ class MemorandumController extends Controller
                         'state' => 0,
                     ]);
                 }
-                $item->notify(new notificationMain($id->id,'Memorando actualizado '.$id->id,'memorandum/show/'));
+                $item->notify(new notificationMain($id->id,'Memorando actualizado '.$id->id,'human_management/memorandum/show/'));
                 Mail::send('emails.memorandum', ['id' => $id,'user' => $item], function ($message) use($item) {
                     $message->to($item->email, $item->name);
                     $message->subject('Energitelco S.A.S. Memorando actualizado');

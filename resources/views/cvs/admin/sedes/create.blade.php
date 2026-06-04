@@ -14,7 +14,7 @@
 </section>
 <section class="content">
     <div class="box">
-        @include('includes.alerts')
+         
         <div class="box-header">
             <div class="box-tools">
                 <a href="{{route('cvs_sedes')}}" class="btn btn-sm btn-primary">Volver</a>

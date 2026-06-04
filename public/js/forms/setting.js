@@ -1,8 +1,11 @@
 $(document).ready(function() {
-    if ($('#from_to_auth').is(':checked'))
+    if ($('#from_to_auth').is(':checked')){
         $('#from_to_auth_div').show();
-    else 
+        $('#attach_div').show();
+    } else {
         $('#from_to_auth_div').hide();
+        $('#attach_div').hide();
+    }
     
     if ($('#from_to_mail').is(':checked'))
         $('#from_to_mail_div').show();
@@ -17,10 +20,14 @@ $(document).ready(function() {
     formType();
 
     $('#from_to_auth').click(function () {
-        if (this.checked)
+        if (this.checked){
             $('#from_to_auth_div').show();
-        else 
+            $('#attach_div').show();
+        }
+        else {
             $('#from_to_auth_div').hide();
+            $('#attach_div').hide();
+        }
     });
     $('#is_format').click(function () {
         if (this.checked)

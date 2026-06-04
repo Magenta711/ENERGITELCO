@@ -24,7 +24,7 @@ class MinorBoxController extends Controller
         $this->middleware('permission:Editar bonificaciones de permisos de trabajo',['only' => ['edit','update']]);
         $this->middleware('permission:Limpiar valores de bonificaciones y caja menor de técnicos',['only' => ['cleaner']]);
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -45,7 +45,7 @@ class MinorBoxController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -67,8 +67,7 @@ class MinorBoxController extends Controller
      */
     public function show(work1_cut_bonus $id)
     {
-        $items = Work1::whereBetween('created_at',[$id->start_date, $id->end_date])->where('estado','!=','No aprobado')->get(); 
-
+        $items = Work1::whereBetween('created_at',[$id->start_date, $id->end_date])->where('estado','!=','No aprobado')->get();
         $array = array();
         $m = 0;
         foreach ($items as $item) {
@@ -97,7 +96,7 @@ class MinorBoxController extends Controller
                         break;
                     default:
                 }
-                
+
                 if (array_key_exists($user->id,$array)) {
                     $caja = $array[$user->id]['caja'];
                     $deliverable = $array[$user->id]['deliverable'];
@@ -149,7 +148,7 @@ class MinorBoxController extends Controller
         {
             $query->with('minor_box');
         }])->whereBetween('created_at',[$id->start_date,$id->end_date])->where('estado','!=','No aprobado')->get();
-        
+
         $itemsAfter = $this->getAfter($id->id);
         $minor_boxes = MinorBoxUser::with('user')->where('status',1)->get();
         return view('human_management.bonus.minor_box.edit',compact('items','id','itemsAfter','minor_boxes'));
@@ -160,7 +159,7 @@ class MinorBoxController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response  
+     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, work1_cut_bonus $id)
     {
@@ -170,25 +169,25 @@ class MinorBoxController extends Controller
         $items = Work1::whereBetween('created_at',[$id->start_date,$id->end_date])->where('estado','!=','No aprobado')->get();
 
         $users_minor = array();
-        
+
         foreach ($items as $item) {
             $i = 0;
             foreach ($item->users as $user) {
                 $i++;
-                
+
                 $minor_box = 0;
                 $discharges = 0;
                 if (!array_key_exists($user->id,$users_minor)) {
 
                     $wallet = MinorBoxUser::where('user_id',$user->id)->first();
-    
+
                     if ($wallet) {
                         $minor_box = $wallet->charges;
                         $discharges = $wallet->discharges;
                         $users_minor[$user->id] = true;
                     }
                 }
-                
+
                 switch ($i) {
                     case 1:
                         $item->work_add->update([
@@ -214,12 +213,12 @@ class MinorBoxController extends Controller
                     case 4:
                         $item->work_add->update([
                             'f9a3u4' => $request->box[$item->id][$user->id],
-                            'deliverable_u4' => $minor_box,  
+                            'deliverable_u4' => $minor_box,
                             'discharges_u4' => $discharges,
                         ]);
                         break;
                     default:
-                        
+
                         break;
                 }
             }
@@ -229,7 +228,7 @@ class MinorBoxController extends Controller
             'has_box' => 1,
             'status' => $id->has_bonus ? 2 : 3,
         ]);
-        
+
         if ($id->has_bonus) {
             $users = User::where('state',1)->get();
             foreach ($users as $user) {
@@ -260,7 +259,6 @@ class MinorBoxController extends Controller
         ]);
         $minor_box = MinorBoxUser::where('user_id',$request->user_id)->first();
         if ($minor_box) {
-            $status = 0;
             $val = $request->value ? $request->value : 0;
             $dis = $request->discharges ? $request->discharges : 0;
 
@@ -269,20 +267,20 @@ class MinorBoxController extends Controller
             if ($value > $discharges) {
                 $total_value = $value - $discharges;
                 $total_discharges = 0;
-                $smAcc = "tiene un total de ".$total_value;
+                $smAcc = "tiene un total de $".number_format($total_value,0,',','.');
             }else {
                 $total_discharges = $discharges - $value;
                 $total_value = 0;
-                $smAcc = "se le debe un total de ".$total_discharges;
+                $smAcc = "se le debe un total de $".number_format($total_discharges,0,',','.');
             }
 
             $msValue = '';
             if ($request->value > 0) {
-                $msValue = 'cargo: '.$request->value.' ';
+                $msValue = 'cargo: $'.number_format($request->value,0,',','.').' ';
             }
             $msDischarges = '';
             if ($request->discharges > 0) {
-                $msDischarges = 'descargo: '.$request->discharges.' ';
+                $msDischarges = 'descargo: $'.number_format($request->discharges,0,',','.').' ';
             }
 
             $history = now()->format('d/m/Y H:i:s').': Manual '.$msValue.$msDischarges.'y '.$smAcc.' Por: '.auth()->user()->name.' Comentario:'.$request->commentary."\n";
@@ -388,6 +386,15 @@ class MinorBoxController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success','Se ha limpiado los valores del '.$id->user->name.' que se solicitaron correctamente');
+        return redirect()->back()->with('success','Se ha limpiado los valores de '.$id->user->name.' que se solicitaron correctamente');
+    }
+    public function tope(Request $request, MinorBoxUSer $id)
+    {
+        // return $request;
+        $id->update([
+            'tope'=>$request->tope
+        ]);
+
+        return redirect()->route('bonus_minor_box')->with('success','Se ha registrado correctamente el tope a '.$id->user->name);
     }
 }

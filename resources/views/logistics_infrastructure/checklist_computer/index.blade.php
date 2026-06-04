@@ -12,7 +12,7 @@
     </ol>
 </section>
 <section class="content">
-    @include('includes.alerts')
+     
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Lista de inpecciones de equipos contra caídas</h3>
@@ -31,6 +31,7 @@
                                 <th scope="col">Código</th>
                                 <th scope="col">Responsable</th>
                                 <th scope="col">Aprobador</th>
+                                <th scope="col">Computador</th>
                                 <th scope="col">Fecha</th>
                                 <th scope="col">Estado</th>
                                 <th scope="col">Acciones</th>

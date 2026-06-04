@@ -16,7 +16,7 @@
     <input type="hidden" value="{{ count($id->invoicesPay()) }}" id="count_invoices">
 </div>
 <section class="content">
-    @include('includes.alerts')
+     
     <div class="box">
         <div class="box-header">
             <div class="box-tools">

@@ -8,6 +8,7 @@ use App\Models\human_magement\settlement;
 use App\Models\human_magement\settlementSalaryMonth;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Models\human_magement\settlementYear;
+use App\Models\SystemMessages;
 use App\User;
 use Illuminate\Support\Facades\Mail;
 
@@ -23,6 +24,7 @@ class settlementController extends Controller
         $this->middleware('permission:Descargar liquidación de prestaciones sociales',['only' => ['download']]);
         $this->middleware('permission:Eliminar liquidación de prestaciones sociales',['only' => ['destroy']]);
         $this->middleware('permission:Aprobar liquidación de prestaciones sociales',['only' => ['approve']]);
+        $this->message = SystemMessages::where('state',1)->where('name','Envio de formatos')->first();
     }
 
     /**
@@ -43,8 +45,9 @@ class settlementController extends Controller
      */
     public function create()
     {
-        $users= User::where('state',1)->get();
-        return view('human_management.settlement.create',compact('users'));
+        $users= User::get();
+        $message = $this->message;
+        return view('human_management.settlement.create',compact('users','message'));
     }
 
     /**
@@ -100,7 +103,7 @@ class settlementController extends Controller
      */
     public function edit(settlement $id)
     {
-        $users= User::where('state',1)->get();
+        $users= User::get();
         return view('human_management.settlement.edit',compact('users','id'));
     }
 
@@ -168,10 +171,10 @@ class settlementController extends Controller
             ]);
             Mail::send('human_management.settlement.email.main', ['id' => $id], function ($menssage) use ($id,$pdf)
             {
-                $menssage->to($id->responsable->email,$id->responsable->name)->subject("Energitelco S.A.S PAGO DE COMISIONES A TÉCNICOS APROBADO");
+                $menssage->to($id->responsable->email,$id->responsable->name)->to($id->user->email,$id->user->name)->subject("Energitelco S.A.S PAGO DE LIQUIDACIÓN DE PRESTACIÓN DE SERVICIO APROBADA");
                 $menssage->attachData($pdf->output(), 'LIQUIDACION.pdf');
             });
-            return redirect()->route('settlement')->with('success','Se ha aprobado la liquidación correctamente');
+            return redirect()->back()->with('success','Se ha aprobado la liquidación correctamente');
         }else {
             $id->update([
                 'status' => 0,
@@ -179,7 +182,7 @@ class settlementController extends Controller
                 'approve_id' => auth()->id(),
             ]);
             
-            return redirect()->route('settlement')->with('success','Se ha desaprobado la liquidación correctamente');
+            return redirect()->back()->with('success','Se ha desaprobado la liquidación correctamente');
         }
     }
     

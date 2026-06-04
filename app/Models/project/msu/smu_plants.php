@@ -1,0 +1,93 @@
+<?php
+
+namespace App\Models\project\msu;
+
+use Illuminate\Database\Eloquent\Model;
+
+class smu_plants extends Model
+{
+    protected $table = 'smu_plants';
+
+    protected $fillable = [
+        'maintenance_id',
+        'plant_id',
+
+        // Plant 1 fields
+        'marca_equipo_pl1',
+        'modelo_equipo_pl1',
+        'serial_equipo_pl1',
+        'velocidad_motor_pl1',
+        'admision_aire_pl1',
+        'velocidad_rpm_pl1',
+        'horas_trabajo_pl1',
+        'frecuencia_pl1',
+        'capacidad_kva_pl1',
+        'capacidad_kw_pl1',
+        'derrateo_pl1',
+        'capacidad_derrateo_pl1',
+        'marca_motor_pl1',
+        'modelo_motor_pl1',
+        'serial_motor_pl1',
+        'presion_aceite_pl1',
+        'temp_aceite_pl1',
+        'temp_refrigerante_pl1',
+        'marca_generador_pl1',
+        'modelo_generador_pl1',
+        'serial_generador_pl1',
+        'temperatura_ambiente_pl1',
+        'voltaje_bateria_pl1',
+        'capacidad_bateria_pl1',
+        'tipo_bateria_pl1',
+        'cantidad_bateria_pl1',
+        'estado_bateria_pl1',
+        'estado_cargador_pl1',
+        'vac_l1_l2_pl1',
+        'vac_l1_l3_pl1',
+        'vac_l2_l3_pl1',
+        'amperios_l1_pl1',
+        'amperios_l2_pl1',
+        'amperios_l3_pl1',
+        'capacidad_amp_pl1',
+        'carga_demandada_pl1',
+        'porcentaje_carga_pl1',
+
+        // Plant 2 fields (with default values)
+        'marca_equipo_pl2',
+        'modelo_equipo_pl2',
+        'serial_equipo_pl2',
+        'velocidad_motor_pl2',
+        'admision_aire_pl2',
+        'velocidad_rpm_pl2',
+        'horas_trabajo_pl2',
+        'frecuencia_pl2',
+        'capacidad_kva_pl2',
+        'capacidad_kw_pl2',
+        'derrateo_pl2',
+        'capacidad_derrateo_pl2',
+        'marca_motor_pl2',
+        'modelo_motor_pl2',
+        'serial_motor_pl2',
+        'presion_aceite_pl2',
+        'temp_aceite_pl2',
+        'temp_refrigerante_pl2',
+        'marca_generador_pl2',
+        'modelo_generador_pl2',
+        'serial_generador_pl2',
+        'temperatura_ambiente_pl2',
+        'voltaje_bateria_pl2',
+        'capacidad_bateria_pl2',
+        'tipo_bateria_pl2',
+        'cantidad_bateria_pl2',
+        'estado_bateria_pl2',
+        'estado_cargador_pl2',
+        'vac_l1_l2_pl2',
+        'vac_l1_l3_pl2',
+        'vac_l2_l3_pl2',
+        'amperios_l1_pl2',
+        'amperios_l2_pl2',
+        'amperios_l3_pl2',
+        'capacidad_amp_pl2',
+        'carga_demandada_pl2',
+        'porcentaje_carga_pl2',
+    ];
+}

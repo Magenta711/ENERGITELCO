@@ -16,7 +16,7 @@
     </ol>
 </section>
 <section class="content">
-    @include('includes.alerts')
+     
     <div class="box">
         <form action="{{route('forms_update',$id->id)}}" method="POST" autocomplete="off">
             @csrf

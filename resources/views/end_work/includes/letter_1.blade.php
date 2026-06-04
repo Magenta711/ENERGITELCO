@@ -14,7 +14,7 @@
         <div class="form-group">
             <label for="reason1">Motivo</label>
             <small>(Renuncia del trabajador, Acuerdo entre las partes, Despido por la empresa)</small>
-            <textarea name="reason1" id="reason1" cols="3" rows="3" class="form-control"></textarea>
+            <textarea name="reason1" id="reason1" cols="3" rows="3" class="form-control">Acuerdo entre las partes</textarea>
         </div>
     </div>
 </div>

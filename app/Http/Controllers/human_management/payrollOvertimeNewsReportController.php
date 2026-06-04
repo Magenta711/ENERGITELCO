@@ -35,7 +35,7 @@ class payrollOvertimeNewsReportController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function index()
     {
         $payrolls = Work8::with(['coordinadorAcargo','responsableAcargo'])->get();
@@ -125,7 +125,7 @@ class payrollOvertimeNewsReportController extends Controller
 
         foreach ($users as $user) {
             if ($user->hasPermissionTo('Aprobar reporte de novedades de nómina y horas extras')){
-                $user->notify(new notificationMain($format->id,'Solicitud de reporte de novedades y horas extras '.$format->id,'human_management/payroll_overtime_news_report/show/'));
+                $user->notify(new notificationMain($format->id,'Solicitud de reporte de novedades y horas extras '.$format->id,'finances/payroll_overtime_news_report/show/'));
             }
         }
           
@@ -238,7 +238,7 @@ class payrollOvertimeNewsReportController extends Controller
 
         foreach ($users as $user) {
             if ($user->hasPermissionTo('Aprobar reporte de novedades de nómina y horas extras')){
-                $user->notify(new notificationMain($format->id,'Se edito reporte de novedades y horas extras '.$format->id,'human_management/payroll_overtime_news_report/show/'));
+                $user->notify(new notificationMain($format->id,'Se edito reporte de novedades y horas extras '.$format->id,'finances/payroll_overtime_news_report/show/'));
             }
         }
 
@@ -302,7 +302,7 @@ class payrollOvertimeNewsReportController extends Controller
                 'commentary'=>$request->commentary,
                 'coordinador' => auth()->id(),
             ]);
-            $id->responsableAcargo->notify(new notificationMain($id->id,'Se ha aprobado un reporte de novedades y horas horas extras '.$id->id,'human_management/payroll_overtime_news_report/show/'));
+            $id->responsableAcargo->notify(new notificationMain($id->id,'Se ha aprobado un reporte de novedades y horas horas extras '.$id->id,'finances/payroll_overtime_news_report/show/'));
             // PDF
             foreach ($id->work_adds as $key => $data) {
                 // $pdf = PDF::loadView('pdf.formulario8',compact('data'));
@@ -328,15 +328,15 @@ class payrollOvertimeNewsReportController extends Controller
                 $menssage->to($usuario->email,$usuario->name)->subject("Energitelco S.A.S H-FR-14 REPORTE DE NOVEDADES DE NOMINA Y HORAS EXTRAS EXITOSA ".$id->id);
             });
             
-            return redirect()->route('approval')->with(['success'=>'Se ha aprobado la solicitud '.$id->id.' correctamente','sudmenu' => 8]);
+            return redirect()->back()->with(['success'=>'Se ha aprobado la solicitud '.$id->id.' correctamente']);
         }else {
             $id->update([
                 'estado' => "No aprobado",
                 'commentary'=>$request->commentary,
                 'coordinador' => auth()->id(),
             ]);
-            $id->responsableAcargo->notify(new notificationMain($id->id,'No se aprobó la solicitud de Reporte de novedades y horas extras '.$id->id,'human_management/payroll_overtime_news_report/show/'));
-            return redirect()->route('approval')->with(['success'=>'Se ha desaprobado la solicitud correctamente','sudmenu'=>8]);
+            $id->responsableAcargo->notify(new notificationMain($id->id,'No se aprobó la solicitud de Reporte de novedades y horas extras '.$id->id,'finances/payroll_overtime_news_report/show/'));
+            return redirect()->back()->with(['success'=>'Se ha desaprobado la solicitud correctamente']);
         }
     }
 }

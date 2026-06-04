@@ -12,7 +12,7 @@
     </ol>
 </section>
 <section class="content">
-    @include('includes.alerts')
+     
     <div class="row">
         @include('settings.include.menu')
         <div class="col-md-8 col-ms-8">

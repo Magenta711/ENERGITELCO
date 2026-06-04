@@ -11,7 +11,7 @@
     </ol>
 </section>
 <section class="content">
-    @include('includes.alerts')
+     
     <div class="row">
         <div class="col-md-12">
             <div class="box">
@@ -19,28 +19,29 @@
                     <div class="box-title">Lista de usuarios</div>
                     <div class="box-tools">
                         @can('Disparar evaluación de desempeño')
-                            <button class="btn btn-sm btn-danger" data-toggle="modal" data-target=".performance_evaluation">Evaluación de desempeño</button>
+                            <button class="btn btn-sm my-1 btn-danger" data-toggle="modal" data-target=".performance_evaluation">Evaluación de desempeño</button>
                         @endcan
                         @can('Realizar llamados de atención a trabajadores')
-                            <a class="btn btn-sm btn-warning btn-send" href="{{ route('attention_call_create') }}">Llamado de atención</a>
+                            <a class="btn btn-sm my-1 btn-warning btn-send" href="{{ route('attention_call_create') }}">Llamado de atención</a>
                         @endcan
                         @can('Exportar usuarios a excel')
-                        <a href="{{route('user_export')}}" class="btn btn-sm btn-primary">Exportar</a>
+                        <a href="{{route('user_export')}}" class="btn btn-sm my-1 btn-primary">Exportar</a>
                         @endcan
                         @can('Crear usuarios')
-                            <a href="{{route('user_create')}}" class="btn btn-sm btn-success btn-send">Crear</a>
+                            <a href="{{route('user_create')}}" class="btn btn-sm my-1 btn-success btn-send">Crear</a>
                         @endcan
                     </div>
                 </div>
                 <div class="box-body">
                     <div class="table-responsive table-hover">
-                        <table id="table_index" class="table table-striped table-bordered" data-page-length='15'>
+                        <table id="table_user" class="table table-striped table-bordered" data-page-length='15'>
                             <thead>
                                 <tr>
                                     <th scope="col"></th>
                                     <th scope="col">Documento</th>
                                     <th scope="col">Nombre</th>
                                     <th scope="col">Correo</th>
+                                    <th scope="col">Teléfono</th>
                                     <th scope="col">Cargo</th>
                                     <th scope="col">24/7</th>
                                     <th scope="col">Estado</th>
@@ -48,61 +49,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $user)
-                                <tr>
-                                    <th scope="row">{{ $user->id }}</th>
-                                    <td>{{ $user->cedula }}</td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email}}</td>
-                                    <td>{{ $user->position->name }}</td>
-                                    <td>{!! $user->b24_7 ? '<i class="fa fa-check">' : '<i class="fa fa-times">' !!}</td>
-                                    <td>{{ ($user->state == 1)  ? 'Activo' : 'Inactivo' }}</td>
-                                    <td>
-                                        @can('Ver usuarios')
-                                            <a class="btn  btn-sm btn-success btn-send" href="{{ route('user_show',$user->id) }}">Ver</a>
-                                        @endcan
-                                        @can('Editar usuarios')
-                                            <a class="btn btn-sm btn-primary btn-send" href="{{ route('user_edit',$user->id) }}">Editar</a>
-                                        @endcan
-                                        {{-- @if ($user->register && $user->register->state == 2) --}}
-                                            @can('Eliminar usuarios')
-                                            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal_delete_{{$user->id}}">Eliminar</button>
-                                                {{-- Modal Delete --}}
-                                                <div class="modal fade" id="modal_delete_{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <form action="{{ route('user_destroy',$user->id) }}" method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                        <div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                            <h4 class="modal-title" id="exampleModalLongTitle">Eliminar usuario</h4>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p>¿Está seguro de eliminar el usuario {{$user->name}}?</p>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-sm btn-secondary pull-left" data-dismiss="modal">Cancelar</button>
-                                                            <button type="submit" class="btn btn-sm btn-danger btn-send">Eliminar</button>
-                                                        </div>
-                                                        </form>
-                                                    </div>
-                                                    </div>
-                                                </div>
-                                                @endcan
-                                            {{-- @else --}}
-                                                @can('Terminar contratación de usuarios')
-                                                
-                                                    <a href="{{route('user_end_work',$user->id)}}" class="btn btn-sm btn-warning btn-send">Terminar</a>
-                                                @endcan
-                                            {{-- @endif --}}
-                                        </form>
-                                    </td>
-                                </tr>
-                                @endforeach
+                               
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col">Documento</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Correo</th>
+                                    <th scope="col">Teléfono</th>
+                                    <th scope="col">Cargo</th>
+                                    <th scope="col">24/7</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>
@@ -110,28 +71,107 @@
         </div>
     </div>
 
-    {{-- Modal Evaluación de desempeño --}}
-    <div class="modal fade performance_evaluation" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-md">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title">Nueva evaluación de desempeño</h4>
-                </div>
-                <form action="{{route('performance_evaluation_create')}}" method="post">
-                @csrf
-                    <div class="modal-body">
-                        <p>¿Desea disparar el envio de la evaluación de desempeño a todos los usuarios activos?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-sm btn-danger pull-left" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-sm btn-success btn-send">Aceptar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+    @include('users.include.modals.delete')
+    @include('users.include.modals.evaluation')
 </section>
+
+@endsection
+
+@section('js')
+    <script>
+        $(document).ready(function () {
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            url = 'users/list';
+            table_id = '#table_user';
+
+            columns = [
+                {data : "id"},
+                {data : "cedula"},
+                {data : "name"},
+                {data : "email"},
+                {data : "telefono"},
+                {data : "position.name"},
+                {
+                    render: function ( data, type, row, meta ) {
+                        return row.b24_7 == 1 ? '<i class="fa fa-check">' : '<i class="fa fa-times">';
+                    }
+                },
+                {
+                    render: function ( data, type, row, meta ) {
+                        if (row.register && row.register.state == 2) {
+                            return 'Proceso de terminación'
+                        }
+                        return row.state == 1 ? 'Activo' : 'Inactivo';
+                    }
+                },
+                {
+                    render: function ( data, type, row, meta ) {
+                        let btnTermination = row.register && row.register.state == 2;
+                        let idUser = {{Auth::user()->id}};
+
+                        return `
+                        @can("Ver usuarios")
+                            <a class="btn  btn-sm btn-success btn-send" href="users/show/${row.id}">Ver</a>
+                        @endcan
+                        @can("Editar usuarios")
+                            <a class="btn btn-sm my-1 btn-primary btn-send" href="users/${row.id}/edit">Editar</a>
+                        @endcan
+                        @can('Eliminar usuarios')
+                            <button type="button" class="btn btn-sm my-1 btn-danger btn-delete">Eliminar</button>
+                        @endcan
+                            ${
+                                (btnTermination) ? 
+                                    row.id == idUser ? 
+                                        ` <a href="user/end_work/signature" class="btn btn-sm my-1 btn-warning btn-send">Firmar de terminación</a>`
+                                    : `<a href="user/end_work/witness/${row.id}" class="btn btn-sm my-1 btn-warning btn-send">Firmar como testigo</a>`
+                                : ` @can("Terminar contratación de usuarios")
+                                        <a href="user/end_work/presend/${row.id}" class="btn btn-sm my-1 btn-warning btn-send">Terminar</a>
+                                    @endcan`
+                            }
+                        `;
+                    }
+                }
+            ];
+
+            dataTableCrete(url,columns,table_id);
+        })
+        
+        function initFnTable(table) {
+            $('.btn-delete').click(function () {
+                let row = table.row( $(this).parent().parent() );
+                let data2 = row.data();
+                // $('#delete-id').val(data.id);
+                $('#delete-name').text(data2.name);
+                $('#delete-modal').modal();
+                $('#delete-submit').click(function (e) {
+                    let form = $("#deleteForm")[0];
+                    let data = new FormData(form);
+                    $.ajax({
+                        type:'POST',
+                        url:'/users/'+data2.id,
+                        data:data,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        timeout: 1000000,
+                        beforeSend: function(){
+                        },
+                        success:function(data){
+                            row.remove().draw();
+                            $('#delete-modal').modal('hide');
+                        },
+                        error: function (error) {
+                            console.log('error-->',error);
+                        }
+                    });
+                });
+            });
+        }
+    </script>
 @endsection

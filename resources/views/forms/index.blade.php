@@ -11,7 +11,7 @@
     </ol>
 </section>
 <section class="content">
-    @include('includes.alerts')
+     
     <div class="box">
         <div class="box-header">
             <div class="box-title">
@@ -90,8 +90,10 @@
 @section('js')
     <script>
         function copy_url(item){
+             $('#url_'+item).show();
             document.getElementById('url_'+item).select();
             document.execCommand("copy");
+            $('#url_'+item).hide();
         }
     </script>
 @endsection

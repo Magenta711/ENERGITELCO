@@ -14,7 +14,7 @@
 </section>
 <section class="content">
     <div class="box">
-        @include('includes.alerts')
+         
         <div class="box-header">
             <div class="box-title">
                 {{ $id->name }}

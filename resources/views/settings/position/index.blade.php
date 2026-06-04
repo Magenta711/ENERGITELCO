@@ -14,7 +14,7 @@
 </section>
 
 <section class="content">
-    @include('includes.alerts')
+     
     <div class="box box-solid">
         <div class="box-header with-border">
             <i class="fa fa-cubes"></i>

@@ -60,7 +60,6 @@ class profileController extends Controller
         $last_24_7 = null;
         $menssage = '';
         $time = auth()->user()->time_24_7;
-        return json_encode($time);
         if (!auth()->user()->b24_7 && isset($request->b24_7)) {
             $last_24_7 = now();
         }

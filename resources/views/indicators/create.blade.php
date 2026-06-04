@@ -13,7 +13,7 @@
     </ol>
 </section>
 <section class="content">
-    @include('includes.alerts')
+     
     <div class="box">
         <div class="box-header">
             <div class="box-title">Crear nuevo indicador</div>
@@ -91,7 +91,7 @@
                     <textarea name="analysis" id="analysis" cols="30" rows="3" class="form-control"></textarea>
                 </div>
                 <hr>
-                <h3>Formula</h3>
+                <h3>Procesamiento formula</h3>
                 <div id="caja_formula" class="row">
                     <div class="col-sm-3 text-center">
                         <button id="btn_operator" class="btn btn-sm btn-link">+ Operador</button>

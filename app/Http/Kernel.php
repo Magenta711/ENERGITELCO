@@ -63,6 +63,7 @@ class Kernel extends HttpKernel
         'roles' => \App\Http\Middleware\CheckRoles::class,
         'role' => \App\Http\Middleware\RoleMiddleware::class,
         'permission' => \App\Http\Middleware\PermissionMiddleware::class,
+        'tienda.session' => \App\Http\Middleware\CustomTiendaSession::class,
     ];
 
     /**

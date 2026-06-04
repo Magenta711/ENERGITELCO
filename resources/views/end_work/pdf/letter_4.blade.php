@@ -72,7 +72,7 @@
         <br>
         <p>{{$data->city}}, {{$date['day']}} de {{$date['month']}} de {{ $date['year']}}</p>
         <br><br>
-        <p>Señor. <br>PENSIONES Y CESANTÍAS PROTECCION</p>
+        <p>Señor. <br>{{$id->from}}</p>
         <br><br>
         <p>{!! str_replace("\r\n", '<br>', addslashes($data->letter4)) !!}</p>
         <br>

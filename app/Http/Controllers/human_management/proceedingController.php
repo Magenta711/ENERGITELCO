@@ -354,7 +354,7 @@ class proceedingController extends Controller
         return redirect()->back()->with('success','Se ha firmado la acta correctamente');
     }
 
-    public function download (Proceeding $id){
+    public function download(Proceeding $id){
         $pdf = PDF::loadView('human_management/proceedings/pdf/main',['id' => $id]);
         return $pdf->download($id->id.'_acta.pdf');
     }

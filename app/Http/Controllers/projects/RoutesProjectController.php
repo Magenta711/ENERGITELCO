@@ -530,12 +530,12 @@ class RoutesProjectController extends Controller
     {
         $id->update(['status' => 1]);
         $id->responsable->notify(new notificationMain($id->id,'Proyecto de rutas aprobado '.$id->id,'project/routes/show/'));
-        return redirect()->route('approval')->with(['success'=>'Se ha aprobado el proyecto correctamente','sudmenu' => 15]);
+        return redirect()->back()->with(['success'=>'Se ha aprobado el proyecto correctamente']);
     }
     public function not_approval(Routes $id)
     {
         $id->update(['status' => 2]);
         $id->responsable->notify(new notificationMain($id->id,'Proyecto de rutas desaprobado '.$id->id,'project/routes/show/'));
-        return redirect()->route('approval')->with(['success'=>'Se ha desaprobado el proyecto correctamente','sudmenu' => 15]);
+        return redirect()->back()->with(['success'=>'Se ha desaprobado el proyecto correctamente']);
     }
 }

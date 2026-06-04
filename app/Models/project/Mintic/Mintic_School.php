@@ -40,4 +40,14 @@ class Mintic_School extends Model
     {
         return $this->hasMany(MinticVisit::class,'project_id','id');
     }
+
+    public function maintenances()
+    {
+        return $this->hasMany(mintic_maintenance::class,'project_id','id');
+    }
+    
+    public function stop_clocks()
+    {
+        return $this->hasMany(minticStopClock::class,'project_id','id');
+    }
 }

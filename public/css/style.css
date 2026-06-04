@@ -8,3 +8,11 @@
     background: url('../img/cargando.gif') 50% 50% no-repeat rgb(249,249,249);
     opacity: .8;
 }
+
+.swal2-popup.swal2-toast .swal2-title {
+    font-size: 2em!important;
+}
+
+.swal2-content {
+    font-size: 15px !important;
+}

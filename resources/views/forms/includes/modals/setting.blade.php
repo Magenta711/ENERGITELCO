@@ -84,6 +84,13 @@
                     </div>
                     <hr>
                 </div>
+                <div class="col-md-6" id="attach_div" style="none">
+                    <div class="form-group">
+                        <input type="checkbox" {!!isset($id) && $id->with_attach ? 'checked' : ''!!}  name="with_attach"  id="with_attach" value="1">
+                        <label for="with_attach">Requiere confirmacion por firma virtual</label>
+                    </div>
+                    <hr>
+                </div>
                 <div class="col-md-6" id="sort_randomly_div" style="display: none;">
                     <div class="form-group">
                         <input type="checkbox" {!!isset($id) && $id->sort_randomly ? 'checked' : ''!!}  name="sort_randomly" id="sort_randomly" value="1">

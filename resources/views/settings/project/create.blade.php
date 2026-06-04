@@ -13,7 +13,7 @@
     </ol>
 </section>
 <section class="content">
-    @include('includes.alerts')
+     
             <form action="{{route('project_setting_store')}}" method="POST">
                 @csrf
                 <div class="box box-solid">

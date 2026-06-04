@@ -32,14 +32,14 @@
                               <td>{{$item->status ? 'Inhabilitado' : 'Habilitado' }}</td>
                               @if ($id->from_to_auth || $id->from_to_mail)
                                 <td>
-                                  <input type="hidden" id="url_{{$item->id}}" value="{{config('app.url')}}/answer/{{$id->token}}/{{$item->secret}}" name="myURL_{{$item->id}}">
-                                  <button class="btn btn-outline-secondary copy-url" id="copy_url_{{$item->id}}" onclick="copy_url({{$item->id}})" type="button"><i class="fas fa-copy"></i></button>
-                                  @if (!$item->status)
-                                    <form action="{{route('forms_resend',$item->id)}}" method="post">
-                                      @csrf
+                                  <input type="text" id="url_{{$item->id}}" value="{{config('app.url')}}/answer/{{$id->token}}/{{$item->secret}}" name="myURL_{{$item->id}}" style="display: none;">
+                                  <form action="{{route('forms_resend',$item->id)}}" method="post">
+                                    @csrf
+                                    <button type="button" class="btn btn-outline-secondary copy-url" id="copy_url_{{$item->id}}" onclick="copy_url({{$item->id}})"><i class="fas fa-copy"></i></button>
+                                    @if (!$item->status)
                                       <button type="submit" class="btn btn-sm btn-primary">Reenviar</button>
-                                    </form>
-                                  @endif
+                                      @endif
+                                  </form>
                                 </td>
                               @endif
                           </tr>

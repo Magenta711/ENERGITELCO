@@ -18,881 +18,1193 @@
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Session\Middleware\StartSession;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
 
-Route::get('/',function () {
-    return view('welcome');
+Route::get('/', 'WelcomeController@index')->name('welcome');
+
+Route::get('example', function () {
+    return view('example');
 });
 
-// Route::get('example',function ()
-// {
-//     return view('example');
-// });
+Route::post('example_post', 'homeController@example')->name('example_post');
 
 //Clear Cache facade value:
-Route::get('/clear-cache', function() {
+Route::get('/clear-cache', function () {
     $exitCode = Artisan::call('cache:clear');
     return '<h1>Cache facade value cleared</h1>';
 });
 
 //Reoptimized class loader:
-Route::get('/optimize', function() { 
+Route::get('/optimize', function () {
     $exitCode = Artisan::call('optimize');
     return '<h1>Reoptimized class loader</h1>';
 });
 
 //Route cache:
-Route::get('/route-cache', function() {
+Route::get('/route-cache', function () {
     $exitCode = Artisan::call('route:cache');
     return '<h1>Routes cached</h1>';
 });
 
 //Clear Route cache:
-Route::get('/route-clear', function() {
+Route::get('/route-clear', function () {
     $exitCode = Artisan::call('route:clear');
     return '<h1>Route cache cleared</h1>';
 });
 
 //Clear View cache:
-Route::get('/view-clear', function() {
+Route::get('/view-clear', function () {
     $exitCode = Artisan::call('view:clear');
     return '<h1>View cache cleared</h1>';
 });
 
 
-Route::post('guest/message','guestController@send')->name('guest_message_send');
+Route::get('stora/{file}', function ($file) {
+    $path = storage_path('app/private/signature/' . $file);
+    return response()->file($path);
+})->name('uploads')->middleware('auth')->middleware('verified');
+
+Route::post('guest/message', 'guestController@send')->name('guest_message_send');
 
 Auth::routes(['verify' => true]);
 
-Route::get('home','HomeController@index')->name('home');
-Route::get('home/callendar','HomeController@callendar')->name('home_callendar');
-Route::get('about','HomeController@about')->name('about');
-Route::post('suggestions_mailbox','HomeController@suggestions_mailbox')->name('suggestions_mailbox_save');
-Route::get('letters/working','HomeController@working_letter')->name('working_letter');
+Route::get('home', 'HomeController@index')->name('home');
+Route::get('home/callendar', 'HomeController@callendar')->name('home_callendar');
+Route::get('about', 'HomeController@about')->name('about');
+Route::post('suggestions_mailbox', 'HomeController@suggestions_mailbox')->name('suggestions_mailbox_save');
+Route::get('letters/working', 'HomeController@working_letter')->name('working_letter');
 
-Route::post('suggestions_mailbox','HomeController@bonus_24_7')->name('bonus_24-7');
+Route::post('suggestions_mailbox', 'HomeController@bonus_24_7')->name('bonus_24-7');
 
 //profile
-Route::get('profile','profileController@index')->name('profile');
-Route::get('profile/setting/edit','profileController@edit')->name('profile_edit');
-Route::put('profile/settings','profileController@update')->name('profile_update');
-Route::post('profile/all_week','profileController@all_week')->name('all_week');
+Route::get('profile', 'profileController@index')->name('profile');
+Route::get('profile/setting/edit', 'profileController@edit')->name('profile_edit');
+Route::put('profile/settings', 'profileController@update')->name('profile_update');
+Route::post('profile/all_week', 'profileController@all_week')->name('all_week');
 
 //password
-Route::get('password/edit','profileController@password_edit')->name('password_edit');
-Route::put('password','profileController@password_update')->name('password_update');
+Route::get('password/edit', 'profileController@password_edit')->name('password_edit');
+Route::put('password', 'profileController@password_update')->name('password_update');
 
 // Carnet
-Route::get('carnet','profileController@carnet')->name('carnet');
+Route::get('carnet', 'profileController@carnet')->name('carnet');
 
 // terms condition and provacy policy
-Route::get('terms_conditions','infoController@termsConditions')->name('terms_conditions');
-Route::get('privacy_policy','infoController@privacyPolicy')->name('privacy_policy');
-Route::get('policy_condition_24_7','infoController@b24_7')->name('policy_condition_24_7');
+Route::get('terms_conditions', 'infoController@termsConditions')->name('terms_conditions');
+Route::get('privacy_policy', 'infoController@privacyPolicy')->name('privacy_policy');
+Route::get('policy_condition_24_7', 'infoController@b24_7')->name('policy_condition_24_7');
 
 //Approvals
-Route::get('approval','approvalController@index')->name('approval');
+Route::get('approval', 'approvalController@index')->name('approval');
 
 //work permit
-Route::get('human_management/work_permit/{all?}','human_management\workPermitController@index')->name('work_permit');
-Route::get('human_management/work_permits/create','human_management\workPermitController@create')->name('work_permit_create');
-Route::post('human_management/work_permit','human_management\workPermitController@store')->name('work_permit_store');
-Route::get('human_management/work_permit/show/{id}','human_management\workPermitController@show')->name('work_permit_show');
+Route::get('human_management/work_permit', 'human_management\workPermitController@index')->name('work_permit');
+Route::get('human_management/work_permit/all', 'human_management\workPermitController@index2')->name('work_permit_all');
+Route::get('human_management/work_permit/list', 'human_management\workPermitController@list')->name('work_permit_list');
+Route::get('human_management/work_permits/create', 'human_management\workPermitController@create')->name('work_permit_create');
+Route::post('human_management/work_permit', 'human_management\workPermitController@store')->name('work_permit_store');
+Route::get('human_management/work_permit/show/{id}', 'human_management\workPermitController@show')->name('work_permit_show');
 // Route::get('human_management/work_permit/edit/{id}','human_management\workPermitController@edit')->name('work_permit_edit');
 // Route::put('human_management/work_permit/{id}','human_management\workPermitController@update')->name('work_permit_update');
-Route::get('human_management/work_permit/download/{id}','human_management\workPermitController@download')->name('work_permit_download');
-Route::put('human_management/work_permit/{id}','human_management\workPermitController@approve')->name('work_permit_approve');
-Route::delete('human_management/work_permit/delete/{id}','human_management\workPermitController@destroy')->name('work_permit_delete');
+Route::get('human_management/work_permit/download/{id}', 'human_management\workPermitController@download')->name('work_permit_download');
+Route::put('human_management/work_permit/{id}', 'human_management\workPermitController@approve')->name('work_permit_approve');
+Route::delete('human_management/work_permit/delete/{id}', 'human_management\workPermitController@destroy')->name('work_permit_delete');
+
+//viatics
+Route::get('finances/viatics/technicals', 'human_management\workPermitViaticsesController@index')->name('work_permit_viatics');
+Route::get('finances/viatics/technicals/create', 'human_management\workPermitViaticsesController@create')->name('work_permit_viatics_create');
+Route::post('finances/viatics/technicals', 'human_management\workPermitViaticsesController@store')->name('work_permit_viatics_store');
+Route::get('finances/viatics/technicals/{id}', 'human_management\workPermitViaticsesController@show')->name('work_permit_viatics_show');
+Route::get('finances/viatics/technicals/{id}/edit', 'human_management\workPermitViaticsesController@edit')->name('work_permit_viatics_edit');
+Route::put('finances/viatics/technicals/{id}', 'human_management\workPermitViaticsesController@update')->name('work_permit_viatics_update');
+Route::get('finances/viatics/technicals/download/{id}', 'human_management\workPermitViaticsesController@export')->name('work_permit_viatics_export');
+Route::post('finances/viatics/technicals/{id}', 'human_management\workPermitViaticsesController@approve')->name('work_permit_viaticses_approve');
+// Route::delete('human_management/fall_protection_equipment_inspection/delete/{id}','human_management\fallProtectionEquipmentInspectionController@destroy')->name('fall_protection_equipment_inspection_delete');
 
 //bonus
-Route::get('human_management/bonus/technicals','human_management\workPermitBonusesController@index')->name('work_permit_bonuses');
-Route::get('human_management/bonus/technicals/create','human_management\workPermitBonusesController@create')->name('work_permit_bonuses_create');
-Route::post('human_management/bonus/technicals','human_management\workPermitBonusesController@store')->name('work_permit_bonuses_store');
-Route::get('human_management/bonus/technicals/{id}','human_management\workPermitBonusesController@show')->name('work_permit_bonuses_show');
-Route::get('human_management/bonus/technicals/{id}/edit','human_management\workPermitBonusesController@edit')->name('work_permit_bonuses_edit');
-Route::put('human_management/bonus/technicals/{id}','human_management\workPermitBonusesController@update')->name('work_permit_bonuses_update');
-Route::get('human_management/bonus/technicals/download/{id}','human_management\workPermitBonusesController@export')->name('work_permit_bonuses_export');
-Route::post('human_management/bonus/technicals/{id}','human_management\workPermitBonusesController@approve')->name('work_permit_bonuses_approve');
+Route::get('finances/bonus/technicals', 'human_management\workPermitBonusesController@index')->name('bonuses_technical');
+Route::get('finances/bonus/technicals/create', 'human_management\workPermitBonusesController@create')->name('bonuses_technical_create');
+Route::post('finances/bonus/technicals', 'human_management\workPermitBonusesController@store')->name('bonuses_technical_store');
+Route::get('finances/bonus/technicals/{id}', 'human_management\workPermitBonusesController@show')->name('bonuses_technical_show');
+Route::get('finances/bonus/technicals/{id}/edit', 'human_management\workPermitBonusesController@edit')->name('bonuses_technical_edit');
+Route::put('finances/bonus/technicals/{id}', 'human_management\workPermitBonusesController@update')->name('bonuses_technical_update');
+Route::get('finances/bonus/technicals/download/{id}', 'human_management\workPermitBonusesController@export')->name('bonuses_technical_export');
+Route::post('finances/bonus/technicals/{id}', 'human_management\workPermitBonusesController@approve')->name('bonuses_technical_approve');
 // Route::delete('human_management/fall_protection_equipment_inspection/delete/{id}','human_management\fallProtectionEquipmentInspectionController@destroy')->name('fall_protection_equipment_inspection_delete');
 
 //fall protection equipment inspection
-Route::get('human_management/fall_protection_equipment_inspection','human_management\fallProtectionEquipmentInspectionController@index')->name('fall_protection_equipment_inspection');
-Route::get('human_management/fall_protection_equipment_inspection/create','human_management\fallProtectionEquipmentInspectionController@create')->name('fall_protection_equipment_inspection_create');
-Route::post('human_management/fall_protection_equipment_inspection','human_management\fallProtectionEquipmentInspectionController@store')->name('fall_protection_equipment_inspection_store');
-Route::get('human_management/fall_protection_equipment_inspection/show/{id}','human_management\fallProtectionEquipmentInspectionController@show')->name('fall_protection_equipment_inspection_show');
+Route::get('human_management/fall_protection_equipment_inspection', 'human_management\fallProtectionEquipmentInspectionController@index')->name('fall_protection_equipment_inspection');
+Route::get('human_management/fall_protection_equipment_inspection/create', 'human_management\fallProtectionEquipmentInspectionController@create')->name('fall_protection_equipment_inspection_create');
+Route::post('human_management/fall_protection_equipment_inspection', 'human_management\fallProtectionEquipmentInspectionController@store')->name('fall_protection_equipment_inspection_store');
+Route::get('human_management/fall_protection_equipment_inspection/show/{id}', 'human_management\fallProtectionEquipmentInspectionController@show')->name('fall_protection_equipment_inspection_show');
 // Route::get('human_management/fall_protection_equipment_inspection/edit/{id}','human_management\fallProtectionEquipmentInspectionController@edit')->name('fall_protection_equipment_inspection_edit');
 // Route::put('human_management/fall_protection_equipment_inspection/{id}','human_management\fallProtectionEquipmentInspectionController@update')->name('fall_protection_equipment_inspection_update');
-Route::get('human_management/fall_protection_equipment_inspection/download/{id}','human_management\fallProtectionEquipmentInspectionController@download')->name('fall_protection_equipment_inspection_download');
-Route::put('human_management/fall_protection_equipment_inspection/{id}','human_management\fallProtectionEquipmentInspectionController@approve')->name('fall_protection_equipment_inspection_approve');
-Route::delete('human_management/fall_protection_equipment_inspection/delete/{id}','human_management\fallProtectionEquipmentInspectionController@destroy')->name('fall_protection_equipment_inspection_delete');
+Route::get('human_management/fall_protection_equipment_inspection/download/{id}', 'human_management\fallProtectionEquipmentInspectionController@download')->name('fall_protection_equipment_inspection_download');
+Route::put('human_management/fall_protection_equipment_inspection/{id}', 'human_management\fallProtectionEquipmentInspectionController@approve')->name('fall_protection_equipment_inspection_approve');
+Route::delete('human_management/fall_protection_equipment_inspection/delete/{id}', 'human_management\fallProtectionEquipmentInspectionController@destroy')->name('fall_protection_equipment_inspection_delete');
 
-//delivery of staffing 
-Route::get('human_management/delivery_staffing','human_management\deliveryStaffingController@index')->name('delivery_staffing');
-Route::get('human_management/delivery_staffing/create','human_management\deliveryStaffingController@create')->name('delivery_staffing_create');
-Route::post('human_management/delivery_staffing','human_management\deliveryStaffingController@store')->name('delivery_staffing_store');
-Route::get('human_management/delivery_staffing/show/{id}','human_management\deliveryStaffingController@show')->name('delivery_staffing_show');
+//delivery of staffing
+Route::get('human_management/delivery_staffing', 'human_management\deliveryStaffingController@index')->name('delivery_staffing');
+Route::get('human_management/delivery_staffing/create', 'human_management\deliveryStaffingController@create')->name('delivery_staffing_create');
+Route::post('human_management/delivery_staffing', 'human_management\deliveryStaffingController@store')->name('delivery_staffing_store');
+Route::get('human_management/delivery_staffing/show/{id}', 'human_management\deliveryStaffingController@show')->name('delivery_staffing_show');
 // Route::get('human_management/delivery_staffing/edit/{id}','human_management\deliveryStaffingController@edit')->name('delivery_staffing_edit');
 // Route::put('human_management/delivery_staffing/{id}','human_management\deliveryStaffingController@update')->name('delivery_staffing_update');
-Route::get('human_management/delivery_staffing/download/{id}','human_management\deliveryStaffingController@download')->name('delivery_staffing_download');
-Route::put('human_management/delivery_staffing/{id}','human_management\deliveryStaffingController@approve')->name('delivery_staffing_approve');
-Route::delete('human_management/delivery_staffing/delete/{id}','human_management\deliveryStaffingController@delete')->name('delivery_staffing_delete');
+Route::get('human_management/delivery_staffing/download/{id}', 'human_management\deliveryStaffingController@download')->name('delivery_staffing_download');
+Route::put('human_management/delivery_staffing/{id}', 'human_management\deliveryStaffingController@approve')->name('delivery_staffing_approve');
+Route::delete('human_management/delivery_staffing/delete/{id}', 'human_management\deliveryStaffingController@delete')->name('delivery_staffing_delete');
 
 //work permits notifications medical incapacity
-Route::get('human_management/work_permits_notifications_medical_incapacity','human_management\workPermitNotificationsMedicalIncapacityController@index')->name('work_permits_notifications_medical_incapacity');
-Route::get('human_management/work_permits_notifications_medical_incapacity/create','human_management\workPermitNotificationsMedicalIncapacityController@create')->name('work_permits_notifications_medical_incapacity_create');
-Route::post('human_management/work_permits_notifications_medical_incapacity','human_management\workPermitNotificationsMedicalIncapacityController@store')->name('work_permits_notifications_medical_incapacity_store');
-Route::get('human_management/work_permits_notifications_medical_incapacity/show/{id}','human_management\workPermitNotificationsMedicalIncapacityController@show')->name('work_permits_notifications_medical_incapacity_show');
+Route::get('human_management/work_permits_notifications_medical_incapacity', 'human_management\workPermitNotificationsMedicalIncapacityController@index')->name('work_permits_notifications_medical_incapacity');
+Route::get('human_management/work_permits_notifications_medical_incapacity/create', 'human_management\workPermitNotificationsMedicalIncapacityController@create')->name('work_permits_notifications_medical_incapacity_create');
+Route::post('human_management/work_permits_notifications_medical_incapacity', 'human_management\workPermitNotificationsMedicalIncapacityController@store')->name('work_permits_notifications_medical_incapacity_store');
+Route::get('human_management/work_permits_notifications_medical_incapacity/show/{id}', 'human_management\workPermitNotificationsMedicalIncapacityController@show')->name('work_permits_notifications_medical_incapacity_show');
 // Route::get('human_management/work_permits_notifications_medical_incapacity/edit/{id}','human_management\workPermitNotificationsMedicalIncapacityController@edit')->name('work_permits_notifications_medical_incapacity_edit');
 // Route::put('human_management/work_permits_notifications_medical_incapacity/{id}','human_management\workPermitNotificationsMedicalIncapacityController@update')->name('work_permits_notifications_medical_incapacity_update');
-Route::get('human_management/work_permits_notifications_medical_incapacity/download/{id}','human_management\workPermitNotificationsMedicalIncapacityController@download')->name('work_permits_notifications_medical_incapacity_download');
-Route::put('human_management/work_permits_notifications_medical_incapacity/{id}','human_management\workPermitNotificationsMedicalIncapacityController@approve')->name('work_permits_notifications_medical_incapacity_approve');
-Route::delete('human_management/work_permits_notifications_medical_incapacity/delete/{id}','human_management\workPermitNotificationsMedicalIncapacityController@delete')->name('work_permits_notifications_medical_incapacity_delete');
+Route::get('human_management/work_permits_notifications_medical_incapacity/download/{id}', 'human_management\workPermitNotificationsMedicalIncapacityController@download')->name('work_permits_notifications_medical_incapacity_download');
+Route::put('human_management/work_permits_notifications_medical_incapacity/{id}', 'human_management\workPermitNotificationsMedicalIncapacityController@approve')->name('work_permits_notifications_medical_incapacity_approve');
+Route::delete('human_management/work_permits_notifications_medical_incapacity/delete/{id}', 'human_management\workPermitNotificationsMedicalIncapacityController@delete')->name('work_permits_notifications_medical_incapacity_delete');
+Route::post('human_management/work_permits_notifications_medical_incapacity/plus/{id}', 'human_management\workPermitNotificationsMedicalIncapacityController@plus')->name('work_permits_notifications_medical_incapacity_plus');
+Route::post('human_management/work_permits_notifications_medical_incapacity/rest/{id}', 'human_management\workPermitNotificationsMedicalIncapacityController@rest')->name('work_permits_notifications_medical_incapacity_rest');
 
-//Payroll and overtime news report 
-Route::get('human_management/payroll_overtime_news_report','human_management\payrollOvertimeNewsReportController@index')->name('payroll_overtime_news_report');
-Route::get('human_management/payroll_overtime_news_report/create','human_management\payrollOvertimeNewsReportController@create')->name('payroll_overtime_news_report_create');
-Route::post('human_management/payroll_overtime_news_report','human_management\payrollOvertimeNewsReportController@store')->name('payroll_overtime_news_report_store');
-Route::get('human_management/payroll_overtime_news_report/show/{id}','human_management\payrollOvertimeNewsReportController@show')->name('payroll_overtime_news_report_show');
-Route::get('human_management/payroll_overtime_news_report/edit/{id}','human_management\payrollOvertimeNewsReportController@edit')->name('payroll_overtime_news_report_edit');
-Route::put('human_management/payroll_overtime_news_report/{id}','human_management\payrollOvertimeNewsReportController@update')->name('payroll_overtime_news_report_update');
-Route::get('human_management/payroll_overtime_news_report/download/{id}','human_management\payrollOvertimeNewsReportController@download')->name('payroll_overtime_news_report_download');
-Route::get('human_management/payroll_overtime_news_report/export/{id}','human_management\payrollOvertimeNewsReportController@export')->name('payroll_overtime_news_report_export');
-Route::get('human_management/payroll_overtime_news_report/export2/{id}','human_management\payrollOvertimeNewsReportController@export2')->name('payroll_overtime_news_report_export2');
-Route::post('human_management/payroll_overtime_news_report/{id}','human_management\payrollOvertimeNewsReportController@approve')->name('payroll_overtime_news_report_approve');
-Route::delete('human_management/payroll_overtime_news_report/delete/{id}','human_management\payrollOvertimeNewsReportController@delete')->name('payroll_overtime_news_report_delete');
+//Payroll and overtime news report
+Route::get('finances/payroll_overtime_news_report', 'human_management\payrollOvertimeNewsReportController@index')->name('payroll_overtime_news_report');
+Route::get('finances/payroll_overtime_news_report/create', 'human_management\payrollOvertimeNewsReportController@create')->name('payroll_overtime_news_report_create');
+Route::post('finances/payroll_overtime_news_report', 'human_management\payrollOvertimeNewsReportController@store')->name('payroll_overtime_news_report_store');
+Route::get('finances/payroll_overtime_news_report/show/{id}', 'human_management\payrollOvertimeNewsReportController@show')->name('payroll_overtime_news_report_show');
+Route::get('finances/payroll_overtime_news_report/edit/{id}', 'human_management\payrollOvertimeNewsReportController@edit')->name('payroll_overtime_news_report_edit');
+Route::put('finances/payroll_overtime_news_report/{id}', 'human_management\payrollOvertimeNewsReportController@update')->name('payroll_overtime_news_report_update');
+Route::get('finances/payroll_overtime_news_report/download/{id}', 'human_management\payrollOvertimeNewsReportController@download')->name('payroll_overtime_news_report_download');
+Route::get('finances/payroll_overtime_news_report/export/{id}', 'human_management\payrollOvertimeNewsReportController@export')->name('payroll_overtime_news_report_export');
+Route::get('finances/payroll_overtime_news_report/export2/{id}', 'human_management\payrollOvertimeNewsReportController@export2')->name('payroll_overtime_news_report_export2');
+Route::post('finances/payroll_overtime_news_report/{id}', 'human_management\payrollOvertimeNewsReportController@approve')->name('payroll_overtime_news_report_approve');
+Route::delete('finances/payroll_overtime_news_report/delete/{id}', 'human_management\payrollOvertimeNewsReportController@destroy')->name('payroll_overtime_news_report_delete');
 
 //Request to withdraw severance
-Route::get('human_management/request_withdraw_severance','human_management\requestWithdrawSeveranceController@index')->name('request_withdraw_severance');
-Route::get('human_management/request_withdraw_severance/create','human_management\requestWithdrawSeveranceController@create')->name('request_withdraw_severance_create');
-Route::post('human_management/request_withdraw_severance','human_management\requestWithdrawSeveranceController@store')->name('request_withdraw_severance_store');
-Route::get('human_management/request_withdraw_severance/show/{id}','human_management\requestWithdrawSeveranceController@show')->name('request_withdraw_severance_show');
+Route::get('human_management/request_withdraw_severance', 'human_management\requestWithdrawSeveranceController@index')->name('request_withdraw_severance');
+Route::get('human_management/request_withdraw_severance/create', 'human_management\requestWithdrawSeveranceController@create')->name('request_withdraw_severance_create');
+Route::post('human_management/request_withdraw_severance', 'human_management\requestWithdrawSeveranceController@store')->name('request_withdraw_severance_store');
+Route::get('human_management/request_withdraw_severance/show/{id}', 'human_management\requestWithdrawSeveranceController@show')->name('request_withdraw_severance_show');
 // Route::get('human_management/request_withdraw_severance/edit/{id}','human_management\requestWithdrawSeveranceController@edit')->name('request_withdraw_severance_edit');
 // Route::put('human_management/request_withdraw_severance/{id}','human_management\requestWithdrawSeveranceController@update')->name('request_withdraw_severance_update');
 // Route::get('human_management/request_withdraw_severance/download/{id}','human_management\requestWithdrawSeveranceController@download')->name('request_withdraw_severance_download');
-Route::put('human_management/request_withdraw_severance/{id}','human_management\requestWithdrawSeveranceController@approve')->name('request_withdraw_severance_approve');
-Route::delete('human_management/request_withdraw_severance/delete/{id}','human_management\requestWithdrawSeveranceController@destroy')->name('request_withdraw_severance_delete');
+Route::put('human_management/request_withdraw_severance/{id}', 'human_management\requestWithdrawSeveranceController@approve')->name('request_withdraw_severance_approve');
+Route::delete('human_management/request_withdraw_severance/delete/{id}', 'human_management\requestWithdrawSeveranceController@destroy')->name('request_withdraw_severance_delete');
 
 //detailed inspection of vehicles
-Route::get('logistics_infrastructure/detailed_inspection_vehicles','logistics_infrastructure\detailedInspectionVehicles@index')->name('detailed_inspection_vehicles');
-Route::get('logistics_infrastructure/detailed_inspection_vehicles/create','logistics_infrastructure\detailedInspectionVehicles@create')->name('detailed_inspection_vehicles_create');
-Route::post('logistics_infrastructure/detailed_inspection_vehicles','logistics_infrastructure\detailedInspectionVehicles@store')->name('detailed_inspection_vehicles_store');
-Route::get('logistics_infrastructure/detailed_inspection_vehicles/show/{id}','logistics_infrastructure\detailedInspectionVehicles@show')->name('detailed_inspection_vehicles_show');
+Route::get('logistics_infrastructure/detailed_inspection_vehicles', 'logistics_infrastructure\detailedInspectionVehicles@index')->name('detailed_inspection_vehicles');
+Route::get('logistics_infrastructure/detailed_inspection_vehicles/create', 'logistics_infrastructure\detailedInspectionVehicles@create')->name('detailed_inspection_vehicles_create');
+Route::post('logistics_infrastructure/detailed_inspection_vehicles', 'logistics_infrastructure\detailedInspectionVehicles@store')->name('detailed_inspection_vehicles_store');
+Route::get('logistics_infrastructure/detailed_inspection_vehicles/show/{id}', 'logistics_infrastructure\detailedInspectionVehicles@show')->name('detailed_inspection_vehicles_show');
 // Route::get('logistics_infrastructure/detailed_inspection_vehicles/edit/{id}','logistics_infrastructure\detailedInspectionVehicles@edit')->name('detailed_inspection_vehicles_edit');
 // Route::put('logistics_infrastructure/detailed_inspection_vehicles/{id}','logistics_infrastructure\detailedInspectionVehicles@update')->name('detailed_inspection_vehicles_update');
-Route::get('logistics_infrastructure/detailed_inspection_vehicles/download/{id}','logistics_infrastructure\detailedInspectionVehicles@download')->name('detailed_inspection_vehicles_download');
-Route::put('logistics_infrastructure/detailed_inspection_vehicles/{id}','logistics_infrastructure\detailedInspectionVehicles@approve')->name('detailed_inspection_vehicles_approve');
-Route::delete('logistics_infrastructure/detailed_inspection_vehicles/delete/{id}','logistics_infrastructure\detailedInspectionVehicles@destroy')->name('detailed_inspection_vehicles_delete');
+Route::get('logistics_infrastructure/detailed_inspection_vehicles/download/{id}', 'logistics_infrastructure\detailedInspectionVehicles@download')->name('detailed_inspection_vehicles_download');
+Route::put('logistics_infrastructure/detailed_inspection_vehicles/{id}', 'logistics_infrastructure\detailedInspectionVehicles@approve')->name('detailed_inspection_vehicles_approve');
+Route::delete('logistics_infrastructure/detailed_inspection_vehicles/delete/{id}', 'logistics_infrastructure\detailedInspectionVehicles@destroy')->name('detailed_inspection_vehicles_delete');
 
 //checklist computer maintenance
-Route::get('logistics_infrastructure/checklist_computer_maintenance','logistics_infrastructure\checklistComputerMaintenance@index')->name('checklist_computer_maintenance');
-Route::get('logistics_infrastructure/checklist_computer_maintenance/create','logistics_infrastructure\checklistComputerMaintenance@create')->name('checklist_computer_maintenance_create');
-Route::post('logistics_infrastructure/checklist_computer_maintenance','logistics_infrastructure\checklistComputerMaintenance@store')->name('checklist_computer_maintenance_store');
-Route::get('logistics_infrastructure/checklist_computer_maintenance/show/{id}','logistics_infrastructure\checklistComputerMaintenance@show')->name('checklist_computer_maintenance_show');
+Route::get('logistics_infrastructure/checklist_computer_maintenance', 'logistics_infrastructure\checklistComputerMaintenance@index')->name('checklist_computer_maintenance');
+Route::get('logistics_infrastructure/checklist_computer_maintenance/create', 'logistics_infrastructure\checklistComputerMaintenance@create')->name('checklist_computer_maintenance_create');
+Route::post('logistics_infrastructure/checklist_computer_maintenance', 'logistics_infrastructure\checklistComputerMaintenance@store')->name('checklist_computer_maintenance_store');
+Route::get('logistics_infrastructure/checklist_computer_maintenance/show/{id}', 'logistics_infrastructure\checklistComputerMaintenance@show')->name('checklist_computer_maintenance_show');
 // Route::get('logistics_infrastructure/checklist_computer_maintenance/edit/{id}','logistics_infrastructure\checklistComputerMaintenance@edit')->name('checklist_computer_maintenance_edit');
 // Route::put('logistics_infrastructure/checklist_computer_maintenance/{id}','logistics_infrastructure\checklistComputerMaintenance@update')->name('checklist_computer_maintenance_update');
-Route::get('logistics_infrastructure/checklist_computer_maintenance/download/{id}','logistics_infrastructure\checklistComputerMaintenance@download')->name('checklist_computer_maintenance_download');
-Route::put('logistics_infrastructure/checklist_computer_maintenance/{id}','logistics_infrastructure\checklistComputerMaintenance@approve')->name('checklist_computer_maintenance_approve');
-Route::delete('logistics_infrastructure/checklist_computer_maintenance/delete/{id}','logistics_infrastructure\checklistComputerMaintenance@delete')->name('checklist_computer_maintenance_delete');
+Route::get('logistics_infrastructure/checklist_computer_maintenance/download/{id}', 'logistics_infrastructure\checklistComputerMaintenance@download')->name('checklist_computer_maintenance_download');
+Route::put('logistics_infrastructure/checklist_computer_maintenance/{id}', 'logistics_infrastructure\checklistComputerMaintenance@approve')->name('checklist_computer_maintenance_approve');
+Route::delete('logistics_infrastructure/checklist_computer_maintenance/delete/{id}', 'logistics_infrastructure\checklistComputerMaintenance@delete')->name('checklist_computer_maintenance_delete');
 
 //review and assignment of tools
-Route::get('execution_works/review_assignment_tools','execution_works\reviewAssignmentTools@index')->name('review_assignment_tools');
-Route::get('execution_works/review_assignment_tools/create','execution_works\reviewAssignmentTools@create')->name('review_assignment_tools_create');
-Route::post('execution_works/review_assignment_tools','execution_works\reviewAssignmentTools@store')->name('review_assignment_tools_store');
-Route::get('execution_works/review_assignment_tools/show/{id}','execution_works\reviewAssignmentTools@show')->name('review_assignment_tools_show');
-Route::get('execution_works/review_assignment_tools/edit/{id}','execution_works\reviewAssignmentTools@edit')->name('review_assignment_tools_edit');
-Route::put('execution_works/review_assignment_tools/{id}','execution_works\reviewAssignmentTools@update')->name('review_assignment_tools_update');
-Route::get('execution_works/review_assignment_tools/download/{id}','execution_works\reviewAssignmentTools@download')->name('review_assignment_tools_download');
-Route::patch('execution_works/review_assignment_tools/{id}','execution_works\reviewAssignmentTools@approve')->name('review_assignment_tools_approve');
-Route::delete('execution_works/review_assignment_tools/delete/{id}','execution_works\reviewAssignmentTools@delete')->name('review_assignment_tools_delete');
+Route::get('execution_works/review_assignment_tools', 'execution_works\reviewAssignmentTools@index')->name('review_assignment_tools');
+Route::get('execution_works/review_assignment_tools/create', 'execution_works\reviewAssignmentTools@create')->name('review_assignment_tools_create');
+Route::post('execution_works/review_assignment_tools', 'execution_works\reviewAssignmentTools@store')->name('review_assignment_tools_store');
+Route::get('execution_works/review_assignment_tools/show/{id}', 'execution_works\reviewAssignmentTools@show')->name('review_assignment_tools_show');
+Route::get('execution_works/review_assignment_tools/edit/{id}', 'execution_works\reviewAssignmentTools@edit')->name('review_assignment_tools_edit');
+Route::put('execution_works/review_assignment_tools/{id}', 'execution_works\reviewAssignmentTools@update')->name('review_assignment_tools_update');
+Route::get('execution_works/review_assignment_tools/download/{id}', 'execution_works\reviewAssignmentTools@download')->name('review_assignment_tools_download');
+Route::patch('execution_works/review_assignment_tools/{id}', 'execution_works\reviewAssignmentTools@approve')->name('review_assignment_tools_approve');
+Route::delete('execution_works/review_assignment_tools/delete/{id}', 'execution_works\reviewAssignmentTools@destroy')->name('review_assignment_tools_delete');
+
+//kits
+Route::get('execution_works/kits', 'execution_works\kitsController@index')->name('kits');
+Route::get('execution_works/kits/create', 'execution_works\kitsController@create')->name('kits_create');
+Route::post('execution_works/kits', 'execution_works\kitsController@store')->name('kits_store');
+Route::get('execution_works/kits/show/{id}', 'execution_works\kitsController@show')->name('kits_show');
+Route::get('execution_works/kits/edit/{id}', 'execution_works\kitsController@edit')->name('kits_edit');
+Route::patch('execution_works/kits/{id}', 'execution_works\kitsController@update')->name('kits_update');
+Route::get('execution_works/kits/edit_all/{id}', 'execution_works\kitsController@edit_all')->name('kits_edit_all');
+Route::put('execution_works/kits_all/{token}', 'execution_works\kitsController@update_all')->name('kits_update_all');
+Route::delete('execution_works/kits/delete/{id}', 'execution_works\kitsController@destroy')->name('kits_delete');
+Route::delete('execution_works/kits/delete_all/{token}/', 'execution_works\kitsController@destroy_all')->name('kits_all_delete');
+
+// kits assignment
+Route::get('execution_works/kits_assignment', 'execution_works\KitsAssignmentController@index')->name('kits_assigment');
+Route::post('execution_works/kits_assignment', 'execution_works\kitsAssignmentController@store')->name('kits_assigment_store');
+Route::get('execution_works/kits_assignment_assginment', 'execution_works\KitsAssignmentController@assignment')->name('kits_assignment_assginment');
+Route::get('execution_works/kits_assignment_review', 'execution_works\KitsAssignmentController@review')->name('kits_assignment_review');
+Route::get('execution_works/kits_assignment_assginment/show/{id}', 'execution_works\KitsAssignmentController@show')->name('kits_assignment_show');
+Route::get('execution_works/kits_assignment/edit/{id}', 'execution_works\KitsAssignmentController@edit')->name('kits_assignment_edit');
+Route::patch('execution_works/kits_assigment/{id}', 'execution_works\KitsAssignmentController@update')->name('kits_assignment_update');
+
+//Kits review
+Route::get('execution_works/review_assignment', 'execution_works\ReviewkitsController@index')->name('kits_review');
+Route::get('execution_works/review_assignment/review/{id}', 'execution_works\ReviewkitsController@review')->name('review_personal');
+Route::post('execution_works/review_assignment', 'execution_works\ReviewkitsController@store')->name('review_personal_store');
+Route::get('execution_works/review_assignment/show/{id}', 'execution_works\ReviewkitsController@show')->name('kits_review_show');
 
 // end contract
-Route::get('user/end_work/presend/{id}','endWorkController@create')->name('user_end_work')->middleware('auth')->middleware('verified');
-Route::post('user/end_work/presend/{id}','endWorkController@store')->name('user_end_work_store')->middleware('auth')->middleware('verified');
-Route::get('user/end_work/signature','endWorkController@edit')->name('user_end_work_signature')->middleware('auth')->middleware('verified');
-Route::put('user/end_work/signature','endWorkController@update')->name('user_end_work_update')->middleware('auth')->middleware('verified');
+Route::get('user/end_work/presend/{id}', 'endWorkController@create')->name('user_end_work')->middleware('auth')->middleware('verified');
+Route::post('user/end_work/presend/{id}', 'endWorkController@store')->name('user_end_work_store')->middleware('auth')->middleware('verified');
+Route::get('user/end_work/signature', 'endWorkController@edit')->name('user_end_work_signature')->middleware('auth')->middleware('verified');
+Route::put('user/end_work/signature', 'endWorkController@update')->name('user_end_work_update')->middleware('auth')->middleware('verified');
+Route::get('user/end_work/witness/{id}', 'endWorkController@witness')->name('user_end_work_witness')->middleware('auth')->middleware('verified');
+Route::put('user/end_work/witness/{id}', 'endWorkController@witness_update')->name('user_end_work_witness_update')->middleware('auth')->middleware('verified');
 
 // letters
-Route::get('guest/letters/recommendation','endWorkController@letter_recommendation')->name('letter_recommendation');
-Route::post('guest/letters/recommendation','endWorkController@letter_recommendation_download')->name('letter_recommendation_download');
+Route::get('guest/letters/recommendation', 'endWorkController@letter_recommendation')->name('letter_recommendation');
+Route::post('guest/letters/recommendation', 'endWorkController@letter_recommendation_download')->name('letter_recommendation_download');
 
 // Users
-Route::get('users','userController@index')->name("users");
-Route::get('users/show/{id}','userController@show')->name("user_show");
-Route::get('users/{id}/edit','userController@edit')->name("user_edit");
-Route::put('users/{id}','userController@update')->name('user_update');
-Route::get('users/create','userController@create')->name("user_create");
-Route::post('users','userController@store')->name("user_store");
-Route::delete('users/{id}','userController@destroy')->name("user_destroy");
-Route::get('users/restore/{id}','userController@restore')->name("restore");
-Route::get('users/export','userController@export')->name('user_export');
+Route::get('users', 'userController@index')->name("users");
+Route::get('users/show/{id}', 'userController@show')->name("user_show");
+Route::get('users/{id}/edit', 'userController@edit')->name("user_edit");
+Route::put('users/{id}', 'userController@update')->name('user_update');
+Route::get('users/create', 'userController@create')->name("user_create");
+Route::post('users', 'userController@store')->name("user_store");
+Route::delete('users/{id}', 'userController@destroy')->name("user_destroy");
+Route::get('users/restore/{id}', 'userController@restore')->name("restore");
+Route::get('users/export', 'userController@export')->name('user_export');
+Route::get('users/list', 'userController@list')->name('user_list');
 
 //retired users
-Route::get('retireds','retiredUserController@index')->name('retired_users');
+Route::get('retireds', 'retiredUserController@index')->name('retired_users');
 
 // Attention Calls
-Route::get('attention_call','AttentionCallController@index')->name("attention_call");
-Route::get('attention_call/create','AttentionCallController@create')->name("attention_call_create");
-Route::post('attention_call','AttentionCallController@store')->name("call_store");
-Route::get('called_responder/{id}','AttentionCallController@edit')->name("called_responder");
-Route::put('called_responder/{id}','AttentionCallController@update')->name("called_responder_store");
-Route::get('attention_call/{id}/edit','AttentionCallController@edit1')->name("attention_call_edit");
-Route::put('attention_call/{id}','AttentionCallController@update1')->name("attention_call_update");
-Route::get('show_called/{id}','AttentionCallController@show')->name("attention_call_show");
-Route::put('approve_call/{id}','AttentionCallController@approve_call')->name("approve_call");
-Route::put('not_approve_call/{id}','AttentionCallController@not_approve_call')->name("not_approve_call");
-Route::delete('attention_call/{id}','AttentionCallController@destroy')->name("delete_call");
+Route::get('attention_call', 'AttentionCallController@index')->name("attention_call");
+Route::get('attention_call/create', 'AttentionCallController@create')->name("attention_call_create");
+Route::post('attention_call', 'AttentionCallController@store')->name("call_store");
+Route::get('called_responder/{id}', 'AttentionCallController@edit')->name("called_responder");
+Route::put('called_responder/{id}', 'AttentionCallController@update')->name("called_responder_store");
+Route::get('attention_call/{id}/edit', 'AttentionCallController@edit1')->name("attention_call_edit");
+Route::put('attention_call/{id}', 'AttentionCallController@update1')->name("attention_call_update");
+Route::get('show_called/{id}', 'AttentionCallController@show')->name("attention_call_show");
+Route::put('approve_call/{id}', 'AttentionCallController@approve_call')->name("approve_call");
+Route::put('not_approve_call/{id}', 'AttentionCallController@not_approve_call')->name("not_approve_call");
+Route::delete('attention_call/{id}', 'AttentionCallController@destroy')->name("delete_call");
 
-Route::resource('roles','RoleController');
+Route::resource('roles', 'RoleController');
 
 //billboard
-Route::get('billboards','billboard@index')->name('billboard');
-Route::post('billboards','billboard@store')->name('billboard_store');
-Route::put('billboards/update/{id}','billboard@update')->name('billboard_update');
-Route::delete('billboards/{id}','billboard@destroy')->name('billboard_destroy');
-Route::delete('billboards/{id}','billboard@destroy')->name('billboard_destroy');
+Route::get('billboards', 'billboard@index')->name('billboard');
+Route::post('billboards', 'billboard@store')->name('billboard_store');
+Route::put('billboards/{id}', 'billboard@update')->name('billboard_update');
+Route::delete('billboards/{id}', 'billboard@destroy')->name('billboard_destroy');
 
 //billboard type
-Route::get('billboard_type','billboard\billboardTypeController@index')->name('billboard_type');
-Route::get('billboard_type/create','billboard\billboardTypeController@create')->name('billboard_type_create');
-Route::post('billboard_type/create','billboard\billboardTypeController@store')->name('billboard_type_store');
-Route::get('billboard_type/show/{id}','billboard\billboardTypeController@show')->name('billboard_type_show');
-Route::get('billboard_type/{id}/edit','billboard\billboardTypeController@edit')->name('billboard_type_edit');
-Route::put('billboard_type/{id}','billboard\billboardTypeController@update')->name('billboard_type_update');
-Route::delete('billboard_type/{id}','billboard\billboardTypeController@destroy')->name('billboard_type_delete');
+Route::get('billboard_type', 'billboard\billboardTypeController@index')->name('billboard_type');
+Route::get('billboard_type/create', 'billboard\billboardTypeController@create')->name('billboard_type_create');
+Route::post('billboard_type/create', 'billboard\billboardTypeController@store')->name('billboard_type_store');
+Route::get('billboard_type/show/{id}', 'billboard\billboardTypeController@show')->name('billboard_type_show');
+Route::get('billboard_type/{id}/edit', 'billboard\billboardTypeController@edit')->name('billboard_type_edit');
+Route::put('billboard_type/{id}', 'billboard\billboardTypeController@update')->name('billboard_type_update');
+Route::delete('billboard_type/{id}', 'billboard\billboardTypeController@destroy')->name('billboard_type_delete');
 
 //project
-Route::get('projects','ProjectsController@index')->name('project');
-Route::get('projects/create','ProjectsController@create')->name('project_create');
-Route::post('projects','ProjectsController@store')->name('project_store');
-Route::get('projects/{id}','ProjectsController@show')->name("project_show");
-Route::get('projects/{id}/edit','ProjectsController@edit')->name("project_edit");
-Route::put('projects/{id}','ProjectsController@update')->name('project_update');
-Route::delete('projects/{id}','ProjectsController@destroy')->name('project_destroy');
+Route::get('projects', 'ProjectsController@index')->name('project');
+Route::get('projects/create', 'ProjectsController@create')->name('project_create');
+Route::post('projects', 'ProjectsController@store')->name('project_store');
+Route::get('projects/{id}', 'ProjectsController@show')->name("project_show");
+Route::get('projects/{id}/edit', 'ProjectsController@edit')->name("project_edit");
+Route::put('projects/{id}', 'ProjectsController@update')->name('project_update');
+Route::delete('projects/{id}', 'ProjectsController@destroy')->name('project_destroy');
 
-Route::get('projects/{id}/mw','ProjectsController@download_mw')->name('project_download_mw');
-Route::get('projects/{id}/rf','ProjectsController@download_rf')->name('project_download_rf');
-Route::get('projects/{id}/order','ProjectsController@download_order')->name('project_download_order');
+Route::get('projects/{id}/mw', 'ProjectsController@download_mw')->name('project_download_mw');
+Route::get('projects/{id}/rf', 'ProjectsController@download_rf')->name('project_download_rf');
+Route::get('projects/{id}/order', 'ProjectsController@download_order')->name('project_download_order');
 
-Route::put('projects/{id}/approve','ProjectsController@approve')->name('approve_project');
-Route::put('projects/{id}/not_approve','ProjectsController@not_approve')->name('not_approve_project');
+Route::put('projects/{id}/approve', 'ProjectsController@approve')->name('approve_project');
+Route::put('projects/{id}/not_approve', 'ProjectsController@not_approve')->name('not_approve_project');
 
-Route::put('projects/{id}/reactive','ProjectsController@reactive')->name('reactive_project');
-Route::put('projects/{id}/finish','ProjectsController@finish')->name('finish_project');
-Route::put('projects/{id}/stop','ProjectsController@stop')->name('stop_project');
-Route::put('projects/{id}/start','ProjectsController@start')->name('start_project');
+Route::put('projects/{id}/reactive', 'ProjectsController@reactive')->name('reactive_project');
+Route::put('projects/{id}/finish', 'ProjectsController@finish')->name('finish_project');
+Route::put('projects/{id}/stop', 'ProjectsController@stop')->name('stop_project');
+Route::put('projects/{id}/start', 'ProjectsController@start')->name('start_project');
 
 //Setting projects
-Route::get('project/setting/project','ProjectsController@setting')->name('project_setting');
-Route::get('project/setting/project/show/{id}','ProjectsController@setting_show')->name('project_setting_show');
-Route::get('project/setting/project/{id}/edit','ProjectsController@setting_edit')->name('project_setting_edit');
-Route::put('project/setting/project/{id}','ProjectsController@setting_update')->name('project_setting_update');
-Route::get('project/setting/project/create','ProjectsController@setting_create')->name('project_setting_create');
-Route::post('project/setting/project','ProjectsController@setting_store')->name('project_setting_store');
+Route::get('project/setting/project', 'ProjectsController@setting')->name('project_setting');
+Route::get('project/setting/project/show/{id}', 'ProjectsController@setting_show')->name('project_setting_show');
+Route::get('project/setting/project/{id}/edit', 'ProjectsController@setting_edit')->name('project_setting_edit');
+Route::put('project/setting/project/{id}', 'ProjectsController@setting_update')->name('project_setting_update');
+Route::get('project/setting/project/create', 'ProjectsController@setting_create')->name('project_setting_create');
+Route::post('project/setting/project', 'ProjectsController@setting_store')->name('project_setting_store');
 
 // Consumables
-Route::get('project/setting/consumables','projects\consumablesController@index')->name('consumables_setting');
-Route::get('project/setting/consumables/create','projects\consumablesController@create')->name('consumables_setting_create');
-Route::get('project/setting/consumables/{id}','projects\consumablesController@show')->name('consumables_setting_show');
-Route::get('project/setting/consumables/{id}/edit','projects\consumablesController@edit')->name('consumables_setting_edit');
-Route::put('project/setting/consumables/{id}','projects\consumablesController@update')->name('consumables_setting_update');
-Route::post('project/setting/consumables','projects\consumablesController@store')->name('consumables_setting_store');
+Route::get('project/setting/consumables', 'projects\consumablesController@index')->name('consumables_setting');
+Route::get('project/setting/consumables/create', 'projects\consumablesController@create')->name('consumables_setting_create');
+Route::get('project/setting/consumables/{id}', 'projects\consumablesController@show')->name('consumables_setting_show');
+Route::get('project/setting/consumables/{id}/edit', 'projects\consumablesController@edit')->name('consumables_setting_edit');
+Route::put('project/setting/consumables/{id}', 'projects\consumablesController@update')->name('consumables_setting_update');
+Route::post('project/setting/consumables', 'projects\consumablesController@store')->name('consumables_setting_store');
 
 // Materials
-Route::get('project/setting/materials','ProjectsController@setting_materials')->name('materials_setting');
-Route::get('project/setting/materials/create','ProjectsController@setting_materials_create')->name('materials_setting_create');
-Route::post('project/setting/materials','ProjectsController@setting_materials_store')->name('materials_setting_store');
-Route::get('project/setting/materials/{id}','ProjectsController@setting_materials_show')->name('materials_setting_show');
-Route::get('project/setting/materials/{id}/edit','ProjectsController@setting_materials_edit')->name('materials_setting_edit');
-Route::put('project/setting/materials/{id}','ProjectsController@setting_materials_update')->name('materials_setting_update');
+Route::get('project/setting/materials', 'ProjectsController@setting_materials')->name('materials_setting');
+Route::get('project/setting/materials/create', 'ProjectsController@setting_materials_create')->name('materials_setting_create');
+Route::post('project/setting/materials', 'ProjectsController@setting_materials_store')->name('materials_setting_store');
+Route::get('project/setting/materials/{id}', 'ProjectsController@setting_materials_show')->name('materials_setting_show');
+Route::get('project/setting/materials/{id}/edit', 'ProjectsController@setting_materials_edit')->name('materials_setting_edit');
+Route::put('project/setting/materials/{id}', 'ProjectsController@setting_materials_update')->name('materials_setting_update');
 
 //Bonificaciones
-Route::get('project/setting/bonuses','ProjectsController@setting_bonuses')->name('bonuses_setting');
+Route::get('project/setting/bonuses', 'ProjectsController@setting_bonuses')->name('bonuses_setting');
 //Control
-Route::get('project/setting/bonuses/control','ProjectsController@setting_bonuses_control')->name('setting_bonuses_control');
-Route::get('project/setting/bonuses/control/create','ProjectsController@setting_bonuses_create_control')->name('bonuses_setting_create_control');
-Route::post('project/setting/bonuses/control','ProjectsController@setting_bonuses_store_control')->name('bonuses_setting_store_control');
-Route::get('project/setting/bonuses/control/show/{id}','projectsController@setting_bonuses_show_control')->name('bonuses_setting_show_control');
-Route::get('project/setting/bonuses/control/{id}/edit','projectsController@setting_bonuses_edit_control')->name('bonuses_setting_edit_control');
-Route::put('project/setting/bonuses/control/{id}','projectsController@setting_bonuses_update_control')->name('bonuses_setting_update_control');
+Route::get('project/setting/bonuses/control', 'ProjectsController@setting_bonuses_control')->name('setting_bonuses_control');
+Route::get('project/setting/bonuses/control/create', 'ProjectsController@setting_bonuses_create_control')->name('bonuses_setting_create_control');
+Route::post('project/setting/bonuses/control', 'ProjectsController@setting_bonuses_store_control')->name('bonuses_setting_store_control');
+Route::get('project/setting/bonuses/control/show/{id}', 'projectsController@setting_bonuses_show_control')->name('bonuses_setting_show_control');
+Route::get('project/setting/bonuses/control/{id}/edit', 'projectsController@setting_bonuses_edit_control')->name('bonuses_setting_edit_control');
+Route::put('project/setting/bonuses/control/{id}', 'projectsController@setting_bonuses_update_control')->name('bonuses_setting_update_control');
 
 //Technical
-Route::get('project/setting/bonuses/technical','ProjectsController@setting_bonuses_technical')->name('setting_bonuses_technical');
-Route::get('project/setting/bonuses/technical/create','ProjectsController@setting_bonuses_create_technical')->name('bonuses_setting_create_technical');
-Route::get('project/setting/bonuses/technical/show/{id}','projectsController@setting_bonuses_show_technical')->name('bonuses_setting_show_technical');
-Route::post('project/setting/bonuses/technical','ProjectsController@setting_bonuses_store_technical')->name('bonuses_setting_store_technical');
-Route::get('project/setting/bonuses/technical/{id}/edit','ProjectsController@setting_bonuses_edit_technical')->name('bonuses_setting_edit_technical');
-Route::put('project/setting/bonuses/technical/{id}','ProjectsController@setting_bonuses_update_technical')->name('bonuses_setting_update_technical');
+Route::get('project/setting/bonuses/technical', 'ProjectsController@setting_bonuses_technical')->name('setting_bonuses_technical');
+Route::get('project/setting/bonuses/technical/create', 'ProjectsController@setting_bonuses_create_technical')->name('bonuses_setting_create_technical');
+Route::get('project/setting/bonuses/technical/show/{id}', 'projectsController@setting_bonuses_show_technical')->name('bonuses_setting_show_technical');
+Route::post('project/setting/bonuses/technical', 'ProjectsController@setting_bonuses_store_technical')->name('bonuses_setting_store_technical');
+Route::get('project/setting/bonuses/technical/{id}/edit', 'ProjectsController@setting_bonuses_edit_technical')->name('bonuses_setting_edit_technical');
+Route::put('project/setting/bonuses/technical/{id}', 'ProjectsController@setting_bonuses_update_technical')->name('bonuses_setting_update_technical');
 
 //Settings
-Route::get('setting','SettingsController@index')->name('settings');
-Route::post('setting','SettingsController@store')->name('setting_store');
-Route::get('setting/system','SettingsController@system')->name('system');
-Route::post('setting/system','SettingsController@system_store')->name('system_store');
-Route::get('setting/messages','SettingsController@messages')->name('messages');
-Route::post('setting/messages','SettingsController@messages_store')->name('messages_store');
-Route::post('setting/upload','SettingsController@upload')->name('setting_files');
+Route::get('setting', 'SettingsController@index')->name('settings');
+Route::post('setting', 'SettingsController@store')->name('setting_store');
+Route::get('setting/system', 'SettingsController@system')->name('system');
+Route::post('setting/system', 'SettingsController@system_store')->name('system_store');
+Route::get('setting/messages', 'SettingsController@messages')->name('messages');
+Route::post('setting/messages', 'SettingsController@messages_store')->name('messages_store');
+Route::post('setting/upload', 'SettingsController@upload')->name('setting_files');
+
+Route::get('setting/modals', 'SettingsController@modals')->name('setting_modals');
+Route::post('setting/modals', 'SettingsController@modals_update')->name('setting_modals_update');
+
+Route::get('setting/empleyee_month', 'SettingsController@empleyee_month')->name('setting_empleyee_month');
+Route::post('setting/empleyee_month', 'SettingsController@empleyee_month_store')->name('setting_empleyee_month_store');
+Route::put('setting/empleyee_month/{id}', 'SettingsController@empleyee_month_update')->name('setting_empleyee_month_update');
+Route::delete('setting/empleyee_month/{id}', 'SettingsController@empleyee_month_delete')->name('setting_empleyee_month_delete');
 
 //Job application
-Route::get('job_application','JobApplicationController@index')->name('job_application')->middleware('auth')->middleware('verified');
-Route::get('work_with_us','JobApplicationController@create')->name('work_with_us');
-Route::post('work_with_us','JobApplicationController@store')->name('work_with_us_store');
-Route::get('job_application/{id}','JobApplicationController@show')->name('job_application_show')->middleware('auth')->middleware('verified');
-Route::get('job_application/{id}/edit','JobApplicationController@edit')->name('job_application_edit')->middleware('auth')->middleware('verified');
-Route::put('job_application/{id}','JobApplicationController@update')->name('job_application_update')->middleware('auth')->middleware('verified');
-Route::delete('job_application/{id}','JobApplicationController@destroy')->name('job_application_delete')->middleware('auth')->middleware('verified');
+Route::get('job_application', 'JobApplicationController@index')->name('job_application')->middleware('auth')->middleware('verified');
+Route::get('work_with_us', 'JobApplicationController@create')->name('work_with_us');
+Route::post('work_with_us', 'JobApplicationController@store')->name('work_with_us_store');
+Route::get('job_application/{id}', 'JobApplicationController@show')->name('job_application_show')->middleware('auth')->middleware('verified');
+Route::get('job_application/{id}/edit', 'JobApplicationController@edit')->name('job_application_edit')->middleware('auth')->middleware('verified');
+Route::put('job_application/{id}', 'JobApplicationController@update')->name('job_application_update')->middleware('auth')->middleware('verified');
+Route::delete('job_application/{id}', 'JobApplicationController@destroy')->name('job_application_delete')->middleware('auth')->middleware('verified');
 
 //performance evaluation
-Route::get('performance_evaluation','PerformanceEvaluationController@index')->name('performance_evaluation');
-Route::post('performance_evaluation','PerformanceEvaluationController@create')->name('performance_evaluation_create');
-Route::PUT('performance_evaluation/store/{id}','PerformanceEvaluationController@store')->name('performance_evaluation_store');
-Route::put('performance_evaluation/{id}','PerformanceEvaluationController@update')->name('self_assessment_store');
-Route::get('performance_evaluation/{id}','PerformanceEvaluationController@autoevaluation')->name('autoevaluation');
-Route::get('performance_evaluation/show/{id}','PerformanceEvaluationController@show')->name('performance_evaluation_show');
-Route::get('performance_evaluation/respoder/{id}','PerformanceEvaluationController@responder')->name('performance_evaluation_responder');
-Route::put('performance_evaluation/{id}/approve_performance','PerformanceEvaluationController@approve_performance')->name('approve_performance');
-Route::put('performance_evaluation/{id}/not_approve_performance','PerformanceEvaluationController@not_approve_performance')->name('not_approve_performance');
+Route::get('performance_evaluation', 'PerformanceEvaluationController@index')->name('performance_evaluation');
+Route::get('performance_evaluation/download/{id}', 'PerformanceEvaluationController@download')->name('performance_evaluation_download');
+Route::post('performance_evaluation', 'PerformanceEvaluationController@create')->name('performance_evaluation_create');
+Route::PUT('performance_evaluation/store/{id}', 'PerformanceEvaluationController@store')->name('performance_evaluation_store');
+Route::put('performance_evaluation/{id}', 'PerformanceEvaluationController@update')->name('self_assessment_store');
+Route::get('performance_evaluation/{id}', 'PerformanceEvaluationController@autoevaluation')->name('autoevaluation');
+Route::get('performance_evaluation/show/{id}', 'PerformanceEvaluationController@show')->name('performance_evaluation_show');
+Route::delete('performance_evaluation/{id}', 'PerformanceEvaluationController@destroy')->name('performance_evaluation_delete');
+Route::get('performance_evaluation/respoder/{id}', 'PerformanceEvaluationController@responder')->name('performance_evaluation_responder');
+Route::put('performance_evaluation/{id}/approve_performance', 'PerformanceEvaluationController@approve_performance')->name('approve_performance');
+Route::put('performance_evaluation/{id}/not_approve_performance', 'PerformanceEvaluationController@not_approve_performance')->name('not_approve_performance');
 
 //customer satisfaction
-Route::get('customer_satisfaction','CustomerSatisfactionController@index')->name('customer_satisfaction')->middleware('auth')->middleware('verified');
-Route::get('customer_satisfaction/{token}/{id}','CustomerSatisfactionController@create')->name('customer_satisfaction_create');
-Route::put('customer_satisfaction/{id}','CustomerSatisfactionController@store')->name('satisfaction_store');
-Route::get('customer_satisfaction/{id}','CustomerSatisfactionController@show')->name('satisfaction_show')->middleware('auth')->middleware('verified');
-Route::get('end_customer_satisfaction','CustomerSatisfactionController@success')->name('customer_satisfaction_success');
-Route::post('customer_satisfaction/new_evaluation/{id}/create','CustomerSatisfactionController@new_evaluation')->name('new_customer_evaluation')->middleware('auth')->middleware('verified');
-Route::delete('customer_satisfaction/{id}','CustomerSatisfactionController@destroy')->name('delete_evaluation_customer')->middleware('auth')->middleware('verified');
+Route::get('customer_satisfaction', 'CustomerSatisfactionController@index')->name('customer_satisfaction')->middleware('auth')->middleware('verified');
+Route::get('customer_satisfaction/{token}/{id}', 'CustomerSatisfactionController@create')->name('customer_satisfaction_create');
+Route::put('customer_satisfaction/{id}', 'CustomerSatisfactionController@store')->name('satisfaction_store');
+Route::get('customer_satisfaction/{id}', 'CustomerSatisfactionController@show')->name('satisfaction_show')->middleware('auth')->middleware('verified');
+Route::get('end_customer_satisfaction', 'CustomerSatisfactionController@success')->name('customer_satisfaction_success');
+Route::post('customer_satisfaction/new_evaluation/{id}/create', 'CustomerSatisfactionController@new_evaluation')->name('new_customer_evaluation')->middleware('auth')->middleware('verified');
+Route::delete('customer_satisfaction/{id}', 'CustomerSatisfactionController@destroy')->name('delete_evaluation_customer')->middleware('auth')->middleware('verified');
 
 //Supplier Evaluation
-Route::get('supplier_evaluation','SupplierEvaluationController@index')->name('supplier_evaluation')->middleware('auth')->middleware('verified');
-Route::post('supplier_evaluation/create','SupplierEvaluationController@create')->name('supplier_evaluation_create')->middleware('auth')->middleware('verified');
-Route::get('supplier_evaluation/{token}/{id}','SupplierEvaluationController@edit_provider')->name('supplier_evaluation_edit_provider');
-Route::put('supplier_evaluation/{id}','SupplierEvaluationController@store')->name('supplier_evaluation_store_provider');
-Route::get('end_supplier_evaluation','SupplierEvaluationController@success')->name('supplier_success');
-Route::get('supplier_evaluations/responde/{id}','SupplierEvaluationController@responde')->name('supplier_evaluation_responde')->middleware('auth')->middleware('verified');
-Route::get('supplier_evaluation/result/show/{id}','SupplierEvaluationController@show')->name('supplier_evaluation_show')->middleware('auth')->middleware('verified');
-Route::put('supplier_evaluation/{id}/responde','SupplierEvaluationController@update')->name('supplier_evaluation_store')->middleware('auth')->middleware('verified');
-Route::get('supplier_evaluation/{id}/documents','SupplierEvaluationController@documents_download')->name('supplier_evaluation_documents_download')->middleware('auth')->middleware('verified');
-Route::get('supplier_evaluations/{id}/remember','SupplierEvaluationController@remember')->name('supplier_evaluation_remember')->middleware('auth')->middleware('verified');
+Route::get('supplier_evaluation', 'SupplierEvaluationController@index')->name('supplier_evaluation')->middleware('auth')->middleware('verified');
+Route::post('supplier_evaluation/create', 'SupplierEvaluationController@create')->name('supplier_evaluation_create')->middleware('auth')->middleware('verified');
+Route::get('supplier_evaluation/{token}/{id}', 'SupplierEvaluationController@edit_provider')->name('supplier_evaluation_edit_provider');
+Route::put('supplier_evaluation/{id}', 'SupplierEvaluationController@store')->name('supplier_evaluation_store_provider');
+Route::get('end_supplier_evaluation', 'SupplierEvaluationController@success')->name('supplier_success');
+Route::get('supplier_evaluations/responde/{id}', 'SupplierEvaluationController@responde')->name('supplier_evaluation_responde')->middleware('auth')->middleware('verified');
+Route::get('supplier_evaluation/result/show/{id}', 'SupplierEvaluationController@show')->name('supplier_evaluation_show')->middleware('auth')->middleware('verified');
+Route::put('supplier_evaluation/{id}/responde', 'SupplierEvaluationController@update')->name('supplier_evaluation_store')->middleware('auth')->middleware('verified');
+Route::get('supplier_evaluation/{id}/documents', 'SupplierEvaluationController@documents_download')->name('supplier_evaluation_documents_download')->middleware('auth')->middleware('verified');
+Route::get('supplier_evaluations/{id}/remember', 'SupplierEvaluationController@remember')->name('supplier_evaluation_remember')->middleware('auth')->middleware('verified');
 
 //Customer
-Route::get('customers','CustomerController@index')->name("customers");
-Route::get('customers/show/{id}','CustomerController@show')->name("customer_show");
-Route::get('customers/{id}/edit','CustomerController@edit')->name("customer_edit");
-Route::put('customers/{id}','CustomerController@update')->name('customer_update');
-Route::get('customers/create','CustomerController@create')->name("customer_create");
-Route::post('customers','CustomerController@store')->name("customer_store");
-Route::delete('customers/{id}','CustomerController@destroy')->name("customer_destroy");
+Route::get('customers', 'CustomerController@index')->name("customers");
+Route::get('customers/show/{id}', 'CustomerController@show')->name("customer_show");
+Route::get('customers/{id}/edit', 'CustomerController@edit')->name("customer_edit");
+Route::put('customers/{id}', 'CustomerController@update')->name('customer_update');
+Route::get('customers/create', 'CustomerController@create')->name("customer_create");
+Route::post('customers', 'CustomerController@store')->name("customer_store");
+Route::delete('customers/{id}', 'CustomerController@destroy')->name("customer_destroy");
 
 //Provider
-Route::get('providers','ProviderController@index')->name("providers");
-Route::get('providers/show/{id}','ProviderController@show')->name("provider_show");
-Route::get('providers/{id}/edit','ProviderController@edit')->name("provider_edit");
-Route::put('providers/{id}','ProviderController@update')->name('provider_update');
-Route::get('providers/create','ProviderController@create')->name("provider_create");
-Route::post('providers','ProviderController@store')->name("provider_store");
-Route::delete('providers/{id}','ProviderController@destroy')->name("provider_destroy");
+Route::get('providers', 'ProviderController@index')->name("providers");
+Route::get('providers/show/{id}', 'ProviderController@show')->name("provider_show");
+Route::get('providers/{id}/edit', 'ProviderController@edit')->name("provider_edit");
+Route::put('providers/{id}', 'ProviderController@update')->name('provider_update');
+Route::get('providers/create', 'ProviderController@create')->name("provider_create");
+Route::post('providers', 'ProviderController@store')->name("provider_store");
+Route::delete('providers/{id}', 'ProviderController@destroy')->name("provider_destroy");
 
 //Notification
-Route::get('notifications','HomeController@notification')->name('notifications');
-Route::get('notifications/{id}/markerAsRead','HomeController@notification_read')->name('notification_read');
-Route::get('notifications/markerAllAsRead','HomeController@notification_all_read')->name('notification_all_read');
-Route::get('notifications/DeleteRead','HomeController@notification_delete')->name('notification_delete');
+Route::get('notifications', 'HomeController@notification')->name('notifications');
+Route::get('notifications/{id}/markerAsRead', 'HomeController@notification_read')->name('notification_read');
+Route::get('notifications/markerAllAsRead', 'HomeController@notification_all_read')->name('notification_all_read');
+Route::get('notifications/DeleteRead', 'HomeController@notification_delete')->name('notification_delete');
 
 //Memorandum
-Route::get('memorandum','MemorandumController@index')->name('memorandum');
-Route::get('memorandum/show/{id}','MemorandumController@show')->name('memorandum_show');
-Route::get('memorandum/create','MemorandumController@create')->name('memorandum_create');
-Route::post('memorandum','MemorandumController@store')->name('memorandum_store');
-Route::get('memorandum/{id}/edit','MemorandumController@edit')->name('memorandum_edit');
-Route::put('memorandum/{id}','MemorandumController@update')->name('memorandum_update');
-Route::put('memorandum/update/{id}','MemorandumController@update1')->name('memorandum_update1');
-Route::delete('memorandum/{id}','MemorandumController@destroy')->name('memorandum_destroy');
+Route::get('human_management/memorandum', 'MemorandumController@index')->name('memorandum');
+Route::get('human_management/memorandum/show/{id}', 'MemorandumController@show')->name('memorandum_show');
+Route::get('human_management/memorandum/create', 'MemorandumController@create')->name('memorandum_create');
+Route::post('human_management/memorandum', 'MemorandumController@store')->name('memorandum_store');
+Route::get('human_management/memorandum/{id}/edit', 'MemorandumController@edit')->name('memorandum_edit');
+Route::put('human_management/memorandum/{id}', 'MemorandumController@update')->name('memorandum_update');
+Route::put('human_management/memorandum/update/{id}', 'MemorandumController@update1')->name('memorandum_update1');
+Route::delete('human_management/memorandum/{id}', 'MemorandumController@destroy')->name('memorandum_destroy');
 
 //curriculum
-Route::get('curriculums','curriculumController@index')->name('curriculums')->middleware('auth')->middleware('verified');
-Route::get('curriculum/show/{id}','curriculumController@show')->name('curriculum_show')->middleware('auth')->middleware('verified');
-Route::get('curriculum/create','curriculumController@create')->name('curriculum_create')->middleware('auth')->middleware('verified');
-Route::post('curriculum','curriculumController@store')->name('curriculum_store')->middleware('auth')->middleware('verified');
-Route::get('curriculum/create2/{id}','curriculumController@create2')->name('curriculum_create2')->middleware('auth')->middleware('verified');
-Route::post('curriculum2/{id}','curriculumController@store2')->name('curriculum_store2')->middleware('auth')->middleware('verified');
-Route::get('curriculum/register/{id}','curriculumController@register')->name('curriculum_register')->middleware('auth')->middleware('verified');
-Route::get('curriculum/create3/{id}','curriculumController@create3')->name('curriculum_create3')->middleware('auth')->middleware('verified');
-Route::put('curriculum3/{id}','curriculumController@store3')->name('curriculum_store3')->middleware('auth')->middleware('verified');
-Route::get('curriculum/{id}/edit','curriculumController@edit')->name('curriculum_edit')->middleware('auth')->middleware('verified');
-Route::put('curriculum/{id}','curriculumController@update')->name('curriculum_update')->middleware('auth')->middleware('verified');
-Route::put('curriculum/approval/{id}','curriculumController@approve')->name('curriculum_approve')->middleware('auth')->middleware('verified');
-Route::put('curriculum/not_approval/{id}','curriculumController@not_approve')->name('curriculum_not_approve')->middleware('auth')->middleware('verified');
-Route::delete('curriculum/{id}','curriculumController@destroy')->name("curriculum_delete")->middleware('auth')->middleware('verified');
-Route::get('guest/attach/document/{token}','curriculumController@attach')->name("curriculum_attach_documents");
-Route::put('guest/attach/document','curriculumController@attach_store')->name("curriculum_attach");
-Route::get('guest/attach/document','curriculumController@success')->name("curriculum_attach_success");
-Route::patch('curriculum/{id}','curriculumController@renovation_contract')->name('renovation_contract')->middleware('auth')->middleware('verified');
+Route::get('curriculums', 'curriculumController@index')->name('curriculums')->middleware('auth')->middleware('verified');
+Route::get('curriculum/show/{id}', 'curriculumController@show')->name('curriculum_show')->middleware('auth')->middleware('verified');
+Route::get('curriculum/create', 'curriculumController@create')->name('curriculum_create')->middleware('auth')->middleware('verified');
+Route::post('curriculum', 'curriculumController@store')->name('curriculum_store')->middleware('auth')->middleware('verified');
+Route::get('curriculum/create2/{id}', 'curriculumController@create2')->name('curriculum_create2')->middleware('auth')->middleware('verified');
+Route::post('curriculum2/{id}', 'curriculumController@store2')->name('curriculum_store2')->middleware('auth')->middleware('verified');
+Route::get('curriculum/register/{id}', 'curriculumController@register')->name('curriculum_register')->middleware('auth')->middleware('verified');
+Route::get('curriculum/create3/{id}', 'curriculumController@create3')->name('curriculum_create3')->middleware('auth')->middleware('verified');
+Route::put('curriculum3/{id}', 'curriculumController@store3')->name('curriculum_store3')->middleware('auth')->middleware('verified');
+Route::get('curriculum/{id}/edit', 'curriculumController@edit')->name('curriculum_edit')->middleware('auth')->middleware('verified');
+Route::put('curriculum/{id}', 'curriculumController@update')->name('curriculum_update')->middleware('auth')->middleware('verified');
+Route::put('curriculum/approval/{id}', 'curriculumController@approve')->name('curriculum_approve')->middleware('auth')->middleware('verified');
+Route::put('curriculum/not_approval/{id}', 'curriculumController@not_approve')->name('curriculum_not_approve')->middleware('auth')->middleware('verified');
+Route::delete('curriculum/{id}', 'curriculumController@destroy')->name("curriculum_delete")->middleware('auth')->middleware('verified');
+Route::get('guest/attach/document/{token}', 'curriculumController@attach')->name("curriculum_attach_documents");
+Route::put('guest/attach/document', 'curriculumController@attach_store')->name("curriculum_attach");
+Route::get('guest/attach/document', 'curriculumController@success')->name("curriculum_attach_success");
+Route::patch('curriculum/{id}', 'curriculumController@renovation_contract')->name('renovation_contract')->middleware('auth')->middleware('verified');
 
-Route::get('curriculum/signature','curriculumController@signature_1')->name('curriculum_signature')->middleware('auth')->middleware('verified');
-Route::post('signature_file','curriculumController@signature')->name('signature_file');
-Route::post('signature_contract','curriculumController@signature_contract')->name('signature_contract');
+Route::get('curriculum/signature', 'curriculumController@signature_1')->name('curriculum_signature')->middleware('auth')->middleware('verified');
+Route::post('signature_file', 'curriculumController@signature')->name('signature_file');
+Route::post('signature_contract', 'curriculumController@signature_contract')->name('signature_contract');
 
 //upload_file
-Route::post('upload_file','curriculumController@upload_file')->name('upload_file');
+Route::post('upload_file', 'curriculumController@upload_file')->name('upload_file');
 
 //interview
-Route::get('interviews','interviewController@index')->name('interview');
-Route::get('interview/show/{id}','interviewController@show')->name('interview_show');
-Route::get('interview/create','interviewController@create')->name('interview_create');
-Route::get('interview/{id}/create','interviewController@create_application')->name('interview_create_application');
-Route::post('interview','interviewController@store')->name('interview_store');
-Route::get('interview/{id}/edit','interviewController@edit')->name('interview_edit');
-Route::put('interview/{id}','interviewController@update')->name('interview_update');
-Route::put('interview/approval/{id}','interviewController@approve')->name('interview_approve');
-Route::put('interview/not_approval/{id}','interviewController@not_approve')->name('interview_not_approve');
-Route::delete('interview/{id}','interviewController@destroy')->name("interview_delete");
-Route::get('interview/{id}','interviewController@presend_documentation')->name("interview_presend_documentation");
-Route::post('interview/{id}','interviewController@send_documentation')->name("interview_send_documentation");
+Route::get('human_management/interview', 'interviewController@index')->name('interview');
+Route::get('human_management/interview/show/{id}', 'interviewController@show')->name('interview_show');
+Route::get('human_management/interview/create', 'interviewController@create')->name('interview_create');
+Route::get('human_management/interview/{id}/create', 'interviewController@create_application')->name('interview_create_application');
+Route::post('human_management/interview', 'interviewController@store')->name('interview_store');
+Route::get('human_management/interview/{id}/edit', 'interviewController@edit')->name('interview_edit');
+Route::put('human_management/interview/{id}', 'interviewController@update')->name('interview_update');
+Route::put('human_management/interview/approval/{id}', 'interviewController@approve')->name('interview_approve');
+Route::put('human_management/interview/not_approval/{id}', 'interviewController@not_approve')->name('interview_not_approve');
+Route::delete('human_management/interview/{id}', 'interviewController@destroy')->name("interview_delete");
+Route::get('human_management/interview/{id}', 'interviewController@presend_documentation')->name("interview_presend_documentation");
+Route::post('human_management/interview/{id}', 'interviewController@send_documentation')->name("interview_send_documentation");
 
-// Route::get('interview/{id}/export','interviewController@export')->name("export_contract");
+// Route::get('human_management/interview/{id}/export','interviewController@export')->name("export_contract");
 
 // position setting
-Route::get('position_settings','SettingsController@position_setting')->name('position_setting');
-Route::get('position_setting/show/{id}','SettingsController@position_setting_show')->name('position_setting_show');
-Route::get('position_setting/create','SettingsController@position_setting_create')->name('position_setting_create');
-Route::post('position_setting','SettingsController@position_setting_store')->name('position_setting_store');
-Route::get('position_setting/{id}/edit','SettingsController@position_setting_edit')->name('position_setting_edit');
-Route::put('position_setting/{id}','SettingsController@position_setting_update')->name('position_setting_update');
+Route::get('setting/position', 'SettingsController@position_setting')->name('position_setting');
+Route::get('setting/position/show/{id}', 'SettingsController@position_setting_show')->name('position_setting_show');
+Route::get('setting/position/create', 'SettingsController@position_setting_create')->name('position_setting_create');
+Route::post('setting/position', 'SettingsController@position_setting_store')->name('position_setting_store');
+Route::get('setting/position/{id}/edit', 'SettingsController@position_setting_edit')->name('position_setting_edit');
+Route::put('setting/position/{id}', 'SettingsController@position_setting_update')->name('position_setting_update');
+
+Route::delete('setting/files/delete/{id}', 'SettingsController@file_delete')->name('files_delete');
 
 //documents
-Route::get('documents','DocumentsController@index')->name('documents');
-Route::get('documents/{id}','DocumentsController@show')->name('documents_show');
-Route::get('document/create','DocumentsController@create')->name('documents_create');
-Route::post('documents','DocumentsController@store')->name('documents_store');
-Route::get('documents/{id}/edit','DocumentsController@edit')->name('documents_edit');
-Route::put('documents/{id}','DocumentsController@update')->name('documents_update');
-Route::delete('documents/{id}','DocumentsController@destroy')->name('documents_delete');
-Route::get('documents/{id}/download','DocumentsController@download')->name('documents_download');
+Route::get('documents', 'DocumentsController@index')->name('documents');
+Route::get('documents/show/{id}', 'DocumentsController@show')->name('documents_show');
+Route::get('documents/create', 'DocumentsController@create')->name('documents_create');
+Route::post('documents', 'DocumentsController@store')->name('documents_store');
+Route::get('documents/{id}/edit', 'DocumentsController@edit')->name('documents_edit');
+Route::put('documents/{id}', 'DocumentsController@update')->name('documents_update');
+Route::delete('documents/{id}', 'DocumentsController@destroy')->name('documents_delete');
+Route::get('documents/{id}/download', 'DocumentsController@download')->name('documents_download');
 
 // cvs
 
 //Ventas
-Route::get('cvs/sale','cvs\CvsSalesController@index')->name('cvs_sales');
-Route::get('cvs/sale/show/{id}','cvs\CvsSalesController@show')->name('cvs_sales_show');
-Route::get('cvs/sale/create','cvs\CvsSalesController@create')->name('cvs_sales_create');
-Route::post('cvs/sale','cvs\CvsSalesController@store')->name('cvs_sales_store');
-Route::get('cvs/sale/{id}/edit','cvs\CvsSalesController@edit')->name('cvs_sales_edit');
-Route::put('cvs/sale/{id}','cvs\CvsSalesController@update')->name('cvs_sales_update');
-Route::put('cvs/sale/end/{id}','cvs\CvsSalesController@end')->name('cvs_sales_end');
+Route::get('cvs/sale', 'cvs\CvsSalesController@index')->name('cvs_sales');
+Route::get('cvs/sale/show/{id}', 'cvs\CvsSalesController@show')->name('cvs_sales_show');
+Route::get('cvs/sale/create', 'cvs\CvsSalesController@create')->name('cvs_sales_create');
+Route::post('cvs/sale', 'cvs\CvsSalesController@store')->name('cvs_sales_store');
+Route::get('cvs/sale/{id}/edit', 'cvs\CvsSalesController@edit')->name('cvs_sales_edit');
+Route::put('cvs/sale/{id}', 'cvs\CvsSalesController@update')->name('cvs_sales_update');
+Route::put('cvs/sale/end/{id}', 'cvs\CvsSalesController@end')->name('cvs_sales_end');
 // Route::delete('cvs/sale','cvs\CvsSalesController@destroy')->name('cvs_sales_delete');
-Route::post('cvs/sale/export','cvs\CvsSalesController@export')->name('cvs_sales_export');
+Route::post('cvs/sale/export', 'cvs\CvsSalesController@export')->name('cvs_sales_export');
 
 // Facturas
-Route::get('cvs/invoices','cvs\CvsInvoiceController@index')->name('cvs_invoices');
+Route::get('cvs/invoices', 'cvs\CvsInvoiceController@index')->name('cvs_invoices');
 // Route::get('cvs/invoices/{id}','cvs\CvsInvoiceController@show')->name('cvs_invoices_show');
 // Route::get('cvs/invoices/create','cvs\CvsInvoiceController@create')->name('cvs_invoices_create');
 // Route::post('cvs/invoices','cvs\CvsInvoiceController@store')->name('cvs_invoices_store');
-Route::get('cvs/invoices/{id}/edit','cvs\CvsInvoiceController@edit')->name('cvs_invoices_edit');
-Route::put('cvs/invoices/{id}','cvs\CvsInvoiceController@update')->name('cvs_invoices_update');
-Route::delete('cvs/invoices/{id}','cvs\CvsInvoiceController@destroy')->name('cvs_invoices_delete');
-Route::post('cvs/invoices/cut','cvs\CvsInvoiceController@cut')->name('cvs_payment_cuy');
+Route::get('cvs/invoices/{id}/edit', 'cvs\CvsInvoiceController@edit')->name('cvs_invoices_edit');
+Route::put('cvs/invoices/{id}', 'cvs\CvsInvoiceController@update')->name('cvs_invoices_update');
+Route::delete('cvs/invoices/{id}', 'cvs\CvsInvoiceController@destroy')->name('cvs_invoices_delete');
+Route::post('cvs/invoices/cut', 'cvs\CvsInvoiceController@cut')->name('cvs_payment_cuy');
 
 // Clientes
-Route::get('cvs/clients','cvs\CvsClientsController@index')->name('cvs_clients')->middleware('auth')->middleware('verified');
-Route::get('cvs/clients/{id}','cvs\CvsClientsController@show')->name('cvs_clients_show')->middleware('auth')->middleware('verified');
+Route::get('cvs/clients', 'cvs\CvsClientsController@index')->name('cvs_clients')->middleware('auth')->middleware('verified');
+Route::get('cvs/clients/{id}', 'cvs\CvsClientsController@show')->name('cvs_clients_show')->middleware('auth')->middleware('verified');
 // Route::get('cvs/clients/create','cvs\CvsClientsController@create')->name('cvs_clients_create');
 // Route::post('cvs/clients','cvs\CvsClientsController@store')->name('cvs_clients_store');
 // Route::get('cvs/clients/{id}/edit','cvs\CvsClientsController@edit')->name('cvs_clients_edit');
 // Route::put('cvs/clients/{id}','cvs\CvsClientsController@update')->name('cvs_clients_update');
 // Route::delete('cvs/clients','cvs\CvsClientsController@destroy')->name('cvs_clients_delete');
-Route::get('unsubscribe/{token}','cvs\CvsClientsController@unsubscribe')->name('cvs_clients_unsubscribe');
-Route::put('unsubscribe/{token}','cvs\CvsClientsController@unsubscribe_save')->name('cvs_clients_unsubscribe_save');
-Route::get('subscribe/{token}','cvs\CvsClientsController@subscribe')->name('cvs_clients_subscribe');
-Route::put('subscribe/{token}','cvs\CvsClientsController@subscribe_save')->name('cvs_clients_subscribe_save');
+Route::get('unsubscribe/{token}', 'cvs\CvsClientsController@unsubscribe')->name('cvs_clients_unsubscribe');
+Route::put('unsubscribe/{token}', 'cvs\CvsClientsController@unsubscribe_save')->name('cvs_clients_unsubscribe_save');
+Route::get('subscribe/{token}', 'cvs\CvsClientsController@subscribe')->name('cvs_clients_subscribe');
+Route::put('subscribe/{token}', 'cvs\CvsClientsController@subscribe_save')->name('cvs_clients_subscribe_save');
 
 // admin
 
 // Sedes
-Route::get('cvs/admin/sedes','cvs\admin\CvsSedesController@index')->name('cvs_sedes');
-Route::get('cvs/admin/sedes/show/{id}','cvs\admin\CvsSedesController@show')->name('cvs_sedes_show');
-Route::get('cvs/admin/sedes/create','cvs\admin\CvsSedesController@create')->name('cvs_sedes_create');
-Route::post('cvs/admin/sedes','cvs\admin\CvsSedesController@store')->name('cvs_sedes_store');
-Route::get('cvs/admin/sedes/{id}/edit','cvs\admin\CvsSedesController@edit')->name('cvs_sedes_edit');
-Route::put('cvs/admin/sedes/{id}','cvs\admin\CvsSedesController@update')->name('cvs_sedes_update');
+Route::get('cvs/admin/sedes', 'cvs\admin\CvsSedesController@index')->name('cvs_sedes');
+Route::get('cvs/admin/sedes/show/{id}', 'cvs\admin\CvsSedesController@show')->name('cvs_sedes_show');
+Route::get('cvs/admin/sedes/create', 'cvs\admin\CvsSedesController@create')->name('cvs_sedes_create');
+Route::post('cvs/admin/sedes', 'cvs\admin\CvsSedesController@store')->name('cvs_sedes_store');
+Route::get('cvs/admin/sedes/{id}/edit', 'cvs\admin\CvsSedesController@edit')->name('cvs_sedes_edit');
+Route::put('cvs/admin/sedes/{id}', 'cvs\admin\CvsSedesController@update')->name('cvs_sedes_update');
 // Route::delete('cvs/admin/sedes','cvs\admin\CvsSedesController@destroy')->name('cvs_sedes_delete');
 
 // activation
-Route::get('cvs/admin/activations','cvs\admin\CvsActivationsController@index')->name('cvs_admin_activations');
-Route::get('cvs/admin/activations/show/{id}','cvs\admin\CvsActivationsController@show')->name('cvs_admin_activations_show');
-Route::get('cvs/admin/activations/create','cvs\admin\CvsActivationsController@create')->name('cvs_admin_activations_create');
-Route::post('cvs/admin/activations','cvs\admin\CvsActivationsController@store')->name('cvs_admin_activations_store');
-Route::get('cvs/admin/activations/{id}/edit','cvs\admin\CvsActivationsController@edit')->name('cvs_admin_activations_edit');
-Route::put('cvs/admin/activations/{id}','cvs\admin\CvsActivationsController@update')->name('cvs_admin_activations_update');
+Route::get('cvs/admin/activations', 'cvs\admin\CvsActivationsController@index')->name('cvs_admin_activations');
+Route::get('cvs/admin/activations/show/{id}', 'cvs\admin\CvsActivationsController@show')->name('cvs_admin_activations_show');
+Route::get('cvs/admin/activations/create', 'cvs\admin\CvsActivationsController@create')->name('cvs_admin_activations_create');
+Route::post('cvs/admin/activations', 'cvs\admin\CvsActivationsController@store')->name('cvs_admin_activations_store');
+Route::get('cvs/admin/activations/{id}/edit', 'cvs\admin\CvsActivationsController@edit')->name('cvs_admin_activations_edit');
+Route::put('cvs/admin/activations/{id}', 'cvs\admin\CvsActivationsController@update')->name('cvs_admin_activations_update');
 // Route::delete('cvs/admin/activations','cvs\admin\CvsActivationsController@destroy')->name('cvs_admin_activations_delete');
 
 // tipos sims
-Route::get('cvs/admin/sims_type','cvs\admin\CvsSims_typeController@index')->name('cvs_admin_sims_type');
-Route::get('cvs/admin/sims_type/show/{id}','cvs\admin\CvsSims_typeController@show')->name('cvs_admin_sims_type_show');
-Route::get('cvs/admin/sims_type/create','cvs\admin\CvsSims_typeController@create')->name('cvs_admin_sims_type_create');
-Route::post('cvs/admin/sims_type','cvs\admin\CvsSims_typeController@store')->name('cvs_admin_sims_type_store');
-Route::get('cvs/admin/sims_type/{id}/edit','cvs\admin\CvsSims_typeController@edit')->name('cvs_admin_sims_type_edit');
-Route::put('cvs/admin/sims_type/{id}','cvs\admin\CvsSims_typeController@update')->name('cvs_admin_sims_type_update');
+Route::get('cvs/admin/sims_type', 'cvs\admin\CvsSims_typeController@index')->name('cvs_admin_sims_type');
+Route::get('cvs/admin/sims_type/show/{id}', 'cvs\admin\CvsSims_typeController@show')->name('cvs_admin_sims_type_show');
+Route::get('cvs/admin/sims_type/create', 'cvs\admin\CvsSims_typeController@create')->name('cvs_admin_sims_type_create');
+Route::post('cvs/admin/sims_type', 'cvs\admin\CvsSims_typeController@store')->name('cvs_admin_sims_type_store');
+Route::get('cvs/admin/sims_type/{id}/edit', 'cvs\admin\CvsSims_typeController@edit')->name('cvs_admin_sims_type_edit');
+Route::put('cvs/admin/sims_type/{id}', 'cvs\admin\CvsSims_typeController@update')->name('cvs_admin_sims_type_update');
 // Route::delete('cvs/admin/sims_type','cvs\admin\CvsSims_typeController@destroy')->name('cvs_admin_sims_type_delete');
 
 // categorias accesorios
-Route::get('cvs/admin/accesories_category','cvs\admin\CvsAccesoriesCategoryController@index')->name('cvs_admin_accesories_category');
-Route::get('cvs/admin/accesories_category/show/{id}','cvs\admin\CvsAccesoriesCategoryController@show')->name('cvs_admin_accesories_category_show');
-Route::get('cvs/admin/accesories_category/create','cvs\admin\CvsAccesoriesCategoryController@create')->name('cvs_admin_accesories_category_create');
-Route::post('cvs/admin/accesories_category','cvs\admin\CvsAccesoriesCategoryController@store')->name('cvs_admin_accesories_category_store');
-Route::get('cvs/admin/accesories_category/{id}/edit','cvs\admin\CvsAccesoriesCategoryController@edit')->name('cvs_admin_accesories_category_edit');
-Route::put('cvs/admin/accesories_category/{id}','cvs\admin\CvsAccesoriesCategoryController@update')->name('cvs_admin_accesories_category_update');
+Route::get('cvs/admin/accesories_category', 'cvs\admin\CvsAccesoriesCategoryController@index')->name('cvs_admin_accesories_category');
+Route::get('cvs/admin/accesories_category/show/{id}', 'cvs\admin\CvsAccesoriesCategoryController@show')->name('cvs_admin_accesories_category_show');
+Route::get('cvs/admin/accesories_category/create', 'cvs\admin\CvsAccesoriesCategoryController@create')->name('cvs_admin_accesories_category_create');
+Route::post('cvs/admin/accesories_category', 'cvs\admin\CvsAccesoriesCategoryController@store')->name('cvs_admin_accesories_category_store');
+Route::get('cvs/admin/accesories_category/{id}/edit', 'cvs\admin\CvsAccesoriesCategoryController@edit')->name('cvs_admin_accesories_category_edit');
+Route::put('cvs/admin/accesories_category/{id}', 'cvs\admin\CvsAccesoriesCategoryController@update')->name('cvs_admin_accesories_category_update');
 // Route::delete('cvs/admin/accesories_category','cvs\admin\CvsAccesoriesCategoryController@destroy')->name('cvs_admin_accesories_category_delete');
 
 // advertising
-Route::get('cvs/admin/advertising','cvs\admin\CvsAdvertisingController@index')->name('cvs_admin_advertising');
-Route::get('cvs/admin/advertising/show/{id}','cvs\admin\CvsAdvertisingController@show')->name('cvs_admin_advertising_show');
-Route::get('cvs/admin/advertising/create','cvs\admin\CvsAdvertisingController@create')->name('cvs_admin_advertising_create');
-Route::post('cvs/admin/advertising','cvs\admin\CvsAdvertisingController@store')->name('cvs_admin_advertising_store');
-Route::get('cvs/admin/advertising/{id}/edit','cvs\admin\CvsAdvertisingController@edit')->name('cvs_admin_advertising_edit');
-Route::put('cvs/admin/advertising/{id}','cvs\admin\CvsAdvertisingController@update')->name('cvs_admin_advertising_update');
+Route::get('cvs/admin/advertising', 'cvs\admin\CvsAdvertisingController@index')->name('cvs_admin_advertising');
+Route::get('cvs/admin/advertising/show/{id}', 'cvs\admin\CvsAdvertisingController@show')->name('cvs_admin_advertising_show');
+Route::get('cvs/admin/advertising/create', 'cvs\admin\CvsAdvertisingController@create')->name('cvs_admin_advertising_create');
+Route::post('cvs/admin/advertising', 'cvs\admin\CvsAdvertisingController@store')->name('cvs_admin_advertising_store');
+Route::get('cvs/admin/advertising/{id}/edit', 'cvs\admin\CvsAdvertisingController@edit')->name('cvs_admin_advertising_edit');
+Route::put('cvs/admin/advertising/{id}', 'cvs\admin\CvsAdvertisingController@update')->name('cvs_admin_advertising_update');
 // Route::delete('cvs/admin/advertising','cvs\admin\CvsAdvertisingController@destroy')->name('cvs_admin_advertising_delete');
 
 // INVENTAROS
 
 //Moviles
-Route::get('cvs/inventary/movile','cvs\inventary\CvsInventarymovileController@index')->name('cvs_inventary_moviles');
-Route::get('cvs/inventary/movile/show/{id}','cvs\inventary\CvsInventarymovileController@show')->name('cvs_inventary_moviles_show');
-Route::get('cvs/inventary/movile/create','cvs\inventary\CvsInventarymovileController@create')->name('cvs_inventary_moviles_create');
-Route::post('cvs/inventary/movile','cvs\inventary\CvsInventarymovileController@store')->name('cvs_inventary_moviles_store');
-Route::get('cvs/inventary/movile/{id}/edit','cvs\inventary\CvsInventarymovileController@edit')->name('cvs_inventary_moviles_edit');
-Route::put('cvs/inventary/movile/{id}','cvs\inventary\CvsInventarymovileController@update')->name('cvs_inventary_moviles_update');
-Route::delete('cvs/inventary/movile/{id}','cvs\inventary\CvsInventarymovileController@destroy')->name('cvs_inventary_moviles_delete');
+Route::get('cvs/inventary/movile', 'cvs\inventary\CvsInventarymovileController@index')->name('cvs_inventary_moviles');
+Route::get('cvs/inventary/movile/show/{id}', 'cvs\inventary\CvsInventarymovileController@show')->name('cvs_inventary_moviles_show');
+Route::get('cvs/inventary/movile/create', 'cvs\inventary\CvsInventarymovileController@create')->name('cvs_inventary_moviles_create');
+Route::post('cvs/inventary/movile', 'cvs\inventary\CvsInventarymovileController@store')->name('cvs_inventary_moviles_store');
+Route::get('cvs/inventary/movile/{id}/edit', 'cvs\inventary\CvsInventarymovileController@edit')->name('cvs_inventary_moviles_edit');
+Route::put('cvs/inventary/movile/{id}', 'cvs\inventary\CvsInventarymovileController@update')->name('cvs_inventary_moviles_update');
+Route::delete('cvs/inventary/movile/{id}', 'cvs\inventary\CvsInventarymovileController@destroy')->name('cvs_inventary_moviles_delete');
 
 //Sim Card
-Route::get('cvs/inventary/sims','cvs\inventary\CvsInventarySimController@index')->name('cvs_inventary_sims');
-Route::get('cvs/inventary/sims/show/{id}','cvs\inventary\CvsInventarySimController@show')->name('cvs_inventary_sims_show');
-Route::get('cvs/inventary/sims/create','cvs\inventary\CvsInventarySimController@create')->name('cvs_inventary_sims_create');
-Route::post('cvs/inventary/sims','cvs\inventary\CvsInventarySimController@store')->name('cvs_inventary_sims_store');
-Route::get('cvs/inventary/sims/{id}/edit','cvs\inventary\CvsInventarySimController@edit')->name('cvs_inventary_sims_edit');
-Route::put('cvs/inventary/sims/{id}','cvs\inventary\CvsInventarySimController@update')->name('cvs_inventary_sims_update');
-Route::delete('cvs/inventary/sims/{id}','cvs\inventary\CvsInventarySimController@destroy')->name('cvs_inventary_sims_delete');
+Route::get('cvs/inventary/sims', 'cvs\inventary\CvsInventarySimController@index')->name('cvs_inventary_sims');
+Route::get('cvs/inventary/sims/show/{id}', 'cvs\inventary\CvsInventarySimController@show')->name('cvs_inventary_sims_show');
+Route::get('cvs/inventary/sims/create', 'cvs\inventary\CvsInventarySimController@create')->name('cvs_inventary_sims_create');
+Route::post('cvs/inventary/sims', 'cvs\inventary\CvsInventarySimController@store')->name('cvs_inventary_sims_store');
+Route::get('cvs/inventary/sims/{id}/edit', 'cvs\inventary\CvsInventarySimController@edit')->name('cvs_inventary_sims_edit');
+Route::put('cvs/inventary/sims/{id}', 'cvs\inventary\CvsInventarySimController@update')->name('cvs_inventary_sims_update');
+Route::delete('cvs/inventary/sims/{id}', 'cvs\inventary\CvsInventarySimController@destroy')->name('cvs_inventary_sims_delete');
 
 // Accesories
-Route::get('cvs/inventary/Accesories','cvs\inventary\CvsInventaryAccesoriesController@index')->name('cvs_inventary_Accesories');
-Route::get('cvs/inventary/Accesories/show/{id}','cvs\inventary\CvsInventaryAccesoriesController@show')->name('cvs_inventary_Accesories_show');
-Route::get('cvs/inventary/Accesories/create','cvs\inventary\CvsInventaryAccesoriesController@create')->name('cvs_inventary_Accesories_create');
-Route::post('cvs/inventary/Accesories','cvs\inventary\CvsInventaryAccesoriesController@store')->name('cvs_inventary_Accesories_store');
-Route::get('cvs/inventary/Accesories/{id}/edit','cvs\inventary\CvsInventaryAccesoriesController@edit')->name('cvs_inventary_Accesories_edit');
-Route::put('cvs/inventary/Accesories/{id}','cvs\inventary\CvsInventaryAccesoriesController@update')->name('cvs_inventary_Accesories_update');
-Route::delete('cvs/inventary/Accesories/{id}','cvs\inventary\CvsInventaryAccesoriesController@destroy')->name('cvs_inventary_Accesories_delete');
+Route::get('cvs/inventary/Accesories', 'cvs\inventary\CvsInventaryAccesoriesController@index')->name('cvs_inventary_Accesories');
+Route::get('cvs/inventary/Accesories/show/{id}', 'cvs\inventary\CvsInventaryAccesoriesController@show')->name('cvs_inventary_Accesories_show');
+Route::get('cvs/inventary/Accesories/create', 'cvs\inventary\CvsInventaryAccesoriesController@create')->name('cvs_inventary_Accesories_create');
+Route::post('cvs/inventary/Accesories', 'cvs\inventary\CvsInventaryAccesoriesController@store')->name('cvs_inventary_Accesories_store');
+Route::get('cvs/inventary/Accesories/{id}/edit', 'cvs\inventary\CvsInventaryAccesoriesController@edit')->name('cvs_inventary_Accesories_edit');
+Route::put('cvs/inventary/Accesories/{id}', 'cvs\inventary\CvsInventaryAccesoriesController@update')->name('cvs_inventary_Accesories_update');
+Route::delete('cvs/inventary/Accesories/{id}', 'cvs\inventary\CvsInventaryAccesoriesController@destroy')->name('cvs_inventary_Accesories_delete');
 
 // Claro service
-Route::get('cvs/inventary/claro_services','cvs\inventary\CvsInventaryClaroServicesController@index')->name('cvs_inventary_claro_services');
-Route::get('cvs/inventary/claro_services/show/{id}','cvs\inventary\CvsInventaryClaroServicesController@show')->name('cvs_inventary_claro_services_show');
-Route::get('cvs/inventary/claro_services/create','cvs\inventary\CvsInventaryClaroServicesController@create')->name('cvs_inventary_claro_services_create');
-Route::post('cvs/inventary/claro_services','cvs\inventary\CvsInventaryClaroServicesController@store')->name('cvs_inventary_claro_services_store');
-Route::get('cvs/inventary/claro_services/{id}/edit','cvs\inventary\CvsInventaryClaroServicesController@edit')->name('cvs_inventary_claro_services_edit');
-Route::put('cvs/inventary/claro_services/{id}','cvs\inventary\CvsInventaryClaroServicesController@update')->name('cvs_inventary_claro_services_update');
-Route::delete('cvs/inventary/claro_services/{id}','cvs\inventary\CvsInventaryClaroServicesController@destroy')->name('cvs_inventary_claro_services_delete');
+Route::get('cvs/inventary/claro_services', 'cvs\inventary\CvsInventaryClaroServicesController@index')->name('cvs_inventary_claro_services');
+Route::get('cvs/inventary/claro_services/show/{id}', 'cvs\inventary\CvsInventaryClaroServicesController@show')->name('cvs_inventary_claro_services_show');
+Route::get('cvs/inventary/claro_services/create', 'cvs\inventary\CvsInventaryClaroServicesController@create')->name('cvs_inventary_claro_services_create');
+Route::post('cvs/inventary/claro_services', 'cvs\inventary\CvsInventaryClaroServicesController@store')->name('cvs_inventary_claro_services_store');
+Route::get('cvs/inventary/claro_services/{id}/edit', 'cvs\inventary\CvsInventaryClaroServicesController@edit')->name('cvs_inventary_claro_services_edit');
+Route::put('cvs/inventary/claro_services/{id}', 'cvs\inventary\CvsInventaryClaroServicesController@update')->name('cvs_inventary_claro_services_update');
+Route::delete('cvs/inventary/claro_services/{id}', 'cvs\inventary\CvsInventaryClaroServicesController@destroy')->name('cvs_inventary_claro_services_delete');
 
 
 // indicators
-Route::get('indicators','indicatorsController@index')->name('indicators');
-Route::get('indicators/create','indicatorsController@create')->name('indicators_create');
-Route::post('indicators','indicatorsController@store')->name('indicators_store');
-Route::get('indicators/show/{id}','indicatorsController@show')->name('indicators_show');
-Route::get('indicators/{id}/edit','indicatorsController@edit')->name('indicators_edit');
-Route::put('indicators/{id}','indicatorsController@update')->name('indicators_update');
-Route::get('indicators/{id}/tracing','indicatorsController@tracing')->name('indicators_tracing');
-Route::put('indicators/tracing/{id}','indicatorsController@save')->name('indicators_tracing_save');
+Route::get('indicators', 'indicatorsController@index')->name('indicators');
+Route::get('indicators/create', 'indicatorsController@create')->name('indicators_create');
+Route::post('indicators', 'indicatorsController@store')->name('indicators_store');
+Route::get('indicators/show/{id}', 'indicatorsController@show')->name('indicators_show');
+Route::get('indicators/{id}/edit', 'indicatorsController@edit')->name('indicators_edit');
+Route::put('indicators/{id}', 'indicatorsController@update')->name('indicators_update');
+Route::get('indicators/{id}/tracing', 'indicatorsController@tracing')->name('indicators_tracing');
+Route::put('indicators/tracing/{id}', 'indicatorsController@save')->name('indicators_tracing_save');
 
 //CCJL
 // PAGOS
-Route::get('ccjl/rent','ccjl\ccjlRentController@index')->name('CCJL_rents');
-Route::get('ccjl/rent/create','ccjl\ccjlRentController@create')->name('CCJL_rents_create');
-Route::post('ccjl/rent','ccjl\ccjlRentController@store')->name('CCJL_rents_store');
-Route::get('ccjl/rent/show/{id}','ccjl\ccjlRentController@show')->name('CCJL_rents_show');
-Route::get('ccjl/rent/{id}/edit','ccjl\ccjlRentController@edit')->name('CCJL_rents_edit');
-Route::put('ccjl/rent/{id}','ccjl\ccjlRentController@update')->name('CCJL_rents_update');
-Route::get('ccjl/rent/{id}/pay','ccjl\ccjlRentController@pay')->name('CCJL_rents_pay');
-Route::put('ccjl/rent/pay/{id}','ccjl\ccjlRentController@save')->name('CCJL_rents_save');
-Route::post('ccjl/rent/remember/{id}','ccjl\ccjlRentController@remember')->name('CCJL_rents_remember');
-Route::delete('ccjl/rent/{id}','ccjl\ccjlRentController@destroy')->name('CCJL_rents_delete');
+Route::get('ccjl/rent', 'ccjl\ccjlRentController@index')->name('CCJL_rents');
+Route::get('ccjl/rent/create', 'ccjl\ccjlRentController@create')->name('CCJL_rents_create');
+Route::post('ccjl/rent', 'ccjl\ccjlRentController@store')->name('CCJL_rents_store');
+Route::get('ccjl/rent/show/{id}', 'ccjl\ccjlRentController@show')->name('CCJL_rents_show');
+Route::get('ccjl/rent/{id}/edit', 'ccjl\ccjlRentController@edit')->name('CCJL_rents_edit');
+Route::put('ccjl/rent/{id}', 'ccjl\ccjlRentController@update')->name('CCJL_rents_update');
+Route::get('ccjl/rent/{id}/pay', 'ccjl\ccjlRentController@pay')->name('CCJL_rents_pay');
+Route::put('ccjl/rent/pay/{id}', 'ccjl\ccjlRentController@save')->name('CCJL_rents_save');
+Route::post('ccjl/rent/remember/{id}', 'ccjl\ccjlRentController@remember')->name('CCJL_rents_remember');
+Route::delete('ccjl/rent/{id}', 'ccjl\ccjlRentController@destroy')->name('CCJL_rents_delete');
 
 // CLIENTS
-Route::get('ccjl/client','ccjl\ccjlClientController@index')->name('CCJL_clients');
-Route::get('ccjl/client/create','ccjl\ccjlClientController@create')->name('CCJL_clients_create');
-Route::post('ccjl/client','ccjl\ccjlClientController@store')->name('CCJL_clients_store');
-Route::get('ccjl/client/show/{id}','ccjl\ccjlClientController@show')->name('CCJL_clients_show');
-Route::get('ccjl/client/{id}/edit','ccjl\ccjlClientController@edit')->name('CCJL_clients_edit');
-Route::put('ccjl/client/{id}','ccjl\ccjlClientController@update')->name('CCJL_clients_update');
+Route::get('ccjl/client', 'ccjl\ccjlClientController@index')->name('CCJL_clients');
+Route::get('ccjl/client/create', 'ccjl\ccjlClientController@create')->name('CCJL_clients_create');
+Route::post('ccjl/client', 'ccjl\ccjlClientController@store')->name('CCJL_clients_store');
+Route::get('ccjl/client/show/{id}', 'ccjl\ccjlClientController@show')->name('CCJL_clients_show');
+Route::get('ccjl/client/{id}/edit', 'ccjl\ccjlClientController@edit')->name('CCJL_clients_edit');
+Route::put('ccjl/client/{id}', 'ccjl\ccjlClientController@update')->name('CCJL_clients_update');
 
 // PRODUCTS
 // CANON
-Route::get('ccjl/local','ccjl\products\ccjlLocalController@index')->name('CCJL_locals');
-Route::get('ccjl/local/create','ccjl\products\ccjlLocalController@create')->name('CCJL_locals_create');
-Route::post('ccjl/local','ccjl\products\ccjlLocalController@store')->name('CCJL_locals_store');
-Route::get('ccjl/local/show/{id}','ccjl\products\ccjlLocalController@show')->name('CCJL_locals_show');
-Route::get('ccjl/local/{id}/edit','ccjl\products\ccjlLocalController@edit')->name('CCJL_locals_edit');
-Route::put('ccjl/local/{id}','ccjl\products\ccjlLocalController@update')->name('CCJL_locals_update');
+Route::get('ccjl/local', 'ccjl\products\ccjlLocalController@index')->name('CCJL_locals');
+Route::get('ccjl/local/create', 'ccjl\products\ccjlLocalController@create')->name('CCJL_locals_create');
+Route::post('ccjl/local', 'ccjl\products\ccjlLocalController@store')->name('CCJL_locals_store');
+Route::get('ccjl/local/show/{id}', 'ccjl\products\ccjlLocalController@show')->name('CCJL_locals_show');
+Route::get('ccjl/local/{id}/edit', 'ccjl\products\ccjlLocalController@edit')->name('CCJL_locals_edit');
+Route::put('ccjl/local/{id}', 'ccjl\products\ccjlLocalController@update')->name('CCJL_locals_update');
 
 // SERVICES
-Route::get('ccjl/service','ccjl\products\ccjlServiceController@index')->name('CCJL_services');
-Route::get('ccjl/service/create','ccjl\products\ccjlServiceController@create')->name('CCJL_services_create');
-Route::post('ccjl/service','ccjl\products\ccjlServiceController@store')->name('CCJL_services_store');
-Route::get('ccjl/service/show/{id}','ccjl\products\ccjlServiceController@show')->name('CCJL_services_show');
-Route::get('ccjl/service/{id}/edit','ccjl\products\ccjlServiceController@edit')->name('CCJL_services_edit');
-Route::put('ccjl/service/{id}','ccjl\products\ccjlServiceController@update')->name('CCJL_services_update');
-Route::delete('ccjl/service/{id}','ccjl\products\ccjlServiceController@destroy')->name('CCJL_services_delete');
+Route::get('ccjl/service', 'ccjl\products\ccjlServiceController@index')->name('CCJL_services');
+Route::get('ccjl/service/create', 'ccjl\products\ccjlServiceController@create')->name('CCJL_services_create');
+Route::post('ccjl/service', 'ccjl\products\ccjlServiceController@store')->name('CCJL_services_store');
+Route::get('ccjl/service/show/{id}', 'ccjl\products\ccjlServiceController@show')->name('CCJL_services_show');
+Route::get('ccjl/service/{id}/edit', 'ccjl\products\ccjlServiceController@edit')->name('CCJL_services_edit');
+Route::put('ccjl/service/{id}', 'ccjl\products\ccjlServiceController@update')->name('CCJL_services_update');
+Route::delete('ccjl/service/{id}', 'ccjl\products\ccjlServiceController@destroy')->name('CCJL_services_delete');
 
 // ADMINISTRATION
-Route::get('ccjl/administration','ccjl\products\ccjlAdministrationController@index')->name('CCJL_administrations');
-Route::get('ccjl/administration/create','ccjl\products\ccjlAdministrationController@create')->name('CCJL_administrations_create');
-Route::post('ccjl/administration','ccjl\products\ccjlAdministrationController@store')->name('CCJL_administrations_store');
-Route::get('ccjl/administration/show/{id}','ccjl\products\ccjlAdministrationController@show')->name('CCJL_administrations_show');
-Route::get('ccjl/administration/{id}/edit','ccjl\products\ccjlAdministrationController@edit')->name('CCJL_administrations_edit');
-Route::put('ccjl/administration/{id}','ccjl\products\ccjlAdministrationController@update')->name('CCJL_administrations_update');
+Route::get('ccjl/administration', 'ccjl\products\ccjlAdministrationController@index')->name('CCJL_administrations');
+Route::get('ccjl/administration/create', 'ccjl\products\ccjlAdministrationController@create')->name('CCJL_administrations_create');
+Route::post('ccjl/administration', 'ccjl\products\ccjlAdministrationController@store')->name('CCJL_administrations_store');
+Route::get('ccjl/administration/show/{id}', 'ccjl\products\ccjlAdministrationController@show')->name('CCJL_administrations_show');
+Route::get('ccjl/administration/{id}/edit', 'ccjl\products\ccjlAdministrationController@edit')->name('CCJL_administrations_edit');
+Route::put('ccjl/administration/{id}', 'ccjl\products\ccjlAdministrationController@update')->name('CCJL_administrations_update');
 
 // Inventario
 // computers
-Route::get('invetory/computer','inventory\computerController@index')->name('inv_computer');
-Route::get('invetory/computer/create','inventory\computerController@create')->name('inv_computer_create');
-Route::post('invetory/computer','inventory\computerController@store')->name('inv_computer_store');
-Route::get('invetory/computer/show/{id}','inventory\computerController@show')->name('inv_computer_show');
-Route::get('invetory/computer/{id}/edit','inventory\computerController@edit')->name('inv_computer_edit');
-Route::put('invetory/computer/{id}','inventory\computerController@update')->name('inv_computer_update');
-Route::delete('invetory/computer/{id}','inventory\computerController@destroy')->name('inv_computer_delete');
+Route::get('logistics_infrastructure/invetory/computer', 'inventory\computerController@index')->name('inv_computer');
+Route::get('logistics_infrastructure/invetory/computer/create', 'inventory\computerController@create')->name('inv_computer_create');
+Route::post('logistics_infrastructure/invetory/computer', 'inventory\computerController@store')->name('inv_computer_store');
+Route::get('logistics_infrastructure/invetory/computer/show/{id}', 'inventory\computerController@show')->name('inv_computer_show');
+Route::get('logistics_infrastructure/invetory/computer/{id}/edit', 'inventory\computerController@edit')->name('inv_computer_edit');
+Route::put('logistics_infrastructure/invetory/computer/{id}', 'inventory\computerController@update')->name('inv_computer_update');
+Route::delete('logistics_infrastructure/invetory/computer/{id}', 'inventory\computerController@destroy')->name('inv_computer_delete');
 
 //vehicles
-Route::get('invetory/vehicle','inventory\vehicleController@index')->name('inv_vehicle');
-Route::get('invetory/vehicle/create','inventory\vehicleController@create')->name('inv_vehicle_create');
-Route::post('invetory/vehicle','inventory\vehicleController@store')->name('inv_vehicle_store');
-Route::get('invetory/vehicle/show/{id}','inventory\vehicleController@show')->name('inv_vehicle_show');
-Route::get('invetory/vehicle/{id}/edit','inventory\vehicleController@edit')->name('inv_vehicle_edit');
-Route::put('invetory/vehicle/{id}','inventory\vehicleController@update')->name('inv_vehicle_update');
-Route::delete('invetory/vehicle/{id}','inventory\vehicleController@destroy')->name('inv_vehicle_delete');
+Route::get('logistics_infrastructure/invetory/vehicle', 'inventory\vehicleController@index')->name('inv_vehicle');
+Route::get('logistics_infrastructure/invetory/vehicle/create', 'inventory\vehicleController@create')->name('inv_vehicle_create');
+Route::post('logistics_infrastructure/invetory/vehicle', 'inventory\vehicleController@store')->name('inv_vehicle_store');
+Route::get('logistics_infrastructure/invetory/vehicle/show/{id}', 'inventory\vehicleController@show')->name('inv_vehicle_show');
+Route::get('logistics_infrastructure/invetory/vehicle/{id}/edit', 'inventory\vehicleController@edit')->name('inv_vehicle_edit');
+Route::put('logistics_infrastructure/invetory/vehicle/{id}', 'inventory\vehicleController@update')->name('inv_vehicle_update');
+Route::delete('logistics_infrastructure/invetory/vehicle/{id}', 'inventory\vehicleController@destroy')->name('inv_vehicle_delete');
 
 // clearings
-Route::get('project/clearing','projects\clearingController@index')->name('clearings');
-Route::get('project/clearing/create','projects\clearingController@create')->name('clearings_create');
-Route::post('project/clearing','projects\clearingController@store')->name('clearings_store');
-Route::get('project/clearing/create/{id}','projects\clearingController@create2')->name('clearings_create2');
-Route::post('project/clearing/{id}','projects\clearingController@store2')->name('clearings_store2');
-Route::get('project/clearing/create3/{id}','projects\clearingController@create3')->name('clearings_create3');
-Route::post('project/clearing/create3/{id}','projects\clearingController@store3')->name('clearings_store3');
-Route::get('project/clearing/show/{id}','projects\clearingController@show')->name('clearings_show');
-Route::get('project/clearing/{id}/edit','projects\clearingController@edit')->name('clearings_edit');
-Route::put('project/clearing/{id}','projects\clearingController@update')->name('clearings_update');
-Route::put('project/clearing/{id}/approval','projects\clearingController@approval')->name('clearings_approval');
-Route::put('project/clearing/{id}/not_approval','projects\clearingController@not_approval')->name('clearings_not_approval');
-Route::delete('project/clearing/{id}','projects\clearingController@destroy')->name('clearings_delete');
-Route::post('project/clearings/upload_file','projects\clearingController@upload_file')->name('clearings_upload');
-Route::get('project/clearings/export/{id}','projects\clearingController@export')->name('clearings_export');
+Route::get('project/clearing', 'projects\clearingController@index')->name('clearings');
+Route::get('project/clearing/create', 'projects\clearingController@create')->name('clearings_create');
+Route::post('project/clearing', 'projects\clearingController@store')->name('clearings_store');
+Route::get('project/clearing/create/{id}', 'projects\clearingController@create2')->name('clearings_create2');
+Route::post('project/clearing/{id}', 'projects\clearingController@store2')->name('clearings_store2');
+Route::get('project/clearing/create3/{id}', 'projects\clearingController@create3')->name('clearings_create3');
+Route::post('project/clearing/create3/{id}', 'projects\clearingController@store3')->name('clearings_store3');
+Route::get('project/clearing/show/{id}', 'projects\clearingController@show')->name('clearings_show');
+Route::get('project/clearing/{id}/edit', 'projects\clearingController@edit')->name('clearings_edit');
+Route::put('project/clearing/{id}', 'projects\clearingController@update')->name('clearings_update');
+Route::put('project/clearing/{id}/approval', 'projects\clearingController@approval')->name('clearings_approval');
+Route::put('project/clearing/{id}/not_approval', 'projects\clearingController@not_approval')->name('clearings_not_approval');
+Route::delete('project/clearing/{id}', 'projects\clearingController@destroy')->name('clearings_delete');
+Route::post('project/clearings/upload_file', 'projects\clearingController@upload_file')->name('clearings_upload');
+Route::get('project/clearings/export/{id}', 'projects\clearingController@export')->name('clearings_export');
 
 //Water Mark Image
-Route::get('project/mintic/ec','projects\MinticController@index')->name('mintic');
-Route::get('project/mintic/ec/show/{id}','projects\MinticController@show')->name('mintic_show');
-Route::get('project/mintic/ec/create','projects\MinticController@create')->name('mintic_create');
+Route::get('project/mintic/ec', 'projects\MinticController@index')->name('mintic');
+Route::get('project/mintic/ec/list', 'projects\MinticController@list')->name('mintic_list');
+Route::get('project/mintic/ec/show/{id}', 'projects\MinticController@show')->name('mintic_show');
+Route::get('project/mintic/ec/create', 'projects\MinticController@create')->name('mintic_create');
 // Route::get('project/mintic/ec/create2/{id}','projects\MinticController@create2')->name('mintic_create2');
-Route::post('project/mintic/ec/store','projects\MinticController@store')->name('mintic_store');
+Route::post('project/mintic/ec/store', 'projects\MinticController@store')->name('mintic_store');
 // Route::post('project/mintic/ec/store2/{id}','projects\MinticController@store2')->name('mintic_store2');
-Route::get('project/mintic/ec/{id}/edit','projects\MinticController@edit')->name('mintic_edit');
-Route::put('project/mintic/ec/{id}','projects\MinticController@update')->name('mintic_update');
-Route::put('project/mintic/ec/approval/{id}','projects\MinticController@approval')->name('mintic_approval');
-Route::put('project/mintic/ec/not_approval/{id}','projects\MinticController@not_approval')->name('mintic_not_approval');
-Route::post('project/mintic/ec/upload','projects\MinticController@upload')->name('mintic_marke');
-Route::delete('project/mintic/ec/{id}','projects\MinticController@destroy')->name('mintic_delete');
-Route::get('project/mintic/ec/{id}','projects\MinticController@pintures')->name('mintic_pintures');
-Route::get('project/mintic/install/{id}','projects\MinticController@install')->name('mintic_install');
-Route::post('project/mintic/install','projects\MinticController@upload_install')->name('mintic_marke_install');
-Route::get('project/mintic/tss/{id}','projects\MinticController@tss')->name('mintic_tss');
-Route::post('project/mintic/tss','projects\MinticController@upload_tss')->name('mintic_marke_tss');
+Route::get('project/mintic/ec/{id}/edit', 'projects\MinticController@edit')->name('mintic_edit');
+Route::put('project/mintic/ec/{id}', 'projects\MinticController@update')->name('mintic_update');
+Route::put('project/mintic/ec/approval/{id}', 'projects\MinticController@approval')->name('mintic_approval');
+Route::put('project/mintic/ec/not_approval/{id}', 'projects\MinticController@not_approval')->name('mintic_not_approval');
+Route::post('project/mintic/ec/upload', 'projects\MinticController@upload')->name('mintic_marke');
+Route::delete('project/mintic/ec/{id}', 'projects\MinticController@destroy')->name('mintic_delete');
+Route::get('project/mintic/ec/{id}', 'projects\MinticController@pintures')->name('mintic_pintures');
 
-Route::get('project/mintic/maintenance/{id}','projects\MinticController@maintenance')->name('mintic_maintenance');
-Route::get('project/mintic/maintenance/{id}/create','projects\MinticController@create_maintenance')->name('mintic_maintenance_create');
-Route::post('project/mintic/maintenance/{id}','projects\MinticController@store_maintenance')->name('mintic_maintenance_store');
-Route::get('project/mintic/maintenance/{id}/{item}/edit','projects\MinticController@edit_maintenance')->name('mintic_maintenance_edit');
-Route::put('project/mintic/maintenance/{id}/{item}','projects\MinticController@update_maintenance')->name('mintic_maintenance_update');
-Route::get('project/mintic/maintenance/{id}/{item}','projects\MinticController@show_maintenance')->name('mintic_maintenance_show');
-Route::get('project/mintic/maintenance/{id}/{item}/export','projects\MinticController@export_maintenance')->name('mintic_maintenance_export');
-Route::get('project/mintic/maintenance/{id}/{item}/photos','projects\MinticController@photos_maintenance')->name('mintic_maintenance_photos');
-Route::post('project/mintic/maintenance/{id}/{item}','projects\MinticController@upload_maintenance')->name('mintic_marke_maintenance');
-Route::delete('project/mintic/maintenance/{id}/{item}','projects\MinticController@destroy_maintenance')->name('mintic_maintenance_delete');
+Route::get('project/mintic/install/{id}', 'projects\InstallController@index')->name('install');
+Route::get('project/mintic/install/create/{id}', 'projects\InstallController@create')->name('install_create');
+Route::post('project/mintic/install/store/{id}', 'projects\InstallController@store')->name('mintic_installation_store');
+Route::get('project/mintic/install/show/{id}/{item}', 'projects\InstallController@show')->name('mintic_installation_show');
+Route::get('project/mintic/install/edit/{id}/{item}', 'projects\InstallController@edit')->name('mintic_installation_edit');
+Route::put('project/mintic/install/{id}/{item}', 'projects\InstallController@update')->name('mintic_installation_update');
+Route::get('project/mintic/install/{id}/{item}/export', 'projects\InstallController@export')->name('mintic_installation_export');
+// Route::get('project/mintic/install/{id}','projects\MinticController@install')->name('mintic_install');
+Route::post('project/mintic/install', 'projects\MinticController@upload_install')->name('mintic_marke_install');
 
-Route::get('project/mintic/add/{id}','projects\MinticImplementController@index')->name('mintic_add_consumables');
-Route::get('project/mintic/add/{id}/show/{item}','projects\MinticImplementController@show')->name('mintic_add_consumables_show');
-Route::get('project/mintic/add/{id}/create','projects\MinticImplementController@create')->name('mintic_add_consumables_create');
-Route::post('project/mintic/add/{id}','projects\MinticImplementController@store')->name('mintic_add_consumables_store');
-Route::get('project/mintic/add/{id}/{item}/edit','projects\MinticImplementController@edit')->name('mintic_add_consumables_edit');
-Route::put('project/mintic/add/{id}/{item}','projects\MinticImplementController@update')->name('mintic_add_consumables_update');
-Route::get('project/mintic/add/{id}/{item}','projects\MinticImplementController@run')->name('mintic_add_consumables_run');
-Route::patch('project/mintic/add/{id}/{item}','projects\MinticImplementController@save')->name('mintic_add_consumables_save');
-Route::post('project/mintic/add/{id}/{item}/approve','projects\MinticImplementController@approve')->name('mintic_add_consumables_approve');
-Route::delete('project/mintic/add/{id}/{item}','projects\MinticImplementController@destroy')->name('mintic_add_consumables_delete');
+Route::get('project/mintic/tss/{id}', 'projects\MinticController@tss')->name('mintic_tss');
+Route::post('project/mintic/tss', 'projects\MinticController@upload_tss')->name('mintic_marke_tss');
+
+Route::get('project/mintic/maintenance/{id}', 'projects\MaintenanceController@index')->name('mintic_maintenance');
+Route::get('project/mintic/maintenance/{id}/create', 'projects\MaintenanceController@create')->name('mintic_maintenance_create');
+Route::post('project/mintic/maintenance/{id}', 'projects\MaintenanceController@store')->name('mintic_maintenance_store');
+Route::get('project/mintic/maintenance/{id}/{item}/edit', 'projects\MaintenanceController@edit')->name('mintic_maintenance_edit');
+Route::put('project/mintic/maintenance/{id}/{item}', 'projects\MaintenanceController@update')->name('mintic_maintenance_update');
+Route::get('project/mintic/maintenance/{id}/{item}', 'projects\MaintenanceController@show')->name('mintic_maintenance_show');
+Route::get('project/mintic/maintenance/{id}/{item}/export', 'projects\MaintenanceController@export')->name('mintic_maintenance_export');
+Route::get('project/mintic/maintenance/{id}/{item}/photos', 'projects\MaintenanceController@photos')->name('mintic_maintenance_photos');
+Route::post('project/mintic/maintenance/{id}/{item}/updload', 'projects\MaintenanceController@upload')->name('mintic_marke_maintenance');
+Route::delete('project/mintic/maintenance/{id}/{item}', 'projects\MaintenanceController@destroy')->name('mintic_maintenance_delete');
+
+Route::get('project/mintic/stop_clock/{id}', 'projects\MinticStopClockController@index')->name('mintic_clock_stop');
+Route::get('project/mintic/stop_clock/{id}/show/{item}', 'projects\MinticStopClockController@show')->name('mintic_clock_stop_show');
+Route::get('project/mintic/stop_clock/{id}/create', 'projects\MinticStopClockController@create')->name('mintic_clock_stop_create');
+Route::post('project/mintic/stop_clock/{id}', 'projects\MinticStopClockController@store')->name('mintic_clock_stop_store');
+Route::get('project/mintic/stop_clock/{id}/{item}/edit', 'projects\MinticStopClockController@edit')->name('mintic_clock_stop_edit');
+Route::put('project/mintic/stop_clock/{id}/{item}', 'projects\MinticStopClockController@update')->name('mintic_clock_stop_update');
+Route::delete('project/mintic/stop_clock/{id}/{item}', 'projects\MinticStopClockController@destroy')->name('mintic_clock_stop_delete');
+Route::get('project/mintic/stop_clock/{id}/{item}/photo', 'projects\MinticStopClockController@photos')->name('mintic_clock_stop_photos');
+Route::post('project/mintic/stop_clock/{id}/{item}/upload', 'projects\MinticStopClockController@upload')->name('mintic_clock_stop_upload');
+Route::patch('project/mintic/stop_clock/{id}/{item}/approve', 'projects\MinticStopClockController@approve')->name('mintic_clock_stop_approve');
+Route::get('project/mintic/stop_clock/{id}/{item}/export', 'projects\MinticStopClockController@export')->name('mintic_clock_stop_export');
+
+Route::get('project/mintic/add/{id}', 'projects\MinticImplementController@index')->name('mintic_add_consumables');
+Route::get('project/mintic/add/{id}/show/{item}', 'projects\MinticImplementController@show')->name('mintic_add_consumables_show');
+Route::get('project/mintic/add/{id}/create', 'projects\MinticImplementController@create')->name('mintic_add_consumables_create');
+Route::post('project/mintic/add/{id}', 'projects\MinticImplementController@store')->name('mintic_add_consumables_store');
+Route::get('project/mintic/add/{id}/{item}/edit', 'projects\MinticImplementController@edit')->name('mintic_add_consumables_edit');
+Route::put('project/mintic/add/{id}/{item}', 'projects\MinticImplementController@update')->name('mintic_add_consumables_update');
+Route::get('project/mintic/add/{id}/{item}', 'projects\MinticImplementController@run')->name('mintic_add_consumables_run');
+Route::patch('project/mintic/add/{id}/{item}', 'projects\MinticImplementController@save')->name('mintic_add_consumables_save');
+Route::post('project/mintic/add/{id}/{item}/approve', 'projects\MinticImplementController@approve')->name('mintic_add_consumables_approve');
+Route::delete('project/mintic/add/{id}/{item}', 'projects\MinticImplementController@destroy')->name('mintic_add_consumables_delete');
 
 //Rutas
-Route::get('project/routes','projects\RoutesProjectController@index')->name('routes');
-Route::get('project/routes/show/{id}','projects\RoutesProjectController@show')->name('routes_show');
-Route::get('project/routes/create','projects\RoutesProjectController@create')->name('routes_create');
-Route::post('project/routes/store','projects\RoutesProjectController@store')->name('routes_store');
-Route::get('project/routes/{id}/edit','projects\RoutesProjectController@edit')->name('routes_edit');
-Route::put('project/routes/{id}','projects\RoutesProjectController@update')->name('routes_update');
-Route::put('project/routes/approval/{id}','projects\RoutesProjectController@approval')->name('routes_approval');
-Route::put('project/routes/not_approval/{id}','projects\RoutesProjectController@not_approval')->name('routes_not_approval');
-Route::delete('project/routes/{id}','projects\RoutesProjectController@destroy')->name('routes_delete');
+Route::get('project/routes', 'projects\RoutesProjectController@index')->name('routes');
+Route::get('project/routes/show/{id}', 'projects\RoutesProjectController@show')->name('routes_show');
+Route::get('project/routes/create', 'projects\RoutesProjectController@create')->name('routes_create');
+Route::post('project/routes/store', 'projects\RoutesProjectController@store')->name('routes_store');
+Route::get('project/routes/{id}/edit', 'projects\RoutesProjectController@edit')->name('routes_edit');
+Route::put('project/routes/{id}', 'projects\RoutesProjectController@update')->name('routes_update');
+Route::put('project/routes/approval/{id}', 'projects\RoutesProjectController@approval')->name('routes_approval');
+Route::put('project/routes/not_approval/{id}', 'projects\RoutesProjectController@not_approval')->name('routes_not_approval');
+Route::delete('project/routes/{id}', 'projects\RoutesProjectController@destroy')->name('routes_delete');
 
 //minor box
-Route::get('human_management/bonus/minor_box','human_management\bonus\MinorBoxController@index')->name('bonus_minor_box');
-Route::get('human_management/bonus/minor_box/create','human_management\bonus\MinorBoxController@create')->name('bonus_minor_box_create');
-Route::post('human_management/bonus/minor_box','human_management\bonus\MinorBoxController@store')->name('bonus_minor_box_store');
-Route::get('human_management/bonus/minor_box/{id}','human_management\bonus\MinorBoxController@show')->name('bonus_minor_box_show');
-Route::get('human_management/bonus/minor_box/{id}/edit','human_management\bonus\MinorBoxController@edit')->name('bonus_minor_box_edit');
-Route::put('human_management/bonus/minor_box/{id}','human_management\bonus\MinorBoxController@update')->name('bonus_minor_box_update');
-Route::get('human_management/bonus/minor_box/{id}/export','human_management\bonus\MinorBoxController@export')->name('bonus_minor_box_export');
-Route::post('human_management/bonus/minor_box/add_user','human_management\bonus\MinorBoxController@add_user')->name('bonus_minor_box_add_user');
-Route::patch('human_management/bonus/minor_box/{id}/cleaner','human_management\bonus\MinorBoxController@cleaner')->name('bonus_minor_box_cleaner_user');
+Route::get('finances/bonus/minor_box', 'human_management\bonus\MinorBoxController@index')->name('bonus_minor_box');
+Route::get('finances/bonus/minor_box/create', 'human_management\bonus\MinorBoxController@create')->name('bonus_minor_box_create');
+Route::post('finances/bonus/minor_box', 'human_management\bonus\MinorBoxController@store')->name('bonus_minor_box_store');
+Route::get('finances/bonus/minor_box/{id}', 'human_management\bonus\MinorBoxController@show')->name('bonus_minor_box_show');
+Route::get('finances/bonus/minor_box/{id}/edit', 'human_management\bonus\MinorBoxController@edit')->name('bonus_minor_box_edit');
+Route::put('finances/bonus/minor_box/{id}', 'human_management\bonus\MinorBoxController@update')->name('bonus_minor_box_update');
+Route::get('finances/bonus/minor_box/{id}/export', 'human_management\bonus\MinorBoxController@export')->name('bonus_minor_box_export');
+Route::post('finances/bonus/minor_box/add_user', 'human_management\bonus\MinorBoxController@add_user')->name('bonus_minor_box_add_user');
+Route::patch('finances/bonus/minor_box/{id}/cleaner', 'human_management\bonus\MinorBoxController@cleaner')->name('bonus_minor_box_cleaner_user');
+Route::put('finances/bonus/minor_box/{id}/tope', 'human_management\bonus\MinorBoxController@tope')->name('bonus_minor_box_tope_user');
 
 // inventarios de equipos
-Route::get('execution_works/inventory/equipment','projects\inventory\EquipmentController@index')->name('mintic_inventory_equipment');
-Route::get('execution_works/inventory/equipment/create','projects\inventory\EquipmentController@create')->name('mintic_inventory_equipment_create');
-Route::post('execution_works/inventory/equipment','projects\inventory\EquipmentController@store')->name('mintic_inventory_equipment_store');
-Route::get('execution_works/inventory/equipment/{id}','projects\inventory\EquipmentController@show')->name('mintic_inventory_equipment_show');
-Route::get('execution_works/inventory/equipment/{id}/edit','projects\inventory\EquipmentController@edit')->name('mintic_inventory_equipment_edit');
-Route::put('execution_works/inventory/equipment/{id}','projects\inventory\EquipmentController@update')->name('mintic_inventory_equipment_update');
-Route::delete('execution_works/inventory/equipment/{id}','projects\inventory\EquipmentController@destroy')->name('mintic_inventory_equipment_delete');
+Route::get('execution_works/inventory/equipment', 'projects\inventory\EquipmentController@index')->name('mintic_inventory_equipment');
+Route::get('execution_works/inventory/equipment/create', 'projects\inventory\EquipmentController@create')->name('mintic_inventory_equipment_create');
+Route::post('execution_works/inventory/equipment', 'projects\inventory\EquipmentController@store')->name('mintic_inventory_equipment_store');
+Route::get('execution_works/inventory/equipment/{id}', 'projects\inventory\EquipmentController@show')->name('mintic_inventory_equipment_show');
+Route::get('execution_works/inventory/equipment/{id}/edit', 'projects\inventory\EquipmentController@edit')->name('mintic_inventory_equipment_edit');
+Route::put('execution_works/inventory/equipment/{id}', 'projects\inventory\EquipmentController@update')->name('mintic_inventory_equipment_update');
+Route::delete('execution_works/inventory/equipment/{id}', 'projects\inventory\EquipmentController@destroy')->name('mintic_inventory_equipment_delete');
 
 //Inventarios de consumible
-Route::get('execution_works/inventory/consumable','projects\inventory\ConsumablesController@index')->name('mintic_inventory_consumables');
-Route::get('execution_works/inventory/consumable/create','projects\inventory\ConsumablesController@create')->name('mintic_inventory_consumables_create');
-Route::post('execution_works/inventory/consumable','projects\inventory\ConsumablesController@store')->name('mintic_inventory_consumables_store');
-Route::get('execution_works/inventory/consumable/{id}','projects\inventory\ConsumablesController@show')->name('mintic_inventory_consumables_show');
-Route::get('execution_works/inventory/consumable/{id}/edit','projects\inventory\ConsumablesController@edit')->name('mintic_inventory_consumables_edit');
-Route::put('execution_works/inventory/consumable/{id}','projects\inventory\ConsumablesController@update')->name('mintic_inventory_consumables_update');
-Route::delete('execution_works/inventory/consumable/{id}','projects\inventory\ConsumablesController@destroy')->name('mintic_inventory_consumables_delete');
+Route::get('execution_works/inventory/consumable', 'projects\inventory\ConsumablesController@index')->name('mintic_inventory_consumables');
+Route::get('execution_works/inventory/consumable/create', 'projects\inventory\ConsumablesController@create')->name('mintic_inventory_consumables_create');
+Route::post('execution_works/inventory/consumable', 'projects\inventory\ConsumablesController@store')->name('mintic_inventory_consumables_store');
+Route::get('execution_works/inventory/consumable/{id}', 'projects\inventory\ConsumablesController@show')->name('mintic_inventory_consumables_show');
+Route::get('execution_works/inventory/consumable/{id}/edit', 'projects\inventory\ConsumablesController@edit')->name('mintic_inventory_consumables_edit');
+Route::put('execution_works/inventory/consumable/{id}', 'projects\inventory\ConsumablesController@update')->name('mintic_inventory_consumables_update');
+Route::delete('execution_works/inventory/consumable/{id}', 'projects\inventory\ConsumablesController@destroy')->name('mintic_inventory_consumables_delete');
 
 //Inventario de herramientas
-Route::get('execution_works/inventory/tool','execution_works\invToolController@index')->name('inventory_tools');
-Route::get('execution_works/inventory/tool/create','execution_works\invToolController@create')->name('inventory_tools_create');
-Route::post('execution_works/inventory/tool','execution_works\invToolController@store')->name('inventory_tools_store');
-Route::get('execution_works/inventory/tool/{id}','execution_works\invToolController@show')->name('inventory_tools_show');
-Route::get('execution_works/inventory/tool/{id}/edit','execution_works\invToolController@edit')->name('inventory_tools_edit');
-Route::put('execution_works/inventory/tool/{id}','execution_works\invToolController@update')->name('inventory_tools_update');
-Route::delete('execution_works/inventory/tool/{id}','execution_works\invToolController@destroy')->name('inventory_tools_delete');
+Route::get('execution_works/inventory/tool', 'execution_works\invToolController@index')->name('inventory_tools');
+Route::get('execution_works/inventory/tool/create', 'execution_works\invToolController@create')->name('inventory_tools_create');
+Route::post('execution_works/inventory/tool', 'execution_works\invToolController@store')->name('inventory_tools_store');
+Route::get('execution_works/inventory/tool/{id}', 'execution_works\invToolController@show')->name('inventory_tools_show');
+Route::get('execution_works/inventory/tool/{id}/edit', 'execution_works\invToolController@edit')->name('inventory_tools_edit');
+Route::put('execution_works/inventory/tool/{id}', 'execution_works\invToolController@update')->name('inventory_tools_update');
+Route::delete('execution_works/inventory/tool/{id}', 'execution_works\invToolController@destroy')->name('inventory_tools_delete');
 
 // actas
-Route::get('human_management/proceeding','human_management\proceedingController@index')->name('proceeding');
-Route::get('human_management/proceeding/create','human_management\proceedingController@create')->name('proceeding_create');
-Route::post('human_management/proceeding','human_management\proceedingController@store')->name('proceeding_store');
-Route::get('human_management/proceeding/show/{id}','human_management\proceedingController@show')->name('proceeding_show');
-Route::patch('human_management/proceeding/signature/{id}','human_management\proceedingController@signature')->name('proceeding_signature');
-Route::get('human_management/proceeding/{id}/edit','human_management\proceedingController@edit')->name('proceeding_edit');
-Route::put('human_management/proceeding/{id}','human_management\proceedingController@update')->name('proceeding_update');
-Route::get('human_management/proceeding/download/{id}','human_management\proceedingController@download')->name('proceeding_download');
-Route::delete('human_management/proceeding/{id}','human_management\proceedingController@destroy')->name('proceeding_delete');
+Route::get('human_management/proceeding', 'human_management\proceedingController@index')->name('proceeding');
+Route::get('human_management/proceeding/create', 'human_management\proceedingController@create')->name('proceeding_create');
+Route::post('human_management/proceeding', 'human_management\proceedingController@store')->name('proceeding_store');
+Route::get('human_management/proceeding/show/{id}', 'human_management\proceedingController@show')->name('proceeding_show');
+Route::patch('human_management/proceeding/signature/{id}', 'human_management\proceedingController@signature')->name('proceeding_signature');
+Route::get('human_management/proceeding/{id}/edit', 'human_management\proceedingController@edit')->name('proceeding_edit');
+Route::put('human_management/proceeding/{id}', 'human_management\proceedingController@update')->name('proceeding_update');
+Route::get('human_management/proceeding/download/{id}', 'human_management\proceedingController@download')->name('proceeding_download');
+Route::delete('human_management/proceeding/{id}', 'human_management\proceedingController@destroy')->name('proceeding_delete');
 
 //Liquidacion
-Route::get('human_management/settlement','human_management\settlementController@index')->name('settlement');
-Route::get('human_management/settlement/create','human_management\settlementController@create')->name('settlement_create');
-Route::post('human_management/settlement','human_management\settlementController@store')->name('settlement_store');
-Route::get('human_management/settlement/show/{id}','human_management\settlementController@show')->name('settlement_show');
-Route::patch('human_management/settlement/{id}','human_management\settlementController@approve')->name('settlement_approve');
-Route::get('human_management/settlement/{id}/edit','human_management\settlementController@edit')->name('settlement_edit');
-Route::put('human_management/settlement/{id}','human_management\settlementController@update')->name('settlement_update');
-Route::get('human_management/settlement/download/{id}','human_management\settlementController@download')->name('settlement_download');
-Route::delete('human_management/settlement/{id}','human_management\settlementController@destroy')->name('settlement_delete');
+Route::get('finances/settlement', 'human_management\settlementController@index')->name('settlement');
+Route::get('finances/settlement/create', 'human_management\settlementController@create')->name('settlement_create');
+Route::post('finances/settlement', 'human_management\settlementController@store')->name('settlement_store');
+Route::get('finances/settlement/show/{id}', 'human_management\settlementController@show')->name('settlement_show');
+Route::patch('finances/settlement/{id}', 'human_management\settlementController@approve')->name('settlement_approve');
+Route::get('finances/settlement/{id}/edit', 'human_management\settlementController@edit')->name('settlement_edit');
+Route::put('finances/settlement/{id}', 'human_management\settlementController@update')->name('settlement_update');
+Route::get('finances/settlement/download/{id}', 'human_management\settlementController@download')->name('settlement_download');
+Route::delete('finances/settlement/{id}', 'human_management\settlementController@destroy')->name('settlement_delete');
 
 //Bonificaciones a administrativos y conductores
-Route::get('human_management/bonus/administratives','human_management\adminBonusesController@index')->name('admin_bonuses');
-Route::get('human_management/bonus/administratives/create','human_management\adminBonusesController@create')->name('admin_bonuses_create');
-Route::post('human_management/bonus/administratives','human_management\adminBonusesController@store')->name('admin_bonuses_store');
-Route::get('human_management/bonus/administratives/show/{id}','human_management\adminBonusesController@show')->name('admin_bonuses_show');
-Route::patch('human_management/bonus/administratives/{id}','human_management\adminBonusesController@approve')->name('admin_bonuses_approve');
-Route::get('human_management/bonus/administratives/{id}/edit','human_management\adminBonusesController@edit')->name('admin_bonuses_edit');
-Route::put('human_management/bonus/administratives/{id}','human_management\adminBonusesController@update')->name('admin_bonuses_update');
-Route::get('human_management/bonus/administratives/download/{id}','human_management\adminBonusesController@download')->name('admin_bonuses_download');
-Route::delete('human_management/bonus/administratives/{id}','human_management\adminBonusesController@destroy')->name('admin_bonuses_delete');
+Route::get('finances/bonus/administratives', 'human_management\adminBonusesController@index')->name('admin_bonuses');
+Route::get('finances/bonus/administratives/create', 'human_management\adminBonusesController@create')->name('admin_bonuses_create');
+Route::post('finances/bonus/administratives', 'human_management\adminBonusesController@store')->name('admin_bonuses_store');
+Route::get('finances/bonus/administratives/show/{id}', 'human_management\adminBonusesController@show')->name('admin_bonuses_show');
+Route::patch('finances/bonus/administratives/{id}', 'human_management\adminBonusesController@approve')->name('admin_bonuses_approve');
+Route::get('finances/bonus/administratives/{id}/edit', 'human_management\adminBonusesController@edit')->name('admin_bonuses_edit');
+Route::put('finances/bonus/administratives/{id}', 'human_management\adminBonusesController@update')->name('admin_bonuses_update');
+Route::get('finances/bonus/administratives/download/{id}', 'human_management\adminBonusesController@download')->name('admin_bonuses_download');
+Route::delete('finances/bonus/administratives/{id}', 'human_management\adminBonusesController@destroy')->name('admin_bonuses_delete');
 
 // Acciones de mejora
-Route::get('human_management/improvement_action','human_management\improvementActionController@index')->name('improvement_action');
-Route::get('human_management/improvement_action/create','human_management\improvementActionController@create')->name('improvement_action_create');
-Route::post('human_management/improvement_action','human_management\improvementActionController@store')->name('improvement_action_store');
-Route::get('human_management/improvement_action/show/{id}','human_management\improvementActionController@show')->name('improvement_action_show');
-Route::patch('human_management/improvement_action/{id}','human_management\improvementActionController@approve')->name('improvement_action_approve');
-Route::get('human_management/improvement_action/{id}/edit','human_management\improvementActionController@edit')->name('improvement_action_edit');
-Route::put('human_management/improvement_action/{id}','human_management\improvementActionController@update')->name('improvement_action_update');
-Route::get('human_management/improvement_action/download/{id}','human_management\improvementActionController@download')->name('improvement_action_download');
-Route::delete('human_management/improvement_action/{id}','human_management\improvementActionController@destroy')->name('improvement_action_delete');
+Route::get('human_management/improvement_action', 'human_management\improvementActionController@index')->name('improvement_action');
+Route::get('human_management/improvement_action/create', 'human_management\improvementActionController@create')->name('improvement_action_create');
+Route::post('human_management/improvement_action', 'human_management\improvementActionController@store')->name('improvement_action_store');
+Route::get('human_management/improvement_action/show/{id}', 'human_management\improvementActionController@show')->name('improvement_action_show');
+Route::patch('human_management/improvement_action/{id}', 'human_management\improvementActionController@approve')->name('improvement_action_approve');
+Route::get('human_management/improvement_action/{id}/edit', 'human_management\improvementActionController@edit')->name('improvement_action_edit');
+Route::put('human_management/improvement_action/{id}', 'human_management\improvementActionController@update')->name('improvement_action_update');
+Route::get('human_management/improvement_action/download/{id}', 'human_management\improvementActionController@download')->name('improvement_action_download');
+Route::delete('human_management/improvement_action/{id}', 'human_management\improvementActionController@destroy')->name('improvement_action_delete');
 
 //AutoForms
-Route::get('forms','forms\formController@index')->name("forms");
-Route::get('forms/create','forms\formController@create')->name("form_create");
-Route::get('forms/{id}','forms\formController@show')->name("forms_show");
-Route::get('forms/{id}/edit','forms\formController@edit')->name("forms_edit");
-Route::get('forms/{id}/answer','forms\formController@answer')->name("forms_answer");
-Route::post('forms','forms\formController@store')->name("forms_store");
-Route::put('forms/{id}','forms\formController@update')->name("forms_update");
-Route::delete('forms/{id}','forms\formController@delete')->name("forms_delete");
-Route::get('forms/export/{id}','forms\formController@export')->name("forms_export");
-Route::post('forms/{user}','forms\formController@resend')->name("forms_resend");
+Route::get('forms', 'forms\formController@index')->name("forms");
+Route::get('forms/create', 'forms\formController@create')->name("form_create");
+Route::get('forms/{id}', 'forms\formController@show')->name("forms_show");
+Route::get('forms/{id}/edit', 'forms\formController@edit')->name("forms_edit");
+Route::get('forms/{id}/answer', 'forms\formController@answer')->name("forms_answer");
+Route::post('forms', 'forms\formController@store')->name("forms_store");
+Route::put('forms/{id}', 'forms\formController@update')->name("forms_update");
+Route::delete('forms/{id}', 'forms\formController@delete')->name("forms_delete");
+Route::get('forms/export/{id}', 'forms\formController@export')->name("forms_export");
+Route::post('forms/{user}', 'forms\formController@resend')->name("forms_resend");
 
-Route::get('answers','forms\answerController@index')->name("answers");
-Route::get('answers/{id}','forms\answerController@show')->name("answers_show")->middleware('auth')->middleware('verified');
-Route::get('answer/{form}/{email?}','forms\answerController@create')->name("answers_create");
-Route::get('answers/auth/{form}/{email?}','forms\answerController@forAuth')->name("answers_to_auth")->middleware('auth')->middleware('verified');
-Route::post('answers','forms\answerController@store')->name("answers_store");
-Route::get('answers/guest/ready','forms\answerController@ready')->name("answers_ready");
-Route::delete('answers/{id}','forms\answerController@delete')->name("answers_delete");
-Route::get('answers/login/{form}','forms\answerController@register_email')->name("answers_email");
-Route::post('answers/login/{form}','forms\answerController@register_email_store')->name("answers_email_store");
+Route::get('answers', 'forms\answerController@index')->name("answers");
+Route::get('answers/{id}', 'forms\answerController@show')->name("answers_show")->middleware('auth')->middleware('verified');
+Route::get('answer/{form}/{email?}', 'forms\answerController@create')->name("answers_create");
+Route::get('answers/auth/{form}/{email?}', 'forms\answerController@forAuth')->name("answers_to_auth")->middleware('auth')->middleware('verified');
+Route::post('answers', 'forms\answerController@store')->name("answers_store");
+Route::get('answers/guest/ready', 'forms\answerController@ready')->name("answers_ready");
+Route::delete('answers/{id}', 'forms\answerController@delete')->name("answers_delete");
+Route::get('answers/login/{form}', 'forms\answerController@register_email')->name("answers_email");
+Route::post('answers/login/{form}', 'forms\answerController@register_email_store')->name("answers_email_store");
+Route::put('answers/calification/{id}', 'forms\answerController@calification')->name("answers_calification");
 
-Route::get('human_management/assistance','human_management\assistanceController@index')->name('assistance');
-Route::get('human_management/assistance/create','human_management\assistanceController@create')->name('assistance_create');
-Route::post('human_management/assistance','human_management\assistanceController@store')->name('assistance_store');
-Route::get('human_management/assistance/show/{id}','human_management\assistanceController@show')->name('assistance_show');
-Route::get('human_management/assistance/{id}/edit','human_management\assistanceController@edit')->name('assistance_edit');
-Route::put('human_management/assistance/{id}','human_management\assistanceController@update')->name('assistance_update');
-Route::get('human_management/assistance/download/{id}','human_management\assistanceController@download')->name('assistance_download');
-Route::patch('human_management/assistance/{id}','human_management\assistanceController@approve')->name('assistance_approve');
-Route::delete('human_management/assistance/{id}','human_management\assistanceController@destroy')->name('assistance_delete');
+Route::get('human_management/assistance', 'human_management\assistanceController@index')->name('assistance');
+Route::get('human_management/assistance/create', 'human_management\assistanceController@create')->name('assistance_create');
+Route::post('human_management/assistance', 'human_management\assistanceController@store')->name('assistance_store');
+Route::get('human_management/assistance/show/{id}', 'human_management\assistanceController@show')->name('assistance_show');
+Route::get('human_management/assistance/{id}/edit', 'human_management\assistanceController@edit')->name('assistance_edit');
+Route::put('human_management/assistance/{id}', 'human_management\assistanceController@update')->name('assistance_update');
+Route::get('human_management/assistance/download/{id}', 'human_management\assistanceController@download')->name('assistance_download');
+Route::patch('human_management/assistance/{id}', 'human_management\assistanceController@approve')->name('assistance_approve');
+Route::delete('human_management/assistance/{id}', 'human_management\assistanceController@destroy')->name('assistance_delete');
 
 //frente de traajo
-Route::get('tasking','taskingController@index')->name('tasking');
+Route::get('tasking', 'taskingController@index')->name('tasking');
 // Route::get('tasking/create','taskingController@create')->name('tasking_create');
-Route::post('tasking','taskingController@store')->name('tasking_store');
+Route::post('tasking', 'taskingController@store')->name('tasking_store');
 // Route::get('tasking/show/{id}','taskingController@show')->name('tasking_show');
 // Route::get('tasking/{id}/edit','taskingController@edit')->name('tasking_edit');
-Route::put('tasking/{id}','taskingController@update')->name('tasking_update');
+Route::put('tasking/{id}', 'taskingController@update')->name('tasking_update');
 // Route::get('tasking/download/{id}','taskingController@download')->name('tasking_download');
 // Route::patch('tasking/{id}','taskingController@approve')->name('tasking_approve');
-Route::delete('tasking/{id}','taskingController@destroy')->name('tasking_delete');
-Route::patch('tasking/{id}','taskingController@report')->name('tasking_report');
-Route::post('tasking/{id}','taskingController@consumables')->name('tasking_consumables');
+Route::delete('tasking/{id}', 'taskingController@destroy')->name('tasking_delete');
+Route::patch('tasking/{id}', 'taskingController@report')->name('tasking_report');
+Route::post('tasking/{id}', 'taskingController@consumables')->name('tasking_consumables');
 
-Route::get('execution_works/inventory/technical','execution_works\inventaryTechnicalController@index')->name('inventary_technical');
-Route::get('execution_works/inventory/technical/create','execution_works\inventaryTechnicalController@create')->name('inventary_technical_create');
-Route::post('execution_works/inventory/technical','execution_works\inventaryTechnicalController@store')->name('inventary_technical_store');
-Route::get('execution_works/inventory/technical/{id}/edit','execution_works\inventaryTechnicalController@edit')->name('inventary_technical_edit');
-Route::put('execution_works/inventory/technical/{id}','execution_works\inventaryTechnicalController@update')->name('inventary_technical_update');
-Route::get('execution_works/inventory/technical/{id}','execution_works\inventaryTechnicalController@show')->name('inventary_technical_show');
-Route::delete('execution_works/inventory/technical/{id}','execution_works\inventaryTechnicalController@destroy')->name('inventary_technical_delete');
+Route::get('execution_works/inventory/technical', 'execution_works\inventaryTechnicalController@index')->name('inventary_technical');
+Route::get('execution_works/inventory/technical/create', 'execution_works\inventaryTechnicalController@create')->name('inventary_technical_create');
+Route::post('execution_works/inventory/technical', 'execution_works\inventaryTechnicalController@store')->name('inventary_technical_store');
+Route::get('execution_works/inventory/technical/{id}/edit', 'execution_works\inventaryTechnicalController@edit')->name('inventary_technical_edit');
+Route::put('execution_works/inventory/technical/{id}', 'execution_works\inventaryTechnicalController@update')->name('inventary_technical_update');
+Route::get('execution_works/inventory/technical/{id}', 'execution_works\inventaryTechnicalController@show')->name('inventary_technical_show');
+Route::delete('execution_works/inventory/technical/{id}', 'execution_works\inventaryTechnicalController@destroy')->name('inventary_technical_delete');
 
-Route::get('learned_lessons','learnedLessonsController@index')->name('learned_lessons');
-Route::get('learned_lessons/create','learnedLessonsController@create')->name('learned_lessons_create');
-Route::post('learned_lessons','learnedLessonsController@store')->name('learned_lessons_store');
-Route::get('learned_lessons/{id}/edit','learnedLessonsController@edit')->name('learned_lessons_edit');
-Route::put('learned_lessons/{id}','learnedLessonsController@update')->name('learned_lessons_update');
-Route::get('learned_lessons/{id}','learnedLessonsController@show')->name('learned_lessons_show');
-Route::delete('learned_lessons/{id}','learnedLessonsController@destroy')->name('learned_lessons_delete');
-Route::get('learned_lessons/download/{id}','learnedLessonsController@download')->name('learned_lessons_download');
+Route::get('learned_lessons', 'learnedLessonsController@index')->name('learned_lessons');
+Route::get('learned_lessons/create', 'learnedLessonsController@create')->name('learned_lessons_create');
+Route::post('learned_lessons', 'learnedLessonsController@store')->name('learned_lessons_store');
+Route::get('learned_lessons/{id}/edit', 'learnedLessonsController@edit')->name('learned_lessons_edit');
+Route::put('learned_lessons/{id}', 'learnedLessonsController@update')->name('learned_lessons_update');
+Route::get('learned_lessons/{id}', 'learnedLessonsController@show')->name('learned_lessons_show');
+Route::delete('learned_lessons/{id}', 'learnedLessonsController@destroy')->name('learned_lessons_delete');
+Route::get('learned_lessons/download/{id}', 'learnedLessonsController@download')->name('learned_lessons_download');
 
-Route::get('learned_lesson/test','learnedLessonsTestController@index')->name('learned_lessons_test');
-Route::get('learned_lesson/test/create','learnedLessonsTestController@create')->name('learned_lessons_test_create');
-Route::post('learned_lesson/test','learnedLessonsTestController@store')->name('learned_lessons_test_store');
-Route::get('learned_lesson/test/{id}/edit','learnedLessonsTestController@edit')->name('learned_lessons_test_edit');
-Route::put('learned_lesson/test/{id}','learnedLessonsTestController@update')->name('learned_lessons_test_update');
-Route::get('learned_lesson/test/{id}','learnedLessonsTestController@show')->name('learned_lessons_test_show');
-Route::delete('learned_lesson/test/{id}','learnedLessonsTestController@destroy')->name('learned_lessons_test_delete');
-Route::post('learned_lessons/answer/home','HomeController@test_leasson')->name('learned_lessons_test_answer');
-Route::post('learned_lessons/answer/export','learnedLessonsTestController@export')->name('learned_lessons_test_export');
+Route::get('learned_lesson/test', 'learnedLessonsTestController@index')->name('learned_lessons_test');
+Route::get('learned_lesson/test/create', 'learnedLessonsTestController@create')->name('learned_lessons_test_create');
+Route::post('learned_lesson/test', 'learnedLessonsTestController@store')->name('learned_lessons_test_store');
+Route::get('learned_lesson/test/{id}/edit', 'learnedLessonsTestController@edit')->name('learned_lessons_test_edit');
+Route::put('learned_lesson/test/{id}', 'learnedLessonsTestController@update')->name('learned_lessons_test_update');
+Route::get('learned_lesson/test/{id}', 'learnedLessonsTestController@show')->name('learned_lessons_test_show');
+Route::delete('learned_lesson/test/{id}', 'learnedLessonsTestController@destroy')->name('learned_lessons_test_delete');
+Route::post('learned_lessons/answer/home', 'HomeController@test_leasson')->name('learned_lessons_test_answer');
+Route::post('learned_lessons/answer/export', 'learnedLessonsTestController@export')->name('learned_lessons_test_export');
 
-Route::get('logistics_infrastructure/drivers','logistics_infrastructure\driversController@index')->name('drivers');
-Route::get('logistics_infrastructure/drivers/create','logistics_infrastructure\driversController@create')->name('drivers_create');
-Route::post('logistics_infrastructure/drivers','logistics_infrastructure\driversController@store')->name('drivers_store');
-Route::get('logistics_infrastructure/drivers/show/{id}','logistics_infrastructure\driversController@show')->name('drivers_show');
-Route::get('logistics_infrastructure/drivers/{id}/edit','logistics_infrastructure\driversController@edit')->name('drivers_edit');
-Route::put('logistics_infrastructure/drivers/{id}','logistics_infrastructure\driversController@update')->name('drivers_update');
-Route::get('logistics_infrastructure/drivers/download/{id}','logistics_infrastructure\driversController@download')->name('drivers_download');
-Route::delete('logistics_infrastructure/drivers/{id}','logistics_infrastructure\driversController@destroy')->name('drivers_delete');
+Route::get('logistics_infrastructure/drivers', 'logistics_infrastructure\driversController@index')->name('drivers');
+Route::get('logistics_infrastructure/drivers/create', 'logistics_infrastructure\driversController@create')->name('drivers_create');
+Route::post('logistics_infrastructure/drivers', 'logistics_infrastructure\driversController@store')->name('drivers_store');
+Route::get('logistics_infrastructure/drivers/show/{id}', 'logistics_infrastructure\driversController@show')->name('drivers_show');
+Route::get('logistics_infrastructure/drivers/{id}/edit', 'logistics_infrastructure\driversController@edit')->name('drivers_edit');
+Route::put('logistics_infrastructure/drivers/{id}', 'logistics_infrastructure\driversController@update')->name('drivers_update');
+Route::get('logistics_infrastructure/drivers/download/{id}', 'logistics_infrastructure\driversController@download')->name('drivers_download');
+Route::delete('logistics_infrastructure/drivers/{id}', 'logistics_infrastructure\driversController@destroy')->name('drivers_delete');
+
+Route::get('logistics_infrastructure/traffic_accident', 'logistics_infrastructure\traffic_accidentController@index')->name('traffic_accident');
+Route::get('logistics_infrastructure/traffic_accident/create', 'logistics_infrastructure\traffic_accidentController@create')->name('traffic_accident_create');
+Route::post('logistics_infrastructure/traffic_accident', 'logistics_infrastructure\traffic_accidentController@store')->name('traffic_accident_store');
+Route::get('logistics_infrastructure/traffic_accident/show/{id}', 'logistics_infrastructure\traffic_accidentController@show')->name('traffic_accident_show');
+Route::get('logistics_infrastructure/traffic_accident/{id}/edit', 'logistics_infrastructure\traffic_accidentController@edit')->name('traffic_accident_edit');
+Route::put('logistics_infrastructure/traffic_accident/{id}', 'logistics_infrastructure\traffic_accidentController@update')->name('traffic_accident_update');
+Route::get('logistics_infrastructure/traffic_accident/download/{id}', 'logistics_infrastructure\traffic_accidentController@download')->name('traffic_accident_download');
+Route::delete('logistics_infrastructure/traffic_accident/{id}', 'logistics_infrastructure\traffic_accidentController@destroy')->name('traffic_accident_delete');
+
+Route::get('logistics_infrastructure/transit_taxes', 'logistics_infrastructure\transitTaxesController@index')->name('transit_taxes');
+Route::get('logistics_infrastructure/transit_taxes/show/{id}', 'logistics_infrastructure\transitTaxesController@show')->name('transit_taxes_show');
+Route::get('logistics_infrastructure/transit_taxes/{id}/edit', 'logistics_infrastructure\transitTaxesController@edit')->name('transit_taxes_edit');
+Route::put('logistics_infrastructure/transit_taxes/{id}', 'logistics_infrastructure\transitTaxesController@update')->name('transit_taxes_update');
+
+Route::get('finances/premium', 'human_management\premiumController@index')->name('premium');
+Route::get('finances/premium/create', 'human_management\premiumController@create')->name('premium_create');
+Route::post('finances/premium', 'human_management\premiumController@store')->name('premium_store');
+Route::get('finances/premium/show/{id}', 'human_management\premiumController@show')->name('premium_show');
+Route::get('finances/premium/{id}/edit', 'human_management\premiumController@edit')->name('premium_edit');
+Route::put('finances/premium/{id}', 'human_management\premiumController@update')->name('premium_update');
+Route::get('finances/premium/download/{id}', 'human_management\premiumController@download')->name('premium_download');
+Route::get('finances/premium/export/{id}', 'human_management\premiumController@export')->name('premium_export');
+Route::post('finances/premium/{id}', 'human_management\premiumController@approve')->name('premium_approve');
+Route::delete('finances/premium/{id}', 'human_management\premiumController@destroy')->name('premium_delete');
+
+Route::get('get_data_json_eb', 'HomeController@data_json')->name('data_json_eb');
+
+Route::get('chargeaccount', 'human_management\chargeaccountController@index')->name("chargeaccount")->middleware('auth')->middleware('verified');;
+Route::get('chargeaccount/create/{token?}', 'human_management\chargeaccountController@create')->name("chargeaccount_create");
+Route::post('chargeaccount', 'human_management\chargeaccountController@store')->name("chargeaccount_store");
+Route::post('chargeaccount/signature', 'human_management\chargeaccountController@signature')->name("chargeaccount_signature");
+Route::get('chargeaccount/show/{id}', 'human_management\chargeaccountController@show')->name("chargeaccount_show")->middleware('auth')->middleware('verified');;
+Route::get('chargeaccount/download/{id}', 'human_management\chargeaccountController@download')->name("chargeaccount_donwload")->middleware('auth')->middleware('verified');;
+Route::put('chargeaccount/approve/{id}', 'human_management\chargeaccountController@approve')->name("chargeaccount_approve")->middleware('auth')->middleware('verified');;
+Route::delete('chargeaccount/{id}', 'human_management\chargeaccountController@destroy')->name("chargeaccount_delete")->middleware('auth')->middleware('verified');
+Route::get('chargeaccount/generate', 'human_management\chargeaccountController@generate')->name("chargeaccount_generate")->middleware('auth')->middleware('verified');
+
+Route::get('form/quote', 'quoteController@index')->name('quote');
+Route::get('form/quote/email', 'quoteController@create')->name('quote_email');
+Route::post('form/quote/', 'quoteController@store')->name("quote_store");
+Route::post('form/visit/', 'quoteController@visit')->name("quote_visit");
+
+Route::get('energias', 'EnergyController@index')->name('energy');
+Route::get('energias/editar', 'EnergyController@edit')->name('energy_edit');
+Route::put('energias/update/{id}', 'EnergyController@update')->name('energy_update');
+
+Route::get('energy/products/category/types/{id}/{item}', 'energy\ProductsController@index')->name('energy_products_types');
+Route::get('energy/products/category', 'energy\ProductsController@categoryIndex')->name('energy_products');
+Route::get('energy/products/create', 'energy\ProductsController@create')->name('energy_products.create');
+Route::post('energy/products/store', 'energy\ProductsController@store')->name('energy_products.store');
+Route::put('energy/products/update/{id}', 'energy\ProductsController@update')->name('energy_products.update');
+Route::put('energy/products/update/products/{id}', 'energy\ProductsController@update_product')->name('energy_products.update_product');
+Route::delete('energy/products/destroy/{id}', 'energy\ProductsController@destroy')->name('energy_products.destroy');
+Route::delete('energy/products/destroy/{id}/{item}/{type}', 'energy\ProductsController@destroy_all')->name('energy_products.destroy_all');
+Route::delete('energy/products/destroy/subcategory_id/{id}/{item}', 'energy\ProductsController@destroy_category')->name('energy_products.destroy_category');
+
+Route::post('energy/products/category/store', 'energy\ProductsController@category')->name('energy_products_category.store');
+Route::delete('energy/products/category/delete/{id}/{item}', 'energy\ProductsController@destroy_category')->name('energy_products_category.delete');
+Route::post('energy/products/subcategory/store/{id}', 'energy\ProductsController@subcategory')->name('energy_products_subcategory.store');
+Route::get('energy/products/category/show/{id}', 'energy\ProductsController@categoryShow')->name('energy_products_category.show');
+Route::put('energy/products/category/shipping/{id}', 'energy\ProductsController@update_shipping')->name('energy_products.shipping');
+
+Route::get('energy/clients', 'energy\EnergyClientsController@index')->name('energy_clients');
+Route::post('energy/clients/store', 'energy\EnergyClientsController@store')->name('energy_clients.store');
+Route::put('energy/clients/update/{id}', 'energy\EnergyClientsController@update')->name('energy_clients.update');
+Route::delete('energy/clients/destroy/{id}', 'energy\EnergyClientsController@destroy')->name('energy_clients.destroy');
+Route::get('energy/clients/info_user/{id}', 'energy\EnergyClientsController@infoUser')->name('energy_clients.info_user');
+
+Route::get('energy/sales', 'energy\EnergySaleController@index')->name('energy_sale');
+Route::get('energy/sales/create', 'energy\EnergySaleController@create')->name('energy_sale.create');
+Route::post('energy/sales/store', 'energy\EnergySaleController@store')->name('energy_sale.store');
+Route::get('energy/sales/show/{id}', 'energy\EnergySaleController@show')->name('energy_sale.show');
+Route::get('energy/sales/review/{id}', 'energy\EnergySaleController@review')->name('energy_sale.review');
+Route::post('energy/sales/reverse/{id}', 'energy\EnergySaleController@reverse')->name('energy_sale.reverse');
+
+Route::get('energy/store/users', 'energy\store\AdminStoreController@index')->name('energy_store_users.index');
+Route::get('energy/store/ventas', 'energy\store\AdminStoreController@ventas')->name('energy_store_ventas.ventas');
+Route::get('energy/store/ventas/show/{id}', 'energy\store\AdminStoreController@ventas_show')->name('energy_store_ventas_show.ventas_show');
+
+Route::get('energy/kits', 'energy\SolarKitsController@index')->name('energy_kits.index');
+Route::get('energy/kits/crear', 'energy\SolarKitsController@create')->name('energy_kits.create');
+Route::post('energy/kits/store', 'energy\SolarKitsController@store')->name('energy_kits.store');
+Route::get('energy/kits/show/{id}', 'energy\SolarKitsController@show')->name('energy_kits.show');
+Route::get('energy/kits/edit/{id}', 'energy\SolarKitsController@edit')->name('energy_kits.edit');
+Route::put('energy/kits/update/{id}', 'energy\SolarKitsController@update')->name('energy_kits.update');
+Route::delete('energy/kits/destroy_all/{id}', 'energy\SolarKitsController@destroy_all')->name('energy_kits.destroy_all');
+
+Route::get('energy/kits/get_subcategories/{id}', 'energy\SolarKitsController@getsubcategories')->name('energy_kits.get_subcategories');
+Route::get('energy/kits/get_products/{id}', 'energy\SolarKitsController@getProducts')->name('energy_kits.get_products');
+Route::get('energy/kits/get_info/{id}', 'energy\SolarKitsController@getInfo')->name('energy_kits.get_info');
+Route::get('energy/kits/get_product/{id}', 'energy\SolarKitsController@getProduct')->name('energy_kits.get_product');
+Route::get('energy/kits/amount_products/{id}/{amount}/{kit}', 'energy\SolarKitsController@amountProducts')->name('energy_kits.amount_products');
+
+Route::post('energy/kits/offer/', 'energy\SolarKitsController@offer')->name('energy_kits.offer');
+
+Route::get('project/maintenance/smu', 'projects\maintenances\SMUController@index')->name('SMU');
+Route::get('project/maintenance/smu/create', 'projects\maintenances\SMUController@create')->name('smu_create');
+Route::post('project/maintenance/smu', 'projects\maintenances\SMUController@store')->name('smu_store');
+Route::get('project/maintenance/edit/{id}', 'projects\maintenances\SMUController@edit')->name('smu_edit');
+Route::put('project/maintenance/update/{id}', 'projects\maintenances\SMUController@update')->name('smu_update');
+
+Route::get('project/maintenance/smu/plant/{id}', 'projects\maintenances\PlantsController@index')->name('plant_index');
+Route::get('project/maintenance/smu/plant/create/{id}', 'projects\maintenances\PlantsController@create')->name('plant_create');
+Route::post('project/maintenance/smu/plant/store/{id}', 'projects\maintenances\PlantsController@store')->name('plant_store');
+Route::get('project/maintenance/smu/plant/edit/{id}', 'projects\maintenances\PlantsController@edit')->name('plant_edit');
+Route::put('project/maintenance/smu/plant/update/{id}', 'projects\maintenances\PlantsController@update')->name('plant_update');
+Route::get('project/maintenance/smu/plant/export/{id}', 'projects\maintenances\PlantsController@export')->name('plant_export');
+Route::get('project/maintenance/smu/plant/photos/{id}/{item}', 'projects\maintenances\PlantsController@photos')->name('plant_photos');
+Route::post('project/maintenance/smu/plant/{id}/{item}/upload', 'projects\maintenances\PlantsController@upload')->name('plant_upload');
+
+
+Route::get('project/maintenance/smu/air/{id}', 'projects\maintenances\AirController@index')->name('air_index');
+Route::get('project/maintenance/smu/air/create/{id}', 'projects\maintenances\AirController@create')->name('air_create');
+Route::post('project/maintenance/smu/air/create/{id}', 'projects\maintenances\AirController@store')->name('air_store');
+Route::get('project/maintenance/smu/air/export/{id}', 'projects\maintenances\AirController@export')->name('air_export');
+Route::get('project/maintenance/smu/air/photos/{id}/{item}', 'projects\maintenances\AirController@photos')->name('air_photos');
+Route::post('project/maintenance/smu/air/{id}/{item}/upload', 'projects\maintenances\AirController@upload')->name('air_upload');
+Route::get('project/maintenance/smu/air/edit/{id}', 'projects\maintenances\AirController@edit')->name('air_edit');
+Route::put('project/maintenance/smu/air/update/{id}', 'projects\maintenances\AirController@update')->name('air_update');
+
+Route::get('project/maintenance/smu/land/{id}', 'projects\maintenances\LandController@index')->name('land_index');
+Route::get('project/maintenance/smu/land/create/{id}', 'projects\maintenances\LandController@create')->name('land_create');
+Route::post('project/maintenance/smu/land/store/{id}', 'projects\maintenances\LandController@store')->name('land_store');
+Route::get('project/maintenance/smu/land/export/{id}', 'projects\maintenances\LandController@export')->name('land_export');
+Route::get('project/maintenance/smu/land/edit/{id}', 'projects\maintenances\LandController@edit')->name('land_edit');
+Route::put('project/maintenance/smu/land/update/{id}', 'projects\maintenances\LandController@update')->name('land_update');
+Route::get('project/maintenance/smu/land/photos/{id}/{item}', 'projects\maintenances\LandController@photos')->name('land_photos');
+Route::post('project/maintenance/smu/land/{id}/{item}/upload', 'projects\maintenances\LandController@upload')->name('land_upload');
+
+Route::get('project/maintenance/smu/strain/{id}', 'projects\maintenances\StrainController@index')->name('strain_index');
+Route::get('project/maintenance/smu/strain/create/{id}', 'projects\maintenances\StrainController@create')->name('strain_create');
+Route::post('project/maintenance/smu/strain/store/{id}', 'projects\maintenances\StrainController@store')->name('strain_store');
+Route::get('project/maintenance/smu/strain/edit/{id}', 'projects\maintenances\StrainController@edit')->name('strain_edit');
+Route::put('project/maintenance/smu/strain/update/{id}', 'projects\maintenances\StrainController@update')->name('strain_update');
+Route::get('project/maintenance/smu/strain/photos/{id}/{item}', 'projects\maintenances\StrainController@photos')->name('strain_photos');
+Route::post('project/maintenance/smu/strain/{id}/{item}/upload', 'projects\maintenances\StrainController@upload')->name('strain_upload');
+Route::get('project/maintenance/smu/strain/export/{id}', 'projects\maintenances\StrainController@export')->name('strain_export');
+
+Route::get('project/maintenance/smu/operation/{id}', 'projects\maintenances\OperationController@index')->name('operation_index');
+Route::get('project/maintenance/smu/operation/create/{id}', 'projects\maintenances\OperationController@create')->name('operation_create');
+Route::post('project/maintenance/smu/operation/store/{id}', 'projects\maintenances\OperationController@store')->name('operation_store');
+Route::get('project/maintenance/smu/operation/edit/{id}', 'projects\maintenances\OperationController@edit')->name('operation_edit');
+Route::put('project/maintenance/smu/operation/update/{id}', 'projects\maintenances\OperationController@update')->name('operation_update');
+Route::get('project/maintenance/smu/operation/export/{id}', 'projects\maintenances\OperationController@export')->name('operation_export');
+Route::get('project/maintenance/smu/operation/photos/{id}/{item}', 'projects\maintenances\OperationController@photos')->name('operation_photos');
+Route::put('project/maintenance/smu/operation/cantidad_photos/{id}/{item}', 'projects\maintenances\OperationController@cantidad_photos')->name('operation_cantidad_photos');
+Route::put('project/maintenance/smu/operation/descripcion_photos/{id}/{item}', 'projects\maintenances\OperationController@descripcion_photos')->name('operation_descripcion_photos');
+
+
+
+// Route::group([
+//     'middleware' => [
+//         'tienda.session',
+//         \App\Http\Middleware\EncryptCookies::class,
+//         \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+//         StartSession::class,
+//         ShareErrorsFromSession::class,
+//         \App\Http\Middleware\VerifyCsrfToken::class,
+//         \Illuminate\Routing\Middleware\SubstituteBindings::class,
+//     ]
+// ], function () {
+    Route::get('product/store/view/{id}', 'StoreProductsController@show')->name('store.products_show');
+    Route::post('product/store/add_cart/{id}/{type}', 'StoreProductsController@add_cart')->name('store.add_cart')->middleware('auth:tienda');
+    Route::get('product/store/show_cart', 'StoreProductsController@show_cart')->name('store.show_cart')->middleware('auth:tienda')->middleware('verified');
+    Route::post('product/store/delete_product', 'StoreProductsController@delete_product')->name('store.delete_product');
+    Route::post('product/store/amount_product', 'StoreProductsController@amount_product')->name('store.amount_product');
+
+    Route::get('product/store/auth/register', 'ClientsAuth\RegisterController@index')->name('register_client');
+    Route::get('product/store/auth/login', 'ClientsAuth\LoginController@index')->name('login_client_show');
+    Route::post('product/store/register', 'ClientsAuth\RegisterController@register')->name('register');
+
+    Route::post('product/store/login', 'ClientsAuth\LoginController@login')->name('login_client');
+    Route::post('product/store/logout', 'ClientsAuth\LoginController@logout')->name('logout_client');
+
+    Route::post('product/store/store_address', 'StoreProductsController@store_address')->name('store.store_address');
+    Route::post('product/store/collect', 'StoreProductsController@collect')->name('store.collect');
+
+    Route::get('product/store/pay/show/{id}/{form}', 'StoreProductsController@pay_show')->name('store.pay_show')->middleware('auth:tienda');
+    Route::post('product/store/pay/pay/', 'StoreProductsController@pay')->name('store.pay');
+    Route::post('product/store/pay/signature_integrity', 'StoreProductsController@signature_integrity')->name('store.signature_integrity');
+
+    Route::get('product/store/orders', 'StoreProductsController@orders_show')->name('store.orders')->middleware('auth:tienda')->middleware('verified');
+    Route::get('product/store/orders/{id}', 'StoreProductsController@orders_detail')->name('store.orders_detail')->middleware('auth:tienda')->middleware('verified');
+
+    Route::get('product/store/kit/{id}', 'StoreProductsController@show_kit')->name('store.kit_show');
+
+// });
+
+
+//Cotizacion del sistema solar
+Route::get('energy/quote_system', 'energy\quote\QuoteEnergySystemController@index')->name('quote_energy_system.index');
+Route::get('energy/quote_system/items', 'energy\quote\QuoteEnergySystemController@Items')->name('quote_energy_system.items');
+Route::post('energy/quote_system/items/store', 'energy\quote\QuoteEnergySystemController@Items_store')->name('quote_energy_system.items_store');
+
+Route::get('energy/quote_system/create', 'energy\quote\QuoteEnergySystemController@create')->name('quote_energy_system.create');
+Route::post('energy/quote_system/store', 'energy\quote\QuoteEnergySystemController@store')->name('quote_energy_system.store');
+Route::get('energy/quote_system/generated/{id}', 'energy\quote\QuoteEnergySystemController@generated')->name('quote_energy_system.generated');
+Route::get('energy/quote_system/edit/{id}', 'energy\quote\QuoteEnergySystemController@edit')->name('quote_energy_system.edit');
+Route::put('energy/quote_system/update/{id}', 'energy\quote\QuoteEnergySystemController@update')->name('quote_energy_system.update');
+Route::delete('energy/quote_system/destroy/{id}', 'energy\quote\QuoteEnergySystemController@destroy')->name('quote_energy_system.destroy');
+
+Route::put('energy/quote_system/flujo_update/{id}', 'energy\quote\QuoteEnergySystemController@FLujoUpdate')->name('quote_energy_system.fLujo_pdate');
+Route::put('energy/quote_system/precio_update/{id}', 'energy\quote\QuoteEnergySystemController@PrecioUpdate')->name('quote_energy_system.precio_pdate');
+Route::post('energy/quote_system/approved/{id}', 'energy\quote\QuoteEnergySystemController@Approved')->name('quote_energy_system.approved');
+Route::post('energy/quote_system/no_approved/{id}', 'energy\quote\QuoteEnergySystemController@NoApproved')->name('quote_energy_system.no_approved');
+Route::get('energy/quote_system/export/{id}', 'energy\quote\QuoteEnergySystemController@export')->name('quote_energy_system.export');
+Route::get('energy/quote_system/review/{token}', 'energy\quote\QuoteEnergySystemController@review')->name('quote_energy_system.review');
+Route::get('energy/quote_system/client_create', 'energy\quote\QuoteEnergySystemController@client_create')->name('quote_energy_system.client_create');
+Route::post('energy/quote_system/client_store', 'energy\quote\QuoteEnergySystemController@client_store')->name('quote_energy_system.client_store');
+Route::get('energy/quote_system/PDF/{id}', 'energy\quote\QuoteEnergySystemController@PDF')->name('quote_energy_system.PDF');
+Route::post('energy/quote_system/update_files/{id}', 'energy\quote\QuoteEnergySystemController@update_files')->name('quote_energy_system.update_files');
+
+//Albumes de proyectos
+Route::get('/albums', 'energy\album\AlbumProjectsController@index')->name('album_projects.index');
+Route::get('/albums/create', 'energy\album\AlbumProjectsController@create')->name('album_projects.create');
+Route::post('/albums', 'energy\album\AlbumProjectsController@store')->name('album_projects.store');
+Route::get('/gallery', 'energy\album\AlbumProjectsController@gallery')->name('album_projects.gallery');
+Route::get('/gallery/{slug}/{id}/images', 'energy\album\AlbumProjectsController@images')->name('album_projects.images');
+Route::get('/albums/{slug}/{id}/gallery', 'energy\album\AlbumProjectsController@showGallery')->name('album_projects.show_gallery');
+Route::post('/albums/{id}/upload', 'energy\album\AlbumProjectsController@upload')->name('album_projects.upload');
+Route::delete('/albums/{id}/destroy', 'energy\album\AlbumProjectsController@destroy')->name('album_projects.destroy');
+Route::delete('/albums/destroy_image/{id}', 'energy\album\AlbumProjectsController@destroy_image')->name('album_projects.destroy_image');
+Route::get('/albums/{slug}/{id}/edit', 'energy\album\AlbumProjectsController@edit')->name('album_projects.edit');
+Route::put('/albums/{id}', 'energy\album\AlbumProjectsController@update')->name('album_projects.update');

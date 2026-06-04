@@ -19,7 +19,8 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'https://www.energitelco.com.co/human_management/payroll_overtime_news_report',
-        'http://www.energitelco.com.co/guest/message'
+        'https://www.energitelco.com.co/finances/payroll_overtime_news_report',
+        'http://www.energitelco.com.co/guest/message',
+        '/product/store/pay/pay',
     ];
 }

@@ -13,7 +13,7 @@
     $i = 0;
 @endphp
 <section class="content">
-    @include('includes.alerts')
+
             <div class="box">
                 <div class="box-header">
                     <div class="box-title">Lista de roles</div>
@@ -48,7 +48,7 @@
                                         @can('Eliminar roles')
                                             @if (!($role->id === 1))
                                             <button type="button" class="btn btn-sm btn-danger pl-4 pr-4" data-toggle="modal" data-target="#modal_delete_{{$role->id}}">Eliminar</button>
-                                        
+
                                             <div class="modal fade" id="modal_delete_{{$role->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">

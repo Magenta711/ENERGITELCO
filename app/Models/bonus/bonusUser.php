@@ -19,4 +19,9 @@ class bonusUser extends Model
     {
         return $this->hasMany(bonusUserDiscount::class,'bonu_user_id','id');
     }
+
+    public function bonu()
+    {
+        return $this->hasOne(bonu::class,'id','bonus_id');
+    }
 }

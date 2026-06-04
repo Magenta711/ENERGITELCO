@@ -1,0 +1,45 @@
+section {
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 80vh;
+
+}
+
+.container {
+    background: #1f2a38;
+    padding: 2rem;
+    border-radius: 16px;
+    width: 500px;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding: 1.5rem;
+        max-width: 500px;
+    }
+
+    h4 {
+        font-size: 1.2rem;
+    }
+
+    .form-group label {
+        font-size: 0.9rem;
+    }
+
+    input.form-control {
+        padding: 0.65rem;
+        font-size: 0.95rem;
+    }
+
+    button.btn-primary {
+        padding: 0.6rem;
+        font-size: 0.95rem;
+    }
+}

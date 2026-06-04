@@ -93,6 +93,10 @@
             <input type="radio" name="tipo_solicitud" value="Emergencia Personal o Familiar" {{(old('tipo_solicitud') == 'Emergencia Personal o Familiar') ? 'checked' : ''}} id="radioEmergenciaPersonalFamiliar">
             Emergencia Personal o Familiar</label>
         </div>
+        <div class="col-sm-6">
+            <label for="radioVacacionesPagas">
+            <input type="radio" name="tipo_solicitud" value="Vacaciones pagadas" {{(old('tipo_solicitud') == 'Vacaciones pagadas') ? 'checked' : ''}} id="radioVacacionesPagas">Vacaciones pagadas</label>
+        </div>
     </div>
 </div>
 <div class="form-group" style="display: none" id="type_inability">

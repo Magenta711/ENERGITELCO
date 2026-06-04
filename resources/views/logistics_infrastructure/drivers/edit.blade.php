@@ -11,7 +11,7 @@
     </ol>
 </section>
 <section class="content">
-    @include('includes.alerts')
+     
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Lista de controles de documentos de conductores</h3>
@@ -82,13 +82,13 @@
                                     <input type="date" name="report_date[]" value="{{$item->date}}" id="report_date" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="report_city">Ciudad</label>
                                     <input type="text" name="report_city[]" value="{{$item->city}}" id="report_city" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="report_vehicle">Vehículos</label>
                                     <select name="report_vehicle[]" id="report_vehicle" class="form-control">
@@ -100,7 +100,18 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="status">Estado</label>
+                                    <select name="report_status[{{$vehicle->id}}][]" id="report_status_{{$vehicle->id}}" class="form-control">
+                                        <option selected disabled></option>
+                                        <option {{$item->status == 0 ? 'selected' : ''}} value="0">Pendiente de pago</option>
+                                        <option {{$item->status == 1 ? 'selected' : ''}} value="1">Pago</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="col-md-1 text-right">
+                                <br>
                                 <i class="fa fa-trash remove_block"></i>
                             </div>
                             <div class="col-md-12">
@@ -116,7 +127,6 @@
                                 </div>
                             </div>
                         </div>
-                        <hr>
                     @empty
                         <div class="row" id="report_origen">
                             <div class="col-md-3">
@@ -125,13 +135,13 @@
                                     <input type="date" name="report_date[]" id="report_date" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="report_city">Ciudad</label>
                                     <input type="text" name="report_city[]" id="report_city" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="report_vehicle">Vehículos</label>
                                     <select name="report_vehicle[]" id="report_vehicle" class="form-control">
@@ -143,8 +153,29 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="status">Estado</label>
+                                    <select name="report_status[{{$vehicle->id}}][]" id="report_status_{{$vehicle->id}}" class="form-control">
+                                        <option selected disabled></option>
+                                        <option value="0">Pendiente de pago</option>
+                                        <option value="1">Pago</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="col-md-1 text-right">
+                                <br>
                                 <i class="fa fa-trash remove_block"></i>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="report_status">Estado</label>
+                                    <select name="report_status[{{$vehicle->id}}][]" id="report_status_{{$vehicle->id}}" class="form-control">
+                                        <option selected disabled></option>
+                                        <option value="0">Pendiente de pago</option>
+                                        <option value="1">Pago</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -159,7 +190,6 @@
                                 </div>
                             </div>
                         </div>
-                        <hr>
                     @endforelse
                 </div>
                 <button type="button" class="btn btn-sm btn-link btn-add-block" id="report_add"><i class="fa fa-plus"></i> Agregar reporte</button>
@@ -193,6 +223,7 @@
                                 </div>
                             </div>
                             <div class="col-md-1 text-right">
+                                <br>
                                 <i class="fa fa-trash remove_block"></i>
                             </div>
                             <div class="col-md-12">
@@ -235,6 +266,7 @@
                                 </div>
                             </div>
                             <div class="col-md-1 text-right">
+                                <br>
                                 <i class="fa fa-trash remove_block"></i>
                             </div>
                             <div class="col-md-12">
@@ -250,7 +282,6 @@
                                 </div>
                             </div>
                         </div>
-                        <hr>
                     @endforelse
                 </div>
                 <button type="button" class="btn btn-sm btn-link btn-add-block" id="control_add"><i class="fa fa-plus"></i> Agregar reporte</button>
@@ -284,6 +315,7 @@
                                 </div>
                             </div>
                             <div class="col-md-1 text-right">
+                                <br>
                                 <i class="fa fa-trash remove_block"></i>
                             </div>
                             <div class="col-md-12">
@@ -299,7 +331,6 @@
                                 </div>
                             </div>
                         </div>
-                        <hr>
                     @empty
                         <div class="row" id="accident_origen">
                             <div class="col-md-3">
@@ -327,6 +358,7 @@
                                 </div>
                             </div>
                             <div class="col-md-1 text-right">
+                                <br>
                                 <i class="fa fa-trash remove_block"></i>
                             </div>
                             <div class="col-md-12">
@@ -342,7 +374,6 @@
                                 </div>
                             </div>
                         </div>
-                        <hr>
                     @endforelse
                 </div>
                 <button type="button" class="btn btn-sm btn-link btn-add-block" id="accident_add"><i class="fa fa-plus"></i> Agregar reporte</button>
@@ -366,6 +397,7 @@
                                 </div>
                             </div>
                             <div class="col-md-1 text-right">
+                                <br>
                                 <i class="fa fa-trash remove_block"></i>
                             </div>
                             <div class="col-md-12">
@@ -381,7 +413,6 @@
                                 </div>
                             </div>
                         </div>
-                        <hr>
                     @empty
                         <div class="row" id="exam_origen">
                             <div class="col-md-6">
@@ -397,6 +428,7 @@
                                 </div>
                             </div>
                             <div class="col-md-1 text-right">
+                                <br>
                                 <i class="fa fa-trash remove_block"></i>
                             </div>
                             <div class="col-md-12">
@@ -412,7 +444,6 @@
                                 </div>
                             </div>
                         </div>
-                        <hr>
                     @endforelse
                 </div>
                 <button type="button" class="btn btn-sm btn-link btn-add-block" id="exam_add"><i class="fa fa-plus"></i> Agregar reporte</button>
@@ -434,6 +465,7 @@
                                 </div>
                             </div>
                             <div class="col-md-1 text-right">
+                                <br>
                                 <i class="fa fa-trash remove_block"></i>
                             </div>
                             <div class="col-md-12">
@@ -449,7 +481,6 @@
                                 </div>
                             </div>
                         </div>
-                        <hr>
                     @empty
                         <div class="row" id="test_origen">
                             <div class="col-md-6">
@@ -465,6 +496,7 @@
                                 </div>
                             </div>
                             <div class="col-md-1 text-right">
+                                <br>
                                 <i class="fa fa-trash remove_block"></i>
                             </div>
                             <div class="col-md-12">
@@ -480,7 +512,6 @@
                                 </div>
                             </div>
                         </div>
-                        <hr>
                     @endforelse
                 </div>
                 <button type="button" class="btn btn-sm btn-link btn-add-block" id="test_add"><i class="fa fa-plus"></i> Agregar reporte</button>
@@ -514,6 +545,7 @@
                                 </div>
                             </div>
                             <div class="col-md-1 text-right">
+                                <br>
                                 <i class="fa fa-trash remove_block"></i>
                             </div>
                             <div class="col-md-12">
@@ -523,7 +555,6 @@
                                 </div>
                             </div>
                         </div>
-                        <hr>
                     @empty
                         <div class="row" id="training_origen">
                             <div class="col-md-3">
@@ -551,6 +582,7 @@
                                 </div>
                             </div>
                             <div class="col-md-1 text-right">
+                                <br>
                                 <i class="fa fa-trash remove_block"></i>
                             </div>
                             <div class="col-md-12">
@@ -560,7 +592,6 @@
                                 </div>
                             </div>
                         </div>
-                        <hr>
                     @endforelse
                 </div>
                 <button type="button" class="btn btn-sm btn-link btn-add-block" id="training_add"><i class="fa fa-plus"></i> Agregar reporte</button>
@@ -586,6 +617,14 @@
                 });
                 $('#'+type+'_origen_'+incre+' input').val('');
             })
+            $('.fa-trash').click(function () {
+                deleteElement(this);
+            });
+            function deleteElement(element){
+                if ( $(element).closest('.row').siblings('.row').length ) {
+                    $(element).closest('.row').remove();
+                }
+            }
         })
     </script>
 @endsection

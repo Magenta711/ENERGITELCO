@@ -1,0 +1,176 @@
+.big-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+}
+
+.pay {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+}
+
+.md-container {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 75%;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    padding: 0%;
+    margin-bottom: 5%;
+    justify-content: center;
+}
+
+.container .img-principal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
+    height: auto;
+    overflow: hidden;
+    margin-right: 5%;
+    height: 200px;
+}
+
+.container .kit-max-img {
+    width: 15%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-content: center;
+    height: 200px;
+    overflow: hidden;
+    align-items: stretch;
+    justify-items: center;
+    margin-right: 5%;
+}
+
+.container .kit-max-img img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.container .img-principal img {
+    object-fit: cover;
+    height: 100%;
+}
+
+.container .info {
+    width: 50%;
+}
+
+.caracter .row {
+    margin: 1% 1% 1% 0;
+}
+
+.caracter .row a {
+    margin: 1% 2% 0 0;
+    font-weight: bold;
+}
+
+.container .info .description {
+    font-weight: bold;
+    font-size: 15pt
+}
+
+#amount_items {
+    text-align: center;
+    width: 40%;
+    border-radius: 15px;
+}
+
+#price_item {
+    font-weight: bold;
+    font-size: 12pt
+}
+
+.pay {
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.pay .price {
+    font-weight: bold;
+    font-size: 18pt;
+    margin-bottom: 50%;
+}
+
+.sub-total {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.hide-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .big-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .container {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+
+    .container .pay .price {
+        font-weight: bold;
+        font-size: 12pt;
+        margin: 10% 0 10% 0;
+    }
+
+    .container .img-principal {
+        width: 100%;
+    }
+
+    .container .info {
+        width: 75%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .container .info .caracter {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .pay {
+        height: 20%;
+        margin-bottom: 5%;
+    }
+
+    .amount_div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+    }
+}

@@ -22,13 +22,13 @@ class Work1 extends Model
     {
         return $this->morphToMany(User::class, 'responsibles');
     }
-    
-    
+
+
     public function coordinadorAcargo()
     {
         return $this->hasOne(User::class,'id','coordinador');
     }
-    
+
     public function responsableAcargo()
     {
         return $this->hasOne(User::class,'id','responsable');
@@ -39,7 +39,7 @@ class Work1 extends Model
     {
         return $this->hasOne(work1_add::class, 'work_id', 'id');
     }
-    
+
     public function vehicle()
     {
         return $this->hasOne(invVehicle::class, 'id', 'vehicle_id');

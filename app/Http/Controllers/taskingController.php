@@ -87,6 +87,7 @@ class taskingController extends Controller
             'commentaries' => $request->commentaries,
             'eb_id' => $request->eb,
             'station_name' => $request->station_name,
+            'id_beneficiario' => $request->id_beneficiario ? $request->id_beneficiario : null,
             'lat' => $request->lat,
             'long' => $request->long,
             'status' => 2,
@@ -100,9 +101,32 @@ class taskingController extends Controller
             || $request->project == "MINTIC ENTREGA INTERVENTORIA CENTRO DIGITAL"
             || $request->project == "MINTIC MANTANIMIENTO"
         ){
-            $mintic = Mintic_School::where('con_sede',$request->eb)->first();
+            $mintic = Mintic_School::where('code',$request->id_beneficiario)->first();
+            $type = ($request->project == "MINTIC ESTUDIO DE CAMPO" || $request->project == "MINTIC TSS EB") ? 'ec' : (($request->project == "MINTIC INSTALACIÓN CENTRO DIGITAL" || $request->project == "MINTIC INSTALACIÓN ESTACIÓN BASE") ? 'install' : (($request->project == "MINTIC INTEGRACIÓN Y ENTREGA CENTRO DIGITAL" || $request->project == "MINTIC ENTREGA INTERVENTORIA CENTRO DIGITAL") ? 'integration' : 'maintenance'));
             if ($mintic) {
-                $type = ($request->project == "MINTIC ESTUDIO DE CAMPO" || $request->project == "MINTIC TSS EB") ? 'ec' : (($request->project == "MINTIC INSTALACIÓN CENTRO DIGITAL" || $request->project == "MINTIC INSTALACIÓN ESTACIÓN BASE") ? 'install' : (($request->project == "MINTIC INTEGRACIÓN Y ENTREGA CENTRO DIGITAL" || $request->project == "MINTIC ENTREGA INTERVENTORIA CENTRO DIGITAL") ? 'integration' : 'maintenance'));
+                MinticVisit::create([
+                    'date'=>Carbon::create($request->date_start)->format('Y-m-d'),
+                    'project_id'=>$mintic->id,
+                    'time'=>Carbon::create($request->date_start)->format('H:i:s'),
+                    'technical_id'=>$request->users[0] ?? null,
+                    'commentary'=>'Auto',
+                    'type' => $type,
+                    'status' => 0
+                ]);
+            }else {
+                $mintic = Mintic_School::create([
+                    'responsable_id' => auth()->id(),
+                    'con_sede' => $request->eb,
+                    'code' => $request->id_beneficiario,
+                    'name' => $request->station_name,
+                    'dep' => $request->department,
+                    'mun' => $request->municipality,
+                    'lat' => $request->lat,
+                    'long' => $request->long,
+                    'observation' => 'Auto',
+                    'status' => 4
+                ]);
+
                 MinticVisit::create([
                     'date'=>Carbon::create($request->date_start)->format('Y-m-d'),
                     'project_id'=>$mintic->id,
@@ -272,13 +296,13 @@ class taskingController extends Controller
                     $detail = taskDetailConsumable::where('inventaryble_type','App\Models\project\Mintic\inventory\invMinticConsumable')->where('inventaryble_id', $value)->where('task_id',$id->id)->first();
                     if ($detail) {
                         $detail->update([
-                            'preamount' => $request->amount[$value] + $detail->preamount
+                            'preamount' => $request->amount[$key] + $detail->preamount
                         ]);
                     }else {
                         $id->consumables()->create([
                             'inventaryble_type' => 'App\Models\project\Mintic\inventory\invMinticConsumable',
                             'inventaryble_id' => $value,
-                            'preamount' => $request->amount[$value],
+                            'preamount' => $request->amount[$key],
                             'amount' => 0,
                             'status' => 0
                         ]);
@@ -314,16 +338,7 @@ class taskingController extends Controller
     {
         if ($equipments = $request->equipment) {
             foreach ($equipments as $key => $value) {
-                $inv = InvUser::where('user_id',auth()->id())->where('inventaryble_type','App\Models\project\Mintic\inventory\invMinticEquipment')->where('inventaryble_id',$key)->first();
-                taskDetailConsumable::find($value)->update([
-                    'amount' => 1,
-                    'status' => 1
-                ]);
-                $inv->update([
-                    'tickets' => 0,
-                    'departures' => 1,
-                    'stock' => 0
-                ]);
+                 
                 invMinticEquipment::find($key)->update([
                     'status' => 3
                 ]);

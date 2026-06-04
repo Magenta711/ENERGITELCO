@@ -12,4 +12,9 @@ class improvementActionDetail extends Model
     {
         return $this->hasMany(improvementActionDetailUser::class,'detail_id','id');
     }
+
+    public function improvement()
+    {
+        return $this->hasOne(improvementAction::class,'id','improvement_id');
+    }
 }

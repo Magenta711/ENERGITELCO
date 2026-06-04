@@ -12,13 +12,19 @@
     </ol>
 </section>
 <section class="content">
-    @include('includes.alerts')
+     
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Lista de solicitudes de permiso laboral o notificaciones de incapacidades médicas</h3>
                 <div class="box-tools">
+                    @can('Habilitar permisos laborales')
+                        <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#hasPermissionModal">Permisos</button>
+                        @include('human_management.medical_incapacity.includes.modals.has_permission')
+                    @endcan
                     @can('Digitar formulario de solicitud de permiso laboral o notificación de incapacidad')
+                        @if (auth()->user()->hasPermisisonWork && auth()->user()->hasPermisisonWork->amount > 0)
                             <a href="{{route('work_permits_notifications_medical_incapacity_create')}}" class="btn btn-sm btn-success">Crear</a>
+                        @endif
                     @endcan
                 </div>
             </div>
@@ -64,7 +70,7 @@
                                     @endif
                                     @can('Eliminar formato de solicitud de permisos laborales o notificaciones de incapacidad')
                                         <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete_{{$medical_incapacity->id}}">Eliminar</button>
-                                        <div class="modal fade" id="delete_{{$medical_incapacity->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id1="delete_{{$medical_incapacity->id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-md">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -97,4 +103,50 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('js')
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $(document).ready(function () {
+            $('.btn-plus').click(function () {
+                let id = this.id.split('_')[this.id.split('_').length - 1];
+                let url = '/human_management/work_permits_notifications_medical_incapacity/plus/'+id;
+                $('#plus_'+id).prop("disabled", true);
+                $('#rest_'+id).prop("disabled", true);
+                $.post(url, function (data) {
+                    $('#plus_'+id).prop("disabled", false);
+                    $('#rest_'+id).prop("disabled", false);
+                    $('#amount_'+id).text(data.amount);
+                    $('#td_responsable_'+id).text('{{auth()->user()->name}}');
+                    $('#td_update_'+id).text(data.updated_at);
+                }).fail(function() {
+                    console.log("error");
+                });
+            });
+
+            $('.btn-rest').click(function () {
+                let id = this.id.split('_')[this.id.split('_').length - 1];
+                let url = '/human_management/work_permits_notifications_medical_incapacity/rest/'+id;
+                $('#plus_'+id).prop("disabled", true);
+                $('#rest_'+id).prop("disabled", true);
+                $.post(url, function (data) {
+                    $('#plus_'+id).prop("disabled", false);
+                    $('#rest_'+id).prop("disabled", false);
+                    $('#amount_'+id).text(data.amount);
+                    $('#td_responsable_'+id).text('{{auth()->user()->name}}');
+                    $('#td_update_'+id).text(data.updated_at);
+                    if (data.amount == 0) {
+                        $('#rest_'+id).prop("disabled", true);
+                    }
+                }).fail(function() {
+                    console.log("error");
+                });
+            });
+        })
+    </script>
 @endsection

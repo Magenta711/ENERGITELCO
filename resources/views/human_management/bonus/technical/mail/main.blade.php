@@ -64,7 +64,7 @@
                                 <tr>
                                     <td class="content-cell" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; box-sizing: border-box; padding: 35px;">
                                     <p
-                                        style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; box-sizing: border-box; color: #3d4852; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: center;">Se ha aprobado el pago de comisiones a ténicos.</p>
+                                        style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; box-sizing: border-box; color: #3d4852; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: center;">Se ha aprobado el pago de bonificaciones a ténicos.</p>
 
                                         <div style="display: flex; width: 100%">
                                             <div style="width: 50%; text-align: center">
@@ -82,8 +82,6 @@
                                                     <th>Funcionario</th>
                                                     <th># Cuenta</th>
                                                     <th>Bonificación</th>
-                                                    <th>Viáticos</th>
-                                                    <th>Ajustes</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -91,14 +89,14 @@
                                                     $plusUser = $plus / count($users);
                                                 @endphp
                                                 @foreach ($users as $key => $item)
-                                                    <tr>
-                                                        <td>{{ $item['cedula'] }}</td>
-                                                        <td>{{ $item['name'] }}</td>
-                                                        <td>{{ $item['cuenta'] }}</td>
-                                                        <td class="text-right">${{ number_format(($item['bonificacion'] + $plusUser),2,',','.') }}</td>
-                                                        <td class="text-right">${{ number_format($item['viaticos'],2,',','.') }}</td>
-                                                        <td class="text-right">-${{ number_format($item['ajustes'],2,',','.') }}</td>
-                                                    </tr>
+                                                    @if ($item['bonificacion'] > 0)
+                                                        <tr>
+                                                            <td>{{ $item['cedula'] }}</td>
+                                                            <td>{{ $item['name'] }}</td>
+                                                            <td>{{ $item['cuenta'] }}</td>
+                                                            <td class="text-right">${{ number_format(($item['bonificacion'] + $plusUser),2,',','.') }}</td>
+                                                        </tr>
+                                                    @endif
                                                 @endforeach
                                             </tbody>
                                         </table>
@@ -113,7 +111,7 @@
                             <table class="footer" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; box-sizing: border-box; margin: 0 auto; padding: 0; text-align: center; width: 570px; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 570px;">
                                 <tr>
                                     <td class="content-cell" align="center" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; box-sizing: border-box; padding: 35px;">
-                                        <p style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; box-sizing: border-box; line-height: 1.5em; margin-top: 0; color: #aeaeae; font-size: 12px; text-align: center;">© 2021 {{config('app.name')}}. Todos los derechos reservados.</p>
+                                        <p style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; box-sizing: border-box; line-height: 1.5em; margin-top: 0; color: #aeaeae; font-size: 12px; text-align: center;">© 2022 {{config('app.name')}}. Todos los derechos reservados.</p>
                                     </td>
                                 </tr>
                             </table>

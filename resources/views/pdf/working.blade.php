@@ -72,26 +72,28 @@
         <br><br><br>
         <p>Medellín, {{$date['day']}} de {{$date['month']}} de {{ $date['year']}}</p>
         <br><br><br><br>
-        <p class="text-center">A QUIEN INTERESE</p>
+        <p class="text-center">{{$id->from}}</p>
         <br>
         <p>{!! str_replace("\r\n", '<br>', addslashes($request->letter4))!!}</p>
         <br>
         <p>- Salario básico: {{number_format($request->layoffs,0,',','.')}} ({{$salary_text}}) más todas las prestaciones sociales de ley.</p>
         <br>
         <p>Para confirmar información ingrese a:</p>
-        <p><a href="{{config('app.url')}}/storage/files/layoffs/{{$document}}">{{config('app.url')}}/storage/files/layoffs/{{$document}}</a></p>
-        <br><br>
+        <p><a href="{{config('app.url')}}/storage/files/work_10/{{$document}}">{{config('app.url')}}/storage/files/work_10/{{$document}}</a></p>
+        <br>
+        <p>Firmado electrónicamente por <b>JORGE ANDRES ORTEGA BEDOYA</b> en rol de gerente general habilitado por Energitelco, con conocimiento de funciones y contenido del presente documento. Se cumple Ley 527 de 1999 y Decreto 19 de 2012.</p>
+        <p style="line-height: 0;">
+        <img src="{{ asset('img/pruhagafs/25522adadaf.jpg') }}" height="40px" style="margin-bottom: -20px" />
+        <br>
+            ______________________________________________
+        </p>
         <p>
-            Firmado electrónicamente por <b>JORGE ANDRES ORTEGA BEDOYA</b> en rol de Gerente General habilitado por Energitelco, con conocimiento de funciones y contenido del presente documento. Se cumple Ley 527 de 1999 y Decreto 19 de 2012.<br>
-            ___________________________
-            </p>
-            <p>
-                Jorge Andrés Ortega Bedoya
-                <br>
-                Gerente General
-                <br>
-                Energitelco S.A.S
-            </p>
+            Jorge Andrés Ortega Bedoya
+            <br>
+            Gerente General
+            <br>
+            Energitelco S.A.S
+        </p>
     </main>
      
     <footer>

@@ -115,7 +115,7 @@ function hasDeliveryFeedback($id,$item){
     </ol>
 </section>
 <section class="content">
-    @include('includes.alerts')
+     
     <div class="box">
         <div class="box-header">
             <div class="box-title">{{$id->project_name}}</div>

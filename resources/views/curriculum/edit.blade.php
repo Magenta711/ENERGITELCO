@@ -12,7 +12,7 @@
     </ol>
 </section>
 <section class="content">
-    @include('includes.alerts')
+     
     {{-- Content main --}}
     <div class="box">
         <div class="box-header">

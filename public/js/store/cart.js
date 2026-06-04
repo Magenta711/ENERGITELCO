@@ -1,0 +1,121 @@
+$(document).ready(function () {
+    $('.hide-container').hide();
+    evaluarStock()
+
+    $('#amount_item').on('input change', function () {
+        let amount = parseInt($(this).val());
+        let available = parseInt($('#available').val());
+        if (amount < 1) {
+            $(this).val(1);
+        } else if (amount > available) {
+            $(this).val(available);
+        }
+    });
+
+    $('.btn-remove').click(function (e) {
+        e.preventDefault();
+        const product = $(this).data('id');
+        const productId = $(this).data('euge');
+        console.log('Valor del producto: ' + productId);
+
+        $.ajax({
+            url: '/product/store/delete_product',
+            method: 'POST',
+            data: {
+                product_id: product,
+                _token: window.csrfToken,
+            },
+            success: function (response) {
+                if (response.success) {
+                    update(productId, response.total, response.count)
+                    evaluarStock();
+                } else {
+                    console.log('No se pudo eliminar el producto.');
+                }
+            },
+            error: function (xhr) {
+                console.log('Error al conectar con el servidor.');
+            }
+        });
+    });
+
+    $('.amount_items').change(function () {
+        let productId = $(this).data('id');
+        let amount = parseInt($(this).val());
+        let Id = $(this).data('euge');
+        let valor_item = parseFloat($('#valor_item-' + Id).val());
+        let available = parseInt($('#available-' + Id).val());
+        if (amount < 1) {
+            $(this).val(1);
+            amount = 1;
+        } else if (amount > available) {
+            $(this).val(available);
+            amount = available;
+        }
+        $.ajax({
+            url: '/product/store/amount_product',
+            method: 'POST',
+            data: {
+                _token: window.csrfToken,
+                product_id: productId,
+                amount_id: amount,
+                valor_venta: valor_item
+            },
+            success: function (response) {
+                if (response.success) {
+                    amount_item(response.total, response.count, valor_item, Id, amount)
+                } else {
+                    console.log('No se pudo agregar el producto.');
+                }
+            },
+            error: function (xhr) {
+                console.log('Error al conectar con el servidor.');
+            }
+        });
+    })
+});
+
+function update(id, total, count) {
+    $('#cart-' + id).remove();
+    $('.price').html(`$${total}`);
+    $('.sub-total').html(`Subtotal de la compra (${count}): $${total}`);
+
+    if (count == 0) {
+        $('.big-container').remove();
+        $('.hide-container').show();
+    }
+}
+
+function amount_item(total, count, valor_item, Id, amount) {
+    $('.price').html(`$${total}`);
+    $('.sub-total').html(`Subtotal de la compra (${count}): $${total}`);
+    const total_item = valor_item * amount;
+    $('.price_item-' + Id).html(`$${formatoNumero(total_item)}`);
+}
+
+function formatoNumero(valor) {
+    return new Intl.NumberFormat('es-CO', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    }).format(valor);
+}
+
+function evaluarStock() {
+    if ($('.unable').length > 0) {
+        $('#btn-comprar')
+            .addClass('disabled')
+            .css({
+                'pointer-events': 'none',
+                'opacity': '0.5'
+            })
+            .text('Stock insuficiente');
+    } else {
+        $('#btn-comprar')
+            .removeClass('disabled')
+            .css({
+                'pointer-events': '',
+                'opacity': ''
+            })
+            .text('Proceder al pago');
+    }
+}

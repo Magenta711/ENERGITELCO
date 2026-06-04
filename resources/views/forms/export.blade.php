@@ -48,7 +48,7 @@
         @foreach ($forms->orders as $order)
             <tr>
                 <td>{{$order->id}}</td>
-                <td>{{$order->user->name}}</td>
+                <td>{{$order->user ? $order->user->name : ''}}</td>
                 @foreach ($forms->questions as $question)
                     @if ($question->status)
                         <td>{!!answerQuestion($order,$question,config('app.url'))!!}</td>

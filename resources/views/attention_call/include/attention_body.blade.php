@@ -80,7 +80,7 @@
     @endforeach
 @endif
 
-@if (!isset($arg) && ($id->state == 'Sin aprobar' || $id->state == 'Sin argumentos') && $id->created_at < now()->subMonths(3)->format('Y-m-d H:i:s'))
+@if (!isset($arg) && ($id->state == 'Sin aprobar' || $id->state == 'Sin argumentos') && $id->created_at < now()->subMonths(1)->format('Y-m-d H:i:s'))
     @can('Aprobar llamados de atención')
         <form id="approve_call" action="{{ route('approve_call',$id->id) }}" method="POST" autocomplete="off">
             @csrf

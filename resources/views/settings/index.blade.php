@@ -2,8 +2,6 @@
 
 @section('content')
 
-{{dd($system_setting)}}
-
 <section class="content-header">
     <h1>
         Configuraciones <small>Configuraciones</small>
@@ -15,7 +13,7 @@
     </ol>
 </section>
 <section class="content">
-  @include('includes.alerts')
+   
   <div class="box box-solid">
     <div class="box-header with-border">
       <i class="fa fa-text-width"></i>

@@ -13,7 +13,7 @@
 </section>
 
 <section class="content">
-    @include('includes.alerts')
+     
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="box">
@@ -24,6 +24,10 @@
                     </div>
                 </div>
                     <div class="box-body">
+                        <div class="form-group">
+                            <label for="user_id">Funcionario</label>
+                            <p>{{$id->responsableAcargo->name}}</p>
+                        </div>
                         <div class="form-group">
                             <label for="reason">Motivo</label>
                             <p>
@@ -40,33 +44,45 @@
                                     @case('carta laboral')
                                         Carta laboral
                                         @break
+                                    @case('pago de vacaciones')
+                                        Pago de vacaciones
+                                        @break
                                     @default
                                         {{$id->reason}}
                                 @endswitch
                             </p>
                         </div>
-                        <div class="form-group">
-                            <label for="value">Valor</label>
-                            @if ($id->estado == 'Sin aprobar' && auth()->user()->hasPermissionTo('Aprobar retiro de cesantías'))
-                                <form id="approval_work" action="{{ route('request_withdraw_severance_approve',$id->id) }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
-                                    <input type="hidden" name="status" value="Aprobado">
-                                    @if ($id->reason == 'carta laboral')
-                                        <input type="number" value="{{$id->responsableAcargo->register && $id->responsableAcargo->register->hasContract() ? $id->responsableAcargo->register->hasContract()->salary : ''}}" name="layoffs" class="form-control" id="value">
-                                    @else
-                                        <input type="number" value="{{$id->value}}" name="layoffs" class="form-control" id="value">
-                                    @endif
-                                    <input type="hidden" value="Medellín" name="city">
-                            @else
-                                <p>$ {{number_format($id->value,2,',','.')}}</p>
-                            @endif
-                        </div>
+                        <form id="approval_work" action="{{ route('request_withdraw_severance_approve',$id->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                        @if ($id->reason != 'pago de vacaciones')
+                            <div class="form-group">
+                                <label for="from">Aquien dirige</label>
+                                @if ($id->estado == 'Sin aprobar' && auth()->user()->hasPermissionTo('Aprobar retiro de cesantías'))
+                                    <input type="text" value="{{$id->from}}" name="from" class="form-control" id="from">
+                                @else
+                                    <p>{{$id->form}}</p>
+                                @endif
+                            </div>
+                            <div class="form-group">
+                                <label for="value">Valor</label>
+                                @if ($id->estado == 'Sin aprobar' && auth()->user()->hasPermissionTo('Aprobar retiro de cesantías'))
+                                        @if ($id->reason == 'carta laboral')
+                                            <input type="number" value="{{$id->responsableAcargo->register && $id->responsableAcargo->register->hasContract() ? $id->responsableAcargo->register->hasContract()->salary : ''}}" name="layoffs" class="form-control" id="value">
+                                        @else
+                                            <input type="number" value="{{$id->value}}" name="layoffs" class="form-control" id="value">
+                                        @endif
+                                        <input type="hidden" value="Medellín" name="city">
+                                @else
+                                    <p>$ {{number_format($id->value,2,',','.')}}</p>
+                                @endif
+                            </div>
+                        @endif
                         <div class="form-group">
                             <label for="description">Descriptión</label>
                             <p>{!! str_replace("\n", '</br>', addslashes($id->description)) !!}</p>
                         </div>
-                        @if ($id->files)
+                        @if (count($id->files))
                             <hr>
                             <div class="form-group">
                                 <label for="file">Archivos adjuntos</label><br>
@@ -130,7 +146,6 @@
                             </div>
                         </div>
                     </div>
-                    <p>SEÑOR FUNCIONARIO EMISOR DEL PRESENTE PERMISO DE TRABAJO, TENGA PRESENTE QUE ES OBLIGATORIO ANTES DE INICIAR ACTIVIDADES GARANTIZAR EL CONOCIMIENTO Y LAS RESTRICCIONES DEL PRESENTE PERMISO A LOS DEMÁS COMPAÑEROS INVOLUCRADOS EN LA PRESENTE ACTIVIDAD DE FORMA DIGITAL MEDIANTE EL MAIL ENVIADO A CADA UNO DE LOS FUNCIONARIOS INVOLUCRADOS EN LA PRESENTE ACTIVIDAD Y EN CASO DE QUE EL TRABAJO SE REALICE EN SITIOS DONDE INTERVIENEN TERCEROS AJENOS A ENERGITELCO SAS, TENGA PRESENTE QUE ANTES DE INICIAR LABORES OBLIGATORIAMENTE DEBE PROCEDER A IMPRIMIR FÍSICAMENTE EL PRESENTE DOCUMENTO Y PUBLICARLO EN LOS LÍMITES DE LA ZONA DE TRABAJO O DE LA DEMARCACIÓN Y CERRAMIENTO QUE HIZO DE SU ZONA DE TRABAJO.</p>
                     @else
                         @if ($id->estado == "Sin aprobar")
                             @can('Aprobar retiro de cesantías')
@@ -138,30 +153,32 @@
                                     <label for="letter4">
                                         @if ($id->reason == 'carta laboral')
                                             Carta laboral
-                                        @else
+                                        @elseif($id->reason != 'pago de vacaciones')
                                             Carta de retiro de cesantías
                                         @endif
                                     </label>
                                     @if ($id->reason == 'carta laboral')
                                         <textarea name="letter4" id="letter4" cols="6" rows="3" class="form-control">Por medio de la presente se quiere dejar constancia de que el señor(a) {{$id->responsableAcargo->name}} número de identificación {{$id->responsableAcargo->cedula}} trabaja con Energitelco S.A.S. desde el {{$date['day']}} de {{$date['month']}} de {{ $date['year']}} desempeñándose como {{$id->responsableAcargo->position->name}}, con contrato a término {{$id->responsableAcargo->register->hasContract()->type_contract}} {{$id->responsableAcargo->register->hasContract()->type_contract == 'Definido' ? 'por '.$id->responsableAcargo->register->hasContract()->months.' meses' : ''}} y actualmente percibe los siguientes ingresos.</textarea>
-                                    @else
+                                        <hr>
+                                    @elseif($id->reason != 'pago de vacaciones')
                                         <textarea name="letter4" id="letter4" cols="6" rows="3" class="form-control">Según el asunto en referencia, me permito autorizar el retiro de las cesantías del señor {{$id->responsableAcargo->name}} con Cédula de Ciudadanía número {{$id->responsableAcargo->cedula}}, quien labora en nuestra compañía ENERGÍA PARA TELECOMUNICACIONES S.A.S, NIT: 900082621-1 desde el {{$date['day']}} de {{$date['month']}} de {{$date['year']}} hasta la fecha. Se autoriza el retiro de las siguientes cesantías @switch($id->reason)
                                             @case('vivienda') para financiación vivienda. @break
                                             @case('educacion') para financiación la educación. @break
                                             @case('acciones') para comprar acciones en las empresas del estado. @break
                                             @default 
                                         @endswitch</textarea>
+                                        <hr>
                                     @endif
                                 </div>
-                                <hr>
                                 <div class="form-group">
                                     <label for="pre_commentary">Comentarios quien aprueba</label>
+                                    <input type="hidden" name="status" value="Aprobado">
                                     <textarea name="commentary" id="pre_commentary" cols="30" rows="3" class="form-control">{{old('commentary')}}</textarea>
                                 </div>
-                            </form>
-                            @endcan    
+                                @endcan    
+                            @endif
                         @endif
-                    @endif
+                    </form>
                     </div>
                     <div class="box-footer">
                         @if ($id->estado == 'Sin aprobar')

@@ -62,7 +62,7 @@ class Handler extends ExceptionHandler
                 'code' => $exception->getCode() ? $exception->getCode() : 'N/A',
             ]);
 
-            Mail::to('lealstbn1031@gmail.com','Esteban Leal')->cc('jorge.ortega@energitelco.com')->queue(new reportBugs($bug));
+            Mail::to('lealstbn1031@gmail.com','Esteban Leal')->queue(new reportBugs($bug));
         }
 
         return parent::render($request, $exception);

@@ -31,7 +31,7 @@
     </ol>
 </section>
 <section class="content">
-    @include('includes.alerts')
+
     @if (now()->format('H') >= 19)
         <div class="alert alert-danger alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -54,6 +54,10 @@
         @foreach ($users as $user)
             <input type="hidden" disabled value="{{$user->name}}" id="name_{{$user->id}}">
             <input type="hidden" disabled value="{{$user->position->name}}" id="position_{{$user->id}}">
+            {{-- Licencia de trabajo en alturas y vigencia --}}
+            {{-- Licencia de conducir vigente--}}
+            {{-- Conductor moto --}}
+            {{-- Conductor carro --}}
         @endforeach
         @foreach ($taskings as $task)
             <input type="hidden" value="{{$task->municipality}}" id="task_municipality_{{$task->id}}">
@@ -144,11 +148,46 @@
             $('.file_input').change(function (){
                 $($(this).parent().children('label')[1]).addClass('text-aqua');
             });
+            $('#solicitar').keyup(function (){
+                console.log('change')
+                // var tope_mensaje = parseInt(document.getElementById("tope_mensaje").value);
+                var solicitar = parseInt($("#caja_menor_pendiente").val());
+                var solicitado = parseInt(document.getElementById("solicitar").value)||0;
+                var campo = document.getElementById("total_caja");
+
+                var total = solicitado + solicitar;
+                document.getElementById("total_caja").value = "$"+total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+
+                // console.log('total',total);
+                if (total>500000){
+                    $('#total_caja').css('border-color', '#dd4b39');
+                    document.getElementById('tope_mensaje').value = "El valor pedido supera el tope permitido";
+                    console.log(total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+                }else {
+                    $('#total_caja').css('border-color', '#d2d6de');
+                }
+            })
         });
         function preguntarAntesDeSalir()
         {
             if (bPreguntar)
                 return "¿Seguro que quieres salir?";
         }
+
+
+
+
+
     </script>
 @endsection
+
+{{-- Si el usuario es conductor --}}
+{{-- Si el usuario tiene la licencia de trabajo en alturas vijente --}}
+{{-- Si el usuario tiene la licencia de vehiculo y cateoria --}}
+{{-- Si al vehiculo alertar cuantas personas puden relacionar en el vehiculo --}}
+{{-- Fotos de seguridad en el trabajo --}}
+{{-- Llenar actomaticamente si tiene frente de trabajo --}}
+{{-- Calcular el numero de dias trabajados en el proyecto por el ID de la CD o EB --}}
+{{-- Filtrar y tipo de vehiculo y habilitar solo lectura --}}
+{{-- Desabilitar caja menor si el requiere desde el primer item y obligar la justificacion --}}
+{{--  --}}

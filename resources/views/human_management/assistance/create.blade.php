@@ -27,7 +27,7 @@
     </ol>
 </section>
 <section class="content">
-    @include('includes.alerts')
+     
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Crear asistencia</h3>

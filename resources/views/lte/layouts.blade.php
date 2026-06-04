@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>{{ config('app.name', 'ENERGIRTELCO SAS') }}</title>
+  <title>{{ config('app.name', 'COLSOLYTEL SAS') }}</title>
   <link rel="shortcut icon" href="{{asset('img/logo_sm.png')}}" />
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -15,26 +15,21 @@
   <!-- Font Awesome -->
   <link href="{{asset("assets/$theme/bower_components/font-awesome/css/all.min.css")}}" rel="stylesheet">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="{{asset("assets/$theme/bower_components/Ionicons/css/ionicons.min.css")}}">  
+  <link rel="stylesheet" href="{{asset("assets/$theme/bower_components/Ionicons/css/ionicons.min.css")}}">
   <!-- Theme style -->
   <!-- AdminLTE Skins. Choose a skin from the css/skins
     folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{asset("assets/$theme/dist/css/skins/_all-skins.min.css")}}">
-  
+
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="{{asset("css/style.css")}}">
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  {{-- <!-- WARNING: Respond.js doesn't work if you view the page via file:// --> --}}
-  <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    @yield('css')
-    
-    <!-- Google Font -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-    
-    <link rel="stylesheet" href="{{asset("assets/$theme/dist/css/AdminLTE.min.css")}}">
+
+  <!-- Google Font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+  <link rel="stylesheet" href="{{asset("assets/$theme/dist/css/AdminLTE.min.css")}}">
+
+  @yield('css')
 </head>
 <!-- ADD THE CLASS layout-boxed TO GET A BOXED LAYOUT -->
 <body class="fixed hold-transition skin-blue sidebar-mini">
@@ -80,6 +75,7 @@
 <script src="{{asset("js/datatables/dataTables.bootstrap4.min.js")}}" ></script>
 <script src="{{asset("js/datatables/sweetalert2.js")}}"></script>
 <script src="{{asset("js/main.js")}}"></script>
+@include('includes.alerts')
 @yield('js')
 </body>
 <html>

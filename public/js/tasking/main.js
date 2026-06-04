@@ -1,6 +1,6 @@
 $(function () {
 
-    const cd = '/json/ec01wxyb1-4adc2.json';
+    const cd = '/get_data_json_eb';
 
     const request = new XMLHttpRequest();
 
@@ -12,8 +12,6 @@ $(function () {
 
     request.onload = function() {
         selectDep(request.response);
-
-        //edit Select2
         llenarSelect2Edit(request.response);
     }
     
@@ -96,11 +94,13 @@ $(document).ready(function() {
             $('#station_name').val('');
             $('#lat').val('');
             $('#long').val('');
+            $('#id-beneficiario').val('');
         }else {
             $('.station-other').hide();
             $('#station_name').val('');
             $('#lat').val('');
             $('#long').val('');
+            $('#id-beneficiario').val('');
         }
     });
 
@@ -123,40 +123,33 @@ $(document).ready(function() {
 });
 
 function usersDisable(date) {
-    resetUsers();
-    newDate = moment(date);
-    dates = $('.date-starts');
-    for (let i = 0; i < dates.length; i++) {
-        let newDates = moment(dates[i].innerText);
-        if (newDate.format('YYYY-MM-DD') == newDates.format('YYYY-MM-DD')) {
-            let eleUsers = $(dates[i]).parent().parent().children('.list-user').children();
-            for (let j = 0; j < eleUsers.length; j++) {
-                let id = eleUsers[j].id.split('-')[(eleUsers[j].id.split('-').length - 1)];
-                $('#option_user_'+id).prop('disabled',true).text(eleUsers[j].innerText+' (no disponible)');
-            }
+    let idUsers = $('.data-user-id');
+    let names = $('.data-user-name');
+
+    let newDate = moment(date);
+    data = [];
+    for (let i = 0; i < idUsers.length; i++) {
+        let disabled = dateUserDisable(newDate,idUsers[i].value);
+        let disableArr = dateUserPermit(newDate,idUsers[i].value);
+        let textDisabled = disabled ? '(No disponible)' : '';
+        if (disableArr[0] == true) {
+            disabled = disableArr[0],
+            textDisabled = textDisabled+' '+disableArr[1]
         }
+        data.push({
+            id: idUsers[i].value,
+            text: names[i].value+' '+textDisabled,
+            selected: false,
+            disabled: disabled
+        });
     }
 
-    // Usuarios de permisos
-    let datesStart = $('.permission-dateStart');
-    let datesEnd = $('.permission-dateEnd');
-    let timeStart = $('.permission-timeStart');
-    let timeEnd = $('.permission-timeEnd');
-    let idUser = $('.permission-idUser');
-    let type = $('.permission-type');
-    let status = $('.permission-status');
-    for (let i = 0; i < datesStart.length; i++) {
-        let newDatesStart = moment(datesStart[i].value);
-        let newDatesEnd = moment(datesEnd[i].value);
-        if (newDate.format('YYYY-MM-DD') >= newDatesStart.format('YYYY-MM-DD') && newDate.format('YYYY-MM-DD') <= newDatesEnd.format('YYYY-MM-DD')) {
-            if (status[i].value != 'No aprobado' && $('#option_user_'+idUser[i].value).text().indexOf(' (') == -1) {
-                let state = status[i].value == 'Aprobado' ? true : false;
-                let textState = status[i].value == 'Sin aprobar' ? ' sin aprobar' : '';
-                $('#option_user_'+idUser[i].value).prop('disabled',state).text($('#option_user_'+idUser[i].value).text()+' ('+type[i].value+textState+')');
-            }
-        }
-    }
+    $('#users').empty();
+    $('#users').select2({
+        data: data
+    });
 }
+
 function vehiclesDisable(date)
 {
     let id = $('.data-vehicles-id');
@@ -193,46 +186,12 @@ function vehiclesDisable(date)
     });
 }
 
-function dateVehicleDisable(date,id) {
-    dates = $('.date-starts');
-    for (let i = 0; i < dates.length; i++) {
-        let newDates = moment(dates[i].innerText);
-        if (newDates.format('YYYY-MM-DD') == date.format('YYYY-MM-DD')) {
-            let eleVehicles = $(dates[i]).parent().parent().children('.list-vehicles').children();
-            for (let j = 0; j < eleVehicles.length; j++) {
-                let idVehicle = eleVehicles[j].id.split('-')[(eleVehicles[j].id.split('-').length - 1)];
-                if (idVehicle == id) {
-                    return true;
-                }
-            }
-        }
-    }
-    return false;
-}
-
-function resetUsers() {
-    let usersOption =  $('#users').children();
-    for (let i = 0; i < usersOption.length; i++) {
-        if (usersOption[i].innerText.indexOf('(') != -1) {
-            $('#option_user_'+usersOption[i].value).prop('disabled',false).text(usersOption[i].innerText.split(' (')[0]);
-        }
-    }
-}
-function resetEditUsers(id) {
-    let usersOption =  $('#users-edit-'+id).children();
-    for (let i = 0; i < usersOption.length; i++) {
-        if (usersOption[i].innerText.indexOf('(') != -1) {
-            $('#option_user-edit-'+id+'-'+usersOption[i].value).prop('disabled',false).text(usersOption[i].innerText.split(' (')[0]);
-        }
-    }
-}
-
 function selectDep(response) {
     data = [];
     response.CD.forEach(element => {
         data.push({
-            id: element.DEPARTAMENTO.toUpperCase(),
-            text: element.DEPARTAMENTO.toUpperCase()
+            id: element.departamento.toUpperCase(),
+            text: element.departamento.toUpperCase()
         });
     });
     response.EB.forEach(element => {
@@ -259,10 +218,10 @@ function selectDep(response) {
 function selectMunicipaly(value,response) {
     data = [];
     response.CD.forEach(element => {
-        if (element.DEPARTAMENTO.toUpperCase() == value) {
+        if (element.departamento.toUpperCase() == value) {
             data.push({
-                id: element.MUNICIPIOANM.toUpperCase(),
-                text: element.MUNICIPIOANM.toUpperCase()
+                id: element.municipio.toUpperCase(),
+                text: element.municipio.toUpperCase()
             });
         }
     });
@@ -298,10 +257,10 @@ function selectMunicipaly(value,response) {
 function selectEB(value,response) {
     data = [];
     response.CD.forEach(element => {
-        if (element.MUNICIPIOANM.toUpperCase() == value) {
+        if (element.municipio.toUpperCase() == value) {
             data.push({
-                id: element.Consecutivo_Sede,
-                text: (element.INSTITUCIÓN_EDUCATIVA+' '+element.NOMBRE_SEDE).toUpperCase()
+                id: element.consecutivo_sede,
+                text: (element.consecutivo_sede+' - '+element.institucion_educativa+' - '+element.nombre_sede).toUpperCase(),
             });
         }
     });
@@ -341,34 +300,40 @@ function selectEB(value,response) {
 
 function selectLocation(value,response) {
     response.CD.forEach(element => {
-        if (element.Consecutivo_Sede == value) {
-            $('#station_name').val(element.NOMBRE_SEDE);
-            $('#lat').val(element.Latitud);
-            $('#long').val(element.LONGITUD);
+        if (element.consecutivo_sede == value) {
+            $('#station_name').val(element.nombre_sede);
+            $('#lat').val(element.latitud);
+            $('#long').val(element.longitud);
+            $('#id-beneficiario').parent().show();
+            $('#id-beneficiario').val(element.id_beneficiario);
         }
     });
     response.EB.forEach(element => {
         if (element.id == value) {
             $('#station_name').val(element.sitio);
-            $('#lat').val(element.Latitud);
-            $('#long').val(element.Longitud);
+            $('#lat').val(element.latitud);
+            $('#long').val(element.longitud);
+            $('#id-beneficiario').parent().hide();
         }
     });
 }
 
 function selectEditLocation(id,value,response) {
     response.CD.forEach(element => {
-        if (element.Consecutivo_Sede == value) {
-            $('#station_name-edit-'+id).val(element.NOMBRE_SEDE);
-            $('#lat-edit-'+id).val(element.Latitud);
-            $('#long-edit-'+id).val(element.LONGITUD);
+        if (element.consecutivo_sede == value) {
+            $('#station_name-edit-'+id).val(element.nombre_sede);
+            $('#lat-edit-'+id).val(element.latitud);
+            $('#long-edit-'+id).val(element.longitud);
+            $('#id-beneficiario-edit-'+id).parent().show();
+            $('#id-beneficiario-edit-'+id).val(element.id_beneficiario);
         }
     });
     response.EB.forEach(element => {
         if (element.id == value) {
             $('#station_name-edit-'+id).val(element.sitio);
-            $('#lat-edit-'+id).val(element.Latitud);
-            $('#long-edit-'+id).val(element.Longitud);
+            $('#lat-edit-'+id).val(element.latitud);
+            $('#long-edit-'+id).val(element.longitud);
+            $('#id-beneficiario-edit-'+id).parent().hide();
         }
     });
 }
@@ -408,10 +373,10 @@ function selectEditDep(id,response) {
     let value = $("#department-edit-"+id).attr('value');
     data = [];
     response.CD.forEach(element => {
-        selected = element.DEPARTAMENTO.toUpperCase() == value ? true : false;
+        selected = element.departamento.toUpperCase() == value ? true : false;
         data.push({
-            id: element.DEPARTAMENTO.toUpperCase(),
-            text: element.DEPARTAMENTO.toUpperCase(),
+            id: element.departamento.toUpperCase(),
+            text: element.departamento.toUpperCase(),
             selected: selected
         });
     });
@@ -442,11 +407,11 @@ function selectEditMun(id,value,response) {
     value2 =  $("#municipality-edit-"+id).attr('value');
     data = [];
     response.CD.forEach(element => {
-        if (element.DEPARTAMENTO.toUpperCase() == value) {
-            selected = element.MUNICIPIOANM.toUpperCase() == value2 ? true : false;
+        if (element.departamento.toUpperCase() == value) {
+            selected = element.municipio.toUpperCase() == value2 ? true : false;
             data.push({
-                id: element.MUNICIPIOANM.toUpperCase(),
-                text: element.MUNICIPIOANM.toUpperCase(),
+                id: element.municipio.toUpperCase(),
+                text: element.municipio.toUpperCase(),
                 selected: selected
             });
         }
@@ -486,18 +451,18 @@ function selectEditEB(id,value,response) {
     value2 =  $("#eb-edit-"+id).attr('value');
     data = [];
     response.CD.forEach(element => {
-        if (element.MUNICIPIOANM.toUpperCase() == value) {
-            selected = element.Consecutivo_Sede.toUpperCase() == value2 ? true : false;
+        if (element.municipio.toUpperCase() == value) {
+            selected = element.consecutivo_sede.toUpperCase() == value2 ? true : false;
             data.push({
-                id: element.Consecutivo_Sede,
-                text: (element.INSTITUCIÓN_EDUCATIVA+' '+element.NOMBRE_SEDE).toUpperCase(),
+                id: element.consecutivo_sede,
+                text: (element.consecutivo_sede+' - '+element.institucion_educativa+' - '+element.nombre_sede).toUpperCase(),
                 selected: selected
             });
         }
     });
     response.EB.forEach(element => {
         if (element.municipio.toUpperCase() == value) {
-            selected = element.id.toUpperCase() == value2 ? true : false;
+            selected = element.id == value2 ? true : false;
             data.push({
                 id: element.id,
                 text: element.sitio.toUpperCase(),
@@ -568,7 +533,7 @@ function selectEditVehicle(id,date) {
     values = $("#vehicles-edit-"+id).attr('value');
     arrValues = values.split('-').filter(function(el) { return el; });
     for (let i = 0; i < idVehicle.length; i++) {
-        selected = arrValues.indexOf(idVehicle[i].value) != -1 ? true : false;
+        let selected = arrValues.indexOf(idVehicle[i].value) != -1 ? true : false;
         let newEnrollmentDate = moment(enrollmentDate[i].value);
         let newSoatDate = moment(soatDate[i].value);
         let newGasesDate = moment(gasesDate[i].value);
@@ -595,36 +560,91 @@ function selectEditVehicle(id,date) {
 }
 
 function selectEditUsers(id,date) {
-    resetEditUsers(id);
-    newDate = moment(date);
-    dates = $('.date-starts');
+    let idUsers = $('.data-user-id');
+    let names = $('.data-user-name');
+
+    let newDate = moment(date);
+    data = [];
+    values = $("#users-edit-"+id).attr('value');
+    arrValues = values.split('-').filter(function(el) { return el; });
+    for (let i = 0; i < idUsers.length; i++) {
+        let selected = arrValues.indexOf(idUsers[i].value) != -1 ? true : false;
+        let disabled = !selected ? dateUserDisable(newDate,idUsers[i].value) : false;
+        let disableArr = dateUserPermit(newDate,idUsers[i].value);
+        let textDisabled = disabled && !selected ? '(No disponible)' : '';
+        if (disableArr[0] == true && !selected) {
+            disabled = disableArr[0],
+            textDisabled = textDisabled+' '+disableArr[1]
+        }
+        data.push({
+            id: idUsers[i].value,
+            text: names[i].value+' '+textDisabled,
+            selected: selected,
+            disabled: disabled
+        });
+    }
+    $("#users-edit-"+id).empty();
+    $('#users-edit-'+id).select2({
+        data: data
+    });
+}
+
+function dateUserDisable(date,id) {
+    let dates = $('.date-starts');
     for (let i = 0; i < dates.length; i++) {
         let newDates = moment(dates[i].innerText);
-        if (newDate.format('YYYY-MM-DD') == newDates.format('YYYY-MM-DD')) {
-            let eleUsers = $(dates[i]).parent().parent().children('.list-user').children();
-            for (let j = 0; j < eleUsers.length; j++) {
-                let idUser = eleUsers[j].id.split('-')[(eleUsers[j].id.split('-').length - 1)];
-                $('#option_user-edit-'+id+'-'+idUser).prop('disabled',true).text(eleUsers[j].innerText+' (no disponible)');
+        if (newDates.format('YYYY-MM-DD') == date.format('YYYY-MM-DD')) {
+            let eleUser = $(dates[i]).parent().parent().children('.list-user').children();
+            for (let j = 0; j < eleUser.length; j++) {
+                let idUser = eleUser[j].id.split('-')[(eleUser[j].id.split('-').length - 1)];
+                if (idUser == id) {
+                    return true;
+                }
             }
         }
     }
+    return false;
+}
 
-    let datesStart = $('.permission-dateStart');
-    let datesEnd = $('.permission-dateEnd');
-    let timeStart = $('.permission-timeStart');
-    let timeEnd = $('.permission-timeEnd');
-    let idUser = $('.permission-idUser');
-    let type = $('.permission-type');
-    let status = $('.permission-status');
+function dateUserPermit(date,id){
+    let datesStart = $('.permission-dateStart-'+id);
+    let datesEnd = $('.permission-dateEnd-'+id);
+    let timeStart = $('.permission-timeStart-'+id);
+    let timeEnd = $('.permission-timeEnd-'+id);
+    let idUser = $('.permission-idUser-'+id);
+    let type = $('.permission-type-'+id);
+    let status = $('.permission-status-'+id);
+
+    let state = false;
+    let textState = '';
     for (let i = 0; i < datesStart.length; i++) {
         let newDatesStart = moment(datesStart[i].value);
         let newDatesEnd = moment(datesEnd[i].value);
-        if (newDate.format('YYYY-MM-DD') >= newDatesStart.format('YYYY-MM-DD') && newDate.format('YYYY-MM-DD') <= newDatesEnd.format('YYYY-MM-DD')) {
+        if (date.format('YYYY-MM-DD') >= newDatesStart.format('YYYY-MM-DD') && date.format('YYYY-MM-DD') <= newDatesEnd.format('YYYY-MM-DD')) {
             if (status[i].value != 'No aprobado' && $('#option_user_'+idUser[i].value).text().indexOf(' (') == -1) {
-                let state = status[i].value == 'Aprobado' ? true : false;
-                let textState = status[i].value == 'Sin aprobar' ? ' sin aprobar' : '';
-                $('#option_user-edit-'+id+'-'+idUser[i].value).prop('disabled',state).text($('#option_user_'+idUser[i].value).text()+' ('+type[i].value+textState+')');
+                state = status[i].value == 'Aprobado' ? true : false;
+                textState = status[i].value == 'Sin aprobar' ? ' sin aprobar' : '';
+                return [ state, '('+type[i].value+') '+textState ];
             }
         }
     }
+    
+    return [ state, textState ];
+}
+
+function dateVehicleDisable(date,id) {
+    dates = $('.date-starts');
+    for (let i = 0; i < dates.length; i++) {
+        let newDates = moment(dates[i].innerText);
+        if (newDates.format('YYYY-MM-DD') == date.format('YYYY-MM-DD')) {
+            let eleVehicles = $(dates[i]).parent().parent().children('.list-vehicles').children();
+            for (let j = 0; j < eleVehicles.length; j++) {
+                let idVehicle = eleVehicles[j].id.split('-')[(eleVehicles[j].id.split('-').length - 1)];
+                if (idVehicle == id) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
 }

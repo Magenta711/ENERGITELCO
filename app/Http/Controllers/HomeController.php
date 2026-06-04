@@ -15,22 +15,23 @@ use App\Models\billboard\billboard_type;
 use App\Models\bonus24;
 use App\Models\project\planing\Project;
 use App\Models\Customer;
+use App\Models\EmployeeMonth;
 use App\Models\LearnedLeassonsTest;
 use App\Models\LearnedLeassonsTestOption;
 use App\Models\LearnedLeassonsTestUsers;
 use App\Models\Provider;
+use App\Models\resource\cd;
+use App\Models\resource\eb;
 use App\Models\SuggestionsMailbox;
+use App\Models\system_setting;
 use App\Models\SystemMessages;
-use App\Models\Work8;
 use App\Models\Work8Users;
 use App\Models\WorkWithUs;
 use App\Models\Tasking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Notification;
 use Barryvdh\DomPDF\Facade as PDF;
-use DB;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -52,18 +53,22 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $question = LearnedLeassonsTestUsers::where('user_id',auth()->id())->whereBetween('created_at',[now()->format('Y-m-d 00:00:00'),now()->format('Y-m-d 23:59:59')])->first();
-        if (!$question) {
-            $test = LearnedLeassonsTest::where('status',1)->whereDoesntHave('answers',function ($query)
-            {
-                return $query->where('user_id',auth()->id());
-            })->inRandomOrder()->limit(5)->first();
-            if ($test) {
-                $question = LearnedLeassonsTestUsers::create([
-                    'user_id' => auth()->id(),
-                    'test_id' => $test->id,
-                    'status' => 0,
-                ]);
+        $system = system_setting::where('state',1)->orderBy('id','DESC')->take(1)->first();
+        $question = null;
+        if ($system->test_intro) {
+            $question = LearnedLeassonsTestUsers::where('user_id',auth()->id())->whereBetween('created_at',[now()->format('Y-m-d 00:00:00'),now()->format('Y-m-d 23:59:59')])->first();
+            if (!$question) {
+                $test = LearnedLeassonsTest::where('status',1)->whereDoesntHave('answers',function ($query)
+                {
+                    return $query->where('user_id',auth()->id());
+                })->inRandomOrder()->limit(5)->first();
+                if ($test) {
+                    $question = LearnedLeassonsTestUsers::create([
+                        'user_id' => auth()->id(),
+                        'test_id' => $test->id,
+                        'status' => 0,
+                    ]);
+                }
             }
         }
         $usuarios = User::with('roles')->where('state',1)->count();
@@ -77,15 +82,15 @@ class HomeController extends Controller
         $trabajos1 = Work1::where('estado','!=','Sin aprobar')->where('estado','!=','No aprobado')->count();
         $sin_aprovar1 = Work1::where('estado','Sin aprobar')->where('coordinador',auth()->id())->count();
         $proyectos = Project::count();
+        $user_births = User::where('state',1)->whereHas('register',function ($query)
+        {
+            return $query->where('date_birth','LIKE','%'.now()->format('m-d'));
+        })->get();
         session(['notificaiones_aprobacion'=>$sin_aprovar1]);
         $total_sin_aprobar = $aprobar1+$aprobar2+$aprobar3+$aprobar4+$aprobar5+$aprobar6+$aprobar7;
         if(auth()->user()->hasRole('Administrador')){
             session(['notificaiones_aprobacion'=>$total_sin_aprobar]);
         }
-        // $bill_types = billboard_type::with(['documents' => function ($query)
-        // {
-        //     $query->select('id','name_document','document')->where('estado','Disponible');
-        // }])->where('status',1)->orderBy('id','DESC')->get();
         $bill_types = billboard_type::with(['documents' => function ($query)
         {
             $query->where('estado','=','Disponible');
@@ -103,7 +108,10 @@ class HomeController extends Controller
         {
             return $query->where('id',auth()->id());
         })->get();
-        return view('home',compact('usuarios','total_sin_aprobar','trabajos1','bill_types','start_mesage','proyectos','customers','providers','job_application','interviews','proof_payment','taskings','question'));
+
+        $employee_months = EmployeeMonth::where('month','LIKE',now()->format('Y')."%")->get();
+        
+        return view('home',compact('usuarios','total_sin_aprobar','trabajos1','bill_types','start_mesage','proyectos','customers','providers','job_application','interviews','proof_payment','taskings','question','employee_months','system','user_births'));
     }
 
     public function notification()
@@ -302,5 +310,24 @@ class HomeController extends Controller
         $data = array();
         
         return response()->json($data);
+    }
+
+      public function data_json()
+    {
+        $cd = cd::get();
+
+        $eb = eb::get();
+        
+        return response()->json([ 'EB' => $eb, 'CD' => $cd ]);
+    }
+
+    public function example(Request $request)
+    {
+        // return response()->json([ 'data' => $request->all()]);
+        
+        $image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $request->imagen));
+        $safeName = 'mi_imagen_'.date('d_m_Y_H_i_s').'.png';
+        Storage::put('private/signature/'.$safeName, $image, 'private');
+        return response()->json([ 'data' => true ]);
     }
 }

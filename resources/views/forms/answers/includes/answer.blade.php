@@ -1,6 +1,5 @@
 @switch($question->type)
 @case('1')
-        {{" "}}
         <p class="p-answer">{{answerQuestion($id,$question)}}</p>
         @break
     @case('2')

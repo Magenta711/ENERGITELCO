@@ -12,7 +12,7 @@
         </ol>
     </section>
     <section class="content">
-        @include('includes.alerts')
+         
         <div class="row">
             <div class="col-md-4">
                 @include('users.include.user_information')

@@ -51,30 +51,30 @@ class computerController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'brand' => ['required'],
-            'serial' => ['required'],
-            'model' => ['required'],
-            'cpu' => ['required'],
-            'rom' => ['required'],
-            'ram' => ['required'],
-            'so' => ['required'],
-            'software' => ['required'],
-            'license' => ['required'],
-            'graphic_card' => ['required'],
-            'warranty' => ['required'],
-            'start_date' => ['required'],
-            'site' => ['required'],
-            'type' => ['required'],
-            'status' => ['required'],
-            'avatars' => ['required'],
-            'office' => ['required'],
-            'antivirus' => ['required'],
-            'elemets' => ['required'],
-            'ports' => ['required'],
-            'tecnology' => ['required'],
-            'wireless_connectivity' => ['required'],
-        ]);
+        // $request->validate([
+        //     'brand' => ['required'],
+        //     'serial' => ['required'],
+        //     'model' => ['required'],
+        //     'cpu' => ['required'],
+        //     'rom' => ['required'],
+        //     'ram' => ['required'],
+        //     'so' => ['required'],
+        //     'software' => ['required'],
+        //     'license' => ['required'],
+        //     'graphic_card' => ['required'],
+        //     'warranty' => ['required'],
+        //     'start_date' => ['required'],
+        //     'site' => ['required'],
+        //     'type' => ['required'],
+        //     'status' => ['required'],
+        //     'avatars' => ['required'],
+        //     'office' => ['required'],
+        //     'antivirus' => ['required'],
+        //     'elemets' => ['required'],
+        //     'ports' => ['required'],
+        //     'tecnology' => ['required'],
+        //     'wireless_connectivity' => ['required'],
+        // ]);
 
         if($request->hasFile('avatars')){
             $file = $request->file('avatars');
@@ -89,7 +89,7 @@ class computerController extends Controller
         $users = User::where('state',1)->get();
         foreach ($users as $user) {
             if ($user->hasPermissionTo('Lista de computadores del inventario')) {
-                $user->notify(new notificationMain($computer->id,'Nuevo computador registrado '.$computer->id,'invetory/computer/show/'));
+                $user->notify(new notificationMain($computer->id,'Nuevo computador registrado '.$computer->id,'logistics_infrastructure/invetory/computer/show/'));
             }
         }
 
@@ -166,7 +166,7 @@ class computerController extends Controller
         $users = User::where('state',1)->get();
         foreach ($users as $user) {
             if ($user->hasPermissionTo('Lista de computadores del inventario')) {
-                $user->notify(new notificationMain($id->id,'Un computador del inventario fue editado '.$id->id,'invetory/computer/show/'));
+                $user->notify(new notificationMain($id->id,'Un computador del inventario fue editado '.$id->id,'logistics_infrastructure/invetory/computer/show/'));
             }
         }
 

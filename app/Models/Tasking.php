@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tasking extends Model
 {
-    protected $fillable = ['responsable_id','date_start','municipality','department','project','eb_id','am','pm','description','commentaries','report','user_inv','report_user','status','station_name','lat','long','height','inv_user','user_add_inv','permit_id'];
+    protected $fillable = ['responsable_id','date_start','municipality','department','project','eb_id','am','pm','description','commentaries','report','user_inv','report_user','status','station_name','lat','long','height','inv_user','user_add_inv','permit_id','id_beneficiario'];
 
     public function users()
     {

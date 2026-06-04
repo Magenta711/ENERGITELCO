@@ -52,7 +52,7 @@ class Work1Export implements FromView, WithDrawings, WithStyles, ShouldAutoSize
     */
     public function view(): View
     {
-        return view('human_management.bonus.technical.export.main', [
+        return view('human_management.bonus.viatic.export.main', [
             'array' => $this->array,
             'id' => $this->id,
         ]);
